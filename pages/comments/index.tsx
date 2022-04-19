@@ -77,9 +77,9 @@ const Comments: NextPage = () => {
         </div>
         <Section>
           <div className={styles.anchorTitle}>
-            <h2>Want to learn more?</h2>
+            <h2>Wanna learn more about Highlight?</h2>
             <p className={classNames(styles.bodyLarge, styles.anchorSmall)}>
-              Scroll down to learn more about the rest of Highlight.
+              {`Scroll down to learn more about Highlight's feature set and value prop!`}
             </p>
           </div>
         </Section>

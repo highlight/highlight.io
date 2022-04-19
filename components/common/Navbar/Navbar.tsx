@@ -28,72 +28,80 @@ const Navbar = () => {
         <a href="http://app.highlight.run/">Register Here</a>
       </Banner>
       <header
-        className={classNames(styles.header, styles.headerPadding, {
+        className={classNames(styles.headerPadding, {
           [styles.blurBg]: scrolled,
         })}
       >
-        <div className={classNames(styles.navContainer, styles.headerLeft)}>
-          <a className={styles.urlStyle} href="https://www.highlight.run/">
-            <HighlightLogo />
-          </a>
-        </div>
-        <div className={styles.navContainer}>
-          <ul className={classNames(styles.menuList, styles.header)}>
-            <li>
-              <a
-                href="https://www.highlight.run/pricing"
-                className={styles.menuItem}
-              >
-                Pricing
-              </a>
-            </li>
-            {/* <li>
+        <div className={classNames(styles.header, styles.headerInner)}>
+          <div className={classNames(styles.navContainer, styles.headerLeft)}>
+            <a className={styles.urlStyle} href="https://www.highlight.run/">
+              <HighlightLogo />
+            </a>
+          </div>
+          <div className={styles.navContainer}>
+            <ul className={classNames(styles.menuList, styles.header)}>
+              <li>
+                <a
+                  href="https://www.highlight.run/pricing"
+                  className={styles.menuItem}
+                >
+                  Pricing
+                </a>
+              </li>
+              {/* <li>
             <a className={styles.menuItem}>Customers</a>
           </li> */}
-            <li>
-              <a href="https://blog.highlight.run/" className={styles.menuItem}>
-                Blog
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://careers.highlight.run/"
-                className={styles.menuItem}
-              >
-                Careers
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://feedback.highlight.run/changelog"
-                className={styles.menuItem}
-              >
-                Changelog
-              </a>
-            </li>
-            <li>
-              <a href="https://docs.highlight.run/" className={styles.menuItem}>
-                Docs
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div
-          className={classNames(
-            styles.navContainer,
-            styles.header,
-            styles.headerRight
-          )}
-        >
-          <a href="https://app.highlight.run/" className={styles.menuItem}>
-            Sign In
-          </a>
-          <PrimaryButton
-            href="https://app.highlight.run/?sign_up=1"
-            className={styles.signUpButton}
+              <li>
+                <a
+                  href="https://blog.highlight.run/"
+                  className={styles.menuItem}
+                >
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://careers.highlight.run/"
+                  className={styles.menuItem}
+                >
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://feedback.highlight.run/changelog"
+                  className={styles.menuItem}
+                >
+                  Changelog
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://docs.highlight.run/"
+                  className={styles.menuItem}
+                >
+                  Docs
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div
+            className={classNames(
+              styles.navContainer,
+              styles.header,
+              styles.headerRight
+            )}
           >
-            Sign Up
-          </PrimaryButton>
+            <a href="https://app.highlight.run/" className={styles.menuItem}>
+              Sign In
+            </a>
+            <PrimaryButton
+              href="https://app.highlight.run/?sign_up=1"
+              className={styles.signUpButton}
+            >
+              Sign Up
+            </PrimaryButton>
+          </div>
         </div>
       </header>
     </>

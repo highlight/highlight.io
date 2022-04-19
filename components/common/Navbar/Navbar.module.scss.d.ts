@@ -1,5 +1,6 @@
 export const blurBg: string;
 export const header: string;
+export const headerInner: string;
 export const headerLeft: string;
 export const headerPadding: string;
 export const headerRight: string;
