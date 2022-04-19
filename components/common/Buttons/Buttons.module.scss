@@ -1,0 +1,30 @@
+.genericButton {
+  padding: var(--size-medium) var(--size-large);
+  color: var(--text-primary);
+  border-radius: var(--size-xxSmall);
+  display: block;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.genericButton:hover {
+  cursor: pointer;
+}
+
+.primaryButton {
+  background-color: var(--brand-accent);
+
+  &:hover {
+    background-color: var(--color-purple-600);
+  }
+}
+
+.secondaryButton {
+  background-color: none;
+  border: 1px solid var(--color-white);
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}

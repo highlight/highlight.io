@@ -1,0 +1,108 @@
+.footer {
+  padding: 50px 100px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerTitle {
+  margin-top: var(--size-xxSmall);
+  margin-bottom: var(--size-xxSmall);
+
+  h3 {
+    letter-spacing: 0;
+    font-size: 14px;
+  }
+}
+
+.footerList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-right: var(--size-xxLarge);
+  font-size: 14px;
+  font-weight: 400;
+
+  li {
+    padding: var(--size-xxSmall) 0;
+
+    a {
+      color: var(--text-gray);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--color-white);
+      cursor: pointer;
+    }
+  }
+}
+
+.footerBottom {
+  max-width: var(--max-width);
+  padding: 92px;
+  padding-top: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.copyrightText {
+  color: var(--text-gray);
+  font-size: var(--size-small);
+  margin: var(--size-small) 0;
+  padding: var(--size-xxSmall) 0 var(--size-xxSmall) var(--size-xSmall);
+}
+
+.socialDiv {
+  display: flex;
+  gap: var(--size-medium);
+  justify-content: center;
+  align-items: center;
+  margin-right: var(--size-xxLarge);
+
+  .socialIcon {
+    width: var(--size-large);
+    height: var(--size-large);
+    color: var(--text-gray);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.statusDiv {
+  display: flex;
+  align-items: center;
+  font-size: var(--size-medium);
+  color: var(--color-green-500);
+  gap: var(--size-small);
+  margin-right: var(--size-xxLarge);
+  text-decoration: none;
+  padding: var(--size-xSmall) var(--size-medium);
+  border-radius: var(--size-xxSmall);
+  background-color: var(--color-black);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-gray-800);
+  }
+
+  .statusCircle {
+    background-color: var(--color-green-500);
+    width: var(--size-small);
+    height: var(--size-small);
+    border-radius: var(--size-small);
+  }
+}

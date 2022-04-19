@@ -1,0 +1,71 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.headerPadding {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: var(--size-medium) var(--size-xxLarge);
+  z-index: 2;
+  position: sticky;
+  top: 0;
+}
+
+.blurBg {
+  backdrop-filter: saturate(180%) blur(5px);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.7) 30%
+  );
+  box-shadow: inset 0 -1px 0 0 hsla(0, 0%, 100%, 0.1);
+}
+
+.navContainer {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--size-medium);
+  transition: opacity 0.2s ease-in-out;
+}
+
+.menuItem {
+  padding: 0 var(--size-medium);
+  display: inline-block;
+  color: var(--text-gray);
+  transition: color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.menuItem:hover {
+  color: var(--color-white);
+}
+
+.signUpButton {
+  margin-left: var(--size-large);
+  padding: var(--size-xSmall) var(--size-medium) !important;
+  color: var(--text-primary);
+}
+
+.headerLeft {
+  justify-content: flex-start;
+}
+
+.headerRight {
+  justify-content: flex-end;
+}
+
+.urlStyle {
+  text-decoration: none;
+}
