@@ -14,10 +14,10 @@ import CrossTeamCollaboration from '../public/images/cross_team_collaboration.sv
 import ProductIllustration from '../public/images/product_illustration.svg';
 import ProductPlaceholder from '../public/images/product_placeholder.svg';
 import ReactDemo from '../public/images/react_demo.png';
-import Companies from '../public/images/companies.svg';
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
 import { CodeBlock } from '../components/common/CodeBlock/CodeBlock';
+import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 
 export const FeatureItem = ({
   children,
@@ -76,13 +76,7 @@ const Home: NextPage = () => {
             <Image src={ProductIllustration} alt="" />
           </div>
         </Section>
-        <div className={styles.customerReel}>
-          <div className={styles.sectionSubtitle}>
-            Empowering Forward-Looking Companies
-          </div>
-          <Image src={Companies} alt="" />
-          <Image src={Companies} alt="" />
-        </div>
+        <CompaniesReel />
         <Section>
           <div className={styles.sectionText}>
             <div className={styles.sectionSubtitle}>Product Feature</div>

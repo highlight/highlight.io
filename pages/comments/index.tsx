@@ -12,13 +12,9 @@ import commentStyles from '../../components/Comments/Comments.module.scss';
 
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
-import CrossTeamCollaboration from '../../public/images/cross_team_collaboration.svg';
-import ProductPlaceholder from '../../public/images/product_placeholder.svg';
-import ReactDemo from '../../public/images/react_demo.png';
-import Companies from '../../public/images/companies.svg';
 import Footer from '../../components/common/Footer/Footer';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
-import { FeatureItem } from '..';
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
 
 const Comments: NextPage = () => {
   return (
@@ -67,124 +63,7 @@ const Comments: NextPage = () => {
             <source src="/images/comments.mp4" type="video/mp4" />
           </video>
         </div>
-        <div className={styles.customerReel}>
-          <div className={styles.sectionSubtitle}>
-            Empowering Forward-Looking Companies
-          </div>
-          <Image src={Companies} alt="" />
-          <Image src={Companies} alt="" />
-        </div>
-        <Section>
-          <div className={styles.anchorTitle}>
-            <h2>Wanna learn more about Highlight?</h2>
-            <p className={classNames(styles.bodyLarge, styles.anchorSmall)}>
-              {`Scroll down to learn more about Highlight's feature set and value prop!`}
-            </p>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>{`A few lines of code and you're gold`}</h2>
-            <p className={styles.bodySmall}>
-              Highlight is built to be framework agnostic, so regardless of your
-              stack, we have a solution{` that'll work for your team.`}
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/getting-started">
-                Read The Docs →
-              </SecondaryButton>
-            </div>
-          </div>
-          <div className={styles.sectionImage}>
-            <Image src={ReactDemo} alt="" width={1215} height={746} />
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionImage}>
-            <Image src={CrossTeamCollaboration} alt="" />
-          </div>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>{`Cross-team collaboration`}</h2>
-            <p className={styles.bodySmall}>
-              Stakeholders on customer issues can change. Highlight makes
-              cross-team communication painless.
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/comments">
-                Read The Docs →
-              </SecondaryButton>
-            </div>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>Access dense developer tooling</h2>
-            <p className={styles.bodySmall}>
-              Highlight is built to be framework agnostic, so regardless of your
-              stack, we have a solution{` that'll work for your team.`}
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/">
-                Read The Docs →
-              </SecondaryButton>
-            </div>
-          </div>
-          <div className={styles.sectionImage}>
-            <Image src={ProductPlaceholder} alt="" />
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionImage}>
-            <Image src={ProductPlaceholder} alt="" />
-          </div>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>{`Learn from your users' interactions`}</h2>
-            <p className={styles.bodySmall}>
-              Stakeholders on customer issues can change. Highlight makes
-              cross-team communication painless.
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/">
-                Read The Docs →
-              </SecondaryButton>
-            </div>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.anchorTitle}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>
-              Highlight is built with privacy and security at the forefront
-            </h2>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionImage}>
-            <Image src={ProductPlaceholder} alt="" />
-          </div>
-          <div className={styles.sectionText}>
-            <FeatureItem>
-              <h3>Privacy-Forward API</h3>
-              <p className={styles.bodySmall}>
-                Highlight supports data redaction, obfuscation, masking and much
-                more. The library also supports a Strict Privacy Mode which
-                obfuscates all text nodes for very strict PII rules.
-              </p>
-            </FeatureItem>
-            <FeatureItem>
-              <h3>Self-Hosted Deployment</h3>
-              <p className={styles.bodySmall}>
-                Deploy Highlight in a cloud provider of your choice. We support
-                {` "one-click" `} deployments on a select set of cloud providers
-                as well as a docker image for custom deployments.
-              </p>
-            </FeatureItem>
-          </div>
-        </Section>
+        <CompaniesReel />
         <CallToAction />
       </main>
 

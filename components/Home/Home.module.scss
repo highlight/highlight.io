@@ -141,6 +141,21 @@
   text-align: center;
   padding: var(--size-xxLarge) 0;
   gap: var(--size-xLarge);
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.companies {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 var(--size-xLarge);
+  grid-gap: var(--size-xLarge);
+
+  img {
+    object-fit: contain;
+    filter: invert(1);
+    opacity: 0.5;
+  }
 }
 
 @media screen and (max-width: 600px) {

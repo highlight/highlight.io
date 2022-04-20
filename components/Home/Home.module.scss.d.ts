@@ -6,6 +6,7 @@ export const bodyLarge: string;
 export const bodySmall: string;
 export const buttonContainer: string;
 export const callToActionBackground: string;
+export const companies: string;
 export const ctaBg: string;
 export const ctaContainer: string;
 export const customerReel: string;

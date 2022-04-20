@@ -1,5 +1,5 @@
 .footer {
-  padding: 50px 100px;
+  padding: 50px var(--size-xxLarge);
   max-width: var(--max-width);
   margin: 0 auto;
   display: flex;
@@ -42,7 +42,7 @@
 
 .footerBottom {
   max-width: var(--max-width);
-  padding: 92px;
+  padding: 80px var(--size-xxLarge);
   padding-top: 0;
   margin: 0 auto;
   display: flex;
@@ -92,12 +92,8 @@
   text-decoration: none;
   padding: var(--size-xSmall) var(--size-medium);
   border-radius: var(--size-xxSmall);
-  background-color: var(--color-black);
+  border: 1px solid var(--color-gray-800);
   transition: all 0.2s ease;
-
-  &:hover {
-    background-color: var(--color-gray-800);
-  }
 
   .statusCircle {
     background-color: var(--color-green-500);
