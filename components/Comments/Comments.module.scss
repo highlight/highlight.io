@@ -24,3 +24,9 @@
     border-radius: var(--size-xSmall);
   }
 }
+
+@media screen and (max-width: 600px) {
+  .video {
+    padding: 0;
+  }
+}

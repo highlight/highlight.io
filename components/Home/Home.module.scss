@@ -37,16 +37,17 @@
   flex: 1 1 55%;
   padding-left: var(--size-xLarge);
 
-  svg {
+  img {
     max-width: 100%;
   }
 }
 
 .sectionImage {
-  flex: 1 1 50%;
+  flex: 1 1 55%;
   padding: 0 var(--size-xxLarge);
 
   img {
+    max-width: 100%;
     object-fit: contain;
   }
 }
@@ -83,6 +84,10 @@
   margin: var(--size-medium) 0;
   padding: var(--size-medium) 0 var(--size-medium) var(--size-xxLarge);
   transition: border-color 0.2s ease;
+
+  .bodySmall {
+    font-size: var(--size-medium);
+  }
 }
 
 .featureItem:hover {
@@ -109,8 +114,12 @@
     position: absolute;
     z-index: -1;
 
-    svg {
-      width: 100%;
+    span {
+      height: 100% !important;
+    }
+
+    img {
+      object-fit: cover;
     }
   }
 
@@ -129,6 +138,40 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   padding: var(--size-xxLarge) 0;
   gap: var(--size-xLarge);
+}
+
+@media screen and (max-width: 600px) {
+  .bodySmall {
+    font-size: var(--size-medium);
+  }
+
+  .bodyLarge {
+    font-size: var(--size-medium);
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    gap: var(--size-small);
+
+    a {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .sectionText,
+  .sectionImage {
+    padding: 0;
+  }
+
+  .callToActionBackground {
+    width: 100%;
+
+    .anchorTitle {
+      padding: 80px var(--size-medium);
+    }
+  }
 }

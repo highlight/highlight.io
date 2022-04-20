@@ -70,7 +70,7 @@
   --color-editor-secondary-text: #4078f2;
 
   --color-primary-background: #000;
-  --color-primary-inverted-background: #111;
+  --color-primary-inverted-background: #333;
   --color-secondary-background: #f9f9f9;
   --color-background-overlay: rgba(0, 0, 0, 0.8);
   --text-primary-inverted: #fff;
@@ -97,7 +97,7 @@
 
   --size-icon: 18px;
 
-  --max-width: 1400px;
+  --max-width: 1200px;
 
   --box-shadow: 0px 0.9px 1.4px rgba(0, 0, 0, 0.012),
     0px 2.2px 3.6px rgba(0, 0, 0, 0.018), 0px 4.4px 7.4px rgba(0, 0, 0, 0.022),
@@ -119,6 +119,10 @@
 
   --button-border-radius: var(--size-xSmall);
   --border-radius: var(--size-xSmall);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -170,4 +174,22 @@ li,
 p,
 label {
   color: var(--text-primary);
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 50px;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: var(--size-medium);
+  }
+
+  main {
+    margin: 0 var(--size-large);
+  }
 }

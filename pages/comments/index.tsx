@@ -10,15 +10,15 @@ import classNames from 'classnames';
 import styles from '../../components/Home/Home.module.scss';
 import commentStyles from '../../components/Comments/Comments.module.scss';
 
-import BlueGradient from '../../public/images/BgBlueGradient';
-import PurpleGradient from '../../public/images/BgPurpleGradient';
-import Footer from '../../components/common/Footer/Footer';
-import Companies from '../../public/images/Companies';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
-import ProductPlaceholder from '../../public/images/ProductPlaceholder';
-import CrossTeamCollaboration from '../../public/images/CrossTeamCollaboration';
-import { FeatureItem } from '..';
+import BlueGradient from '../../public/images/bg_blue_gradient.svg';
+import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
+import CrossTeamCollaboration from '../../public/images/cross_team_collaboration.svg';
+import ProductPlaceholder from '../../public/images/product_placeholder.svg';
 import ReactDemo from '../../public/images/react_demo.png';
+import Companies from '../../public/images/companies.svg';
+import Footer from '../../components/common/Footer/Footer';
+import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FeatureItem } from '..';
 
 const Comments: NextPage = () => {
   return (
@@ -27,13 +27,12 @@ const Comments: NextPage = () => {
         <title>Comments - Highlight</title>
         <meta name="description" content="Stop debugging in the dark. " />
       </Head>
-
       <div className={styles.bgPosition}>
         <div className={styles.purpleDiv}>
-          <PurpleGradient />
+          <Image src={PurpleGradient} alt="" />
         </div>
         <div className={styles.blueDiv}>
-          <BlueGradient />
+          <Image src={BlueGradient} alt="" />
         </div>
       </div>
       <Navbar />
@@ -72,8 +71,8 @@ const Comments: NextPage = () => {
           <div className={styles.sectionSubtitle}>
             Empowering Forward-Looking Companies
           </div>
-          <Companies />
-          <Companies />
+          <Image src={Companies} alt="" />
+          <Image src={Companies} alt="" />
         </div>
         <Section>
           <div className={styles.anchorTitle}>
@@ -103,7 +102,7 @@ const Comments: NextPage = () => {
         </Section>
         <Section>
           <div className={styles.sectionImage}>
-            <CrossTeamCollaboration />
+            <Image src={CrossTeamCollaboration} alt="" />
           </div>
           <div className={styles.sectionText}>
             <div className={styles.sectionSubtitle}>Product Feature</div>
@@ -134,12 +133,12 @@ const Comments: NextPage = () => {
             </div>
           </div>
           <div className={styles.sectionImage}>
-            <ProductPlaceholder />
+            <Image src={ProductPlaceholder} alt="" />
           </div>
         </Section>
         <Section>
           <div className={styles.sectionImage}>
-            <ProductPlaceholder />
+            <Image src={ProductPlaceholder} alt="" />
           </div>
           <div className={styles.sectionText}>
             <div className={styles.sectionSubtitle}>Product Feature</div>
@@ -165,7 +164,7 @@ const Comments: NextPage = () => {
         </Section>
         <Section>
           <div className={styles.sectionImage}>
-            <ProductPlaceholder />
+            <Image src={ProductPlaceholder} alt="" />
           </div>
           <div className={styles.sectionText}>
             <FeatureItem>

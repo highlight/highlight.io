@@ -5,6 +5,7 @@
   display: block;
   text-decoration: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .genericButton:hover {

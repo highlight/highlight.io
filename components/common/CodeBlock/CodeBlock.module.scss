@@ -57,11 +57,12 @@
 }
 
 .codeBlockInner {
+  width: fit-content;
   display: flex;
   align-items: center;
   padding: 4px 12px;
   color: var(--color-white);
-  background-color: var(--color-primary-background);
+  background-color: var(--color-primary-inverted-background);
   border-radius: var(--size-xSmall);
 }
 

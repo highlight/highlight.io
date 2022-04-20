@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 70px 0;
   display: flex;
@@ -8,4 +8,10 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--size-xxLarge);
+}
+
+@media screen and (max-width: 600px) {
+  .section {
+    flex-direction: column;
+  }
 }

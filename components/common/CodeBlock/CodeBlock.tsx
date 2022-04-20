@@ -60,9 +60,9 @@ export const CodeBlock = ({
           text={text}
           language={language}
           customStyle={{
-            padding: '4px 8px',
+            padding: '2px 8px',
             color: 'var(--color-white)',
-            backgroundColor: 'var(--color-primary-background)',
+            backgroundColor: 'var(--color-primary-inverted-background)',
           }}
           showLineNumbers={showLineNumbers}
           {...props}

@@ -8,15 +8,16 @@ import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 
-import BlueGradient from '../public/images/BgBlueGradient';
-import PurpleGradient from '../public/images/BgPurpleGradient';
-import CrossTeamCollaboration from '../public/images/CrossTeamCollaboration';
-import ProductIllustration from '../public/images/ProductIllustration';
-import ProductPlaceholder from '../public/images/ProductPlaceholder';
+import BlueGradient from '../public/images/bg_blue_gradient.svg';
+import PurpleGradient from '../public/images/bg_purple_gradient.svg';
+import CrossTeamCollaboration from '../public/images/cross_team_collaboration.svg';
+import ProductIllustration from '../public/images/product_illustration.svg';
+import ProductPlaceholder from '../public/images/product_placeholder.svg';
 import ReactDemo from '../public/images/react_demo.png';
-import Companies from '../public/images/Companies';
+import Companies from '../public/images/companies.svg';
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
+import { CodeBlock } from '../components/common/CodeBlock/CodeBlock';
 
 export const FeatureItem = ({
   children,
@@ -39,10 +40,10 @@ const Home: NextPage = () => {
       </Head>
       <div className={styles.bgPosition}>
         <div className={styles.purpleDiv}>
-          <PurpleGradient />
+          <Image src={PurpleGradient} alt="" />
         </div>
         <div className={styles.blueDiv}>
-          <BlueGradient />
+          <Image src={BlueGradient} alt="" />
         </div>
       </div>
       <Navbar />
@@ -55,6 +56,13 @@ const Home: NextPage = () => {
               web app? Join hundreds of companies that use Highlight to keep
               their web app stable and their customers happy.
             </p>
+            <div>
+              <CodeBlock
+                text={`npm install highlight.run`}
+                language="typescript"
+                showLineNumbers={false}
+              />
+            </div>
             <div className={styles.buttonContainer}>
               <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                 Get Started For Free
@@ -65,15 +73,15 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.productIllustration}>
-            <ProductIllustration />
+            <Image src={ProductIllustration} alt="" />
           </div>
         </Section>
         <div className={styles.customerReel}>
           <div className={styles.sectionSubtitle}>
             Empowering Forward-Looking Companies
           </div>
-          <Companies />
-          <Companies />
+          <Image src={Companies} alt="" />
+          <Image src={Companies} alt="" />
         </div>
         <Section>
           <div className={styles.sectionText}>
@@ -95,7 +103,7 @@ const Home: NextPage = () => {
         </Section>
         <Section>
           <div className={styles.sectionImage}>
-            <CrossTeamCollaboration />
+            <Image src={CrossTeamCollaboration} alt="" />
           </div>
           <div className={styles.sectionText}>
             <div className={styles.sectionSubtitle}>Product Feature</div>
@@ -126,12 +134,12 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.sectionImage}>
-            <ProductPlaceholder />
+            <Image src={ProductPlaceholder} alt="" />
           </div>
         </Section>
         <Section>
           <div className={styles.sectionImage}>
-            <ProductPlaceholder />
+            <Image src={ProductPlaceholder} alt="" />
           </div>
           <div className={styles.sectionText}>
             <div className={styles.sectionSubtitle}>Product Feature</div>
@@ -157,7 +165,7 @@ const Home: NextPage = () => {
         </Section>
         <Section>
           <div className={styles.sectionImage}>
-            <ProductPlaceholder />
+            <Image src={ProductPlaceholder} alt="" />
           </div>
           <div className={styles.sectionText}>
             <FeatureItem>
