@@ -3,7 +3,6 @@ import React from 'react';
 import styles from '../../Home/Home.module.scss';
 import Image from 'next/image';
 import Mona from '../../../public/images/companies/mona.png';
-import Quorum from '../../../public/images/companies/quorum.png';
 import Airplane from '../../../public/images/companies/airplane.png';
 import Basedash from '../../../public/images/companies/basedash.png';
 import Knock from '../../../public/images/companies/knock.png';
@@ -41,9 +40,7 @@ export const CompaniesReel = () => {
         <Image src={Districtzero} alt="" />
         <Image src={Tyltgo} alt="" />
         <Image src={Dripos} alt="" />
-        <Image src={Quorum} alt="" />
         <Image src={Mage} alt="" />
-        <Image src={Cabal} alt="" />
         <Image src={Journey} alt="" />
       </div>
     </div>
