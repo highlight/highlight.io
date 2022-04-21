@@ -5,6 +5,7 @@ export const headerLeft: string;
 export const headerPadding: string;
 export const headerRight: string;
 export const menuItem: string;
+export const menuItemLarge: string;
 export const menuList: string;
 export const mobileHeader: string;
 export const mobileMenu: string;

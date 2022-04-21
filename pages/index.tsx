@@ -72,7 +72,7 @@ const Home: NextPage = () => {
               </SecondaryButton>
             </div>
           </div>
-          <div className={styles.productIllustration}>
+          <div className={styles.sectionImageRight}>
             <Image src={ProductIllustration} alt="" />
           </div>
         </Section>
@@ -87,16 +87,16 @@ const Home: NextPage = () => {
             </p>
             <div className={styles.buttonContainer}>
               <SecondaryButton href="https://docs.highlight.run/getting-started">
-                Read The Docs →
+                Read The Docs
               </SecondaryButton>
             </div>
           </div>
-          <div className={styles.sectionImage}>
+          <div className={styles.sectionImageRight}>
             <Image src={ReactDemo} alt="" width={1215} height={746} />
           </div>
         </Section>
         <Section>
-          <div className={styles.sectionImage}>
+          <div className={styles.sectionImageLeft}>
             <Image src={CrossTeamCollaboration} alt="" />
           </div>
           <div className={styles.sectionText}>
@@ -108,7 +108,7 @@ const Home: NextPage = () => {
             </p>
             <div className={styles.buttonContainer}>
               <SecondaryButton href="https://docs.highlight.run/comments">
-                Read The Docs →
+                Read The Docs
               </SecondaryButton>
             </div>
           </div>
@@ -123,16 +123,16 @@ const Home: NextPage = () => {
             </p>
             <div className={styles.buttonContainer}>
               <SecondaryButton href="https://docs.highlight.run/">
-                Read The Docs →
+                Read The Docs
               </SecondaryButton>
             </div>
           </div>
-          <div className={styles.sectionImage}>
+          <div className={styles.sectionImageRight}>
             <Image src={ProductPlaceholder} alt="" />
           </div>
         </Section>
         <Section>
-          <div className={styles.sectionImage}>
+          <div className={styles.sectionImageLeft}>
             <Image src={ProductPlaceholder} alt="" />
           </div>
           <div className={styles.sectionText}>
@@ -144,7 +144,7 @@ const Home: NextPage = () => {
             </p>
             <div className={styles.buttonContainer}>
               <SecondaryButton href="https://docs.highlight.run/">
-                Read The Docs →
+                Read The Docs
               </SecondaryButton>
             </div>
           </div>
@@ -158,7 +158,7 @@ const Home: NextPage = () => {
           </div>
         </Section>
         <Section>
-          <div className={styles.sectionImage}>
+          <div className={styles.sectionImageRight}>
             <Image src={ProductPlaceholder} alt="" />
           </div>
           <div className={styles.sectionText}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonProps } from 'antd';
 import classNames from 'classnames';
-
+import { BiRightArrowAlt } from 'react-icons/bi';
 import styles from './Buttons.module.scss';
 
 export const SecondaryButton = ({
@@ -23,6 +23,7 @@ export const SecondaryButton = ({
       )}
     >
       {children}
+      <span className={styles.arrow}>→</span>
     </a>
   );
 };

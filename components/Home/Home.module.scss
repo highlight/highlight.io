@@ -33,18 +33,19 @@
   gap: var(--size-medium);
 }
 
-.productIllustration {
+.sectionImageRight {
   flex: 1 1 55%;
   padding-left: var(--size-xLarge);
 
   img {
     max-width: 100%;
+    object-fit: contain;
   }
 }
 
-.sectionImage {
+.sectionImageLeft {
   flex: 1 1 55%;
-  padding: 0 var(--size-xxLarge);
+  padding-right: var(--size-xLarge);
 
   img {
     max-width: 100%;

@@ -22,10 +22,21 @@
 
 .secondaryButton {
   background-color: none;
-  border: 1px solid var(--color-white);
-  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 
-  &:hover {
-    opacity: 1;
+  .arrow {
+    color: var(--brand-accent-light);
+    transition: all 0.3s ease;
+    margin-left: 10px;
+    margin-right: 6px;
+    font-size: var(--size-large);
+  }
+
+  &:hover .arrow {
+    margin-left: var(--size-medium);
+    margin-right: 0;
   }
 }
