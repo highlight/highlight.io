@@ -28,7 +28,6 @@ export const CompaniesReel = () => {
       </div>
       <div className={styles.companies}>
         <Image src={Mona} alt="" />
-        <Image src={Quorum} alt="" />
         <Image src={Airplane} alt="" />
         <Image src={Basedash} alt="" />
         <Image src={Knock} alt="" />
