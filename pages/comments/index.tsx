@@ -42,10 +42,11 @@ const Comments: NextPage = () => {
               )}
             >
               <h1>Introducing: Comments by Highlight</h1>
-              <p className={styles.bodySmall}>
-                What if you could playback everything that led to an issue on
-                your web app? Join hundreds of companies that use Highlight to
-                keep their web app stable and their customers happy.
+              <p className={styles.bodyLarge}>
+                Now, in addition to session replay and monitoring, you can have
+                free flowing conversations related to issues to ensure that your
+                whole team is on the same page. Give Highlight a try and stay in
+                the loop!
               </p>
               <div className={styles.buttonContainer}>
                 <PrimaryButton href="https://app.highlight.run/?sign_up=1">
@@ -60,7 +61,7 @@ const Comments: NextPage = () => {
         </Section>
         <div className={commentStyles.video}>
           <video autoPlay controls muted loop>
-            <source src="/images/comments.mp4" type="video/mp4" />
+            <source src="/images/replies.mp4" type="video/mp4" />
           </video>
         </div>
         <CompaniesReel />
