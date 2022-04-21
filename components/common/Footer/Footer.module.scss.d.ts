@@ -1,6 +1,7 @@
 export const copyrightText: string;
 export const footer: string;
 export const footerBottom: string;
+export const footerBottomMobile: string;
 export const footerList: string;
 export const footerTitle: string;
 export const socialDiv: string;

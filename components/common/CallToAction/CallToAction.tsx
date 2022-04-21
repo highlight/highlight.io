@@ -29,7 +29,7 @@ export const CallToAction = () => {
             )}
           >
             <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-              Get Started For Free
+              Learn More
             </PrimaryButton>
             <SecondaryButton href="https://calendly.com/jaykhatri/highlight-demo-call">
               Request A Demo

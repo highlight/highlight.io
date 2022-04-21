@@ -8,7 +8,7 @@
   z-index: 2;
   position: sticky;
   top: 0;
-  transition: all 1s ease;
+  transition: all 0.2s ease;
 }
 
 .headerInner {
@@ -32,6 +32,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.navMenu {
+  display: none;
+
+  svg {
+    width: var(--size-large);
+    height: var(--size-large);
+  }
+}
+
+.mobileMenu {
+  display: none;
 }
 
 .menuList {
@@ -72,4 +85,54 @@
 
 .urlStyle {
   text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .headerInner {
+    padding: var(--size-medium) var(--size-large);
+  }
+
+  .navContainer {
+    display: none;
+  }
+
+  .mobileHeader {
+    background: var(--color-primary-background);
+  }
+
+  .navMenu {
+    display: flex;
+  }
+
+  .mobileMenu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    padding: var(--size-medium);
+    background-color: var(--color-primary-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: var(--size-small);
+
+    a {
+      width: 100%;
+      text-align: center;
+    }
+
+    .signUpButton {
+      margin: 0;
+    }
+
+    .menuList {
+      padding: var(--size-medium);
+      flex-direction: column;
+      gap: var(--size-large);
+    }
+  }
+
+  .headerLeft {
+    display: flex;
+  }
 }

@@ -97,6 +97,36 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      <div className={styles.footerBottomMobile}>
+        <div>
+          <HighlightLogo />
+        </div>
+        <div className={styles.status}>
+          <a
+            href="https://highlight.hyperping.io/"
+            className={styles.statusDiv}
+          >
+            <div className={styles.statusCircle}></div>
+            <div>All Systems Operational</div>
+          </a>
+        </div>
+        <div className={styles.socialDiv}>
+          <a href="https://twitter.com/highlightrun">
+            <FaTwitter className={styles.socialIcon} />
+          </a>
+          <a href="https://www.linkedin.com/company/highlightrun">
+            <FaLinkedinIn className={styles.socialIcon} />
+          </a>
+          <a href="https://github.com/highlight-run">
+            <FaGithub className={styles.socialIcon} />
+          </a>
+        </div>
+        <div>
+          <div className={styles.copyrightText}>
+            Copyright Highlight 2022. All right reserved.
+          </div>
+        </div>
+      </div>
     </footer>
   );
 };
