@@ -27,6 +27,7 @@ export const CompaniesReel = () => {
         Empowering Forward-Looking Companies
       </div>
       <div className={styles.companies}>
+        <Image src={Cabal} alt="" />
         <Image src={Mona} alt="" />
         <Image src={Airplane} alt="" />
         <Image src={Basedash} alt="" />
@@ -35,13 +36,14 @@ export const CompaniesReel = () => {
         <Image src={Impira} alt="" />
         <Image src={Porter} alt="" />
         <Image src={Portal} alt="" />
+        <Image src={Commandbar} alt="" />
         <Image src={Quickcard} alt="" />
         <Image src={Districtzero} alt="" />
-        <Image src={Commandbar} alt="" />
         <Image src={Tyltgo} alt="" />
         <Image src={Dripos} alt="" />
-        <Image src={Cabal} alt="" />
+        <Image src={Quorum} alt="" />
         <Image src={Mage} alt="" />
+        <Image src={Cabal} alt="" />
         <Image src={Journey} alt="" />
       </div>
     </div>
