@@ -53,11 +53,17 @@
   margin: 0;
   font-size: var(--size-medium);
   transition: opacity 0.2s ease-in-out;
+
+  li {
+    position: relative;
+  }
 }
 
 .menuItem {
   padding: 0 var(--size-medium);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-small);
   color: var(--text-gray);
   transition: color 0.2s ease;
   text-decoration: none;
@@ -67,6 +73,20 @@
 
 .menuItem:hover {
   color: var(--color-white);
+}
+
+.menuDropdown {
+  list-style-type: none;
+  padding: var(--size-small) 0;
+  margin: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-large);
+  background-color: var(--color-primary-background);
+  width: 100%;
+  margin-top: var(--size-xLarge);
+  border-radius: var(--border-radius);
 }
 
 .signUpButton {
@@ -117,6 +137,10 @@
     width: 100%;
     gap: var(--size-medium);
 
+    li {
+      width: 100%;
+    }
+
     a {
       width: 100%;
       padding-left: var(--size-medium);
@@ -138,9 +162,22 @@
       padding: 0;
       font-size: var(--size-large);
       text-align: left;
-      display: inline-block;
+      display: inline-flex;
       color: var(--text-primary);
       text-decoration: none;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .menuDropdown {
+      position: relative;
+      margin-top: var(--size-small);
+
+      .menuItemLarge {
+        padding-left: var(--size-small);
+        color: var(--text-gray);
+      }
     }
   }
 

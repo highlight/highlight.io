@@ -18,13 +18,12 @@ import Cabal from '../../../public/images/companies/cabal.svg';
 import Journey from '../../../public/images/companies/journey.png';
 import Dripos from '../../../public/images/companies/dripos.png';
 import Mage from '../../../public/images/companies/mage.png';
+import Link from 'next/link';
+import classNames from 'classnames';
 
 export const CompaniesReel = () => {
   return (
     <div className={styles.customerReel}>
-      <div className={styles.sectionSubtitle}>
-        Empowering Forward-Looking Companies
-      </div>
       <div className={styles.companies}>
         <Image src={Cabal} alt="" />
         <Image src={Mona} alt="" />
@@ -42,6 +41,18 @@ export const CompaniesReel = () => {
         <Image src={Dripos} alt="" />
         <Image src={Mage} alt="" />
         <Image src={Journey} alt="" />
+      </div>
+      <div className={styles.anchorTitle}>
+        <p className={classNames(styles.bodyLarge, styles.customerCopy)}>
+          From startups to enterprises, the worlds most forward-thinking
+          companies manage their secrets in Doppler.{' '}
+          <Link href={'/customers'}>
+            <a className={styles.buttonArrow}>
+              Our Customers
+              <span className={styles.arrow}>→</span>
+            </a>
+          </Link>
+        </p>
       </div>
     </div>
   );

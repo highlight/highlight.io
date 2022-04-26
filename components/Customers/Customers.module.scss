@@ -1,0 +1,47 @@
+.customerCard {
+  border-radius: var(--border-radius);
+  background-color: #161616;
+  padding: var(--size-medium) var(--size-large);
+}
+
+.companyDiv {
+  padding: var(--size-medium);
+  margin: auto;
+  max-width: 200px;
+}
+
+.companyLogo {
+  filter: invert(1);
+  height: 100px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.authorDiv {
+  display: flex;
+  align-items: center;
+  gap: var(--size-small);
+
+  p {
+    color: var(--text-gray);
+  }
+}
+
+.reviewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 var(--size-large);
+  grid-gap: var(--size-large);
+}
+
+@media screen and (max-width: 600px) {
+  .reviewGrid {
+    padding: 0;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

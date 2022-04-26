@@ -16,7 +16,6 @@ import ProductPlaceholder from '../public/images/product_placeholder.svg';
 import ReactDemo from '../public/images/react_demo.png';
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
-import { CodeBlock } from '../components/common/CodeBlock/CodeBlock';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 
 export const FeatureItem = ({
@@ -56,13 +55,6 @@ const Home: NextPage = () => {
               web app? Join hundreds of companies that use Highlight to keep
               their web app stable and their customers happy.
             </p>
-            <div>
-              <CodeBlock
-                text={`npm install highlight.run`}
-                language="typescript"
-                showLineNumbers={false}
-              />
-            </div>
             <div className={styles.buttonContainer}>
               <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                 Get Started For Free

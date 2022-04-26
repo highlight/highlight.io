@@ -4,6 +4,7 @@ export const headerInner: string;
 export const headerLeft: string;
 export const headerPadding: string;
 export const headerRight: string;
+export const menuDropdown: string;
 export const menuItem: string;
 export const menuItemLarge: string;
 export const menuList: string;

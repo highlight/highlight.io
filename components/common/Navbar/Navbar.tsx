@@ -4,11 +4,13 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useState } from 'react';
 import Banner from '../Banner/Banner';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineClose, AiOutlineDown } from 'react-icons/ai';
+import Link from 'next/link';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [developerOpen, setDeveloperOpen] = useState(true);
 
   const changeBackground = () => {
     if (window.scrollY > 60) {
@@ -37,9 +39,11 @@ const Navbar = () => {
       >
         <div className={classNames(styles.header, styles.headerInner)}>
           <div className={classNames(styles.navContainer, styles.headerLeft)}>
-            <a className={styles.urlStyle} href="https://www.highlight.run/">
-              <HighlightLogo />
-            </a>
+            <Link href={'/'}>
+              <a className={styles.urlStyle}>
+                <HighlightLogo />
+              </a>
+            </Link>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
@@ -55,9 +59,11 @@ const Navbar = () => {
                     Pricing
                   </a>
                 </li>
-                {/* <li>
-            <a className={styles.menuItemLarge}>Customers</a>
-          </li> */}
+                <li>
+                  <Link href={'/customers'}>
+                    <a className={styles.menuItemLarge}>Customers</a>
+                  </Link>
+                </li>
                 <li>
                   <a
                     href="https://blog.highlight.run/"
@@ -76,19 +82,33 @@ const Navbar = () => {
                 </li>
                 <li>
                   <a
-                    href="https://feedback.highlight.run/changelog"
+                    onClick={() => {
+                      setDeveloperOpen(!developerOpen);
+                    }}
                     className={styles.menuItemLarge}
                   >
-                    Changelog
+                    Developers <AiOutlineDown />
                   </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.highlight.run/"
-                    className={styles.menuItemLarge}
-                  >
-                    Docs
-                  </a>
+                  {developerOpen && (
+                    <ul className={styles.menuDropdown}>
+                      <li>
+                        <a
+                          href="https://feedback.highlight.run/changelog"
+                          className={styles.menuItemLarge}
+                        >
+                          Changelog
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="https://docs.highlight.run/"
+                          className={styles.menuItemLarge}
+                        >
+                          Docs
+                        </a>
+                      </li>
+                    </ul>
+                  )}
                 </li>
               </ul>
               <a href="https://app.highlight.run/" className={styles.menuItem}>
@@ -109,9 +129,11 @@ const Navbar = () => {
                   Pricing
                 </a>
               </li>
-              {/* <li>
-            <a className={styles.menuItem}>Customers</a>
-          </li> */}
+              <li>
+                <Link href={'/customers'}>
+                  <a className={styles.menuItem}>Customers</a>
+                </Link>
+              </li>
               <li>
                 <a
                   href="https://blog.highlight.run/"
@@ -130,19 +152,33 @@ const Navbar = () => {
               </li>
               <li>
                 <a
-                  href="https://feedback.highlight.run/changelog"
+                  onClick={() => {
+                    setDeveloperOpen(!developerOpen);
+                  }}
                   className={styles.menuItem}
                 >
-                  Changelog
+                  Developers <AiOutlineDown />
                 </a>
-              </li>
-              <li>
-                <a
-                  href="https://docs.highlight.run/"
-                  className={styles.menuItem}
-                >
-                  Docs
-                </a>
+                {developerOpen && (
+                  <ul className={styles.menuDropdown}>
+                    <li>
+                      <a
+                        href="https://feedback.highlight.run/changelog"
+                        className={styles.menuItem}
+                      >
+                        Changelog
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://docs.highlight.run/"
+                        className={styles.menuItem}
+                      >
+                        Docs
+                      </a>
+                    </li>
+                  </ul>
+                )}
               </li>
             </ul>
           </div>
