@@ -10,13 +10,12 @@ import styles from '../components/Home/Home.module.scss';
 
 import BlueGradient from '../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../public/images/bg_purple_gradient.svg';
-import CrossTeamCollaboration from '../public/images/cross_team_collaboration.svg';
 import ProductIllustration from '../public/images/product_illustration.svg';
-import ProductPlaceholder from '../public/images/product_placeholder.svg';
-import ReactDemo from '../public/images/react_demo.png';
+import ReplyGif from '../public/images/reply.gif';
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
+import classNames from 'classnames';
 
 export const FeatureItem = ({
   children,
@@ -84,28 +83,39 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.sectionImageRight}>
-            <Image src={ReactDemo} alt="" width={1215} height={746} />
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionImageLeft}>
-            <Image src={CrossTeamCollaboration} alt="" />
-          </div>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>{`Cross-team collaboration`}</h2>
-            <p className={styles.bodySmall}>
-              Stakeholders on customer issues can change. Highlight makes
-              cross-team communication painless.
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/comments">
-                Read The Docs
-              </SecondaryButton>
+            <div className={styles.imageInner}>
+              <Image src={ReplyGif} alt="" />
             </div>
           </div>
         </Section>
         <Section>
+          <div className={styles.anchorFeature}>
+            <div className={styles.anchorTitle}>
+              <div className={styles.sectionSubtitle}>Product Feature</div>
+              <h2>{`Cross-team collaboration`}</h2>
+              <p className={styles.bodySmall}>
+                Stakeholders on customer issues can change. Highlight makes
+                cross-team communication painless.
+              </p>
+            </div>
+            <div className={styles.anchorImage}>
+              <Image
+                src={ReplyGif}
+                alt=""
+                layout={'fill'}
+                objectFit={'cover'}
+              />
+            </div>
+          </div>
+        </Section>
+        <Section>
+          <div
+            className={classNames(styles.sectionImageLeft, styles.hideMobile)}
+          >
+            <div className={styles.imageInner}>
+              <Image src={ReplyGif} alt="" />
+            </div>
+          </div>
           <div className={styles.sectionText}>
             <div className={styles.sectionSubtitle}>Product Feature</div>
             <h2>Access dense developer tooling</h2>
@@ -119,25 +129,29 @@ const Home: NextPage = () => {
               </SecondaryButton>
             </div>
           </div>
-          <div className={styles.sectionImageRight}>
-            <Image src={ProductPlaceholder} alt="" />
+          <div className={classNames(styles.sectionImageLeft, styles.mobile)}>
+            <div className={styles.imageInner}>
+              <Image src={ReplyGif} alt="" />
+            </div>
           </div>
         </Section>
         <Section>
-          <div className={styles.sectionImageLeft}>
-            <Image src={ProductPlaceholder} alt="" />
-          </div>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Product Feature</div>
-            <h2>{`Learn from your users' interactions`}</h2>
-            <p className={styles.bodySmall}>
-              Stakeholders on customer issues can change. Highlight makes
-              cross-team communication painless.
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/">
-                Read The Docs
-              </SecondaryButton>
+          <div className={styles.anchorFeature}>
+            <div className={styles.anchorTitle}>
+              <div className={styles.sectionSubtitle}>Product Feature</div>
+              <h2>{`Learn from your users' interactions`}</h2>
+              <p className={styles.bodySmall}>
+                Stakeholders on customer issues can change. Highlight makes
+                cross-team communication painless.
+              </p>
+            </div>
+            <div className={styles.anchorImage}>
+              <Image
+                src={ReplyGif}
+                alt=""
+                layout={'fill'}
+                objectFit={'cover'}
+              />
             </div>
           </div>
         </Section>
@@ -150,8 +164,8 @@ const Home: NextPage = () => {
           </div>
         </Section>
         <Section>
-          <div className={styles.sectionImageRight}>
-            <Image src={ProductPlaceholder} alt="" />
+          <div className={styles.sectionImageLeft}>
+            <Image src={ReplyGif} alt="" />
           </div>
           <div className={styles.sectionText}>
             <FeatureItem>

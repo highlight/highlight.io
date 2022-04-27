@@ -29,28 +29,52 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 45%;
-  padding: 0 var(--size-xLarge);
+  padding: 0px var(--size-xLarge);
   gap: var(--size-medium);
   min-width: 550px;
+  margin: 50px 0;
 }
 
 .sectionImageRight {
   flex: 1 1 55%;
-  padding-left: var(--size-xLarge);
+  padding-right: var(--size-xLarge);
+
+  span {
+    height: 100% !important;
+  }
+
+  .imageInner {
+    height: 100%;
+    width: calc(100% + 200px);
+    margin-right: -200px;
+    text-align: right;
+  }
 
   img {
     max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: var(--border-radius);
   }
 }
 
 .sectionImageLeft {
   flex: 1 1 55%;
-  padding-right: var(--size-xLarge);
+  padding-left: var(--size-xLarge);
+
+  span {
+    height: 100% !important;
+  }
+
+  .imageInner {
+    height: 100%;
+    width: calc(100% + 200px);
+    margin-left: -200px;
+  }
 
   img {
     max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: var(--border-radius);
   }
 }
 
@@ -79,6 +103,34 @@
   text-align: center;
   margin: auto;
   gap: var(--size-medium);
+}
+
+.anchorFeature {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  gap: var(--size-large);
+  padding: 0 var(--size-xxLarge);
+
+  .anchorTitle {
+    max-width: 600px;
+  }
+
+  .anchorImage {
+    position: relative;
+    width: 100%;
+    height: 40vw;
+    max-height: 720px;
+
+    img {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+  }
 }
 
 .featureItem {
@@ -193,7 +245,23 @@
   }
 }
 
+.hideMobile {
+  display: block;
+}
+
+.mobile {
+  display: none;
+}
+
 @media screen and (max-width: 600px) {
+  .mobile {
+    display: block;
+  }
+
+  .hideMobile {
+    display: none;
+  }
+
   .bodySmall {
     font-size: var(--size-medium);
   }
@@ -205,7 +273,18 @@
   .buttonContainer {
     width: 100%;
     flex-direction: column;
+    align-items: flex-start;
     gap: var(--size-small);
+
+    a {
+      text-align: left;
+    }
+  }
+
+  .tryButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     a {
       width: 100%;
@@ -218,6 +297,7 @@
   .sectionImageLeft {
     min-width: 0;
     padding: 0;
+    margin: 0;
   }
 
   .callToActionBackground {
@@ -231,5 +311,24 @@
   .companies {
     grid-template-columns: repeat(4, 1fr);
     padding: 0;
+  }
+
+  .buttonArrow {
+    .arrow {
+      font-size: var(--size-medium);
+    }
+  }
+
+  .anchorFeature {
+    padding: 0;
+    div {
+      text-align: left;
+    }
+
+    .anchorImage {
+      height: 60vw;
+      width: calc(100vw + 100px);
+      margin: 0 -50px;
+    }
   }
 }

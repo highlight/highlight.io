@@ -1,3 +1,5 @@
+export const anchorFeature: string;
+export const anchorImage: string;
 export const anchorSmall: string;
 export const anchorTitle: string;
 export const arrow: string;
@@ -14,6 +16,9 @@ export const ctaContainer: string;
 export const customerCopy: string;
 export const customerReel: string;
 export const featureItem: string;
+export const hideMobile: string;
+export const imageInner: string;
+export const mobile: string;
 export const purpleDiv: string;
 export const sectionImageLeft: string;
 export const sectionImageRight: string;

@@ -10,7 +10,7 @@ import Link from 'next/link';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [developerOpen, setDeveloperOpen] = useState(true);
+  const [developerOpen, setDeveloperOpen] = useState(false);
 
   const changeBackground = () => {
     if (window.scrollY > 60) {
