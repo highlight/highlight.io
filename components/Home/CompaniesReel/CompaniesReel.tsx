@@ -43,11 +43,10 @@ export const CompaniesReel = () => {
         <Image src={Journey} alt="" />
       </div>
       <div className={styles.anchorTitle}>
-        <p className={classNames(styles.bodyLarge, styles.customerCopy)}>
-          From startups to enterprises, the worlds most forward-thinking
-          companies manage their secrets in Doppler.{' '}
+        <p className={classNames(styles.bodyMedium, styles.customerCopy)}>
+          Forward-thinking copmanies rely on Highlight.{' '}
           <Link href={'/customers'}>
-            <a className={styles.buttonArrow}>
+            <a className={classNames(styles.buttonArrow, styles.bodySmall)}>
               Our Customers
               <span className={styles.arrow}>→</span>
             </a>

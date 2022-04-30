@@ -1,5 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Lottie from 'react-lottie';
+import animationData from '../public/data/lottie';
 import Image from 'next/image';
 import React from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
@@ -29,6 +31,14 @@ export const FeatureItem = ({
 };
 
 const Home: NextPage = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
   return (
     <div>
       <Head>
@@ -49,10 +59,10 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.sectionText}>
             <h1>Stop debugging in the dark</h1>
-            <p className={styles.bodySmall}>
+            <p className={styles.bodyMedium}>
               What if you could playback everything that led to an issue on your
-              web app? Join hundreds of companies that use Highlight to keep
-              their web app stable and their customers happy.
+              web app? Highlight keeps your web app stable and their customers
+              happy.
             </p>
             <div className={styles.buttonContainer}>
               <PrimaryButton href="https://app.highlight.run/?sign_up=1">
@@ -64,7 +74,7 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className={styles.sectionImageRight}>
-            <Image src={ProductIllustration} alt="" />
+            <Lottie options={defaultOptions} height={410} width={640} />
           </div>
         </Section>
         <CompaniesReel />
