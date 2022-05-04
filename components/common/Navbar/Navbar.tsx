@@ -2,15 +2,21 @@ import { HighlightLogo } from '../HighlightLogo/HighlightLogo';
 import styles from './Navbar.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
-import { AiOutlineMenu, AiOutlineClose, AiOutlineDown } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import ChevronDown from '../../../public/images/ChevronDownIcon';
 import Link from 'next/link';
+import SvgBookIcon from '../../../public/images/BookIcon';
+import SvgEditIcon from '../../../public/images/EditIcon';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [developerOpen, setDeveloperOpen] = useState(false);
+  const [mobileDeveloperOpen, setMobileDeveloperOpen] = useState(false);
+
+  const dropdownRef = useRef<null | HTMLUListElement>(null);
 
   const changeBackground = () => {
     if (window.scrollY > 60) {
@@ -24,6 +30,19 @@ const Navbar = () => {
     changeBackground();
     window.addEventListener('scroll', changeBackground);
   });
+
+  // Bind the navbar dropdowns to close on outside click
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDeveloperOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   return (
     <>
@@ -52,12 +71,9 @@ const Navbar = () => {
             <div className={styles.mobileMenu}>
               <ul className={classNames(styles.menuList, styles.header)}>
                 <li>
-                  <a
-                    href="https://www.highlight.run/pricing"
-                    className={styles.menuItemLarge}
-                  >
-                    Pricing
-                  </a>
+                  <Link href={'/pricing'}>
+                    <a className={styles.menuItemLarge}>Pricing</a>
+                  </Link>
                 </li>
                 <li>
                   <Link href={'/customers'}>
@@ -65,12 +81,9 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://blog.highlight.run/"
-                    className={styles.menuItemLarge}
-                  >
-                    Blog
-                  </a>
+                  <Link href={'/blog'}>
+                    <a className={styles.menuItemLarge}>Blog</a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -83,13 +96,13 @@ const Navbar = () => {
                 <li>
                   <a
                     onClick={() => {
-                      setDeveloperOpen(!developerOpen);
+                      setMobileDeveloperOpen(!mobileDeveloperOpen);
                     }}
                     className={styles.menuItemLarge}
                   >
-                    Developers <AiOutlineDown />
+                    Developers <ChevronDown />
                   </a>
-                  {developerOpen && (
+                  {mobileDeveloperOpen && (
                     <ul className={styles.menuDropdown}>
                       <li>
                         <a
@@ -122,12 +135,9 @@ const Navbar = () => {
           <div className={styles.navContainer}>
             <ul className={classNames(styles.menuList, styles.header)}>
               <li>
-                <a
-                  href="https://www.highlight.run/pricing"
-                  className={styles.menuItem}
-                >
-                  Pricing
-                </a>
+                <Link href={'/pricing'}>
+                  <a className={styles.menuItem}>Pricing</a>
+                </Link>
               </li>
               <li>
                 <Link href={'/customers'}>
@@ -135,12 +145,9 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://blog.highlight.run/"
-                  className={styles.menuItem}
-                >
-                  Blog
-                </a>
+                <Link href={'/blog'}>
+                  <a className={styles.menuItem}>Blog</a>
+                </Link>
               </li>
               <li>
                 <a
@@ -153,20 +160,26 @@ const Navbar = () => {
               <li>
                 <a
                   onClick={() => {
-                    setDeveloperOpen(!developerOpen);
+                    setDeveloperOpen(true);
                   }}
                   className={styles.menuItem}
                 >
-                  Developers <AiOutlineDown />
+                  Developers <ChevronDown />
                 </a>
                 {developerOpen && (
-                  <ul className={styles.menuDropdown}>
+                  <ul ref={dropdownRef} className={styles.menuDropdown}>
                     <li>
                       <a
                         href="https://feedback.highlight.run/changelog"
                         className={styles.menuItem}
                       >
-                        Changelog
+                        <div className={styles.dropdownItem}>
+                          <SvgEditIcon />
+                          <div>
+                            <h4>Changelog</h4>
+                            <div>Updates to our products</div>
+                          </div>
+                        </div>
                       </a>
                     </li>
                     <li>
@@ -174,7 +187,13 @@ const Navbar = () => {
                         href="https://docs.highlight.run/"
                         className={styles.menuItem}
                       >
-                        Docs
+                        <div className={styles.dropdownItem}>
+                          <SvgBookIcon />
+                          <div>
+                            <h4>Docs</h4>
+                            <div>Read our documentation</div>
+                          </div>
+                        </div>
                       </a>
                     </li>
                   </ul>

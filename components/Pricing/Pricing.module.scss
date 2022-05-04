@@ -1,0 +1,129 @@
+.pricingTable {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 200px repeat(4, 150px);
+  grid-auto-rows: min-content;
+  row-gap: var(--size-small);
+  column-gap: 50px;
+
+  & > span {
+    border-bottom: 1px solid rgb(49, 48, 53);
+    height: var(--size-large);
+  }
+
+  span {
+    font-size: 14px;
+  }
+
+  .checkmark {
+    filter: invert(1);
+  }
+}
+
+.mobileTiers {
+  display: none;
+}
+
+.mobileTierCard {
+  padding: var(--size-large);
+  width: 100%;
+  background-color: #161616;
+  border-radius: var(--border-radius);
+  margin: var(--size-small) auto;
+
+  & > div {
+    width: 100%;
+  }
+}
+
+.tableCard {
+  max-width: 1050px;
+  padding: var(--size-xLarge) 25px;
+  width: 100%;
+  background-color: #161616;
+  border-radius: var(--border-radius);
+  margin: auto;
+}
+
+.tierInfo {
+  display: flex;
+  flex-shrink: initial;
+  flex-basis: initial;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+
+  .tierName {
+    font-size: var(--size-large);
+  }
+
+  .tierPrice {
+    display: flex;
+    flex-shrink: initial;
+    flex-basis: initial;
+    flex-direction: row;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    align-items: center;
+    margin: var(--size-small) 0;
+
+    .priceNum {
+      display: flex;
+      line-height: 32px;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+      color: rgb(247, 248, 248);
+    }
+
+    .priceDuration {
+      margin-left: var(--size-small);
+      white-space: nowrap;
+    }
+  }
+
+  .startTrial {
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    padding: 0;
+    margin-bottom: var(--size-small);
+    max-width: 300px;
+  }
+
+  .pricingBreakdown {
+    max-width: 300px;
+    display: flex;
+    flex-shrink: initial;
+    flex-basis: initial;
+    flex-direction: row;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    margin-bottom: var(--size-xxSmall);
+  }
+}
+
+.tableBody {
+  font-style: normal;
+  line-height: normal;
+  font-weight: normal;
+  color: var(--text-gray);
+  font-size: 14px;
+}
+
+@media screen and (max-width: 1000px) {
+  .tableCard {
+    display: none;
+  }
+
+  .mobileTiers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+  }
+}

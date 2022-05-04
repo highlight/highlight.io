@@ -29,23 +29,22 @@ export const CompaniesReel = () => {
         <Image src={Mona} alt="" />
         <Image src={Airplane} alt="" />
         <Image src={Basedash} alt="" />
-        <Image src={Knock} alt="" />
-        <Image src={Pipe} alt="" />
-        <Image src={Impira} alt="" />
-        <Image src={Porter} alt="" />
-        <Image src={Portal} alt="" />
-        <Image src={Commandbar} alt="" />
-        <Image src={Quickcard} alt="" />
-        <Image src={Districtzero} alt="" />
-        <Image src={Tyltgo} alt="" />
-        <Image src={Dripos} alt="" />
-        <Image src={Mage} alt="" />
-        <Image src={Journey} alt="" />
+        <Image src={Knock} alt="" className={styles.scaleHeight} />
+        <Image src={Pipe} alt="" className={styles.scaleHeight} />
+        <Image src={Impira} alt="" className={styles.scaleHeight} />
+        <Image src={Porter} alt="" className={styles.scaleHeight} />
+        <Image src={Portal} alt="" className={styles.scaleHeight} />
+        <Image src={Commandbar} alt="" className={styles.scaleHeight} />
+        <Image src={Quickcard} alt="" className={styles.scaleHeight} />
+        <Image src={Districtzero} alt="" className={styles.scaleHeight} />
+        <Image src={Tyltgo} alt="" className={styles.scaleHeight} />
+        <Image src={Dripos} alt="" className={styles.scaleHeight} />
+        <Image src={Mage} alt="" className={styles.scaleHeight} />
+        <Image src={Journey} alt="" className={styles.scaleHeight} />
       </div>
       <div className={styles.anchorTitle}>
-        <p className={classNames(styles.bodyLarge, styles.customerCopy)}>
-          From startups to enterprises, the worlds most forward-thinking
-          companies manage their secrets in Doppler.{' '}
+        <p className={classNames(styles.bodySmall, styles.customerCopy)}>
+          Highlight powers forward-thinking companies.
           <Link href={'/customers'}>
             <a className={styles.buttonArrow}>
               Our Customers
