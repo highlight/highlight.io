@@ -12,12 +12,13 @@ import styles from '../components/Home/Home.module.scss';
 
 import BlueGradient from '../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../public/images/bg_purple_gradient.svg';
-import ProductIllustration from '../public/images/product_illustration.svg';
+import ProductIllustrationAnimation from '../public/images/heroAnimation.json';
 import ReplyGif from '../public/images/reply.gif';
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
+import Lottie from 'lottie-react';
 
 export const FeatureItem = ({
   children,
@@ -59,10 +60,10 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.sectionText}>
             <h1>
-              Stop debugging in the&nbsp;
-              <span className={styles.darkText}>dark.</span>
+              Stop debugging in the{' '}
+              <span className={styles.gradientText}>dark</span>
             </h1>
-            <p className={styles.bodyMedium}>
+            <p className={styles.bodySmall}>
               What if you could playback everything that led to an issue on your
               web app? Highlight keeps your web app stable and your customers
               happy.
@@ -76,8 +77,14 @@ const Home: NextPage = () => {
               </SecondaryButton>
             </div>
           </div>
-          <div className={styles.sectionImageRight}>
-            <Lottie options={defaultOptions} height={410} width={640} />
+          <div
+            className={classNames(styles.sectionImageRight, styles.heroImage)}
+          >
+            <Lottie
+              animationData={ProductIllustrationAnimation}
+              loop={true}
+              autoplay={true}
+            />
           </div>
         </Section>
         <CompaniesReel />

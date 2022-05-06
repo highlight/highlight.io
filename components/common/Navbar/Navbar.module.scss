@@ -69,6 +69,11 @@
   text-decoration: none;
   cursor: pointer;
   outline: none;
+
+  .chevronDown {
+    width: var(--size-medium) !important;
+    height: var(--size-medium) !important;
+  }
 }
 
 .menuItem:hover {
@@ -84,7 +89,8 @@
   flex-direction: column;
   gap: var(--size-large);
   background-color: var(--color-primary-background);
-  width: 100%;
+  width: 300px;
+  margin-left: calc(50% - 150px);
   margin-top: var(--size-xLarge);
   border-radius: var(--border-radius);
 }
@@ -105,6 +111,24 @@
 
 .urlStyle {
   text-decoration: none;
+}
+
+.dropdownItem {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--size-large);
+  align-items: center;
+
+  h4 {
+    color: var(--text-gray) !important;
+    font-weight: 500 !important;
+    transition: color 0.2s ease;
+    margin-bottom: var(--size-xxSmall) !important;
+  }
+
+  &:hover h4 {
+    color: var(--color-white) !important;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -173,6 +197,7 @@
     .menuDropdown {
       position: relative;
       margin-top: var(--size-small);
+      margin-left: 0;
 
       .menuItemLarge {
         padding-left: var(--size-small);
