@@ -18,7 +18,6 @@ import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
-import Lottie from 'lottie-react';
 
 export const FeatureItem = ({
   children,
@@ -81,6 +80,7 @@ const Home: NextPage = () => {
             className={classNames(styles.sectionImageRight, styles.heroImage)}
           >
             <Lottie
+              options={defaultOptions}
               animationData={ProductIllustrationAnimation}
               loop={true}
               autoplay={true}
