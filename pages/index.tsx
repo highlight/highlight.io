@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react';
 import animationData from '../public/data/lottie';
 import Image from 'next/image';
 import React from 'react';
@@ -80,7 +80,6 @@ const Home: NextPage = () => {
             className={classNames(styles.sectionImageRight, styles.heroImage)}
           >
             <Lottie
-              options={defaultOptions}
               animationData={ProductIllustrationAnimation}
               loop={true}
               autoplay={true}
