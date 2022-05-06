@@ -58,10 +58,13 @@ const Home: NextPage = () => {
       <main>
         <Section>
           <div className={styles.sectionText}>
-            <h1>Stop debugging in the dark</h1>
+            <h1>
+              Stop debugging in the&nbsp;
+              <span className={styles.darkText}>dark.</span>
+            </h1>
             <p className={styles.bodyMedium}>
               What if you could playback everything that led to an issue on your
-              web app? Highlight keeps your web app stable and their customers
+              web app? Highlight keeps your web app stable and your customers
               happy.
             </p>
             <div className={styles.buttonContainer}>

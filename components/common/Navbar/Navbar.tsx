@@ -28,8 +28,8 @@ const Navbar = () => {
   return (
     <>
       <Banner>
-        <p>Want 1 month of free Highlight? </p>
-        <a href="http://app.highlight.run/">Register Here</a>
+        <p>Want 14 days of free Highlight? </p>
+        <a href="http://app.highlight.run/">Sign Up Here</a>
       </Banner>
       <header
         className={classNames(styles.headerPadding, {

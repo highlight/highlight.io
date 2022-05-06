@@ -5,9 +5,9 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: linear-gradient(90deg, #5c29c6 0%, #351479 62.48%);
+  background: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid var(--color-gray-800);
   transform-origin: top center;
-  border-bottom: 1px solid var(--accents-2);
   transition: transform 0.2s ease, height 0.3s ease;
   color: var(--text-primary);
   z-index: 200;
