@@ -26,18 +26,8 @@
 }
 
 .gradientText {
-  // background: -webkit-linear-gradient(
-  //   135deg,
-  //   var(--color-purple-400),
-  //   var(--color-purple-700)
-  // );
-  background: -webkit-linear-gradient(
-    135deg,
-    var(--color-yellow-300),
-    var(--color-yellow-600)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  position: relative;
+  // transition: color 0.8s ease;
 }
 
 .sectionText {

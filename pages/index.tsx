@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Lottie from 'lottie-react';
-import animationData from '../public/data/lottie';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import { SecondaryButton } from '../components/common/Buttons/SecondaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
@@ -31,14 +30,6 @@ export const FeatureItem = ({
 };
 
 const Home: NextPage = () => {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
   return (
     <div>
       <Head>
@@ -59,8 +50,7 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.sectionText}>
             <h1>
-              Stop debugging in the{' '}
-              <span className={styles.gradientText}>dark</span>
+              Stop debugging in the <DarkText />
             </h1>
             <p className={styles.bodySmall}>
               What if you could playback everything that led to an issue on your
@@ -210,6 +200,14 @@ const Home: NextPage = () => {
 
       <Footer />
     </div>
+  );
+};
+
+const DarkText = () => {
+  return (
+    <span className={styles.gradientText}>
+      <span>dark</span>
+    </span>
   );
 };
 
