@@ -8,9 +8,47 @@ import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
-import { BlogPost } from '../../components/Blog/BlogPost/BlogPost';
+import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
+import { GraphQLClient, gql } from 'graphql-request';
 
-const Customers: NextPage = () => {
+export const graphcms = new GraphQLClient(
+  'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
+  {
+    headers: {
+      Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
+    },
+  }
+);
+
+const QUERY = gql`
+  {
+    posts {
+      id
+      image {
+        url
+      }
+      title
+      description
+      publishedAt
+      publishedBy {
+        name
+        picture
+      }
+    }
+  }
+`;
+
+export async function getStaticProps() {
+  const { posts } = await graphcms.request(QUERY);
+
+  return {
+    props: {
+      posts: posts.reverse(),
+    },
+  };
+}
+
+const Blog = ({ posts }: { posts: any }) => {
   return (
     <>
       <Head>
@@ -36,10 +74,9 @@ const Customers: NextPage = () => {
           </div>
         </Section>
         <div className={styles.blogContainer}>
-          <BlogPost />
-          <BlogPost />
-          <BlogPost />
-          <BlogPost />
+          {posts.map((p: Post, i: number) => (
+            <BlogPost {...p} key={i} />
+          ))}
         </div>
       </main>
       <Footer />
@@ -47,4 +84,4 @@ const Customers: NextPage = () => {
   );
 };
 
-export default Customers;
+export default Blog;

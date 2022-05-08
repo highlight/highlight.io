@@ -7,7 +7,7 @@
   margin: var(--size-large) auto;
   padding: var(--size-small) var(--size-xLarge);
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--size-xxLarge);
 }
 
@@ -22,6 +22,7 @@
 .cardImage {
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .avatar {
@@ -31,6 +32,10 @@
   overflow: hidden;
 }
 
+.authorName {
+  color: var(--color-white) !important;
+}
+
 .authorDiv {
   display: flex;
   align-items: center;
@@ -38,6 +43,50 @@
 
   p {
     color: var(--text-gray);
+    margin: var(--size-xxSmall) 0 !important;
+  }
+}
+
+.postDiv {
+  text-align: left;
+}
+
+.mainImage {
+  position: relative;
+  width: 100%;
+  height: auto;
+  align-items: stretch;
+  min-height: 400px;
+}
+
+.postBody {
+  width: 100%;
+
+  pre {
+    overflow: auto;
+  }
+
+  h4 {
+    font-size: var(--size-large);
+  }
+
+  p,
+  li {
+    font-size: var(--size-medium);
+    line-height: 1.5rem !important;
+    color: var(--text-gray);
+
+    img {
+      width: 100%;
+    }
+  }
+
+  a {
+    color: var(--text-gray);
+  }
+
+  a:hover {
+    color: var(--brand-accent-light);
   }
 }
 
@@ -50,6 +99,18 @@
     padding: var(--size-large) 0;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--size-medium);
+    gap: var(--size-large);
+  }
+
+  .cardSection {
+    width: 100%;
+  }
+
+  .cardImage {
+    min-height: 200px !important;
+  }
+
+  .mainImage {
+    min-height: 200px;
   }
 }
