@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export interface Post {
-  id: string;
+  slug: string;
   description: string;
   image: {
     url: string;
@@ -14,18 +14,20 @@ export interface Post {
     name: string;
     picture: string;
   };
+  content: string;
 }
 
 export const BlogPost = ({
-  id,
+  slug,
   description,
+  content,
   image: { url },
   title,
   publishedAt,
   publishedBy,
 }: Post) => {
   return (
-    <Link href={`/blog/post/${id}`}>
+    <Link href={`/blog/post/${slug}`}>
       <a style={{ textDecoration: 'none' }}>
         <div className={styles.blogPost}>
           <div className={styles.cardSection}>
@@ -45,7 +47,11 @@ export const BlogPost = ({
               </div>
               <div>
                 <p className={styles.authorName}>{publishedBy.name}</p>
-                <p>{new Date(publishedAt).toLocaleDateString('en-US')}</p>
+                <p>{`${new Date(publishedAt).toLocaleDateString(
+                  'en-US'
+                )} • ${Math.floor(
+                  content.split(' ').length / 200
+                )} min read`}</p>
               </div>
             </div>
           </div>

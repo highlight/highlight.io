@@ -10,6 +10,7 @@ import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
 import { GraphQLClient, gql } from 'graphql-request';
+import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 
 export const graphcms = new GraphQLClient(
   'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
@@ -23,7 +24,7 @@ export const graphcms = new GraphQLClient(
 const QUERY = gql`
   {
     posts {
-      id
+      slug
       image {
         url
       }
@@ -34,6 +35,7 @@ const QUERY = gql`
         name
         picture
       }
+      content
     }
   }
 `;
@@ -78,6 +80,7 @@ const Blog = ({ posts }: { posts: any }) => {
             <BlogPost {...p} key={i} />
           ))}
         </div>
+        <CallToAction />
       </main>
       <Footer />
     </>

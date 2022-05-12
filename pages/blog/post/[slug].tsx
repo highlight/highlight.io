@@ -11,35 +11,61 @@ import { gql } from 'graphql-request';
 import { graphcms } from '..';
 import classNames from 'classnames';
 import ReactMarkdown from 'react-markdown';
+import { GetStaticPaths, GetStaticProps } from 'next/types';
+import { CallToAction } from '../../../components/common/CallToAction/CallToAction';
 
-const QUERY = gql`
-  query GetPost($postId: ID!) {
-    post(where: { id: $postId }) {
-      id
-      title
-      image {
-        url
+export const getStaticPaths: GetStaticPaths = async () => {
+  const QUERY = gql`
+    {
+      posts {
+        slug
       }
-      description
-      publishedAt
-      publishedBy {
-        name
-        picture
-      }
-      content
     }
-  }
-`;
+  `;
+  const { posts } = await graphcms.request(QUERY);
 
-export async function getServerSideProps({ query }: any) {
-  const { post } = await graphcms.request(QUERY, { postId: query.postid });
+  return {
+    paths: posts.map((p: { slug: string }) => ({ params: { slug: p.slug } })),
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = params?.slug as string;
+
+  const QUERY = gql`
+    query GetPost($slug: String!) {
+      post(where: { slug: $slug }) {
+        title
+        image {
+          url
+        }
+        description
+        publishedAt
+        publishedBy {
+          name
+          picture
+        }
+        content
+      }
+    }
+  `;
+  const data = await graphcms.request(QUERY, { slug: slug });
+
+  // Handle event slugs which don't exist in our CMS
+  if (!data.post) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
-      post,
+      post: data.post,
     },
+    revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
-}
+};
 
 const PostPage = ({ post }: { post: any }) => {
   return (
@@ -71,7 +97,11 @@ const PostPage = ({ post }: { post: any }) => {
               </div>
               <div>
                 <p className={styles.authorName}>{post.publishedBy.name}</p>
-                <p>{new Date(post.publishedAt).toLocaleDateString('en-US')}</p>
+                <p>{`${new Date(post.publishedAt).toLocaleDateString(
+                  'en-US'
+                )} • ${Math.floor(
+                  post.content.split(' ').length / 200
+                )} min read`}</p>
               </div>
             </div>
           </div>
@@ -97,6 +127,7 @@ const PostPage = ({ post }: { post: any }) => {
             <ReactMarkdown>{post.content}</ReactMarkdown>
           </div>
         </Section>
+        <CallToAction />
       </main>
       <Footer />
     </>

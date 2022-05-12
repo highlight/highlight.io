@@ -10,6 +10,7 @@ import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import { CUSTOMER_REVIEWS } from '../../components/Customers/Customers';
 import { CustomerCard } from '../../components/Customers/CustomerCard/CustomerCard';
+import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 
 const Customers: NextPage = () => {
   return (
@@ -43,6 +44,7 @@ const Customers: NextPage = () => {
             })}
           </div>
         </Section>
+        <CallToAction />
       </main>
       <Footer />
     </>

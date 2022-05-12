@@ -11,6 +11,7 @@ import styles from '../../components/Pricing/Pricing.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import SvgCheckmarkCircle from '../../public/images/CheckmarkCircle';
+import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 
 interface TierInfoObject {
   tierName: string;
@@ -270,6 +271,7 @@ const Pricing: NextPage = () => {
             </div>
           </div>
         </Section>
+        <CallToAction />
       </main>
       <Footer />
     </>
