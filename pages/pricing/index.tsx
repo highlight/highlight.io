@@ -196,7 +196,9 @@ const Pricing: NextPage = () => {
               <span>-</span>
               <span>-</span>
               <span>-</span>
-              <span>-</span>
+              <span>
+                <SvgCheckmarkCircle className={styles.checkmark} />
+              </span>
               <span className={styles.tableBody}>Enhanced User Properties</span>
               <span>-</span>
               <span>-</span>
