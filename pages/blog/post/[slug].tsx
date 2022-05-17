@@ -47,6 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           picture
         }
         content
+        tags
       }
     }
   `;
@@ -125,6 +126,11 @@ const PostPage = ({ post }: { post: any }) => {
             )}
           >
             <ReactMarkdown>{post.content}</ReactMarkdown>
+            <div className={styles.tagDiv}>
+              {post.tags.map((tag: string) => (
+                <div key={tag}>{tag}</div>
+              ))}
+            </div>
           </div>
         </Section>
         <CallToAction />

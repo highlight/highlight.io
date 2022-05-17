@@ -9,3 +9,4 @@ export const cardSection: string;
 export const mainImage: string;
 export const postBody: string;
 export const postDiv: string;
+export const tagDiv: string;

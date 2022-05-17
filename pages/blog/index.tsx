@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
@@ -11,6 +10,10 @@ import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
 import { GraphQLClient, gql } from 'graphql-request';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { useEffect, useState } from 'react';
+import Paginate from '../../components/common/Paginate/Paginate';
+
+const ITEMS_PER_PAGE = 5;
 
 export const graphcms = new GraphQLClient(
   'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
@@ -50,7 +53,20 @@ export async function getStaticProps() {
   };
 }
 
-const Blog = ({ posts }: { posts: any }) => {
+const Blog = ({ posts }: { posts: Array<never> }) => {
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount] = useState(Math.ceil(posts.length / ITEMS_PER_PAGE));
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentItems(
+      posts.slice(
+        ITEMS_PER_PAGE * (currentPage - 1),
+        Math.min(ITEMS_PER_PAGE * currentPage, posts.length)
+      )
+    );
+  }, [currentPage, posts]);
+
   return (
     <>
       <Head>
@@ -76,9 +92,15 @@ const Blog = ({ posts }: { posts: any }) => {
           </div>
         </Section>
         <div className={styles.blogContainer}>
-          {posts.map((p: Post, i: number) => (
+          {currentItems.map((p: Post, i: number) => (
             <BlogPost {...p} key={i} />
           ))}
+          <Paginate
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+          />
         </div>
         <CallToAction />
       </main>

@@ -59,6 +59,19 @@
   min-height: 400px;
 }
 
+.tagDiv {
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-small);
+
+  div {
+    padding: var(--size-xSmall) var(--size-small);
+    background: var(--color-gray-400);
+    color: var(--color-black);
+    border-radius: var(--size-xLarge);
+  }
+}
+
 .postBody {
   width: 100%;
 
