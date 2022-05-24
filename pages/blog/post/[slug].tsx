@@ -52,7 +52,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     }
   `;
+  const POSTS_QUERY = gql`
+query GetPosts() {
+    posts(orderBy: publishedAt_DESC) {
+      slug
+      title
+      description
+    }
+  }
+`;
   const data = await graphcms.request(QUERY, { slug: slug });
+  const { posts } = await graphcms.request(POSTS_QUERY);
 
   // Handle event slugs which don't exist in our CMS
   if (!data.post) {
@@ -61,15 +71,28 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
+  const currentPostIndex = posts.findIndex((post: any) => post.slug === slug);
+
   return {
     props: {
       post: data.post,
+      prev: currentPostIndex > 0 ? posts[currentPostIndex - 1] : {},
+      next:
+        currentPostIndex < posts.length - 1 ? posts[currentPostIndex + 1] : {},
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
 };
 
-const PostPage = ({ post }: { post: any }) => {
+const PostPage = ({
+  post,
+  prev,
+  next,
+}: {
+  post: any;
+  prev: any;
+  next: any;
+}) => {
   return (
     <>
       <Head>
@@ -134,6 +157,24 @@ const PostPage = ({ post }: { post: any }) => {
             )}
           >
             <ReactMarkdown>{post.content}</ReactMarkdown>
+          </div>
+        </Section>
+        <Section>
+          <div className={styles.suggestedPostDiv}>
+            {prev.title ? (
+              <Link href={`/blog/${prev.slug}`} passHref>
+                <div className={styles.suggestedPost}>{`<< ${prev.title}`}</div>
+              </Link>
+            ) : (
+              <></>
+            )}
+            {next.title ? (
+              <Link href={`/blog/${next.slug}`} passHref>
+                <div className={styles.suggestedPost}>{`${next.title} >>`}</div>
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
         </Section>
         <CallToAction />

@@ -77,6 +77,20 @@
   }
 }
 
+.suggestedPostDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suggestedPost {
+  padding: var(--size-xSmall) var(--size-small);
+  background: var(--color-gray-800);
+  color: var(--color-white);
+  border-radius: var(--size-small);
+  cursor: pointer;
+}
+
 .postBody {
   width: 100%;
 

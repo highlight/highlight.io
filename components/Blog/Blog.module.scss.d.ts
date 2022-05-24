@@ -10,4 +10,6 @@ export const mainImage: string;
 export const postBody: string;
 export const postDiv: string;
 export const selectedTag: string;
+export const suggestedPost: string;
+export const suggestedPostDiv: string;
 export const tagDiv: string;
