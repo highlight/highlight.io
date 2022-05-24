@@ -76,8 +76,8 @@ query GetPosts() {
   return {
     props: {
       post: data.post,
-      prev: currentPostIndex > 0 ? posts[currentPostIndex - 1] : {},
-      next:
+      next: currentPostIndex > 0 ? posts[currentPostIndex - 1] : {},
+      prev:
         currentPostIndex < posts.length - 1 ? posts[currentPostIndex + 1] : {},
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
@@ -162,18 +162,24 @@ const PostPage = ({
         <Section>
           <div className={styles.suggestedPostDiv}>
             {prev.title ? (
-              <Link href={`/blog/${prev.slug}`} passHref>
-                <div className={styles.suggestedPost}>{`<< ${prev.title}`}</div>
+              <Link href={`/blog/post/${prev.slug}`} passHref>
+                <div className={styles.suggestedPost}>
+                  <div>{`<<`}</div>
+                  {prev.title}
+                </div>
               </Link>
             ) : (
-              <></>
+              <div></div>
             )}
             {next.title ? (
-              <Link href={`/blog/${next.slug}`} passHref>
-                <div className={styles.suggestedPost}>{`${next.title} >>`}</div>
+              <Link href={`/blog/post/${next.slug}`} passHref>
+                <div className={styles.suggestedPost}>
+                  <div>{`>>`}</div>
+                  {next.title}
+                </div>
               </Link>
             ) : (
-              <></>
+              <div></div>
             )}
           </div>
         </Section>

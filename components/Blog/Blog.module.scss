@@ -80,15 +80,16 @@
 .suggestedPostDiv {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .suggestedPost {
   padding: var(--size-xSmall) var(--size-small);
-  background: var(--color-gray-800);
-  color: var(--color-white);
+  color: var(--color-gray-400);
   border-radius: var(--size-small);
   cursor: pointer;
+  max-width: 300px;
 }
 
 .postBody {
