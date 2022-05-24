@@ -12,6 +12,9 @@ import { GraphQLClient, gql } from 'graphql-request';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import { useEffect, useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
+import { GetServerSideProps } from 'next';
+import Link from 'next/link';
+import classNames from 'classnames';
 
 const ITEMS_PER_PAGE = 5;
 
@@ -24,36 +27,54 @@ export const graphcms = new GraphQLClient(
   }
 );
 
-const QUERY = gql`
-  {
-    posts {
-      slug
-      image {
-        url
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const QUERY = gql`
+    query GetPosts($tag: [String!]) {
+      posts(orderBy: publishedAt_DESC, where: { tags_contains_all: $tag }) {
+        slug
+        image {
+          url
+        }
+        title
+        description
+        publishedAt
+        publishedBy {
+          name
+          picture
+        }
+        content
+        tags
       }
-      title
-      description
-      publishedAt
-      publishedBy {
-        name
-        picture
-      }
-      content
     }
-  }
-`;
+  `;
 
-export async function getStaticProps() {
-  const { posts } = await graphcms.request(QUERY);
+  const { posts } = await graphcms.request(QUERY, {
+    tag: query.tag ? [query.tag] : [],
+  });
+  const { posts: allPosts } = await graphcms.request(QUERY, {
+    tag: [],
+  });
+  const allTags = allPosts.map((post: any) => post.tags);
+  const uniqueTags = Array.from(new Set(allTags.flat()));
 
   return {
     props: {
-      posts: posts.reverse(),
+      posts,
+      tags: uniqueTags,
+      currentTag: query.tag || '',
     },
   };
-}
+};
 
-const Blog = ({ posts }: { posts: Array<never> }) => {
+const Blog = ({
+  posts,
+  tags,
+  currentTag,
+}: {
+  posts: Array<never>;
+  tags: Array<string>;
+  currentTag: string;
+}) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount] = useState(Math.ceil(posts.length / ITEMS_PER_PAGE));
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,6 +110,25 @@ const Blog = ({ posts }: { posts: Array<never> }) => {
             <p className={homeStyles.bodyLarge}>
               {`Welcome to the Highlight Blog 👋`}
             </p>
+          </div>
+        </Section>
+        <Section>
+          <div className={styles.tagDiv}>
+            {tags.map((tag: string) => (
+              <Link
+                key={tag}
+                href={currentTag === tag ? '/blog' : `/blog?tag=${tag}`}
+                passHref={true}
+              >
+                <div
+                  className={classNames({
+                    [styles.selectedTag]: currentTag === tag,
+                  })}
+                >
+                  {tag}
+                </div>
+              </Link>
+            ))}
           </div>
         </Section>
         <div className={styles.blogContainer}>

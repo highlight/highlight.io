@@ -66,9 +66,14 @@
 
   div {
     padding: var(--size-xSmall) var(--size-small);
-    background: var(--color-gray-400);
+    background: var(--color-gray-600);
     color: var(--color-black);
     border-radius: var(--size-xLarge);
+    cursor: pointer;
+  }
+
+  .selectedTag {
+    background: var(--color-white);
   }
 }
 

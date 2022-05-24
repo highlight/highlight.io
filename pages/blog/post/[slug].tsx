@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { CallToAction } from '../../../components/common/CallToAction/CallToAction';
+import Link from 'next/link';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`
@@ -105,6 +106,13 @@ const PostPage = ({ post }: { post: any }) => {
                 )} min read`}</p>
               </div>
             </div>
+            <div className={styles.tagDiv}>
+              {post.tags.map((tag: string) => (
+                <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
+                  <div>{tag}</div>
+                </Link>
+              ))}
+            </div>
           </div>
         </Section>
         <Section>
@@ -126,11 +134,6 @@ const PostPage = ({ post }: { post: any }) => {
             )}
           >
             <ReactMarkdown>{post.content}</ReactMarkdown>
-            <div className={styles.tagDiv}>
-              {post.tags.map((tag: string) => (
-                <div key={tag}>{tag}</div>
-              ))}
-            </div>
           </div>
         </Section>
         <CallToAction />

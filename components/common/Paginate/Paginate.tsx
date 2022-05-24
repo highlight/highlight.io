@@ -37,7 +37,7 @@ const Paginate = ({
       )}
       {pageRange.map((p, i) =>
         p === 0 ? (
-          <></>
+          <div key={i}></div>
         ) : (
           <div
             className={classNames(styles.pageNumber, {
