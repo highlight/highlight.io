@@ -10,10 +10,11 @@ import Footer from '../../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
 import { graphcms } from '..';
 import classNames from 'classnames';
-import ReactMarkdown from 'react-markdown';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { CallToAction } from '../../../components/common/CallToAction/CallToAction';
 import Link from 'next/link';
+import { RichText } from '@graphcms/rich-text-react-renderer';
+import { CodeBlock, dracula } from 'react-code-blocks';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`
@@ -47,7 +48,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           name
           picture
         }
-        content
+        richcontent {
+          raw
+          markdown
+        }
         tags
       }
     }
@@ -125,7 +129,7 @@ const PostPage = ({
                 <p>{`${new Date(post.publishedAt).toLocaleDateString(
                   'en-US'
                 )} • ${Math.floor(
-                  post.content.split(' ').length / 200
+                  post.richcontent.markdown.split(' ').length / 200
                 )} min read`}</p>
               </div>
             </div>
@@ -156,7 +160,20 @@ const PostPage = ({
               styles.postBody
             )}
           >
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <RichText
+              content={post.richcontent.raw}
+              renderers={{
+                code_block: ({ children }) => {
+                  return (
+                    <CodeBlock
+                      language={'js'}
+                      text={children?.props?.content[0].text}
+                      theme={dracula}
+                    />
+                  );
+                },
+              }}
+            />
           </div>
         </Section>
         <Section>

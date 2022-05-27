@@ -14,13 +14,15 @@ export interface Post {
     name: string;
     picture: string;
   };
-  content: string;
+  richcontent: {
+    markdown: string;
+  };
 }
 
 export const BlogPost = ({
   slug,
   description,
-  content,
+  richcontent,
   image: { url },
   title,
   publishedAt,
@@ -50,7 +52,7 @@ export const BlogPost = ({
                 <p>{`${new Date(publishedAt).toLocaleDateString(
                   'en-US'
                 )} • ${Math.floor(
-                  content.split(' ').length / 200
+                  richcontent.markdown.split(' ').length / 200
                 )} min read`}</p>
               </div>
             </div>
