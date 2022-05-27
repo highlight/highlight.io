@@ -163,7 +163,7 @@ const PostPage = ({
             <RichText
               content={post.richcontent.raw}
               renderers={{
-                code_block: ({ children }) => {
+                code_block: ({ children }: { children: any }) => {
                   return (
                     <CodeBlock
                       language={'js'}

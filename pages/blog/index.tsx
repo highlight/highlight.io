@@ -27,27 +27,6 @@ export const graphcms = new GraphQLClient(
   }
 );
 
-const MUTATION = gql`
-  mutation CreateChangelog(
-    $title: String
-    $desc: String
-    $scontent: String
-    $slug: String
-  ) {
-    createChangelog(
-      data: {
-        description: $desc
-        image: { create: { fileName: "", handle: "" } }
-        content: $scontent
-        slug: $slug
-        title: $title
-      }
-    ) {
-      slug
-    }
-  }
-`;
-
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const QUERY = gql`
     query GetPosts($tag: [String!]) {
@@ -80,15 +59,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   });
   const allTags = allPosts.map((post: any) => post.tags);
   const uniqueTags = Array.from(new Set(allTags.flat()));
-
-  // fetch('https://canny.io/api/v1/entries/list');
-
-  // await graphcms.request(MUTATION, {
-  //   title: allPosts[0].title,
-  //   desc: allPosts[0].description,
-  //   scontent: allPosts[0].richcontent.markdown,
-  //   slug: 'test',
-  // });
 
   return {
     props: {
