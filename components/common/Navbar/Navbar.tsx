@@ -86,12 +86,9 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://careers.highlight.run/"
-                    className={styles.menuItemLarge}
-                  >
-                    Careers
-                  </a>
+                  <Link href={'/careers'}>
+                    <a className={styles.menuItemLarge}>Careers</a>
+                  </Link>
                 </li>
                 <li>
                   <a
@@ -105,12 +102,9 @@ const Navbar = () => {
                   {mobileDeveloperOpen && (
                     <ul className={styles.menuDropdown}>
                       <li>
-                        <a
-                          href="https://feedback.highlight.run/changelog"
-                          className={styles.menuItemLarge}
-                        >
-                          Changelog
-                        </a>
+                        <Link href={'/changelog'}>
+                          <a className={styles.menuItemLarge}>Changelog</a>
+                        </Link>
                       </li>
                       <li>
                         <a
@@ -150,12 +144,9 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://careers.highlight.run/"
-                  className={styles.menuItem}
-                >
-                  Careers
-                </a>
+                <Link href={'/careers'}>
+                  <a className={styles.menuItem}>Careers</a>
+                </Link>
               </li>
               <li>
                 <a
@@ -169,18 +160,17 @@ const Navbar = () => {
                 {developerOpen && (
                   <ul ref={dropdownRef} className={styles.menuDropdown}>
                     <li>
-                      <a
-                        href="https://feedback.highlight.run/changelog"
-                        className={styles.menuItem}
-                      >
-                        <div className={styles.dropdownItem}>
-                          <SvgEditIcon />
-                          <div>
-                            <h4>Changelog</h4>
-                            <div>Updates to our products</div>
+                      <Link href={'/changelog'}>
+                        <a className={styles.menuItem}>
+                          <div className={styles.dropdownItem}>
+                            <SvgEditIcon />
+                            <div>
+                              <h4>Changelog</h4>
+                              <div>Updates to our products</div>
+                            </div>
                           </div>
-                        </div>
-                      </a>
+                        </a>
+                      </Link>
                     </li>
                     <li>
                       <a
