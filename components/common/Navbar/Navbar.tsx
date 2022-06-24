@@ -47,8 +47,77 @@ const Navbar = () => {
   return (
     <>
       <Banner>
-        <p>Want 1 month of free Highlight? </p>
-        <a href="http://app.highlight.run/">Register Here</a>
+        <div className={styles.bannerContainer}>
+          <p>Want 1 month of free Highlight? </p>
+          <a href="http://app.highlight.run/" className={styles.callToAction}>
+            Register Here →
+          </a>
+        </div>
+        <div className={styles.navContainer}>
+          <ul className={classNames(styles.menuList, styles.header)}>
+            <li>
+              <Link href={'/pricing'}>
+                <a className={styles.menuItem}>Pricing</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={'/customers'}>
+                <a className={styles.menuItem}>Customers</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={'/blog'}>
+                <a className={styles.menuItem}>Blog</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={'/careers'}>
+                <a className={styles.menuItem}>Careers</a>
+              </Link>
+            </li>
+            <li>
+              <a
+                onClick={() => {
+                  setDeveloperOpen(true);
+                }}
+                className={styles.menuItem}
+              >
+                Developers <ChevronDown />
+              </a>
+              {developerOpen && (
+                <ul ref={dropdownRef} className={styles.menuDropdown}>
+                  <li>
+                    <Link href={'/changelog'}>
+                      <a className={styles.menuItem}>
+                        <div className={styles.dropdownItem}>
+                          <SvgEditIcon />
+                          <div>
+                            <h4>Changelog</h4>
+                            <div>Updates to our products</div>
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <a
+                      href="https://docs.highlight.run/"
+                      className={styles.menuItem}
+                    >
+                      <div className={styles.dropdownItem}>
+                        <SvgBookIcon />
+                        <div>
+                          <h4>Docs</h4>
+                          <div>Read our documentation</div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              )}
+            </li>
+          </ul>
+        </div>
       </Banner>
       <header
         className={classNames(styles.headerPadding, {
@@ -126,71 +195,6 @@ const Navbar = () => {
               </PrimaryButton>
             </div>
           )}
-          <div className={styles.navContainer}>
-            <ul className={classNames(styles.menuList, styles.header)}>
-              <li>
-                <Link href={'/pricing'}>
-                  <a className={styles.menuItem}>Pricing</a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/customers'}>
-                  <a className={styles.menuItem}>Customers</a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/blog'}>
-                  <a className={styles.menuItem}>Blog</a>
-                </Link>
-              </li>
-              <li>
-                <Link href={'/careers'}>
-                  <a className={styles.menuItem}>Careers</a>
-                </Link>
-              </li>
-              <li>
-                <a
-                  onClick={() => {
-                    setDeveloperOpen(true);
-                  }}
-                  className={styles.menuItem}
-                >
-                  Developers <ChevronDown />
-                </a>
-                {developerOpen && (
-                  <ul ref={dropdownRef} className={styles.menuDropdown}>
-                    <li>
-                      <Link href={'/changelog'}>
-                        <a className={styles.menuItem}>
-                          <div className={styles.dropdownItem}>
-                            <SvgEditIcon />
-                            <div>
-                              <h4>Changelog</h4>
-                              <div>Updates to our products</div>
-                            </div>
-                          </div>
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <a
-                        href="https://docs.highlight.run/"
-                        className={styles.menuItem}
-                      >
-                        <div className={styles.dropdownItem}>
-                          <SvgBookIcon />
-                          <div>
-                            <h4>Docs</h4>
-                            <div>Read our documentation</div>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                )}
-              </li>
-            </ul>
-          </div>
           <div
             className={classNames(
               styles.navContainer,
@@ -198,7 +202,10 @@ const Navbar = () => {
               styles.headerRight
             )}
           >
-            <a href="https://app.highlight.run/" className={styles.menuItem}>
+            <a
+              href="https://app.highlight.run/"
+              className={styles.signInButton}
+            >
               Sign In
             </a>
             <PrimaryButton

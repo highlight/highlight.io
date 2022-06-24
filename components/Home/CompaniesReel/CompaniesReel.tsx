@@ -18,8 +18,6 @@ import Cabal from '../../../public/images/companies/cabal.svg';
 import Journey from '../../../public/images/companies/journey.png';
 import Dripos from '../../../public/images/companies/dripos.png';
 import Mage from '../../../public/images/companies/mage.png';
-import Link from 'next/link';
-import classNames from 'classnames';
 
 export const CompaniesReel = () => {
   return (
@@ -41,17 +39,6 @@ export const CompaniesReel = () => {
         <Image src={Dripos} alt="" className={styles.scaleHeight} />
         <Image src={Mage} alt="" className={styles.scaleHeight} />
         <Image src={Journey} alt="" className={styles.scaleHeight} />
-      </div>
-      <div className={styles.anchorTitle}>
-        <p className={classNames(styles.bodySmall, styles.customerCopy)}>
-          Highlight powers forward-thinking companies.
-          <Link href={'/customers'}>
-            <a className={styles.buttonArrow}>
-              Our Customers
-              <span className={styles.arrow}>→</span>
-            </a>
-          </Link>
-        </p>
       </div>
     </div>
   );

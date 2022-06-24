@@ -21,8 +21,8 @@
   backdrop-filter: saturate(180%) blur(5px);
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.7) 40%
+    rgba(22, 2, 49, 0.5) 0%,
+    rgba(22, 2, 49, 0.7) 40%
   );
   box-shadow: inset 0 -1px 0 0 hsla(0, 0%, 100%, 0.1);
 }
@@ -30,7 +30,7 @@
 .navContainer {
   flex: 1 1;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -56,6 +56,7 @@
 
   li {
     position: relative;
+    font-weight: 300;
   }
 }
 
@@ -90,15 +91,34 @@
   gap: var(--size-large);
   background-color: var(--color-primary-background);
   width: 300px;
-  margin-left: calc(50% - 150px);
+  margin-left: calc(0% - 150px);
   margin-top: var(--size-xLarge);
   border-radius: var(--border-radius);
 }
 
+.signInButton {
+  padding: 0 var(--size-medium);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-small);
+  color: var(--brand-accent-light);
+  transition: color 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  font-weight: 500;
+}
+
 .signUpButton {
   margin-left: var(--size-large);
-  padding: var(--size-xSmall) var(--size-medium) !important;
-  color: var(--text-primary);
+  border: 1px solid var(--brand-accent-light);
+  background-color: transparent;
+  color: var(--brand-accent-light);
+
+  &:hover {
+    background-color: var(--brand-accent-light);
+    color: var(--color-primary-background);
+  }
 }
 
 .headerLeft {
@@ -118,6 +138,7 @@
   justify-content: flex-start;
   gap: var(--size-large);
   align-items: center;
+  text-align: left;
 
   h4 {
     color: var(--text-gray) !important;
@@ -128,6 +149,18 @@
 
   &:hover h4 {
     color: var(--color-white) !important;
+  }
+}
+
+.bannerContainer {
+  gap: var(--size-small);
+  display: flex;
+  flex: 1;
+  align-items: center;
+
+  .callToAction {
+    color: #72e4fc;
+    font-weight: 500;
   }
 }
 

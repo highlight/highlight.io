@@ -3,9 +3,10 @@
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 6px;
-  background: linear-gradient(90deg, #5c29c6 0%, #351479 62.48%);
+  padding: 0 var(--size-xxLarge);
+  background: #6c37f4;
   transform-origin: top center;
   border-bottom: 1px solid var(--accents-2);
   transition: transform 0.2s ease, height 0.3s ease;
@@ -13,12 +14,11 @@
   z-index: 200;
   line-height: 18px;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   position: relative;
 
   a {
-    font-weight: 500;
     text-decoration: none;
     color: var(--text-primary);
   }

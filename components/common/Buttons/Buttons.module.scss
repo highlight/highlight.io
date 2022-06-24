@@ -1,6 +1,7 @@
 .genericButton {
   padding: var(--size-medium) var(--size-large);
   color: var(--text-primary);
+  font-weight: 500;
   border-radius: var(--size-xxSmall);
   display: block;
   text-decoration: none;
@@ -13,19 +14,21 @@
 }
 
 .primaryButton {
-  background-color: var(--brand-accent);
+  background-color: var(--brand-accent-light);
+  color: var(--text-primary-inverted);
 
   &:hover {
-    background-color: var(--color-purple-600);
+    background-color: var(--brand-accent);
   }
 }
 
 .secondaryButton {
   background-color: none;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   padding: 0;
+  color: var(--brand-accent-light);
 
   .arrow {
     color: var(--brand-accent-light);

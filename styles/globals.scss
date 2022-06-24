@@ -69,18 +69,18 @@
   --color-editor-foreground-text: #383a42;
   --color-editor-secondary-text: #4078f2;
 
-  --color-primary-background: #000;
+  --color-primary-background: #160231;
   --color-primary-inverted-background: #333;
   --color-secondary-background: #f9f9f9;
   --color-background-overlay: rgba(0, 0, 0, 0.8);
-  --text-primary-inverted: #fff;
+  --text-primary-inverted: #000;
   --text-primary: var(--color-white);
   --color-link: var(--color-purple);
 
-  --brand-accent: #5c29c6;
+  --brand-accent: #23b6e2;
   --text-gray: #a9a9a9;
   --text-blue: var(--color-blue-500);
-  --brand-accent-light: #9260f9;
+  --brand-accent-light: #72e4fc;
 
   // Logo
   --logo-gradient-start-color: var(--color-purple);
@@ -112,7 +112,7 @@
 
   --header-font-family: 'Steradian', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     'Noto Sans', sans-serif;
-  --body-font-family: 'Steradian', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  --body-font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol';
   --monospace-font-family: 'Roboto Mono', monospace;

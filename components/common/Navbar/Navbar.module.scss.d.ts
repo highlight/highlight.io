@@ -1,4 +1,6 @@
+export const bannerContainer: string;
 export const blurBg: string;
+export const callToAction: string;
 export const chevronDown: string;
 export const dropdownItem: string;
 export const header: string;
@@ -14,5 +16,6 @@ export const mobileHeader: string;
 export const mobileMenu: string;
 export const navContainer: string;
 export const navMenu: string;
+export const signInButton: string;
 export const signUpButton: string;
 export const urlStyle: string;
