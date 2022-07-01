@@ -1,11 +1,11 @@
-import HighlightLogoSmall from '../../../public/images/HighlightLogoSmall';
+import Image from 'next/image';
+import HighlightLogoFull from '../../../public/images/highlight-logo.png';
 import styles from './HighlightLogo.module.scss';
 
 export const HighlightLogo = () => {
   return (
     <div className={styles.logoDiv}>
-      <HighlightLogoSmall className={styles.logo} />
-      <span className={styles.logoText}>Highlight</span>
+      <Image src={HighlightLogoFull} alt="" />
     </div>
   );
 };

@@ -77,23 +77,36 @@
   --text-primary: var(--color-white);
   --color-link: var(--color-purple);
 
-  --brand-accent: #23b6e2;
+  --brand-accent: var(--color-secondary-300);
+  --brand-accent-light: var(--color-secondary-200);
   --text-gray: #a9a9a9;
   --text-blue: var(--color-blue-500);
-  --brand-accent-light: #72e4fc;
+
+  --color-selected-light: #ebff5e;
+  --color-selected-dark: #8dc31a;
+  --color-secondary-100: #b9f2fe;
+  --color-secondary-200: #72e4fc;
+  --color-secondary-300: #23b6e2;
+  --color-secondary-400: #0b75aa;
+  --color-primary-100: #b19cff;
+  --color-primary-200: #6c37f4;
+  --color-primary-300: #5420d1;
+  --color-primary-400: #120532;
 
   // Logo
   --logo-gradient-start-color: var(--color-purple);
   --logo-gradient-end-color: #321873;
 
-  --size-xxxLarge: 56px;
-  --size-xxLarge: 48px;
-  --size-xLarge: 32px;
-  --size-large: 24px;
-  --size-medium: 16px;
-  --size-small: 12px;
-  --size-xSmall: 8px;
-  --size-xxSmall: 4px;
+  --space-unit: 4px;
+  --size-4xLarge: calc(18 * var(--space-unit));
+  --size-xxxLarge: calc(14 * var(--space-unit));
+  --size-xxLarge: calc(11 * var(--space-unit));
+  --size-xLarge: calc(8 * var(--space-unit));
+  --size-large: calc(6 * var(--space-unit));
+  --size-medium: calc(4 * var(--space-unit));
+  --size-small: calc(3 * var(--space-unit));
+  --size-xSmall: calc(2 * var(--space-unit));
+  --size-xxSmall: calc(1 * var(--space-unit));
 
   --size-icon: 18px;
 
@@ -110,7 +123,7 @@
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07);
 
-  --header-font-family: 'Steradian', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  --header-font-family: 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     'Noto Sans', sans-serif;
   --body-font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -138,7 +151,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--header-font-family) !important;
   line-height: 110% !important;
   margin: 0 !important;
@@ -146,18 +159,18 @@ h6 {
 }
 
 h1 {
-  font-size: 64px;
-  letter-spacing: -2px;
+  font-size: 70px;
+  letter-spacing: -1.8px;
 }
 
 h2 {
-  font-size: 50px;
-  letter-spacing: -1px;
+  font-size: 58px;
+  letter-spacing: -1.5px;
 }
 
 h3 {
-  font-size: var(--size-large);
-  letter-spacing: -1px;
+  font-size: var(--size-xxLarge);
+  letter-spacing: -1.6px;
 }
 
 h4 {

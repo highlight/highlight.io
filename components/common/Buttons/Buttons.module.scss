@@ -1,5 +1,5 @@
 .genericButton {
-  padding: var(--size-medium) var(--size-large);
+  padding: var(--size-small) var(--size-large);
   color: var(--text-primary);
   font-weight: 500;
   border-radius: var(--size-xxSmall);
@@ -38,8 +38,13 @@
     font-size: var(--size-large);
   }
 
-  &:hover .arrow {
-    margin-left: var(--size-medium);
-    margin-right: 0;
+  &:hover {
+    color: var(--color-secondary-300);
+
+    .arrow {
+      color: var(--color-secondary-300);
+      margin-left: var(--size-medium);
+      margin-right: 0;
+    }
   }
 }

@@ -73,4 +73,22 @@ export const REVIEWS: Review[] = [
       role: 'Engineer',
     },
   },
+  {
+    companyLogo: Journey,
+    text: `Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I'd recommend Highlight to any team that wants to ship fast.`,
+    author: {
+      image: Avatar,
+      name: 'John Dee',
+      role: 'Engineer',
+    },
+  },
+  {
+    companyLogo: Dripos,
+    text: `Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I'd recommend Highlight to any team that wants to ship fast.`,
+    author: {
+      image: Avatar,
+      name: 'John Dee',
+      role: 'Engineer',
+    },
+  },
 ];

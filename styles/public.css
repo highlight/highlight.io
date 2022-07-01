@@ -1,71 +1,71 @@
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
-    font-weight: 200;
-    src: local('Steradian UltraLight'), local('SteradianUltraLight'),
-        url('./font/SteradianUltraLight.woff2') format('woff2');
+    font-weight: 600;
+    src: local('Poppins SemiBold'), local('PoppinsSemiBold'),
+        url('./font/Poppins-SemiBold.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
-    font-weight: normal;
-    src: local('Steradian Regular'), local('SteradianRegular'),
-        url('./font/SteradianRegular.woff2') format('woff2');
+    font-weight: 400;
+    src: local('Poppins Regular'), local('PoppinsRegular'),
+        url('./font/Poppins-Regular.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 100;
-    src: local('Steradian Thin'), local('SteradianThin'),
-        url('./font/SteradianThin.woff2') format('woff2');
+    src: local('Poppins Thin'), local('PoppinsThin'),
+        url('./font/Poppins-Thin.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 800;
-    src: local('Steradian Black'), local('SteradianBlack'),
-        url('./font/SteradianBlack.woff2') format('woff2');
+    src: local('Poppins Black'), local('PoppinsBlack'),
+        url('./font/Poppins-Black.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
-    font-weight: bold;
-    src: local('Steradian Bold'), local('SteradianBold'),
-        url('./font/SteradianBold.woff2') format('woff2');
+    font-weight: 700;
+    src: local('Poppins Bold'), local('PoppinsBold'),
+        url('./font/Poppins-Bold.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
-    src: local('Steradian Medium'), local('SteradianMedium'),
-        url('./font/SteradianMedium.woff2') format('woff2');
+    src: local('Poppins Medium'), local('PoppinsMedium'),
+        url('./font/Poppins-Medium.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 200;
-    src: local('Steradian ExtraLight'), local('SteradianExtraLight'),
-        url('./font/SteradianExtraLight.woff2') format('woff2');
+    src: local('Poppins ExtraLight'), local('PoppinsExtraLight'),
+        url('./font/Poppins-ExtraLight.ttf') format('ttf');
 }
 
 @font-face {
     font-display: swap;
-    font-family: 'Steradian';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 300;
-    src: local('Steradian Light'), local('SteradianLight'),
-        url('./font/SteradianLight.woff2') format('woff2');
+    src: local('Poppins Light'), local('PoppinsLight'),
+        url('./font/Poppins-Light.ttf') format('ttf');
 }

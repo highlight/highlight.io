@@ -2,16 +2,29 @@ import React from 'react';
 import classNames from 'classnames';
 
 import styles from '../../Home/Home.module.scss';
-import { Section } from '../Section/Section';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { Typography } from '../Typography/Typography';
+import FooterLeftImage from '../../../public/images/footer-highlighter-left.png';
+import FooterRightImage from '../../../public/images/footer-bug-right.png';
+import Image from 'next/image';
 
 export const CallToAction = () => {
   return (
     <div className={styles.callToActionBackground}>
       <div className={classNames(styles.anchorTitle, styles.ctaContainer)}>
-        <div className={styles.sectionSubtitle}>Try Highlight Today</div>
-        <h2>Get the visibility you need</h2>
+        <div className={styles.footerImageLeft}>
+          <Image src={FooterLeftImage} alt="" />
+        </div>
+        <div className={styles.footerImageRight}>
+          <Image src={FooterRightImage} alt="" />
+        </div>
+        <div className={styles.sectionSubtitle}>
+          <Typography type="outline">Try Highlight Today</Typography>
+        </div>
+        <h2>
+          Get the <span className={styles.highlightedText}>visibility</span> you
+          need
+        </h2>
         <div
           className={classNames(
             styles.buttonContainer,
@@ -19,7 +32,9 @@ export const CallToAction = () => {
           )}
         >
           <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-            Get started for free
+            <Typography type="copy1" emphasis={true}>
+              Get started for free
+            </Typography>
           </PrimaryButton>
         </div>
       </div>

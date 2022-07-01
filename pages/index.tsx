@@ -9,13 +9,40 @@ import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 
 import DarkPlaceholder from '../public/images/dark.png';
-import ReactImage from '../public/images/react.png';
+import BigHeroSection from '../public/images/big-hero-section.svg';
+import HeroBugRight from '../public/images/hero-bug-right.svg';
+import HeroBugLeft from '../public/images/hero-bug-left.svg';
+import PlaybackIcon from '../public/images/pc-play-media.svg';
+import ConsoleIcon from '../public/images/window-code.svg';
+import TimingIcon from '../public/images/stopwatch.svg';
+import StacktraceIcon from '../public/images/check-list.svg';
+
+import MultipleIcon from '../public/images/multiple.svg';
+import PuzzleIcon from '../public/images/puzzle.svg';
+import ChartbarIcon from '../public/images/chart-bar.svg';
+import MagnifierIcon from '../public/images/magnifier.svg';
+import VerifiedIcon from '../public/images/verified.svg';
+import PlugIcon from '../public/images/plug.svg';
+
+import CollaborateImage from '../public/images/collaborate.png';
+import SearchImage from '../public/images/search.png';
+import ReactImage from '../public/images/language/ReactIcon';
+import htmlImage from '../public/images/language/htmlIcon';
+import VueImage from '../public/images/language/VueIcon';
+import NodeImage from '../public/images/language/NodeIcon';
+import NextjsImage from '../public/images/language/NextjsIcon';
+import GoImage from '../public/images/language/GoIcon';
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
 import { Review, REVIEWS } from '../components/Home/Reviews';
 import { SnippetTab } from '../components/Home/SnippetTab/SnippetTab';
+import { Typography } from '../components/common/Typography/Typography';
+import { Collapse } from 'antd';
+import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
+
+const { Panel } = Collapse;
 
 export const FeatureItem = ({
   children,
@@ -54,6 +81,25 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
 };
 
 const Home: NextPage = () => {
+  const SetupDescription = (
+    <div className={classNames(styles.sectionText, styles.codeSection)}>
+      <div className={styles.sectionSubtitle}>
+        <Typography type="outline">effortless setup</Typography>
+      </div>
+      <h2>
+        Start using Highlight{' '}
+        <span className={styles.highlightedText}>within minutes</span>
+      </h2>
+      <Typography type="copy2">
+        {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
+      </Typography>
+      <div className={styles.buttonContainer}>
+        <SecondaryButton href="https://docs.highlight.run/getting-started">
+          Read more about our backend integrations in beta
+        </SecondaryButton>
+      </div>
+    </div>
+  );
   const SNIPPET_TABS = [
     {
       image: ReactImage,
@@ -65,23 +111,68 @@ const Home: NextPage = () => {
               <Image src={DarkPlaceholder} alt="" />
             </div>
           </div>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>effortless setup</div>
-            <h2>{`Start using Highlight in minutes`}</h2>
-            <p className={styles.bodySmall}>
-              {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/getting-started">
-                Read more about our backend integrations in beta
-              </SecondaryButton>
-            </div>
-          </div>
+          {SetupDescription}
         </Section>
       ),
     },
     {
-      image: ReactImage,
+      image: VueImage,
+      key: 'vue',
+      content: (
+        <Section>
+          <div className={styles.sectionImageLeft}>
+            <div className={styles.imageInner}>
+              <Image src={DarkPlaceholder} alt="" />
+            </div>
+          </div>
+          {SetupDescription}
+        </Section>
+      ),
+    },
+    {
+      image: NextjsImage,
+      key: 'nextjs',
+      content: (
+        <Section>
+          <div className={styles.sectionImageLeft}>
+            <div className={styles.imageInner}>
+              <Image src={DarkPlaceholder} alt="" />
+            </div>
+          </div>
+          {SetupDescription}
+        </Section>
+      ),
+    },
+    {
+      image: htmlImage,
+      key: 'html',
+      content: (
+        <Section>
+          <div className={styles.sectionImageLeft}>
+            <div className={styles.imageInner}>
+              <Image src={DarkPlaceholder} alt="" />
+            </div>
+          </div>
+          {SetupDescription}
+        </Section>
+      ),
+    },
+    {
+      image: GoImage,
+      key: 'go',
+      content: (
+        <Section>
+          <div className={styles.sectionImageLeft}>
+            <div className={styles.imageInner}>
+              <Image src={DarkPlaceholder} alt="" />
+            </div>
+          </div>
+          {SetupDescription}
+        </Section>
+      ),
+    },
+    {
+      image: NodeImage,
       key: 'node',
       content: (
         <Section>
@@ -90,18 +181,7 @@ const Home: NextPage = () => {
               <Image src={DarkPlaceholder} alt="" />
             </div>
           </div>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>effortless setup</div>
-            <h2>{`Start using Highlight in minutes`}</h2>
-            <p className={styles.bodySmall}>
-              {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
-            </p>
-            <div className={styles.buttonContainer}>
-              <SecondaryButton href="https://docs.highlight.run/getting-started">
-                Read The Docs
-              </SecondaryButton>
-            </div>
-          </div>
+          {SetupDescription}
         </Section>
       ),
     },
@@ -116,24 +196,34 @@ const Home: NextPage = () => {
       <Navbar />
       <main>
         <Section>
+          <div className={styles.heroBugLeft}>
+            <Image src={HeroBugLeft} alt="bug left" />
+          </div>
+          <div className={styles.heroBugRight}>
+            <Image src={HeroBugRight} alt="bug right" />
+          </div>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
               <div className={styles.sectionSubtitle}>
-                Stop debugging in the dark
+                <Typography type="outline">
+                  Stop debugging in the dark
+                </Typography>
               </div>
               <h1>{`Because a stack trace alone isn't enough`}</h1>
-              <p className={styles.bodyLarge}>
+              <Typography type="copy1">
                 Stop wasting effort trying to track down and reproduce bugs.
                 Through session replays, Highlight shows you exactly how and
                 when your bugs happen. Highlight removes the mystery of
                 debugging.
-              </p>
+              </Typography>
             </div>
             <div
               className={classNames(styles.buttonContainer, styles.heroImage)}
             >
               <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                Get Started For Free
+                <Typography type="copy1" emphasis={true}>
+                  Get started for free
+                </Typography>
               </PrimaryButton>
             </div>
             <div
@@ -150,139 +240,279 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorTitle}>
-              <h2>{`Highlight superpowers your team.`}</h2>
+              <h2>
+                Highlight{' '}
+                <span className={styles.highlightedText}>supercharges</span>{' '}
+                your team.
+              </h2>
             </div>
             <div className={styles.featureContainer}>
               <FeatureItem>
-                <h3>Playback of your app</h3>
-                <div>Highlight powers forward-thinking companies.</div>
+                <Image src={PlaybackIcon} alt="" />
+                <Typography type="copy1" emphasis={true}>
+                  Playback of your app
+                </Typography>
+                <Typography type="copy2">
+                  Highlight powers forward-thinking companies.
+                </Typography>
               </FeatureItem>
               <FeatureItem>
-                <h3>Error stack traces</h3>
-                <div>Highlight powers forward-thinking companies.</div>
+                <Image src={StacktraceIcon} alt="" />
+                <Typography type="copy1" emphasis={true}>
+                  Error stack traces
+                </Typography>
+                <Typography type="copy2">
+                  Highlight powers forward-thinking companies.
+                </Typography>
               </FeatureItem>
               <FeatureItem>
-                <h3>{`Console & network tabs`}</h3>
-                <div>Highlight powers forward-thinking companies.</div>
+                <Image src={ConsoleIcon} alt="" />
+                <Typography type="copy1" emphasis={true}>
+                  {`Console & network tabs`}
+                </Typography>
+                <Typography type="copy2">
+                  Highlight powers forward-thinking companies.
+                </Typography>
               </FeatureItem>
               <FeatureItem>
-                <h3>Precise timing</h3>
-                <div>Highlight powers forward-thinking companies.</div>
+                <Image src={TimingIcon} alt="" />
+                <Typography type="copy1" emphasis={true}>
+                  Precise timing
+                </Typography>
+                <Typography type="copy2">
+                  Highlight powers forward-thinking companies.
+                </Typography>
               </FeatureItem>
             </div>
           </div>
         </Section>
-        <Section>
-          <div className={styles.anchorFeature}>
-            <div className={styles.anchorTitle}>
-              <h2>{`Highlight is the ultimate debugging solution.`}</h2>
+        <div className={styles.hero}>
+          <Image src={BigHeroSection} alt="hero" />
+        </div>
+        <div className={styles.secondaryBackground}>
+          <Section>
+            <div className={styles.anchorFeature}>
+              <div
+                className={classNames(
+                  styles.anchorTitle,
+                  styles.secondaryAnchor
+                )}
+              >
+                <h2>
+                  Highlight is the{' '}
+                  <span className={styles.highlightedText}>ultimate</span>{' '}
+                  debugging solution.
+                </h2>
+              </div>
             </div>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>
-              cross-team collaboration
-            </div>
-            <h2>{`Collaborate on bugs, everyone is kept in the loop.`}</h2>
-            <div className={styles.sectionInfo}>
-              <h3
-                className={styles.bodyLarge}
-              >{`There's never one stakeholder on a bug.`}</h3>
-              <p className={styles.bodySmall}>
-                When something breaks on your web app, there are many teams that
-                could get the first message about it. Highlight makes it easy to
-                communicate and re-assign issues to make decisions on errors
-                faster.
-              </p>
-            </div>
-            <div className={styles.sectionInfo}>
-              <h3 className={styles.bodyLarge}>
-                Integrate with your favorite tools.
+          </Section>
+          <Section>
+            <div className={styles.sectionText}>
+              <div className={styles.sectionSubtitle}>
+                <Typography type="outline">cross-team collaboration</Typography>
+              </div>
+              <h3>
+                <span className={styles.highlightedText}>Collaborate</span> on
+                bugs, everyone is kept in the loop.
               </h3>
-              <p className={styles.bodySmall}>
-                {`We understand that Highlight isn't your issue tracking tool or your customer data platform. That’s why we integrate with tools like Slack, Clickup and Zapier to keep everyone in the loop.`}
-              </p>
+              <Collapse
+                destroyInactivePanel={true}
+                defaultActiveKey={['1']}
+                className={styles.sectionCollapse}
+              >
+                <Panel
+                  header={
+                    <div className={styles.collapseHeader}>
+                      <Image src={MultipleIcon} alt="" />
+                      <Typography
+                        type="copy1"
+                        emphasis={true}
+                      >{`There's never one stakeholder on a bug.`}</Typography>
+                    </div>
+                  }
+                  className={styles.sectionInfo}
+                  key="1"
+                  showArrow={false}
+                >
+                  <div className={styles.sectionBody}>
+                    <Typography type="copy2">
+                      When something breaks on your web app, there are many
+                      teams that could get the first message about it. Highlight
+                      makes it easy to communicate and re-assign issues to make
+                      decisions on errors faster.
+                    </Typography>
+                  </div>
+                </Panel>
+                <Panel
+                  header={
+                    <div className={styles.collapseHeader}>
+                      <Image src={PuzzleIcon} alt="" />
+                      <Typography
+                        type="copy1"
+                        emphasis={true}
+                      >{`Integrate with your favorite tools.`}</Typography>
+                    </div>
+                  }
+                  className={styles.sectionInfo}
+                  key="2"
+                  showArrow={false}
+                >
+                  <div className={styles.sectionBody}>
+                    <Typography type="copy2">{`We understand that Highlight isn't your issue tracking tool or your customer data platform. That's why we integrate with tools like Slack, Clickup and Zapier to keep everyone in the loop.`}</Typography>
+                  </div>
+                </Panel>
+              </Collapse>
             </div>
-          </div>
-          <div className={styles.sectionImageRight}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
+            <div className={styles.sectionImageRight}>
+              <div className={styles.imageInner}>
+                <Image src={CollaborateImage} alt="" />
+              </div>
             </div>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>Powerful search</div>
-            <h2>{`Easily search for a bug by session or specific property.`}</h2>
-            <div className={styles.sectionInfo}>
-              <h3
-                className={styles.bodyLarge}
-              >{`Get to the correct session instantly.`}</h3>
-              <p className={styles.bodySmall}>
-                What if you step in the shoes of your users and debug from their
-                perspective? With our search console, you can instantly find the
-                right session and debug with confidence.
-              </p>
-            </div>
-            <div className={styles.sectionInfo}>
-              <h3 className={styles.bodyLarge}>
-                What is slowing down your users?
+          </Section>
+          <Section>
+            <div className={styles.sectionText}>
+              <div className={styles.sectionSubtitle}>
+                <Typography type="outline">Powerful search</Typography>
+              </div>
+              <h3>
+                <span className={styles.highlightedText}>Easily search</span>{' '}
+                for a bug by session or specific property.
               </h3>
-              <p className={styles.bodySmall}>
-                Are users not using a new feature? Or is there a known drop off
-                in a specific user flow? Our search console gives you the
-                ability to search based on URL, number of errors, user
-                properties and much more!
-              </p>
+              <Collapse
+                destroyInactivePanel={true}
+                defaultActiveKey={['1']}
+                className={styles.sectionCollapse}
+              >
+                <Panel
+                  header={
+                    <div className={styles.collapseHeader}>
+                      <Image src={MagnifierIcon} alt="" />
+                      <Typography
+                        type="copy1"
+                        emphasis={true}
+                      >{`Get to the correct session instantly.`}</Typography>
+                    </div>
+                  }
+                  className={styles.sectionInfo}
+                  key="1"
+                  showArrow={false}
+                >
+                  <div className={styles.sectionBody}>
+                    <Typography type="copy2">
+                      What if you step in the shoes of your users and debug from
+                      their perspective? With our search console, you can
+                      instantly find the right session and debug with
+                      confidence.
+                    </Typography>
+                  </div>
+                </Panel>
+                <Panel
+                  header={
+                    <div className={styles.collapseHeader}>
+                      <Image src={ChartbarIcon} alt="" />
+                      <Typography type="copy1" emphasis={true}>{`
+                    What is slowing down your users?`}</Typography>
+                    </div>
+                  }
+                  className={styles.sectionInfo}
+                  key="2"
+                  showArrow={false}
+                >
+                  <div className={styles.sectionBody}>
+                    <Typography type="copy2">
+                      Are users not using a new feature? Or is there a known
+                      drop off in a specific user flow? Our search console gives
+                      you the ability to search based on URL, number of errors,
+                      user properties and much more!
+                    </Typography>
+                  </div>
+                </Panel>
+              </Collapse>
             </div>
-          </div>
-          <div className={styles.sectionImageRight}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
+            <div className={styles.sectionImageRight}>
+              <div className={styles.imageInner}>
+                <Image src={SearchImage} alt="" />
+              </div>
             </div>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.sectionText}>
-            <div className={styles.sectionSubtitle}>security-compliant</div>
-            <h2>{`Highlight is built for privacy and security.`}</h2>
-            <div className={styles.sectionInfo}>
-              <h3 className={styles.bodyLarge}>{`Privacy-first API`}</h3>
-              <p className={styles.bodySmall}>
-                Highlight supports data redaction, obfuscation, masking and much
-                more. The library also supports a Strict Privacy Mode which
-                obfuscates all text nodes for very strict PII rules.
-              </p>
-            </div>
-            <div className={styles.sectionInfo}>
-              <h3 className={styles.bodyLarge}>
-                Compliance/Trust at the forefront
+          </Section>
+          <Section>
+            <div className={styles.sectionText}>
+              <div className={styles.sectionSubtitle}>
+                <Typography type="outline">security-compliant</Typography>
+              </div>
+              <h3>
+                Highlight is built for{' '}
+                <span className={styles.highlightedText}>
+                  privacy and security.
+                </span>
               </h3>
-              <p className={styles.bodySmall}>
-                Highlight supports several wellknown compliance frameworks
-                including GDPR, CCPA, and SOC2.
-              </p>
+              <Collapse
+                destroyInactivePanel={true}
+                defaultActiveKey={['1']}
+                className={styles.sectionCollapse}
+              >
+                <Panel
+                  header={
+                    <div className={styles.collapseHeader}>
+                      <Image src={PlugIcon} alt="" />
+                      <Typography type="copy1" emphasis={true}>
+                        Leverage our privacy-first API.
+                      </Typography>
+                    </div>
+                  }
+                  className={styles.sectionInfo}
+                  key="1"
+                  showArrow={false}
+                >
+                  <div className={styles.sectionBody}>
+                    <Typography type="copy2">
+                      Highlight supports data redaction, obfuscation, masking
+                      and much more. The library also supports a Strict Privacy
+                      Mode which obfuscates all text nodes for very strict PII
+                      rules.
+                    </Typography>
+                  </div>
+                </Panel>
+                <Panel
+                  header={
+                    <div className={styles.collapseHeader}>
+                      <Image src={VerifiedIcon} alt="" />
+                      <Typography type="copy1" emphasis={true}>
+                        {`We put compliance & trust at the forefront.`}
+                      </Typography>
+                    </div>
+                  }
+                  className={styles.sectionInfo}
+                  key="2"
+                  showArrow={false}
+                >
+                  <div className={styles.sectionBody}>
+                    <Typography type="copy2">
+                      Highlight supports several wellknown compliance frameworks
+                      including GDPR, CCPA, and SOC2.
+                    </Typography>
+                  </div>
+                </Panel>
+              </Collapse>
             </div>
-          </div>
-          <div className={styles.sectionImageRight}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
+            <div className={styles.sectionImageRight}>
+              <div className={styles.imageInner}>
+                <ObfuscationSlider />
+              </div>
             </div>
-          </div>
-        </Section>
+          </Section>
+        </div>
         <SnippetTab tabs={SNIPPET_TABS} />
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <div className={styles.sectionSubtitle}>Product Feature</div>
               <h2>{`Our customers`}</h2>
-              <p className={styles.bodySmall}>
+              <Typography type="copy2">
                 {`Highlight powers forward-thinking companies. `}
                 <SecondaryButton href="/customers">
                   Find out about our customers
                 </SecondaryButton>
-              </p>
+              </Typography>
             </div>
             <CompaniesReel />
           </div>
@@ -290,12 +520,12 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <p className={styles.bodySmall}>
+              <Typography type="copy2">
                 {`Don't take our word. `}
                 <SecondaryButton href="/customers">
                   Read our customer review section
                 </SecondaryButton>
-              </p>
+              </Typography>
             </div>
           </div>
         </Section>

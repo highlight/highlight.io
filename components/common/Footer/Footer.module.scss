@@ -1,20 +1,14 @@
 .footer {
-  padding: 50px var(--size-xxLarge);
+  padding: calc(30 * var(--space-unit)) var(--size-xxLarge);
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 300px repeat(4, 1fr);
   justify-content: space-between;
 }
 
 .footerTitle {
-  margin-top: var(--size-xxSmall);
-  margin-bottom: var(--size-xxSmall);
-
-  h3 {
-    letter-spacing: 0;
-    font-size: var(--size-medium);
-  }
+  margin-bottom: var(--size-xSmall);
 }
 
 .footerList {
@@ -22,20 +16,18 @@
   margin: 0;
   padding: 0;
   margin-right: var(--size-xxLarge);
-  font-size: var(--size-medium);
-  font-weight: 400;
 
   li {
-    padding: var(--size-xxSmall) 0;
+    padding: var(--size-xSmall) 0;
 
     a {
-      color: var(--text-gray);
+      color: var(--text-primary);
       text-decoration: none;
       transition: color 0.2s ease;
     }
 
     a:hover {
-      color: var(--color-white);
+      color: var(--color-secondary-300);
       cursor: pointer;
     }
   }
@@ -71,18 +63,17 @@
 .socialDiv {
   display: flex;
   gap: var(--size-medium);
-  justify-content: center;
   align-items: center;
-  margin-right: var(--size-xxLarge);
+  margin-top: var(--size-large);
 
   .socialIcon {
     width: var(--size-large);
     height: var(--size-large);
-    color: var(--text-gray);
+    color: var(--color-white);
     transition: color 0.2s ease;
 
     &:hover {
-      color: var(--color-white);
+      color: var(--color-secondary-300);
     }
   }
 }

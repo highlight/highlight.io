@@ -9,6 +9,7 @@ import ChevronDown from '../../../public/images/ChevronDownIcon';
 import Link from 'next/link';
 import SvgBookIcon from '../../../public/images/BookIcon';
 import SvgEditIcon from '../../../public/images/EditIcon';
+import { Typography } from '../Typography/Typography';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -206,13 +207,17 @@ const Navbar = () => {
               href="https://app.highlight.run/"
               className={styles.signInButton}
             >
-              Sign In
+              <Typography type="copy2" emphasis={true}>
+                Sign in
+              </Typography>
             </a>
             <PrimaryButton
               href="https://app.highlight.run/?sign_up=1"
               className={styles.signUpButton}
             >
-              Get Started
+              <Typography type="copy2" emphasis={true}>
+                Sign up
+              </Typography>
             </PrimaryButton>
           </div>
         </div>

@@ -15,6 +15,87 @@
   filter: blur(150px);
 }
 
+.highlightedText {
+  color: var(--color-selected-light);
+}
+
+.hero {
+  margin-bottom: calc(22 * var(--space-unit));
+}
+
+.heroBugLeft {
+  position: absolute;
+  left: -150px;
+  top: 250px;
+}
+
+.heroBugRight {
+  position: absolute;
+  right: -50px;
+  top: 50px;
+}
+
+.footerImageLeft {
+  position: absolute;
+  left: -150px;
+  bottom: -13px;
+}
+
+.footerImageRight {
+  position: absolute;
+  right: -200px;
+  top: 25px;
+}
+
+.obfuscation {
+  position: relative;
+}
+
+.obfuscationImage {
+  position: absolute;
+  right: -100px;
+  bottom: -80px;
+}
+
+.obfuscationHandle {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 0 auto;
+  height: 40px;
+  justify-content: center;
+  width: 40px;
+  border: 3px solid rgb(114, 228, 252);
+  border-radius: 100%;
+  background-color: var(--brand-accent-light);
+  transform: none;
+
+  .arrow1 {
+    border-width: 6px;
+    border-style: inset solid inset inset;
+    border-color: rgba(0, 0, 0, 0) #0d0225 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-image: initial;
+    height: 0px;
+    margin-left: -10px;
+    margin-right: 10px;
+    width: 0px;
+  }
+
+  .arrow2 {
+    border-width: 6px;
+    border-style: inset inset inset solid;
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #0d0225;
+    border-image: initial;
+    height: 0px;
+    margin-right: -10px;
+    width: 0px;
+  }
+}
+
+.secondaryBackground {
+  background-color: var(--color-primary-200);
+}
+
 .bodyLarge {
   color: var(--text-primary);
   font-size: 22px;
@@ -38,11 +119,18 @@
 .sectionText {
   display: flex;
   flex-direction: column;
-  flex: 1 1 45%;
+  flex: 1 1 50%;
   padding: 0px var(--size-xLarge);
-  gap: var(--size-large);
   min-width: 550px;
-  margin: 50px 0;
+  margin: var(--size-xLarge) 0;
+
+  &.codeSection {
+    gap: var(--size-xLarge);
+
+    .sectionSubtitle {
+      margin: 0;
+    }
+  }
 }
 
 .heroImage {
@@ -51,16 +139,32 @@
   justify-content: center;
 }
 
+.sectionCollapse {
+  margin-top: var(--size-large);
+
+  .collapseHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--size-medium);
+  }
+
+  .sectionBody {
+    padding-left: calc(9.5 * var(--space-unit));
+  }
+}
+
 .sectionInfo {
   display: flex;
   flex-direction: column;
   padding: var(--size-medium) 0;
   border-bottom: 2px solid var(--color-white);
+  cursor: pointer;
 }
 
 .sectionImageRight {
-  flex: 1 1 55%;
+  flex: 1 1 50%;
   padding-right: var(--size-xLarge);
+  margin: var(--size-xxLarge) 0;
 
   span {
     height: 100% !important;
@@ -68,14 +172,14 @@
 
   img {
     max-width: 100%;
-    object-fit: cover;
-    border-radius: var(--border-radius);
+    object-fit: contain;
   }
 }
 
 .sectionImageLeft {
-  flex: 1 1 55%;
+  flex: 1 1 50%;
   padding-left: var(--size-xLarge);
+  margin: var(--size-xLarge) 0;
 
   span {
     height: 100% !important;
@@ -88,7 +192,6 @@
 }
 
 .imageInner {
-  height: 100%;
   width: 100%;
 
   span {
@@ -107,22 +210,18 @@
 }
 
 .sectionSubtitle {
-  color: var(--text-primary);
+  color: var(--color-selected-light);
   text-transform: uppercase;
-  font-size: var(--size-medium);
-  letter-spacing: 1px;
-  font-weight: 500;
-  margin-bottom: var(--size-medium);
+  margin-bottom: var(--size-large);
 }
 
 .anchorTitle {
-  max-width: 800px;
+  max-width: 840px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   margin: auto;
-  gap: var(--size-medium);
 }
 
 .anchorFeature {
@@ -134,20 +233,27 @@
   align-items: center;
   text-align: center;
   margin: auto;
-  gap: var(--size-large);
   padding: 0 var(--size-xxLarge);
+
+  .sectionSubtitle {
+    margin-bottom: var(--size-xLarge);
+  }
+
+  .buttonContainer {
+    margin: var(--size-xxxLarge) 0 calc(22 * var(--space-unit));
+  }
 
   h1,
   h2 {
-    margin-bottom: var(--size-large) !important;
+    margin-bottom: calc(10 * var(--space-unit)) !important;
   }
 
   .anchorHead {
-    max-width: 800px;
+    max-width: 840px;
   }
 
   .anchorTitle {
-    max-width: 600px;
+    max-width: 740px;
   }
 
   .anchorImage {
@@ -159,6 +265,12 @@
     img {
       border-radius: var(--border-radius);
       overflow: hidden;
+    }
+  }
+
+  .secondaryAnchor {
+    h2 {
+      margin: calc(18 * var(--space-unit)) 0 !important;
     }
   }
 }
@@ -201,7 +313,7 @@ $animationSpeed: 40s;
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(-500px * 4));
+    transform: translateX(calc(-532px * 7));
   }
 }
 
@@ -214,38 +326,40 @@ $animationSpeed: 40s;
   .slideTrack {
     animation: scroll $animationSpeed linear infinite;
     display: flex;
-    width: calc(500px * 14);
+    width: calc(532px * 14);
+
+    &:hover {
+      animation-play-state: paused;
+    }
   }
 }
 
 .featureContainer {
   display: flex;
-  gap: var(--size-large);
+  gap: var(--size-medium);
+  margin-top: var(--size-xLarge);
 }
 
 .featureItem {
   margin: 0;
-  padding: var(--size-medium) 0;
+  padding: var(--size-xSmall) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--size-small);
+  gap: var(--size-xSmall);
   max-width: 300px;
-
-  .bodySmall {
-    font-size: var(--size-medium);
-  }
 }
 
 .snippetTabs {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--size-large);
+  gap: var(--size-small);
   padding: var(--size-xxLarge) 0 0;
 
   .snippetTab {
     width: 200px;
     text-align: center;
+    margin-bottom: calc(-1 * var(--size-small));
     padding: var(--size-large) var(--size-xLarge) var(--size-medium);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
 
@@ -254,10 +368,7 @@ $animationSpeed: 40s;
     }
 
     &.tabSelected {
-      border: 1px solid var(--color-white);
-      border-bottom: 1px solid var(--color-primary-background);
-      margin-bottom: -1px;
-      z-index: 10;
+      z-index: 5;
       background-color: var(--color-primary-background);
       position: relative;
     }
@@ -265,21 +376,29 @@ $animationSpeed: 40s;
 }
 
 .snippetContent {
-  border-top: 1px solid var(--color-white);
   padding: var(--size-xxLarge) 0;
 }
 
 .callToActionBackground {
   position: relative;
   width: 100%;
-  background-color: var(--color-purple-700);
+  background-color: var(--color-primary-200);
   overflow: hidden;
   margin: auto auto var(--size-xLarge);
 
   .ctaContainer {
     width: 100%;
-    padding: 80px 0;
+    padding: calc(32 * var(--space-unit)) 0;
     align-items: center;
+    position: relative;
+
+    h2 {
+      margin-bottom: var(--size-xxxLarge) !important;
+    }
+
+    .sectionSubtitle {
+      margin-bottom: var(--size-xLarge) !important;
+    }
   }
 
   .ctaBg {
@@ -304,7 +423,6 @@ $animationSpeed: 40s;
   .tryButtonContainer {
     display: flex;
     justify-content: center;
-    padding: var(--size-medium) 0;
   }
 }
 
