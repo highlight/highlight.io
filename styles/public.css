@@ -69,3 +69,12 @@
     src: local('Poppins Light'), local('PoppinsLight'),
         url('./font/Poppins-Light.ttf') format('ttf');
 }
+
+@font-face {
+    font-display: swap;
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: local('IBM Plex Mono Regular'), local('IBMPlexMonoRegular'),
+        url('./font/IBMPlexMono-Regular.ttf') format('ttf');
+}

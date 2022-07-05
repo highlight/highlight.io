@@ -120,6 +120,7 @@
   display: flex;
   flex-direction: column;
   flex: 1 1 50%;
+  width: 50%;
   padding: 0px var(--size-xLarge);
   min-width: 550px;
   margin: var(--size-xLarge) 0;
@@ -180,6 +181,7 @@
   flex: 1 1 50%;
   padding-left: var(--size-xLarge);
   margin: var(--size-xLarge) 0;
+  width: 50%;
 
   span {
     height: 100% !important;
@@ -359,6 +361,7 @@ $animationSpeed: 40s;
   .snippetTab {
     width: 200px;
     text-align: center;
+    position: relative;
     margin-bottom: calc(-1 * var(--size-small));
     padding: var(--size-large) var(--size-xLarge) var(--size-medium);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
@@ -372,6 +375,56 @@ $animationSpeed: 40s;
       background-color: var(--color-primary-background);
       position: relative;
     }
+  }
+
+  .snippetBeta {
+    position: absolute;
+    top: calc(-1 * var(--size-xLarge));
+    left: 0;
+    width: 100%;
+  }
+}
+
+.codeSnippetFrame {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-white);
+  width: 100%;
+
+  .codeSnippetTopbar {
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid var(--color-white);
+    padding: var(--size-small) var(--size-large);
+    align-items: center;
+
+    .codeSnippetButtons {
+      display: flex;
+      position: absolute;
+      gap: var(--size-small);
+    }
+
+    .codeSnippetIcon {
+      height: calc(7 * var(--space-unit));
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      svg {
+        height: inherit;
+      }
+    }
+
+    .codeSnippetCircle {
+      height: calc(4 * var(--space-unit));
+      width: calc(4 * var(--space-unit));
+      border-radius: calc(4 * var(--space-unit));
+      border: 1px solid var(--color-white);
+    }
+  }
+
+  .codeSnippetContent {
+    padding: var(--size-large) var(--size-large) calc(20 * var(--space-unit));
+    overflow: scroll;
   }
 }
 

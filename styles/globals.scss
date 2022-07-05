@@ -92,6 +92,7 @@
   --color-primary-200: #6c37f4;
   --color-primary-300: #5420d1;
   --color-primary-400: #120532;
+  --color-primary-500: #0d0225;
 
   // Logo
   --logo-gradient-start-color: var(--color-purple);
@@ -192,6 +193,10 @@ label {
 main {
   width: 100vw;
   overflow: hidden;
+}
+
+code {
+  font-family: 'IBM Plex Mono', 'monospace';
 }
 
 @media screen and (max-width: 600px) {

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { Typography } from '../../common/Typography/Typography';
 
 import styles from '../../Home/Home.module.scss';
 
@@ -7,6 +8,7 @@ export interface SnippetTabObject {
   image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   key: string;
   content: JSX.Element;
+  beta?: boolean;
 }
 
 export const SnippetTab = ({ tabs }: { tabs: SnippetTabObject[] }) => {
@@ -24,6 +26,11 @@ export const SnippetTab = ({ tabs }: { tabs: SnippetTabObject[] }) => {
             })}
             onClick={() => setCurrentTabKey(tab.key)}
           >
+            {tab.beta && (
+              <div className={styles.snippetBeta}>
+                <Typography type="outline">in beta</Typography>
+              </div>
+            )}
             <tab.image
               color={tab.key === currentTabKey ? '#EBFF5E' : '#72E4FC'}
             />

@@ -41,6 +41,7 @@ import { SnippetTab } from '../components/Home/SnippetTab/SnippetTab';
 import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
+import { CodeSnippet } from '../components/Home/CodeSnippet/CodeSnippet';
 
 const { Panel } = Collapse;
 
@@ -107,9 +108,23 @@ const Home: NextPage = () => {
       content: (
         <Section>
           <div className={styles.sectionImageLeft}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <CodeSnippet
+              HeaderImage={ReactImage}
+              language="javascript"
+              content={`import React from 'react';   
+import App from './App';
+import { H } from 'highlight.run';
+import { ErrorBoundary } from '@highlight-run/react';
+
+H.init('1jdkoe52');
+
+ReactDOM.render(
+  <ErrorBoundary showDialog>
+    <App />
+  </ErrorBoundary>,
+  document.getElementById('root')
+);`}
+            />
           </div>
           {SetupDescription}
         </Section>
@@ -121,9 +136,20 @@ const Home: NextPage = () => {
       content: (
         <Section>
           <div className={styles.sectionImageLeft}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <CodeSnippet
+              HeaderImage={VueImage}
+              language="javascript"
+              content={`import { createApp } from 'vue';       
+import App from './App.vue';
+import { H } from 'highlight.run';
+
+H.init('1jdkoe52', {
+  environment: 'production',
+  enableStrictPrivacy: false,
+});
+
+createApp(App).mount('#app');`}
+            />
           </div>
           {SetupDescription}
         </Section>
@@ -135,9 +161,19 @@ const Home: NextPage = () => {
       content: (
         <Section>
           <div className={styles.sectionImageLeft}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <CodeSnippet
+              HeaderImage={NextjsImage}
+              language="javascript"
+              content={`import { H } from 'highlight.run';
+
+H.init('1jdkoe52');
+
+function MyApp({ Component, pageProps }) {
+  return <Component {...pageProps} />
+}
+
+export default MyApp`}
+            />
           </div>
           {SetupDescription}
         </Section>
@@ -160,12 +196,27 @@ const Home: NextPage = () => {
     {
       image: GoImage,
       key: 'go',
+      beta: true,
       content: (
         <Section>
           <div className={styles.sectionImageLeft}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <CodeSnippet
+              HeaderImage={GoImage}
+              language="javascript"
+              content={`import (
+  "github.com/highlight-run/highlight-go"
+  highlightChi "github.com/highlight-run/highlight-go/middleware/chi"
+)
+
+func main() {
+  //...
+  highlight.Start()
+  defer highlight.Stop()
+  //...
+  r := chi.NewRouter()
+  r.Use(highlightChi.Middleware)
+}`}
+            />
           </div>
           {SetupDescription}
         </Section>
@@ -174,12 +225,23 @@ const Home: NextPage = () => {
     {
       image: NodeImage,
       key: 'node',
+      beta: true,
       content: (
         <Section>
           <div className={styles.sectionImageLeft}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <CodeSnippet
+              HeaderImage={NodeImage}
+              language="javascript"
+              content={`import { Highlight } from "@highlight-run/node";
+
+const app = express();
+
+const highlightOptions = {}; 
+const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
+
+// This should be before any other error middleware and after all controllers
+app.use(highlightHandler);`}
+            />
           </div>
           {SetupDescription}
         </Section>
