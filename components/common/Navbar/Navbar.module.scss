@@ -169,6 +169,12 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .bannerContainer {
+    flex: 0;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .headerInner {
     padding: var(--size-medium) var(--size-large);

@@ -1,16 +1,20 @@
+import Image from 'next/image';
 import SyntaxHighlighter, {
   SyntaxHighlighterProps,
 } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import CopyIcon from '../../../public/images/copy.svg';
 import styles from '../../Home/Home.module.scss';
 
 export const CodeSnippet = ({
   content,
   HeaderImage,
+  canCopy,
   ...props
 }: SyntaxHighlighterProps & {
   content: string;
   HeaderImage: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  canCopy?: boolean;
 }) => {
   return (
     <div className={styles.codeSnippetFrame}>
@@ -25,6 +29,16 @@ export const CodeSnippet = ({
         </div>
       </div>
       <div className={styles.codeSnippetContent}>
+        {canCopy && (
+          <div
+            className={styles.codeSnippetCopy}
+            onClick={() => navigator.clipboard.writeText(content)}
+          >
+            <div className={styles.codeSnippetCopyIcon}>
+              <Image src={CopyIcon} alt="" />
+            </div>
+          </div>
+        )}
         <SyntaxHighlighter
           style={dracula}
           customStyle={{

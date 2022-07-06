@@ -6,6 +6,7 @@ import RegularText from '../../../public/images/regularText.svg';
 import SecurityImage from '../../../public/images/safety-security-section.png';
 
 import styles from '../../Home/Home.module.scss';
+import classNames from 'classnames';
 
 export const ObfuscationSlider = () => {
   return (
@@ -22,7 +23,7 @@ export const ObfuscationSlider = () => {
           </div>
         }
       />
-      <div className={styles.obfuscationImage}>
+      <div className={classNames(styles.obfuscationImage, styles.hideMobile)}>
         <Image src={SecurityImage} alt="" />
       </div>
     </div>

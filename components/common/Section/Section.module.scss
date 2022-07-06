@@ -11,8 +11,12 @@
   gap: var(--size-xxLarge);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .section {
     flex-direction: column;
+  }
+
+  .sectionReverseMobile {
+    flex-direction: column-reverse !important;
   }
 }

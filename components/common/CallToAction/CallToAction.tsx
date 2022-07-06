@@ -12,9 +12,6 @@ export const CallToAction = () => {
   return (
     <div className={styles.callToActionBackground}>
       <div className={classNames(styles.anchorTitle, styles.ctaContainer)}>
-        <div className={styles.footerImageLeft}>
-          <Image src={FooterLeftImage} alt="" />
-        </div>
         <div className={styles.footerImageRight}>
           <Image src={FooterRightImage} alt="" />
         </div>
@@ -36,6 +33,9 @@ export const CallToAction = () => {
               Get started for free
             </Typography>
           </PrimaryButton>
+        </div>
+        <div className={styles.footerImageLeft}>
+          <Image src={FooterLeftImage} alt="" />
         </div>
       </div>
     </div>

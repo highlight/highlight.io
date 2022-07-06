@@ -27,3 +27,15 @@
   letter-spacing: 0.75px;
   text-transform: uppercase;
 }
+
+@media screen and (max-width: 600px) {
+  .copy1 {
+    font-size: 18px;
+    line-height: 34px;
+  }
+
+  .copy2 {
+    font-size: 16px;
+    line-height: 30px;
+  }
+}

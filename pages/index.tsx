@@ -10,6 +10,7 @@ import styles from '../components/Home/Home.module.scss';
 
 import DarkPlaceholder from '../public/images/dark.png';
 import BigHeroSection from '../public/images/big-hero-section.svg';
+import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugRight from '../public/images/hero-bug-right.svg';
 import HeroBugLeft from '../public/images/hero-bug-left.svg';
 import PlaybackIcon from '../public/images/pc-play-media.svg';
@@ -26,6 +27,8 @@ import PlugIcon from '../public/images/plug.svg';
 
 import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.png';
+import Tablet1 from '../public/images/tablet1.png';
+import Tablet2 from '../public/images/tablet2.png';
 import ReactImage from '../public/images/language/ReactIcon';
 import htmlImage from '../public/images/language/htmlIcon';
 import VueImage from '../public/images/language/VueIcon';
@@ -110,6 +113,7 @@ const Home: NextPage = () => {
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={ReactImage}
+              canCopy={true}
               language="javascript"
               content={`import React from 'react';   
 import App from './App';
@@ -138,6 +142,7 @@ ReactDOM.render(
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={VueImage}
+              canCopy={true}
               language="javascript"
               content={`import { createApp } from 'vue';       
 import App from './App.vue';
@@ -163,6 +168,7 @@ createApp(App).mount('#app');`}
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={NextjsImage}
+              canCopy={true}
               language="javascript"
               content={`import { H } from 'highlight.run';
 
@@ -202,6 +208,7 @@ export default MyApp`}
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={GoImage}
+              canCopy={true}
               language="javascript"
               content={`import (
   "github.com/highlight-run/highlight-go"
@@ -231,6 +238,7 @@ func main() {
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={NodeImage}
+              canCopy={true}
               language="javascript"
               content={`import { Highlight } from "@highlight-run/node";
 
@@ -348,8 +356,11 @@ app.use(highlightHandler);`}
             </div>
           </div>
         </Section>
-        <div className={styles.hero}>
+        <div className={classNames(styles.hero, styles.hideMobile)}>
           <Image src={BigHeroSection} alt="hero" />
+        </div>
+        <div className={classNames(styles.hero, styles.mobile)}>
+          <Image src={MobileHeroSection} alt="hero" />
         </div>
         <div className={styles.secondaryBackground}>
           <Section>
@@ -368,7 +379,7 @@ app.use(highlightHandler);`}
               </div>
             </div>
           </Section>
-          <Section>
+          <Section reverseMobile={true}>
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">cross-team collaboration</Typography>
@@ -426,12 +437,17 @@ app.use(highlightHandler);`}
               </Collapse>
             </div>
             <div className={styles.sectionImageRight}>
-              <div className={styles.imageInner}>
+              <div className={classNames(styles.imageInner, styles.hideMobile)}>
                 <Image src={CollaborateImage} alt="" />
+              </div>
+              <div
+                className={classNames(styles.imageInner, styles.tabletGraphic)}
+              >
+                <Image src={Tablet1} alt="" />
               </div>
             </div>
           </Section>
-          <Section>
+          <Section reverseMobile={true}>
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">Powerful search</Typography>
@@ -492,12 +508,17 @@ app.use(highlightHandler);`}
               </Collapse>
             </div>
             <div className={styles.sectionImageRight}>
-              <div className={styles.imageInner}>
+              <div className={classNames(styles.imageInner, styles.hideMobile)}>
                 <Image src={SearchImage} alt="" />
+              </div>
+              <div
+                className={classNames(styles.imageInner, styles.tabletGraphic)}
+              >
+                <Image src={Tablet2} alt="" />
               </div>
             </div>
           </Section>
-          <Section>
+          <Section reverseMobile={true}>
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">security-compliant</Typography>

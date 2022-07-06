@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer>
       <div className={styles.footer}>
-        <div>
+        <div className={styles.footerBottom}>
           <div>
             <HighlightLogo />
           </div>

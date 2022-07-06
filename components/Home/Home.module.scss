@@ -181,7 +181,6 @@
   flex: 1 1 50%;
   padding-left: var(--size-xLarge);
   margin: var(--size-xLarge) 0;
-  width: 50%;
 
   span {
     height: 100% !important;
@@ -281,7 +280,7 @@
   width: 500px;
   background: var(--color-white);
   border-radius: var(--size-medium);
-  padding: var(--size-large);
+  padding: var(--size-xLarge);
   margin: var(--size-medium) var(--size-medium) 100px;
 
   .author {
@@ -300,6 +299,10 @@
     width: 120px;
     position: relative;
     text-align: left;
+  }
+
+  p {
+    margin: var(--size-xLarge) 0 !important;
   }
 
   p,
@@ -425,6 +428,34 @@ $animationSpeed: 40s;
   .codeSnippetContent {
     padding: var(--size-large) var(--size-large) calc(20 * var(--space-unit));
     overflow: scroll;
+    position: relative;
+
+    .codeSnippetCopy {
+      position: absolute;
+      bottom: var(--size-large);
+      right: var(--size-large);
+      width: calc(16 * var(--space-unit));
+      height: calc(16 * var(--space-unit));
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      .codeSnippetCopyIcon {
+        width: var(--size-medium);
+        height: var(--size-medium);
+      }
+
+      img {
+        border-radius: 0;
+      }
+
+      &:hover {
+        border-color: var(--color-secondary-200);
+      }
+    }
   }
 }
 
@@ -493,18 +524,20 @@ $animationSpeed: 40s;
 
 .companies {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   padding: 0 var(--size-xLarge);
-  grid-gap: var(--size-xLarge);
+  column-gap: var(--size-xLarge);
+  row-gap: var(--size-medium);
 
   .scaleHeight {
-    max-height: 25px !important;
-    min-height: 25px !important;
+    max-height: 36px !important;
+    min-height: 36px !important;
   }
 
   img {
     object-fit: contain;
     filter: invert(1);
+    min-height: 36px;
   }
 }
 
@@ -549,15 +582,111 @@ $animationSpeed: 40s;
   display: none;
 }
 
-@media screen and (max-width: 600px) {
-  .mobile {
+.tabletGraphic {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .hideMobile {
+    display: none;
+  }
+  .tabletGraphic {
     display: block;
   }
 
+  .snippetTabs {
+    gap: 0;
+    .snippetTab {
+      width: 120px;
+      padding: var(--size-medium) var(--size-medium) var(--size-medium);
+
+      svg {
+        height: var(--size-large);
+      }
+    }
+  }
+
+  .sectionImageRight,
+  .sectionImageLeft {
+    padding: 0 var(--size-large);
+  }
+
+  .obfuscation {
+    padding: 0 calc(30 * var(--space-unit));
+  }
+
+  .heroBugLeft,
+  .heroBugRight {
+    display: none;
+  }
+
+  .featureContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    margin-right: -300px;
+    margin-left: -100px;
+  }
+
+  .sectionText {
+    width: 100%;
+
+    h3,
+    .sectionSubtitle {
+      text-align: center;
+    }
+  }
+
+  .codeSection {
+    text-align: center;
+
+    .buttonContainer {
+      justify-content: center;
+    }
+  }
+
+  .ctaContainer {
+    padding: calc(48 * var(--space-unit)) 0 calc(32 * var(--space-unit)) 0 !important;
+  }
+
+  .footerImageLeft {
+    left: -80px;
+  }
+
+  .footerImageRight {
+    right: -100px;
+  }
+
+  .slideTrack {
+    animation: none !important;
+    display: grid !important;
+    padding: 0 var(--size-xLarge) var(--size-xxxLarge) var(--size-xLarge);
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--size-medium);
+    row-gap: var(--size-large);
+    width: 100% !important;
+  }
+
+  .reviewCard {
+    width: auto;
+    margin: 0;
+  }
+
+  .companies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
   .hideMobile {
     display: none;
   }
 
+  .mobile {
+    display: block;
+  }
   .bodySmall {
     font-size: var(--size-medium);
   }
@@ -566,10 +695,41 @@ $animationSpeed: 40s;
     font-size: var(--size-medium);
   }
 
+  .hero {
+    margin: var(--size-xxLarge) 0;
+    object-fit: contain;
+
+    span,
+    img {
+      width: 100% !important;
+    }
+  }
+
+  .sectionImageRight {
+    padding: 0 calc(24 * var(--space-unit));
+    margin: 0;
+  }
+
+  .sectionText {
+    min-width: auto;
+  }
+
+  .obfuscation {
+    padding: 0;
+  }
+
+  .featureContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
+    .featureItem {
+      max-width: none;
+    }
+  }
+
   .buttonContainer {
     width: 100%;
     flex-direction: column;
-    align-items: flex-start;
     gap: var(--size-small);
 
     a {
@@ -583,30 +743,21 @@ $animationSpeed: 40s;
     align-items: center;
 
     a {
-      width: 100%;
       text-align: center;
     }
-  }
-
-  .sectionText,
-  .sectionImageRight,
-  .sectionImageLeft {
-    min-width: 0;
-    padding: 0;
-    margin: 0;
   }
 
   .callToActionBackground {
     width: 100%;
 
-    .anchorTitle {
-      padding: 80px var(--size-medium);
+    .ctaContainer {
+      padding: calc(24 * var(--space-unit)) 0 0 !important;
     }
   }
 
   .companies {
-    grid-template-columns: repeat(4, 1fr);
-    padding: 0;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 var(--size-xLarge);
   }
 
   .buttonArrow {
@@ -617,13 +768,34 @@ $animationSpeed: 40s;
 
   .anchorFeature {
     padding: 0;
-    div {
-      text-align: left;
-    }
     .anchorImage {
       height: 60vw;
       width: calc(100vw + 100px);
       margin: 0 -50px;
     }
+  }
+
+  .slideTrack {
+    animation: scroll $animationSpeed linear infinite !important;
+    display: flex !important;
+    width: calc(332px * 14) !important;
+
+    &:hover {
+      animation-play-state: paused !important;
+    }
+  }
+
+  .reviewCard {
+    width: 300px;
+  }
+
+  .footerImageLeft {
+    position: relative;
+    margin: var(--size-xLarge) auto 0;
+    left: 0;
+  }
+
+  .footerImageRight {
+    display: none;
   }
 }

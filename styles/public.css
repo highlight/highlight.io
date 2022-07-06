@@ -75,6 +75,6 @@
     font-family: 'IBM Plex Mono';
     font-style: normal;
     font-weight: 400;
-    src: local('IBM Plex Mono Regular'), local('IBMPlexMonoRegular'),
+    src: local('IBMPlexMono Regular'), local('IBMPlexMonoRegular'),
         url('./font/IBMPlexMono-Regular.ttf') format('ttf');
 }

@@ -196,25 +196,26 @@ main {
 }
 
 code {
-  font-family: 'IBM Plex Mono', 'monospace';
+  font-family: 'IBM Plex Mono', 'Courier', 'monospace';
+  font-weight: 400;
 }
 
 @media screen and (max-width: 600px) {
   h1 {
-    font-size: 50px;
+    font-size: 40px;
+    letter-spacing: 0;
   }
 
   h2 {
-    font-size: 36px;
+    font-size: var(--size-xLarge);
+    letter-spacing: 0;
   }
 
   h3 {
-    font-size: var(--size-medium);
+    font-size: var(--size-large);
+    letter-spacing: 0;
   }
 
-  main {
-    padding: 0 var(--size-large);
-  }
   footer {
     margin: 0 var(--size-large);
   }
