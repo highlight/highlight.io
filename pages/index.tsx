@@ -323,7 +323,7 @@ app.use(highlightHandler);`}
                   Playback of your app
                 </Typography>
                 <Typography type="copy2">
-                  Highlight powers forward-thinking companies.
+                  See exactly how users are impacted by errros.
                 </Typography>
               </FeatureItem>
               <FeatureItem>
@@ -332,7 +332,7 @@ app.use(highlightHandler);`}
                   Error stack traces
                 </Typography>
                 <Typography type="copy2">
-                  Highlight powers forward-thinking companies.
+                  Access full, language-specific stack traces on your web app.
                 </Typography>
               </FeatureItem>
               <FeatureItem>
@@ -341,7 +341,7 @@ app.use(highlightHandler);`}
                   {`Console & network tabs`}
                 </Typography>
                 <Typography type="copy2">
-                  Highlight powers forward-thinking companies.
+                  Debug with everything you get in the dev-tools console.
                 </Typography>
               </FeatureItem>
               <FeatureItem>
@@ -350,7 +350,7 @@ app.use(highlightHandler);`}
                   Precise timing
                 </Typography>
                 <Typography type="copy2">
-                  Highlight powers forward-thinking companies.
+                  Understand when bugs happen and eveything that leads to it.
                 </Typography>
               </FeatureItem>
             </div>

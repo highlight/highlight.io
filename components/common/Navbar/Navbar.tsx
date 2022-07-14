@@ -1,4 +1,7 @@
-import { HighlightLogo } from '../HighlightLogo/HighlightLogo';
+import {
+  HighlightLogo,
+  HighlightLogoWhite,
+} from '../HighlightLogo/HighlightLogo';
 import styles from './Navbar.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
@@ -15,16 +18,19 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [developerOpen, setDeveloperOpen] = useState(false);
-  const [mobileDeveloperOpen, setMobileDeveloperOpen] = useState(false);
+  const [prevY, setPrevY] = useState(0);
 
   const dropdownRef = useRef<null | HTMLUListElement>(null);
 
   const changeBackground = () => {
-    if (window.scrollY > 60) {
+    const currentScrollPos = window.pageYOffset;
+    console.log(currentScrollPos, prevY);
+    if (window.scrollY > 60 && prevY < currentScrollPos) {
       setScrolled(true);
-    } else {
+    } else if (window.scrollY > 60 && prevY > currentScrollPos) {
       setScrolled(false);
     }
+    setPrevY(currentScrollPos);
   };
 
   useEffect(() => {
@@ -122,15 +128,19 @@ const Navbar = () => {
       </Banner>
       <header
         className={classNames(styles.headerPadding, {
-          [styles.blurBg]: scrolled,
+          [styles.hideNavbar]: scrolled,
           [styles.mobileHeader]: isOpen,
         })}
       >
-        <div className={classNames(styles.header, styles.headerInner)}>
+        <div
+          className={classNames(styles.header, styles.headerInner, {
+            [styles.openHeader]: isOpen,
+          })}
+        >
           <div className={classNames(styles.navContainer, styles.headerLeft)}>
             <Link href={'/'}>
               <a className={styles.urlStyle}>
-                <HighlightLogo />
+                {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
               </a>
             </Link>
           </div>
@@ -141,59 +151,57 @@ const Navbar = () => {
             <div className={styles.mobileMenu}>
               <ul className={classNames(styles.menuList, styles.header)}>
                 <li>
-                  <Link href={'/pricing'}>
-                    <a className={styles.menuItemLarge}>Pricing</a>
-                  </Link>
+                  <Typography type="copy3" emphasis={true}>
+                    <Link href={'/pricing'}>
+                      <a className={styles.menuItemLarge}>Pricing</a>
+                    </Link>
+                  </Typography>
                 </li>
                 <li>
-                  <Link href={'/customers'}>
-                    <a className={styles.menuItemLarge}>Customers</a>
-                  </Link>
+                  <Typography type="copy3" emphasis={true}>
+                    <Link href={'/customers'}>
+                      <a className={styles.menuItemLarge}>Customers</a>
+                    </Link>
+                  </Typography>
                 </li>
                 <li>
-                  <Link href={'/blog'}>
-                    <a className={styles.menuItemLarge}>Blog</a>
-                  </Link>
+                  <Typography type="copy3" emphasis={true}>
+                    <Link href={'/blog'}>
+                      <a className={styles.menuItemLarge}>Blog</a>
+                    </Link>
+                  </Typography>
                 </li>
                 <li>
-                  <Link href={'/careers'}>
-                    <a className={styles.menuItemLarge}>Careers</a>
-                  </Link>
+                  <Typography type="copy3" emphasis={true}>
+                    <Link href={'/careers'}>
+                      <a className={styles.menuItemLarge}>Careers</a>
+                    </Link>
+                  </Typography>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      setMobileDeveloperOpen(!mobileDeveloperOpen);
-                    }}
-                    className={styles.menuItemLarge}
-                  >
-                    Developers <ChevronDown />
-                  </a>
-                  {mobileDeveloperOpen && (
-                    <ul className={styles.menuDropdown}>
-                      <li>
-                        <Link href={'/changelog'}>
-                          <a className={styles.menuItemLarge}>Changelog</a>
-                        </Link>
-                      </li>
-                      <li>
-                        <a
-                          href="https://docs.highlight.run/"
-                          className={styles.menuItemLarge}
-                        >
-                          Docs
-                        </a>
-                      </li>
-                    </ul>
-                  )}
+                  <Typography type="copy3" emphasis={true}>
+                    <a
+                      href="https://docs.highlight.run/"
+                      className={styles.menuItemLarge}
+                    >
+                      Docs
+                    </a>
+                  </Typography>
                 </li>
               </ul>
-              <a href="https://app.highlight.run/" className={styles.menuItem}>
-                Sign In
-              </a>
-              <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                Get Started
-              </PrimaryButton>
+              <div className={styles.menuButtons}>
+                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                  Get Started
+                </PrimaryButton>
+                <Typography type="copy3" emphasis={true}>
+                  <a
+                    href="https://app.highlight.run/"
+                    className={styles.menuItem}
+                  >
+                    Sign In
+                  </a>
+                </Typography>
+              </div>
             </div>
           )}
           <div
