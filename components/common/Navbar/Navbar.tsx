@@ -24,7 +24,6 @@ const Navbar = () => {
 
   const changeBackground = () => {
     const currentScrollPos = window.pageYOffset;
-    console.log(currentScrollPos, prevY);
     if (window.scrollY > 60 && prevY < currentScrollPos) {
       setScrolled(true);
     } else if (window.scrollY > 60 && prevY > currentScrollPos) {

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import { SecondaryButton } from '../components/common/Buttons/SecondaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
@@ -46,6 +46,8 @@ import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { CodeSnippet } from '../components/Home/CodeSnippet/CodeSnippet';
 
+const IMAGE_SHOW_OFFSET = 500;
+
 const { Panel } = Collapse;
 
 export const FeatureItem = ({
@@ -70,7 +72,9 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
           objectFit={'contain'}
         />
       </div>
-      <p>{text}</p>
+      <Typography type="copy2">
+        <p>{text}</p>
+      </Typography>
       <div className={styles.author}>
         <div className={styles.authorImage}>
           <Image src={author.image} alt={author.name} />
@@ -85,6 +89,17 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
 };
 
 const Home: NextPage = () => {
+  const section1 = useRef(null);
+  const section2 = useRef(null);
+  const section3 = useRef(null);
+  const [, setScrollYPosition] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setScrollYPosition(window.scrollY);
+    });
+  });
+
   const SetupDescription = (
     <div className={classNames(styles.sectionText, styles.codeSection)}>
       <div className={styles.sectionSubtitle}>
@@ -379,7 +394,257 @@ app.use(highlightHandler);`}
               </div>
             </div>
           </Section>
-          <Section reverseMobile={true}>
+          <Section>
+            <div className={styles.featuresColumnContainer}>
+              <div className={styles.featuresLeftColumn}>
+                <div ref={section1} className={styles.featuresSection}>
+                  <div>
+                    <div className={styles.sectionSubtitle}>
+                      <Typography type="outline">
+                        cross-team collaboration
+                      </Typography>
+                    </div>
+                    <h3>
+                      <span className={styles.highlightedText}>
+                        Collaborate
+                      </span>{' '}
+                      on bugs, everyone is kept in the loop.
+                    </h3>
+                    <Collapse
+                      destroyInactivePanel={true}
+                      defaultActiveKey={['1', '2']}
+                      className={styles.sectionCollapse}
+                    >
+                      <Panel
+                        header={
+                          <div className={styles.collapseHeader}>
+                            <Image src={MultipleIcon} alt="" />
+                            <Typography
+                              type="copy1"
+                              emphasis={true}
+                            >{`There's never one stakeholder on a bug.`}</Typography>
+                          </div>
+                        }
+                        className={styles.sectionInfo}
+                        key="1"
+                        showArrow={false}
+                      >
+                        <div className={styles.sectionBody}>
+                          <Typography type="copy2">
+                            When something breaks on your web app, there are
+                            many teams that could get the first message about
+                            it. Highlight makes it easy to communicate and
+                            re-assign issues to make decisions on errors faster.
+                          </Typography>
+                        </div>
+                      </Panel>
+                      <Panel
+                        header={
+                          <div className={styles.collapseHeader}>
+                            <Image src={PuzzleIcon} alt="" />
+                            <Typography
+                              type="copy1"
+                              emphasis={true}
+                            >{`Integrate with your favorite tools.`}</Typography>
+                          </div>
+                        }
+                        className={styles.sectionInfo}
+                        key="2"
+                        showArrow={false}
+                      >
+                        <div className={styles.sectionBody}>
+                          <Typography type="copy2">{`We understand that Highlight isn't your issue tracking tool or your customer data platform. That's why we integrate with tools like Slack, Clickup and Zapier to keep everyone in the loop.`}</Typography>
+                        </div>
+                      </Panel>
+                    </Collapse>
+                  </div>
+                </div>
+                <div ref={section2} className={styles.featuresSection}>
+                  <div>
+                    <div className={styles.sectionSubtitle}>
+                      <Typography type="outline">Powerful search</Typography>
+                    </div>
+                    <h3>
+                      <span className={styles.highlightedText}>
+                        Easily search
+                      </span>{' '}
+                      for a bug by session or specific property.
+                    </h3>
+                    <Collapse
+                      destroyInactivePanel={true}
+                      defaultActiveKey={['1', '2']}
+                      className={styles.sectionCollapse}
+                    >
+                      <Panel
+                        header={
+                          <div className={styles.collapseHeader}>
+                            <Image src={MagnifierIcon} alt="" />
+                            <Typography
+                              type="copy1"
+                              emphasis={true}
+                            >{`Get to the correct session instantly.`}</Typography>
+                          </div>
+                        }
+                        className={styles.sectionInfo}
+                        key="1"
+                        showArrow={false}
+                      >
+                        <div className={styles.sectionBody}>
+                          <Typography type="copy2">
+                            What if you step in the shoes of your users and
+                            debug from their perspective? With our search
+                            console, you can instantly find the right session
+                            and debug with confidence.
+                          </Typography>
+                        </div>
+                      </Panel>
+                      <Panel
+                        header={
+                          <div className={styles.collapseHeader}>
+                            <Image src={ChartbarIcon} alt="" />
+                            <Typography type="copy1" emphasis={true}>{`
+                    What is slowing down your users?`}</Typography>
+                          </div>
+                        }
+                        className={styles.sectionInfo}
+                        key="2"
+                        showArrow={false}
+                      >
+                        <div className={styles.sectionBody}>
+                          <Typography type="copy2">
+                            Are users not using a new feature? Or is there a
+                            known drop off in a specific user flow? Our search
+                            console gives you the ability to search based on
+                            URL, number of errors, user properties and much
+                            more!
+                          </Typography>
+                        </div>
+                      </Panel>
+                    </Collapse>
+                  </div>
+                </div>
+                <div ref={section3} className={styles.featuresSection}>
+                  <div>
+                    <div className={styles.sectionSubtitle}>
+                      <Typography type="outline">security-compliant</Typography>
+                    </div>
+                    <h3>
+                      Highlight is built for{' '}
+                      <span className={styles.highlightedText}>
+                        privacy and security.
+                      </span>
+                    </h3>
+                    <Collapse
+                      destroyInactivePanel={true}
+                      defaultActiveKey={['1', '2']}
+                      className={styles.sectionCollapse}
+                    >
+                      <Panel
+                        header={
+                          <div className={styles.collapseHeader}>
+                            <Image src={PlugIcon} alt="" />
+                            <Typography type="copy1" emphasis={true}>
+                              Leverage our privacy-first API.
+                            </Typography>
+                          </div>
+                        }
+                        className={styles.sectionInfo}
+                        key="1"
+                        showArrow={false}
+                      >
+                        <div className={styles.sectionBody}>
+                          <Typography type="copy2">
+                            Highlight supports data redaction, obfuscation,
+                            masking and much more. The library also supports a
+                            Strict Privacy Mode which obfuscates all text nodes
+                            for very strict PII rules.
+                          </Typography>
+                        </div>
+                      </Panel>
+                      <Panel
+                        header={
+                          <div className={styles.collapseHeader}>
+                            <Image src={VerifiedIcon} alt="" />
+                            <Typography type="copy1" emphasis={true}>
+                              {`We put compliance & trust at the forefront.`}
+                            </Typography>
+                          </div>
+                        }
+                        className={styles.sectionInfo}
+                        key="2"
+                        showArrow={false}
+                      >
+                        <div className={styles.sectionBody}>
+                          <Typography type="copy2">
+                            Highlight supports several wellknown compliance
+                            frameworks including GDPR, CCPA, and SOC2.
+                          </Typography>
+                        </div>
+                      </Panel>
+                    </Collapse>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.featuresRightColumn}>
+                <div
+                  className={classNames({
+                    [styles.hideImage]:
+                      section2.current?.getBoundingClientRect().y <=
+                      IMAGE_SHOW_OFFSET,
+                  })}
+                >
+                  <div
+                    className={classNames(styles.imageInner, styles.hideMobile)}
+                  >
+                    <Image src={CollaborateImage} alt="" />
+                  </div>
+                  <div
+                    className={classNames(
+                      styles.imageInner,
+                      styles.tabletGraphic
+                    )}
+                  >
+                    <Image src={Tablet1} alt="" />
+                  </div>
+                </div>
+                <div
+                  className={classNames({
+                    [styles.hideImage]:
+                      section2.current?.getBoundingClientRect().y >
+                        IMAGE_SHOW_OFFSET ||
+                      section3.current?.getBoundingClientRect().y <=
+                        IMAGE_SHOW_OFFSET,
+                  })}
+                >
+                  <div
+                    className={classNames(styles.imageInner, styles.hideMobile)}
+                  >
+                    <Image src={SearchImage} alt="" />
+                  </div>
+                  <div
+                    className={classNames(
+                      styles.imageInner,
+                      styles.tabletGraphic
+                    )}
+                  >
+                    <Image src={Tablet2} alt="" />
+                  </div>
+                </div>
+                <div
+                  className={classNames({
+                    [styles.hideImage]:
+                      section3.current?.getBoundingClientRect().y >
+                      IMAGE_SHOW_OFFSET - 10,
+                  })}
+                >
+                  <div className={styles.imageInner}>
+                    <ObfuscationSlider />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Section>
+          <Section reverseMobile={true} className={styles.mobileOnly}>
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">cross-team collaboration</Typography>
@@ -390,7 +655,7 @@ app.use(highlightHandler);`}
               </h3>
               <Collapse
                 destroyInactivePanel={true}
-                defaultActiveKey={['1']}
+                defaultActiveKey={['1', '2']}
                 className={styles.sectionCollapse}
               >
                 <Panel
@@ -447,7 +712,7 @@ app.use(highlightHandler);`}
               </div>
             </div>
           </Section>
-          <Section reverseMobile={true}>
+          <Section reverseMobile={true} className={styles.mobileOnly}>
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">Powerful search</Typography>
@@ -458,7 +723,7 @@ app.use(highlightHandler);`}
               </h3>
               <Collapse
                 destroyInactivePanel={true}
-                defaultActiveKey={['1']}
+                defaultActiveKey={['1', '2']}
                 className={styles.sectionCollapse}
               >
                 <Panel
@@ -518,7 +783,7 @@ app.use(highlightHandler);`}
               </div>
             </div>
           </Section>
-          <Section reverseMobile={true}>
+          <Section reverseMobile={true} className={styles.mobileOnly}>
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">security-compliant</Typography>
@@ -531,7 +796,7 @@ app.use(highlightHandler);`}
               </h3>
               <Collapse
                 destroyInactivePanel={true}
-                defaultActiveKey={['1']}
+                defaultActiveKey={['1', '2']}
                 className={styles.sectionCollapse}
               >
                 <Panel

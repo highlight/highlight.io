@@ -14,10 +14,12 @@
 .headerInner {
   margin: auto;
   padding: var(--size-medium) var(--size-xxLarge);
+  background-color: var(--color-primary-500);
+  border-bottom: 1px solid #30294e;
 }
 
 .hideNavbar {
-  top: -64px;
+  top: -84px;
 }
 
 .navContainer {
