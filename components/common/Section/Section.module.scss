@@ -11,9 +11,24 @@
   gap: var(--size-xxLarge);
 }
 
+.noYTopPadding {
+  padding-top: 0;
+}
+.noYBottomPadding {
+  padding-bottom: 0;
+}
+
 @media screen and (max-width: 800px) {
   .section {
     flex-direction: column;
+    padding: 50px var(--size-large);
+  }
+
+  .noYTopPadding {
+    padding-top: 0;
+  }
+  .noYBottomPadding {
+    padding-bottom: 0;
   }
 
   .sectionReverseMobile {

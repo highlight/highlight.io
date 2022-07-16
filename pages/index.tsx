@@ -124,7 +124,7 @@ const Home: NextPage = () => {
       image: ReactImage,
       key: 'react',
       content: (
-        <Section>
+        <Section noYTopPadding={true}>
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={ReactImage}
@@ -153,7 +153,7 @@ ReactDOM.render(
       image: VueImage,
       key: 'vue',
       content: (
-        <Section>
+        <Section noYTopPadding={true}>
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={VueImage}
@@ -179,7 +179,7 @@ createApp(App).mount('#app');`}
       image: NextjsImage,
       key: 'nextjs',
       content: (
-        <Section>
+        <Section noYTopPadding={true}>
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={NextjsImage}
@@ -204,7 +204,7 @@ export default MyApp`}
       image: htmlImage,
       key: 'html',
       content: (
-        <Section>
+        <Section noYTopPadding={true}>
           <div className={styles.sectionImageLeft}>
             <div className={styles.imageInner}>
               <Image src={DarkPlaceholder} alt="" />
@@ -219,7 +219,7 @@ export default MyApp`}
       key: 'go',
       beta: true,
       content: (
-        <Section>
+        <Section noYTopPadding={true}>
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={GoImage}
@@ -249,7 +249,7 @@ func main() {
       key: 'node',
       beta: true,
       content: (
-        <Section>
+        <Section noYTopPadding={true}>
           <div className={styles.sectionImageLeft}>
             <CodeSnippet
               HeaderImage={NodeImage}
