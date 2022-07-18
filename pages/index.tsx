@@ -85,8 +85,8 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
 
 const Home: NextPage = () => {
   const section1 = useRef(null);
-  const section2 = useRef(null);
-  const section3 = useRef(null);
+  const section2 = useRef<HTMLInputElement>(null);
+  const section3 = useRef<HTMLInputElement>(null);
   const [, setScrollYPosition] = useState(0);
 
   useEffect(() => {
@@ -413,7 +413,7 @@ const Home: NextPage = () => {
                 <div
                   className={classNames({
                     [styles.hideImage]:
-                      section2.current?.getBoundingClientRect().y <=
+                      (section2?.current?.getBoundingClientRect().y || 0) <=
                       IMAGE_SHOW_OFFSET,
                   })}
                 >
@@ -434,9 +434,9 @@ const Home: NextPage = () => {
                 <div
                   className={classNames({
                     [styles.hideImage]:
-                      section2.current?.getBoundingClientRect().y >
+                      (section2?.current?.getBoundingClientRect().y || 0) >
                         IMAGE_SHOW_OFFSET ||
-                      section3.current?.getBoundingClientRect().y <=
+                      (section3?.current?.getBoundingClientRect().y || 0) <=
                         IMAGE_SHOW_OFFSET,
                   })}
                 >
@@ -457,7 +457,7 @@ const Home: NextPage = () => {
                 <div
                   className={classNames({
                     [styles.hideImage]:
-                      section3.current?.getBoundingClientRect().y >
+                      (section3?.current?.getBoundingClientRect().y || 0) >
                       IMAGE_SHOW_OFFSET - 10,
                   })}
                 >
