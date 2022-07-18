@@ -42,4 +42,7 @@
 	"openInGitHub.defaultRemote": "origin",
 	"openInGithub.maxBuffer": 512000,
 	"openInGitHub.excludeCurrentRevision": false,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 }

@@ -20,9 +20,74 @@
     filter: invert(1);
   }
 }
-
 .mobileTiers {
   display: none;
+}
+
+.anchorHead {
+  max-width: 840px;
+}
+
+.sectionSubtitle {
+  margin-bottom: var(--size-xLarge);
+  color: var(--color-selected-light);
+  text-transform: uppercase;
+  margin-bottom: var(--size-large);
+}
+
+.yellowText {
+  color: var(--color-selected-light);
+}
+
+.anchorFeature {
+  max-width: 660px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  padding: 0 var(--size-xxLarge);
+
+  .sectionSubtitle {
+    margin-bottom: var(--size-xLarge);
+  }
+
+  .buttonContainer {
+    margin: var(--size-xxxLarge) 0 calc(22 * var(--space-unit));
+  }
+
+  h1,
+  h2 {
+    margin-bottom: calc(10 * var(--space-unit)) !important;
+  }
+
+  .anchorHead {
+    max-width: 840px;
+  }
+
+  .anchorTitle {
+    max-width: 740px;
+  }
+
+  .anchorImage {
+    position: relative;
+    width: 100%;
+    height: 40vw;
+    max-height: 720px;
+
+    img {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+  }
+
+  .secondaryAnchor {
+    h2 {
+      margin: calc(18 * var(--space-unit)) 0 !important;
+    }
+  }
 }
 
 .mobileTierCard {

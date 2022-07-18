@@ -12,78 +12,29 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import SvgCheckmarkCircle from '../../public/images/CheckmarkCircle';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
-
-interface TierInfoObject {
-  tierName: string;
-  basePrice: number;
-  seatPrice: number;
-  buttonText: string;
-}
-
-const TierInfo = ({
-  tierName,
-  basePrice,
-  seatPrice,
-  buttonText,
-}: TierInfoObject) => {
-  return (
-    <div>
-      <div className={styles.tierInfo}>
-        <span className={styles.tierName}>{tierName}</span>
-        <div className={styles.tierPrice}>
-          <span className={styles.priceNum}>{`$${basePrice + seatPrice}`}</span>
-          <span className={classNames(styles.priceDuration, styles.tableBody)}>
-            /month
-          </span>
-        </div>
-        <PrimaryButton
-          className={styles.startTrial}
-          href="https://app.highlight.run/?sign_up=1"
-        >
-          {buttonText}
-        </PrimaryButton>
-        <div className={styles.pricingBreakdown}>
-          <div className={styles.tierInfo}>
-            <span>Base Price</span>
-            <span className={styles.tableBody}>billed monthly</span>
-          </div>
-          <div>{`$${basePrice}`}</div>
-        </div>
-        <div className={styles.pricingBreakdown}>
-          <div className={styles.tierInfo}>
-            <span>Seat Pricing</span>
-            <span className={styles.tableBody}>billed monthly</span>
-          </div>
-          <div>{`$${seatPrice}`}</div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { Typography } from '../../components/common/Typography/Typography';
 
 const Pricing: NextPage = () => {
   return (
-    <>
+    <div>
       <Head>
-        <title>Pricing - Highlight</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+        <title>Highlight - Plans and Pricing</title>
+        <meta name="description" content="Highlight - Plans and Pricing" />
       </Head>
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
         <Section>
-          <div className={homeStyles.anchorTitle}>
-            <h1>Pricing</h1>
-            <p className={homeStyles.bodyLarge}>
-              {`Highlight's plans scale for any organization—from startups to Fortune 500s.`}
-            </p>
+          <div className={styles.anchorFeature}>
+            <div className={styles.anchorHead}>
+              <div className={styles.sectionSubtitle}>
+                <Typography type="outline">Plans and Pricing</Typography>
+              </div>
+              <h1>
+                Get the
+                <span className={styles.yellowText}>{` visibility `}</span>
+                you need today.
+              </h1>
+            </div>
           </div>
         </Section>
         <Section>
@@ -276,7 +227,55 @@ const Pricing: NextPage = () => {
         <CallToAction />
       </main>
       <Footer />
-    </>
+    </div>
+  );
+};
+
+interface TierInfoObject {
+  tierName: string;
+  basePrice: number;
+  seatPrice: number;
+  buttonText: string;
+}
+
+const TierInfo = ({
+  tierName,
+  basePrice,
+  seatPrice,
+  buttonText,
+}: TierInfoObject) => {
+  return (
+    <div>
+      <div className={styles.tierInfo}>
+        <span className={styles.tierName}>{tierName}</span>
+        <div className={styles.tierPrice}>
+          <span className={styles.priceNum}>{`$${basePrice + seatPrice}`}</span>
+          <span className={classNames(styles.priceDuration, styles.tableBody)}>
+            /month
+          </span>
+        </div>
+        <PrimaryButton
+          className={styles.startTrial}
+          href="https://app.highlight.run/?sign_up=1"
+        >
+          {buttonText}
+        </PrimaryButton>
+        <div className={styles.pricingBreakdown}>
+          <div className={styles.tierInfo}>
+            <span>Base Price</span>
+            <span className={styles.tableBody}>billed monthly</span>
+          </div>
+          <div>{`$${basePrice}`}</div>
+        </div>
+        <div className={styles.pricingBreakdown}>
+          <div className={styles.tierInfo}>
+            <span>Seat Pricing</span>
+            <span className={styles.tableBody}>billed monthly</span>
+          </div>
+          <div>{`$${seatPrice}`}</div>
+        </div>
+      </div>
+    </div>
   );
 };
 
