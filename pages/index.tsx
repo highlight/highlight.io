@@ -8,7 +8,6 @@ import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 
-import DarkPlaceholder from '../public/images/dark.png';
 import BigHeroSection from '../public/images/big-hero-section.svg';
 import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugRight from '../public/images/hero-bug-right.svg';
@@ -25,9 +24,9 @@ import MagnifierIcon from '../public/images/magnifier.svg';
 import VerifiedIcon from '../public/images/verified.svg';
 import PlugIcon from '../public/images/plug.svg';
 
-import CollaborateImage from '../public/images/collaborate.png';
-import SearchImage from '../public/images/search.png';
-import Tablet1 from '../public/images/tablet1.png';
+import CollaborateImage from '../public/images/collaborate.svg';
+import SearchImage from '../public/images/search.svg';
+import Tablet1 from '../public/images/tablet1.svg';
 import Tablet2 from '../public/images/tablet2.png';
 
 import Footer from '../components/common/Footer/Footer';
@@ -39,7 +38,7 @@ import { SnippetTab } from '../components/Home/SnippetTab/SnippetTab';
 import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
-import { CodeSnippet } from '../components/Home/CodeSnippet/CodeSnippet';
+import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 
 const IMAGE_SHOW_OFFSET = 500;
 
@@ -67,9 +66,11 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
           objectFit={'contain'}
         />
       </div>
-      <Typography type="copy2">
-        <p>{text}</p>
-      </Typography>
+      <div className={styles.reviewText}>
+        <Typography type="copy2">
+          <p>{text}</p>
+        </Typography>
+      </div>
       <div className={styles.author}>
         <div className={styles.authorImage}>
           <Image src={author.image} alt={author.name} />
@@ -135,15 +136,7 @@ const Home: NextPage = () => {
                 </Typography>
               </PrimaryButton>
             </div>
-            <div
-              className={classNames(
-                styles.anchorImage,
-                styles.heroImage,
-                styles.imageInner
-              )}
-            >
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <HeroVideo />
           </div>
         </Section>
         <Section>
@@ -460,6 +453,7 @@ const Home: NextPage = () => {
                       (section3?.current?.getBoundingClientRect().y || 0) >
                       IMAGE_SHOW_OFFSET - 10,
                   })}
+                  style={{ width: '80%' }}
                 >
                   <div className={styles.imageInner}>
                     <ObfuscationSlider />
