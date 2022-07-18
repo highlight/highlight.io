@@ -134,6 +134,7 @@ const Navbar = () => {
         <div
           className={classNames(styles.header, styles.headerInner, {
             [styles.openHeader]: isOpen,
+            [styles.headerBorder]: prevY != 0,
           })}
         >
           <div className={classNames(styles.navContainer, styles.headerLeft)}>

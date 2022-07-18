@@ -146,9 +146,12 @@
 
 .featuresRightColumn {
   position: sticky;
-  top: calc(30 * var(--space-unit));
+  top: 0;
   width: 50%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sectionText {
@@ -293,11 +296,94 @@
     max-width: 740px;
   }
 
+  .hideVideo {
+    display: none !important;
+  }
+
+  .modalBg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+  }
+
+  .videoModal {
+    z-index: 999;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+
+    & video {
+      width: 70vw;
+    }
+  }
+
   .anchorImage {
     position: relative;
     width: 100%;
-    height: 40vw;
     max-height: 720px;
+    cursor: pointer;
+
+    .thumbnail {
+      transition: all 0.4s ease-in-out;
+      opacity: 1;
+    }
+
+    &:hover {
+      .thumbnail {
+        opacity: 0.2;
+      }
+      .playButton {
+        .playButtonIcon {
+          transform: scale(1.1);
+        }
+
+        .jayImage,
+        .playCard {
+          opacity: 1;
+        }
+      }
+    }
+
+    .playButton {
+      position: absolute;
+      margin: auto;
+      z-index: 9;
+      width: 220px;
+      display: flex;
+      top: calc(50% - 55px);
+      justify-content: center;
+
+      .playButtonIcon {
+        transition: all 0.4s ease-in-out;
+      }
+
+      .jayImage {
+        position: absolute;
+        z-index: 10;
+        height: var(--size-xxLarge);
+        width: var(--size-xxLarge);
+        display: flex;
+        right: 20%;
+        bottom: -5%;
+        transition: all 0.4s ease-in-out;
+        opacity: 0;
+      }
+
+      .playCard {
+        text-align: center;
+        position: absolute;
+        width: 300px;
+        top: 140px;
+        opacity: 0;
+        transition: all 0.4s ease-in-out;
+      }
+    }
 
     img {
       border-radius: var(--border-radius);
@@ -388,6 +474,7 @@ $animationSpeed: 40s;
   flex-direction: column;
   gap: var(--size-xSmall);
   max-width: 300px;
+  flex: 1 1 25%;
 }
 
 .snippetTabs {

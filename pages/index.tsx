@@ -8,7 +8,6 @@ import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 
-import DarkPlaceholder from '../public/images/dark.png';
 import BigHeroSection from '../public/images/big-hero-section.svg';
 import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugRight from '../public/images/hero-bug-right.svg';
@@ -40,6 +39,7 @@ import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { CodeSnippet } from '../components/Home/CodeSnippet/CodeSnippet';
+import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 
 const IMAGE_SHOW_OFFSET = 500;
 
@@ -135,15 +135,7 @@ const Home: NextPage = () => {
                 </Typography>
               </PrimaryButton>
             </div>
-            <div
-              className={classNames(
-                styles.anchorImage,
-                styles.heroImage,
-                styles.imageInner
-              )}
-            >
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
+            <HeroVideo />
           </div>
         </Section>
         <Section>
@@ -460,6 +452,7 @@ const Home: NextPage = () => {
                       (section3?.current?.getBoundingClientRect().y || 0) >
                       IMAGE_SHOW_OFFSET - 10,
                   })}
+                  style={{ width: '80%' }}
                 >
                   <div className={styles.imageInner}>
                     <ObfuscationSlider />
