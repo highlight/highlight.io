@@ -404,6 +404,12 @@
   border-radius: var(--size-medium);
   padding: var(--size-xLarge);
   margin: var(--size-medium) var(--size-medium) 100px;
+  display: flex;
+  flex-direction: column;
+
+  .reviewText {
+    flex: 1 1 auto;
+  }
 
   .author {
     display: flex;
@@ -414,6 +420,8 @@
   .authorImage {
     height: var(--size-xxLarge);
     width: var(--size-xxLarge);
+    border-radius: var(--size-xxLarge);
+    overflow: hidden;
   }
 
   .companyLogo {

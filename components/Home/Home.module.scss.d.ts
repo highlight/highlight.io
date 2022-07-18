@@ -61,6 +61,7 @@ export const playButtonIcon: string;
 export const playCard: string;
 export const purpleDiv: string;
 export const reviewCard: string;
+export const reviewText: string;
 export const scaleHeight: string;
 export const scroll: string;
 export const secondaryAnchor: string;
