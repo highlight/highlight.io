@@ -28,6 +28,230 @@
   max-width: 840px;
 }
 
+.tierWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.moneySign {
+  margin-right: 4px !important;
+  display: flex;
+}
+
+.pricingButton {
+  padding: var(--size-xSmall) var(--size-medium);
+  border: 1px solid var(--brand-accent-light);
+  background-color: transparent;
+  color: var(--brand-accent-light);
+  text-align: center;
+
+  &:hover {
+    border-color: var(--color-secondary-300);
+    background-color: var(--color-secondary-300);
+    color: var(--color-primary-background);
+  }
+}
+
+.timeIndicator {
+  display: flex;
+  flex-direction: column;
+  vertical-align: text-bottom;
+  height: 100%;
+}
+
+.price {
+  display: inline-block;
+  margin-right: 4px !important;
+}
+
+.desktopPrice {
+  display: flex;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.dekstopTierName {
+  margin-bottom: 8px;
+}
+
+.desktopSessionCredits {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.desktopSessionCreditsEnterprise {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.mostPopular {
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
+  border: var(--color-selected-light) solid 1px;
+  width: 218px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-selected-light);
+  margin-top: -40px;
+}
+
+.configColumn {
+  width: 269px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.featureName {
+  margin-bottom: 14px !important;
+}
+
+.featureSet {
+  display: flex;
+  margin-top: 53px;
+  flex-direction: column;
+}
+
+.featureKey {
+  color: var(--copy-on-dark);
+}
+
+.featureKeys {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.billingCopy {
+  margin-bottom: 10px;
+}
+
+.billingWidget {
+  display: flex;
+  flex-direction: column;
+}
+.billingWidgetButtons {
+  display: flex;
+}
+
+.billingButton {
+  height: 40px;
+  width: 107px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent !important;
+  color: var(--color-white);
+  border: var(--color-white) solid 1px;
+}
+
+.rightButton {
+  -webkit-border-top-left-radius: 0px !important;
+  -webkit-border-bottom-left-radius: 0px !important;
+  -moz-border-radius-topleft: 0px !important;
+  -moz-border-radius-bottomleft: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+.leftButton {
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+// &:hover {
+//   border-color: var(--color-secondary-300) !important;
+//   background-color: var(--color-secondary-300) !important;
+//   color: var(--color-primary-background) !important;
+// }
+
+.selected {
+  background-color: var(--color-white) !important;
+  color: var(--color-primary-background) !important;
+}
+
+// .signUpButton {
+//   padding: var(--size-xSmall) var(--size-medium) !important;
+//   margin-left: var(--size-large) !important;
+//   border: 1px solid var(--brand-accent-light) !important;
+//   background-color: transparent !important;
+//   color: var(--brand-accent-light) !important;
+// }
+
+.tierColumn {
+  border-top: var(--divider-on-dark) 1px solid;
+  border-right: var(--divider-on-dark) 1px solid;
+  border-left: var(--divider-on-dark) 1px solid;
+  border-bottom: var(--divider-on-dark) 1px solid;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  width: 218px;
+}
+
+.mostPopularTierColumn {
+  -webkit-border-top-left-radius: 0px;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.desktopTierSection {
+  height: 244px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px 0px 20px;
+}
+
+.featureDivider {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--divider-on-dark);
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.featureKeyDivider {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--divider-on-dark);
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+.desktopFeaturesSection {
+  padding: 0px 20px 24px 20px;
+  text-align: center;
+  margin-top: 70px;
+}
+
 .sectionSubtitle {
   margin-bottom: var(--size-xLarge);
   color: var(--color-selected-light);

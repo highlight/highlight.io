@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AiOutlineDown } from 'react-icons/ai';
 import DarkPlaceholder from '../../../public/images/dark.png';
-import { SecondaryButton } from '../../common/Buttons/SecondaryButton';
+import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
 import { Section } from '../../common/Section/Section';
 import { Typography } from '../../common/Typography/Typography';
 import ReactImage from '../../../public/images/language/ReactIcon';
@@ -36,9 +36,9 @@ const SetupDescription = (
       {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
     </Typography>
     <div className={styles.buttonContainer}>
-      <SecondaryButton href="https://docs.highlight.run/getting-started">
+      <PrimaryLink href="https://docs.highlight.run/getting-started">
         Read more about our backend integrations in beta
-      </SecondaryButton>
+      </PrimaryLink>
     </div>
   </div>
 );

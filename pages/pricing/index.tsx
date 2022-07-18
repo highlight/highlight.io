@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
+import CheckMark from '../../public/images/checkmark.svg';
+import Chat from '../../public/images/pricing-comment.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
@@ -13,8 +15,264 @@ import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import SvgCheckmarkCircle from '../../public/images/CheckmarkCircle';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
+import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
+import { features } from 'process';
+import { useState } from 'react';
+
+type PricingDetails = {
+  features: {
+    name: 'Features';
+    key: 0;
+    items: {
+      publicSessionSharing: {
+        key: 0;
+        name: 'Public session sharing';
+        value: boolean;
+      };
+      customDataExport: {
+        key: 1;
+        name: 'Custom data export';
+        value: boolean;
+      };
+      enhancedUserProperties: {
+        key: 2;
+        name: 'Enhanced user properties';
+        value: boolean;
+      };
+      sessionErrorCommenting: {
+        key: 3;
+        name: 'Session / error commenting';
+        value: boolean;
+      };
+    };
+  };
+  teamManagement: {
+    key: 1;
+    name: 'Team Management';
+    items: {
+      publicSessionSharing: {
+        key: 0;
+        name: 'Public session sharing';
+        value: boolean;
+      };
+      customDataExport: {
+        key: 1;
+        name: 'Custom data export';
+        value: boolean;
+      };
+      enhancedUserProperties: {
+        key: 2;
+        name: 'Enhanced user properties';
+        value: boolean;
+      };
+      sessionErrorCommenting: {
+        key: 3;
+        name: 'Session / error commenting';
+        value: boolean;
+      };
+    };
+  };
+  support: {
+    key: 2;
+    name: 'Support';
+    items: {
+      publicSessionSharing: {
+        key: 0;
+        name: 'Public session sharing';
+        value: boolean;
+      };
+      customDataExport: {
+        key: 1;
+        name: 'Custom data export';
+        value: boolean;
+      };
+      enhancedUserProperties: {
+        key: 2;
+        name: 'Enhanced user properties';
+        value: boolean;
+      };
+      sessionErrorCommenting: {
+        key: 3;
+        name: 'Session / error commenting';
+        value: boolean;
+      };
+    };
+  };
+};
+const BasicDetails: PricingDetails = {
+  features: {
+    name: 'Features',
+    key: 0,
+    items: {
+      publicSessionSharing: {
+        key: 0,
+        name: 'Public session sharing',
+        value: true,
+      },
+      customDataExport: {
+        key: 1,
+        name: 'Custom data export',
+        value: false,
+      },
+      enhancedUserProperties: {
+        key: 2,
+        name: 'Enhanced user properties',
+        value: true,
+      },
+      sessionErrorCommenting: {
+        key: 3,
+        name: 'Session / error commenting',
+        value: false,
+      },
+    },
+  },
+  teamManagement: {
+    name: 'Team Management',
+    key: 1,
+    items: {
+      publicSessionSharing: {
+        key: 0,
+        name: 'Public session sharing',
+        value: true,
+      },
+      customDataExport: {
+        key: 1,
+        name: 'Custom data export',
+        value: true,
+      },
+      enhancedUserProperties: {
+        key: 2,
+        name: 'Enhanced user properties',
+        value: true,
+      },
+      sessionErrorCommenting: {
+        key: 3,
+        name: 'Session / error commenting',
+        value: true,
+      },
+    },
+  },
+  support: {
+    name: 'Support',
+    key: 2,
+    items: {
+      publicSessionSharing: {
+        key: 0,
+        name: 'Public session sharing',
+        value: true,
+      },
+      customDataExport: {
+        key: 1,
+        name: 'Custom data export',
+        value: true,
+      },
+      enhancedUserProperties: {
+        key: 2,
+        name: 'Enhanced user properties',
+        value: true,
+      },
+      sessionErrorCommenting: {
+        key: 3,
+        name: 'Session / error commenting',
+        value: true,
+      },
+    },
+  },
+};
+const TierSection = ({
+  tierName,
+  numSessionCredits,
+  price,
+  contactSales,
+  features,
+  mostPopular,
+}: {
+  mostPopular: boolean;
+  tierName: string;
+  numSessionCredits: number;
+  price: number;
+  contactSales: boolean;
+  features: PricingDetails;
+}) => {
+  return (
+    <div
+      className={classNames(styles.tierColumn, {
+        [styles.mostPopularTierColumn]: mostPopular,
+      })}
+    >
+      {mostPopular && (
+        <div className={styles.mostPopular}>
+          <Typography type="outline">Most Popular</Typography>
+        </div>
+      )}
+      <div className={styles.desktopTierSection}>
+        <Typography type="copy1" emphasis className={styles.dekstopTierName}>
+          {tierName}
+        </Typography>
+        {contactSales ? (
+          <div className={styles.desktopSessionCreditsEnterprise}>
+            <Typography type="copy3" emphasis>
+              {'Custom'}
+            </Typography>
+            <Typography type="copy3">{` session credits`}</Typography>
+          </div>
+        ) : (
+          <div className={styles.desktopSessionCredits}>
+            <Typography type="copy3" emphasis>
+              {numSessionCredits}
+            </Typography>
+            <Typography type="copy3">{` session credits`}</Typography>
+          </div>
+        )}
+        <div className={styles.desktopPrice}>
+          {contactSales ? (
+            <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
+          ) : (
+            <>
+              <Typography type="copy3" emphasis className={styles.moneySign}>
+                {'$'}
+              </Typography>
+              <h3 className={styles.price}>{price}</h3>
+              <div className={styles.timeIndicator}>
+                <Typography type="copy3">{'/ mo'}</Typography>
+              </div>
+            </>
+          )}
+        </div>
+        <PrimaryButton className={styles.pricingButton}>
+          <Typography type="copy3" emphasis={true}>
+            {contactSales ? 'Contact Sales' : 'Start Free Trial'}
+          </Typography>
+        </PrimaryButton>
+      </div>
+
+      {features &&
+        Object.keys(features).map((headingKey) => {
+          return (
+            <div className={styles.desktopFeaturesSection} key={headingKey}>
+              {Object.keys((features as any)[headingKey].items).map(
+                (featureKey) => {
+                  return (
+                    <>
+                      {(features as any)[headingKey].items[featureKey].value ? (
+                        <Image src={CheckMark} alt="checkmark"></Image>
+                      ) : (
+                        <div>-</div>
+                      )}
+                      <hr className={styles.featureDivider} />
+                    </>
+                  );
+                }
+              )}
+            </div>
+          );
+        })}
+    </div>
+  );
+};
 
 const Pricing: NextPage = () => {
+  const [monthly, setMonthly] = useState(true);
   return (
     <div>
       <Head>
@@ -37,192 +295,107 @@ const Pricing: NextPage = () => {
             </div>
           </div>
         </Section>
-        <Section>
-          <div className={styles.mobileTiers}>
-            <div className={styles.mobileTierCard}>
-              <TierInfo
-                tierName="Free"
-                basePrice={0}
-                seatPrice={0}
-                buttonText="Get Started"
-              />
+        <Section className={styles.tierWrapper}>
+          <div className={styles.configColumn}>
+            <div className={styles.billingWidget}>
+              <Typography type="copy3" className={styles.billingCopy}>
+                Select billing cycle
+              </Typography>
+              <div className={styles.billingWidgetButtons}>
+                <PrimaryButton
+                  className={classNames(
+                    styles.billingButton,
+                    styles.leftButton,
+                    {
+                      [styles.selected]: monthly,
+                    }
+                  )}
+                  onClick={() => setMonthly(true)}
+                >
+                  Monthly
+                </PrimaryButton>
+                <PrimaryButton
+                  className={classNames(
+                    styles.billingButton,
+                    styles.rightButton,
+                    {
+                      [styles.selected]: !monthly,
+                    }
+                  )}
+                  onClick={() => setMonthly(false)}
+                >
+                  Annual
+                </PrimaryButton>
+              </div>
             </div>
-            <div className={styles.mobileTierCard}>
-              <TierInfo
-                tierName="Basic"
-                basePrice={100}
-                seatPrice={0}
-                buttonText="Start Trial"
-              />
-            </div>
-            <div className={styles.mobileTierCard}>
-              <TierInfo
-                tierName="Startup"
-                basePrice={300}
-                seatPrice={0}
-                buttonText="Start Trial"
-              />
-            </div>
-            <div className={styles.mobileTierCard}>
-              <TierInfo
-                tierName="Enterprise"
-                basePrice={1000}
-                seatPrice={0}
-                buttonText="Schedule Demo"
-              />
-            </div>
-          </div>
-          <div className={styles.tableCard}>
-            <div className={styles.pricingTable}>
-              <div></div>
-              <TierInfo
-                tierName="Free"
-                basePrice={0}
-                seatPrice={0}
-                buttonText="Get Started"
-              />
-              <TierInfo
-                tierName="Basic"
-                basePrice={100}
-                seatPrice={0}
-                buttonText="Start Trial"
-              />
-              <TierInfo
-                tierName="Startup"
-                basePrice={300}
-                seatPrice={0}
-                buttonText="Start Trial"
-              />
-              <TierInfo
-                tierName="Enterprise"
-                basePrice={1000}
-                seatPrice={0}
-                buttonText="Schedule Demo"
-              />
-              <span>Quotas</span>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <span className={styles.tableBody}>Session Credits</span>
-              <span>500</span>
-              <span>10,000</span>
-              <span>80,000</span>
-              <span>200,000+</span>
-              <span className={styles.tableBody}>Included Seats</span>
-              <span>Unlimited</span>
-              <span>2</span>
-              <span>8</span>
-              <span>12</span>
-              <span className={styles.tableBody}>Session Overage Rate</span>
-              <span>$5 / 1k sessions / mo</span>
-              <span>$5 / 1k sessions / mo</span>
-              <span>$5 / 1k sessions / mo</span>
-              <span>$5 / 1k sessions / mo</span>
-              <span className={styles.tableBody}>Data Retention</span>
-              <span>1 month</span>
-              <span>Custom</span>
-              <span>Custom</span>
-              <span>Custom</span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span>Features</span>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <span className={styles.tableBody}>Public Session Sharing</span>
-              <span>-</span>
-              <span>-</span>
-              <span>
-                <SvgCheckmarkCircle className={styles.checkmark} />
-              </span>
-              <span>
-                <SvgCheckmarkCircle className={styles.checkmark} />
-              </span>
-              <span className={styles.tableBody}>Custom Data Export</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>
-                <SvgCheckmarkCircle className={styles.checkmark} />
-              </span>
-              <span className={styles.tableBody}>Enhanced User Properties</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span className={styles.tableBody}>
-                Session / Error Commenting
-              </span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span>Team Management</span>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <span className={styles.tableBody}>
-                Role-Based Access Control
-              </span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span className={styles.tableBody}>Single Sign-On</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span className={styles.tableBody}>
-                Two-Factor Authentication
-              </span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span>Support</span>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <span className={styles.tableBody}>Email</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span className={styles.tableBody}>Intercom</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span className={styles.tableBody}>Slack Connect</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span className={styles.tableBody}>24x7 Support with SLAs</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
-              <span>-</span>
+            <div className={styles.featureKeys}>
+              {Object.keys(BasicDetails).map((headingKey) => {
+                return (
+                  <div key={headingKey} className={styles.featureSet}>
+                    <Typography
+                      className={styles.featureName}
+                      type="copy3"
+                      emphasis
+                    >
+                      {(BasicDetails as any)[headingKey].name}
+                    </Typography>
+                    {Object.keys((BasicDetails as any)[headingKey].items).map(
+                      (featureKey) => {
+                        return (
+                          <>
+                            <Typography
+                              type="copy3"
+                              key={featureKey}
+                              className={styles.featureKey}
+                            >
+                              {
+                                (BasicDetails as any)[headingKey].items[
+                                  featureKey
+                                ].name
+                              }
+                            </Typography>
+                            <hr className={styles.featureKeyDivider} />
+                          </>
+                        );
+                      }
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
+          <TierSection
+            mostPopular={false}
+            tierName="Basic"
+            numSessionCredits={500}
+            price={120}
+            contactSales={false}
+            features={BasicDetails}
+          />
+          <TierSection
+            mostPopular={false}
+            tierName="Basic"
+            numSessionCredits={500}
+            price={120}
+            contactSales={false}
+            features={BasicDetails}
+          />
+          <TierSection
+            mostPopular={true}
+            tierName="Basic"
+            numSessionCredits={500}
+            price={120}
+            contactSales={false}
+            features={BasicDetails}
+          />
+          <TierSection
+            mostPopular={false}
+            tierName="Basic"
+            numSessionCredits={500}
+            price={120}
+            contactSales={true}
+            features={BasicDetails}
+          />
         </Section>
         <CallToAction />
       </main>

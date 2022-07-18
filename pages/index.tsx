@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
-import { SecondaryButton } from '../components/common/Buttons/SecondaryButton';
+import { PrimaryLink } from '../components/common/Buttons/SecondaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
@@ -681,9 +681,9 @@ const Home: NextPage = () => {
               <h2>{`Our customers`}</h2>
               <Typography type="copy2">
                 {`Highlight powers forward-thinking companies. `}
-                <SecondaryButton href="/customers">
+                <PrimaryLink href="/customers">
                   Find out about our customers
-                </SecondaryButton>
+                </PrimaryLink>
               </Typography>
             </div>
             <CompaniesReel />
@@ -694,9 +694,9 @@ const Home: NextPage = () => {
             <div className={styles.anchorHead}>
               <Typography type="copy2">
                 {`Don't take our word. `}
-                <SecondaryButton href="/customers">
+                <PrimaryLink href="/customers">
                   Read our customer review section
-                </SecondaryButton>
+                </PrimaryLink>
               </Typography>
             </div>
           </div>
