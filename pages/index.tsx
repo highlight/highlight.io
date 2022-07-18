@@ -29,12 +29,7 @@ import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.png';
 import Tablet1 from '../public/images/tablet1.png';
 import Tablet2 from '../public/images/tablet2.png';
-import ReactImage from '../public/images/language/ReactIcon';
-import htmlImage from '../public/images/language/htmlIcon';
-import VueImage from '../public/images/language/VueIcon';
-import NodeImage from '../public/images/language/NodeIcon';
-import NextjsImage from '../public/images/language/NextjsIcon';
-import GoImage from '../public/images/language/GoIcon';
+
 import Footer from '../components/common/Footer/Footer';
 import { CallToAction } from '../components/common/CallToAction/CallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
@@ -100,177 +95,6 @@ const Home: NextPage = () => {
     });
   });
 
-  const SetupDescription = (
-    <div className={classNames(styles.sectionText, styles.codeSection)}>
-      <div className={styles.sectionSubtitle}>
-        <Typography type="outline">effortless setup</Typography>
-      </div>
-      <h2>
-        Start using Highlight{' '}
-        <span className={styles.highlightedText}>within minutes</span>
-      </h2>
-      <Typography type="copy2">
-        {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
-      </Typography>
-      <div className={styles.buttonContainer}>
-        <SecondaryButton href="https://docs.highlight.run/getting-started">
-          Read more about our backend integrations in beta
-        </SecondaryButton>
-      </div>
-    </div>
-  );
-  const SNIPPET_TABS = [
-    {
-      image: ReactImage,
-      key: 'react',
-      content: (
-        <Section noYTopPadding={true}>
-          <div className={styles.sectionImageLeft}>
-            <CodeSnippet
-              HeaderImage={ReactImage}
-              canCopy={true}
-              language="javascript"
-              content={`import React from 'react';   
-import App from './App';
-import { H } from 'highlight.run';
-import { ErrorBoundary } from '@highlight-run/react';
-
-H.init('1jdkoe52');
-
-ReactDOM.render(
-  <ErrorBoundary showDialog>
-    <App />
-  </ErrorBoundary>,
-  document.getElementById('root')
-);`}
-            />
-          </div>
-          {SetupDescription}
-        </Section>
-      ),
-    },
-    {
-      image: VueImage,
-      key: 'vue',
-      content: (
-        <Section noYTopPadding={true}>
-          <div className={styles.sectionImageLeft}>
-            <CodeSnippet
-              HeaderImage={VueImage}
-              canCopy={true}
-              language="javascript"
-              content={`import { createApp } from 'vue';       
-import App from './App.vue';
-import { H } from 'highlight.run';
-
-H.init('1jdkoe52', {
-  environment: 'production',
-  enableStrictPrivacy: false,
-});
-
-createApp(App).mount('#app');`}
-            />
-          </div>
-          {SetupDescription}
-        </Section>
-      ),
-    },
-    {
-      image: NextjsImage,
-      key: 'nextjs',
-      content: (
-        <Section noYTopPadding={true}>
-          <div className={styles.sectionImageLeft}>
-            <CodeSnippet
-              HeaderImage={NextjsImage}
-              canCopy={true}
-              language="javascript"
-              content={`import { H } from 'highlight.run';
-
-H.init('1jdkoe52');
-
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-
-export default MyApp`}
-            />
-          </div>
-          {SetupDescription}
-        </Section>
-      ),
-    },
-    {
-      image: htmlImage,
-      key: 'html',
-      content: (
-        <Section noYTopPadding={true}>
-          <div className={styles.sectionImageLeft}>
-            <div className={styles.imageInner}>
-              <Image src={DarkPlaceholder} alt="" />
-            </div>
-          </div>
-          {SetupDescription}
-        </Section>
-      ),
-    },
-    {
-      image: GoImage,
-      key: 'go',
-      beta: true,
-      content: (
-        <Section noYTopPadding={true}>
-          <div className={styles.sectionImageLeft}>
-            <CodeSnippet
-              HeaderImage={GoImage}
-              canCopy={true}
-              language="javascript"
-              content={`import (
-  "github.com/highlight-run/highlight-go"
-  highlightChi "github.com/highlight-run/highlight-go/middleware/chi"
-)
-
-func main() {
-  //...
-  highlight.Start()
-  defer highlight.Stop()
-  //...
-  r := chi.NewRouter()
-  r.Use(highlightChi.Middleware)
-}`}
-            />
-          </div>
-          {SetupDescription}
-        </Section>
-      ),
-    },
-    {
-      image: NodeImage,
-      key: 'node',
-      beta: true,
-      content: (
-        <Section noYTopPadding={true}>
-          <div className={styles.sectionImageLeft}>
-            <CodeSnippet
-              HeaderImage={NodeImage}
-              canCopy={true}
-              language="javascript"
-              content={`import { Highlight } from "@highlight-run/node";
-
-const app = express();
-
-const highlightOptions = {}; 
-const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
-
-// This should be before any other error middleware and after all controllers
-app.use(highlightHandler);`}
-            />
-          </div>
-          {SetupDescription}
-        </Section>
-      ),
-    },
-  ];
   return (
     <div>
       <Head>
@@ -850,7 +674,7 @@ app.use(highlightHandler);`}
             </div>
           </Section>
         </div>
-        <SnippetTab tabs={SNIPPET_TABS} />
+        <SnippetTab />
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
