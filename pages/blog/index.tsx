@@ -15,6 +15,8 @@ import Paginate from '../../components/common/Paginate/Paginate';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import classNames from 'classnames';
+import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
+import { Typography } from '../../components/common/Typography/Typography';
 
 const ITEMS_PER_PAGE = 5;
 
@@ -97,46 +99,40 @@ const Blog = ({
         <title>Highlight Blog</title>
         <meta name="description" content="Stop debugging in the dark. " />
       </Head>
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
+        <div className={styles.blogContainer}>
+          <h4>Blog article of the week</h4>
+          {currentItems.slice(0, 1).map((p: Post, i: number) => (
+            <BlogPost {...p} key={i} />
+          ))}
+          <hr />
+        </div>
         <Section>
-          <div className={homeStyles.anchorTitle}>
-            <h1>Highlight Blog</h1>
-            <p className={homeStyles.bodyLarge}>
-              {`Welcome to the Highlight Blog 👋`}
-            </p>
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.tagDiv}>
-            {tags.map((tag: string) => (
-              <Link
-                key={tag}
-                href={currentTag === tag ? '/blog' : `/blog?tag=${tag}`}
-                passHref={true}
-              >
-                <div
-                  className={classNames({
-                    [styles.selectedTag]: currentTag === tag,
-                  })}
+          <div className={styles.tagHeader}>
+            <h4>Sort by tag</h4>
+            <div className={styles.tagDiv}>
+              {tags.map((tag: string) => (
+                <Link
+                  key={tag}
+                  href={currentTag === tag ? '/blog' : `/blog?tag=${tag}`}
+                  passHref={true}
                 >
-                  {tag}
-                </div>
-              </Link>
-            ))}
+                  <div
+                    className={classNames({
+                      [styles.selectedTag]: currentTag === tag,
+                    })}
+                  >
+                    <Typography type="copy3">{tag}</Typography>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </Section>
         <div className={styles.blogContainer}>
           {currentItems.map((p: Post, i: number) => (
-            <BlogPost {...p} key={i} />
+            <BlogPostSmall {...p} key={i} />
           ))}
           <Paginate
             currentPage={currentPage}

@@ -1,6 +1,7 @@
 import styles from '../Blog.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Typography } from '../../common/Typography/Typography';
 
 export interface Post {
   slug: string;
@@ -17,16 +18,16 @@ export interface Post {
   richcontent: {
     markdown: string;
   };
+  tags: Array<string>;
 }
 
 export const BlogPost = ({
   slug,
-  description,
   richcontent,
   image: { url },
   title,
   publishedAt,
-  publishedBy,
+  tags,
 }: Post) => {
   return (
     <Link href={`/blog/post/${slug}`}>
@@ -38,23 +39,24 @@ export const BlogPost = ({
             </div>
           </div>
           <div className={styles.cardSection}>
-            <h2>{title}</h2>
-            <p className={styles.bodyText}>{description}</p>
             <div className={styles.authorDiv}>
-              <div
-                className={styles.avatar}
-                style={{ width: '36px', height: '36px', position: 'relative' }}
-              >
-                <Image src={publishedBy.picture} alt="" layout="fill" />
-              </div>
-              <div>
-                <p className={styles.authorName}>{publishedBy.name}</p>
-                <p>{`${new Date(publishedAt).toLocaleDateString(
-                  'en-US'
-                )} • ${Math.floor(
-                  richcontent.markdown.split(' ').length / 200
-                )} min read`}</p>
-              </div>
+              <p>{`${new Date(publishedAt).toLocaleDateString('en-US', {
+                day: 'numeric',
+                year: 'numeric',
+                month: 'short',
+              })} • ${Math.floor(
+                richcontent.markdown.split(' ').length / 200
+              )} min. read`}</p>
+            </div>
+            <h3>{title}</h3>
+            <div className={styles.tagDiv}>
+              {tags.map((tag: string) => (
+                <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
+                  <div>
+                    <Typography type="copy3">{tag}</Typography>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>

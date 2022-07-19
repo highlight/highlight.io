@@ -96,6 +96,7 @@
   --color-primary-300: #5420d1;
   --color-primary-400: #120532;
   --color-primary-500: #0d0225;
+  --color-copy-on-dark: #dfdfdf;
 
   // Logo
   --logo-gradient-start-color: var(--color-purple);
@@ -178,7 +179,9 @@ h3 {
 }
 
 h4 {
-  font-weight: 400 !important;
+  font-size: 36px;
+  letter-spacing: -1.6px;
+  font-weight: 600 !important;
 }
 
 p {
