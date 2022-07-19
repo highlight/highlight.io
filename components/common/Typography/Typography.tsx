@@ -16,13 +16,12 @@ export const Typography = ({
   return (
     <span
       {...props}
-      className={classNames({
+      className={classNames(className, {
         [styles.copy1]: props.type === 'copy1',
         [styles.copy2]: props.type === 'copy2',
         [styles.copy3]: props.type === 'copy3',
         [styles.outline]: props.type === 'outline',
         [styles.emphasis]: emphasis,
-        [className]: true,
       })}
     >
       {children}
