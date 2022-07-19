@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { BiRightArrowAlt } from 'react-icons/bi';
 import styles from './Buttons.module.scss';
 
-export const SecondaryButton = ({
+export const PrimaryLink = ({
   children,
   ...props
 }: React.PropsWithChildren<ButtonProps>) => {

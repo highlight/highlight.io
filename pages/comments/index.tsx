@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import { SecondaryButton } from '../../components/common/Buttons/SecondaryButton';
+import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
 import classNames from 'classnames';
@@ -52,9 +52,9 @@ const Comments: NextPage = () => {
                 <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                   Get Started For Free
                 </PrimaryButton>
-                <SecondaryButton href="https://calendly.com/jaykhatri/highlight-demo-call">
+                <PrimaryLink href="https://calendly.com/jaykhatri/highlight-demo-call">
                   Request A Demo
-                </SecondaryButton>
+                </PrimaryLink>
               </div>
             </div>
           </div>

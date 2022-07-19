@@ -112,16 +112,16 @@
 }
 
 .signUpButton {
-  padding: var(--size-xSmall) var(--size-medium);
-  margin-left: var(--size-large);
-  border: 1px solid var(--brand-accent-light);
-  background-color: transparent;
-  color: var(--brand-accent-light);
+  padding: var(--size-xSmall) var(--size-medium) !important;
+  margin-left: var(--size-large) !important;
+  border: 1px solid var(--brand-accent-light) !important;
+  background-color: transparent !important;
+  color: var(--brand-accent-light) !important;
 
   &:hover {
-    border-color: var(--color-secondary-300);
-    background-color: var(--color-secondary-300);
-    color: var(--color-primary-background);
+    border-color: var(--color-secondary-300) !important;
+    background-color: var(--color-secondary-300) !important;
+    color: var(--color-primary-background) !important;
   }
 }
 
