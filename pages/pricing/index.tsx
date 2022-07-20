@@ -1,23 +1,22 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import BlueGradient from '../../public/images/bg_blue_gradient.svg';
-import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
+import { SVGProps } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
+import PcPlayMedia from '../../public/images/pc-play-media.svg';
 import Chat from '../../public/images/pricing-comment.svg';
-import homeStyles from '../../components/Home/Home.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import styles from '../../components/Pricing/Pricing.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import SvgCheckmarkCircle from '../../public/images/CheckmarkCircle';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
-import { features } from 'process';
 import { useState } from 'react';
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
+import Collapsible from 'react-collapsible';
 
 type PricingDetails = {
   features: {
@@ -281,8 +280,8 @@ const Pricing: NextPage = () => {
       </Head>
       <Navbar />
       <main>
-        <Section>
-          <div className={styles.anchorFeature}>
+        <Section className={styles.titleSection}>
+          <div className={styles.pricingTitle}>
             <div className={styles.anchorHead}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">Plans and Pricing</Typography>
@@ -397,9 +396,167 @@ const Pricing: NextPage = () => {
             features={BasicDetails}
           />
         </Section>
+        <Section className={styles.customerSection}>
+          <div className={styles.anchorFeature}>
+            <div className={styles.anchorHead}>
+              <h2>{`Our customers`}</h2>
+              <Typography type="copy2">
+                {`Highlight powers forward-thinking companies. `}
+                <PrimaryLink href="/customers">
+                  Find out about our customers
+                </PrimaryLink>
+              </Typography>
+            </div>
+            <CompaniesReel />
+          </div>
+        </Section>
+        <Section className={styles.faqSection}>
+          <div className={styles.anchorFeature}>
+            <div className={styles.anchorHead}>
+              <h2>{`Frequently Asked Questions`}</h2>
+            </div>
+          </div>
+          <div>
+            <Question
+              questionText="What counts as a session?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="How long does it take to set up Highlight?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Do I need a credit card to sign up?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="How will you charge me?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Can I deploy Highlight on-premise?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Is Highlight secure? Where’s my data stored?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Can I cancel at anytime?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Do you offer a discount for non-profits?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+          </div>
+        </Section>
         <CallToAction />
       </main>
       <Footer />
+    </div>
+  );
+};
+
+const DownArrow = ({ fill }: { fill: string }) => (
+  <svg width={12} height={12} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clipPath="url(#a)">
+      <path
+        d="M11.625 3.375 6 9 .375 3.375"
+        stroke={fill}
+        strokeWidth={2}
+        strokeMiterlimit={10}
+      />
+    </g>
+    <defs>
+      <clipPath id="a">
+        <path fill={fill} d="M0 0h12v12H0z" />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+const Question = ({
+  questionText,
+  questionDescription,
+  icon,
+}: {
+  questionText: string;
+  questionDescription: string;
+  icon: string;
+}) => {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className={styles.faqRowClickable}>
+      <Collapsible
+        onOpening={() => setExpanded(true)}
+        onClosing={() => setExpanded(false)}
+        transitionTime={200}
+        trigger={
+          <div className={styles.faqRow}>
+            <div className={styles.faqLeftContent}>
+              <Image src={icon} alt="pc icon"></Image>
+              <Typography className={styles.question} type="copy2" emphasis>
+                {questionText}
+              </Typography>
+            </div>
+            <button
+              className={classNames(styles.circleButton, {
+                [styles.expanded]: expanded,
+              })}
+            >
+              <DownArrow fill={expanded ? '#0D0225' : '#72E4FC'} />
+            </button>
+          </div>
+        }
+      >
+        <div className={styles.collapseInner}>
+          <Typography className={styles.questionDescription} type="copy3">
+            {questionDescription}
+          </Typography>
+        </div>
+      </Collapsible>
+      <hr className={styles.faqDivider} />
     </div>
   );
 };
