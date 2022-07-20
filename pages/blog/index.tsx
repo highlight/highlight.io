@@ -96,6 +96,7 @@ const Blog = ({
 
   return (
     <>
+      <></>
       <Head>
         <title>Highlight Blog</title>
         <meta name="description" content="Stop debugging in the dark. " />
