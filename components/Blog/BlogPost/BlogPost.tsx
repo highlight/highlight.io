@@ -2,6 +2,7 @@ import styles from '../Blog.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
+import { Dispatch, SetStateAction } from 'react';
 
 export interface Post {
   slug: string;
@@ -28,10 +29,11 @@ export const BlogPost = ({
   title,
   publishedAt,
   tags,
-}: Post) => {
+  setIsLoading,
+}: Post & { setIsLoading: Dispatch<SetStateAction<boolean>> }) => {
   return (
     <Link href={`/blog/post/${slug}`}>
-      <a style={{ textDecoration: 'none' }}>
+      <a style={{ textDecoration: 'none' }} onClick={() => setIsLoading(true)}>
         <div className={styles.blogPost}>
           <div className={styles.cardSection}>
             <div className={styles.cardImage}>

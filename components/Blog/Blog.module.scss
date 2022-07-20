@@ -1,3 +1,14 @@
+.loadingBar {
+  height: 2px;
+  width: 0;
+  background-color: var(--color-selected-light);
+  transition: all 10s ease-in-out;
+}
+
+.loaded {
+  width: 100%;
+}
+
 .blogContainer {
   margin: var(--size-xxLarge) auto;
   max-width: var(--max-width);
@@ -7,6 +18,11 @@
     color: #30294e;
     border: 0.5px solid #30294e;
   }
+}
+
+.tagContainer {
+  margin: calc(20 * var(--space-unit)) auto calc(4 * var(--space-unit));
+  max-width: var(--max-width);
 }
 
 .tagHeader {
@@ -67,25 +83,19 @@
   align-items: center;
   border-radius: 50px;
   overflow: hidden;
-}
-
-.authorName {
-  color: var(--color-white) !important;
+  border: 3px solid var(--color-white);
 }
 
 .authorDiv {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--size-small);
 
   p {
     color: var(--color-copy-on-dark);
     margin: var(--size-xxSmall) 0 !important;
   }
-}
-
-.postDiv {
-  text-align: left;
 }
 
 .mainImage {
@@ -101,6 +111,7 @@
   flex-direction: row;
   gap: var(--size-small);
   margin-top: var(--size-xSmall);
+  flex-wrap: wrap;
 
   div {
     background: rgba(255, 255, 255, 0.12);
@@ -114,6 +125,15 @@
     border: 1px solid var(--color-selected-light);
     color: var(--color-selected-light);
   }
+}
+
+.dateDiv {
+  color: var(--copy-on-dark);
+}
+
+.postTagDiv {
+  margin: var(--size-large) 0 var(--size-xxLarge);
+  justify-content: center;
 }
 
 .suggestedPostDiv {
@@ -132,7 +152,22 @@
 }
 
 .postBody {
+  text-align: left;
   width: 100%;
+
+  .codeBlock {
+    & > span {
+      background-color: transparent !important;
+      padding: var(--size-large);
+      border: 1px solid #30294e;
+      border-radius: var(--border-radius) !important;
+    }
+  }
+
+  .postHeader {
+    margin-top: var(--size-xxLarge);
+    margin-bottom: var(--size-medium);
+  }
 
   pre {
     overflow: auto;
@@ -145,8 +180,8 @@
   p,
   li {
     font-size: var(--size-medium);
-    line-height: 1.5rem !important;
-    color: var(--text-gray);
+    line-height: var(--size-xLarge) !important;
+    color: var(--copy-on-dark);
 
     img {
       width: 100%;
@@ -154,11 +189,9 @@
   }
 
   a {
-    color: var(--text-gray);
-  }
-
-  a:hover {
-    color: var(--brand-accent-light);
+    color: var(--color-secondary-200);
+    font-weight: 600;
+    text-decoration: none;
   }
 }
 @media screen and (max-width: 800px) {
@@ -179,7 +212,7 @@
   }
 
   .mainImage {
-    min-height: 200px;
+    min-height: 300px;
   }
 
   .tagHeader {
@@ -201,6 +234,10 @@
 @media screen and (max-width: 600px) {
   .blogContainer {
     padding: 0;
+  }
+
+  .tagContainer {
+    padding: 0 var(--size-medium);
   }
 
   .cardImage {

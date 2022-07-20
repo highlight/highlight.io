@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Post } from '../BlogPost/BlogPost';
 import { Typography } from '../../common/Typography/Typography';
+import { Dispatch, SetStateAction } from 'react';
 
 export const BlogPostSmall = ({
   slug,
@@ -11,10 +12,11 @@ export const BlogPostSmall = ({
   title,
   publishedAt,
   tags,
-}: Post) => {
+  setIsLoading,
+}: Post & { setIsLoading: Dispatch<SetStateAction<boolean>> }) => {
   return (
     <Link href={`/blog/post/${slug}`}>
-      <a style={{ textDecoration: 'none' }}>
+      <a style={{ textDecoration: 'none' }} onClick={() => setIsLoading(true)}>
         <div className={styles.blogPostSmall}>
           <div className={styles.cardImage}>
             <Image src={url} alt="" layout="fill" objectFit="cover" />

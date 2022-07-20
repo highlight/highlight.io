@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import Head from 'next/head';
-import BlueGradient from '../../../public/images/bg_blue_gradient.svg';
-import PurpleGradient from '../../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../../components/Home/Home.module.scss';
 import styles from '../../../components/Blog/Blog.module.scss';
 import Navbar from '../../../components/common/Navbar/Navbar';
@@ -15,6 +13,18 @@ import { CallToAction } from '../../../components/common/CallToAction/CallToActi
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock, dracula } from 'react-code-blocks';
+import { Typography } from '../../../components/common/Typography/Typography';
+import { useState } from 'react';
+
+const blogTypographyRenderer = ({ children }: { children: any }) => {
+  return (
+    <div className={styles.postHeader}>
+      <Typography type="copy1" emphasis>
+        {children?.props?.content[0].text}
+      </Typography>
+    </div>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`
@@ -88,116 +98,83 @@ query GetPosts() {
   };
 };
 
-const PostPage = ({
-  post,
-  prev,
-  next,
-}: {
-  post: any;
-  prev: any;
-  next: any;
-}) => {
+const PostPage = ({ post }: { post: any; prev: any; next: any }) => {
   return (
     <>
       <Head>
         <title>Highlight Blog</title>
         <meta name="description" content="Stop debugging in the dark. " />
       </Head>
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
         <Section>
-          <div className={classNames(homeStyles.anchorTitle, styles.postDiv)}>
-            <h1>{post.title}</h1>
-            <p className={homeStyles.bodyLarge}>{post.description}</p>
-            <div className={styles.authorDiv}>
-              <div
-                className={styles.avatar}
-                style={{ width: '36px', height: '36px', position: 'relative' }}
-              >
-                <Image src={post.publishedBy.picture} alt="" layout="fill" />
-              </div>
-              <div>
-                <p className={styles.authorName}>{post.publishedBy.name}</p>
-                <p>{`${new Date(post.publishedAt).toLocaleDateString(
-                  'en-US'
-                )} • ${Math.floor(
-                  post.richcontent.markdown.split(' ').length / 200
-                )} min read`}</p>
-              </div>
-            </div>
-            <div className={styles.tagDiv}>
+          <div className={homeStyles.anchorTitle}>
+            <Typography type="copy2">
+              <p className={styles.dateDiv}>{`${new Date(
+                post.publishedAt
+              ).toLocaleDateString('en-US', {
+                day: 'numeric',
+                year: 'numeric',
+                month: 'short',
+              })} • ${Math.floor(
+                post.richcontent.markdown.split(' ').length / 200
+              )} min read`}</p>
+            </Typography>
+            <h2>{post.title}</h2>
+            <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags.map((tag: string) => (
                 <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
                   <div>{tag}</div>
                 </Link>
               ))}
             </div>
+            <div className={styles.authorDiv}>
+              <div
+                className={styles.avatar}
+                style={{ width: '50px', height: '50px', position: 'relative' }}
+              >
+                <Image src={post.publishedBy.picture} alt="" layout="fill" />
+              </div>
+              <div>
+                <Typography type="copy2" emphasis>
+                  {post.publishedBy.name}
+                </Typography>
+              </div>
+            </div>
           </div>
         </Section>
         <Section>
-          <div className={styles.mainImage}>
+          <div className={classNames(styles.mainImage, homeStyles.anchorTitle)}>
             <Image
               src={post.image.url}
               alt=""
               layout="fill"
-              objectFit="contain"
+              objectFit="cover"
             />
           </div>
         </Section>
         <Section>
-          <div
-            className={classNames(
-              homeStyles.anchorTitle,
-              styles.postDiv,
-              styles.postBody
-            )}
-          >
+          <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
             <RichText
               content={post.richcontent.raw}
               renderers={{
                 code_block: ({ children }: { children: any }) => {
                   return (
-                    <CodeBlock
-                      language={'js'}
-                      text={children?.props?.content[0].text}
-                      theme={dracula}
-                    />
+                    <div className={styles.codeBlock}>
+                      <CodeBlock
+                        language={'js'}
+                        text={children?.props?.content[0].text}
+                        showLineNumbers={false}
+                        theme={dracula}
+                      />
+                    </div>
                   );
                 },
+                h1: blogTypographyRenderer,
+                h2: blogTypographyRenderer,
+                h3: blogTypographyRenderer,
               }}
             />
-          </div>
-        </Section>
-        <Section>
-          <div className={styles.suggestedPostDiv}>
-            {prev.title ? (
-              <Link href={`/blog/post/${prev.slug}`} passHref>
-                <div className={styles.suggestedPost}>
-                  <div>{`<<`}</div>
-                  {prev.title}
-                </div>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-            {next.title ? (
-              <Link href={`/blog/post/${next.slug}`} passHref>
-                <div className={styles.suggestedPost}>
-                  <div>{`>>`}</div>
-                  {next.title}
-                </div>
-              </Link>
-            ) : (
-              <div></div>
-            )}
           </div>
         </Section>
         <CallToAction />
