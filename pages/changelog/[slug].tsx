@@ -79,7 +79,7 @@ const ChangelogPage = ({ changelog }: { changelog: any }) => {
       <Navbar />
       <main>
         <Section>
-          <div className={classNames(homeStyles.anchorTitle, styles.postDiv)}>
+          <div className={homeStyles.anchorTitle}>
             <h1>{changelog.title}</h1>
             <div className={styles.authorDiv}>
               <div>
@@ -91,13 +91,7 @@ const ChangelogPage = ({ changelog }: { changelog: any }) => {
           </div>
         </Section>
         <Section>
-          <div
-            className={classNames(
-              homeStyles.anchorTitle,
-              styles.postDiv,
-              styles.postBody
-            )}
-          >
+          <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
             <ReactMarkdown>{changelog.content}</ReactMarkdown>
           </div>
         </Section>

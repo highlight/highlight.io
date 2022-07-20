@@ -57,18 +57,12 @@ const CareerPage = ({ role }: { role: any }) => {
       <Navbar />
       <main>
         <Section>
-          <div className={classNames(homeStyles.anchorTitle, styles.postDiv)}>
+          <div className={homeStyles.anchorTitle}>
             <h1>{role.title}</h1>
           </div>
         </Section>
         <Section>
-          <div
-            className={classNames(
-              homeStyles.anchorTitle,
-              styles.postDiv,
-              styles.postBody
-            )}
-          >
+          <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
             <ReactMarkdown>{role.content}</ReactMarkdown>
           </div>
         </Section>
