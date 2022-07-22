@@ -26,7 +26,7 @@
 }
 
 .navContainer {
-  flex: 1 1;
+  flex: 1 1 auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -159,7 +159,7 @@
 .bannerContainer {
   gap: var(--size-small);
   display: flex;
-  flex: 1;
+  flex: 1 1 auto;
   align-items: center;
 
   .callToAction {
@@ -168,9 +168,27 @@
   }
 }
 
+.navPostTitle {
+  font-size: 18px;
+  line-height: 32px;
+  color: var(--copy-on-dark);
+  margin: 0 var(--size-large);
+}
+
+.loadingBar {
+  height: 2px;
+  width: 0;
+  background-color: var(--color-selected-light);
+  transition: all 0.2s ease;
+}
+
 @media screen and (max-width: 800px) {
   .bannerContainer {
     flex: 0;
+  }
+
+  .navPostTitle {
+    display: none;
   }
 }
 

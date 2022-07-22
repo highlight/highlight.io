@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Head from 'next/head';
 import homeStyles from '../../../components/Home/Home.module.scss';
 import styles from '../../../components/Blog/Blog.module.scss';
-import Navbar from '../../../components/common/Navbar/Navbar';
 import { Section } from '../../../components/common/Section/Section';
 import Footer from '../../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
@@ -14,7 +13,8 @@ import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock, dracula } from 'react-code-blocks';
 import { Typography } from '../../../components/common/Typography/Typography';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import BlogNavbar from '../../../components/Blog/BlogNavbar/BlogNavbar';
 
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
@@ -99,14 +99,21 @@ query GetPosts() {
 };
 
 const PostPage = ({ post }: { post: any; prev: any; next: any }) => {
+  const blogBody = useRef<HTMLDivElement>(null);
+  const [endPosition, setEndPosition] = useState(0);
+
+  useEffect(() => {
+    setEndPosition(blogBody.current?.offsetHeight || 0);
+  }, [blogBody]);
+
   return (
     <>
       <Head>
         <title>Highlight Blog</title>
         <meta name="description" content="Stop debugging in the dark. " />
       </Head>
-      <Navbar />
-      <main>
+      <BlogNavbar title={post.title} endPosition={endPosition} />
+      <main ref={blogBody}>
         <Section>
           <div className={homeStyles.anchorTitle}>
             <Typography type="copy2">

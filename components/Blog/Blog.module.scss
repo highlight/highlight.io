@@ -1,14 +1,3 @@
-.loadingBar {
-  height: 2px;
-  width: 0;
-  background-color: var(--color-selected-light);
-  transition: all 10s ease-in-out;
-}
-
-.loaded {
-  width: 100%;
-}
-
 .blogContainer {
   margin: var(--size-xxLarge) auto;
   max-width: var(--max-width);
@@ -18,11 +7,16 @@
     color: #30294e;
     border: 0.5px solid #30294e;
   }
+
+  h4 {
+    padding: 0 var(--size-medium);
+  }
 }
 
 .tagContainer {
   margin: calc(20 * var(--space-unit)) auto calc(4 * var(--space-unit));
   max-width: var(--max-width);
+  padding: 0 var(--size-medium);
 }
 
 .tagHeader {
@@ -86,6 +80,17 @@
   border: 3px solid var(--color-white);
 }
 
+.postDateDiv {
+  display: flex;
+  align-items: center;
+  gap: var(--size-small);
+
+  p {
+    color: var(--color-copy-on-dark);
+    margin: var(--size-xxSmall) 0 !important;
+  }
+}
+
 .authorDiv {
   display: flex;
   align-items: center;
@@ -114,11 +119,14 @@
   flex-wrap: wrap;
 
   div {
+    display: flex;
+    align-items: center;
     background: rgba(255, 255, 255, 0.12);
     border-radius: var(--size-xLarge);
     padding: var(--size-xxSmall) var(--size-medium);
     color: var(--color-copy-on-dark);
     cursor: pointer;
+    height: 34px;
   }
 
   .selectedTag {
@@ -179,8 +187,8 @@
 
   p,
   li {
-    font-size: var(--size-medium);
-    line-height: var(--size-xLarge) !important;
+    font-size: 18px;
+    line-height: 34px !important;
     color: var(--copy-on-dark);
 
     img {

@@ -29,11 +29,10 @@ export const BlogPost = ({
   title,
   publishedAt,
   tags,
-  setIsLoading,
-}: Post & { setIsLoading: Dispatch<SetStateAction<boolean>> }) => {
+}: Post) => {
   return (
     <Link href={`/blog/post/${slug}`}>
-      <a style={{ textDecoration: 'none' }} onClick={() => setIsLoading(true)}>
+      <a style={{ textDecoration: 'none' }}>
         <div className={styles.blogPost}>
           <div className={styles.cardSection}>
             <div className={styles.cardImage}>
@@ -41,7 +40,7 @@ export const BlogPost = ({
             </div>
           </div>
           <div className={styles.cardSection}>
-            <div className={styles.authorDiv}>
+            <div className={styles.postDateDiv}>
               <p>{`${new Date(publishedAt).toLocaleDateString('en-US', {
                 day: 'numeric',
                 year: 'numeric',

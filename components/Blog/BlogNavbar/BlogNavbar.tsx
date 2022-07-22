@@ -1,20 +1,25 @@
 import {
   HighlightLogo,
   HighlightLogoWhite,
-} from '../HighlightLogo/HighlightLogo';
-import styles from './Navbar.module.scss';
+} from '../../common/HighlightLogo/HighlightLogo';
+import styles from '../../common/Navbar/Navbar.module.scss';
 import classNames from 'classnames';
-import { PrimaryButton } from '../Buttons/PrimaryButton';
+import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
-import Banner from '../Banner/Banner';
+import Banner from '../../common/Banner/Banner';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import ChevronDown from '../../../public/images/ChevronDownIcon';
 import Link from 'next/link';
-import SvgBookIcon from '../../../public/images/BookIcon';
-import SvgEditIcon from '../../../public/images/EditIcon';
-import { Typography } from '../Typography/Typography';
+import { Typography } from '../../common/Typography/Typography';
 
-const Navbar = () => {
+const SHOW_NAVBAR_OFFSET = 300;
+
+const BlogNavbar = ({
+  title,
+  endPosition,
+}: {
+  title: string;
+  endPosition: number;
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [developerOpen, setDeveloperOpen] = useState(false);
@@ -24,12 +29,12 @@ const Navbar = () => {
 
   const changeBackground = () => {
     const currentScrollPos = window.pageYOffset;
-    if (window.scrollY > 60 && prevY < currentScrollPos) {
+    if (window.scrollY > SHOW_NAVBAR_OFFSET) {
       setScrolled(true);
-    } else if (window.scrollY > 60 && prevY > currentScrollPos) {
+    } else if (window.scrollY <= SHOW_NAVBAR_OFFSET) {
       setScrolled(false);
     }
-    setPrevY(currentScrollPos);
+    setPrevY(currentScrollPos * 1.1);
   };
 
   useEffect(() => {
@@ -132,7 +137,7 @@ const Navbar = () => {
       </Banner>
       <header
         className={classNames(styles.headerPadding, {
-          [styles.hideNavbar]: scrolled,
+          [styles.hideNavbar]: !scrolled,
           [styles.mobileHeader]: isOpen,
         })}
       >
@@ -148,6 +153,7 @@ const Navbar = () => {
                 {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
               </a>
             </Link>
+            <div className={styles.navPostTitle}>{title}</div>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
@@ -162,13 +168,13 @@ const Navbar = () => {
                     </Link>
                   </Typography>
                 </li>
-                {/* <li>
+                <li>
                   <Typography type="copy3" emphasis={true}>
                     <Link href={'/customers'}>
                       <a className={styles.menuItemLarge}>Customers</a>
                     </Link>
                   </Typography>
-                </li> */}
+                </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
                     <Link href={'/blog'}>
@@ -216,14 +222,6 @@ const Navbar = () => {
               styles.headerRight
             )}
           >
-            <a
-              href="https://app.highlight.run/"
-              className={styles.signInButton}
-            >
-              <Typography type="copy2" emphasis={true}>
-                Sign in
-              </Typography>
-            </a>
             <PrimaryButton
               href="https://app.highlight.run/?sign_up=1"
               className={styles.signUpButton}
@@ -234,9 +232,17 @@ const Navbar = () => {
             </PrimaryButton>
           </div>
         </div>
+        <div
+          className={styles.loadingBar}
+          style={{
+            width: `${
+              (1 - Math.max(0, endPosition - prevY) / endPosition) * 100
+            }%`,
+          }}
+        ></div>
       </header>
     </>
   );
 };
 
-export default Navbar;
+export default BlogNavbar;

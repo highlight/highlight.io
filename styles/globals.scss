@@ -165,21 +165,25 @@ h6 {
 
 h1 {
   font-size: 70px;
+  line-height: 80px !important;
   letter-spacing: -1.8px;
 }
 
 h2 {
   font-size: 58px;
+  line-height: 76px !important;
   letter-spacing: -1.5px;
 }
 
 h3 {
   font-size: var(--size-xxLarge);
+  line-height: 54px !important;
   letter-spacing: -1.6px;
 }
 
 h4 {
   font-size: 36px;
+  line-height: 48px !important;
   letter-spacing: -1.6px;
   font-weight: 600 !important;
 }
@@ -208,16 +212,19 @@ code {
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 40px;
+    line-height: 48px !important;
     letter-spacing: 0;
   }
 
   h2 {
     font-size: var(--size-xLarge);
+    line-height: 40px !important;
     letter-spacing: 0;
   }
 
   h3 {
     font-size: var(--size-large);
+    font-size: 32px !important;
     letter-spacing: 0;
   }
 

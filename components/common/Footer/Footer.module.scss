@@ -5,6 +5,10 @@
   display: grid;
   grid-template-columns: 300px repeat(4, 1fr);
   justify-content: space-between;
+
+  & > * {
+    min-width: 0px;
+  }
 }
 
 .footerTitle {
@@ -19,6 +23,10 @@
 
   li {
     padding: var(--size-xSmall) 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: normal;
 
     a {
       color: var(--text-primary);

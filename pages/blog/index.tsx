@@ -83,7 +83,6 @@ const Blog = ({
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount] = useState(Math.ceil(posts.length / ITEMS_PER_PAGE));
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setCurrentItems(
@@ -102,15 +101,10 @@ const Blog = ({
       </Head>
       <Navbar />
       <main>
-        <div
-          className={classNames(styles.loadingBar, {
-            [styles.loaded]: isLoading,
-          })}
-        ></div>
         <div className={styles.blogContainer}>
           <h4>Blog article of the week</h4>
           {currentItems.slice(0, 1).map((p: Post, i: number) => (
-            <BlogPost {...p} key={i} setIsLoading={setIsLoading} />
+            <BlogPost {...p} key={i} />
           ))}
           <hr />
         </div>
@@ -138,7 +132,7 @@ const Blog = ({
         </div>
         <div className={styles.blogContainer}>
           {currentItems.map((p: Post, i: number) => (
-            <BlogPostSmall {...p} key={i} setIsLoading={setIsLoading} />
+            <BlogPostSmall {...p} key={i} />
           ))}
           <Paginate
             currentPage={currentPage}
