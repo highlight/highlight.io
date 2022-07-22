@@ -224,7 +224,13 @@ code {
 
   h3 {
     font-size: var(--size-large);
-    font-size: 32px !important;
+    line-height: 40px !important;
+    letter-spacing: 0;
+  }
+
+  h4 {
+    font-size: 22px !important;
+    line-height: 36px !important;
     letter-spacing: 0;
   }
 
