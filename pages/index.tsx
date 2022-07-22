@@ -85,9 +85,10 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
 };
 
 const Home: NextPage = () => {
-  const section1 = useRef(null);
-  const section2 = useRef<HTMLInputElement>(null);
-  const section3 = useRef<HTMLInputElement>(null);
+  const section1 = useRef<HTMLDivElement>(null);
+  const section2 = useRef<HTMLDivElement>(null);
+  const section3 = useRef<HTMLDivElement>(null);
+  const [offsetPosition, setOffsetPosition] = useState(0);
   const [, setScrollYPosition] = useState(0);
 
   useEffect(() => {
@@ -95,6 +96,10 @@ const Home: NextPage = () => {
       setScrollYPosition(window.scrollY);
     });
   });
+
+  useEffect(() => {
+    setOffsetPosition(section1.current?.offsetHeight || 0);
+  }, [section1]);
 
   return (
     <div>
@@ -402,7 +407,14 @@ const Home: NextPage = () => {
                   </div>
                 </div>
               </div>
-              <div className={styles.featuresRightColumn}>
+              <div
+                className={styles.featuresRightColumn}
+                style={{
+                  margin: `calc(-1 * ${offsetPosition * 0.2}px) 0 calc(${
+                    offsetPosition * 0.2
+                  }px)`,
+                }}
+              >
                 <div
                   className={classNames({
                     [styles.hideImage]:
