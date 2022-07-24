@@ -27,7 +27,6 @@
 .anchorHead {
   max-width: 840px;
 }
-
 .tierWrapper {
   display: flex;
   flex-direction: row;
@@ -225,10 +224,16 @@
 }
 
 .desktopTierSection {
-  height: 244px;
+  height: 260px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 24px 20px 0px 20px;
+}
+
+.desktopTopTier {
+  display: flex;
+  flex-direction: column;
 }
 
 .featureDivider {
@@ -306,6 +311,78 @@
   text-align: center;
   margin: auto;
   padding: 0 var(--size-xxLarge);
+}
+
+@media screen and (max-width: 800px) {
+  .pricingTitle {
+    padding: 0;
+  }
+}
+
+.mobileBillingWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobileTierCarousel {
+  padding: 0px;
+  display: flex;
+  gap: 16px;
+}
+
+.carousel-div {
+  margin-right: 10px;
+}
+
+.billingCycleText {
+  margin: 0;
+}
+
+.mobileCarousel {
+  display: flex;
+  flex-direction: row;
+}
+
+.mobileTierName {
+  margin-bottom: 8px;
+}
+
+.mobileSessionCredits {
+  margin-bottom: 22px;
+}
+
+.mobileTier {
+  border: var(--color-white) 1px solid;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.mobilePricingButton {
+  width: 100%;
+}
+
+.mobileTierSectionWrapper {
+  width: 60vw;
+  height: 272px;
+  padding: 10px;
+}
+.mobileTierWrapper {
+  padding: 0px;
+}
+
+@media screen and (max-width: 400px) {
+  .mobileBillingWrapper {
+    flex-direction: column;
+  }
+  .billingCycleText {
+    margin-bottom: 14px;
+  }
 }
 
 .customerSection {

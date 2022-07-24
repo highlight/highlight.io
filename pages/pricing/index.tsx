@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { SVGProps } from 'react';
+import { SVGProps, useCallback, useEffect, useRef } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
 import PcPlayMedia from '../../public/images/pc-play-media.svg';
 import Chat from '../../public/images/pricing-comment.svg';
@@ -16,7 +16,12 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 import Collapsible from 'react-collapsible';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 type PricingDetails = {
   features: {
@@ -205,38 +210,40 @@ const TierSection = ({
         </div>
       )}
       <div className={styles.desktopTierSection}>
-        <Typography type="copy1" emphasis className={styles.dekstopTierName}>
-          {tierName}
-        </Typography>
-        {contactSales ? (
-          <div className={styles.desktopSessionCreditsEnterprise}>
-            <Typography type="copy3" emphasis>
-              {'Custom'}
-            </Typography>
-            <Typography type="copy3">{` session credits`}</Typography>
-          </div>
-        ) : (
-          <div className={styles.desktopSessionCredits}>
-            <Typography type="copy3" emphasis>
-              {numSessionCredits}
-            </Typography>
-            <Typography type="copy3">{` session credits`}</Typography>
-          </div>
-        )}
-        <div className={styles.desktopPrice}>
+        <div className={styles.desktopTopTier}>
+          <Typography type="copy1" emphasis className={styles.dekstopTierName}>
+            {tierName}
+          </Typography>
           {contactSales ? (
-            <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
-          ) : (
-            <>
-              <Typography type="copy3" emphasis className={styles.moneySign}>
-                {'$'}
+            <div className={styles.desktopSessionCreditsEnterprise}>
+              <Typography type="copy3" emphasis>
+                {'Custom'}
               </Typography>
-              <h3 className={styles.price}>{price}</h3>
-              <div className={styles.timeIndicator}>
-                <Typography type="copy3">{'/ mo'}</Typography>
-              </div>
-            </>
+              <Typography type="copy3">{` session credits`}</Typography>
+            </div>
+          ) : (
+            <div className={styles.desktopSessionCredits}>
+              <Typography type="copy3" emphasis>
+                {numSessionCredits}
+              </Typography>
+              <Typography type="copy3">{` session credits`}</Typography>
+            </div>
           )}
+          <div className={styles.desktopPrice}>
+            {contactSales ? (
+              <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
+            ) : (
+              <>
+                <Typography type="copy3" emphasis className={styles.moneySign}>
+                  {'$'}
+                </Typography>
+                <h3 className={styles.price}>{price}</h3>
+                <div className={styles.timeIndicator}>
+                  <Typography type="copy3">{'/ mo'}</Typography>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <PrimaryButton className={styles.pricingButton}>
           <Typography type="copy3" emphasis={true}>
@@ -272,6 +279,9 @@ const TierSection = ({
 
 const Pricing: NextPage = () => {
   const [monthly, setMonthly] = useState(true);
+  const is800 = useMediaQuery(800);
+  const is400 = useMediaQuery(400);
+  const isMobile = is800 || is400;
   return (
     <div>
       <Head>
@@ -294,108 +304,98 @@ const Pricing: NextPage = () => {
             </div>
           </div>
         </Section>
-        <Section className={styles.tierWrapper}>
-          <div className={styles.configColumn}>
-            <div className={styles.billingWidget}>
-              <Typography type="copy3" className={styles.billingCopy}>
+
+        {isMobile ? (
+          <Section className={styles.mobileTierWrapper}>
+            <div className={styles.mobileBillingWrapper}>
+              <Typography type="copy3" className={styles.billingCycleText}>
                 Select billing cycle
               </Typography>
-              <div className={styles.billingWidgetButtons}>
-                <PrimaryButton
-                  className={classNames(
-                    styles.billingButton,
-                    styles.leftButton,
-                    {
-                      [styles.selected]: monthly,
-                    }
-                  )}
-                  onClick={() => setMonthly(true)}
-                >
-                  Monthly
-                </PrimaryButton>
-                <PrimaryButton
-                  className={classNames(
-                    styles.billingButton,
-                    styles.rightButton,
-                    {
-                      [styles.selected]: !monthly,
-                    }
-                  )}
-                  onClick={() => setMonthly(false)}
-                >
-                  Annual
-                </PrimaryButton>
+              <BillingWidget
+                onMonthlyChange={(m) => setMonthly(m)}
+                monthly={monthly}
+              />
+            </div>
+            <MobileTierCarousel />
+          </Section>
+        ) : (
+          <Section className={styles.tierWrapper}>
+            <div className={styles.configColumn}>
+              <BillingWidget
+                onMonthlyChange={(m) => setMonthly(m)}
+                monthly={monthly}
+                mobile={is400 ? '400' : is800 ? '800' : 'desktop'}
+              />
+              <div className={styles.featureKeys}>
+                {Object.keys(BasicDetails).map((headingKey) => {
+                  return (
+                    <div key={headingKey} className={styles.featureSet}>
+                      <Typography
+                        className={styles.featureName}
+                        type="copy3"
+                        emphasis
+                      >
+                        {(BasicDetails as any)[headingKey].name}
+                      </Typography>
+                      {Object.keys((BasicDetails as any)[headingKey].items).map(
+                        (featureKey) => {
+                          return (
+                            <>
+                              <Typography
+                                type="copy3"
+                                key={featureKey}
+                                className={styles.featureKey}
+                              >
+                                {
+                                  (BasicDetails as any)[headingKey].items[
+                                    featureKey
+                                  ].name
+                                }
+                              </Typography>
+                              <hr className={styles.featureKeyDivider} />
+                            </>
+                          );
+                        }
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            <div className={styles.featureKeys}>
-              {Object.keys(BasicDetails).map((headingKey) => {
-                return (
-                  <div key={headingKey} className={styles.featureSet}>
-                    <Typography
-                      className={styles.featureName}
-                      type="copy3"
-                      emphasis
-                    >
-                      {(BasicDetails as any)[headingKey].name}
-                    </Typography>
-                    {Object.keys((BasicDetails as any)[headingKey].items).map(
-                      (featureKey) => {
-                        return (
-                          <>
-                            <Typography
-                              type="copy3"
-                              key={featureKey}
-                              className={styles.featureKey}
-                            >
-                              {
-                                (BasicDetails as any)[headingKey].items[
-                                  featureKey
-                                ].name
-                              }
-                            </Typography>
-                            <hr className={styles.featureKeyDivider} />
-                          </>
-                        );
-                      }
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <TierSection
-            mostPopular={false}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={false}
-            features={BasicDetails}
-          />
-          <TierSection
-            mostPopular={false}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={false}
-            features={BasicDetails}
-          />
-          <TierSection
-            mostPopular={true}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={false}
-            features={BasicDetails}
-          />
-          <TierSection
-            mostPopular={false}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={true}
-            features={BasicDetails}
-          />
-        </Section>
+            <TierSection
+              mostPopular={false}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={false}
+              features={BasicDetails}
+            />
+            <TierSection
+              mostPopular={false}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={false}
+              features={BasicDetails}
+            />
+            <TierSection
+              mostPopular={true}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={false}
+              features={BasicDetails}
+            />
+            <TierSection
+              mostPopular={false}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={true}
+              features={BasicDetails}
+            />
+          </Section>
+        )}
         <Section className={styles.customerSection}>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
@@ -410,87 +410,91 @@ const Pricing: NextPage = () => {
             <CompaniesReel />
           </div>
         </Section>
-        <Section className={styles.faqSection}>
-          <div className={styles.anchorFeature}>
-            <div className={styles.anchorHead}>
-              <h2>{`Frequently Asked Questions`}</h2>
+        {is800 ? (
+          <div>hello</div>
+        ) : (
+          <Section className={styles.faqSection}>
+            <div className={styles.anchorFeature}>
+              <div className={styles.anchorHead}>
+                <h2>{`Frequently Asked Questions`}</h2>
+              </div>
             </div>
-          </div>
-          <div>
-            <Question
-              questionText="What counts as a session?"
-              questionDescription={`
+            <div>
+              <Question
+                questionText="What counts as a session?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="How long does it take to set up Highlight?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="How long does it take to set up Highlight?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="Do I need a credit card to sign up?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="Do I need a credit card to sign up?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="How will you charge me?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="How will you charge me?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="Can I deploy Highlight on-premise?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="Can I deploy Highlight on-premise?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="Is Highlight secure? Where’s my data stored?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="Is Highlight secure? Where’s my data stored?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="Can I cancel at anytime?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="Can I cancel at anytime?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="Do you offer a discount for non-profits?"
-              questionDescription={`
+                icon={PcPlayMedia}
+              />
+              <Question
+                questionText="Do you offer a discount for non-profits?"
+                questionDescription={`
                   We love supporting non-profits and offer a 75% discount for the 
                   lifetime of the account. To activate the discount, create a 
                   workplace on either the Standard or Pro plan. Then reach out to 
                   support and mention the discount.`}
-              icon={PcPlayMedia}
-            />
-          </div>
-        </Section>
+                icon={PcPlayMedia}
+              />
+            </div>
+          </Section>
+        )}
         <CallToAction />
       </main>
       <Footer />
@@ -561,49 +565,172 @@ const Question = ({
   );
 };
 
-interface TierInfoObject {
-  tierName: string;
-  basePrice: number;
-  seatPrice: number;
-  buttonText: string;
-}
+const useMediaQuery = (width: number) => {
+  const [targetReached, setTargetReached] = useState(false);
 
-const TierInfo = ({
-  tierName,
-  basePrice,
-  seatPrice,
-  buttonText,
-}: TierInfoObject) => {
+  const updateTarget = useCallback((e) => {
+    if (e.matches) {
+      setTargetReached(true);
+    } else {
+      setTargetReached(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${width}px)`);
+    media.addEventListener('change', (e) => updateTarget(e));
+
+    // Check on mount (callback is not called until a change occurs)
+    if (media.matches) {
+      setTargetReached(true);
+    }
+
+    return () => media.removeEventListener('change', (e) => updateTarget(e));
+  }, [width, updateTarget]);
+
+  return targetReached;
+};
+
+const BillingWidget = ({
+  monthly,
+  onMonthlyChange,
+}: {
+  monthly: boolean;
+  onMonthlyChange: (monthly: boolean) => void;
+}) => {
+  return (
+    <>
+      <div className={styles.billingWidget}>
+        <div className={styles.billingWidgetButtons}>
+          <PrimaryButton
+            className={classNames(styles.billingButton, styles.leftButton, {
+              [styles.selected]: monthly,
+            })}
+            onClick={() => onMonthlyChange(true)}
+          >
+            Monthly
+          </PrimaryButton>
+          <PrimaryButton
+            className={classNames(styles.billingButton, styles.rightButton, {
+              [styles.selected]: !monthly,
+            })}
+            onClick={() => onMonthlyChange(false)}
+          >
+            Annual
+          </PrimaryButton>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const MobileTierCarousel = () => {
+  const settings = {
+    className: 'carousel-div',
+    centerMode: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    speed: 500,
+    arrows: false,
+    centerPadding: '0px',
+    dots: true,
+    appendDots: (dots: any) => {
+      return (
+        <div
+          style={{
+            backgroundColor: 'transparent',
+            borderRadius: '10px',
+            padding: '10px',
+          }}
+        >
+          <ul style={{ margin: 0, padding: 0 }}>{dots}</ul>
+        </div>
+      );
+    },
+  };
   return (
     <div>
-      <div className={styles.tierInfo}>
-        <span className={styles.tierName}>{tierName}</span>
-        <div className={styles.tierPrice}>
-          <span className={styles.priceNum}>{`$${basePrice + seatPrice}`}</span>
-          <span className={classNames(styles.priceDuration, styles.tableBody)}>
-            /month
-          </span>
+      <Slider {...settings}>
+        <MobileTierSection
+          mostPopular={false}
+          tierName="Basic"
+          numSessionCredits={500}
+          price={120}
+          contactSales={false}
+        />
+        <MobileTierSection
+          mostPopular={true}
+          tierName="Basic"
+          numSessionCredits={500}
+          price={120}
+          contactSales={false}
+        />
+        <MobileTierSection
+          mostPopular={false}
+          tierName="Basic"
+          numSessionCredits={500}
+          price={120}
+          contactSales={false}
+        />
+        <MobileTierSection
+          mostPopular={false}
+          tierName="Basic"
+          numSessionCredits={500}
+          price={120}
+          contactSales={true}
+        />
+      </Slider>
+    </div>
+  );
+};
+
+const MobileTierSection = ({
+  tierName,
+  numSessionCredits,
+  price,
+  contactSales,
+  mostPopular,
+}: {
+  mostPopular: boolean;
+  tierName: string;
+  numSessionCredits: number;
+  price: number;
+  contactSales: boolean;
+}) => {
+  return (
+    <div className={styles.mobileTierSectionWrapper}>
+      <div className={styles.mobileTier}>
+        <Typography type="copy1" emphasis className={styles.mobileTierName}>
+          {tierName}
+        </Typography>
+        <Typography type="copy3" className={styles.mobileSessionCredits}>
+          {numSessionCredits} session credits
+        </Typography>
+        <div className={styles.desktopPrice}>
+          {contactSales ? (
+            <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
+          ) : (
+            <>
+              <Typography type="copy3" emphasis className={styles.moneySign}>
+                {'$'}
+              </Typography>
+              <h3 className={styles.price}>{price}</h3>
+              <div className={styles.timeIndicator}>
+                <Typography type="copy3">{'/ mo'}</Typography>
+              </div>
+            </>
+          )}
         </div>
         <PrimaryButton
-          className={styles.startTrial}
-          href="https://app.highlight.run/?sign_up=1"
+          className={classNames(
+            styles.pricingButton,
+            styles.mobilePricingButton
+          )}
         >
-          {buttonText}
+          <Typography type="copy3" emphasis={true}>
+            {contactSales ? 'Contact Sales' : 'Start Free Trial'}
+          </Typography>
         </PrimaryButton>
-        <div className={styles.pricingBreakdown}>
-          <div className={styles.tierInfo}>
-            <span>Base Price</span>
-            <span className={styles.tableBody}>billed monthly</span>
-          </div>
-          <div>{`$${basePrice}`}</div>
-        </div>
-        <div className={styles.pricingBreakdown}>
-          <div className={styles.tierInfo}>
-            <span>Seat Pricing</span>
-            <span className={styles.tableBody}>billed monthly</span>
-          </div>
-          <div>{`$${seatPrice}`}</div>
-        </div>
       </div>
     </div>
   );
