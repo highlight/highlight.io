@@ -190,7 +190,6 @@ const Pricing: NextPage = () => {
               <BillingWidget
                 onMonthlyChange={(m) => setMonthly(m)}
                 monthly={monthly}
-                mobile={is400 ? '400' : is800 ? '800' : 'desktop'}
               />
               <div className={styles.featureKeys}>
                 {Object.keys(BasicDetails).map((headingKey) => {
