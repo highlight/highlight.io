@@ -13,24 +13,37 @@ import Dripos from '../../../public/images/companies/dripos.png';
 import Mage from '../../../public/images/companies/mage.png';
 import Secoda from '../../../public/images/companies/secoda.svg';
 import classNames from 'classnames';
+import { Typography } from '../../common/Typography/Typography';
+import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
 
 export const CompaniesReel = () => {
   return (
-    <div className={styles.customerReel}>
-      <div className={styles.companies}>
-        <Image src={Pipe} alt="" className={styles.scaleHeight} />
-        <Image src={Portal} alt="" className={styles.scaleHeight} />
-        <Image src={Dripos} alt="" className={styles.scaleHeight} />
-        <Image src={Knock} alt="" className={styles.scaleHeight} />
-        <Image src={Hightouch} alt="" className={styles.scaleHeight} />
-        <Image src={Secoda} alt="" className={styles.scaleHeight} />
-        <Image src={Impira} alt="" className={styles.scaleHeight} />
-        <Image src={Mage} alt="" className={styles.scaleHeight} />
-        <Image src={Airplane} alt="" className={styles.scaleHeight} />
-        <div
-          className={classNames(styles.tabletGraphic, styles.hideMobile)}
-        ></div>
-        <Image src={Basedash} alt="" />
+    <div className={styles.anchorFeature}>
+      <div className={styles.anchorHead}>
+        <h2>{`Our customers`}</h2>
+        <Typography type="copy2">
+          {`Highlight powers forward-thinking companies. `}
+          <PrimaryLink href="/customers">
+            Find out about our customers
+          </PrimaryLink>
+        </Typography>
+      </div>
+      <div className={styles.customerReel}>
+        <div className={styles.companies}>
+          <Image src={Pipe} alt="" className={styles.scaleHeight} />
+          <Image src={Portal} alt="" className={styles.scaleHeight} />
+          <Image src={Dripos} alt="" className={styles.scaleHeight} />
+          <Image src={Knock} alt="" className={styles.scaleHeight} />
+          <Image src={Hightouch} alt="" className={styles.scaleHeight} />
+          <Image src={Secoda} alt="" className={styles.scaleHeight} />
+          <Image src={Impira} alt="" className={styles.scaleHeight} />
+          <Image src={Mage} alt="" className={styles.scaleHeight} />
+          <Image src={Airplane} alt="" className={styles.scaleHeight} />
+          <div
+            className={classNames(styles.tabletGraphic, styles.hideMobile)}
+          ></div>
+          <Image src={Basedash} alt="" />
+        </div>
       </div>
     </div>
   );
