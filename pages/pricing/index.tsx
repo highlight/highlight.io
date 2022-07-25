@@ -19,170 +19,39 @@ import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
 
 import Collapsible from 'react-collapsible';
 import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import {
+  BasicDetails,
+  EnterpriseDetails,
+  EssentialsDetails,
+  PricingDetails,
+  StartupDetails,
+} from './plan_features';
+import {
+  BasicInfo,
+  EnterpriseInfo,
+  EssentialsInfo,
+  PricingInfo,
+  StartupInfo,
+} from './plan_info';
 
-type PricingDetails = {
-  features: {
-    name: 'Features';
-    key: 0;
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-  teamManagement: {
-    key: 1;
-    name: 'Team Management';
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-  support: {
-    key: 2;
-    name: 'Support';
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-};
-const BasicDetails: PricingDetails = {
-  features: {
-    name: 'Features',
-    key: 0,
-    items: {
-      publicSessionSharing: {
-        key: 0,
-        name: 'Public session sharing',
-        value: true,
-      },
-      customDataExport: {
-        key: 1,
-        name: 'Custom data export',
-        value: false,
-      },
-      enhancedUserProperties: {
-        key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: false,
-      },
-    },
-  },
-  teamManagement: {
-    name: 'Team Management',
-    key: 1,
-    items: {
-      publicSessionSharing: {
-        key: 0,
-        name: 'Public session sharing',
-        value: true,
-      },
-      customDataExport: {
-        key: 1,
-        name: 'Custom data export',
-        value: true,
-      },
-      enhancedUserProperties: {
-        key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: true,
-      },
-    },
-  },
-  support: {
-    name: 'Support',
-    key: 2,
-    items: {
-      publicSessionSharing: {
-        key: 0,
-        name: 'Public session sharing',
-        value: true,
-      },
-      customDataExport: {
-        key: 1,
-        name: 'Custom data export',
-        value: true,
-      },
-      enhancedUserProperties: {
-        key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: true,
-      },
-    },
-  },
-};
+// Plans and info used for both mobile and desktop views.
+const planDetails: Array<PricingDetails> = [
+  BasicDetails,
+  EssentialsDetails,
+  StartupDetails,
+  EnterpriseDetails,
+];
+const planInfo: Array<PricingInfo> = [
+  BasicInfo,
+  EssentialsInfo,
+  StartupInfo,
+  EnterpriseInfo,
+];
+
 const TierSection = ({
   tierName,
   numSessionCredits,
@@ -396,105 +265,90 @@ const Pricing: NextPage = () => {
             />
           </Section>
         )}
-        <Section className={styles.customerSection}>
+        <Section>
+          <CompaniesReel />
+        </Section>
+        <Section className={styles.faqSection}>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <h2>{`Our customers`}</h2>
-              <Typography type="copy2">
-                {`Highlight powers forward-thinking companies. `}
-                <PrimaryLink href="/customers">
-                  Find out about our customers
-                </PrimaryLink>
-              </Typography>
+              <h2>{`Frequently asked questions`}</h2>
             </div>
-            <CompaniesReel />
+          </div>
+          <div>
+            <Question
+              questionText="What counts as a session?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="How long does it take to set up Highlight?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Do I need a credit card to sign up?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="How will you charge me?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Can I deploy Highlight on-premise?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Is Highlight secure? Where’s my data stored?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Can I cancel at anytime?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
+            <Question
+              questionText="Do you offer a discount for non-profits?"
+              questionDescription={`
+                  We love supporting non-profits and offer a 75% discount for the 
+                  lifetime of the account. To activate the discount, create a 
+                  workplace on either the Standard or Pro plan. Then reach out to 
+                  support and mention the discount.`}
+              icon={PcPlayMedia}
+            />
           </div>
         </Section>
-        {is800 ? (
-          <div>hello</div>
-        ) : (
-          <Section className={styles.faqSection}>
-            <div className={styles.anchorFeature}>
-              <div className={styles.anchorHead}>
-                <h2>{`Frequently Asked Questions`}</h2>
-              </div>
-            </div>
-            <div>
-              <Question
-                questionText="What counts as a session?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="How long does it take to set up Highlight?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="Do I need a credit card to sign up?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="How will you charge me?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="Can I deploy Highlight on-premise?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="Is Highlight secure? Where’s my data stored?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="Can I cancel at anytime?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-              <Question
-                questionText="Do you offer a discount for non-profits?"
-                questionDescription={`
-                  We love supporting non-profits and offer a 75% discount for the 
-                  lifetime of the account. To activate the discount, create a 
-                  workplace on either the Standard or Pro plan. Then reach out to 
-                  support and mention the discount.`}
-                icon={PcPlayMedia}
-              />
-            </div>
-          </Section>
-        )}
         <CallToAction />
       </main>
       <Footer />
@@ -625,62 +479,97 @@ const BillingWidget = ({
 };
 
 const MobileTierCarousel = () => {
-  const settings = {
-    className: 'carousel-div',
-    centerMode: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    speed: 500,
-    arrows: false,
-    centerPadding: '0px',
-    dots: true,
-    appendDots: (dots: any) => {
-      return (
-        <div
-          style={{
-            backgroundColor: 'transparent',
-            borderRadius: '10px',
-            padding: '10px',
-          }}
-        >
-          <ul style={{ margin: 0, padding: 0 }}>{dots}</ul>
-        </div>
-      );
-    },
-  };
+  const [planIndex, setPlanIndex] = useState(2);
+  const [viewportRef, embla] = useEmblaCarousel({
+    align: 'center',
+    skipSnaps: true,
+    startIndex: planIndex,
+  });
+
+  useEffect(() => {
+    if (embla && planIndex) {
+      embla?.scrollTo(planIndex);
+      embla.on('select', (e) => setPlanIndex(embla.selectedScrollSnap())); // Add event listener
+    }
+  }, [embla, planIndex]);
+
   return (
-    <div>
-      <Slider {...settings}>
-        <MobileTierSection
-          mostPopular={false}
-          tierName="Basic"
-          numSessionCredits={500}
-          price={120}
-          contactSales={false}
-        />
-        <MobileTierSection
-          mostPopular={true}
-          tierName="Basic"
-          numSessionCredits={500}
-          price={120}
-          contactSales={false}
-        />
-        <MobileTierSection
-          mostPopular={false}
-          tierName="Basic"
-          numSessionCredits={500}
-          price={120}
-          contactSales={false}
-        />
-        <MobileTierSection
-          mostPopular={false}
-          tierName="Basic"
-          numSessionCredits={500}
-          price={120}
-          contactSales={true}
-        />
-      </Slider>
-    </div>
+    <>
+      <div className="embla">
+        <div className="embla__container" ref={viewportRef}>
+          <div className="embla__container">
+            {planInfo.map((p: PricingInfo, i: number) => (
+              <MobileTierSection
+                selected={i == planIndex}
+                key={i}
+                mostPopular={p.mostPopular}
+                tierName={p.tierName}
+                numSessionCredits={p.numSessionCredits}
+                price={p.price}
+                contactSales={p.contactSales}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className={styles.mobileTierDots}>
+        {planInfo.map((p: PricingInfo, i: number) => (
+          <button
+            key={i}
+            onClick={() => {
+              embla?.scrollTo(i, false);
+            }}
+            className={classNames(styles.mobileTierDot, {
+              [styles.dotSelected]: i == planIndex,
+            })}
+          ></button>
+        ))}
+      </div>
+      <div className={styles.mobileFeaturesWrapper}>
+        <Typography type="copy3" emphasis>
+          {Object.keys(planDetails[planIndex]).map((headingKey) => {
+            let currentFeatureSection = (planDetails[planIndex] as any)[
+              headingKey
+            ];
+            return (
+              <div className={styles.mobileFeaturesSection} key={headingKey}>
+                <div className={styles.mobileFeatureHeader}>
+                  <Typography type="copy3" emphasis>
+                    {currentFeatureSection.name}
+                  </Typography>
+                </div>
+                {Object.keys(currentFeatureSection.items).map(
+                  (featureKey: any, i: number) => {
+                    let currentFeature =
+                      currentFeatureSection.items[featureKey];
+                    return (
+                      <div key={i} className={styles.mobileFeatureRow}>
+                        <div className={styles.mobileFeatureInner}>
+                          <Typography
+                            type="copy3"
+                            className={styles.mobileFeatureName}
+                          >
+                            {currentFeature.name}
+                          </Typography>
+                          <Typography type="copy3">
+                            {currentFeature.value == true ? (
+                              <Image src={CheckMark} alt="checkmark"></Image>
+                            ) : (
+                              <div>-</div>
+                            )}
+                          </Typography>
+                        </div>
+                        <hr className={styles.mobileFeatureDivider} />
+                      </div>
+                    );
+                  }
+                )}
+              </div>
+            );
+          })}
+        </Typography>
+      </div>
+    </>
   );
 };
 
@@ -690,36 +579,53 @@ const MobileTierSection = ({
   price,
   contactSales,
   mostPopular,
+  selected,
 }: {
   mostPopular: boolean;
   tierName: string;
   numSessionCredits: number;
   price: number;
   contactSales: boolean;
+  selected: boolean;
 }) => {
   return (
-    <div className={styles.mobileTierSectionWrapper}>
-      <div className={styles.mobileTier}>
-        <Typography type="copy1" emphasis className={styles.mobileTierName}>
-          {tierName}
-        </Typography>
-        <Typography type="copy3" className={styles.mobileSessionCredits}>
-          {numSessionCredits} session credits
-        </Typography>
-        <div className={styles.desktopPrice}>
-          {contactSales ? (
-            <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
-          ) : (
-            <>
-              <Typography type="copy3" emphasis className={styles.moneySign}>
-                {'$'}
-              </Typography>
-              <h3 className={styles.price}>{price}</h3>
-              <div className={styles.timeIndicator}>
-                <Typography type="copy3">{'/ mo'}</Typography>
-              </div>
-            </>
-          )}
+    <div
+      className={classNames(styles.mobileTierSectionWrapper, 'embla__slide', {
+        [styles.mobileNotSelectedPlan]: !selected,
+      })}
+    >
+      {mostPopular && (
+        <div className={styles.mostPopularMobile}>
+          <Typography type="outline">Most Popular</Typography>
+        </div>
+      )}
+      <div
+        className={classNames(styles.mobileTier, {
+          [styles.mostPopularTierColumnMobile]: mostPopular,
+        })}
+      >
+        <div className={styles.mobileTierTop}>
+          <Typography type="copy1" emphasis className={styles.mobileTierName}>
+            {tierName}
+          </Typography>
+          <Typography type="copy3" className={styles.mobileSessionCredits}>
+            {numSessionCredits} session credits
+          </Typography>
+          <div className={styles.desktopPrice}>
+            {contactSales ? (
+              <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
+            ) : (
+              <>
+                <Typography type="copy3" emphasis className={styles.moneySign}>
+                  {'$'}
+                </Typography>
+                <h3 className={styles.price}>{price}</h3>
+                <div className={styles.timeIndicator}>
+                  <Typography type="copy3">{'/ mo'}</Typography>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <PrimaryButton
           className={classNames(
