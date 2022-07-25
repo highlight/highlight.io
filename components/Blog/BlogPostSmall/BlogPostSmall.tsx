@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Post } from '../BlogPost/BlogPost';
 import { Typography } from '../../common/Typography/Typography';
-import { Dispatch, SetStateAction } from 'react';
 
 export const BlogPostSmall = ({
   slug,

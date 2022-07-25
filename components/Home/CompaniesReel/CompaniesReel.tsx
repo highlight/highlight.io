@@ -22,15 +22,25 @@ export const CompaniesReel = () => {
         <Image src={Portal} alt="" className={styles.scaleHeight} />
         <Image src={Dripos} alt="" className={styles.scaleHeight} />
         <Image src={Knock} alt="" className={styles.scaleHeight} />
-        <Image src={Hightouch} alt="" className={styles.scaleHeight} />
-        <Image src={Secoda} alt="" className={styles.scaleHeight} />
+        <Image
+          src={Hightouch}
+          alt=""
+          className={styles.scaleHeight}
+          style={{ transform: 'scale(1.4)' }}
+        />
+        <Image src={Basedash} alt="" />
         <Image src={Impira} alt="" className={styles.scaleHeight} />
         <Image src={Mage} alt="" className={styles.scaleHeight} />
         <Image src={Airplane} alt="" className={styles.scaleHeight} />
         <div
           className={classNames(styles.tabletGraphic, styles.hideMobile)}
         ></div>
-        <Image src={Basedash} alt="" />
+        <Image
+          src={Secoda}
+          alt=""
+          className={styles.scaleHeight}
+          style={{ transform: 'scale(1.4)' }}
+        />
       </div>
     </div>
   );

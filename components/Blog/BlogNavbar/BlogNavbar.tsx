@@ -34,7 +34,7 @@ const BlogNavbar = ({
     } else if (window.scrollY <= SHOW_NAVBAR_OFFSET) {
       setScrolled(false);
     }
-    setPrevY(currentScrollPos * 1.1);
+    setPrevY(currentScrollPos * 1.3);
   };
 
   useEffect(() => {

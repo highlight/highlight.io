@@ -20,7 +20,7 @@
 }
 
 .mobileOnly {
-  display: none;
+  display: none !important;
 }
 
 .hideImage {
@@ -129,8 +129,10 @@
   width: 100%;
   overflow: visible;
   position: relative;
-  display: flex;
   padding: 0 var(--size-xxLarge);
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  gap: var(--size-medium);
 }
 
 .featuresSection {
@@ -141,14 +143,14 @@
 }
 
 .featuresLeftColumn {
-  width: 50%;
-  padding: 0 var(--size-xxLarge) 0 0;
+  grid-column: col-start / span 5;
 }
 
 .featuresRightColumn {
+  grid-column: col-start 7 / -1;
+  grid-row: 1;
   position: sticky;
   top: 0;
-  width: 50%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -166,6 +168,7 @@
 
   &.codeSection {
     gap: var(--size-xLarge);
+    grid-column: col-start 8 / -1;
 
     .sectionSubtitle {
       margin: 0;
@@ -230,6 +233,11 @@
     object-fit: cover;
     border-radius: var(--border-radius);
   }
+}
+
+.gridSectionImageLeft {
+  margin: var(--size-xLarge) 0;
+  grid-column: col-start / span 6;
 }
 
 .imageInner {
@@ -332,7 +340,7 @@
 
     .thumbnail {
       transition: all 0.4s ease-in-out;
-      opacity: 1;
+      opacity: 0.2;
     }
 
     &:hover {
@@ -373,7 +381,7 @@
         right: 20%;
         bottom: -5%;
         transition: all 0.4s ease-in-out;
-        opacity: 0;
+        opacity: 1;
       }
 
       .playCard {
@@ -381,7 +389,7 @@
         position: absolute;
         width: 300px;
         top: 140px;
-        opacity: 0;
+        opacity: 1;
         transition: all 0.4s ease-in-out;
       }
     }
@@ -442,8 +450,6 @@
   }
 }
 
-$animationSpeed: 40s;
-
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -460,13 +466,10 @@ $animationSpeed: 40s;
   width: 100%;
 
   .slideTrack {
-    animation: scroll $animationSpeed linear infinite;
+    transition: all 0.1s linear;
     display: flex;
     width: calc(532px * 14);
-
-    &:hover {
-      animation-play-state: paused;
-    }
+    margin-left: calc(-532px * 2);
   }
 }
 
@@ -517,6 +520,7 @@ $animationSpeed: 40s;
     top: calc(-1 * var(--size-xLarge));
     left: 0;
     width: 100%;
+    color: var(--color-selected-light);
   }
 }
 
@@ -593,6 +597,24 @@ $animationSpeed: 40s;
 
 .snippetContent {
   padding: var(--size-xxLarge) 0;
+}
+
+.simpleCallToActionBackground {
+  margin: var(--size-xLarge) 0 !important;
+  background-color: transparent !important;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-divider-on-dark);
+  padding: 40px 24px 48px;
+
+  h3 {
+    margin-bottom: var(--size-xLarge) !important;
+  }
+
+  .ctaContainer {
+    max-width: 600px;
+    margin: auto !important;
+    padding: 0 !important;
+  }
 }
 
 .callToActionBackground {
@@ -777,6 +799,10 @@ $animationSpeed: 40s;
     }
   }
 
+  .gridSectionImageLeft {
+    grid-column: col-start / span 12;
+  }
+
   .sectionImageRight,
   .sectionImageLeft {
     padding: 0 var(--size-large);
@@ -803,6 +829,10 @@ $animationSpeed: 40s;
 
   .sectionText {
     width: 100%;
+
+    &.codeSection {
+      grid-column: col-start / span 12;
+    }
 
     h3,
     .sectionSubtitle {
@@ -862,7 +892,7 @@ $animationSpeed: 40s;
     display: none;
   }
   .mobileOnly {
-    display: flex;
+    display: flex !important;
   }
 
   .sectionImageLeft {
@@ -903,6 +933,10 @@ $animationSpeed: 40s;
   .sectionText {
     min-width: auto;
     padding: 0;
+
+    &.codeSection {
+      grid-column: col-start / span 12;
+    }
   }
 
   .obfuscation {
@@ -968,7 +1002,6 @@ $animationSpeed: 40s;
   }
 
   .slideTrack {
-    animation: scroll $animationSpeed linear infinite !important;
     display: flex !important;
     width: calc(332px * 14) !important;
 
@@ -993,5 +1026,17 @@ $animationSpeed: 40s;
 
   .snippetDropdownContainer {
     display: block;
+  }
+
+  .simpleCallToActionBackground {
+    padding: 40px 24px 48px;
+
+    h3 {
+      margin-bottom: var(--size-large) !important;
+    }
+
+    .ctaContainer {
+      padding: 0 !important;
+    }
   }
 }

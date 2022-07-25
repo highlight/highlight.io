@@ -15,13 +15,15 @@ import { CodeBlock, dracula } from 'react-code-blocks';
 import { Typography } from '../../../components/common/Typography/Typography';
 import { useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../../components/Blog/BlogNavbar/BlogNavbar';
+import { SimpleCallToAction } from '../../../components/common/CallToAction/SimpleCallToAction';
+import { BlogPostSmall } from '../../../components/Blog/BlogPostSmall/BlogPostSmall';
+import { BlogPost } from '../../../components/Blog/BlogPost/BlogPost';
+import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
     <div className={styles.postHeader}>
-      <Typography type="copy1" emphasis>
-        {children?.props?.content[0].text}
-      </Typography>
+      <h5>{children?.props?.content[0].text}</h5>
     </div>
   );
 };
@@ -69,9 +71,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const POSTS_QUERY = gql`
 query GetPosts() {
     posts(orderBy: publishedAt_DESC) {
-      slug
-      title
-      description
+        slug
+        title
+        image {
+          url
+        }
+        richcontent {
+          markdown
+        }
+        publishedAt
+        tags
     }
   }
 `;
@@ -90,21 +99,47 @@ query GetPosts() {
   return {
     props: {
       post: data.post,
-      next: currentPostIndex > 0 ? posts[currentPostIndex - 1] : {},
-      prev:
-        currentPostIndex < posts.length - 1 ? posts[currentPostIndex + 1] : {},
+      suggestedPosts: posts.slice(
+        currentPostIndex + 1,
+        Math.min(currentPostIndex + 4, posts.length - 1)
+      ),
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
 };
 
-const PostPage = ({ post }: { post: any; prev: any; next: any }) => {
+const findPostMidpoint = (raw: any[]) => {
+  for (let i = 0; i < raw.length; i++) {
+    const r = raw[i];
+    if (i > raw.length / 2 - 1) {
+      if (r.type === 'paragraph') {
+        return i + 1;
+      }
+    }
+  }
+  return Math.floor(raw.length / 2);
+};
+
+const PostPage = ({
+  post,
+  suggestedPosts,
+}: {
+  post: any;
+  suggestedPosts: any[];
+}) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const [endPosition, setEndPosition] = useState(0);
+  const [postRaw, setPostRaw] = useState<any[]>(post.richcontent.raw.children);
 
   useEffect(() => {
     setEndPosition(blogBody.current?.offsetHeight || 0);
   }, [blogBody]);
+
+  useEffect(() => {
+    setPostRaw(post.richcontent.raw.children);
+  }, [setPostRaw, post]);
+
+  console.log(suggestedPosts);
 
   return (
     <>
@@ -113,7 +148,7 @@ const PostPage = ({ post }: { post: any; prev: any; next: any }) => {
         <meta name="description" content="Stop debugging in the dark. " />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
-      <main ref={blogBody}>
+      <main ref={blogBody} className={styles.mainBlogPadding}>
         <Section>
           <div className={homeStyles.anchorTitle}>
             <Typography type="copy2">
@@ -163,7 +198,30 @@ const PostPage = ({ post }: { post: any; prev: any; next: any }) => {
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
             <RichText
-              content={post.richcontent.raw}
+              content={{
+                children: postRaw.slice(0, findPostMidpoint(postRaw)),
+              }}
+              renderers={{
+                code_block: ({ children }: { children: any }) => {
+                  return (
+                    <div className={styles.codeBlock}>
+                      <CodeBlock
+                        language={'js'}
+                        text={children?.props?.content[0].text}
+                        showLineNumbers={false}
+                        theme={dracula}
+                      />
+                    </div>
+                  );
+                },
+                h1: blogTypographyRenderer,
+                h2: blogTypographyRenderer,
+                h3: blogTypographyRenderer,
+              }}
+            />
+            <SimpleCallToAction />
+            <RichText
+              content={{ children: postRaw.slice(findPostMidpoint(postRaw)) }}
               renderers={{
                 code_block: ({ children }: { children: any }) => {
                   return (
@@ -184,8 +242,19 @@ const PostPage = ({ post }: { post: any; prev: any; next: any }) => {
             />
           </div>
         </Section>
-        <CallToAction />
+        <Section>
+          <div className={styles.postBodyDivider}></div>
+        </Section>
+        <Section>
+          <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
+            <h3>Other articles you may like</h3>
+            {suggestedPosts.map((p, i) => (
+              <SuggestedBlogPost {...p} key={i} />
+            ))}
+          </div>
+        </Section>
       </main>
+      <CallToAction />
       <Footer />
     </>
   );

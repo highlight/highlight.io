@@ -55,15 +55,29 @@ export const FeatureItem = ({
   );
 };
 
-export const CustomerReview = ({ companyLogo, text, author }: Review) => {
+export const CustomerReview = ({
+  companyLogo,
+  text,
+  author,
+  scale,
+}: Review) => {
   return (
     <div className={styles.reviewCard}>
-      <div className={styles.companyLogo}>
+      <div
+        className={styles.companyLogo}
+        style={{
+          width: `${120 * (scale || 1)}px`,
+          objectFit: 'contain',
+        }}
+      >
         <Image
           src={companyLogo}
           alt={author.name}
           layout={'fill'}
           objectFit={'contain'}
+          style={{
+            transform: `scale(${scale || 1})`,
+          }}
         />
       </div>
       <div className={styles.reviewText}>
@@ -76,8 +90,10 @@ export const CustomerReview = ({ companyLogo, text, author }: Review) => {
           <Image src={author.image} alt={author.name} />
         </div>
         <div>
-          <b>{author.name}</b>
-          {`, ${author.role}`}
+          <Typography type="copy2" emphasis>
+            {author.name}
+          </Typography>
+          <Typography type="copy2">{`, ${author.role}`}</Typography>
         </div>
       </div>
     </div>
@@ -88,8 +104,13 @@ const Home: NextPage = () => {
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
   const section3 = useRef<HTMLDivElement>(null);
+  const startScroll = useRef<HTMLDivElement>(null);
+  const endScroll = useRef<HTMLDivElement>(null);
   const [offsetPosition, setOffsetPosition] = useState(0);
-  const [, setScrollYPosition] = useState(0);
+  const [scrollYPosition, setScrollYPosition] = useState(0);
+  const [startYPosition, setStartYPosition] = useState(0);
+  const [endYPosition, setEndYPosition] = useState(0);
+  const [scrollPercentage, setScrollPercentage] = useState(0);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -99,7 +120,19 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setOffsetPosition(section1.current?.offsetHeight || 0);
-  }, [section1]);
+    setStartYPosition(startScroll.current?.offsetTop || 0);
+    setEndYPosition(endScroll.current?.offsetTop || 0);
+    setScrollPercentage(
+      (scrollYPosition - startYPosition) / (endYPosition - startYPosition)
+    );
+  }, [
+    section1,
+    startScroll,
+    endScroll,
+    scrollYPosition,
+    startYPosition,
+    endYPosition,
+  ]);
 
   return (
     <div>
@@ -233,8 +266,9 @@ const Home: NextPage = () => {
                       on bugs, everyone is kept in the loop.
                     </h3>
                     <Collapse
+                      accordion
                       destroyInactivePanel={true}
-                      defaultActiveKey={['1', '2']}
+                      defaultActiveKey={['1']}
                       className={styles.sectionCollapse}
                     >
                       <Panel
@@ -293,8 +327,9 @@ const Home: NextPage = () => {
                       for a bug by session or specific property.
                     </h3>
                     <Collapse
+                      accordion
                       destroyInactivePanel={true}
-                      defaultActiveKey={['1', '2']}
+                      defaultActiveKey={['1']}
                       className={styles.sectionCollapse}
                     >
                       <Panel
@@ -357,8 +392,9 @@ const Home: NextPage = () => {
                       </span>
                     </h3>
                     <Collapse
+                      accordion
                       destroyInactivePanel={true}
-                      defaultActiveKey={['1', '2']}
+                      defaultActiveKey={['1']}
                       className={styles.sectionCollapse}
                     >
                       <Panel
@@ -484,8 +520,9 @@ const Home: NextPage = () => {
                 bugs, everyone is kept in the loop.
               </h3>
               <Collapse
+                accordion
                 destroyInactivePanel={true}
-                defaultActiveKey={['1', '2']}
+                defaultActiveKey={['1']}
                 className={styles.sectionCollapse}
               >
                 <Panel
@@ -552,8 +589,9 @@ const Home: NextPage = () => {
                 for a bug by session or specific property.
               </h3>
               <Collapse
+                accordion
                 destroyInactivePanel={true}
-                defaultActiveKey={['1', '2']}
+                defaultActiveKey={['1']}
                 className={styles.sectionCollapse}
               >
                 <Panel
@@ -625,8 +663,9 @@ const Home: NextPage = () => {
                 </span>
               </h3>
               <Collapse
+                accordion
                 destroyInactivePanel={true}
-                defaultActiveKey={['1', '2']}
+                defaultActiveKey={['1']}
                 className={styles.sectionCollapse}
               >
                 <Panel
@@ -681,6 +720,7 @@ const Home: NextPage = () => {
           </Section>
         </div>
         <SnippetTab />
+        <div ref={startScroll}></div>
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
@@ -708,20 +748,26 @@ const Home: NextPage = () => {
           </div>
         </Section>
         <div className={styles.slider}>
-          <div className={styles.slideTrack}>
+          <div
+            className={styles.slideTrack}
+            style={{
+              transform: `translateX(calc(-532px * 1 * ${scrollPercentage}))`,
+            }}
+          >
             {[...REVIEWS, ...REVIEWS].map((review, i) => (
               <CustomerReview
                 key={i}
                 companyLogo={review.companyLogo}
                 text={review.text}
                 author={review.author}
+                scale={review.scale}
               />
             ))}
           </div>
         </div>
         <CallToAction />
       </main>
-
+      <div ref={endScroll}></div>
       <Footer />
     </div>
   );

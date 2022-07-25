@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import styles from '../../Home/Home.module.scss';
-import VideoThumbnail from '../../../public/images/thumbnail.png';
+import VideoThumbnail from '../../../public/images/thumbnail.svg';
 import Jay from '../../../public/images/jay.png';
 import PlayButton from '../../../public/images/playButton.svg';
 import classNames from 'classnames';

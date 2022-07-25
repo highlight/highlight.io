@@ -29,7 +29,7 @@ const SetupDescription = (
       <Typography type="outline">effortless setup</Typography>
     </div>
     <h2>
-      Start using Highlight{' '}
+      Use Highlight{' '}
       <span className={styles.highlightedText}>within minutes</span>
     </h2>
     <Typography type="copy2">
@@ -48,8 +48,8 @@ const SNIPPET_TABS = [
     image: ReactImage,
     key: 'react',
     content: (
-      <Section noYTopPadding={true}>
-        <div className={styles.sectionImageLeft}>
+      <Section noYTopPadding={true} grid>
+        <div className={styles.gridSectionImageLeft}>
           <CodeSnippet
             HeaderImage={ReactImage}
             canCopy={true}
@@ -77,8 +77,8 @@ ReactDOM.render(
     image: VueImage,
     key: 'vue',
     content: (
-      <Section noYTopPadding={true}>
-        <div className={styles.sectionImageLeft}>
+      <Section noYTopPadding={true} grid>
+        <div className={styles.gridSectionImageLeft}>
           <CodeSnippet
             HeaderImage={VueImage}
             canCopy={true}
@@ -103,8 +103,8 @@ createApp(App).mount('#app');`}
     image: NextjsImage,
     key: 'nextjs',
     content: (
-      <Section noYTopPadding={true}>
-        <div className={styles.sectionImageLeft}>
+      <Section noYTopPadding={true} grid>
+        <div className={styles.gridSectionImageLeft}>
           <CodeSnippet
             HeaderImage={NextjsImage}
             canCopy={true}
@@ -128,8 +128,8 @@ export default MyApp`}
     image: htmlImage,
     key: 'html',
     content: (
-      <Section noYTopPadding={true}>
-        <div className={styles.sectionImageLeft}>
+      <Section noYTopPadding={true} grid>
+        <div className={styles.gridSectionImageLeft}>
           <div className={styles.imageInner}>
             <Image src={DarkPlaceholder} alt="" />
           </div>
@@ -143,8 +143,8 @@ export default MyApp`}
     key: 'go',
     beta: true,
     content: (
-      <Section noYTopPadding={true}>
-        <div className={styles.sectionImageLeft}>
+      <Section noYTopPadding={true} grid>
+        <div className={styles.gridSectionImageLeft}>
           <CodeSnippet
             HeaderImage={GoImage}
             canCopy={true}
@@ -173,8 +173,8 @@ func main() {
     key: 'node',
     beta: true,
     content: (
-      <Section noYTopPadding={true}>
-        <div className={styles.sectionImageLeft}>
+      <Section noYTopPadding={true} grid>
+        <div className={styles.gridSectionImageLeft}>
           <CodeSnippet
             HeaderImage={NodeImage}
             canCopy={true}
@@ -199,6 +199,7 @@ app.use(highlightHandler);`}
 export const SnippetTab = () => {
   const tabs = SNIPPET_TABS;
   const [currentTabKey, setCurrentTabKey] = useState(tabs[0]?.key);
+  const [currentHoverKey, setCurrentHoverKey] = useState<String>('');
   const [currentTabElement, setCurrentTabElement] = useState(tabs[0]);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -220,6 +221,8 @@ export const SnippetTab = () => {
               [styles.tabSelected]: tab.key === currentTabKey,
             })}
             onClick={() => setCurrentTabKey(tab.key)}
+            onMouseEnter={() => setCurrentHoverKey(tab.key)}
+            onMouseLeave={() => setCurrentHoverKey('')}
           >
             {tab.beta && (
               <div className={styles.snippetBeta}>
@@ -227,7 +230,14 @@ export const SnippetTab = () => {
               </div>
             )}
             <tab.image
-              color={tab.key === currentTabKey ? '#EBFF5E' : '#72E4FC'}
+              color={
+                tab.key === currentTabKey
+                  ? '#EBFF5E'
+                  : tab.key === currentHoverKey
+                  ? '#23B6E2'
+                  : '#72E4FC'
+              }
+              secondaryColor={tab.key === currentTabKey ? '#0d0225' : undefined}
             />
           </div>
         ))}
@@ -239,7 +249,10 @@ export const SnippetTab = () => {
             onClick={() => setShowDropdown(!showDropdown)}
           >
             <div className={styles.snippetDropdownValue}>
-              <currentTabElement.image color={'#72E4FC'} />
+              <currentTabElement.image
+                color={'#72E4FC'}
+                secondaryColor={'#0d0225'}
+              />
             </div>
             <AiOutlineDown />
           </div>
@@ -253,7 +266,7 @@ export const SnippetTab = () => {
                     setCurrentTabKey(tab.key);
                   }}
                 >
-                  <tab.image color={'#72E4FC'} />
+                  <tab.image color={'#72E4FC'} secondaryColor={'#0d0225'} />
                 </div>
               ))}
             </div>

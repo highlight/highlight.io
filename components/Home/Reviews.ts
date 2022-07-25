@@ -18,6 +18,7 @@ import AirplaneAvatar from '../../public/images/avatars/airplane.jpg';
 export interface Review {
   companyLogo: StaticImageData;
   text: string;
+  scale?: number;
   author: {
     image: StaticImageData;
     name: string;
@@ -28,6 +29,7 @@ export interface Review {
 export const REVIEWS: Review[] = [
   {
     companyLogo: Basedash,
+    scale: 1.2,
     text: `Highlight helps us catch bugs that would otherwise go undetected and makes it easy to replicate and debug them.`,
     author: {
       image: BasedashAvatar,
@@ -37,6 +39,7 @@ export const REVIEWS: Review[] = [
   },
   {
     companyLogo: Impira,
+    scale: 1,
     text: `Before Highlight, I was flying blind, but now I can see exactly where users are succeeding, failing, and running into issues.`,
     author: {
       image: ImpiraAvatar,
@@ -46,6 +49,7 @@ export const REVIEWS: Review[] = [
   },
   {
     companyLogo: Mage,
+    scale: 1,
     text: `Highlight weaves together the incredible, varied, and complex interactions of our users into something understandable and actionable.`,
     author: {
       image: MageAvatar,
@@ -55,20 +59,12 @@ export const REVIEWS: Review[] = [
   },
   {
     companyLogo: Knock,
+    scale: 0.9,
     text: `I love Highlight because not only does it help me debug more quickly, but it gives me insight into how customers are actually using our product.`,
     author: {
       image: KnockAvatar,
       name: 'Meryl Dakin',
       role: 'Founding Software Engineer',
-    },
-  },
-  {
-    companyLogo: Airplane,
-    text: `Highlight gives us valuable ground truth, in a secure and privacy-aware manner, when we're working on improving onboarding flows and understanding feature usage.`,
-    author: {
-      image: AirplaneAvatar,
-      name: 'Josh Ma',
-      role: 'Co-founder & CTO',
     },
   },
   {
@@ -78,15 +74,6 @@ export const REVIEWS: Review[] = [
       image: PortalAvatar,
       name: 'Neil Raina',
       role: 'CTO',
-    },
-  },
-  {
-    companyLogo: Secoda,
-    text: `As a PLG company, Highlight gives us complete visibility on how customers are using our app and what parts of the journey are confusing or tough to get through.`,
-    author: {
-      image: SecodaAvatar,
-      name: 'Etai Mizrahi',
-      role: 'Co-founder',
     },
   },
 ];

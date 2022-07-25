@@ -1,8 +1,6 @@
 import Image from 'next/image';
-import SyntaxHighlighter, {
-  SyntaxHighlighterProps,
-} from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import { dracula, CodeBlock } from 'react-code-blocks';
+import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import CopyIcon from '../../../public/images/copy.svg';
 import styles from '../../Home/Home.module.scss';
 
@@ -39,18 +37,18 @@ export const CodeSnippet = ({
             </div>
           </div>
         )}
-        <SyntaxHighlighter
-          style={dracula}
+        <CodeBlock
+          theme={dracula}
           customStyle={{
             backgroundColor: 'transparent',
             padding: 0,
             margin: 0,
             overflow: 'scroll',
           }}
+          text={content}
+          showLineNumbers={false}
           {...props}
-        >
-          {content}
-        </SyntaxHighlighter>
+        />
       </div>
     </div>
   );

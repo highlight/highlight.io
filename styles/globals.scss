@@ -97,6 +97,7 @@
   --color-primary-400: #120532;
   --color-primary-500: #0d0225;
   --color-copy-on-dark: #dfdfdf;
+  --color-divider-on-dark: #30294e;
 
   // Logo
   --logo-gradient-start-color: var(--color-purple);
@@ -166,25 +167,30 @@ h6 {
 h1 {
   font-size: 70px;
   line-height: 80px !important;
-  letter-spacing: -1.8px;
+  letter-spacing: -1.5px;
 }
 
 h2 {
   font-size: 58px;
   line-height: 76px !important;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.5px;
 }
 
 h3 {
   font-size: var(--size-xxLarge);
   line-height: 54px !important;
-  letter-spacing: -1.6px;
+  letter-spacing: -0.25px;
 }
 
 h4 {
   font-size: 36px;
   line-height: 48px !important;
-  letter-spacing: -1.6px;
+  font-weight: 600 !important;
+}
+
+h5 {
+  font-size: 26px;
+  line-height: 40px !important;
   font-weight: 600 !important;
 }
 
@@ -205,7 +211,7 @@ main {
 }
 
 code {
-  font-family: 'IBM Plex Mono', 'Courier', 'monospace';
+  font-family: 'IBM Plex Mono', 'Courier', 'monospace' !important;
   font-weight: 400;
 }
 
@@ -232,6 +238,12 @@ code {
     font-size: 22px !important;
     line-height: 36px !important;
     letter-spacing: 0;
+  }
+
+  h5 {
+    font-size: 18px;
+    line-height: 34px !important;
+    font-weight: 600 !important;
   }
 
   footer {

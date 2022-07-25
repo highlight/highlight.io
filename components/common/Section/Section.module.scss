@@ -11,6 +11,12 @@
   gap: var(--size-xxLarge);
 }
 
+.gridSection {
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  gap: var(--size-medium);
+}
+
 .noYTopPadding {
   padding-top: 0;
 }

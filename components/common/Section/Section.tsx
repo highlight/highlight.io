@@ -9,12 +9,14 @@ export const Section = ({
   children,
   noYBottomPadding,
   noYTopPadding,
+  grid,
   ...props
 }: React.PropsWithChildren<{
   reverseMobile?: boolean;
   className?: string;
   noYTopPadding?: boolean;
   noYBottomPadding?: boolean;
+  grid?: boolean;
 }>) => {
   return (
     <div
@@ -23,6 +25,7 @@ export const Section = ({
         [styles.sectionReverseMobile]: reverseMobile,
         [styles.noYTopPadding]: noYTopPadding,
         [styles.noYBottomPadding]: noYBottomPadding,
+        [styles.gridSection]: grid,
       })}
     >
       {children}
