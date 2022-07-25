@@ -32,11 +32,9 @@
     "react-icons": "^4.3.1",
     "react-markdown": "^8.0.3",
     "react-responsive-carousel": "^3.2.23",
-    "react-slick": "^0.29.0",
     "react-swipe": "^6.0.4",
     "react-syntax-highlighter": "13.5.3",
     "sass": "^1.50.0",
-    "slick-carousel": "^1.8.1",
     "swipe-js-iso": "^2.1.5"
   },
   "devDependencies": {

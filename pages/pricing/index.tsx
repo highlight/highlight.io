@@ -16,9 +16,6 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
 
 import Collapsible from 'react-collapsible';
