@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { SVGProps } from 'react';
+import { SVGProps, useCallback, useEffect, useRef } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
 import PcPlayMedia from '../../public/images/pc-play-media.svg';
 import Chat from '../../public/images/pricing-comment.svg';
@@ -16,168 +16,39 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
-import Collapsible from 'react-collapsible';
+import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
 
-type PricingDetails = {
-  features: {
-    name: 'Features';
-    key: 0;
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-  teamManagement: {
-    key: 1;
-    name: 'Team Management';
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-  support: {
-    key: 2;
-    name: 'Support';
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-};
-const BasicDetails: PricingDetails = {
-  features: {
-    name: 'Features',
-    key: 0,
-    items: {
-      publicSessionSharing: {
-        key: 0,
-        name: 'Public session sharing',
-        value: true,
-      },
-      customDataExport: {
-        key: 1,
-        name: 'Custom data export',
-        value: false,
-      },
-      enhancedUserProperties: {
-        key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: false,
-      },
-    },
-  },
-  teamManagement: {
-    name: 'Team Management',
-    key: 1,
-    items: {
-      publicSessionSharing: {
-        key: 0,
-        name: 'Public session sharing',
-        value: true,
-      },
-      customDataExport: {
-        key: 1,
-        name: 'Custom data export',
-        value: true,
-      },
-      enhancedUserProperties: {
-        key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: true,
-      },
-    },
-  },
-  support: {
-    name: 'Support',
-    key: 2,
-    items: {
-      publicSessionSharing: {
-        key: 0,
-        name: 'Public session sharing',
-        value: true,
-      },
-      customDataExport: {
-        key: 1,
-        name: 'Custom data export',
-        value: true,
-      },
-      enhancedUserProperties: {
-        key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: true,
-      },
-    },
-  },
-};
+import Collapsible from 'react-collapsible';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
+import {
+  BasicDetails,
+  EnterpriseDetails,
+  EssentialsDetails,
+  PricingDetails,
+  StartupDetails,
+} from '../../components/Pricing/plan_features';
+import {
+  BasicInfo,
+  EnterpriseInfo,
+  EssentialsInfo,
+  PricingInfo,
+  StartupInfo,
+} from '../../components/Pricing/plan_info';
+
+// Plans and info used for both mobile and desktop views.
+const planDetails: Array<PricingDetails> = [
+  BasicDetails,
+  EssentialsDetails,
+  StartupDetails,
+  EnterpriseDetails,
+];
+const planInfo: Array<PricingInfo> = [
+  BasicInfo,
+  EssentialsInfo,
+  StartupInfo,
+  EnterpriseInfo,
+];
+
 const TierSection = ({
   tierName,
   numSessionCredits,
@@ -205,38 +76,40 @@ const TierSection = ({
         </div>
       )}
       <div className={styles.desktopTierSection}>
-        <Typography type="copy1" emphasis className={styles.dekstopTierName}>
-          {tierName}
-        </Typography>
-        {contactSales ? (
-          <div className={styles.desktopSessionCreditsEnterprise}>
-            <Typography type="copy3" emphasis>
-              {'Custom'}
-            </Typography>
-            <Typography type="copy3">{` session credits`}</Typography>
-          </div>
-        ) : (
-          <div className={styles.desktopSessionCredits}>
-            <Typography type="copy3" emphasis>
-              {numSessionCredits}
-            </Typography>
-            <Typography type="copy3">{` session credits`}</Typography>
-          </div>
-        )}
-        <div className={styles.desktopPrice}>
+        <div className={styles.desktopTopTier}>
+          <Typography type="copy1" emphasis className={styles.dekstopTierName}>
+            {tierName}
+          </Typography>
           {contactSales ? (
-            <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
-          ) : (
-            <>
-              <Typography type="copy3" emphasis className={styles.moneySign}>
-                {'$'}
+            <div className={styles.desktopSessionCreditsEnterprise}>
+              <Typography type="copy3" emphasis>
+                {'Custom'}
               </Typography>
-              <h3 className={styles.price}>{price}</h3>
-              <div className={styles.timeIndicator}>
-                <Typography type="copy3">{'/ mo'}</Typography>
-              </div>
-            </>
+              <Typography type="copy3">{` session credits`}</Typography>
+            </div>
+          ) : (
+            <div className={styles.desktopSessionCredits}>
+              <Typography type="copy3" emphasis>
+                {numSessionCredits}
+              </Typography>
+              <Typography type="copy3">{` session credits`}</Typography>
+            </div>
           )}
+          <div className={styles.desktopPrice}>
+            {contactSales ? (
+              <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
+            ) : (
+              <>
+                <Typography type="copy3" emphasis className={styles.moneySign}>
+                  {'$'}
+                </Typography>
+                <h3 className={styles.price}>{price}</h3>
+                <div className={styles.timeIndicator}>
+                  <Typography type="copy3">{'/ mo'}</Typography>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <PrimaryButton className={styles.pricingButton}>
           <Typography type="copy3" emphasis={true}>
@@ -272,6 +145,9 @@ const TierSection = ({
 
 const Pricing: NextPage = () => {
   const [monthly, setMonthly] = useState(true);
+  const is800 = useMediaQuery(800);
+  const is400 = useMediaQuery(400);
+  const isMobile = is800 || is400;
   return (
     <div>
       <Head>
@@ -294,126 +170,104 @@ const Pricing: NextPage = () => {
             </div>
           </div>
         </Section>
-        <Section className={styles.tierWrapper}>
-          <div className={styles.configColumn}>
-            <div className={styles.billingWidget}>
-              <Typography type="copy3" className={styles.billingCopy}>
+
+        {isMobile ? (
+          <Section className={styles.mobileTierWrapper}>
+            <div className={styles.mobileBillingWrapper}>
+              <Typography type="copy3" className={styles.billingCycleText}>
                 Select billing cycle
               </Typography>
-              <div className={styles.billingWidgetButtons}>
-                <PrimaryButton
-                  className={classNames(
-                    styles.billingButton,
-                    styles.leftButton,
-                    {
-                      [styles.selected]: monthly,
-                    }
-                  )}
-                  onClick={() => setMonthly(true)}
-                >
-                  Monthly
-                </PrimaryButton>
-                <PrimaryButton
-                  className={classNames(
-                    styles.billingButton,
-                    styles.rightButton,
-                    {
-                      [styles.selected]: !monthly,
-                    }
-                  )}
-                  onClick={() => setMonthly(false)}
-                >
-                  Annual
-                </PrimaryButton>
+              <BillingWidget
+                onMonthlyChange={(m) => setMonthly(m)}
+                monthly={monthly}
+              />
+            </div>
+            <MobileTierCarousel />
+          </Section>
+        ) : (
+          <Section className={styles.tierWrapper}>
+            <div className={styles.configColumn}>
+              <BillingWidget
+                onMonthlyChange={(m) => setMonthly(m)}
+                monthly={monthly}
+              />
+              <div className={styles.featureKeys}>
+                {Object.keys(BasicDetails).map((headingKey) => {
+                  return (
+                    <div key={headingKey} className={styles.featureSet}>
+                      <Typography
+                        className={styles.featureName}
+                        type="copy3"
+                        emphasis
+                      >
+                        {(BasicDetails as any)[headingKey].name}
+                      </Typography>
+                      {Object.keys((BasicDetails as any)[headingKey].items).map(
+                        (featureKey) => {
+                          return (
+                            <>
+                              <Typography
+                                type="copy3"
+                                key={featureKey}
+                                className={styles.featureKey}
+                              >
+                                {
+                                  (BasicDetails as any)[headingKey].items[
+                                    featureKey
+                                  ].name
+                                }
+                              </Typography>
+                              <hr className={styles.featureKeyDivider} />
+                            </>
+                          );
+                        }
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            <div className={styles.featureKeys}>
-              {Object.keys(BasicDetails).map((headingKey) => {
-                return (
-                  <div key={headingKey} className={styles.featureSet}>
-                    <Typography
-                      className={styles.featureName}
-                      type="copy3"
-                      emphasis
-                    >
-                      {(BasicDetails as any)[headingKey].name}
-                    </Typography>
-                    {Object.keys((BasicDetails as any)[headingKey].items).map(
-                      (featureKey) => {
-                        return (
-                          <>
-                            <Typography
-                              type="copy3"
-                              key={featureKey}
-                              className={styles.featureKey}
-                            >
-                              {
-                                (BasicDetails as any)[headingKey].items[
-                                  featureKey
-                                ].name
-                              }
-                            </Typography>
-                            <hr className={styles.featureKeyDivider} />
-                          </>
-                        );
-                      }
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <TierSection
-            mostPopular={false}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={false}
-            features={BasicDetails}
-          />
-          <TierSection
-            mostPopular={false}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={false}
-            features={BasicDetails}
-          />
-          <TierSection
-            mostPopular={true}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={false}
-            features={BasicDetails}
-          />
-          <TierSection
-            mostPopular={false}
-            tierName="Basic"
-            numSessionCredits={500}
-            price={120}
-            contactSales={true}
-            features={BasicDetails}
-          />
-        </Section>
-        <Section className={styles.customerSection}>
-          <div className={styles.anchorFeature}>
-            <div className={styles.anchorHead}>
-              <h2>{`Our customers`}</h2>
-              <Typography type="copy2">
-                {`Highlight powers forward-thinking companies. `}
-                <PrimaryLink href="/customers">
-                  Find out about our customers
-                </PrimaryLink>
-              </Typography>
-            </div>
-            <CompaniesReel />
-          </div>
+            <TierSection
+              mostPopular={false}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={false}
+              features={BasicDetails}
+            />
+            <TierSection
+              mostPopular={false}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={false}
+              features={BasicDetails}
+            />
+            <TierSection
+              mostPopular={true}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={false}
+              features={BasicDetails}
+            />
+            <TierSection
+              mostPopular={false}
+              tierName="Basic"
+              numSessionCredits={500}
+              price={120}
+              contactSales={true}
+              features={BasicDetails}
+            />
+          </Section>
+        )}
+        <Section>
+          <CompaniesReel />
         </Section>
         <Section className={styles.faqSection}>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <h2>{`Frequently Asked Questions`}</h2>
+              <h2>{`Frequently asked questions`}</h2>
             </div>
           </div>
           <div>
@@ -561,49 +415,224 @@ const Question = ({
   );
 };
 
-interface TierInfoObject {
-  tierName: string;
-  basePrice: number;
-  seatPrice: number;
-  buttonText: string;
-}
+const useMediaQuery = (width: number) => {
+  const [targetReached, setTargetReached] = useState(false);
 
-const TierInfo = ({
-  tierName,
-  basePrice,
-  seatPrice,
-  buttonText,
-}: TierInfoObject) => {
+  const updateTarget = useCallback((e: any) => {
+    if (e.matches) {
+      setTargetReached(true);
+    } else {
+      setTargetReached(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${width}px)`);
+    media.addEventListener('change', (e) => updateTarget(e));
+
+    // Check on mount (callback is not called until a change occurs)
+    if (media.matches) {
+      setTargetReached(true);
+    }
+
+    return () => media.removeEventListener('change', (e) => updateTarget(e));
+  }, [width, updateTarget]);
+
+  return targetReached;
+};
+
+const BillingWidget = ({
+  monthly,
+  onMonthlyChange,
+}: {
+  monthly: boolean;
+  onMonthlyChange: (monthly: boolean) => void;
+}) => {
   return (
-    <div>
-      <div className={styles.tierInfo}>
-        <span className={styles.tierName}>{tierName}</span>
-        <div className={styles.tierPrice}>
-          <span className={styles.priceNum}>{`$${basePrice + seatPrice}`}</span>
-          <span className={classNames(styles.priceDuration, styles.tableBody)}>
-            /month
-          </span>
+    <>
+      <div className={styles.billingWidget}>
+        <div className={styles.billingWidgetButtons}>
+          <PrimaryButton
+            className={classNames(styles.billingButton, styles.leftButton, {
+              [styles.selected]: monthly,
+            })}
+            onClick={() => onMonthlyChange(true)}
+          >
+            Monthly
+          </PrimaryButton>
+          <PrimaryButton
+            className={classNames(styles.billingButton, styles.rightButton, {
+              [styles.selected]: !monthly,
+            })}
+            onClick={() => onMonthlyChange(false)}
+          >
+            Annual
+          </PrimaryButton>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const MobileTierCarousel = () => {
+  const [planIndex, setPlanIndex] = useState(2);
+  const [viewportRef, embla] = useEmblaCarousel({
+    align: 'center',
+    skipSnaps: true,
+    startIndex: planIndex,
+  });
+
+  useEffect(() => {
+    if (embla && planIndex) {
+      embla?.scrollTo(planIndex);
+      embla.on('select', (e) => setPlanIndex(embla.selectedScrollSnap())); // Add event listener
+    }
+  }, [embla, planIndex]);
+
+  return (
+    <>
+      <div className="embla">
+        <div className="embla__container" ref={viewportRef}>
+          <div className="embla__container">
+            {planInfo.map((p: PricingInfo, i: number) => (
+              <MobileTierSection
+                selected={i == planIndex}
+                key={i}
+                mostPopular={p.mostPopular}
+                tierName={p.tierName}
+                numSessionCredits={p.numSessionCredits}
+                price={p.price}
+                contactSales={p.contactSales}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className={styles.mobileTierDots}>
+        {planInfo.map((p: PricingInfo, i: number) => (
+          <button
+            key={i}
+            onClick={() => {
+              embla?.scrollTo(i, false);
+            }}
+            className={classNames(styles.mobileTierDot, {
+              [styles.dotSelected]: i == planIndex,
+            })}
+          ></button>
+        ))}
+      </div>
+      <div className={styles.mobileFeaturesWrapper}>
+        <Typography type="copy3" emphasis>
+          {Object.keys(planDetails[planIndex]).map((headingKey) => {
+            let currentFeatureSection = (planDetails[planIndex] as any)[
+              headingKey
+            ];
+            return (
+              <div className={styles.mobileFeaturesSection} key={headingKey}>
+                <div className={styles.mobileFeatureHeader}>
+                  <Typography type="copy3" emphasis>
+                    {currentFeatureSection.name}
+                  </Typography>
+                </div>
+                {Object.keys(currentFeatureSection.items).map(
+                  (featureKey: any, i: number) => {
+                    let currentFeature =
+                      currentFeatureSection.items[featureKey];
+                    return (
+                      <div key={i} className={styles.mobileFeatureRow}>
+                        <div className={styles.mobileFeatureInner}>
+                          <Typography
+                            type="copy3"
+                            className={styles.mobileFeatureName}
+                          >
+                            {currentFeature.name}
+                          </Typography>
+                          <Typography type="copy3">
+                            {currentFeature.value == true ? (
+                              <Image src={CheckMark} alt="checkmark"></Image>
+                            ) : (
+                              <div>-</div>
+                            )}
+                          </Typography>
+                        </div>
+                        <hr className={styles.mobileFeatureDivider} />
+                      </div>
+                    );
+                  }
+                )}
+              </div>
+            );
+          })}
+        </Typography>
+      </div>
+    </>
+  );
+};
+
+const MobileTierSection = ({
+  tierName,
+  numSessionCredits,
+  price,
+  contactSales,
+  mostPopular,
+  selected,
+}: {
+  mostPopular: boolean;
+  tierName: string;
+  numSessionCredits: number;
+  price: number;
+  contactSales: boolean;
+  selected: boolean;
+}) => {
+  return (
+    <div
+      className={classNames(styles.mobileTierSectionWrapper, 'embla__slide', {
+        [styles.mobileNotSelectedPlan]: !selected,
+      })}
+    >
+      {mostPopular && (
+        <div className={styles.mostPopularMobile}>
+          <Typography type="outline">Most Popular</Typography>
+        </div>
+      )}
+      <div
+        className={classNames(styles.mobileTier, {
+          [styles.mostPopularTierColumnMobile]: mostPopular,
+        })}
+      >
+        <div className={styles.mobileTierTop}>
+          <Typography type="copy1" emphasis className={styles.mobileTierName}>
+            {tierName}
+          </Typography>
+          <Typography type="copy3" className={styles.mobileSessionCredits}>
+            {numSessionCredits} session credits
+          </Typography>
+          <div className={styles.desktopPrice}>
+            {contactSales ? (
+              <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
+            ) : (
+              <>
+                <Typography type="copy3" emphasis className={styles.moneySign}>
+                  {'$'}
+                </Typography>
+                <h3 className={styles.price}>{price}</h3>
+                <div className={styles.timeIndicator}>
+                  <Typography type="copy3">{'/ mo'}</Typography>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <PrimaryButton
-          className={styles.startTrial}
-          href="https://app.highlight.run/?sign_up=1"
+          className={classNames(
+            styles.pricingButton,
+            styles.mobilePricingButton
+          )}
         >
-          {buttonText}
+          <Typography type="copy3" emphasis={true}>
+            {contactSales ? 'Contact Sales' : 'Start Free Trial'}
+          </Typography>
         </PrimaryButton>
-        <div className={styles.pricingBreakdown}>
-          <div className={styles.tierInfo}>
-            <span>Base Price</span>
-            <span className={styles.tableBody}>billed monthly</span>
-          </div>
-          <div>{`$${basePrice}`}</div>
-        </div>
-        <div className={styles.pricingBreakdown}>
-          <div className={styles.tierInfo}>
-            <span>Seat Pricing</span>
-            <span className={styles.tableBody}>billed monthly</span>
-          </div>
-          <div>{`$${seatPrice}`}</div>
-        </div>
       </div>
     </div>
   );

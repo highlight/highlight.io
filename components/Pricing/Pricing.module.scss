@@ -27,7 +27,6 @@
 .anchorHead {
   max-width: 840px;
 }
-
 .tierWrapper {
   display: flex;
   flex-direction: row;
@@ -215,6 +214,11 @@
   width: 218px;
 }
 
+.desktopTopTier {
+  display: flex;
+  flex-direction: column;
+}
+
 .mostPopularTierColumn {
   -webkit-border-top-left-radius: 0px;
   -webkit-border-top-right-radius: 0px;
@@ -225,10 +229,19 @@
 }
 
 .desktopTierSection {
-  height: 244px;
+  height: 260px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 24px 20px 0px 20px;
+}
+
+.mobileFeatureDivider {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--divider-on-dark);
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .featureDivider {
@@ -285,6 +298,10 @@
   margin-top: 70px;
 }
 
+.mobileFeaturesSection {
+  margin-top: 32px;
+}
+
 .sectionSubtitle {
   margin-bottom: var(--size-xLarge);
   color: var(--color-selected-light);
@@ -306,6 +323,171 @@
   text-align: center;
   margin: auto;
   padding: 0 var(--size-xxLarge);
+}
+
+@media screen and (max-width: 800px) {
+  .pricingTitle {
+    padding: 0;
+  }
+}
+
+.mobileNotSelectedPlan {
+  opacity: 60%;
+}
+
+.mobileBillingWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 32px 0px 32px;
+  margin-bottom: 95px;
+}
+
+.mostPopularTierColumnMobile {
+  -webkit-border-top-left-radius: 0px !important;
+  -webkit-border-top-right-radius: 0px !important;
+  -moz-border-radius-topleft: 0px !important;
+  -moz-border-radius-topright: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-top: 0 !important;
+}
+
+.mobileFeaturesWrapper {
+  padding: 32px;
+}
+
+.mobileFeatureRow {
+  display: flex;
+  flex-direction: column;
+}
+
+.mostPopularMobile {
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  min-width: 100%;
+
+  text-transform: uppercase;
+  border: var(--color-selected-light) solid 1px;
+  width: 218px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-selected-light);
+  margin-top: -40px;
+}
+
+.mobileFeatureHeader {
+  margin-bottom: 14px;
+}
+
+.mobileTierCarousel {
+  padding: 0px;
+  display: flex;
+  gap: 16px;
+}
+
+.mobileFeatureInner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mobileFeatureName {
+  color: var(--copy-on-dark);
+}
+
+.carousel-div {
+  margin-right: 10px;
+}
+
+.billingCycleText {
+  margin: 0;
+}
+
+.mobileCarousel {
+  display: flex;
+  flex-direction: row;
+}
+
+.mobileTierName {
+  margin-bottom: 8px;
+}
+
+.mobileSessionCredits {
+  margin-bottom: 22px;
+}
+
+.mobileTier {
+  border: var(--color-white) 1px solid;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.mobileTierTop {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobilePricingButton {
+  width: 100%;
+}
+
+.mobileTierSectionWrapper {
+  min-width: 50%;
+  padding: 10px;
+  position: relative;
+  transition: opacity 0.3s;
+}
+
+.mobileTierDots {
+  padding: 0px 32px 0px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.mobileTierDot {
+  margin: 4px;
+  height: 12px;
+  width: 12px;
+  padding: 0;
+  border-radius: 100px;
+  background-color: transparent;
+  border: var(--color-selected-light) 1px solid;
+}
+
+.dotSelected {
+  background-color: var(--color-selected-light);
+}
+
+.mobileTierWrapper {
+  padding: 0px;
+  gap: 0px !important;
+  grid-gap: 0px !important;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 400px) {
+  .mobileBillingWrapper {
+    flex-direction: column;
+  }
+  .billingCycleText {
+    margin-bottom: 14px;
+  }
 }
 
 .customerSection {
@@ -330,7 +512,6 @@
 }
 
 .faqSection {
-  width: 1200px;
   display: flex;
   flex-direction: column;
   margin-bottom: 160px;
@@ -345,6 +526,18 @@
 
 .faqLeftContent {
   display: flex;
+}
+
+.anchorFeaturePricing {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  padding: 0;
 }
 
 .anchorFeature {

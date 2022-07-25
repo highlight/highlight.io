@@ -722,18 +722,7 @@ const Home: NextPage = () => {
         <SnippetTab />
         <div ref={startScroll}></div>
         <Section>
-          <div className={styles.anchorFeature}>
-            <div className={styles.anchorHead}>
-              <h2>{`Our customers`}</h2>
-              <Typography type="copy2">
-                {`Highlight powers forward-thinking companies. `}
-                <PrimaryLink href="/customers">
-                  Find out about our customers
-                </PrimaryLink>
-              </Typography>
-            </div>
-            <CompaniesReel />
-          </div>
+          <CompaniesReel />
         </Section>
         <Section>
           <div className={styles.anchorFeature}>
