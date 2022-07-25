@@ -26,14 +26,14 @@ import {
   EssentialsDetails,
   PricingDetails,
   StartupDetails,
-} from './plan_features';
+} from '../../components/Pricing/plan_features';
 import {
   BasicInfo,
   EnterpriseInfo,
   EssentialsInfo,
   PricingInfo,
   StartupInfo,
-} from './plan_info';
+} from '../../components/Pricing/plan_info';
 
 // Plans and info used for both mobile and desktop views.
 const planDetails: Array<PricingDetails> = [
@@ -418,7 +418,7 @@ const Question = ({
 const useMediaQuery = (width: number) => {
   const [targetReached, setTargetReached] = useState(false);
 
-  const updateTarget = useCallback((e) => {
+  const updateTarget = useCallback((e: any) => {
     if (e.matches) {
       setTargetReached(true);
     } else {
