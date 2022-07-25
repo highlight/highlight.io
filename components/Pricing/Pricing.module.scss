@@ -214,6 +214,11 @@
   width: 218px;
 }
 
+.desktopTopTier {
+  display: flex;
+  flex-direction: column;
+}
+
 .mostPopularTierColumn {
   -webkit-border-top-left-radius: 0px;
   -webkit-border-top-right-radius: 0px;
@@ -229,11 +234,6 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 24px 20px 0px 20px;
-}
-
-.desktopTopTier {
-  display: flex;
-  flex-direction: column;
 }
 
 .mobileFeatureDivider {
