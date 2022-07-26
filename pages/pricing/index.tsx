@@ -475,11 +475,11 @@ const BillingWidget = ({
 };
 
 const MobileTierCarousel = () => {
+  const { width } = useWindowDimensions();
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
-    align: 'center',
-    skipSnaps: true,
     startIndex: planIndex,
+    align: 0.105,
   });
 
   useEffect(() => {
@@ -491,21 +491,20 @@ const MobileTierCarousel = () => {
 
   return (
     <>
-      <div className="embla">
-        <div className="embla__container" ref={viewportRef}>
-          <div className="embla__container">
-            {planInfo.map((p: PricingInfo, i: number) => (
-              <MobileTierSection
-                selected={i == planIndex}
-                key={i}
-                mostPopular={p.mostPopular}
-                tierName={p.tierName}
-                numSessionCredits={p.numSessionCredits}
-                price={p.price}
-                contactSales={p.contactSales}
-              />
-            ))}
-          </div>
+      <div className="embla__container" ref={viewportRef}>
+        <div className="embla__container">
+          {planInfo.map((p: PricingInfo, i: number) => (
+            <MobileTierSection
+              width={width / 2}
+              selected={i == planIndex}
+              key={i}
+              mostPopular={p.mostPopular}
+              tierName={p.tierName}
+              numSessionCredits={p.numSessionCredits}
+              price={p.price}
+              contactSales={p.contactSales}
+            />
+          ))}
         </div>
       </div>
       <div className={styles.mobileTierDots}>
@@ -576,6 +575,7 @@ const MobileTierSection = ({
   contactSales,
   mostPopular,
   selected,
+  width,
 }: {
   mostPopular: boolean;
   tierName: string;
@@ -583,9 +583,11 @@ const MobileTierSection = ({
   price: number;
   contactSales: boolean;
   selected: boolean;
+  width: number;
 }) => {
   return (
     <div
+      style={{ minWidth: width }}
       className={classNames(styles.mobileTierSectionWrapper, 'embla__slide', {
         [styles.mobileNotSelectedPlan]: !selected,
       })}
@@ -637,5 +639,30 @@ const MobileTierSection = ({
     </div>
   );
 };
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
 
 export default Pricing;

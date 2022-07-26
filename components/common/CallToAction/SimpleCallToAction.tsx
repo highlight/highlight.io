@@ -27,7 +27,10 @@ export const SimpleCallToAction = () => {
             styles.tryButtonContainer
           )}
         >
-          <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+          <PrimaryButton
+            href="https://app.highlight.run/?sign_up=1"
+            style={{ color: 'black' }}
+          >
             <Typography type="copy1" emphasis={true}>
               Get started for free
             </Typography>

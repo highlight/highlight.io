@@ -343,6 +343,12 @@
   margin-bottom: 95px;
 }
 
+@media screen and (max-width: 400px) {
+  .mobileBillingWrapper {
+    padding: 0px 20px 0px 20px;
+  }
+}
+
 .mostPopularTierColumnMobile {
   -webkit-border-top-left-radius: 0px !important;
   -webkit-border-top-right-radius: 0px !important;
@@ -355,6 +361,12 @@
 
 .mobileFeaturesWrapper {
   padding: 32px;
+}
+
+@media screen and (max-width: 400px) {
+  .mobileFeaturesWrapper {
+    padding: 20px;
+  }
 }
 
 .mobileFeatureRow {
@@ -373,7 +385,6 @@
 
   text-transform: uppercase;
   border: var(--color-selected-light) solid 1px;
-  width: 218px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -446,7 +457,6 @@
 }
 
 .mobileTierSectionWrapper {
-  min-width: 50%;
   padding: 10px;
   position: relative;
   transition: opacity 0.3s;
