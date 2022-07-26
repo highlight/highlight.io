@@ -476,8 +476,6 @@ const BillingWidget = ({
 
 const MobileTierCarousel = () => {
   const { width } = useWindowDimensions();
-  console.log(width);
-  console.log(width / 2);
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
     startIndex: planIndex,
