@@ -481,7 +481,7 @@ const MobileTierCarousel = () => {
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
     startIndex: planIndex,
-    align: 0.1,
+    align: 0.105,
   });
 
   useEffect(() => {
@@ -493,22 +493,20 @@ const MobileTierCarousel = () => {
 
   return (
     <>
-      <div className="embla">
-        <div className="embla__container" ref={viewportRef}>
-          <div className="embla__container">
-            {planInfo.map((p: PricingInfo, i: number) => (
-              <MobileTierSection
-                width={width / 2}
-                selected={i == planIndex}
-                key={i}
-                mostPopular={p.mostPopular}
-                tierName={p.tierName}
-                numSessionCredits={p.numSessionCredits}
-                price={p.price}
-                contactSales={p.contactSales}
-              />
-            ))}
-          </div>
+      <div className="embla__container" ref={viewportRef}>
+        <div className="embla__container">
+          {planInfo.map((p: PricingInfo, i: number) => (
+            <MobileTierSection
+              width={width / 2}
+              selected={i == planIndex}
+              key={i}
+              mostPopular={p.mostPopular}
+              tierName={p.tierName}
+              numSessionCredits={p.numSessionCredits}
+              price={p.price}
+              contactSales={p.contactSales}
+            />
+          ))}
         </div>
       </div>
       <div className={styles.mobileTierDots}>
