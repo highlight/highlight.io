@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { SVGProps, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
 import PcPlayMedia from '../../public/images/pc-play-media.svg';
 import Chat from '../../public/images/pricing-comment.svg';
@@ -13,13 +13,11 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
-import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 import Collapsible from 'react-collapsible';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import {
   BasicDetails,
   EnterpriseDetails,
@@ -490,8 +488,7 @@ const MobileTierCarousel = () => {
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
     startIndex: planIndex,
-    align: 0.105,
-    draggable: true,
+    align: 'center',
   });
 
   useEffect(() => {
@@ -506,7 +503,7 @@ const MobileTierCarousel = () => {
 
   return (
     <>
-      <div className="embla__container" ref={viewportRef}>
+      <div className="embla" ref={viewportRef}>
         <div className="embla__container">
           {planInfo.map((p: PricingInfo, i: number) => (
             <MobileTierSection
