@@ -13,12 +13,11 @@ import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock, dracula } from 'react-code-blocks';
 import { Typography } from '../../../components/common/Typography/Typography';
-import { useEffect, useRef, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../../components/Blog/BlogNavbar/BlogNavbar';
 import { SimpleCallToAction } from '../../../components/common/CallToAction/SimpleCallToAction';
-import { BlogPostSmall } from '../../../components/Blog/BlogPostSmall/BlogPostSmall';
-import { BlogPost } from '../../../components/Blog/BlogPost/BlogPost';
 import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
+import { ElementNode } from '@graphcms/rich-text-types';
 
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
@@ -69,8 +68,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
   const POSTS_QUERY = gql`
-query GetPosts() {
-    posts(orderBy: publishedAt_DESC) {
+    query GetPosts() {
+      posts(orderBy: publishedAt_DESC) {
         slug
         title
         image {
@@ -81,9 +80,9 @@ query GetPosts() {
         }
         publishedAt
         tags
+      }
     }
-  }
-`;
+  `;
   const data = await graphcms.request(QUERY, { slug: slug });
   const { posts } = await graphcms.request(POSTS_QUERY);
 
@@ -108,17 +107,15 @@ query GetPosts() {
   };
 };
 
-const findPostMidpoint = (raw: any[]) => {
-  for (let i = 0; i < raw.length; i++) {
-    const r = raw[i];
-    if (i > raw.length / 2 - 1) {
-      if (r.type === 'paragraph') {
-        return i + 1;
-      }
-    }
-  }
-  return Math.floor(raw.length / 2);
-};
+interface PostSection {
+  nodes: ElementNode[];
+  footer: ReactElement | null;
+}
+
+// update here to support other tags
+enum SectionType {
+  CallToAction = '{{CALL_TO_ACTION}}',
+}
 
 const PostPage = ({
   post,
@@ -129,7 +126,10 @@ const PostPage = ({
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const [endPosition, setEndPosition] = useState(0);
-  const [postRaw, setPostRaw] = useState<any[]>(post.richcontent.raw.children);
+  const [postRaw, setPostRaw] = useState<ElementNode[]>(
+    post.richcontent.raw.children
+  );
+  const [postSections, setPostSections] = useState<PostSection[]>();
 
   useEffect(() => {
     setEndPosition(blogBody.current?.offsetHeight || 0);
@@ -139,7 +139,39 @@ const PostPage = ({
     setPostRaw(post.richcontent.raw.children);
   }, [setPostRaw, post]);
 
-  console.log(suggestedPosts);
+  useEffect(() => {
+    const processed: PostSection[] = [];
+    let currentBlock: ElementNode[] = [];
+    for (const r of postRaw) {
+      let specialType: SectionType | undefined = undefined;
+      for (const child of r.children) {
+        // update here to support other tags
+        if (child.text === SectionType.CallToAction) {
+          specialType = SectionType.CallToAction;
+          break;
+        }
+      }
+      switch (specialType) {
+        // update here to support other tags
+        case SectionType.CallToAction:
+          processed.push({
+            nodes: currentBlock,
+            footer: <SimpleCallToAction />,
+          });
+          currentBlock = [];
+          break;
+        default:
+          currentBlock.push(r);
+      }
+    }
+    if (currentBlock.length) {
+      processed.push({
+        nodes: currentBlock,
+        footer: null,
+      });
+    }
+    setPostSections(processed);
+  }, [postRaw]);
 
   return (
     <>
@@ -197,49 +229,33 @@ const PostPage = ({
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
-            <RichText
-              content={{
-                children: postRaw.slice(0, findPostMidpoint(postRaw)),
-              }}
-              renderers={{
-                code_block: ({ children }: { children: any }) => {
-                  return (
-                    <div className={styles.codeBlock}>
-                      <CodeBlock
-                        language={'js'}
-                        text={children?.props?.content[0].text}
-                        showLineNumbers={false}
-                        theme={dracula}
-                      />
-                    </div>
-                  );
-                },
-                h1: blogTypographyRenderer,
-                h2: blogTypographyRenderer,
-                h3: blogTypographyRenderer,
-              }}
-            />
-            <SimpleCallToAction />
-            <RichText
-              content={{ children: postRaw.slice(findPostMidpoint(postRaw)) }}
-              renderers={{
-                code_block: ({ children }: { children: any }) => {
-                  return (
-                    <div className={styles.codeBlock}>
-                      <CodeBlock
-                        language={'js'}
-                        text={children?.props?.content[0].text}
-                        showLineNumbers={false}
-                        theme={dracula}
-                      />
-                    </div>
-                  );
-                },
-                h1: blogTypographyRenderer,
-                h2: blogTypographyRenderer,
-                h3: blogTypographyRenderer,
-              }}
-            />
+            {postSections?.map((p) => (
+              <>
+                <RichText
+                  content={{
+                    children: p.nodes,
+                  }}
+                  renderers={{
+                    code_block: ({ children }: { children: any }) => {
+                      return (
+                        <div className={styles.codeBlock}>
+                          <CodeBlock
+                            language={'js'}
+                            text={children?.props?.content[0].text}
+                            showLineNumbers={false}
+                            theme={dracula}
+                          />
+                        </div>
+                      );
+                    },
+                    h1: blogTypographyRenderer,
+                    h2: blogTypographyRenderer,
+                    h3: blogTypographyRenderer,
+                  }}
+                />
+                {p.footer}
+              </>
+            ))}
           </div>
         </Section>
         <Section>
