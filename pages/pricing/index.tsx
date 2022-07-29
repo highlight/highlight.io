@@ -95,7 +95,7 @@ const TierSection = ({
             ) : (
               <div className={styles.desktopSessionCredits}>
                 <Typography type="copy3" emphasis>
-                  {numSessionCredits}
+                  {numSessionCredits.toLocaleString()}
                 </Typography>
                 <Typography type="copy3">{` session credits`}</Typography>
               </div>
@@ -136,12 +136,11 @@ const TierSection = ({
           Object.keys(features).map((headingKey) => {
             return (
               <div className={styles.desktopFeaturesSection} key={headingKey}>
-                {Object.keys((features as any)[headingKey].items).map(
-                  (featureKey) => {
+                {(features as any)[headingKey].items.map(
+                  (item: any, key: number) => {
                     return (
                       <>
-                        {(features as any)[headingKey].items[featureKey]
-                          .value ? (
+                        {item.value ? (
                           <Image src={CheckMark} alt="checkmark"></Image>
                         ) : (
                           <div>-</div>
@@ -218,20 +217,16 @@ const Pricing: NextPage = () => {
                       >
                         {(BasicDetails as any)[headingKey].name}
                       </Typography>
-                      {Object.keys((BasicDetails as any)[headingKey].items).map(
-                        (featureKey) => {
+                      {(BasicDetails as any)[headingKey].items.map(
+                        (item: any, key: number) => {
                           return (
                             <>
                               <Typography
                                 type="copy3"
-                                key={featureKey}
+                                key={key}
                                 className={styles.featureKey}
                               >
-                                {
-                                  (BasicDetails as any)[headingKey].items[
-                                    featureKey
-                                  ].name
-                                }
+                                {item.name}
                               </Typography>
                               <hr className={styles.featureKeyDivider} />
                             </>
@@ -627,7 +622,8 @@ const MobileTierSection = ({
             {tierName}
           </Typography>
           <Typography type="copy3" className={styles.mobileSessionCredits}>
-            {numSessionCredits} session credits
+            {numSessionCredits ? numSessionCredits.toLocaleString() : 'Custom'}{' '}
+            session credits
           </Typography>
           <div className={styles.desktopPrice}>
             {contactSales ? (
