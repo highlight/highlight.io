@@ -1,59 +1,7 @@
 export type PricingDetails = {
-  features: {
-    name: 'Features';
-    key: 0;
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-  teamManagement: {
-    key: 1;
-    name: 'Team Management';
-    items: {
-      publicSessionSharing: {
-        key: 0;
-        name: 'Public session sharing';
-        value: boolean;
-      };
-      customDataExport: {
-        key: 1;
-        name: 'Custom data export';
-        value: boolean;
-      };
-      enhancedUserProperties: {
-        key: 2;
-        name: 'Enhanced user properties';
-        value: boolean;
-      };
-      sessionErrorCommenting: {
-        key: 3;
-        name: 'Session / error commenting';
-        value: boolean;
-      };
-    };
-  };
-  support: {
-    key: 2;
-    name: 'Support';
+  [key: string]: {
+    name: string;
+    key: number;
     items: {
       publicSessionSharing: {
         key: 0;
@@ -87,7 +35,7 @@ export const BasicDetails: PricingDetails = {
       publicSessionSharing: {
         key: 0,
         name: 'Public session sharing',
-        value: true,
+        value: false,
       },
       customDataExport: {
         key: 1,
@@ -97,12 +45,12 @@ export const BasicDetails: PricingDetails = {
       enhancedUserProperties: {
         key: 2,
         name: 'Enhanced user properties',
-        value: true,
+        value: false,
       },
       sessionErrorCommenting: {
         key: 3,
         name: 'Session / error commenting',
-        value: false,
+        value: true,
       },
     },
   },
@@ -112,23 +60,18 @@ export const BasicDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
-        value: true,
+        name: 'Role-based access control',
+        value: false,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
-        value: true,
+        name: 'Single sign-on',
+        value: false,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: true,
+        name: 'Two-factor authentication',
+        value: false,
       },
     },
   },
@@ -138,23 +81,23 @@ export const BasicDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
+        name: 'Email',
         value: true,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
+        name: 'Intercom',
         value: true,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
-        value: true,
+        name: 'Slack Connect',
+        value: false,
       },
       sessionErrorCommenting: {
         key: 3,
-        name: 'Session / error commenting',
-        value: true,
+        name: '24x7 support with SLAs',
+        value: false,
       },
     },
   },
@@ -168,7 +111,7 @@ export const EssentialsDetails: PricingDetails = {
       publicSessionSharing: {
         key: 0,
         name: 'Public session sharing',
-        value: true,
+        value: false,
       },
       customDataExport: {
         key: 1,
@@ -178,12 +121,12 @@ export const EssentialsDetails: PricingDetails = {
       enhancedUserProperties: {
         key: 2,
         name: 'Enhanced user properties',
-        value: true,
+        value: false,
       },
       sessionErrorCommenting: {
         key: 3,
         name: 'Session / error commenting',
-        value: false,
+        value: true,
       },
     },
   },
@@ -193,23 +136,18 @@ export const EssentialsDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
-        value: true,
+        name: 'Role-based access control',
+        value: false,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
-        value: true,
+        name: 'Single sign-on',
+        value: false,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
-        value: true,
+        name: 'Two-factor authentication',
+        value: false,
       },
     },
   },
@@ -219,23 +157,23 @@ export const EssentialsDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
+        name: 'Email',
         value: true,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
+        name: 'Intercom',
         value: true,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
-        value: true,
+        name: 'Slack Connect',
+        value: false,
       },
       sessionErrorCommenting: {
         key: 3,
-        name: 'Session / error commenting',
-        value: true,
+        name: '24x7 support with SLAs',
+        value: false,
       },
     },
   },
@@ -264,7 +202,7 @@ export const StartupDetails: PricingDetails = {
       sessionErrorCommenting: {
         key: 3,
         name: 'Session / error commenting',
-        value: false,
+        value: true,
       },
     },
   },
@@ -274,22 +212,17 @@ export const StartupDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
+        name: 'Role-based access control',
         value: true,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
+        name: 'Single sign-on',
         value: true,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
+        name: 'Two-factor authentication',
         value: true,
       },
     },
@@ -300,23 +233,23 @@ export const StartupDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
+        name: 'Email',
         value: true,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
+        name: 'Intercom',
         value: true,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
+        name: 'Slack Connect',
         value: true,
       },
       sessionErrorCommenting: {
         key: 3,
-        name: 'Session / error commenting',
-        value: true,
+        name: '24x7 support with SLAs',
+        value: false,
       },
     },
   },
@@ -335,7 +268,7 @@ export const EnterpriseDetails: PricingDetails = {
       customDataExport: {
         key: 1,
         name: 'Custom data export',
-        value: false,
+        value: true,
       },
       enhancedUserProperties: {
         key: 2,
@@ -345,7 +278,7 @@ export const EnterpriseDetails: PricingDetails = {
       sessionErrorCommenting: {
         key: 3,
         name: 'Session / error commenting',
-        value: false,
+        value: true,
       },
     },
   },
@@ -355,22 +288,17 @@ export const EnterpriseDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
+        name: 'Role-based access control',
         value: true,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
+        name: 'Single sign-on',
         value: true,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
-        value: true,
-      },
-      sessionErrorCommenting: {
-        key: 3,
-        name: 'Session / error commenting',
+        name: 'Two-factor authentication',
         value: true,
       },
     },
@@ -381,22 +309,22 @@ export const EnterpriseDetails: PricingDetails = {
     items: {
       publicSessionSharing: {
         key: 0,
-        name: 'Public session sharing',
+        name: 'Email',
         value: true,
       },
       customDataExport: {
         key: 1,
-        name: 'Custom data export',
+        name: 'Intercom',
         value: true,
       },
       enhancedUserProperties: {
         key: 2,
-        name: 'Enhanced user properties',
+        name: 'Slack Connect',
         value: true,
       },
       sessionErrorCommenting: {
         key: 3,
-        name: 'Session / error commenting',
+        name: '24x7 support with SLAs',
         value: true,
       },
     },
