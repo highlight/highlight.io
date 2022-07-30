@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { SVGProps, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
 import PcPlayMedia from '../../public/images/pc-play-media.svg';
 import Wallet from '../../public/images/wallet.svg';
@@ -21,13 +21,11 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
-import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
+import useEmblaCarousel from 'embla-carousel-react';
 
 import Collapsible from 'react-collapsible';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 import {
   BasicDetails,
   EnterpriseDetails,
@@ -73,80 +71,95 @@ const TierSection = ({
   features: PricingDetails;
 }) => {
   return (
-    <div
-      className={classNames(styles.tierColumn, {
-        [styles.mostPopularTierColumn]: mostPopular,
-      })}
-    >
+    <div>
       {mostPopular && (
         <div className={styles.mostPopular}>
           <Typography type="outline">Most Popular</Typography>
         </div>
       )}
-      <div className={styles.desktopTierSection}>
-        <div className={styles.desktopTopTier}>
-          <Typography type="copy1" emphasis className={styles.dekstopTierName}>
-            {tierName}
-          </Typography>
-          {contactSales ? (
-            <div className={styles.desktopSessionCreditsEnterprise}>
-              <Typography type="copy3" emphasis>
-                {'Custom'}
-              </Typography>
-              <Typography type="copy3">{` session credits`}</Typography>
-            </div>
-          ) : (
-            <div className={styles.desktopSessionCredits}>
-              <Typography type="copy3" emphasis>
-                {numSessionCredits}
-              </Typography>
-              <Typography type="copy3">{` session credits`}</Typography>
-            </div>
-          )}
-          <div className={styles.desktopPrice}>
+      <div
+        className={classNames(styles.tierColumn, {
+          [styles.mostPopularTierColumn]: mostPopular,
+        })}
+      >
+        <div className={styles.desktopTierSection}>
+          <div className={styles.desktopTopTier}>
+            <Typography
+              type="copy1"
+              emphasis
+              className={styles.dekstopTierName}
+            >
+              {tierName}
+            </Typography>
             {contactSales ? (
-              <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
-            ) : (
-              <>
-                <Typography type="copy3" emphasis className={styles.moneySign}>
-                  {'$'}
+              <div className={styles.desktopSessionCreditsEnterprise}>
+                <Typography type="copy3" emphasis>
+                  {'Custom'}
                 </Typography>
-                <h3 className={styles.price}>{price}</h3>
-                <div className={styles.timeIndicator}>
-                  <Typography type="copy3">{'/ mo'}</Typography>
-                </div>
-              </>
+                <Typography type="copy3">{` session credits`}</Typography>
+              </div>
+            ) : (
+              <div className={styles.desktopSessionCredits}>
+                <Typography type="copy3" emphasis>
+                  {numSessionCredits.toLocaleString()}
+                </Typography>
+                <Typography type="copy3">{` session credits`}</Typography>
+              </div>
             )}
-          </div>
-        </div>
-        <PrimaryButton className={styles.pricingButton}>
-          <Typography type="copy3" emphasis={true}>
-            {contactSales ? 'Contact Sales' : 'Start Free Trial'}
-          </Typography>
-        </PrimaryButton>
-      </div>
-
-      {features &&
-        Object.keys(features).map((headingKey) => {
-          return (
-            <div className={styles.desktopFeaturesSection} key={headingKey}>
-              {Object.keys((features as any)[headingKey].items).map(
-                (featureKey) => {
-                  return (
-                    <>
-                      {(features as any)[headingKey].items[featureKey].value ? (
-                        <Image src={CheckMark} alt="checkmark"></Image>
-                      ) : (
-                        <div>-</div>
-                      )}
-                      <hr className={styles.featureDivider} />
-                    </>
-                  );
-                }
+            <div className={styles.desktopPrice}>
+              {contactSales ? (
+                <Image
+                  height={24}
+                  width={24}
+                  src={Chat}
+                  alt="chat icon"
+                ></Image>
+              ) : (
+                <>
+                  <Typography
+                    type="copy3"
+                    emphasis
+                    className={styles.moneySign}
+                  >
+                    {'$'}
+                  </Typography>
+                  <h3 className={styles.price}>{price}</h3>
+                  <div className={styles.timeIndicator}>
+                    <Typography type="copy3">{'/ mo'}</Typography>
+                  </div>
+                </>
               )}
             </div>
-          );
-        })}
+          </div>
+          <PrimaryButton className={styles.pricingButton}>
+            <Typography type="copy3" emphasis={true}>
+              {contactSales ? 'Contact Sales' : 'Start Free Trial'}
+            </Typography>
+          </PrimaryButton>
+        </div>
+
+        {features &&
+          Object.keys(features).map((headingKey) => {
+            return (
+              <div className={styles.desktopFeaturesSection} key={headingKey}>
+                {(features as any)[headingKey].items.map(
+                  (item: any, key: number) => {
+                    return (
+                      <>
+                        {item.value ? (
+                          <Image src={CheckMark} alt="checkmark"></Image>
+                        ) : (
+                          <div>-</div>
+                        )}
+                        <hr className={styles.featureDivider} />
+                      </>
+                    );
+                  }
+                )}
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
@@ -210,20 +223,16 @@ const Pricing: NextPage = () => {
                       >
                         {(BasicDetails as any)[headingKey].name}
                       </Typography>
-                      {Object.keys((BasicDetails as any)[headingKey].items).map(
-                        (featureKey) => {
+                      {(BasicDetails as any)[headingKey].items.map(
+                        (item: any, key: number) => {
                           return (
                             <>
                               <Typography
                                 type="copy3"
-                                key={featureKey}
+                                key={key}
                                 className={styles.featureKey}
                               >
-                                {
-                                  (BasicDetails as any)[headingKey].items[
-                                    featureKey
-                                  ].name
-                                }
+                                {item.name}
                               </Typography>
                               <hr className={styles.featureKeyDivider} />
                             </>
@@ -239,33 +248,33 @@ const Pricing: NextPage = () => {
               mostPopular={false}
               tierName="Basic"
               numSessionCredits={500}
-              price={120}
+              price={0}
               contactSales={false}
               features={BasicDetails}
             />
             <TierSection
               mostPopular={false}
-              tierName="Basic"
-              numSessionCredits={500}
-              price={120}
+              tierName="Essentials"
+              numSessionCredits={10000}
+              price={150}
               contactSales={false}
-              features={BasicDetails}
+              features={EssentialsDetails}
             />
             <TierSection
               mostPopular={true}
-              tierName="Basic"
-              numSessionCredits={500}
-              price={120}
+              tierName="Startup"
+              numSessionCredits={80000}
+              price={400}
               contactSales={false}
-              features={BasicDetails}
+              features={StartupDetails}
             />
             <TierSection
               mostPopular={false}
-              tierName="Basic"
-              numSessionCredits={500}
-              price={120}
+              tierName="Enterprise"
+              numSessionCredits={300000}
+              price={1500}
               contactSales={true}
-              features={BasicDetails}
+              features={EnterpriseDetails}
             />
           </Section>
         )}
@@ -491,19 +500,22 @@ const MobileTierCarousel = () => {
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
     startIndex: planIndex,
-    align: 0.105,
+    align: 'center',
   });
 
   useEffect(() => {
     if (embla && planIndex) {
-      embla?.scrollTo(planIndex);
-      embla.on('select', (e) => setPlanIndex(embla.selectedScrollSnap())); // Add event listener
+      embla.scrollTo(planIndex);
+
+      embla.on('select', (e) => {
+        setPlanIndex(embla.selectedScrollSnap());
+      });
     }
   }, [embla, planIndex]);
 
   return (
     <>
-      <div className="embla__container" ref={viewportRef}>
+      <div className="embla" ref={viewportRef}>
         <div className="embla__container">
           {planInfo.map((p: PricingInfo, i: number) => (
             <MobileTierSection
@@ -619,7 +631,8 @@ const MobileTierSection = ({
             {tierName}
           </Typography>
           <Typography type="copy3" className={styles.mobileSessionCredits}>
-            {numSessionCredits} session credits
+            {numSessionCredits ? numSessionCredits.toLocaleString() : 'Custom'}{' '}
+            session credits
           </Typography>
           <div className={styles.desktopPrice}>
             {contactSales ? (
