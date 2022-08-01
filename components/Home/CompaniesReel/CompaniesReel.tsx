@@ -14,7 +14,6 @@ import Mage from '../../../public/images/companies/mage.png';
 import Secoda from '../../../public/images/companies/secoda.svg';
 import classNames from 'classnames';
 import { Typography } from '../../common/Typography/Typography';
-import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
 
 export const CompaniesReel = () => {
   return (
@@ -44,12 +43,7 @@ export const CompaniesReel = () => {
           <div
             className={classNames(styles.tabletGraphic, styles.hideMobile)}
           ></div>
-          <Image
-            src={Secoda}
-            alt=""
-            className={styles.scaleHeight}
-            style={{ transform: 'scale(1.4)' }}
-          />
+          <Image src={Secoda} alt="" className={styles.scaleHeight} />
         </div>
       </div>
     </div>
