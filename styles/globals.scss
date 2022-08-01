@@ -219,6 +219,10 @@ a {
   color: var(--brand-accent-light);
   font-weight: 600;
   text-decoration: none;
+
+  &:hover {
+    color: var(--brand-accent);
+  }
 }
 
 .embla {
