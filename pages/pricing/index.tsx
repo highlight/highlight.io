@@ -519,7 +519,7 @@ const MobileTierCarousel = () => {
         <div className="embla__container">
           {planInfo.map((p: PricingInfo, i: number) => (
             <MobileTierSection
-              width={width / 2}
+              width={width <= 800 ? 248 : 332}
               selected={i == planIndex}
               key={i}
               mostPopular={p.mostPopular}
