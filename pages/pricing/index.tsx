@@ -86,7 +86,7 @@ const TierSection = ({
       >
         <div className={styles.desktopTierSection}>
           <div className={styles.desktopTopTier}>
-            <div className={styles.desktopTierHeader}>
+            <div className={styles.tierHeader}>
               <Typography type="copy1" emphasis>
                 {tierName}
               </Typography>
@@ -210,7 +210,7 @@ const Pricing: NextPage = () => {
                 monthly={monthly}
               />
             </div>
-            <MobileTierCarousel />
+            <MobileTierCarousel monthly={monthly} />
           </Section>
         ) : (
           <Section className={styles.tierWrapper}>
@@ -504,7 +504,7 @@ const BillingWidget = ({
   );
 };
 
-const MobileTierCarousel = () => {
+const MobileTierCarousel = ({ monthly }: { monthly?: boolean }) => {
   const { width } = useWindowDimensions();
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
@@ -536,6 +536,7 @@ const MobileTierCarousel = () => {
               numSessionCredits={p.numSessionCredits}
               price={p.price}
               contactSales={p.contactSales}
+              monthly={monthly}
             />
           ))}
         </div>
@@ -609,6 +610,7 @@ const MobileTierSection = ({
   mostPopular,
   selected,
   width,
+  monthly,
 }: {
   mostPopular: boolean;
   tierName: string;
@@ -617,6 +619,7 @@ const MobileTierSection = ({
   contactSales: boolean;
   selected: boolean;
   width: number;
+  monthly?: boolean;
 }) => {
   return (
     <div
@@ -636,9 +639,18 @@ const MobileTierSection = ({
         })}
       >
         <div className={styles.mobileTierTop}>
-          <Typography type="copy1" emphasis className={styles.mobileTierName}>
-            {tierName}
-          </Typography>
+          <div className={styles.tierHeader}>
+            <Typography type="copy1" emphasis>
+              {tierName}
+            </Typography>
+            <div
+              className={classNames(styles.discountPill, {
+                [styles.discountPillVisible]: !monthly,
+              })}
+            >
+              - 20%
+            </div>
+          </div>
           <Typography type="copy3" className={styles.mobileSessionCredits}>
             {numSessionCredits ? numSessionCredits.toLocaleString() : 'Custom'}{' '}
             session credits

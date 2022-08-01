@@ -72,8 +72,9 @@
   margin-bottom: 24px;
 }
 
-.desktopTierHeader {
+.tierHeader {
   align-items: center;
+  column-gap: 8px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
@@ -447,10 +448,6 @@
 .mobileCarousel {
   display: flex;
   flex-direction: row;
-}
-
-.mobileTierName {
-  margin-bottom: 8px;
 }
 
 .mobileSessionCredits {
