@@ -165,7 +165,7 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <main>
-        <Section>
+        <Section className={styles.heroVideoWrapper}>
           <div className={styles.heroBugLeft}>
             <Image src={HeroBugLeft} alt="bug left" />
           </div>

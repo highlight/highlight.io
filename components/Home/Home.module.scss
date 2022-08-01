@@ -33,6 +33,10 @@
   margin-bottom: calc(22 * var(--space-unit));
 }
 
+.heroVideoWrapper {
+  overflow: hidden;
+}
+
 .heroBugLeft {
   position: absolute;
   left: -150px;
