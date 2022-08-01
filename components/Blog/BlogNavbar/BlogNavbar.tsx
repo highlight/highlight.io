@@ -136,7 +136,7 @@ const BlogNavbar = ({
         </div>
       </Banner>
       <header
-        className={classNames(styles.headerPadding, {
+        className={classNames({
           [styles.hideNavbar]: !scrolled,
           [styles.mobileHeader]: isOpen,
         })}
