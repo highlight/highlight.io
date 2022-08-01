@@ -34,7 +34,7 @@ export const CompaniesReel = () => {
             src={Hightouch}
             alt="Hightouch"
             className={styles.scaleHeight}
-            style={{ transform: 'scale(1.4)' }}
+            style={{ transform: 'scale(1.1)' }}
           />
           <Image src={Basedash} alt="Basedash" />
           <Image src={Impira} alt="Impira" className={styles.scaleHeight} />
