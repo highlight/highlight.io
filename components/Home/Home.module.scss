@@ -416,6 +416,7 @@
   margin: var(--size-medium) var(--size-medium) 100px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 
   .reviewText {
     flex: 1 1 auto;
@@ -462,15 +463,19 @@
 
 .slider {
   margin: auto;
-  overflow: hidden;
+  overflow: scroll;
   position: relative;
   width: 100%;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
 
   .slideTrack {
     transition: all 0.1s linear;
     display: flex;
-    width: calc(532px * 14);
-    margin-left: calc(-532px * 2);
   }
 }
 

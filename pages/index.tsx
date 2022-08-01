@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import { PrimaryLink } from '../components/common/Buttons/SecondaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
@@ -104,35 +104,57 @@ const Home: NextPage = () => {
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
   const section3 = useRef<HTMLDivElement>(null);
-  const startScroll = useRef<HTMLDivElement>(null);
-  const endScroll = useRef<HTMLDivElement>(null);
+  const reviewsRef = useRef<HTMLDivElement>(null);
+  const scrollYPosition = useRef<number>(0);
   const [offsetPosition, setOffsetPosition] = useState(0);
-  const [scrollYPosition, setScrollYPosition] = useState(0);
-  const [startYPosition, setStartYPosition] = useState(0);
-  const [endYPosition, setEndYPosition] = useState(0);
-  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [scrollReviews, setScrollReviews] = useState(false);
+
+  const scrollListener = useCallback(() => {
+    if (!scrollReviews) {
+      return;
+    }
+
+    if (reviewsRef.current) {
+      const { scrollY } = window;
+      const scrollingDown = scrollYPosition.current > scrollY;
+      const scrollDistance = scrollingDown ? -6 : 6;
+      reviewsRef.current.scrollLeft += scrollDistance;
+      scrollYPosition.current = scrollY;
+    }
+  }, [scrollReviews]);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      setScrollYPosition(window.scrollY);
-    });
-  });
+    window.removeEventListener('scroll', scrollListener);
+    window.addEventListener('scroll', scrollListener);
+    return () => window.removeEventListener('scroll', scrollListener);
+  }, [scrollListener]);
 
   useEffect(() => {
-    setOffsetPosition(section1.current?.offsetHeight || 0);
-    setStartYPosition(startScroll.current?.offsetTop || 0);
-    setEndYPosition(endScroll.current?.offsetTop || 0);
-    setScrollPercentage(
-      (scrollYPosition - startYPosition) / (endYPosition - startYPosition)
+    const reviewsElement = reviewsRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrollReviews(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: '250px 0px',
+        threshold: 0,
+      }
     );
-  }, [
-    section1,
-    startScroll,
-    endScroll,
-    scrollYPosition,
-    startYPosition,
-    endYPosition,
-  ]);
+
+    if (reviewsElement) {
+      observer.observe(reviewsElement);
+    }
+
+    setOffsetPosition(section1.current?.offsetHeight || 0);
+
+    return () => {
+      if (reviewsElement) {
+        observer.unobserve(reviewsElement);
+      }
+    };
+  }, [section1, reviewsRef]);
 
   return (
     <div>
@@ -720,7 +742,6 @@ const Home: NextPage = () => {
           </Section>
         </div>
         <SnippetTab />
-        <div ref={startScroll}></div>
         <Section>
           <CompaniesReel />
         </Section>
@@ -734,13 +755,8 @@ const Home: NextPage = () => {
             </div>
           </div>
         </Section>
-        <div className={styles.slider}>
-          <div
-            className={styles.slideTrack}
-            style={{
-              transform: `translateX(calc(-532px * 1 * ${scrollPercentage}))`,
-            }}
-          >
+        <div className={styles.slider} ref={reviewsRef}>
+          <div className={styles.slideTrack}>
             {[...REVIEWS, ...REVIEWS].map((review, i) => (
               <CustomerReview
                 key={i}
@@ -754,7 +770,6 @@ const Home: NextPage = () => {
         </div>
         <CallToAction />
       </main>
-      <div ref={endScroll}></div>
       <Footer />
     </div>
   );
