@@ -2,6 +2,7 @@ import { HighlightLogo } from '../HighlightLogo/HighlightLogo';
 import styles from './Footer.module.scss';
 import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { Typography } from '../Typography/Typography';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -31,6 +32,12 @@ const Footer = () => {
           </div>
           <Typography type="copy3">
             <ul className={styles.footerList}>
+              <li>
+                <Link href="/pricing">Pricing</Link>
+              </li>
+              <li>
+                <a href="https://app.highlight.run/?sign_up=1">Sign up</a>
+              </li>
               <li>
                 <a href="https://www.highlight.run/#product">Features</a>
               </li>

@@ -1,14 +1,18 @@
+.container {
+  position: sticky;
+  top: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+
+  &.hide {
+    top: -121px;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.headerPadding {
-  z-index: 10;
-  position: sticky;
-  top: 0;
-  transition: all 0.2s ease;
 }
 
 .headerInner {
@@ -18,11 +22,7 @@
 }
 
 .headerBorder {
-  border-bottom: 1px solid #var(--color-divider-on-dark);
-}
-
-.hideNavbar {
-  top: -84px;
+  border-bottom: 1px solid var(--color-divider-on-dark);
 }
 
 .navContainer {
@@ -54,7 +54,6 @@
 
   li {
     position: relative;
-    font-weight: 300;
   }
 }
 
@@ -64,6 +63,7 @@
   align-items: center;
   gap: var(--size-small);
   color: var(--text-gray);
+  font-weight: 300;
   transition: color 0.2s ease;
   text-decoration: none;
   cursor: pointer;

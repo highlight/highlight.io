@@ -21,7 +21,7 @@ export const CompaniesReel = () => {
     <div className={styles.anchorFeature}>
       <div className={styles.anchorHead}>
         <h2>{`Our customers`}</h2>
-        <Typography type="copy2">
+        <Typography type="copy2" onDark>
           {`Highlight powers forward-thinking companies. `}
           <PrimaryLink href="/customers">
             Find out about our customers
