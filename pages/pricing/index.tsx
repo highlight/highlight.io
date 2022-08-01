@@ -149,20 +149,18 @@ const TierSection = ({
           Object.keys(features).map((headingKey) => {
             return (
               <div className={styles.desktopFeaturesSection} key={headingKey}>
-                {(features as any)[headingKey].items.map(
-                  (item: any, key: number) => {
-                    return (
-                      <>
-                        {item.value ? (
-                          <Image src={CheckMark} alt="checkmark"></Image>
-                        ) : (
-                          <div>-</div>
-                        )}
-                        <hr className={styles.featureDivider} />
-                      </>
-                    );
-                  }
-                )}
+                {(features as any)[headingKey].items.map((item: any) => {
+                  return (
+                    <>
+                      {item.value ? (
+                        <Image src={CheckMark} alt="checkmark"></Image>
+                      ) : (
+                        <div>-</div>
+                      )}
+                      <hr className={styles.featureDivider} />
+                    </>
+                  );
+                })}
               </div>
             );
           })}
@@ -516,7 +514,7 @@ const MobileTierCarousel = ({ monthly }: { monthly?: boolean }) => {
     if (embla && planIndex) {
       embla.scrollTo(planIndex);
 
-      embla.on('select', (e) => {
+      embla.on('select', () => {
         setPlanIndex(embla.selectedScrollSnap());
       });
     }
@@ -536,7 +534,7 @@ const MobileTierCarousel = ({ monthly }: { monthly?: boolean }) => {
               numSessionCredits={p.numSessionCredits}
               price={p.price}
               contactSales={p.contactSales}
-              monthly={monthly}
+              discount={p.price > 0 ? !monthly : undefined}
             />
           ))}
         </div>
@@ -610,7 +608,7 @@ const MobileTierSection = ({
   mostPopular,
   selected,
   width,
-  monthly,
+  discount,
 }: {
   mostPopular: boolean;
   tierName: string;
@@ -619,7 +617,7 @@ const MobileTierSection = ({
   contactSales: boolean;
   selected: boolean;
   width: number;
-  monthly?: boolean;
+  discount?: boolean;
 }) => {
   return (
     <div
@@ -645,7 +643,7 @@ const MobileTierSection = ({
             </Typography>
             <div
               className={classNames(styles.discountPill, {
-                [styles.discountPillVisible]: !monthly,
+                [styles.discountPillVisible]: discount,
               })}
             >
               - 20%
