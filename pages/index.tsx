@@ -24,7 +24,7 @@ import MagnifierIcon from '../public/images/magnifier.svg';
 import VerifiedIcon from '../public/images/verified.svg';
 import PlugIcon from '../public/images/plug.svg';
 
-import CollaborateImage from '../public/images/collaborate.svg';
+import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.svg';
 import Tablet1 from '../public/images/tablet1.svg';
 import Tablet2 from '../public/images/tablet2.png';
