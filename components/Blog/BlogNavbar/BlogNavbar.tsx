@@ -141,7 +141,6 @@ const BlogNavbar = ({
       </Banner>
       <header
         className={classNames({
-          [styles.hideNavbar]: !scrolled,
           [styles.mobileHeader]: isOpen,
         })}
       >
