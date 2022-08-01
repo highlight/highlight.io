@@ -2,6 +2,7 @@ import { HighlightLogo } from '../HighlightLogo/HighlightLogo';
 import styles from './Footer.module.scss';
 import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { Typography } from '../Typography/Typography';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -40,7 +41,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="https://www.highlight.run/#customer">Customers</a>
+                <Link href="/#customers">Customers</Link>
               </li>
             </ul>
           </Typography>
