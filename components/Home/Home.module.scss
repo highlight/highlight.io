@@ -316,6 +316,14 @@
     position: fixed;
   }
 
+  .modalClose {
+    color: var(--color-gray-300);
+    position: absolute;
+    font-size: 40px;
+    top: var(--size-medium);
+    right: var(--size-medium);
+  }
+
   .videoModal {
     z-index: 999;
     height: 100vh;
