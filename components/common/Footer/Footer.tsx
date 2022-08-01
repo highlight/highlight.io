@@ -47,7 +47,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="https://www.highlight.run/#customer">Customers</a>
+                <Link href="/#customers">Customers</Link>
               </li>
             </ul>
           </Typography>

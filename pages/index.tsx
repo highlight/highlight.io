@@ -767,10 +767,8 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
               <Typography type="copy2" onDark>
-                {`Don't take our word. `}
-                <PrimaryLink href="/customers">
-                  Read our customer review section
-                </PrimaryLink>
+                Don&apos;t take our word for it. Here&apos;s what our customers
+                have to say.
               </Typography>
             </div>
           </div>

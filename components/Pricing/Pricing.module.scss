@@ -72,8 +72,31 @@
   margin-bottom: 24px;
 }
 
-.dekstopTierName {
+.tierHeader {
+  align-items: center;
+  column-gap: 8px;
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 8px;
+}
+
+.discountPill {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  color: var(--color-white);
+  display: flex;
+  font-size: 16px;
+  height: 34px;
+  justify-content: center;
+  min-width: 60px;
+  opacity: 0;
+  padding: 5px;
+  transition: opacity 0.2s ease;
+}
+
+.discountPillVisible {
+  opacity: 100% !important;
 }
 
 .desktopSessionCredits {
@@ -425,10 +448,6 @@
 .mobileCarousel {
   display: flex;
   flex-direction: row;
-}
-
-.mobileTierName {
-  margin-bottom: 8px;
 }
 
 .mobileSessionCredits {

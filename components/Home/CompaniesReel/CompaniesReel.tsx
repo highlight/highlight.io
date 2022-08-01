@@ -18,14 +18,11 @@ import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
 
 export const CompaniesReel = () => {
   return (
-    <div className={styles.anchorFeature}>
+    <div className={styles.anchorFeature} id="customers">
       <div className={styles.anchorHead}>
         <h2>{`Our customers`}</h2>
         <Typography type="copy2" onDark>
-          {`Highlight powers forward-thinking companies. `}
-          <PrimaryLink href="/customers">
-            Find out about our customers
-          </PrimaryLink>
+          Highlight powers forward-thinking companies.
         </Typography>
       </div>
       <div className={styles.customerReel}>

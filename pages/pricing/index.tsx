@@ -60,6 +60,7 @@ const TierSection = ({
   numSessionCredits,
   price,
   contactSales,
+  discount,
   features,
   mostPopular,
 }: {
@@ -68,6 +69,7 @@ const TierSection = ({
   numSessionCredits: number;
   price: number;
   contactSales: boolean;
+  discount?: boolean;
   features: PricingDetails;
 }) => {
   return (
@@ -84,13 +86,18 @@ const TierSection = ({
       >
         <div className={styles.desktopTierSection}>
           <div className={styles.desktopTopTier}>
-            <Typography
-              type="copy1"
-              emphasis
-              className={styles.dekstopTierName}
-            >
-              {tierName}
-            </Typography>
+            <div className={styles.tierHeader}>
+              <Typography type="copy1" emphasis>
+                {tierName}
+              </Typography>
+              <div
+                className={classNames(styles.discountPill, {
+                  [styles.discountPillVisible]: discount,
+                })}
+              >
+                - 20%
+              </div>
+            </div>
             {contactSales ? (
               <div className={styles.desktopSessionCreditsEnterprise}>
                 <Typography type="copy3" emphasis>
@@ -142,20 +149,18 @@ const TierSection = ({
           Object.keys(features).map((headingKey) => {
             return (
               <div className={styles.desktopFeaturesSection} key={headingKey}>
-                {(features as any)[headingKey].items.map(
-                  (item: any, key: number) => {
-                    return (
-                      <>
-                        {item.value ? (
-                          <Image src={CheckMark} alt="checkmark"></Image>
-                        ) : (
-                          <div>-</div>
-                        )}
-                        <hr className={styles.featureDivider} />
-                      </>
-                    );
-                  }
-                )}
+                {(features as any)[headingKey].items.map((item: any) => {
+                  return (
+                    <>
+                      {item.value ? (
+                        <Image src={CheckMark} alt="checkmark"></Image>
+                      ) : (
+                        <div>-</div>
+                      )}
+                      <hr className={styles.featureDivider} />
+                    </>
+                  );
+                })}
               </div>
             );
           })}
@@ -203,7 +208,7 @@ const Pricing: NextPage = () => {
                 monthly={monthly}
               />
             </div>
-            <MobileTierCarousel />
+            <MobileTierCarousel monthly={monthly} />
           </Section>
         ) : (
           <Section className={styles.tierWrapper}>
@@ -260,6 +265,7 @@ const Pricing: NextPage = () => {
               price={150}
               contactSales={false}
               features={EssentialsDetails}
+              discount={!monthly}
             />
             <TierSection
               mostPopular={true}
@@ -268,6 +274,7 @@ const Pricing: NextPage = () => {
               price={400}
               contactSales={false}
               features={StartupDetails}
+              discount={!monthly}
             />
             <TierSection
               mostPopular={false}
@@ -500,7 +507,7 @@ const BillingWidget = ({
   );
 };
 
-const MobileTierCarousel = () => {
+const MobileTierCarousel = ({ monthly }: { monthly?: boolean }) => {
   const { width } = useWindowDimensions();
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
@@ -512,7 +519,7 @@ const MobileTierCarousel = () => {
     if (embla && planIndex) {
       embla.scrollTo(planIndex);
 
-      embla.on('select', (e) => {
+      embla.on('select', () => {
         setPlanIndex(embla.selectedScrollSnap());
       });
     }
@@ -524,7 +531,7 @@ const MobileTierCarousel = () => {
         <div className="embla__container">
           {planInfo.map((p: PricingInfo, i: number) => (
             <MobileTierSection
-              width={width / 2}
+              width={width <= 800 ? 248 : 332}
               selected={i == planIndex}
               key={i}
               mostPopular={p.mostPopular}
@@ -532,6 +539,7 @@ const MobileTierCarousel = () => {
               numSessionCredits={p.numSessionCredits}
               price={p.price}
               contactSales={p.contactSales}
+              discount={p.price > 0 ? !monthly : undefined}
             />
           ))}
         </div>
@@ -605,6 +613,7 @@ const MobileTierSection = ({
   mostPopular,
   selected,
   width,
+  discount,
 }: {
   mostPopular: boolean;
   tierName: string;
@@ -613,6 +622,7 @@ const MobileTierSection = ({
   contactSales: boolean;
   selected: boolean;
   width: number;
+  discount?: boolean;
 }) => {
   return (
     <div
@@ -632,9 +642,18 @@ const MobileTierSection = ({
         })}
       >
         <div className={styles.mobileTierTop}>
-          <Typography type="copy1" emphasis className={styles.mobileTierName}>
-            {tierName}
-          </Typography>
+          <div className={styles.tierHeader}>
+            <Typography type="copy1" emphasis>
+              {tierName}
+            </Typography>
+            <div
+              className={classNames(styles.discountPill, {
+                [styles.discountPillVisible]: discount,
+              })}
+            >
+              - 20%
+            </div>
+          </div>
           <Typography type="copy3" className={styles.mobileSessionCredits}>
             {numSessionCredits ? numSessionCredits.toLocaleString() : 'Custom'}{' '}
             session credits
