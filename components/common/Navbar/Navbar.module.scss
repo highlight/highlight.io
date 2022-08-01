@@ -54,7 +54,6 @@
 
   li {
     position: relative;
-    font-weight: 300;
   }
 }
 
@@ -64,6 +63,7 @@
   align-items: center;
   gap: var(--size-small);
   color: var(--text-gray);
+  font-weight: 300;
   transition: color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
