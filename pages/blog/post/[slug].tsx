@@ -133,7 +133,9 @@ const PostPage = ({
 
   useEffect(() => {
     setEndPosition(blogBody.current?.offsetHeight || 0);
-  }, [blogBody]);
+    // recalculate end position when blog sections are processed
+    // because at that point the page height is finalized
+  }, [postSections]);
 
   useEffect(() => {
     setPostRaw(post.richcontent.raw.children);
