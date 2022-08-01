@@ -60,6 +60,7 @@ const TierSection = ({
   numSessionCredits,
   price,
   contactSales,
+  discount,
   features,
   mostPopular,
 }: {
@@ -68,6 +69,7 @@ const TierSection = ({
   numSessionCredits: number;
   price: number;
   contactSales: boolean;
+  discount?: boolean;
   features: PricingDetails;
 }) => {
   return (
@@ -84,13 +86,18 @@ const TierSection = ({
       >
         <div className={styles.desktopTierSection}>
           <div className={styles.desktopTopTier}>
-            <Typography
-              type="copy1"
-              emphasis
-              className={styles.dekstopTierName}
-            >
-              {tierName}
-            </Typography>
+            <div className={styles.desktopTierHeader}>
+              <Typography type="copy1" emphasis>
+                {tierName}
+              </Typography>
+              <div
+                className={classNames(styles.discountPill, {
+                  [styles.discountPillVisible]: discount,
+                })}
+              >
+                - 20%
+              </div>
+            </div>
             {contactSales ? (
               <div className={styles.desktopSessionCreditsEnterprise}>
                 <Typography type="copy3" emphasis>
@@ -259,6 +266,7 @@ const Pricing: NextPage = () => {
               price={150}
               contactSales={false}
               features={EssentialsDetails}
+              discount={!monthly}
             />
             <TierSection
               mostPopular={true}
@@ -267,6 +275,7 @@ const Pricing: NextPage = () => {
               price={400}
               contactSales={false}
               features={StartupDetails}
+              discount={!monthly}
             />
             <TierSection
               mostPopular={false}

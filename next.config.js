@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  compress: true,
   images: {
     domains: ['media.graphassets.com', 'lh3.googleusercontent.com'],
   },
+  productionBrowserSourceMaps: true,
+  reactStrictMode: true,
+  swcMinify: true,
 };
 
 module.exports = nextConfig;
