@@ -158,7 +158,7 @@ const Home: NextPage = () => {
                 </Typography>
               </div>
               <h1>{`Because a stack trace alone isn't enough`}</h1>
-              <Typography type="copy1">
+              <Typography type="copy1" onDark>
                 Stop wasting effort trying to track down and reproduce bugs.
                 Through session replays, Highlight shows you exactly how and
                 when your bugs happen. Highlight removes the mystery of
@@ -192,7 +192,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   Playback of your app
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   See exactly how users are impacted by errros.
                 </Typography>
               </FeatureItem>
@@ -201,7 +201,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   Error stack traces
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   Access full, language-specific stack traces on your web app.
                 </Typography>
               </FeatureItem>
@@ -210,7 +210,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   {`Console & network tabs`}
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   Debug with everything you get in the dev-tools console.
                 </Typography>
               </FeatureItem>
@@ -219,7 +219,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   Precise timing
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   Understand when bugs happen and eveything that leads to it.
                 </Typography>
               </FeatureItem>
@@ -727,7 +727,7 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <Typography type="copy2">
+              <Typography type="copy2" onDark>
                 {`Don't take our word. `}
                 <PrimaryLink href="/customers">
                   Read our customer review section
