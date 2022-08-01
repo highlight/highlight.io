@@ -733,6 +733,10 @@
   display: block;
 }
 
+.hidePhone {
+  display: block;
+}
+
 .mobile {
   display: none;
 }
@@ -810,7 +814,7 @@
     }
   }
 
-  .anchorTitle {
+  .secondaryAnchor {
     max-height: 300px;
   }
 
@@ -824,7 +828,7 @@
   }
 
   .obfuscation {
-    padding: 0 calc(30 * var(--space-unit));
+    padding: 0;
   }
 
   .heroBugLeft,
@@ -893,6 +897,14 @@
   .companies {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .featuresLeftColumn {
+    grid-column: col-start / span 6;
+  }
+
+  .featuresRightColumn {
+    grid-column: col-start 7 / -1;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -910,7 +922,7 @@
     display: flex !important;
   }
 
-  .anchorTitle {
+  .secondaryAnchor {
     max-height: 200px;
   }
 
@@ -920,6 +932,10 @@
   }
 
   .hideMobile {
+    display: none;
+  }
+
+  .hidePhone {
     display: none;
   }
 

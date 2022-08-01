@@ -249,7 +249,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </Section>
-          <Section className={styles.hideMobile}>
+          <Section className={styles.hidePhone}>
             <div className={styles.featuresColumnContainer}>
               <div className={styles.featuresLeftColumn}>
                 <div ref={section1} className={styles.featuresSection}>
@@ -501,9 +501,9 @@ const Home: NextPage = () => {
                       (section3?.current?.getBoundingClientRect().y || 0) >
                       IMAGE_SHOW_OFFSET - 10,
                   })}
-                  style={{ width: '80%' }}
+                  style={{ width: 300 }}
                 >
-                  <div className={styles.imageInner}>
+                  <div className={styles.imageInner} style={{ height: 300 }}>
                     <ObfuscationSlider />
                   </div>
                 </div>

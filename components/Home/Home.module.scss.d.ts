@@ -48,6 +48,7 @@ export const heroBugRight: string;
 export const heroImage: string;
 export const hideImage: string;
 export const hideMobile: string;
+export const hidePhone: string;
 export const hideVideo: string;
 export const highlightedText: string;
 export const imageInner: string;
