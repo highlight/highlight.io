@@ -132,10 +132,13 @@
   width: 100%;
   overflow: visible;
   position: relative;
-  padding: 0 var(--size-xxLarge);
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
   gap: var(--size-medium);
+
+  @media screen and (max-width: 1288px) {
+    padding: 0 var(--size-xxLarge);
+  }
 }
 
 .featuresSection {
@@ -285,7 +288,10 @@
   align-items: center;
   text-align: center;
   margin: auto;
-  padding: 0 var(--size-xxLarge);
+
+  @media screen and (max-width: 1288px) {
+    padding: 0 var(--size-xxLarge);
+  }
 
   .sectionSubtitle {
     margin-bottom: var(--size-xLarge);
