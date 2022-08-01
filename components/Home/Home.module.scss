@@ -780,6 +780,16 @@
   }
 }
 
+.collaborationGraphic {
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+}
+
+.mobileSpacing {
+  margin-top: -80px;
+}
+
 @media screen and (max-width: 800px) {
   .hideMobile {
     display: none;
@@ -798,6 +808,10 @@
         height: var(--size-large);
       }
     }
+  }
+
+  .anchorTitle {
+    max-height: 300px;
   }
 
   .gridSectionImageLeft {
@@ -894,6 +908,10 @@
   }
   .mobileOnly {
     display: flex !important;
+  }
+
+  .anchorTitle {
+    max-height: 200px;
   }
 
   .sectionImageLeft {

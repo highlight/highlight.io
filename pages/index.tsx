@@ -249,7 +249,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </Section>
-          <Section>
+          <Section className={styles.hideMobile}>
             <div className={styles.featuresColumnContainer}>
               <div className={styles.featuresLeftColumn}>
                 <div ref={section1} className={styles.featuresSection}>
@@ -510,7 +510,10 @@ const Home: NextPage = () => {
               </div>
             </div>
           </Section>
-          <Section reverseMobile={true} className={styles.mobileOnly}>
+          <Section
+            reverseMobile={true}
+            className={classNames(styles.mobileOnly, styles.mobileSpacing)}
+          >
             <div className={styles.sectionText}>
               <div className={styles.sectionSubtitle}>
                 <Typography type="outline">cross-team collaboration</Typography>
@@ -573,7 +576,11 @@ const Home: NextPage = () => {
                 <Image src={CollaborateImage} alt="" />
               </div>
               <div
-                className={classNames(styles.imageInner, styles.tabletGraphic)}
+                className={classNames(
+                  styles.imageInner,
+                  styles.tabletGraphic,
+                  styles.collaborationGraphic
+                )}
               >
                 <Image src={Tablet1} alt="" />
               </div>
