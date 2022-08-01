@@ -72,7 +72,7 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <Link href={'/customers'}>
+              <Link href={'/#customers'}>
                 <a className={styles.menuItem}>Customers</a>
               </Link>
             </li>
@@ -170,7 +170,7 @@ const BlogNavbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href={'/customers'}>
+                    <Link href={'/#customers'}>
                       <a className={styles.menuItemLarge}>Customers</a>
                     </Link>
                   </Typography>

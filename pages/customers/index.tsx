@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
@@ -11,6 +11,16 @@ import Footer from '../../components/common/Footer/Footer';
 import { CUSTOMER_REVIEWS } from '../../components/Customers/Customers';
 import { CustomerCard } from '../../components/Customers/CustomerCard/CustomerCard';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+
+// Hides the page in production and renders it in dev. More info:
+// https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
+export const getStaticProps: GetStaticProps = async () => {
+  if (process.env.NODE_ENV === 'production') {
+    return { notFound: true };
+  }
+
+  return { props: {} };
+};
 
 const Customers: NextPage = () => {
   return (
