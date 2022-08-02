@@ -34,7 +34,9 @@
 }
 
 .heroVideoWrapper {
-  overflow: hidden;
+  @media screen and (max-width: 1200px) {
+    overflow: hidden;
+  }
 }
 
 .heroBugLeft {
