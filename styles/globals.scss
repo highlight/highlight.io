@@ -196,6 +196,12 @@ h5 {
   font-weight: 600 !important;
 }
 
+h6 {
+  font-size: 22px;
+  line-height: 34px !important;
+  font-weight: 600 !important;
+}
+
 p {
   font-weight: 300;
   line-height: initial !important;
@@ -229,7 +235,6 @@ a {
 
 .embla {
   position: relative;
-  max-width: 670px;
 }
 
 .embla__viewport {
@@ -252,7 +257,6 @@ a {
   -webkit-touch-callout: none;
   -khtml-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  margin-left: -10px;
 }
 
 .embla__slide {
@@ -389,7 +393,9 @@ a {
     font-weight: 600 !important;
   }
 
-  footer {
-    margin: 0 var(--size-large);
+  h6 {
+    font-size: 16px;
+    line-height: 30px !important;
+    font-weight: 600 !important;
   }
 }

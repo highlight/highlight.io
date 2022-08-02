@@ -293,10 +293,6 @@
   text-align: center;
   margin: auto;
 
-  @media screen and (max-width: 1288px) {
-    padding: 0 var(--size-xxLarge);
-  }
-
   .sectionSubtitle {
     margin-bottom: var(--size-xLarge);
   }
@@ -628,7 +624,6 @@
 
 .simpleCallToActionBackground {
   margin: var(--size-xLarge) 0 !important;
-  background-color: transparent !important;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-divider-on-dark);
   padding: 40px 24px 48px;
