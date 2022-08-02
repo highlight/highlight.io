@@ -118,7 +118,7 @@ const Home: NextPage = () => {
       const { scrollY } = window;
       const scrollingDown = scrollYPosition.current > scrollY;
       // Adjust this value to control scroll speed
-      const scrollDistance = scrollingDown ? -6 : 6;
+      const scrollDistance = scrollingDown ? -3 : 3;
       reviewsRef.current.scrollLeft += scrollDistance;
       scrollYPosition.current = scrollY;
     }
