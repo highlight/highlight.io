@@ -56,11 +56,7 @@ const BlogNavbar = ({
   }, [dropdownRef]);
 
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.hide]: scrolled,
-      })}
-    >
+    <>
       <Banner>
         <div className={styles.bannerContainer}>
           <p>Want 1 month of free Highlight? </p>
@@ -140,7 +136,8 @@ const BlogNavbar = ({
         </div>
       </Banner>
       <header
-        className={classNames({
+        className={classNames(styles.headerPadding, {
+          [styles.hideNavbar]: !scrolled,
           [styles.mobileHeader]: isOpen,
         })}
       >
@@ -244,7 +241,7 @@ const BlogNavbar = ({
           }}
         ></div>
       </header>
-    </div>
+    </>
   );
 };
 
