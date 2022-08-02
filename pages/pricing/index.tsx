@@ -236,6 +236,7 @@ const Pricing: NextPage = () => {
                                 type="copy3"
                                 key={key}
                                 className={styles.featureKey}
+                                onDark
                               >
                                 {item.name}
                               </Typography>
@@ -431,7 +432,11 @@ const Question = ({
         }
       >
         <div className={styles.collapseInner}>
-          <Typography className={styles.questionDescription} type="copy3">
+          <Typography
+            className={styles.questionDescription}
+            type="copy3"
+            onDark
+          >
             <div
               dangerouslySetInnerHTML={{ __html: questionDescription }}
             ></div>

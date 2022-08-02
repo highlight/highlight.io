@@ -54,6 +54,7 @@ export const jayImage: string;
 export const mobile: string;
 export const mobileOnly: string;
 export const modalBg: string;
+export const modalClose: string;
 export const obfuscation: string;
 export const obfuscationHandle: string;
 export const obfuscationImage: string;

@@ -65,6 +65,8 @@
   position: absolute;
   right: -100px;
   bottom: -80px;
+  height: 245px;
+  width: 249px;
 }
 
 .obfuscationHandle {
@@ -130,10 +132,13 @@
   width: 100%;
   overflow: visible;
   position: relative;
-  padding: 0 var(--size-xxLarge);
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
   gap: var(--size-medium);
+
+  @media screen and (max-width: 1288px) {
+    padding: 0 var(--size-xxLarge);
+  }
 }
 
 .featuresSection {
@@ -283,7 +288,10 @@
   align-items: center;
   text-align: center;
   margin: auto;
-  padding: 0 var(--size-xxLarge);
+
+  @media screen and (max-width: 1288px) {
+    padding: 0 var(--size-xxLarge);
+  }
 
   .sectionSubtitle {
     margin-bottom: var(--size-xLarge);
@@ -314,6 +322,14 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
+  }
+
+  .modalClose {
+    color: var(--color-gray-300);
+    position: absolute;
+    font-size: 40px;
+    top: var(--size-medium);
+    right: var(--size-medium);
   }
 
   .videoModal {
