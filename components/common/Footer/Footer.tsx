@@ -83,7 +83,7 @@ const Footer = () => {
           <Typography type="copy3">
             <ul className={styles.footerList}>
               <li>
-                <Link href="/terms">Terms Of Service</Link>
+                <Link href="/terms">Terms of Service</Link>
               </li>
               <li>
                 <Link href="/privacy">Privacy Policy</Link>

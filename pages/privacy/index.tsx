@@ -134,11 +134,11 @@ const Privacy = () => {
               mobile device (“Usage Data”).
             </p>
             <p>
-              This Usage Data may include information such as your computer's
-              Internet Protocol address (e.g. IP address), browser type, browser
-              version, the pages of our Service that you visit, the time and
-              date of your visit, the time spent on those pages, unique device
-              identifiers and other diagnostic data.
+              This Usage Data may include information such as your
+              computer&apos;s Internet Protocol address (e.g. IP address),
+              browser type, browser version, the pages of our Service that you
+              visit, the time and date of your visit, the time spent on those
+              pages, unique device identifiers and other diagnostic data.
             </p>
             <p>
               When you access Service with a mobile device, this Usage Data may
@@ -460,8 +460,8 @@ const Privacy = () => {
               operate.
             </p>
             <p>
-              3. To stop selling your personal information. We don't sell or
-              rent your personal information to any third parties for any
+              3. To stop selling your personal information. We don&apos;t sell
+              or rent your personal information to any third parties for any
               purpose. You are the only owner of your Personal Data and can
               request disclosure or deletion at any time.
             </p>
@@ -545,7 +545,7 @@ const Privacy = () => {
             <p>
               Our Service may contain links to other sites that are not operated
               by us. If you click a third party link, you will be directed to
-              that third party's site. We strongly advise you to review the
+              that third party&apos;s site. We strongly advise you to review the
               Privacy Policy of every site you visit.
             </p>
             <p>
@@ -553,7 +553,7 @@ const Privacy = () => {
               content, privacy policies or practices of any third party sites or
               services.
             </p>
-            <p>17. Children's Privacy</p>
+            <p>17. Children&apos;s Privacy</p>
             <p>
               Our Services are not intended for use by children under the age of
               18 (“Child” or “Children”).
