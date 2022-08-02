@@ -76,22 +76,16 @@ const Blog = ({
   tags,
   currentTag,
 }: {
-  posts: Array<never>;
+  posts: Array<Post>;
   tags: Array<string>;
   currentTag: string;
 }) => {
-  const [currentItems, setCurrentItems] = useState([]);
-  const [pageCount] = useState(Math.ceil(posts.length / ITEMS_PER_PAGE));
   const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    setCurrentItems(
-      posts.slice(
-        ITEMS_PER_PAGE * (currentPage - 1),
-        Math.min(ITEMS_PER_PAGE * currentPage, posts.length)
-      )
-    );
-  }, [currentPage, posts]);
+  const pageCount = Math.ceil(posts.length / ITEMS_PER_PAGE);
+  const currentItems = posts.slice(
+    ITEMS_PER_PAGE * (currentPage - 1),
+    Math.min(ITEMS_PER_PAGE * currentPage, posts.length)
+  );
 
   return (
     <>
@@ -103,9 +97,7 @@ const Blog = ({
       <main>
         <div className={styles.blogContainer}>
           <h4>Blog article of the week</h4>
-          {currentItems.slice(0, 1).map((p: Post, i: number) => (
-            <BlogPost {...p} key={i} />
-          ))}
+          <BlogPost {...posts[0]} />
           <hr />
         </div>
         <div className={styles.tagContainer}>
