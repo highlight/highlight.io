@@ -130,6 +130,10 @@ const Home: NextPage = () => {
   }, [scrollListener]);
 
   useEffect(() => {
+    setOffsetPosition(section1.current?.offsetHeight || 0);
+  }, [section1]);
+
+  useEffect(() => {
     const reviewsElement = reviewsRef.current;
 
     const observer = new IntersectionObserver(
@@ -145,16 +149,18 @@ const Home: NextPage = () => {
 
     if (reviewsElement) {
       observer.observe(reviewsElement);
-    }
 
-    setOffsetPosition(section1.current?.offsetHeight || 0);
+      // Scroll to center on load
+      reviewsElement.scrollLeft =
+        (reviewsElement.scrollWidth - window.innerWidth) / 2;
+    }
 
     return () => {
       if (reviewsElement) {
         observer.unobserve(reviewsElement);
       }
     };
-  }, [section1, reviewsRef]);
+  }, [reviewsRef]);
 
   return (
     <div>
