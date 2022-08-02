@@ -186,8 +186,12 @@
   text-align: left;
   width: 100%;
 
-  h3 {
-    margin-bottom: var(--size-large) !important;
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 1.5em !important;
+    margin-bottom: 0.25em !important;
   }
 
   .codeBlock {
