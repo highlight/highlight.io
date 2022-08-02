@@ -32,7 +32,7 @@ const SetupDescription = (
       Use Highlight{' '}
       <span className={styles.highlightedText}>within minutes</span>
     </h2>
-    <Typography type="copy2">
+    <Typography type="copy2" onDark>
       {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
     </Typography>
     <div className={styles.buttonContainer}>
@@ -54,7 +54,7 @@ const SNIPPET_TABS = [
             HeaderImage={ReactImage}
             canCopy={true}
             language="javascript"
-            content={`import React from 'react';   
+            content={`import React from 'react';
 import App from './App';
 import { H } from 'highlight.run';
 import { ErrorBoundary } from '@highlight-run/react';
@@ -83,7 +83,7 @@ ReactDOM.render(
             HeaderImage={VueImage}
             canCopy={true}
             language="javascript"
-            content={`import { createApp } from 'vue';       
+            content={`import { createApp } from 'vue';
 import App from './App.vue';
 import { H } from 'highlight.run';
 
@@ -183,7 +183,7 @@ func main() {
 
 const app = express();
 
-const highlightOptions = {}; 
+const highlightOptions = {};
 const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
 
 // This should be before any other error middleware and after all controllers

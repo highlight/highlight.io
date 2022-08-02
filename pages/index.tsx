@@ -24,7 +24,7 @@ import MagnifierIcon from '../public/images/magnifier.svg';
 import VerifiedIcon from '../public/images/verified.svg';
 import PlugIcon from '../public/images/plug.svg';
 
-import CollaborateImage from '../public/images/collaborate.svg';
+import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.svg';
 import Tablet1 from '../public/images/tablet1.svg';
 import Tablet2 from '../public/images/tablet2.png';
@@ -108,6 +108,9 @@ const Home: NextPage = () => {
   const scrollYPosition = useRef<number>(0);
   const [offsetPosition, setOffsetPosition] = useState(0);
   const [scrollReviews, setScrollReviews] = useState(false);
+  const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
+  const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
+  const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
 
   const scrollListener = useCallback(() => {
     if (!scrollReviews) {
@@ -187,7 +190,7 @@ const Home: NextPage = () => {
                 </Typography>
               </div>
               <h1>{`Because a stack trace alone isn't enough`}</h1>
-              <Typography type="copy1">
+              <Typography type="copy1" onDark>
                 Stop wasting effort trying to track down and reproduce bugs.
                 Through session replays, Highlight shows you exactly how and
                 when your bugs happen. Highlight removes the mystery of
@@ -221,7 +224,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   Playback of your app
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   See exactly how users are impacted by errros.
                 </Typography>
               </FeatureItem>
@@ -230,7 +233,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   Error stack traces
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   Access full, language-specific stack traces on your web app.
                 </Typography>
               </FeatureItem>
@@ -239,7 +242,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   {`Console & network tabs`}
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   Debug with everything you get in the dev-tools console.
                 </Typography>
               </FeatureItem>
@@ -248,7 +251,7 @@ const Home: NextPage = () => {
                 <Typography type="copy1" emphasis={true}>
                   Precise timing
                 </Typography>
-                <Typography type="copy2">
+                <Typography type="copy2" onDark>
                   Understand when bugs happen and eveything that leads to it.
                 </Typography>
               </FeatureItem>
@@ -297,12 +300,15 @@ const Home: NextPage = () => {
                     <Collapse
                       accordion
                       destroyInactivePanel={true}
-                      defaultActiveKey={['1']}
+                      activeKey={firstCollapseIndex}
                       className={styles.sectionCollapse}
                     >
                       <Panel
                         header={
-                          <div className={styles.collapseHeader}>
+                          <div
+                            className={styles.collapseHeader}
+                            onMouseEnter={() => setFirstCollapseIndex('1')}
+                          >
                             <Image src={MultipleIcon} alt="" />
                             <Typography
                               type="copy1"
@@ -325,7 +331,10 @@ const Home: NextPage = () => {
                       </Panel>
                       <Panel
                         header={
-                          <div className={styles.collapseHeader}>
+                          <div
+                            className={styles.collapseHeader}
+                            onMouseEnter={() => setFirstCollapseIndex('2')}
+                          >
                             <Image src={PuzzleIcon} alt="" />
                             <Typography
                               type="copy1"
@@ -358,12 +367,15 @@ const Home: NextPage = () => {
                     <Collapse
                       accordion
                       destroyInactivePanel={true}
-                      defaultActiveKey={['1']}
+                      activeKey={secondCollapseIndex}
                       className={styles.sectionCollapse}
                     >
                       <Panel
                         header={
-                          <div className={styles.collapseHeader}>
+                          <div
+                            className={styles.collapseHeader}
+                            onMouseEnter={() => setSecondCollapseIndex('1')}
+                          >
                             <Image src={MagnifierIcon} alt="" />
                             <Typography
                               type="copy1"
@@ -386,7 +398,10 @@ const Home: NextPage = () => {
                       </Panel>
                       <Panel
                         header={
-                          <div className={styles.collapseHeader}>
+                          <div
+                            className={styles.collapseHeader}
+                            onMouseEnter={() => setSecondCollapseIndex('2')}
+                          >
                             <Image src={ChartbarIcon} alt="" />
                             <Typography type="copy1" emphasis={true}>{`
                     What is slowing down your users?`}</Typography>
@@ -423,12 +438,15 @@ const Home: NextPage = () => {
                     <Collapse
                       accordion
                       destroyInactivePanel={true}
-                      defaultActiveKey={['1']}
+                      activeKey={thirdCollapseIndex}
                       className={styles.sectionCollapse}
                     >
                       <Panel
                         header={
-                          <div className={styles.collapseHeader}>
+                          <div
+                            className={styles.collapseHeader}
+                            onMouseEnter={() => setThirdCollapseIndex('1')}
+                          >
                             <Image src={PlugIcon} alt="" />
                             <Typography type="copy1" emphasis={true}>
                               Leverage our privacy-first API.
@@ -450,7 +468,10 @@ const Home: NextPage = () => {
                       </Panel>
                       <Panel
                         header={
-                          <div className={styles.collapseHeader}>
+                          <div
+                            className={styles.collapseHeader}
+                            onMouseEnter={() => setThirdCollapseIndex('2')}
+                          >
                             <Image src={VerifiedIcon} alt="" />
                             <Typography type="copy1" emphasis={true}>
                               {`We put compliance & trust at the forefront.`}
@@ -551,12 +572,15 @@ const Home: NextPage = () => {
               <Collapse
                 accordion
                 destroyInactivePanel={true}
-                defaultActiveKey={['1']}
+                activeKey={firstCollapseIndex}
                 className={styles.sectionCollapse}
               >
                 <Panel
                   header={
-                    <div className={styles.collapseHeader}>
+                    <div
+                      className={styles.collapseHeader}
+                      onMouseEnter={() => setFirstCollapseIndex('1')}
+                    >
                       <Image src={MultipleIcon} alt="" />
                       <Typography
                         type="copy1"
@@ -579,7 +603,10 @@ const Home: NextPage = () => {
                 </Panel>
                 <Panel
                   header={
-                    <div className={styles.collapseHeader}>
+                    <div
+                      className={styles.collapseHeader}
+                      onMouseEnter={() => setFirstCollapseIndex('2')}
+                    >
                       <Image src={PuzzleIcon} alt="" />
                       <Typography
                         type="copy1"
@@ -620,12 +647,15 @@ const Home: NextPage = () => {
               <Collapse
                 accordion
                 destroyInactivePanel={true}
-                defaultActiveKey={['1']}
+                activeKey={secondCollapseIndex}
                 className={styles.sectionCollapse}
               >
                 <Panel
                   header={
-                    <div className={styles.collapseHeader}>
+                    <div
+                      className={styles.collapseHeader}
+                      onMouseEnter={() => setSecondCollapseIndex('1')}
+                    >
                       <Image src={MagnifierIcon} alt="" />
                       <Typography
                         type="copy1"
@@ -648,7 +678,10 @@ const Home: NextPage = () => {
                 </Panel>
                 <Panel
                   header={
-                    <div className={styles.collapseHeader}>
+                    <div
+                      className={styles.collapseHeader}
+                      onMouseEnter={() => setSecondCollapseIndex('2')}
+                    >
                       <Image src={ChartbarIcon} alt="" />
                       <Typography type="copy1" emphasis={true}>{`
                     What is slowing down your users?`}</Typography>
@@ -694,12 +727,15 @@ const Home: NextPage = () => {
               <Collapse
                 accordion
                 destroyInactivePanel={true}
-                defaultActiveKey={['1']}
+                activeKey={thirdCollapseIndex}
                 className={styles.sectionCollapse}
               >
                 <Panel
                   header={
-                    <div className={styles.collapseHeader}>
+                    <div
+                      className={styles.collapseHeader}
+                      onMouseEnter={() => setThirdCollapseIndex('1')}
+                    >
                       <Image src={PlugIcon} alt="" />
                       <Typography type="copy1" emphasis={true}>
                         Leverage our privacy-first API.
@@ -721,7 +757,10 @@ const Home: NextPage = () => {
                 </Panel>
                 <Panel
                   header={
-                    <div className={styles.collapseHeader}>
+                    <div
+                      className={styles.collapseHeader}
+                      onMouseEnter={() => setThirdCollapseIndex('2')}
+                    >
                       <Image src={VerifiedIcon} alt="" />
                       <Typography type="copy1" emphasis={true}>
                         {`We put compliance & trust at the forefront.`}
@@ -755,7 +794,7 @@ const Home: NextPage = () => {
         <Section>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <Typography type="copy2">
+              <Typography type="copy2" onDark>
                 Don&apos;t take our word for it. Here&apos;s what our customers
                 have to say.
               </Typography>

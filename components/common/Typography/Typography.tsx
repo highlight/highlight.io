@@ -6,11 +6,13 @@ import styles from './Typography.module.scss';
 export const Typography = ({
   children,
   emphasis = false,
+  onDark = false,
   className,
   ...props
 }: React.PropsWithChildren<{
   type: 'copy1' | 'copy2' | 'copy3' | 'outline';
   emphasis?: boolean;
+  onDark?: boolean;
   className?: string;
 }>) => {
   return (
@@ -22,6 +24,7 @@ export const Typography = ({
         [styles.copy3]: props.type === 'copy3',
         [styles.outline]: props.type === 'outline',
         [styles.emphasis]: emphasis,
+        [styles.onDark]: onDark,
       })}
     >
       {children}
