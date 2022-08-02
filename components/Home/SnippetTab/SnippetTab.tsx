@@ -53,7 +53,7 @@ const SNIPPET_TABS = [
           <CodeSnippet
             HeaderImage={ReactImage}
             canCopy={true}
-            language="javascript"
+            language="jsx"
             content={`import React from 'react';
 import App from './App';
 import { H } from 'highlight.run';
@@ -148,7 +148,7 @@ export default MyApp`}
           <CodeSnippet
             HeaderImage={GoImage}
             canCopy={true}
-            language="javascript"
+            language="go"
             content={`import (
   "github.com/highlight-run/highlight-go"
   highlightChi "github.com/highlight-run/highlight-go/middleware/chi"

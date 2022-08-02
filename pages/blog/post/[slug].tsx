@@ -11,13 +11,14 @@ import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { CallToAction } from '../../../components/common/CallToAction/CallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
-import { CodeBlock, dracula } from 'react-code-blocks';
+import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../../components/common/Typography/Typography';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../../components/Blog/BlogNavbar/BlogNavbar';
 import { SimpleCallToAction } from '../../../components/common/CallToAction/SimpleCallToAction';
 import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
+import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme';
 
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
@@ -245,7 +246,7 @@ const PostPage = ({
                             language={'js'}
                             text={children?.props?.content[0].text}
                             showLineNumbers={false}
-                            theme={dracula}
+                            theme={highlightCodeTheme}
                           />
                         </div>
                       );

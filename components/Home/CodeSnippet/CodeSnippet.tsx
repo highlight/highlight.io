@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { dracula, CodeBlock } from 'react-code-blocks';
+import { CodeBlock } from 'react-code-blocks';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import CopyIcon from '../../../public/images/copy.svg';
+import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme';
 import styles from '../../Home/Home.module.scss';
 
 export const CodeSnippet = ({
@@ -38,7 +39,7 @@ export const CodeSnippet = ({
           </div>
         )}
         <CodeBlock
-          theme={dracula}
+          theme={highlightCodeTheme}
           customStyle={{
             backgroundColor: 'transparent',
             padding: 0,
