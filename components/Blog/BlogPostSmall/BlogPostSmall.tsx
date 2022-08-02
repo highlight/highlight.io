@@ -13,9 +13,9 @@ export const BlogPostSmall = ({
   tags,
 }: Post) => {
   return (
-    <Link href={`/blog/post/${slug}`}>
-      <a style={{ textDecoration: 'none' }}>
-        <div className={styles.blogPostSmall}>
+    <div className={styles.blogPostSmall}>
+      <Link href={`/blog/post/${slug}`}>
+        <a style={{ textDecoration: 'none' }}>
           <div className={styles.cardImage}>
             <Image src={url} alt="" layout="fill" objectFit="cover" />
           </div>
@@ -40,8 +40,8 @@ export const BlogPostSmall = ({
               </Link>
             ))}
           </div>
-        </div>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </div>
   );
 };
