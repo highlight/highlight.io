@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import { PrimaryLink } from '../components/common/Buttons/SecondaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
@@ -104,38 +104,67 @@ const Home: NextPage = () => {
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
   const section3 = useRef<HTMLDivElement>(null);
-  const startScroll = useRef<HTMLDivElement>(null);
-  const endScroll = useRef<HTMLDivElement>(null);
+  const reviewsRef = useRef<HTMLDivElement>(null);
+  const scrollYPosition = useRef<number>(0);
   const [offsetPosition, setOffsetPosition] = useState(0);
-  const [scrollYPosition, setScrollYPosition] = useState(0);
-  const [startYPosition, setStartYPosition] = useState(0);
-  const [endYPosition, setEndYPosition] = useState(0);
-  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [scrollReviews, setScrollReviews] = useState(false);
   const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
   const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
   const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
 
+  const scrollListener = useCallback(() => {
+    if (!scrollReviews) {
+      return;
+    }
+
+    if (reviewsRef.current) {
+      const { scrollY } = window;
+      const scrollingDown = scrollYPosition.current > scrollY;
+      // Adjust this value to control scroll speed
+      const scrollDistance = scrollingDown ? -3 : 3;
+      reviewsRef.current.scrollLeft += scrollDistance;
+      scrollYPosition.current = scrollY;
+    }
+  }, [scrollReviews]);
+
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      setScrollYPosition(window.scrollY);
-    });
-  });
+    window.removeEventListener('scroll', scrollListener);
+    window.addEventListener('scroll', scrollListener);
+    return () => window.removeEventListener('scroll', scrollListener);
+  }, [scrollListener]);
 
   useEffect(() => {
     setOffsetPosition(section1.current?.offsetHeight || 0);
-    setStartYPosition(startScroll.current?.offsetTop || 0);
-    setEndYPosition(endScroll.current?.offsetTop || 0);
-    setScrollPercentage(
-      (scrollYPosition - startYPosition) / (endYPosition - startYPosition)
+  }, [section1]);
+
+  useEffect(() => {
+    const reviewsElement = reviewsRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrollReviews(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: '250px 0px',
+        threshold: 0,
+      }
     );
-  }, [
-    section1,
-    startScroll,
-    endScroll,
-    scrollYPosition,
-    startYPosition,
-    endYPosition,
-  ]);
+
+    if (reviewsElement) {
+      observer.observe(reviewsElement);
+
+      // Scroll to center on load
+      reviewsElement.scrollLeft =
+        (reviewsElement.scrollWidth - window.innerWidth) / 2;
+    }
+
+    return () => {
+      if (reviewsElement) {
+        observer.unobserve(reviewsElement);
+      }
+    };
+  }, [reviewsRef]);
 
   return (
     <div>
@@ -146,7 +175,7 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <main>
-        <Section>
+        <Section className={styles.heroVideoWrapper}>
           <div className={styles.heroBugLeft}>
             <Image src={HeroBugLeft} alt="bug left" />
           </div>
@@ -766,7 +795,6 @@ const Home: NextPage = () => {
           </Section>
         </div>
         <SnippetTab />
-        <div ref={startScroll}></div>
         <Section>
           <CompaniesReel />
         </Section>
@@ -780,13 +808,8 @@ const Home: NextPage = () => {
             </div>
           </div>
         </Section>
-        <div className={styles.slider}>
-          <div
-            className={styles.slideTrack}
-            style={{
-              transform: `translateX(calc(-532px * 1 * ${scrollPercentage}))`,
-            }}
-          >
+        <div className={styles.slider} ref={reviewsRef}>
+          <div className={styles.slideTrack}>
             {[...REVIEWS, ...REVIEWS].map((review, i) => (
               <CustomerReview
                 key={i}
@@ -800,7 +823,6 @@ const Home: NextPage = () => {
         </div>
         <CallToAction />
       </main>
-      <div ref={endScroll}></div>
       <Footer />
     </div>
   );

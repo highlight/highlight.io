@@ -33,6 +33,10 @@
   margin-bottom: calc(22 * var(--space-unit));
 }
 
+.heroVideoWrapper {
+  overflow: hidden;
+}
+
 .heroBugLeft {
   position: absolute;
   left: -150px;
@@ -432,6 +436,7 @@
   margin: var(--size-medium) var(--size-medium) 100px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 
   .reviewText {
     flex: 1 1 auto;
@@ -478,15 +483,20 @@
 
 .slider {
   margin: auto;
-  overflow: hidden;
+  overflow: scroll;
   position: relative;
   width: 100%;
+
+  // Hides the scrollbar. Requires different properties for certain browsers.
+  -ms-overflow-style: none; // IE
+  scrollbar-width: none; // Firefox
+  &::-webkit-scrollbar {
+    display: none; // Everything else
+  }
 
   .slideTrack {
     transition: all 0.1s linear;
     display: flex;
-    width: calc(532px * 14);
-    margin-left: calc(-532px * 2);
   }
 }
 
@@ -895,21 +905,6 @@
     right: -100px;
   }
 
-  .slideTrack {
-    animation: none !important;
-    display: grid !important;
-    padding: 0 var(--size-xLarge) var(--size-xxxLarge) var(--size-xLarge);
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: var(--size-medium);
-    row-gap: var(--size-large);
-    width: 100% !important;
-  }
-
-  .reviewCard {
-    width: auto;
-    margin: 0;
-  }
-
   .companies {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1049,15 +1044,6 @@
     .anchorImage {
       height: 60vw;
       margin: 0;
-    }
-  }
-
-  .slideTrack {
-    display: flex !important;
-    width: calc(332px * 14) !important;
-
-    &:hover {
-      animation-play-state: paused !important;
     }
   }
 

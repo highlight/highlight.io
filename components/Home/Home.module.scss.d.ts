@@ -46,6 +46,7 @@ export const hero: string;
 export const heroBugLeft: string;
 export const heroBugRight: string;
 export const heroImage: string;
+export const heroVideoWrapper: string;
 export const hideImage: string;
 export const hideMobile: string;
 export const hidePhone: string;
