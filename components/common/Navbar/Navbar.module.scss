@@ -213,20 +213,20 @@
   }
 
   .mobileMenu {
+    align-items: center;
+    background-color: var(--color-primary-200);
     border-top: 1px solid rgb(255, 255, 255, 0.32);
-    position: absolute;
-    top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-medium);
+    height: calc(100vh - 60px);
+    justify-content: flex-start;
     left: 0;
     padding: var(--size-medium) var(--size-medium) var(--size-xLarge)
       var(--size-medium);
-    background-color: var(--color-primary-200);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    position: absolute;
+    top: 64px;
     width: 100%;
-    height: calc(100vh - 60px);
-    gap: var(--size-medium);
 
     li {
       width: 100%;
