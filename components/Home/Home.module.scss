@@ -870,21 +870,6 @@
     right: -100px;
   }
 
-  .slideTrack {
-    animation: none !important;
-    display: grid !important;
-    padding: 0 var(--size-xLarge) var(--size-xxxLarge) var(--size-xLarge);
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: var(--size-medium);
-    row-gap: var(--size-large);
-    width: 100% !important;
-  }
-
-  .reviewCard {
-    width: auto;
-    margin: 0;
-  }
-
   .companies {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1008,15 +993,6 @@
     .anchorImage {
       height: 60vw;
       margin: 0;
-    }
-  }
-
-  .slideTrack {
-    display: flex !important;
-    width: calc(332px * 14) !important;
-
-    &:hover {
-      animation-play-state: paused !important;
     }
   }
 
