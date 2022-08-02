@@ -59,7 +59,7 @@ import App from './App';
 import { H } from 'highlight.run';
 import { ErrorBoundary } from '@highlight-run/react';
 
-H.init('1jdkoe52');
+H.init('your-api-key');
 
 ReactDOM.render(
   <ErrorBoundary showDialog>
@@ -87,7 +87,7 @@ ReactDOM.render(
 import App from './App.vue';
 import { H } from 'highlight.run';
 
-H.init('1jdkoe52', {
+H.init('your-api-key', {
   environment: 'production',
   enableStrictPrivacy: false,
 });
@@ -111,7 +111,7 @@ createApp(App).mount('#app');`}
             language="javascript"
             content={`import { H } from 'highlight.run';
 
-H.init('1jdkoe52');
+H.init('your-api-key');
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
@@ -130,9 +130,22 @@ export default MyApp`}
     content: (
       <Section noYTopPadding={true} grid>
         <div className={styles.gridSectionImageLeft}>
-          <div className={styles.imageInner}>
-            <Image src={DarkPlaceholder} alt="" />
-          </div>
+          <CodeSnippet
+            HeaderImage={htmlImage}
+            canCopy={true}
+            language="html"
+            content={`<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
+        <script>
+            window.H.init("your-api-key")
+        </script>
+    </head>
+    <body>
+        <!-- Your Application -->
+    </body>
+</html>`}
+          />
         </div>
         {SetupDescription}
       </Section>
