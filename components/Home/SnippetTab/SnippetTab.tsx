@@ -59,7 +59,7 @@ import App from './App';
 import { H } from 'highlight.run';
 import { ErrorBoundary } from '@highlight-run/react';
 
-H.init('abcd1234');
+H.init('your-api-key');
 
 ReactDOM.render(
   <ErrorBoundary showDialog>
@@ -87,7 +87,7 @@ ReactDOM.render(
 import App from './App.vue';
 import { H } from 'highlight.run';
 
-H.init('abcd1234', {
+H.init('your-api-key', {
   environment: 'production',
   enableStrictPrivacy: false,
 });
@@ -111,7 +111,7 @@ createApp(App).mount('#app');`}
             language="javascript"
             content={`import { H } from 'highlight.run';
 
-H.init('abcd1234');
+H.init('your-api-key');
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
@@ -138,7 +138,7 @@ export default MyApp`}
     <head>
         <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
         <script>
-            window.H.init("abcd1234")
+            window.H.init("your-api-key")
         </script>
     </head>
     <body>
