@@ -286,6 +286,7 @@
   height: 32px;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   justify-content: center;
   font-size: 8px;
   transition-duration: 0.2s;
