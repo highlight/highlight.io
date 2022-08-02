@@ -293,10 +293,6 @@
   text-align: center;
   margin: auto;
 
-  @media screen and (max-width: 1288px) {
-    padding: 0 var(--size-xxLarge);
-  }
-
   .sectionSubtitle {
     margin-bottom: var(--size-xLarge);
   }

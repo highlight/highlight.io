@@ -1,8 +1,8 @@
 .section {
   width: 100%;
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width) + (var(--size-large) * 2));
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 50px var(--size-large);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -27,7 +27,6 @@
 @media screen and (max-width: 800px) {
   .section {
     flex-direction: column;
-    padding: 50px var(--size-large);
   }
 
   .noYTopPadding {
