@@ -130,9 +130,22 @@ export default MyApp`}
     content: (
       <Section noYTopPadding={true} grid>
         <div className={styles.gridSectionImageLeft}>
-          <div className={styles.imageInner}>
-            <Image src={DarkPlaceholder} alt="" />
-          </div>
+          <CodeSnippet
+            HeaderImage={htmlImage}
+            canCopy={true}
+            language="html"
+            content={`<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
+        <script>
+            window.H.init("1jdkoe52")
+        </script>
+    </head>
+    <body>
+        <!-- Your Application -->
+    </body>
+</html>`}
+          />
         </div>
         {SetupDescription}
       </Section>
