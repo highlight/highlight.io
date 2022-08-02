@@ -59,7 +59,7 @@ import App from './App';
 import { H } from 'highlight.run';
 import { ErrorBoundary } from '@highlight-run/react';
 
-H.init('1jdkoe52');
+H.init('abcd1234');
 
 ReactDOM.render(
   <ErrorBoundary showDialog>
@@ -87,7 +87,7 @@ ReactDOM.render(
 import App from './App.vue';
 import { H } from 'highlight.run';
 
-H.init('1jdkoe52', {
+H.init('abcd1234', {
   environment: 'production',
   enableStrictPrivacy: false,
 });
@@ -111,7 +111,7 @@ createApp(App).mount('#app');`}
             language="javascript"
             content={`import { H } from 'highlight.run';
 
-H.init('1jdkoe52');
+H.init('abcd1234');
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
@@ -138,7 +138,7 @@ export default MyApp`}
     <head>
         <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
         <script>
-            window.H.init("1jdkoe52")
+            window.H.init("abcd1234")
         </script>
     </head>
     <body>
