@@ -470,11 +470,12 @@
   overflow: scroll;
   position: relative;
   width: 100%;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
 
+  // Hides the scrollbar. Requires different properties for certain browsers.
+  -ms-overflow-style: none; // IE
+  scrollbar-width: none; // Firefox
   &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+    display: none; // Everything else
   }
 
   .slideTrack {
