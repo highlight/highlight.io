@@ -83,10 +83,10 @@ const Footer = () => {
           <Typography type="copy3">
             <ul className={styles.footerList}>
               <li>
-                <a href="https://highlight.run/terms">Terms Of Service</a>
+                <Link href="/terms">Terms of Service</Link>
               </li>
               <li>
-                <a href="https://highlight.run/privacy">Privacy Policy</a>
+                <Link href="/privacy">Privacy Policy</Link>
               </li>
             </ul>
           </Typography>
