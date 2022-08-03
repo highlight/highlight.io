@@ -648,6 +648,10 @@
   overflow: hidden;
   margin: auto auto var(--size-xLarge);
 
+  .ctaTitle {
+    margin-top: 0 !important;
+  }
+
   .ctaContainer {
     width: 100%;
     padding: calc(32 * var(--space-unit)) 0;
