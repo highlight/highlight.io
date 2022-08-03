@@ -56,7 +56,7 @@ const SNIPPET_TABS = [
             language="jsx"
             content={`import React from 'react';
 import App from './App';
-import { H } from 'highlight.io';
+import { H } from 'highlight.run';
 import { ErrorBoundary } from '@highlight-run/react';
 
 H.init('your-api-key');
@@ -85,7 +85,7 @@ ReactDOM.render(
             language="javascript"
             content={`import { createApp } from 'vue';
 import App from './App.vue';
-import { H } from 'highlight.io';
+import { H } from 'highlight.run';
 
 H.init('your-api-key', {
   environment: 'production',
@@ -109,7 +109,7 @@ createApp(App).mount('#app');`}
             HeaderImage={NextjsImage}
             canCopy={true}
             language="javascript"
-            content={`import { H } from 'highlight.io';
+            content={`import { H } from 'highlight.run';
 
 H.init('your-api-key');
 
