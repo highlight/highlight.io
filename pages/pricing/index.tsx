@@ -256,7 +256,7 @@ const Pricing: NextPage = () => {
               </div>
               <h1>
                 Get the
-                <span className={styles.yellowquestion}>{` visibility `}</span>
+                <span className={styles.yellowText}>{` visibility `}</span>
                 you need today.
               </h1>
             </div>
@@ -266,7 +266,7 @@ const Pricing: NextPage = () => {
         {isMobile ? (
           <Section className={styles.mobileTierWrapper}>
             <div className={styles.mobileBillingWrapper}>
-              <Typography type="copy3" className={styles.billingCyclequestion}>
+              <Typography type="copy3" className={styles.billingCycleText}>
                 Select billing cycle
               </Typography>
               <BillingWidget
@@ -432,7 +432,11 @@ const Question = ({
         }
       >
         <div className={styles.collapseInner}>
-          <Typography className={styles.answer} type="copy3" onDark>
+          <Typography
+            className={styles.questionDescription}
+            type="copy3"
+            onDark
+          >
             <div dangerouslySetInnerHTML={{ __html: answer }}></div>
           </Typography>
         </div>
