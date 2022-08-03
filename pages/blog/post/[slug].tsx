@@ -19,6 +19,7 @@ import { SimpleCallToAction } from '../../../components/common/CallToAction/Simp
 import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme';
+import { Post } from '../../../components/Blog/BlogPost/BlogPost';
 
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
@@ -51,10 +52,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     query GetPost($slug: String!) {
       post(where: { slug: $slug }) {
         title
+        metaTitle
         image {
           url
         }
         description
+        metaDescription
         publishedAt
         publishedBy {
           name
@@ -65,6 +68,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           markdown
         }
         tags
+        readingTime
       }
     }
   `;
@@ -81,6 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
         publishedAt
         tags
+        readingTime
       }
     }
   `;
@@ -122,7 +127,7 @@ const PostPage = ({
   post,
   suggestedPosts,
 }: {
-  post: any;
+  post: Post;
   suggestedPosts: any[];
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
@@ -179,8 +184,11 @@ const PostPage = ({
   return (
     <>
       <Head>
-        <title>{post.title}</title>
-        <meta name="description" content={post.description} />
+        <title>{post.metaTitle || post.title}</title>
+        <meta
+          name="description"
+          content={post.metaDescription || post.description}
+        />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>
@@ -193,9 +201,10 @@ const PostPage = ({
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${Math.floor(
-                post.richcontent.markdown.split(' ').length / 200
-              )} min read`}</p>
+              })} • ${
+                post.readingTime ||
+                Math.floor(post.richcontent.markdown.split(' ').length / 200)
+              } min read`}</p>
             </Typography>
             <h2>{post.title}</h2>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
@@ -232,32 +241,8 @@ const PostPage = ({
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
-            {postSections?.map((p) => (
-              <>
-                <RichText
-                  content={{
-                    children: p.nodes,
-                  }}
-                  renderers={{
-                    code_block: ({ children }: { children: any }) => {
-                      return (
-                        <div className={styles.codeBlock}>
-                          <CodeBlock
-                            language={'js'}
-                            text={children?.props?.content[0].text}
-                            showLineNumbers={false}
-                            theme={highlightCodeTheme}
-                          />
-                        </div>
-                      );
-                    },
-                    h1: blogTypographyRenderer,
-                    h2: blogTypographyRenderer,
-                    h3: blogTypographyRenderer,
-                  }}
-                />
-                {p.footer}
-              </>
+            {postSections?.map((p, idx) => (
+              <PostSection key={idx} p={p} />
             ))}
           </div>
         </Section>
@@ -275,6 +260,36 @@ const PostPage = ({
       </main>
       <CallToAction />
       <Footer />
+    </>
+  );
+};
+
+const PostSection = ({ p }: { p: PostSection }) => {
+  return (
+    <>
+      <RichText
+        content={{
+          children: p.nodes,
+        }}
+        renderers={{
+          code_block: ({ children }: { children: any }) => {
+            return (
+              <div className={styles.codeBlock}>
+                <CodeBlock
+                  language={'js'}
+                  text={children?.props?.content[0].text}
+                  showLineNumbers={false}
+                  theme={highlightCodeTheme}
+                />
+              </div>
+            );
+          },
+          h1: blogTypographyRenderer,
+          h2: blogTypographyRenderer,
+          h3: blogTypographyRenderer,
+        }}
+      />
+      {p.footer}
     </>
   );
 };

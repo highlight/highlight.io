@@ -7,10 +7,12 @@ import { Dispatch, SetStateAction } from 'react';
 export interface Post {
   slug: string;
   description: string;
+  metaDescription?: string;
   image: {
     url: string;
   };
   title: string;
+  metaTitle?: string;
   publishedAt: string;
   publishedBy: {
     name: string;
@@ -18,8 +20,10 @@ export interface Post {
   };
   richcontent: {
     markdown: string;
+    raw: any;
   };
   tags: Array<string>;
+  readingTime?: number;
 }
 
 export const BlogPost = ({
@@ -29,6 +33,7 @@ export const BlogPost = ({
   title,
   publishedAt,
   tags,
+  readingTime,
 }: Post) => {
   return (
     <Link href={`/blog/post/${slug}`}>
@@ -45,9 +50,10 @@ export const BlogPost = ({
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${Math.floor(
-                richcontent.markdown.split(' ').length / 200
-              )} min. read`}</p>
+              })} • ${
+                readingTime ||
+                Math.floor(richcontent.markdown.split(' ').length / 200)
+              } min. read`}</p>
             </div>
             <h3>{title}</h3>
             <div className={styles.tagDiv}>
