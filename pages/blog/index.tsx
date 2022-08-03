@@ -38,7 +38,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
           url
         }
         title
+        metaTitle
         description
+        metaDescription
         publishedAt
         publishedBy {
           name
@@ -49,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
           raw
         }
         tags
+        readingTime
       }
     }
   `;

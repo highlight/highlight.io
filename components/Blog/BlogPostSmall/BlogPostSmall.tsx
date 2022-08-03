@@ -11,6 +11,7 @@ export const BlogPostSmall = ({
   title,
   publishedAt,
   tags,
+  readingTime,
 }: Post) => {
   return (
     <div className={styles.blogPostSmall}>
@@ -24,9 +25,10 @@ export const BlogPostSmall = ({
               day: 'numeric',
               year: 'numeric',
               month: 'short',
-            })} • ${Math.floor(
-              richcontent.markdown.split(' ').length / 200
-            )} min. read`}</p>
+            })} • ${
+              readingTime ||
+              Math.floor(richcontent.markdown.split(' ').length / 200)
+            } min. read`}</p>
           </div>
           <Typography type="copy1" emphasis>
             {title}

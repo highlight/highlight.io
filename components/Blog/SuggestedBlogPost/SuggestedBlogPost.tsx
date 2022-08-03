@@ -12,6 +12,7 @@ export const SuggestedBlogPost = ({
   title,
   publishedAt,
   tags,
+  readingTime,
 }: Post) => {
   return (
     <Link href={`/blog/post/${slug}`}>
@@ -29,9 +30,10 @@ export const SuggestedBlogPost = ({
                   day: 'numeric',
                   year: 'numeric',
                   month: 'short',
-                })} • ${Math.floor(
-                  richcontent.markdown.split(' ').length / 200
-                )} min. read`}</p>
+                })} • ${
+                  readingTime ||
+                  Math.floor(richcontent.markdown.split(' ').length / 200)
+                } min. read`}</p>
               </Typography>
             </div>
             <div className={styles.suggestedPostTitle}>
