@@ -90,8 +90,11 @@ const Blog = ({
   return (
     <>
       <Head>
-        <title>Highlight Blog</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+        <title>Debugging Blog: Best Practices From The Highlight Team</title>
+        <meta
+          name="description"
+          content="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
+        />
       </Head>
       <Navbar />
       <main>
