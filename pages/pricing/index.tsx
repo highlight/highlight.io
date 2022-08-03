@@ -55,6 +55,54 @@ const planInfo: Array<PricingInfo> = [
   EnterpriseInfo,
 ];
 
+const FAQS = [
+  {
+    question: 'Do you offer a discount for non-profits?',
+    answer: `We love supporting non-profits and offer a 75% discount for the lifetime of the account. To activate the discount, create a workplace on either the Standard or Pro plan. Then reach out to support and mention the discount. `,
+    icon: TagLoyalty,
+  },
+  {
+    question: 'How long does it take to setup Highlight?',
+    answer: `It generally takes an engineer less than ten minutes to understand the concepts of Highlight and integrate the app into their workflow. For more information on setup, take a look at our <a href="https://docs.highlight.run">docs</a>. `,
+    icon: Stopwatch,
+  },
+  {
+    question: 'Can I deploy Highlight on-premise?',
+    answer: `Yes! To get a glimpse at how our deployment process looks, take a look <a href="https://docs.highlight.run/docs/on-premise">here</a> (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact <a href="mailto:sales@highlight.run">sales</a>. `,
+    icon: Globe,
+  },
+  {
+    question: "Is Highlight secure? Where's my data stored?",
+    answer: `Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our <a href="/#privacy">security section</a> and <a href="https://docs.highlight.run" target="_blank">docs</a>. If we don't answer your question there, <a href="mailto:jay@highlight.run">let us know</a>. `,
+    icon: Security,
+  },
+  {
+    question: 'Do I need a credit card to sign up?',
+    answer: `Absolutely not! We never ask for your credit card on sign up. If you start on a paid plan then 30 days after signing up you will be politely prompted to enter in your payment information. At anytime you can switch back to a free plan as long as your workplace has less than 6 seats. `,
+    icon: CreditCard,
+  },
+  {
+    question: 'How will you charge me?',
+    answer: `We ask for a credit card. Your credit card information will never touch our servers as we use <a href="https://stripe.com/" target="_blank">Stripe</a> as our payments processor. For Enterprise customers we can do ACH and custom invoices if requested. `,
+    icon: Wallet,
+  },
+  {
+    question: 'How does billing work?',
+    answer: `We charge by usage; or number of sessions collected per month. Our billing system uses prorated billing, meaning you only pay for what you use below each of our thresholds (see above). For example if you move to the Startup plan from the Basic plan in the middle of the month, then you will only be charged for the time you are on the paid plan. `,
+    icon: ReceiptList,
+  },
+  {
+    question: 'What counts as a session?',
+    answer: `A session is contiguous instance of a user's presence on your app for less than 4 hours. That is, if a user is browsing your application for 3 minutes, then closes the tab, this counts as a single session. `,
+    icon: PcPlayMedia,
+  },
+  {
+    question: 'Can I cancel at anytime?',
+    answer: `Definitely! You can cancel or downgrade your subscription at anytime. You can also delete your workplace in the settings page at anytime. `,
+    icon: Delete,
+  },
+];
+
 const TierSection = ({
   tierName,
   numSessionCredits,
@@ -184,6 +232,23 @@ const Pricing: NextPage = () => {
           name="description"
           content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
         />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity":
+              ${JSON.stringify(
+                FAQS.map((faq) => ({
+                  '@type': 'Question',
+                  name: faq.question,
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: faq.answer,
+                  },
+                }))
+              )}
+          }`}
+        </script>
       </Head>
       <Navbar />
       <main>
@@ -301,80 +366,14 @@ const Pricing: NextPage = () => {
             </div>
           </div>
           <div>
-            <Question
-              questionText="Do you offer a discount for non-profits?"
-              questionDescription={`We love supporting non-profits and offer a 75% discount for the lifetime of the account. To
-                activate the discount, create a workplace on either the Standard or Pro plan. Then reach out to support and
-                mention the discount.
-              `}
-              icon={TagLoyalty}
-            />
-            <Question
-              questionText="How long does it take to setup Highlight?"
-              questionDescription={`It generally takes an engineer less than ten minutes to understand the concepts of
-                Highlight and integrate the app into their workflow. For more information on setup, take a look at our <a
-                  href="https://docs.highlight.run">docs</a>.
-                `}
-              icon={Stopwatch}
-            />
-            <Question
-              questionText="Can I deploy Highlight on-premise?"
-              questionDescription={`Yes! To get a glimpse at how our deployment process looks, take a look <a
-                  href="https://docs.highlight.run/docs/on-premise">here</a> (its super simple!). We also support deployments for
-                most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment,
-                contact <a href="mailto:sales@highlight.run">sales</a>.
-              `}
-              icon={Globe}
-            />
-            <Question
-              questionText="Is Highlight secure? Where's my data stored?"
-              questionDescription={`Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we
-                also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see
-                our <a href="/#privacy">security section</a> and <a href="https://docs.highlight.run" target="_blank">docs</a>. If
-                we don't answer your question there, <a href="mailto:jay@highlight.run">let us know</a>.
-              `}
-              icon={Security}
-            />
-            <Question
-              questionText="Do I need a credit card to sign up?"
-              questionDescription={`Absolutely not! We never ask for your credit card on sign up. If you start on a paid plan
-                then 30 days after signing up you will be politely prompted to enter in your payment information. At anytime you
-                can switch back to a free plan as long as your workplace has less than 6 seats.
-              `}
-              icon={CreditCard}
-            />
-            <Question
-              questionText="How will you charge me?"
-              questionDescription={`We ask for a credit card. Your credit card information will never touch our servers as we
-                use <a href="https://stripe.com/" target="_blank">Stripe</a> as our payments processor. For Enterprise customers
-                we can do ACH and custom invoices if requested.
-              `}
-              icon={Wallet}
-            />
-            <Question
-              questionText="How does billing work?"
-              questionDescription={`We charge by usage; or number of sessions collected per month. Our billing system uses
-                prorated billing, meaning you only pay for what you use below each of our thresholds (see above). For example if
-                you move to the Startup plan from the Basic plan in the middle of the month, then you will only be charged for the
-                time you are on the paid plan.
-              `}
-              icon={ReceiptList}
-            />
-            <Question
-              questionText="What counts as a session?"
-              questionDescription={`A session is contiguous instance of a user's presence on your app for less than 4 hours.
-                That is, if a user is browsing your application for 3 minutes, then closes the tab, this counts as a single
-                session.
-              `}
-              icon={PcPlayMedia}
-            />
-            <Question
-              questionText="Can I cancel at anytime?"
-              questionDescription={`Definitely! You can cancel or downgrade your subscription at anytime. You can also delete
-                your workplace in the settings page at anytime.
-              `}
-              icon={Delete}
-            />
+            {FAQS.map((faq, index) => (
+              <Question
+                key={index}
+                question={faq.question}
+                answer={faq.answer}
+                icon={faq.icon}
+              />
+            ))}
           </div>
         </Section>
         <CallToAction />
@@ -403,12 +402,12 @@ const DownArrow = ({ fill }: { fill: string }) => (
 );
 
 const Question = ({
-  questionText,
-  questionDescription,
+  question,
+  answer,
   icon,
 }: {
-  questionText: string;
-  questionDescription: string;
+  question: string;
+  answer: string;
   icon: string;
 }) => {
   const [expanded, setExpanded] = useState(false);
@@ -423,7 +422,7 @@ const Question = ({
             <div className={styles.faqLeftContent}>
               <Image src={icon} alt="pc icon"></Image>
               <Typography className={styles.question} type="copy2" emphasis>
-                {questionText}
+                {question}
               </Typography>
             </div>
             <button
@@ -442,9 +441,7 @@ const Question = ({
             type="copy3"
             onDark
           >
-            <div
-              dangerouslySetInnerHTML={{ __html: questionDescription }}
-            ></div>
+            <div dangerouslySetInnerHTML={{ __html: answer }}></div>
           </Typography>
         </div>
       </Collapsible>
