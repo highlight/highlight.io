@@ -39,12 +39,10 @@ const Footer = () => {
                 <a href="https://app.highlight.run/?sign_up=1">Sign up</a>
               </li>
               <li>
-                <a href="https://www.highlight.io/#product">Features</a>
+                <Link href="/#features">Features</Link>
               </li>
               <li>
-                <a href="https://www.highlight.io/#privacy">
-                  Privacy {'&'} Security
-                </a>
+                <Link href="/privacy">Privacy {'&'} Security</Link>
               </li>
               <li>
                 <Link href="/#customers">Customers</Link>
@@ -61,7 +59,7 @@ const Footer = () => {
           <Typography type="copy3">
             <ul className={styles.footerList}>
               <li>
-                <a href="https://feedback.highlight.io/changelog">Changelog</a>
+                <a href="https://feedback.highlight.run/changelog">Changelog</a>
               </li>
               <li>
                 <a href="https://docs.highlight.run/">Documentation</a>

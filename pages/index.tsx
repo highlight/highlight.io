@@ -228,7 +228,7 @@ const Home: NextPage = () => {
           </div>
         </Section>
         <Section>
-          <div className={styles.anchorFeature}>
+          <div className={styles.anchorFeature} id="features">
             <div className={styles.anchorTitle}>
               <h2>
                 Highlight{' '}
