@@ -82,7 +82,7 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <Link href={'/careers'}>
+              <Link href={'https://careers.highlight.run'}>
                 <a className={styles.menuItem}>Careers</a>
               </Link>
             </li>
@@ -184,7 +184,7 @@ const BlogNavbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href={'/careers'}>
+                    <Link href={'https://careers.highlight.run'}>
                       <a className={styles.menuItemLarge}>Careers</a>
                     </Link>
                   </Typography>
