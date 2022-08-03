@@ -28,7 +28,7 @@ export const SimpleCallToAction = () => {
           )}
         >
           <PrimaryButton
-            href="https://app.highlight.io/?sign_up=1"
+            href="https://app.highlight.run/?sign_up=1"
             style={{ color: 'black' }}
           >
             <Typography type="copy1" emphasis={true}>

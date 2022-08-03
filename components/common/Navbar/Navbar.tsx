@@ -59,7 +59,7 @@ const Navbar = () => {
       <Banner>
         <div className={styles.bannerContainer}>
           <p>Want 1 month of free Highlight? </p>
-          <a href="http://app.highlight.io/" className={styles.callToAction}>
+          <a href="http://app.highlight.run/" className={styles.callToAction}>
             Register Here →
           </a>
         </div>
@@ -198,12 +198,12 @@ const Navbar = () => {
                 </li>
               </ul>
               <div className={styles.menuButtons}>
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                   Get Started
                 </PrimaryButton>
                 <Typography type="copy3" emphasis={true}>
                   <a
-                    href="https://app.highlight.io/"
+                    href="https://app.highlight.run/"
                     className={styles.menuItem}
                   >
                     Sign In
@@ -219,13 +219,16 @@ const Navbar = () => {
               styles.headerRight
             )}
           >
-            <a href="https://app.highlight.io/" className={styles.signInButton}>
+            <a
+              href="https://app.highlight.run/"
+              className={styles.signInButton}
+            >
               <Typography type="copy2" emphasis={true}>
                 Sign in
               </Typography>
             </a>
             <PrimaryButton
-              href="https://app.highlight.io/?sign_up=1"
+              href="https://app.highlight.run/?sign_up=1"
               className={styles.signUpButton}
             >
               <Typography type="copy2" emphasis={true}>

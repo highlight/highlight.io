@@ -49,7 +49,7 @@ const Comments: NextPage = () => {
                 the loop!
               </p>
               <div className={styles.buttonContainer}>
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                   Get Started For Free
                 </PrimaryButton>
                 <PrimaryLink href="https://calendly.com/jaykhatri/highlight-demo-call">
