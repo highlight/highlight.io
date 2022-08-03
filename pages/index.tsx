@@ -10,8 +10,7 @@ import styles from '../components/Home/Home.module.scss';
 
 import BigHeroSection from '../public/images/big-hero-section.svg';
 import MobileHeroSection from '../public/images/mobile-insects.png';
-import HeroBugRight from '../public/images/hero-bug-right.svg';
-import HeroBugLeft from '../public/images/hero-bug-left.svg';
+import HeroBug from '../public/images/hero-bug-left.gif';
 import PlaybackIcon from '../public/images/pc-play-media.svg';
 import ConsoleIcon from '../public/images/window-code.svg';
 import TimingIcon from '../public/images/stopwatch.svg';
@@ -195,10 +194,10 @@ const Home: NextPage = () => {
       <main>
         <Section className={styles.heroVideoWrapper}>
           <div className={styles.heroBugLeft}>
-            <Image src={HeroBugLeft} alt="bug left" />
+            <Image src={HeroBug} alt="bug left" />
           </div>
           <div className={styles.heroBugRight}>
-            <Image src={HeroBugRight} alt="bug right" />
+            <Image src={HeroBug} alt="bug right" />
           </div>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
