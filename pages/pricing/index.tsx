@@ -230,7 +230,7 @@ const Pricing: NextPage = () => {
 
         <script type="application/ld+json">
           {`{
-            "@conquestion": "https://schema.org",
+            "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity":
               ${JSON.stringify(
@@ -239,7 +239,7 @@ const Pricing: NextPage = () => {
                   name: faq.question,
                   acceptedAnswer: {
                     '@type': 'Answer',
-                    question: faq.answer,
+                    text: faq.answer,
                   },
                 }))
               )}
