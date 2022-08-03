@@ -39,12 +39,12 @@ const Privacy = () => {
             <p>Welcome to Highlight Inc.</p>
             <p>
               Highlight Inc. (“us”, “we”, or “our”) operates{' '}
-              <a href="https://highlight.run">https://highlight.run</a>{' '}
+              <a href="https://highlight.io">https://highlight.io</a>{' '}
               (hereinafter referred to as “Service”).
             </p>
             <p>
               Our Privacy Policy governs your visit to{' '}
-              <a href="https://highlight.run">https://highlight.run</a>, and
+              <a href="https://highlight.io">https://highlight.io</a>, and
               explains how we collect, safeguard and disclose information that
               results from your use of our Service.
             </p>
@@ -63,7 +63,7 @@ const Privacy = () => {
             <p>2. Definitions</p>
             <p>
               SERVICE means the{' '}
-              <a href="https://highlight.run">https://highlight.run</a> website
+              <a href="https://highlight.io">https://highlight.io</a> website
               operated by Highlight Inc.
             </p>
             <p>
@@ -124,7 +124,7 @@ const Privacy = () => {
               We may use your Personal Data to contact you with newsletters,
               marketing or promotional materials and other information that may
               be of interest to you. You may opt out of receiving any, or all,
-              of these communications from us by emailing at jay@highlight.run.
+              of these communications from us by emailing at jay@highlight.io.
             </p>
             <p>
               Usage Data
@@ -309,7 +309,7 @@ const Privacy = () => {
             <p>
               If you wish to be informed what Personal Data we hold about you
               and if you want it to be removed from our systems, please email us
-              at jay@highlight.run.
+              at jay@highlight.io.
             </p>
             <p>
               In certain circumstances, you have the following data protection
@@ -384,7 +384,7 @@ const Privacy = () => {
             </p>
             <p>
               4. users are able to change their personal information by emailing
-              us at jay@highlight.run.
+              us at jay@highlight.io.
             </p>
             <p>Our Policy on “Do Not Track” Signals:</p>
             <p>
@@ -477,7 +477,7 @@ const Privacy = () => {
               To exercise your California data protection rights described
               above, please send your request(s) by one of the following means:
             </p>
-            <p>By email: jay@highlight.run</p>
+            <p>By email: jay@highlight.io</p>
             <p>
               Your data protection rights, described above, are covered by the
               CCPA, short for the California Consumer Privacy Act. To find out
@@ -587,8 +587,7 @@ const Privacy = () => {
               contact us:
             </p>
             <p>
-              By email: <a href="mailto:jay@highlight.run">jay@highlight.run</a>
-              .
+              By email: <a href="mailto:jay@highlight.io">jay@highlight.io</a>.
             </p>
           </div>
         </Section>

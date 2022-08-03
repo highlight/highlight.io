@@ -36,7 +36,7 @@ const SetupDescription = (
       {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
     </Typography>
     <div className={styles.buttonContainer}>
-      <PrimaryLink href="https://docs.highlight.run/getting-started">
+      <PrimaryLink href="https://docs.highlight.io/getting-started">
         Read more about our backend integrations in beta
       </PrimaryLink>
     </div>
@@ -56,7 +56,7 @@ const SNIPPET_TABS = [
             language="jsx"
             content={`import React from 'react';
 import App from './App';
-import { H } from 'highlight.run';
+import { H } from 'highlight.io';
 import { ErrorBoundary } from '@highlight-run/react';
 
 H.init('your-api-key');
@@ -85,7 +85,7 @@ ReactDOM.render(
             language="javascript"
             content={`import { createApp } from 'vue';
 import App from './App.vue';
-import { H } from 'highlight.run';
+import { H } from 'highlight.io';
 
 H.init('your-api-key', {
   environment: 'production',
@@ -109,7 +109,7 @@ createApp(App).mount('#app');`}
             HeaderImage={NextjsImage}
             canCopy={true}
             language="javascript"
-            content={`import { H } from 'highlight.run';
+            content={`import { H } from 'highlight.io';
 
 H.init('your-api-key');
 
@@ -136,7 +136,7 @@ export default MyApp`}
             language="html"
             content={`<html>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
+        <script src="https://cdn.jsdelivr.net/npm/highlight.io@latest"></script>
         <script>
             window.H.init("your-api-key")
         </script>

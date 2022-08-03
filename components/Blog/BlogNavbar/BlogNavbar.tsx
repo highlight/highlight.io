@@ -60,7 +60,7 @@ const BlogNavbar = ({
       <Banner>
         <div className={styles.bannerContainer}>
           <p>Want 1 month of free Highlight? </p>
-          <a href="http://app.highlight.run/" className={styles.callToAction}>
+          <a href="http://app.highlight.io/" className={styles.callToAction}>
             Register Here →
           </a>
         </div>
@@ -87,7 +87,7 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <a href="https://docs.highlight.run/" className={styles.menuItem}>
+              <a href="https://docs.highlight.io/" className={styles.menuItem}>
                 Docs
               </a>
             </li>
@@ -117,7 +117,7 @@ const BlogNavbar = ({
                   </li>
                   <li>
                     <a
-                      href="https://docs.highlight.run/"
+                      href="https://docs.highlight.io/"
                       className={styles.menuItem}
                     >
                       <div className={styles.dropdownItem}>
@@ -192,7 +192,7 @@ const BlogNavbar = ({
                 <li>
                   <Typography type="copy3" emphasis={true}>
                     <a
-                      href="https://docs.highlight.run/"
+                      href="https://docs.highlight.io/"
                       className={styles.menuItemLarge}
                     >
                       Docs
@@ -201,12 +201,12 @@ const BlogNavbar = ({
                 </li>
               </ul>
               <div className={styles.menuButtons}>
-                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                   Get Started
                 </PrimaryButton>
                 <Typography type="copy3" emphasis={true}>
                   <a
-                    href="https://app.highlight.run/"
+                    href="https://app.highlight.io/"
                     className={styles.menuItem}
                   >
                     Sign In
@@ -223,7 +223,7 @@ const BlogNavbar = ({
             )}
           >
             <PrimaryButton
-              href="https://app.highlight.run/?sign_up=1"
+              href="https://app.highlight.io/?sign_up=1"
               className={styles.signUpButton}
             >
               <Typography type="copy2" emphasis={true}>

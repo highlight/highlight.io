@@ -36,13 +36,13 @@ const Footer = () => {
                 <Link href="/pricing">Pricing</Link>
               </li>
               <li>
-                <a href="https://app.highlight.run/?sign_up=1">Sign up</a>
+                <a href="https://app.highlight.io/?sign_up=1">Sign up</a>
               </li>
               <li>
-                <a href="https://www.highlight.run/#product">Features</a>
+                <a href="https://www.highlight.io/#product">Features</a>
               </li>
               <li>
-                <a href="https://www.highlight.run/#privacy">
+                <a href="https://www.highlight.io/#privacy">
                   Privacy {'&'} Security
                 </a>
               </li>
@@ -61,13 +61,13 @@ const Footer = () => {
           <Typography type="copy3">
             <ul className={styles.footerList}>
               <li>
-                <a href="https://feedback.highlight.run/changelog">Changelog</a>
+                <a href="https://feedback.highlight.io/changelog">Changelog</a>
               </li>
               <li>
-                <a href="https://docs.highlight.run/">Documentation</a>
+                <a href="https://docs.highlight.io/">Documentation</a>
               </li>
               <li>
-                <a href="https://docs.highlight.run/deployment-overview">
+                <a href="https://docs.highlight.io/deployment-overview">
                   On-Premise
                 </a>
               </li>
@@ -100,10 +100,10 @@ const Footer = () => {
           <Typography type="copy3">
             <ul className={styles.footerList}>
               <li>
-                <a href="https://careers.highlight.run/">Careers</a>
+                <a href="https://careers.highlight.io/">Careers</a>
               </li>
               <li>
-                <a href="mailto:sales@highlight.run">sales@highlight.run</a>
+                <a href="mailto:sales@highlight.io">sales@highlight.io</a>
               </li>
             </ul>
           </Typography>

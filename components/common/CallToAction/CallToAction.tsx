@@ -28,7 +28,7 @@ export const CallToAction = () => {
             styles.tryButtonContainer
           )}
         >
-          <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+          <PrimaryButton href="https://app.highlight.io/?sign_up=1">
             <Typography type="copy1" emphasis={true}>
               Get started for free
             </Typography>
