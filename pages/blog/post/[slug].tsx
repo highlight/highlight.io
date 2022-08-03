@@ -201,9 +201,10 @@ const PostPage = ({
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${Math.floor(
-                post.richcontent.markdown.split(' ').length / 200
-              )} min read`}</p>
+              })} • ${
+                post.readingTime ||
+                Math.floor(post.richcontent.markdown.split(' ').length / 200)
+              } min read`}</p>
             </Typography>
             <h2>{post.title}</h2>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
