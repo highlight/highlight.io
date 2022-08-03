@@ -225,9 +225,13 @@ const Pricing: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Highlight - Plans and Pricing</title>
-        <meta name="description" content="Highlight - Plans and Pricing" />
-
+        <title>
+          Highlight: Plans And Pricing For Any Team. Get Started Free.
+        </title>
+        <meta
+          name="description"
+          content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
+        />
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",

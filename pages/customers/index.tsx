@@ -26,8 +26,11 @@ const Customers: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Customers - Highlight</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+        <title>Highlight: See Customer Stories And Case Studies.</title>
+        <meta
+          name="description"
+          content="Highlight powers forward-thinking companies. Don't take our word for it. Learn straight from the people we help. Here's what our customers have to say:"
+        />
       </Head>
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
