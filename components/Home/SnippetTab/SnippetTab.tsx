@@ -136,7 +136,7 @@ export default MyApp`}
             language="html"
             content={`<html>
     <head>
-        <script src="https://cdn.jsdelivr.net/npm/highlight.io@latest"></script>
+        <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
         <script>
             window.H.init("your-api-key")
         </script>
