@@ -179,8 +179,8 @@ const PostPage = ({
   return (
     <>
       <Head>
-        <title>Highlight Blog</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+        <title>{post.title}</title>
+        <meta name="description" content={post.description} />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>
