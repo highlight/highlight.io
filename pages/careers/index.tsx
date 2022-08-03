@@ -15,8 +15,11 @@ const Careers = () => {
   return (
     <>
       <Head>
-        <title>Highlight Careers</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+        <title>Careers At Highlight: Build The Best Debugging Tool Ever</title>
+        <meta
+          name="description"
+          content="We're building a platform for debugging apps with extremely high precision, with the goal of helping teams better understand how their app behaves. See careers:"
+        />
       </Head>
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
