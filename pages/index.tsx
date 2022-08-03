@@ -243,7 +243,7 @@ const Home: NextPage = () => {
                   Playback of your app
                 </Typography>
                 <Typography type="copy2" onDark>
-                  See exactly how users are impacted by errros.
+                  See exactly how users are impacted by errors.
                 </Typography>
               </FeatureItem>
               <FeatureItem>
