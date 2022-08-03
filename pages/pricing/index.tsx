@@ -68,12 +68,12 @@ const FAQS = [
   },
   {
     question: 'Can I deploy Highlight on-premise?',
-    answer: `Yes! To get a glimpse at how our deployment process looks, take a look <a href="https://docs.highlight.run/docs/on-premise">here</a> (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact <a href="mailto:sales@highlight.run">sales</a>. `,
+    answer: `Yes! To get a glimpse at how our deployment process looks, take a look <a href="https://docs.highlight.run/docs/on-premise">here</a> (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact <a href="mailto:sales@highlight.io">sales</a>. `,
     icon: Globe,
   },
   {
     question: "Is Highlight secure? Where's my data stored?",
-    answer: `Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our <a href="/#privacy">security section</a> and <a href="https://docs.highlight.run" target="_blank">docs</a>. If we don't answer your question there, <a href="mailto:jay@highlight.run">let us know</a>. `,
+    answer: `Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our <a href="/#privacy">security section</a> and <a href="https://docs.highlight.run" target="_blank">docs</a>. If we don't answer your question there, <a href="mailto:jay@highlight.io">let us know</a>. `,
     icon: Security,
   },
   {

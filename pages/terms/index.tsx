@@ -46,7 +46,7 @@ const Terms = () => {
             </p>
             <p>
               These Terms of Service (“Terms”, “Terms of Service”) govern your
-              use of our web pages located at https://highlight.run operated by
+              use of our web pages located at https://highlight.io operated by
               Highlight Inc.
             </p>
             <p>
@@ -63,7 +63,7 @@ const Terms = () => {
             <a>
               If you do not agree with (or cannot comply with) Agreements, then
               you may not use the Service, but please let us know by emailing at
-              <a href="mailto:jay@highlight.run">jay@highlight.run</a> so we can
+              <a href="mailto:jay@highlight.io">jay@highlight.io</a> so we can
               try to find a solution. These Terms apply to all visitors, users
               and others who wish to access or use Service.
             </a>
@@ -380,7 +380,7 @@ const Terms = () => {
               If you are a copyright owner, or authorized on behalf of one, and
               you believe that the copyrighted work has been copied in a way
               that constitutes copyright infringement, please submit your claim
-              via email to jay@highlight.run, with the subject line: “Copyright
+              via email to jay@highlight.io, with the subject line: “Copyright
               Infringement” and include in your claim a detailed description of
               the alleged Infringement as detailed below, under “DMCA Notice and
               Procedure for Copyright Infringement Claims”
@@ -428,12 +428,12 @@ const Terms = () => {
               behalf.
             </p>
             <p>
-              You can contact our Copyright Agent via email at jay@highlight.run
+              You can contact our Copyright Agent via email at jay@highlight.io
             </p>
             <p>
               <b>16. Error Reporting and Feedback</b>
               <br />
-              You may provide us directly at jay@highlight.run with information
+              You may provide us directly at jay@highlight.io with information
               and feedback concerning errors, suggestions for improvements,
               ideas, problems, complaints, and other matters related to our
               Service (“Feedback”). You acknowledge and agree that: (i) you
@@ -624,8 +624,7 @@ const Terms = () => {
               Please send your feedback, comments, requests for technical
               support:
               <br />
-              By email: <a href="mailto:jay@highlight.run">jay@highlight.run</a>
-              .
+              By email: <a href="mailto:jay@highlight.io">jay@highlight.io</a>.
             </p>
           </div>
         </Section>

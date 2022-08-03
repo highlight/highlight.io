@@ -39,12 +39,10 @@ const Footer = () => {
                 <a href="https://app.highlight.run/?sign_up=1">Sign up</a>
               </li>
               <li>
-                <a href="https://www.highlight.run/#product">Features</a>
+                <Link href="/#features">Features</Link>
               </li>
               <li>
-                <a href="https://www.highlight.run/#privacy">
-                  Privacy {'&'} Security
-                </a>
+                <Link href="/privacy">Privacy &amp; Security</Link>
               </li>
               <li>
                 <Link href="/#customers">Customers</Link>
@@ -103,7 +101,7 @@ const Footer = () => {
                 <a href="https://careers.highlight.run/">Careers</a>
               </li>
               <li>
-                <a href="mailto:sales@highlight.run">sales@highlight.run</a>
+                <a href="mailto:sales@highlight.io">sales@highlight.io</a>
               </li>
             </ul>
           </Typography>
