@@ -40,7 +40,7 @@ import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 
-const IMAGE_SHOW_OFFSET = 500;
+const IMAGE_SHOW_OFFSET = 450;
 
 const { Panel } = Collapse;
 
@@ -108,11 +108,24 @@ const Home: NextPage = () => {
   const scrollYPosition = useRef<number>(0);
   const [offsetPosition, setOffsetPosition] = useState(0);
   const [scrollReviews, setScrollReviews] = useState(false);
+  const [featureImageIndex, setFeatureImageIndex] = useState(0);
   const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
   const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
   const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
 
   const scrollListener = useCallback(() => {
+    if (
+      (section3?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
+    ) {
+      setFeatureImageIndex(2);
+    } else if (
+      (section2?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
+    ) {
+      setFeatureImageIndex(1);
+    } else {
+      setFeatureImageIndex(0);
+    }
+
     if (!scrollReviews) {
       return;
     }
@@ -281,7 +294,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </Section>
-          <Section className={styles.hidePhone}>
+          <Section className={styles.hidePhone} noYBottomPadding>
             <div className={styles.featuresColumnContainer}>
               <div className={styles.featuresLeftColumn}>
                 <div ref={section1} className={styles.featuresSection}>
@@ -496,16 +509,12 @@ const Home: NextPage = () => {
               <div
                 className={styles.featuresRightColumn}
                 style={{
-                  margin: `calc(-1 * ${offsetPosition * 0.2}px) 0 calc(${
-                    offsetPosition * 0.2
-                  }px)`,
+                  marginTop: `calc(-1 * ${offsetPosition * 0.2}px)`,
                 }}
               >
                 <div
                   className={classNames({
-                    [styles.hideImage]:
-                      (section2?.current?.getBoundingClientRect().y || 0) <=
-                      IMAGE_SHOW_OFFSET,
+                    [styles.hideImage]: featureImageIndex !== 0,
                   })}
                 >
                   <div
@@ -524,11 +533,7 @@ const Home: NextPage = () => {
                 </div>
                 <div
                   className={classNames({
-                    [styles.hideImage]:
-                      (section2?.current?.getBoundingClientRect().y || 0) >
-                        IMAGE_SHOW_OFFSET ||
-                      (section3?.current?.getBoundingClientRect().y || 0) <=
-                        IMAGE_SHOW_OFFSET,
+                    [styles.hideImage]: featureImageIndex !== 1,
                   })}
                 >
                   <div
@@ -547,9 +552,7 @@ const Home: NextPage = () => {
                 </div>
                 <div
                   className={classNames({
-                    [styles.hideImage]:
-                      (section3?.current?.getBoundingClientRect().y || 0) >
-                      IMAGE_SHOW_OFFSET - 10,
+                    [styles.hideImage]: featureImageIndex !== 2,
                   })}
                   style={{ width: 300 }}
                 >
