@@ -12,6 +12,14 @@ const nextConfig = {
   env: {
     staticPages: getStaticPages(),
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
