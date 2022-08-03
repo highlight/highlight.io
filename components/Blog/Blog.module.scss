@@ -59,7 +59,16 @@
   gap: var(--size-medium);
 
   .cardImage {
+    margin-bottom: var(--size-large);
     min-height: 200px;
+  }
+
+  .postDateDiv {
+    margin-bottom: var(--size-medium);
+  }
+
+  .tagDiv {
+    margin-top: var(--size-large);
   }
 
   span {
