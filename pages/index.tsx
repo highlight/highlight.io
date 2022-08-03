@@ -210,7 +210,7 @@ const Home: NextPage = () => {
               <h1>{`Because a stack trace alone isn't enough`}</h1>
               <Typography type="copy1" onDark>
                 Stop wasting effort trying to track down and reproduce bugs.
-                Through session replays, Highlight shows you exactly how and
+                Through session replay, Highlight shows you exactly how and
                 when your bugs happen. Highlight removes the mystery of
                 debugging.
               </Typography>
