@@ -73,7 +73,7 @@ export const reviewText: string;
 export const scaleHeight: string;
 export const scroll: string;
 export const search: string;
-export const searchImage: string;
+export const searchTwoHighlighters: string;
 export const secondaryAnchor: string;
 export const secondaryBackground: string;
 export const sectionBody: string;

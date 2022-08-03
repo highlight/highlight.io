@@ -86,11 +86,20 @@
   position: relative;
 }
 
-.searchImage {
+.searchTwoHighlighters {
   position: absolute;
   right: 0;
   bottom: -110px;
   width: 400px;
+
+  @media screen and (max-width: 1288px) {
+    bottom: -90px;
+    width: 300px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 270px;
+  }
 }
 
 .obfuscation {
