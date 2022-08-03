@@ -1,3 +1,5 @@
+const getStaticPages = require('./scripts/get-static-pages');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compress: true,
@@ -7,13 +9,8 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
   swcMinify: true,
-  async rewrites() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/api/sitemap',
-      },
-    ];
+  env: {
+    staticPages: getStaticPages(),
   },
 };
 

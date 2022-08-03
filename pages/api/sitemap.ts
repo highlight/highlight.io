@@ -26,14 +26,9 @@ export default async function handler(_: any, res: any) {
       }
     }
   `);
-  const blogPages = posts.map((post: any) => `/blog/post/${post.slug}`);
+  const blogPages = posts.map((post: any) => `blog/post/${post.slug}`);
 
-  const staticPagePaths = await globby([
-    'pages/**/index.tsx',
-    '!pages/_*.*',
-    '!pages/api',
-  ]);
-
+  const staticPagePaths = process.env.staticPages?.split(', ') || [];
   const staticPages = staticPagePaths.map((path) => {
     return `${path.replace('pages', '').replace('index.tsx', '')}`;
   });
@@ -42,7 +37,7 @@ export default async function handler(_: any, res: any) {
 
   const addPage = (page: string) => {
     return `    <url>
-      <loc>${`${process.env.WEBSITE_URL}${page}`}</loc>
+      <loc>${`${process.env.WEBSITE_URL}/${page}`}</loc>
       <changefreq>hourly</changefreq>
     </url>`;
   };
