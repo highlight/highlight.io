@@ -179,6 +179,77 @@ const Pricing: NextPage = () => {
       <Head>
         <title>Highlight - Plans and Pricing</title>
         <meta name="description" content="Highlight - Plans and Pricing" />
+
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [{
+              "@type": "Question",
+              "name": "Do you offer a discount for non-profits?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We love supporting non-profits and offer a 75% discount for the lifetime of the account. To activate the discount, create a workplace on either the Standard or Pro plan. Then reach out to support and mention the discount."
+              }
+            },{
+              "@type": "Question",
+              "name": "How long does it take to setup Highlight?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It generally takes an engineer less than ten minutes to understand the concepts of Highlight and integrate the app into their workflow. For more information on setup, take a look at our docs."
+              }
+            },{
+              "@type": "Question",
+              "name": "Can I deploy Highlight on-premise?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! To get a glimpse at how our deployment process looks, take a look here (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact sales."
+              }
+            },{
+              "@type": "Question",
+              "name": "Is Highlight secure? Where's my data stored?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our security section and docs. If we don't answer your question there, let us know."
+              }
+            },{
+              "@type": "Question",
+              "name": "Do I need a credit card to sign up?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely not! We never ask for your credit card on sign up. If you start on a paid plan then 30 days after signing up you will be politely prompted to enter in your payment information. At anytime you can switch back to a free plan as long as your workplace has less than 6 seats."
+              }
+            },{
+              "@type": "Question",
+              "name": "How will you charge me?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We ask for a credit card. Your credit card information will never touch our servers as we use Stripe as our payments processor. For Enterprise customers we can do ACH and custom invoices if requested."
+              }
+            },{
+              "@type": "Question",
+              "name": "How does billing work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We charge by usage; or number of sessions collected per month. Our billing system uses prorated billing, meaning you only pay for what you use below each of our thresholds (see above). For example if you move to the Startup plan from the Basic plan in the middle of the month, then you will only be charged for the time you are on the paid plan."
+              }
+            },{
+              "@type": "Question",
+              "name": "What counts as a session?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A session is contiguous instance of a user's presence on your app for less than 4 hours. That is, if a user is browsing your application for 3 minutes, then closes the tab, this counts as a single session."
+              }
+            },{
+              "@type": "Question",
+              "name": "Can I cancel at anytime?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Definitely! You can cancel or downgrade your subscription at anytime. You can also delete your workplace in the settings page at anytime."
+              }
+            }]
+          }`}
+        </script>
       </Head>
       <Navbar />
       <main>
