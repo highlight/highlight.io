@@ -100,7 +100,7 @@ const Footer = () => {
           <Typography type="copy3">
             <ul className={styles.footerList}>
               <li>
-                <a href="https://careers.highlight.io/">Careers</a>
+                <a href="https://careers.highlight.run/">Careers</a>
               </li>
               <li>
                 <a href="mailto:sales@highlight.io">sales@highlight.io</a>
