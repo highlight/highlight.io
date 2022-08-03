@@ -87,7 +87,7 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <a href="https://docs.highlight.io/" className={styles.menuItem}>
+              <a href="https://docs.highlight.run/" className={styles.menuItem}>
                 Docs
               </a>
             </li>
@@ -117,7 +117,7 @@ const BlogNavbar = ({
                   </li>
                   <li>
                     <a
-                      href="https://docs.highlight.io/"
+                      href="https://docs.highlight.run/"
                       className={styles.menuItem}
                     >
                       <div className={styles.dropdownItem}>
@@ -192,7 +192,7 @@ const BlogNavbar = ({
                 <li>
                   <Typography type="copy3" emphasis={true}>
                     <a
-                      href="https://docs.highlight.io/"
+                      href="https://docs.highlight.run/"
                       className={styles.menuItemLarge}
                     >
                       Docs

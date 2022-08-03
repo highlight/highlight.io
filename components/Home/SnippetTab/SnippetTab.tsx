@@ -36,7 +36,7 @@ const SetupDescription = (
       {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
     </Typography>
     <div className={styles.buttonContainer}>
-      <PrimaryLink href="https://docs.highlight.io/getting-started">
+      <PrimaryLink href="https://docs.highlight.run/getting-started">
         Read more about our backend integrations in beta
       </PrimaryLink>
     </div>
