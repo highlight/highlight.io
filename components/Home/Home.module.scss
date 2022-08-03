@@ -29,8 +29,23 @@
 }
 
 .hero {
-  text-align: right;
   margin-bottom: calc(22 * var(--space-unit));
+}
+
+.bigHero {
+  margin-top: -200px;
+  position: relative;
+  z-index: -1;
+
+  .hero {
+    aspect-ratio: 2 / 1;
+    margin: 0 0 0 auto;
+    max-width: 1400px;
+
+    video {
+      max-width: 100%;
+    }
+  }
 }
 
 .heroVideoWrapper {
@@ -55,13 +70,27 @@
 .footerImageLeft {
   position: absolute;
   left: -150px;
-  bottom: -13px;
+  bottom: -59px;
+  width: 300px;
 }
 
 .footerImageRight {
   position: absolute;
   right: -200px;
-  top: 25px;
+  top: 0;
+  transform: scaleX(-1);
+  width: 280px;
+}
+
+.search {
+  position: relative;
+}
+
+.searchImage {
+  position: absolute;
+  right: 0;
+  bottom: -110px;
+  width: 400px;
 }
 
 .obfuscation {
@@ -72,8 +101,9 @@
   position: absolute;
   right: -100px;
   bottom: -80px;
-  height: 245px;
+  height: 249px;
   width: 249px;
+  transform: scaleX(-1);
 }
 
 .obfuscationHandle {

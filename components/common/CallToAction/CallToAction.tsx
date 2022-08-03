@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import styles from '../../Home/Home.module.scss';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { Typography } from '../Typography/Typography';
-import FooterLeftImage from '../../../public/images/footer-highlighter-left.png';
-import FooterRightImage from '../../../public/images/footer-bug-right.png';
+import FooterLeftImage from '../../../public/images/safety-security-section.gif';
+import FooterRightImage from '../../../public/images/hero-bug-right.gif';
 import Image from 'next/image';
 
 export const CallToAction = () => {
