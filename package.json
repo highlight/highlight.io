@@ -37,6 +37,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-swipe": "^6.0.4",
     "react-syntax-highlighter": "13.5.3",
+    "remark-gfm": "^3.0.1",
     "sass": "^1.50.0",
     "swipe-js-iso": "^2.1.5"
   },

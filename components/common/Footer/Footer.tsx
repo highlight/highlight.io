@@ -62,7 +62,7 @@ const Footer = () => {
                 <a href="https://feedback.highlight.run/changelog">Changelog</a>
               </li>
               <li>
-                <a href="https://docs.highlight.run/">Documentation</a>
+                <a href="https://highlight.io/blog">Documentation</a>
               </li>
               <li>
                 <a href="https://docs.highlight.run/deployment-overview">
