@@ -4,6 +4,17 @@ import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
 import { Dispatch, SetStateAction } from 'react';
 
+export interface Author {
+  firstName: string;
+  lastName: string;
+  title: string;
+  twitterLink: string;
+  linkedInLink: string;
+  githubLink: string;
+  personalWebsiteLink: string;
+  profilePhoto: { url: string };
+}
+
 export interface Post {
   slug: string;
   description: string;
@@ -24,6 +35,7 @@ export interface Post {
   };
   tags: Array<string>;
   readingTime?: number;
+  author?: Author;
 }
 
 export const BlogPost = ({

@@ -1,3 +1,5 @@
+export const authorDescription: string;
+export const authorDetails: string;
 export const authorDiv: string;
 export const avatar: string;
 export const blogContainer: string;
