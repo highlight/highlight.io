@@ -87,51 +87,10 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <a href="https://docs.highlight.run/" className={styles.menuItem}>
+              <Link href={'/docs'} className={styles.menuItem}>
                 Docs
-              </a>
+              </Link>
             </li>
-            {/* <li>
-              <a
-                onClick={() => {
-                  setDeveloperOpen(true);
-                }}
-                className={styles.menuItem}
-              >
-                Developers <ChevronDown />
-              </a>
-              {developerOpen && (
-                <ul ref={dropdownRef} className={styles.menuDropdown}>
-                  <li>
-                    <Link href={'/changelog'}>
-                      <a className={styles.menuItem}>
-                        <div className={styles.dropdownItem}>
-                          <SvgEditIcon />
-                          <div>
-                            <h4>Changelog</h4>
-                            <div>Updates to our products</div>
-                          </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <a
-                      href="https://docs.highlight.run/"
-                      className={styles.menuItem}
-                    >
-                      <div className={styles.dropdownItem}>
-                        <SvgBookIcon />
-                        <div>
-                          <h4>Docs</h4>
-                          <div>Read our documentation</div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li> */}
           </ul>
         </div>
       </Banner>
@@ -191,12 +150,9 @@ const BlogNavbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <a
-                      href="https://docs.highlight.run/"
-                      className={styles.menuItemLarge}
-                    >
+                    <Link href="/docs" className={styles.menuItemLarge}>
                       Docs
-                    </a>
+                    </Link>
                   </Typography>
                 </li>
               </ul>
