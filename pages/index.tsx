@@ -106,7 +106,6 @@ const Home: NextPage = () => {
   const section3 = useRef<HTMLDivElement>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollYPosition = useRef<number>(0);
-  const [renderBug, setRenderBug] = useState(false);
   const [offsetPosition, setOffsetPosition] = useState(0);
   const [scrollReviews, setScrollReviews] = useState(false);
   const [featureImageIndex, setFeatureImageIndex] = useState(0);
@@ -180,10 +179,6 @@ const Home: NextPage = () => {
     };
   }, [reviewsRef]);
 
-  useEffect(() => {
-    setTimeout(() => setRenderBug(true), 700);
-  }, []);
-
   return (
     <div>
       <Head>
@@ -200,7 +195,7 @@ const Home: NextPage = () => {
       <main>
         <Section className={styles.heroVideoWrapper}>
           <div className={styles.heroBugLeft}>
-            {renderBug && <Image src={HeroBugLeft} alt="bug left" />}
+            <Image src={HeroBugLeft} alt="bug left" />
           </div>
           <div className={styles.heroBugRight}>
             <Image src={HeroBugRight} alt="bug right" />
