@@ -7,6 +7,7 @@ import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
 import { Section } from '../../common/Section/Section';
 import { Typography } from '../../common/Typography/Typography';
 import ReactImage from '../../../public/images/language/ReactIcon';
+import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple';
 import htmlImage from '../../../public/images/language/htmlIcon';
 import VueImage from '../../../public/images/language/VueIcon';
 import NodeImage from '../../../public/images/language/NodeIcon';
@@ -131,7 +132,7 @@ export default MyApp`}
       <Section noYTopPadding={true} grid>
         <div className={styles.gridSectionImageLeft}>
           <CodeSnippet
-            HeaderImage={htmlImage}
+            HeaderImage={htmlImageDarkPurple}
             canCopy={true}
             language="html"
             content={`<html>
