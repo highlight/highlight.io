@@ -1,3 +1,5 @@
+@import 'styles/mixins';
+
 .bgPosition {
   position: absolute;
   z-index: -1;
@@ -528,13 +530,7 @@
   overflow: scroll;
   position: relative;
   width: 100%;
-
-  // Hides the scrollbar. Requires different properties for certain browsers.
-  -ms-overflow-style: none; // IE
-  scrollbar-width: none; // Firefox
-  &::-webkit-scrollbar {
-    display: none; // Everything else
-  }
+  @include hide-scrollbar;
 
   .slideTrack {
     transition: all 0.1s linear;
@@ -634,6 +630,11 @@
     padding: var(--size-large) var(--size-large) calc(20 * var(--space-unit));
     overflow: scroll;
     position: relative;
+    @include hide-scrollbar;
+
+    > span {
+      @include hide-scrollbar;
+    }
 
     .codeSnippetCopy {
       position: absolute;
