@@ -13,7 +13,13 @@ import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../../components/common/Typography/Typography';
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import {
+  createElement,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import BlogNavbar from '../../../components/Blog/BlogNavbar/BlogNavbar';
 import { SimpleCallToAction } from '../../../components/common/CallToAction/SimpleCallToAction';
 import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
@@ -23,14 +29,21 @@ import { Post } from '../../../components/Blog/BlogPost/BlogPost';
 import Dribble from '../../../public/images/logo-dribbble.svg';
 import LinkedIn from '../../../public/images/logo-linkedin.svg';
 
-const blogTypographyRenderer = ({ children }: { children: any }) => {
-  return (
-    <div className={styles.postHeader}>
-      <h5 className={styles.postHeaderText}>
-        {children?.props?.content[0].text}
-      </h5>
-    </div>
-  );
+const getBlogTypographyRenderer = (type: string) => {
+  function ParagraphHeader({ children }: { children: any }) {
+    return (
+      <div className={styles.postHeader}>
+        {createElement(
+          type,
+          {
+            className: styles.postHeaderText,
+          },
+          children?.props?.content[0].text
+        )}
+      </div>
+    );
+  }
+  return ParagraphHeader;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -159,9 +172,12 @@ const PostSection = ({ p, idx }: { p: PostSection; idx: number }) => {
               </div>
             );
           },
-          h1: blogTypographyRenderer,
-          h2: blogTypographyRenderer,
-          h3: blogTypographyRenderer,
+          h1: getBlogTypographyRenderer('h1'),
+          h2: getBlogTypographyRenderer('h2'),
+          h3: getBlogTypographyRenderer('h3'),
+          h4: getBlogTypographyRenderer('h4'),
+          h5: getBlogTypographyRenderer('h5'),
+          h6: getBlogTypographyRenderer('h6'),
         }}
       />
       {p.footer}
@@ -298,7 +314,7 @@ const PostPage = ({
             </div>
           </div>
         </Section>
-        <Section>
+        <Section className={styles.headerSection}>
           <div className={classNames(styles.mainImage, homeStyles.anchorTitle)}>
             <Image
               src={post.image.url}
@@ -308,7 +324,7 @@ const PostPage = ({
             />
           </div>
         </Section>
-        <Section>
+        <Section className={styles.headerSection}>
           <div
             className={classNames(
               homeStyles.anchorTitle,

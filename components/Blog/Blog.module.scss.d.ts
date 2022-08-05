@@ -10,6 +10,7 @@ export const cardImage: string;
 export const cardSection: string;
 export const codeBlock: string;
 export const dateDiv: string;
+export const headerSection: string;
 export const mainBlogPadding: string;
 export const mainImage: string;
 export const postBody: string;
