@@ -3,7 +3,7 @@ import Image from 'next/image';
 import ReactCompareImage from 'react-compare-image';
 import ObfuscatedText from '../../../public/images/obfuscatedText.svg';
 import RegularText from '../../../public/images/regularText.svg';
-import SecurityImage from '../../../public/images/safety-security-section.png';
+import SecurityImage from '../../../public/images/safety-security-section.gif';
 
 import styles from '../../Home/Home.module.scss';
 import classNames from 'classnames';
