@@ -121,12 +121,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--size-small);
+  gap: var(--size-medium);
 
   p {
     color: var(--color-copy-on-dark);
     margin: var(--size-xxSmall) 0 !important;
   }
+}
+
+.authorDescription {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.authorDetails {
+  display: flex;
+  gap: var(--size-medium);
 }
 
 .mainBlogPadding {

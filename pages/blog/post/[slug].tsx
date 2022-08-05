@@ -20,6 +20,8 @@ import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/Su
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../../components/Blog/BlogPost/BlogPost';
+import Dribble from '../../../public/images/logo-dribbble.svg';
+import LinkedIn from '../../../public/images/logo-linkedin.svg';
 
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
@@ -69,6 +71,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
         tags
         readingTime
+        author {
+          firstName
+          lastName
+          title
+          twitterLink
+          linkedInLink
+          githubLink
+          personalWebsiteLink
+          profilePhoto {
+            url
+          }
+        }
       }
     }
   `;
@@ -219,13 +233,36 @@ const PostPage = ({
                 className={styles.avatar}
                 style={{ width: '50px', height: '50px', position: 'relative' }}
               >
-                <Image src={post.publishedBy.picture} alt="" layout="fill" />
+                <Image
+                  src={
+                    post.author?.profilePhoto.url || post.publishedBy.picture
+                  }
+                  alt=""
+                  layout="fill"
+                />
               </div>
-              <div>
-                <Typography type="copy2" emphasis>
-                  {post.publishedBy.name}
-                </Typography>
-              </div>
+              {post.author && (
+                <div className={styles.authorDescription}>
+                  <Typography type="copy2" emphasis>
+                    <div className={styles.authorDetails}>
+                      <span>
+                        {post.author.firstName} {post.author.lastName}
+                      </span>
+                      {post.author.githubLink && (
+                        <a href={post.author.githubLink}>
+                          <Image src={Dribble} alt={'github icon'} />
+                        </a>
+                      )}
+                      {post.author.linkedInLink && (
+                        <a href={post.author.linkedInLink}>
+                          <Image src={LinkedIn} alt={'linkedin icon'} />
+                        </a>
+                      )}
+                    </div>
+                  </Typography>
+                  <Typography type="copy3">{post.author.title}</Typography>
+                </div>
+              )}
             </div>
           </div>
         </Section>
