@@ -202,6 +202,15 @@
   max-width: 300px;
 }
 
+.postBodyTop {
+  margin-top: calc(-1 * var(--size-medium)) !important;
+}
+
+.headerSection {
+  padding-bottom: var(--size-medium) !important;
+  padding-top: var(--size-medium) !important;
+}
+
 .postBody {
   text-align: left;
   width: 100%;
@@ -211,8 +220,11 @@
   h4,
   h5,
   h6 {
-    margin-top: 1.5em !important;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 40px;
     margin-bottom: 0.25em !important;
+    margin-top: 1.5em !important;
   }
 
   .codeBlock {
@@ -231,6 +243,11 @@
   .postHeader {
     margin-top: var(--size-xxLarge);
     margin-bottom: var(--size-medium);
+  }
+
+  .postHeaderText {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   pre {
