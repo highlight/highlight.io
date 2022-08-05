@@ -202,6 +202,10 @@
   max-width: 300px;
 }
 
+.postBodyTop {
+  margin-top: -16px !important;
+}
+
 .postBody {
   text-align: left;
   width: 100%;
@@ -231,6 +235,11 @@
   .postHeader {
     margin-top: var(--size-xxLarge);
     margin-bottom: var(--size-medium);
+  }
+
+  .postHeaderText {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   pre {

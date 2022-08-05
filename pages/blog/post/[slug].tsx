@@ -26,7 +26,9 @@ import LinkedIn from '../../../public/images/logo-linkedin.svg';
 const blogTypographyRenderer = ({ children }: { children: any }) => {
   return (
     <div className={styles.postHeader}>
-      <h5>{children?.props?.content[0].text}</h5>
+      <h5 className={styles.postHeaderText}>
+        {children?.props?.content[0].text}
+      </h5>
     </div>
   );
 };
@@ -136,6 +138,36 @@ interface PostSection {
 enum SectionType {
   CallToAction = '{{CALL_TO_ACTION}}',
 }
+
+const PostSection = ({ p, idx }: { p: PostSection; idx: number }) => {
+  return (
+    <>
+      <RichText
+        content={{
+          children: p.nodes,
+        }}
+        renderers={{
+          code_block: ({ children }: { children: any }) => {
+            return (
+              <div className={styles.codeBlock}>
+                <CodeBlock
+                  language={'js'}
+                  text={children?.props?.content[0].text}
+                  showLineNumbers={false}
+                  theme={highlightCodeTheme}
+                />
+              </div>
+            );
+          },
+          h1: blogTypographyRenderer,
+          h2: blogTypographyRenderer,
+          h3: blogTypographyRenderer,
+        }}
+      />
+      {p.footer}
+    </>
+  );
+};
 
 const PostPage = ({
   post,
@@ -277,9 +309,15 @@ const PostPage = ({
           </div>
         </Section>
         <Section>
-          <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
+          <div
+            className={classNames(
+              homeStyles.anchorTitle,
+              styles.postBody,
+              styles.postBodyTop
+            )}
+          >
             {postSections?.map((p, idx) => (
-              <PostSection key={idx} p={p} />
+              <PostSection key={idx} idx={idx} p={p} />
             ))}
           </div>
         </Section>
@@ -297,36 +335,6 @@ const PostPage = ({
       </main>
       <CallToAction />
       <Footer />
-    </>
-  );
-};
-
-const PostSection = ({ p }: { p: PostSection }) => {
-  return (
-    <>
-      <RichText
-        content={{
-          children: p.nodes,
-        }}
-        renderers={{
-          code_block: ({ children }: { children: any }) => {
-            return (
-              <div className={styles.codeBlock}>
-                <CodeBlock
-                  language={'js'}
-                  text={children?.props?.content[0].text}
-                  showLineNumbers={false}
-                  theme={highlightCodeTheme}
-                />
-              </div>
-            );
-          },
-          h1: blogTypographyRenderer,
-          h2: blogTypographyRenderer,
-          h3: blogTypographyRenderer,
-        }}
-      />
-      {p.footer}
     </>
   );
 };
