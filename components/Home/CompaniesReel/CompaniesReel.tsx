@@ -43,7 +43,12 @@ export const CompaniesReel = () => {
           <div
             className={classNames(styles.tabletGraphic, styles.hideMobile)}
           ></div>
-          <Image src={Secoda} alt="Secoda" className={styles.scaleHeight} />
+          <Image
+            src={Secoda}
+            alt="Secoda"
+            className={styles.scaleHeight}
+            style={{ transform: 'scale(0.8)' }}
+          />
         </div>
       </div>
     </div>

@@ -249,11 +249,15 @@
 }
 
 .sectionInfo {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   padding: var(--size-medium) 0;
-  border-bottom: 2px solid var(--color-white);
-  cursor: pointer;
+
+  &:global(.ant-collapse-item-active) {
+    border-bottom: 2px solid var(--color-white);
+  }
 }
 
 .sectionImageRight {
