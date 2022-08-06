@@ -1,4 +1,4 @@
-An h1 header
+Performance Stuff
 ============
 
 Paragraphs are separated by a blank line.
