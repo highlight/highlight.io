@@ -342,7 +342,9 @@ const PostPage = ({
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
-            <h3>Other articles you may like</h3>
+            <h3 className={styles.otherArticlesHeader}>
+              Other articles you may like
+            </h3>
             {suggestedPosts.map((p, i) => (
               <SuggestedBlogPost {...p} key={i} />
             ))}

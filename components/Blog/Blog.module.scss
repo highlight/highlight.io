@@ -283,6 +283,16 @@
   margin: auto;
 }
 
+.otherArticlesHeader {
+  margin-bottom: 40px !important;
+}
+
+@media screen and (max-width: 800px) {
+  .otherArticlesHeader {
+    margin-bottom: 32px !important;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .mainBlogPadding {
     padding: 0;
