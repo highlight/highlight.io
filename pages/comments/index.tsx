@@ -21,7 +21,12 @@ const Comments: NextPage = () => {
     <div>
       <Head>
         <title>Comments - Highlight</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+
+        <meta
+          property="og:title"
+          content="Comments - Highlight"
+          key="ogtitle"
+        />
       </Head>
       <div className={styles.bgPosition}>
         <div className={styles.purpleDiv}>

@@ -181,16 +181,6 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>
-          Highlight: The Ultimate Debugging Tool For Fast-Moving Teams
-        </title>
-        <meta
-          name="description"
-          content="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Navbar />
       <main>
         <Section className={styles.heroVideoWrapper}>
