@@ -187,7 +187,7 @@ const TierSection = ({
             </div>
           </div>
           <PrimaryButton className={styles.pricingButton}>
-            <Typography type="copy3" emphasis={true}>
+            <Typography type="copy2" emphasis={true}>
               {contactSales ? 'Contact Sales' : 'Start Free Trial'}
             </Typography>
           </PrimaryButton>
@@ -694,7 +694,7 @@ const MobileTierSection = ({
             styles.mobilePricingButton
           )}
         >
-          <Typography type="copy3" emphasis={true}>
+          <Typography type="copy2" emphasis={true}>
             {contactSales ? 'Contact Sales' : 'Start Free Trial'}
           </Typography>
         </PrimaryButton>
