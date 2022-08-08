@@ -862,10 +862,6 @@
   width: 200px;
 }
 
-.mobileSpacing {
-  margin-top: -80px;
-}
-
 @media screen and (max-width: 800px) {
   .hideMobile {
     display: none;
@@ -978,6 +974,9 @@
   .mobileOnly {
     display: flex !important;
   }
+  .mobileSpacing {
+    margin-top: -80px !important;
+  }
 
   .secondaryAnchor {
     max-height: 200px;
@@ -989,11 +988,11 @@
   }
 
   .hideMobile {
-    display: none;
+    display: none !important;
   }
 
   .hidePhone {
-    display: none;
+    display: none !important;
   }
 
   .mobile {
