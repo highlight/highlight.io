@@ -31,7 +31,7 @@ export const SimpleCallToAction = () => {
             href="https://app.highlight.run/?sign_up=1"
             style={{ color: 'black' }}
           >
-            <Typography type="copy1" emphasis={true}>
+            <Typography type="copy2" emphasis={true}>
               Get started for free
             </Typography>
           </PrimaryButton>

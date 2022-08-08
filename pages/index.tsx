@@ -218,7 +218,7 @@ const Home: NextPage = () => {
               className={classNames(styles.buttonContainer, styles.heroImage)}
             >
               <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                <Typography type="copy1" emphasis={true}>
+                <Typography type="copy2" emphasis={true}>
                   Get started for free
                 </Typography>
               </PrimaryButton>
