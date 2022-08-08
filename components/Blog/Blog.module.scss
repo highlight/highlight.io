@@ -215,19 +215,9 @@
   text-align: left;
   width: 100%;
 
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 40px;
-    margin-bottom: 0.25em !important;
-    margin-top: 1.5em !important;
-  }
-
   .codeBlock {
+    margin-top: var(--size-medium);
+    margin-bottom: var(--size-medium);
     > span {
       background-color: transparent !important;
       padding: var(--size-large);
@@ -241,8 +231,17 @@
   }
 
   .postHeader {
-    margin-top: var(--size-xxLarge);
-    margin-bottom: var(--size-medium);
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 40px;
+      margin-bottom: 0.25em !important;
+      margin-top: 1.5em !important;
+    }
   }
 
   .postHeaderText {
