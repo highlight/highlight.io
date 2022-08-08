@@ -98,6 +98,17 @@ const Blog = ({
           name="description"
           content="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
         />
+
+        <meta
+          property="og:title"
+          content="Debugging Blog: Best Practices From The Highlight Team"
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
+          key="ogdesc"
+        />
       </Head>
       <Navbar />
       <main>

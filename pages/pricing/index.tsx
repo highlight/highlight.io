@@ -232,6 +232,18 @@ const Pricing: NextPage = () => {
           name="description"
           content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
         />
+
+        <meta
+          property="og:title"
+          content="Highlight: Plans And Pricing For Any Team. Get Started Free."
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
+          key="ogdesc"
+        />
+
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",

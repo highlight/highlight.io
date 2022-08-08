@@ -251,6 +251,14 @@ const PostPage = ({
           name="description"
           content={post.metaDescription || post.description}
         />
+
+        <meta property="og:image" content={post.image.url} key="ogimage" />
+        <meta property="og:title" content={post.metaTitle} key="ogtitle" />
+        <meta
+          property="og:description"
+          content={post.metaDescription}
+          key="ogdesc"
+        />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>

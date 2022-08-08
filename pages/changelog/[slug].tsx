@@ -66,7 +66,7 @@ const ChangelogPage = ({ changelog }: { changelog: any }) => {
     <>
       <Head>
         <title>{changelog.title}</title>
-        <meta name="description" content="Stop debugging in the dark. " />
+        <meta property="og:title" content={changelog.title} key="ogtitle" />
       </Head>
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
