@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import Head from 'next/head';
-import homeStyles from '../../../components/Home/Home.module.scss';
-import styles from '../../../components/Blog/Blog.module.scss';
-import { Section } from '../../../components/common/Section/Section';
-import Footer from '../../../components/common/Footer/Footer';
+import homeStyles from '../../components/Home/Home.module.scss';
+import styles from '../../components/Blog/Blog.module.scss';
+import { Section } from '../../components/common/Section/Section';
+import Footer from '../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
-import { graphcms } from '..';
+import { graphcms } from '.';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { CallToAction } from '../../../components/common/CallToAction/CallToAction';
+import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock } from 'react-code-blocks';
-import { Typography } from '../../../components/common/Typography/Typography';
+import { Typography } from '../../components/common/Typography/Typography';
 import {
   createElement,
   ReactElement,
@@ -20,14 +20,16 @@ import {
   useRef,
   useState,
 } from 'react';
-import BlogNavbar from '../../../components/Blog/BlogNavbar/BlogNavbar';
-import { SimpleCallToAction } from '../../../components/common/CallToAction/SimpleCallToAction';
-import { SuggestedBlogPost } from '../../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
+import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
+import { SimpleCallToAction } from '../../components/common/CallToAction/SimpleCallToAction';
+import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
-import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme';
-import { Post } from '../../../components/Blog/BlogPost/BlogPost';
-import Dribble from '../../../public/images/logo-dribbble.svg';
-import LinkedIn from '../../../public/images/logo-linkedin.svg';
+import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
+import { Post } from '../../components/Blog/BlogPost/BlogPost';
+import Dribble from '../../public/images/logo-dribbble.svg';
+import LinkedIn from '../../public/images/logo-linkedin.svg';
+
+const NUM_SUGGESTED_POSTS = 3;
 
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphHeader({ children }: { children: any }) {
@@ -128,15 +130,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  const currentPostIndex = posts.findIndex((post: any) => post.slug === slug);
-
+  const otherPosts = posts.filter((post: any) => post.slug !== slug);
+  const suggestedPosts = [];
+  // suggest N random posts that are not the current post
+  for (let i = 0; i < Math.min(NUM_SUGGESTED_POSTS, posts.length - 1); i++) {
+    suggestedPosts.push(
+      otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0]
+    );
+  }
   return {
     props: {
+      suggestedPosts,
       post: data.post,
-      suggestedPosts: posts.slice(
-        currentPostIndex + 1,
-        Math.min(currentPostIndex + 4, posts.length - 1)
-      ),
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
@@ -152,7 +157,7 @@ enum SectionType {
   CallToAction = '{{CALL_TO_ACTION}}',
 }
 
-const PostSection = ({ p, idx }: { p: PostSection; idx: number }) => {
+const PostSection = ({ p }: { p: PostSection; idx: number }) => {
   return (
     <>
       <RichText
