@@ -29,6 +29,8 @@ import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import Dribble from '../../public/images/logo-dribbble.svg';
 import LinkedIn from '../../public/images/logo-linkedin.svg';
 
+const NUM_SUGGESTED_POSTS = 3;
+
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphHeader({ children }: { children: any }) {
     return (
@@ -128,15 +130,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  const currentPostIndex = posts.findIndex((post: any) => post.slug === slug);
-
+  const otherPosts = posts.filter((post: any) => post.slug !== slug);
+  const suggestedPosts = [];
+  // suggest N random posts that are not the current post
+  for (let i = 0; i < Math.min(NUM_SUGGESTED_POSTS, posts.length - 1); i++) {
+    suggestedPosts.push(
+      otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0]
+    );
+  }
   return {
     props: {
+      suggestedPosts,
       post: data.post,
-      suggestedPosts: posts.slice(
-        currentPostIndex + 1,
-        Math.min(currentPostIndex + 4, posts.length - 1)
-      ),
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
