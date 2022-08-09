@@ -1,7 +1,4 @@
 import { GraphQLClient, gql } from 'graphql-request';
-import fs from 'fs';
-import globby from 'globby';
-import path from 'path';
 
 export default async function handler(_: any, res: any) {
   res.statusCode = 200;
@@ -26,7 +23,7 @@ export default async function handler(_: any, res: any) {
       }
     }
   `);
-  const blogPages = posts.map((post: any) => `blog/post/${post.slug}`);
+  const blogPages = posts.map((post: any) => `blog/${post.slug}`);
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
   const staticPages = staticPagePaths.map((path) => {

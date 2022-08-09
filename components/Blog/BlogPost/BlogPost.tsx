@@ -2,7 +2,6 @@ import styles from '../Blog.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
-import { Dispatch, SetStateAction } from 'react';
 
 export interface Author {
   firstName: string;
@@ -48,7 +47,7 @@ export const BlogPost = ({
   readingTime,
 }: Post) => {
   return (
-    <Link href={`/blog/post/${slug}`}>
+    <Link href={`/blog/${slug}`}>
       <a style={{ textDecoration: 'none' }}>
         <div className={styles.blogPost}>
           <div className={styles.cardSection}>
