@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
-import styles from '../../components/Blog/Blog.module.scss';
+import styles from '../../components/Docs/Docs.module.scss';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
@@ -11,6 +11,9 @@ import Footer from '../../components/common/Footer/Footer';
 import remarkGfm from 'remark-gfm';
 
 import path from 'path';
+import Navbar from '../../components/common/Navbar/Navbar';
+import Link from 'next/link';
+import { Typography } from '../../components/common/Typography/Typography';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 
@@ -58,9 +61,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const staticPaths = docPaths.map((p) =>
     path.join('/docs', p.slug.split('.')[0])
   );
-  console.log(staticPaths);
   return {
-    paths: ['/docs/performance'],
+    paths: staticPaths,
     fallback: true,
   };
 };
@@ -69,26 +71,72 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
   const currentDoc = docPaths.find((d) => d.slug === context?.params?.doc);
   const fileContents = await fsp.readFile(path.join(currentDoc?.path || ''));
-  console.log('contents', fileContents.toString());
   return {
-    props: { markdownText: fileContents.toString(), slug: currentDoc?.slug },
+    props: {
+      markdownText: fileContents.toString(),
+      slug: currentDoc?.slug,
+      docOptions: docPaths,
+    },
   };
-  return { props: { markdownText: 'hello' } };
 };
 
-const DocPage = ({ markdownText }: { markdownText: string }) => {
+const toSentenceCase = (word: string): string => {
+  if (word.length < 1) {
+    return '';
+  }
+  return word[0].toUpperCase() + word.slice(1);
+};
+
+const DocPage = ({
+  markdownText,
+  slug,
+  docOptions,
+}: {
+  markdownText: string;
+  slug: string;
+  docOptions: DocPath[];
+}) => {
   const blogBody = useRef<HTMLDivElement>(null);
   return (
     <>
       <Head>
-        <title>{'TODO'}</title>
+        <title>
+          {'Highlight Docs: '}
+          {toSentenceCase(slug)}
+        </title>
         <meta name="description" content={'TODO'} />
       </Head>
-      <BlogNavbar title={'TODO'} endPosition={100} />
-      <main ref={blogBody} className={styles.mainBlogPadding}>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {markdownText}
-        </ReactMarkdown>
+      <Navbar />
+      <main ref={blogBody} className={styles.mainWrapper}>
+        <div className={styles.leftSection}>
+          {docOptions
+            .map((d) => d.heading)
+            .filter((d, i, a) => a.indexOf(d) === i && d.length)
+            .map((heading, i) => {
+              return (
+                <div key={i} className={styles.headingSection}>
+                  <Typography type="outline">
+                    {heading.split('-').join(' ')}
+                  </Typography>
+                  {docOptions
+                    .filter((o) => o.heading === heading)
+                    .map((doc, i) => (
+                      <Link passHref={true} href={doc.slug} key={i}>
+                        <Typography type="copy3" className={styles.docLink}>
+                          {doc.slug}
+                        </Typography>
+                      </Link>
+                    ))}
+                </div>
+              );
+            })}
+        </div>
+        <div className={styles.centerSection}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {markdownText}
+          </ReactMarkdown>
+        </div>
+        <div className={styles.rightSection}>hello</div>
       </main>
       <Footer />
     </>

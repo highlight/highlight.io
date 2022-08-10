@@ -1,0 +1,38 @@
+.mainWrapper {
+  display: flex;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  padding: var(--size-large) var(--size-xxLarge);
+  gap: 24px;
+}
+
+.centerSection {
+  display: flex;
+  flex-direction: column;
+  width: 850px;
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.headingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.docLink {
+  color: var(--color-gray-400);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.docLink:hover {
+  color: var(--color-white);
+}
