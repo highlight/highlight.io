@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:creator" content="@highlightrun" />
         <meta name="twitter:image" content={MetaImage.src} key="twimage" />
         <meta
-          property="twitter:title"
+          name="twitter:title"
           content="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
           key="twtitle"
         />
