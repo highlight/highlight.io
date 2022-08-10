@@ -28,13 +28,14 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import Dribble from '../../public/images/logo-dribbble.svg';
 import LinkedIn from '../../public/images/logo-linkedin.svg';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 const NUM_SUGGESTED_POSTS = 3;
 
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphHeader({ children }: { children: any }) {
     return (
-      <div className={styles.postHeader}>
+      <>
         {createElement(
           type,
           {
@@ -42,7 +43,7 @@ const getBlogTypographyRenderer = (type: string) => {
           },
           children?.props?.content[0].text
         )}
-      </div>
+      </>
     );
   }
   return ParagraphHeader;
@@ -159,7 +160,7 @@ enum SectionType {
 
 const PostSection = ({ p }: { p: PostSection; idx: number }) => {
   return (
-    <>
+    <div className={styles.postSection}>
       <RichText
         content={{
           children: p.nodes,
@@ -186,7 +187,7 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
         }}
       />
       {p.footer}
-    </>
+    </div>
   );
 };
 
