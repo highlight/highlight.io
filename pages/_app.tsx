@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:creator" content="@highlightrun" />
         <meta
           name="twitter:image"
-          content={`${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
+          content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
           key="twimage"
         />
 
@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content={`${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
+          content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
           key="ogimage"
         />
         <meta property="og:site_name" content="Highlight" key="ogsitename" />
