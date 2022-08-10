@@ -15,7 +15,7 @@ export const BlogPostSmall = ({
 }: Post) => {
   return (
     <div className={styles.blogPostSmall}>
-      <Link href={`/blog/post/${slug}`}>
+      <Link href={`/blog/${slug}`}>
         <a style={{ textDecoration: 'none' }}>
           <div className={styles.cardImage}>
             <Image src={url} alt="" layout="fill" objectFit="cover" />

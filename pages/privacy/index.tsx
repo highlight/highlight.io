@@ -12,17 +12,19 @@ const Privacy = () => {
   return (
     <>
       <Head>
-        <title>Privacy Policy</title>
+        <title>Highlight: Privacy Policy</title>
         <meta name="description" content="Highlight privacy policy" />
+        <meta
+          property="og:title"
+          content="Highlight: Privacy Policy"
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content="Highlight privacy policy"
+          key="ogdesc"
+        />
       </Head>
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
         <Section>

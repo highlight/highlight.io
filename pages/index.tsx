@@ -3,15 +3,14 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
-import { PrimaryLink } from '../components/common/Buttons/SecondaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 
-import BigHeroSection from '../public/images/big-hero-section.svg';
+import BigHeroSection from '../public/images/big-hero-section.gif';
 import MobileHeroSection from '../public/images/mobile-insects.png';
-import HeroBugRight from '../public/images/hero-bug-right.svg';
-import HeroBugLeft from '../public/images/hero-bug-left.svg';
+import HeroBugLeft from '../public/images/hero-bug-left.gif';
+import HeroBugRight from '../public/images/hero-bug-right.gif';
 import PlaybackIcon from '../public/images/pc-play-media.svg';
 import ConsoleIcon from '../public/images/window-code.svg';
 import TimingIcon from '../public/images/stopwatch.svg';
@@ -26,6 +25,7 @@ import PlugIcon from '../public/images/plug.svg';
 
 import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.svg';
+import TwoHighlightersImage from '../public/images/two-highlighters.gif';
 import Tablet1 from '../public/images/tablet1.svg';
 import Tablet2 from '../public/images/tablet2.png';
 
@@ -181,16 +181,6 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>
-          Highlight: The Ultimate Debugging Tool For Fast-Moving Teams
-        </title>
-        <meta
-          name="description"
-          content="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Navbar />
       <main>
         <Section className={styles.heroVideoWrapper}>
@@ -218,7 +208,7 @@ const Home: NextPage = () => {
               className={classNames(styles.buttonContainer, styles.heroImage)}
             >
               <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                <Typography type="copy1" emphasis={true}>
+                <Typography type="copy2" emphasis={true}>
                   Get started for free
                 </Typography>
               </PrimaryButton>
@@ -275,8 +265,19 @@ const Home: NextPage = () => {
             </div>
           </div>
         </Section>
-        <div className={classNames(styles.hero, styles.hideMobile)}>
-          <Image src={BigHeroSection} alt="hero" />
+        <div className={classNames(styles.bigHero, styles.hideMobile)}>
+          <div className={classNames(styles.hero)}>
+            <video
+              playsInline
+              autoPlay
+              muted
+              loop
+              poster="big-hero-section.svg"
+              id="big-hero-video"
+            >
+              <source src="/images/big-hero.mp4" type="video/mp4"></source>
+            </video>
+          </div>
         </div>
         <div className={classNames(styles.hero, styles.mobile)}>
           <Image src={MobileHeroSection} alt="hero" />
@@ -541,9 +542,16 @@ const Home: NextPage = () => {
                   })}
                 >
                   <div
-                    className={classNames(styles.imageInner, styles.hideMobile)}
+                    className={classNames(
+                      styles.imageInner,
+                      styles.hideMobile,
+                      styles.search
+                    )}
                   >
                     <Image src={SearchImage} alt="" />
+                    <div className={styles.searchTwoHighlighters}>
+                      <Image src={TwoHighlightersImage} alt="" />
+                    </div>
                   </div>
                   <div
                     className={classNames(
@@ -551,14 +559,13 @@ const Home: NextPage = () => {
                       styles.tabletGraphic
                     )}
                   >
-                    <Image src={Tablet2} alt="" />
+                    <Image src={TwoHighlightersImage} alt="" />
                   </div>
                 </div>
                 <div
                   className={classNames({
                     [styles.hideImage]: featureImageIndex !== 2,
                   })}
-                  style={{ width: 300 }}
                 >
                   <div className={styles.imageInner} style={{ height: 300 }}>
                     <ObfuscationSlider />
@@ -723,7 +730,7 @@ const Home: NextPage = () => {
               <div
                 className={classNames(styles.imageInner, styles.tabletGraphic)}
               >
-                <Image src={Tablet2} alt="" />
+                <Image src={TwoHighlightersImage} alt="" />
               </div>
             </div>
           </Section>

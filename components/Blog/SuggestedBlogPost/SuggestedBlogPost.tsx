@@ -15,7 +15,7 @@ export const SuggestedBlogPost = ({
   readingTime,
 }: Post) => {
   return (
-    <Link href={`/blog/post/${slug}`}>
+    <Link href={`/blog/${slug}`}>
       <a style={{ textDecoration: 'none' }}>
         <div className={classNames(styles.blogPost, styles.suggestedBlogPost)}>
           <div className={styles.cardSection}>

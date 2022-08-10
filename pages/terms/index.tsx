@@ -13,17 +13,20 @@ const Terms = () => {
   return (
     <>
       <Head>
-        <title>Terms of Service</title>
-        <meta name="description" content="Highlight terms of service" />
+        <title>Highlight: Terms of Service</title>
+        <meta name="description" content="Highlight: Terms of Service" />
+
+        <meta
+          property="og:title"
+          content="Highlight: Terms of Service"
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content="Highlight: Terms of Service"
+          key="ogdesc"
+        />
       </Head>
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
         <Section>
