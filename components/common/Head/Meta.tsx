@@ -1,4 +1,4 @@
-import MetaImage from '../public/images/meta-image.jpg';
+import MetaImage from '../../../public/images/meta-image.jpg';
 export const Meta = ({
   title,
   description,
