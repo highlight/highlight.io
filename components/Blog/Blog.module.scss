@@ -232,7 +232,11 @@
   }
 
   .postHeader {
-    h2 {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-size: 26px;
       font-weight: 600;
       line-height: 40px;
@@ -242,10 +246,7 @@
   }
 
   .postHeader {
-    h3,
-    h4,
-    h5,
-    h6 {
+    h2 ~ h3 {
       font-size: 22px;
       font-weight: 600;
       line-height: 40px;

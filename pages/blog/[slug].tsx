@@ -281,7 +281,7 @@ const PostPage = ({
                 Math.floor(post.richcontent.markdown.split(' ').length / 200)
               } min read`}</p>
             </Typography>
-            <h2>{post.title}</h2>
+            <h1>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags.map((tag: string) => (
                 <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
