@@ -1,22 +1,18 @@
-import Image from 'next/image';
 import Head from 'next/head';
-import BlueGradient from '../../public/images/bg_blue_gradient.svg';
-import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
-import homeStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
-import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
-import { GraphQLClient, gql } from 'graphql-request';
+import { gql, GraphQLClient } from 'graphql-request';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
 import { Typography } from '../../components/common/Typography/Typography';
+import { Meta } from '../../components/common/Head/Meta';
 
 const ITEMS_PER_PAGE = 5;
 
@@ -94,20 +90,9 @@ const Blog = ({
     <>
       <Head>
         <title>Debugging Blog: Best Practices From The Highlight Team</title>
-        <meta
-          name="description"
-          content="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
-        />
-
-        <meta
-          property="og:title"
-          content="Debugging Blog: Best Practices From The Highlight Team"
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
-          key="ogdesc"
+        <Meta
+          title="Debugging Blog: Best Practices From The Highlight Team"
+          description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
         />
       </Head>
       <Navbar />

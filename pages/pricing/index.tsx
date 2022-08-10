@@ -40,6 +40,7 @@ import {
   PricingInfo,
   StartupInfo,
 } from '../../components/Pricing/plan_info';
+import { Meta } from '../../components/common/Head/Meta';
 
 // Plans and info used for both mobile and desktop views.
 const planDetails: Array<PricingDetails> = [
@@ -228,20 +229,9 @@ const Pricing: NextPage = () => {
         <title>
           Highlight: Plans And Pricing For Any Team. Get Started Free.
         </title>
-        <meta
-          name="description"
-          content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
-        />
-
-        <meta
-          property="og:title"
-          content="Highlight: Plans And Pricing For Any Team. Get Started Free."
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
-          key="ogdesc"
+        <Meta
+          title="Highlight: Plans And Pricing For Any Team. Get Started Free."
+          description="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
         />
 
         <script type="application/ld+json">
