@@ -138,7 +138,6 @@ const DocPage = ({
         </div>
         <div className={styles.rightSection}>hello</div>
       </main>
-      <Footer />
     </>
   );
 };
