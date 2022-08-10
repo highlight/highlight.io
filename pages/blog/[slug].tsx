@@ -28,6 +28,7 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import Dribble from '../../public/images/logo-dribbble.svg';
 import LinkedIn from '../../public/images/logo-linkedin.svg';
+import { Meta } from '../../components/common/Head/Meta';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -252,17 +253,10 @@ const PostPage = ({
     <>
       <Head>
         <title>{post.metaTitle || post.title}</title>
-        <meta
-          name="description"
-          content={post.metaDescription || post.description}
-        />
-
-        <meta property="og:image" content={post.image.url} key="ogimage" />
-        <meta property="og:title" content={post.metaTitle} key="ogtitle" />
-        <meta
-          property="og:description"
-          content={post.metaDescription}
-          key="ogdesc"
+        <Meta
+          title={post.metaTitle || post.title}
+          description={post.metaDescription || post.description}
+          absoluteImageUrl={post.image.url}
         />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
