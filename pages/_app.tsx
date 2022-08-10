@@ -38,19 +38,23 @@ function MyApp({ Component, pageProps }: AppProps) {
         </title>
 
         {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" key="twcard" />
+        <meta name="twitter:site" content="https://www.highlight.io" />
+        <meta name="twitter:creator" content="@highlightrun" />
         <meta
-          property="twitter:card"
-          content="summary_large_image"
-          key="twcard"
+          name="twitter:image"
+          content={`${process.env.VERCEL_URL}${MetaImage.src}`}
+          key="twimage"
         />
-        <meta property="twitter:site" content="https://www.highlight.io" />
-        <meta property="twitter:creator" content="@highlightrun" />
-        <meta property="twitter:image" content={MetaImage.src} key="twimage" />
 
         {/* Open Graph */}
         <meta property="og:url" content="highlight.io" key="ogurl" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={MetaImage.src} key="ogimage" />
+        <meta
+          property="og:image"
+          content={`${process.env.VERCEL_URL}${MetaImage.src}`}
+          key="ogimage"
+        />
         <meta property="og:site_name" content="Highlight" key="ogsitename" />
         <meta
           property="og:title"
