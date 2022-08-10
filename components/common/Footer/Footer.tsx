@@ -26,7 +26,7 @@ const Footer = () => {
         </div>
         <div>
           <div className={styles.footerTitle}>
-            <Typography type="copy3" emphasis={true}>
+            <Typography type="copy2" emphasis={true}>
               Product
             </Typography>
           </div>
@@ -52,7 +52,7 @@ const Footer = () => {
         </div>
         <div>
           <div className={styles.footerTitle}>
-            <Typography type="copy3" emphasis={true}>
+            <Typography type="copy2" emphasis={true}>
               Developers
             </Typography>
           </div>
@@ -74,7 +74,7 @@ const Footer = () => {
         </div>
         <div>
           <div className={styles.footerTitle}>
-            <Typography type="copy3" emphasis={true}>
+            <Typography type="copy2" emphasis={true}>
               Legal
             </Typography>
           </div>
@@ -91,7 +91,7 @@ const Footer = () => {
         </div>
         <div>
           <div className={styles.footerTitle}>
-            <Typography type="copy3" emphasis={true}>
+            <Typography type="copy2" emphasis={true}>
               Contact
             </Typography>
           </div>
