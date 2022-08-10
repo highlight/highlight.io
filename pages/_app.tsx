@@ -41,7 +41,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:card" content="summary_large_image" key="twcard" />
         <meta name="twitter:site" content="@highlightrun" />
         <meta name="twitter:creator" content="@highlightrun" />
-        <meta name="twitter:image" content={MetaImage.src} key="twimage" />
+        <meta
+          name="twitter:image"
+          content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
+          key="twimage"
+        />
         <meta
           name="twitter:title"
           content="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
@@ -51,7 +55,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* Open Graph */}
         <meta property="og:url" content="highlight.io" key="ogurl" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={MetaImage.src} key="ogimage" />
+        <meta
+          property="og:image"
+          content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
+          key="ogimage"
+        />
         <meta property="og:site_name" content="Highlight" key="ogsitename" />
         <meta
           property="og:title"
