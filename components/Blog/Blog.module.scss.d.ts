@@ -21,6 +21,7 @@ export const postDateDiv: string;
 export const postHeaderText: string;
 export const postSection: string;
 export const postTagDiv: string;
+export const postTitle: string;
 export const selectedTag: string;
 export const suggestedBlogPost: string;
 export const suggestedPost: string;
