@@ -8,7 +8,7 @@ import FooterLeftImage from '../../../public/images/safety-security-section.gif'
 import FooterRightImage from '../../../public/images/hero-bug-right.gif';
 import Image from 'next/image';
 
-export const CallToAction = () => {
+export const FooterCallToAction = () => {
   return (
     <div className={styles.callToActionBackground}>
       <div className={classNames(styles.anchorTitle, styles.ctaContainer)}>

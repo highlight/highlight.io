@@ -19,7 +19,7 @@ import Footer from '../../components/common/Footer/Footer';
 import styles from '../../components/Pricing/Pricing.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
@@ -378,7 +378,7 @@ const Pricing: NextPage = () => {
             ))}
           </div>
         </Section>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </div>

@@ -8,7 +8,7 @@ import { gql } from 'graphql-request';
 import { graphcms } from '.';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock } from 'react-code-blocks';
@@ -21,7 +21,7 @@ import {
   useState,
 } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
-import { SimpleCallToAction } from '../../components/common/CallToAction/SimpleCallToAction';
+import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction';
 import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
@@ -35,15 +35,15 @@ const NUM_SUGGESTED_POSTS = 3;
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphHeader({ children }: { children: any }) {
     return (
-      <div className={styles.postHeader}>
+      <>
         {createElement(
           type,
           {
-            className: styles.postHeaderText,
+            className: styles.blogText,
           },
           children?.props?.content[0].text
         )}
-      </div>
+      </>
     );
   }
   return ParagraphHeader;
@@ -159,6 +159,7 @@ enum SectionType {
 }
 
 const PostSection = ({ p }: { p: PostSection; idx: number }) => {
+  console.log('here');
   return (
     <>
       <RichText
@@ -184,6 +185,7 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
           h4: getBlogTypographyRenderer('h4'),
           h5: getBlogTypographyRenderer('h5'),
           h6: getBlogTypographyRenderer('h6'),
+          p: getBlogTypographyRenderer('p'),
         }}
       />
       {p.footer}
@@ -232,11 +234,12 @@ const PostPage = ({
         case SectionType.CallToAction:
           processed.push({
             nodes: currentBlock,
-            footer: <SimpleCallToAction />,
+            footer: <BlogCallToAction />,
           });
           currentBlock = [];
           break;
         default:
+          r.className = '.testing';
           currentBlock.push(r);
       }
     }
@@ -275,7 +278,7 @@ const PostPage = ({
                 Math.floor(post.richcontent.markdown.split(' ').length / 200)
               } min read`}</p>
             </Typography>
-            <h2>{post.title}</h2>
+            <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags.map((tag: string) => (
                 <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
@@ -359,7 +362,7 @@ const PostPage = ({
           </div>
         </Section>
       </main>
-      <CallToAction />
+      <FooterCallToAction />
       <Footer />
     </>
   );

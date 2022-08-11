@@ -5,7 +5,7 @@ import styles from '../../Home/Home.module.scss';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { Typography } from '../Typography/Typography';
 
-export const SimpleCallToAction = () => {
+export const BlogCallToAction = () => {
   return (
     <div
       className={classNames(
