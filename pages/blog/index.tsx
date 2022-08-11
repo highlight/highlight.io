@@ -25,6 +25,7 @@ export const graphcms = new GraphQLClient(
   }
 );
 
+// need server-side request here to be able to filter the graphcms request via the query
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const QUERY = gql`
     query GetPosts($tag: [String!]) {
