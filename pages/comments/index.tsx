@@ -15,6 +15,7 @@ import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import Footer from '../../components/common/Footer/Footer';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
+import { Meta } from '../../components/common/Head/Meta';
 
 const Comments: NextPage = () => {
   return (
@@ -22,10 +23,9 @@ const Comments: NextPage = () => {
       <Head>
         <title>Comments - Highlight</title>
 
-        <meta
-          property="og:title"
-          content="Comments - Highlight"
-          key="ogtitle"
+        <Meta
+          title="Comments - Highlight"
+          description="Comments by Highlight"
         />
       </Head>
       <div className={styles.bgPosition}>
