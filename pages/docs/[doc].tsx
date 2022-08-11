@@ -136,7 +136,7 @@ const DocPage = ({
             {markdownText}
           </ReactMarkdown>
         </div>
-        <div className={styles.rightSection}>hello</div>
+        <div className={styles.rightSection}></div>
       </main>
     </>
   );
