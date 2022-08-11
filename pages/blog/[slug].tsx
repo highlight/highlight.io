@@ -76,6 +76,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         image {
           url
         }
+        metaImage {
+          url
+        }
         description
         metaDescription
         publishedAt
@@ -259,7 +262,7 @@ const PostPage = ({
         <Meta
           title={post.metaTitle || post.title}
           description={post.metaDescription || post.description}
-          absoluteImageUrl={post.image.url}
+          absoluteImageUrl={post.metaImage.url}
         />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
