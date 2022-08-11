@@ -35,7 +35,7 @@ const NUM_SUGGESTED_POSTS = 3;
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphHeader({ children }: { children: any }) {
     return (
-      <>
+      <div className={styles.postHeader}>
         {createElement(
           type,
           {
@@ -43,7 +43,7 @@ const getBlogTypographyRenderer = (type: string) => {
           },
           children?.props?.content[0].text
         )}
-      </>
+      </div>
     );
   }
   return ParagraphHeader;
@@ -160,7 +160,7 @@ enum SectionType {
 
 const PostSection = ({ p }: { p: PostSection; idx: number }) => {
   return (
-    <div className={styles.postSection}>
+    <>
       <RichText
         content={{
           children: p.nodes,
@@ -187,7 +187,7 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
         }}
       />
       {p.footer}
-    </div>
+    </>
   );
 };
 
@@ -275,7 +275,7 @@ const PostPage = ({
                 Math.floor(post.richcontent.markdown.split(' ').length / 200)
               } min read`}</p>
             </Typography>
-            <h1 className={styles.postTitle}>{post.title}</h1>
+            <h2>{post.title}</h2>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags.map((tag: string) => (
                 <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>

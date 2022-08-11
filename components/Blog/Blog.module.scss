@@ -211,10 +211,6 @@
   padding-top: var(--size-medium) !important;
 }
 
-.postTitle {
-  font-size: 58px !important;
-}
-
 .postBody {
   text-align: left;
   width: 100%;
@@ -235,32 +231,17 @@
     }
   }
 
-  .postSection {
-    h2 {
+  .postHeader {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-size: 26px;
       font-weight: 600;
       line-height: 40px;
       margin-bottom: 0.25em !important;
       margin-top: 1.5em !important;
-    }
-  }
-
-  .postSection {
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-size: 22px;
-      font-weight: 600;
-      line-height: 40px;
-      margin-bottom: 0.25em !important;
-      margin-top: 1.5em !important;
-    }
-  }
-
-  .postSection {
-    h2 ~ h3 {
-      margin-top: 0.25em !important;
     }
   }
 

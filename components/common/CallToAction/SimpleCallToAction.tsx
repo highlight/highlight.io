@@ -17,7 +17,7 @@ export const SimpleCallToAction = () => {
         <div className={styles.sectionSubtitle}>
           <Typography type="outline">Try Highlight Today</Typography>
         </div>
-        <h3 className={classNames(styles.ctaTitle, styles.ctaHeader)}>
+        <h3 className={styles.ctaTitle}>
           Get the <span className={styles.highlightedText}>visibility</span> you
           need
         </h3>
