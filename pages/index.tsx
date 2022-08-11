@@ -30,7 +30,7 @@ import Tablet1 from '../public/images/tablet1.svg';
 import Tablet2 from '../public/images/tablet2.png';
 
 import Footer from '../components/common/Footer/Footer';
-import { CallToAction } from '../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
 import { Review, REVIEWS } from '../components/Home/Reviews';
@@ -835,7 +835,7 @@ const Home: NextPage = () => {
             ))}
           </div>
         </div>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </div>

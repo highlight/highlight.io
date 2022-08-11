@@ -3,7 +3,7 @@ import homeStyles from '../../components/Home/Home.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { Meta } from '../../components/common/Head/Meta';
 
@@ -622,7 +622,7 @@ const Terms = () => {
           </div>
         </Section>
 
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>

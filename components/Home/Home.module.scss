@@ -692,9 +692,8 @@
   overflow: hidden;
   margin: auto auto var(--size-xLarge);
 
-  h3.ctaTitle.ctaHeader {
-    margin-top: 0px !important;
-    font-size: 26px !important;
+  .ctaTitle {
+    margin-top: 0 !important;
   }
 
   .ctaContainer {

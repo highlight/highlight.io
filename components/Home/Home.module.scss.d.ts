@@ -31,7 +31,6 @@ export const companies: string;
 export const companyLogo: string;
 export const ctaBg: string;
 export const ctaContainer: string;
-export const ctaHeader: string;
 export const ctaTitle: string;
 export const customerCopy: string;
 export const customerReel: string;

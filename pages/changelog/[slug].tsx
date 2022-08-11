@@ -10,7 +10,7 @@ import Footer from '../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { graphcms } from '../blog';
 import ReactMarkdown from 'react-markdown';
 import { Meta } from '../../components/common/Head/Meta';
@@ -96,7 +96,7 @@ const ChangelogPage = ({ changelog }: { changelog: any }) => {
             <ReactMarkdown>{changelog.content}</ReactMarkdown>
           </div>
         </Section>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>

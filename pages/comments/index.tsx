@@ -13,7 +13,7 @@ import commentStyles from '../../components/Comments/Comments.module.scss';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import Footer from '../../components/common/Footer/Footer';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
 import { Meta } from '../../components/common/Head/Meta';
 
@@ -70,7 +70,7 @@ const Comments: NextPage = () => {
           </video>
         </div>
         <CompaniesReel />
-        <CallToAction />
+        <FooterCallToAction />
       </main>
 
       <Footer />

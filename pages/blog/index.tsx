@@ -4,7 +4,7 @@ import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
 import { gql, GraphQLClient } from 'graphql-request';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
 import { GetServerSideProps } from 'next';
@@ -135,7 +135,7 @@ const Blog = ({
             pageCount={pageCount}
           />
         </div>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>
