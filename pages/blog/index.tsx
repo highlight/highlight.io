@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
@@ -89,13 +88,10 @@ const Blog = ({
 
   return (
     <>
-      <Head>
-        <title>Debugging Blog: Best Practices From The Highlight Team</title>
-        <Meta
-          title="Debugging Blog: Best Practices From The Highlight Team"
-          description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
-        />
-      </Head>
+      <Meta
+        title="Debugging Blog: Best Practices From The Highlight Team"
+        description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
+      />
       <Navbar />
       <main>
         <div className={styles.blogContainer}>

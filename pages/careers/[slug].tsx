@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
@@ -12,6 +11,7 @@ import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { OPEN_ROLES } from '../../components/Careers/careers';
 import ReactMarkdown from 'react-markdown';
+import { Meta } from '../../components/common/Head/Meta';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -42,10 +42,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const CareerPage = ({ role }: { role: any }) => {
   return (
     <>
-      <Head>
-        <title>Highlight Blog</title>
-        <meta name="description" content="Stop debugging in the dark. " />
-      </Head>
+      <Meta
+        title="Highlight Careers: Joining the Team"
+        description="Stop debugging in the dark. Join the team that makes it happen!"
+      />
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
           <Image src={PurpleGradient} alt="" />

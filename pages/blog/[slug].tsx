@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Head from 'next/head';
 import homeStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Blog/Blog.module.scss';
 import { Section } from '../../components/common/Section/Section';
@@ -245,14 +244,11 @@ const PostPage = ({
 
   return (
     <>
-      <Head>
-        <title>{post.metaTitle || post.title}</title>
-        <Meta
-          title={post.metaTitle || post.title}
-          description={post.metaDescription || post.description}
-          absoluteImageUrl={post.metaImage.url}
-        />
-      </Head>
+      <Meta
+        title={post.metaTitle || post.title}
+        description={post.metaDescription || post.description}
+        absoluteImageUrl={post.metaImage.url}
+      />
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>
         <Section>

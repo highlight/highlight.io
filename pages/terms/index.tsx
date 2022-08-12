@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import homeStyles from '../../components/Home/Home.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
@@ -10,13 +9,10 @@ import { Meta } from '../../components/common/Head/Meta';
 const Terms = () => {
   return (
     <>
-      <Head>
-        <title>Highlight: Terms of Service</title>
-        <Meta
-          title={'Highlight: Terms of Service'}
-          description={'Highlight: Terms of Service'}
-        />
-      </Head>
+      <Meta
+        title={'Highlight: Terms of Service'}
+        description={'Highlight: Terms of Service'}
+      />
       <Navbar />
       <main>
         <Section>

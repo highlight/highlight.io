@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
@@ -17,6 +16,7 @@ import {
   Entry,
 } from '../../components/Changelog/ChangelogEntry/ChangelogEntry';
 import { GetStaticProps } from 'next/types';
+import { Meta } from '../../components/common/Head/Meta';
 
 const ITEMS_PER_PAGE = 25;
 
@@ -57,10 +57,10 @@ const Changelog = ({ changelogs }: { changelogs: Array<never> }) => {
 
   return (
     <>
-      <Head>
-        <title>Highlight Changelog</title>
-        <meta name="description" content="Stop debugging in the dark. " />
-      </Head>
+      <Meta
+        title={'Highlight Changelog'}
+        description={'Stop debugging in the dark.'}
+      />
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
           <Image src={PurpleGradient} alt="" />
