@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
@@ -65,10 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const ChangelogPage = ({ changelog }: { changelog: any }) => {
   return (
     <>
-      <Head>
-        <title>{changelog.title}</title>
-        <Meta title={changelog.title} description={changelog.title} />
-      </Head>
+      <Meta title={changelog.title} description={changelog.title} />
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
           <Image src={PurpleGradient} alt="" />

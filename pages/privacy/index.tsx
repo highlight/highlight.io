@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import homeStyles from '../../components/Home/Home.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
@@ -9,13 +8,10 @@ import { Meta } from '../../components/common/Head/Meta';
 const Privacy = () => {
   return (
     <>
-      <Head>
-        <title>Highlight: Privacy Policy</title>
-        <Meta
-          title={'Highlight: Privacy Policy'}
-          description={'Highlight privacy policy'}
-        />
-      </Head>
+      <Meta
+        title={'Highlight: Privacy Policy'}
+        description={'Highlight privacy policy'}
+      />
       <Navbar />
       <main>
         <Section>

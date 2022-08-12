@@ -229,11 +229,6 @@ const Pricing: NextPage = () => {
         <title>
           Highlight: Plans And Pricing For Any Team. Get Started Free.
         </title>
-        <Meta
-          title="Highlight: Plans And Pricing For Any Team. Get Started Free."
-          description="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
-        />
-
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
@@ -252,6 +247,10 @@ const Pricing: NextPage = () => {
           }`}
         </script>
       </Head>
+      <Meta
+        title="Highlight: Plans And Pricing For Any Team. Get Started Free."
+        description="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
+      />
       <Navbar />
       <main>
         <Section className={styles.titleSection}>
