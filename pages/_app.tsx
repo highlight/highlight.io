@@ -9,6 +9,7 @@ import type { AppProps } from 'next/app';
 import Script from 'next/script';
 import MetaImage from '../public/images/meta-image.jpg';
 import Head from 'next/head';
+import { Meta } from '../components/common/Head/Meta';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -36,26 +37,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>
           Highlight: The Ultimate Debugging Tool For Fast-Moving Teams
         </title>
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" key="twcard" />
-        <meta name="twitter:site" content="https://www.highlight.io" />
-        <meta name="twitter:creator" content="@highlightrun" />
-
-        {/* Open Graph */}
-        <meta property="og:url" content="highlight.io" key="ogurl" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content={MetaImage.src} key="ogimage" />
-        <meta property="og:site_name" content="Highlight" key="ogsitename" />
-        <meta
-          property="og:title"
-          content="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
-          key="ogdesc"
+        <Meta
+          title="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
+          description="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
+          absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
         />
 
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>

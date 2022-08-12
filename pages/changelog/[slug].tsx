@@ -10,9 +10,10 @@ import Footer from '../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { graphcms } from '../blog';
 import ReactMarkdown from 'react-markdown';
+import { Meta } from '../../components/common/Head/Meta';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`
@@ -66,7 +67,7 @@ const ChangelogPage = ({ changelog }: { changelog: any }) => {
     <>
       <Head>
         <title>{changelog.title}</title>
-        <meta property="og:title" content={changelog.title} key="ogtitle" />
+        <Meta title={changelog.title} description={changelog.title} />
       </Head>
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
@@ -95,7 +96,7 @@ const ChangelogPage = ({ changelog }: { changelog: any }) => {
             <ReactMarkdown>{changelog.content}</ReactMarkdown>
           </div>
         </Section>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>

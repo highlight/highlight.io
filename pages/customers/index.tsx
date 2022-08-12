@@ -10,7 +10,7 @@ import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import { CUSTOMER_REVIEWS } from '../../components/Customers/Customers';
 import { CustomerCard } from '../../components/Customers/CustomerCard/CustomerCard';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 
 // Hides the page in production and renders it in dev. More info:
 // https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
@@ -57,7 +57,7 @@ const Customers: NextPage = () => {
             })}
           </div>
         </Section>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>

@@ -21,6 +21,9 @@ export interface Post {
   image: {
     url: string;
   };
+  metaImage: {
+    url: string;
+  };
   title: string;
   metaTitle?: string;
   publishedAt: string;

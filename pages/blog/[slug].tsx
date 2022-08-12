@@ -8,43 +8,39 @@ import { gql } from 'graphql-request';
 import { graphcms } from '.';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../components/common/Typography/Typography';
-import {
-  createElement,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { createElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
-import { SimpleCallToAction } from '../../components/common/CallToAction/SimpleCallToAction';
+import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction';
 import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import Dribble from '../../public/images/logo-dribbble.svg';
 import LinkedIn from '../../public/images/logo-linkedin.svg';
+import { Meta } from '../../components/common/Head/Meta';
 
 const NUM_SUGGESTED_POSTS = 3;
 
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphHeader({ children }: { children: any }) {
     return (
-      <div className={styles.postHeader}>
+      <>
         {createElement(
           type,
           {
-            className: styles.postHeaderText,
+            className: styles.blogText,
           },
           children?.props?.content[0].text
         )}
-      </div>
+      </>
     );
   }
+
   return ParagraphHeader;
 };
 
@@ -73,6 +69,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         title
         metaTitle
         image {
+          url
+        }
+        metaImage {
           url
         }
         description
@@ -138,10 +137,44 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0]
     );
   }
+
+  const postSections: PostSection[] = [];
+  let currentBlock: ElementNode[] = [];
+  for (const r of data.post.richcontent.raw.children) {
+    let specialType: SectionType | undefined = undefined;
+    for (const child of r.children) {
+      // update here to support other tags
+      if (child.text === SectionType.CallToAction) {
+        specialType = SectionType.CallToAction;
+        break;
+      }
+    }
+    switch (specialType) {
+      // update here to support other tags
+      case SectionType.CallToAction:
+        postSections.push({
+          nodes: currentBlock,
+          footer: 'BlogCallToAction',
+        });
+        currentBlock = [];
+        break;
+      default:
+        r.className = '.testing';
+        currentBlock.push(r);
+    }
+  }
+  if (currentBlock.length) {
+    postSections.push({
+      nodes: currentBlock,
+      footer: null,
+    });
+  }
+
   return {
     props: {
       suggestedPosts,
       post: data.post,
+      postSections,
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
@@ -149,7 +182,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 interface PostSection {
   nodes: ElementNode[];
-  footer: ReactElement | null;
+  footer: string | null;
 }
 
 // update here to support other tags
@@ -183,26 +216,26 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
           h4: getBlogTypographyRenderer('h4'),
           h5: getBlogTypographyRenderer('h5'),
           h6: getBlogTypographyRenderer('h6'),
+          p: getBlogTypographyRenderer('p'),
         }}
       />
-      {p.footer}
+      {/*update to support new footer components*/}
+      {p.footer === 'BlogCallToAction' ? <BlogCallToAction /> : null}
     </>
   );
 };
 
 const PostPage = ({
   post,
+  postSections,
   suggestedPosts,
 }: {
   post: Post;
+  postSections: PostSection[];
   suggestedPosts: any[];
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const [endPosition, setEndPosition] = useState(0);
-  const [postRaw, setPostRaw] = useState<ElementNode[]>(
-    post.richcontent.raw.children
-  );
-  const [postSections, setPostSections] = useState<PostSection[]>();
 
   useEffect(() => {
     setEndPosition(blogBody.current?.offsetHeight || 0);
@@ -210,59 +243,14 @@ const PostPage = ({
     // because at that point the page height is finalized
   }, [postSections]);
 
-  useEffect(() => {
-    setPostRaw(post.richcontent.raw.children);
-  }, [setPostRaw, post]);
-
-  useEffect(() => {
-    const processed: PostSection[] = [];
-    let currentBlock: ElementNode[] = [];
-    for (const r of postRaw) {
-      let specialType: SectionType | undefined = undefined;
-      for (const child of r.children) {
-        // update here to support other tags
-        if (child.text === SectionType.CallToAction) {
-          specialType = SectionType.CallToAction;
-          break;
-        }
-      }
-      switch (specialType) {
-        // update here to support other tags
-        case SectionType.CallToAction:
-          processed.push({
-            nodes: currentBlock,
-            footer: <SimpleCallToAction />,
-          });
-          currentBlock = [];
-          break;
-        default:
-          currentBlock.push(r);
-      }
-    }
-    if (currentBlock.length) {
-      processed.push({
-        nodes: currentBlock,
-        footer: null,
-      });
-    }
-    setPostSections(processed);
-  }, [postRaw]);
-
   return (
     <>
       <Head>
         <title>{post.metaTitle || post.title}</title>
-        <meta
-          name="description"
-          content={post.metaDescription || post.description}
-        />
-
-        <meta property="og:image" content={post.image.url} key="ogimage" />
-        <meta property="og:title" content={post.metaTitle} key="ogtitle" />
-        <meta
-          property="og:description"
-          content={post.metaDescription}
-          key="ogdesc"
+        <Meta
+          title={post.metaTitle || post.title}
+          description={post.metaDescription || post.description}
+          absoluteImageUrl={post.metaImage.url}
         />
       </Head>
       <BlogNavbar title={post.title} endPosition={endPosition} />
@@ -281,7 +269,7 @@ const PostPage = ({
                 Math.floor(post.richcontent.markdown.split(' ').length / 200)
               } min read`}</p>
             </Typography>
-            <h2>{post.title}</h2>
+            <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags.map((tag: string) => (
                 <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
@@ -334,6 +322,7 @@ const PostPage = ({
               alt=""
               layout="fill"
               objectFit="cover"
+              priority
             />
           </div>
         </Section>
@@ -364,7 +353,7 @@ const PostPage = ({
           </div>
         </Section>
       </main>
-      <CallToAction />
+      <FooterCallToAction />
       <Footer />
     </>
   );

@@ -7,7 +7,7 @@ import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { OPEN_ROLES } from '../../components/Careers/careers';
 import Link from 'next/link';
 
@@ -46,7 +46,7 @@ const Careers = () => {
             </Link>
           ))}
         </div>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>

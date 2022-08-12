@@ -9,7 +9,7 @@ import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { OPEN_ROLES } from '../../components/Careers/careers';
 import ReactMarkdown from 'react-markdown';
 
@@ -66,7 +66,7 @@ const CareerPage = ({ role }: { role: any }) => {
             <ReactMarkdown>{role.content}</ReactMarkdown>
           </div>
         </Section>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </>

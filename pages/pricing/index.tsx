@@ -19,7 +19,7 @@ import Footer from '../../components/common/Footer/Footer';
 import styles from '../../components/Pricing/Pricing.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
 import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
@@ -40,6 +40,7 @@ import {
   PricingInfo,
   StartupInfo,
 } from '../../components/Pricing/plan_info';
+import { Meta } from '../../components/common/Head/Meta';
 
 // Plans and info used for both mobile and desktop views.
 const planDetails: Array<PricingDetails> = [
@@ -228,20 +229,9 @@ const Pricing: NextPage = () => {
         <title>
           Highlight: Plans And Pricing For Any Team. Get Started Free.
         </title>
-        <meta
-          name="description"
-          content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
-        />
-
-        <meta
-          property="og:title"
-          content="Highlight: Plans And Pricing For Any Team. Get Started Free."
-          key="ogtitle"
-        />
-        <meta
-          property="og:description"
-          content="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
-          key="ogdesc"
+        <Meta
+          title="Highlight: Plans And Pricing For Any Team. Get Started Free."
+          description="Highlight's developer friendly pricing makes sure any team can afford to get the visibility into bugs they need. See plans, features, FAQs and more here:"
         />
 
         <script type="application/ld+json">
@@ -388,7 +378,7 @@ const Pricing: NextPage = () => {
             ))}
           </div>
         </Section>
-        <CallToAction />
+        <FooterCallToAction />
       </main>
       <Footer />
     </div>
