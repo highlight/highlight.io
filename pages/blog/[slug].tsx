@@ -13,13 +13,7 @@ import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../components/common/Typography/Typography';
-import {
-  createElement,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { createElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
 import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction';
 import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
@@ -46,6 +40,7 @@ const getBlogTypographyRenderer = (type: string) => {
       </>
     );
   }
+
   return ParagraphHeader;
 };
 
@@ -142,10 +137,44 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0]
     );
   }
+
+  const postSections: PostSection[] = [];
+  let currentBlock: ElementNode[] = [];
+  for (const r of data.post.richcontent.raw.children) {
+    let specialType: SectionType | undefined = undefined;
+    for (const child of r.children) {
+      // update here to support other tags
+      if (child.text === SectionType.CallToAction) {
+        specialType = SectionType.CallToAction;
+        break;
+      }
+    }
+    switch (specialType) {
+      // update here to support other tags
+      case SectionType.CallToAction:
+        postSections.push({
+          nodes: currentBlock,
+          footer: 'BlogCallToAction',
+        });
+        currentBlock = [];
+        break;
+      default:
+        r.className = '.testing';
+        currentBlock.push(r);
+    }
+  }
+  if (currentBlock.length) {
+    postSections.push({
+      nodes: currentBlock,
+      footer: null,
+    });
+  }
+
   return {
     props: {
       suggestedPosts,
       post: data.post,
+      postSections,
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
@@ -153,7 +182,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 interface PostSection {
   nodes: ElementNode[];
-  footer: ReactElement | null;
+  footer: string | null;
 }
 
 // update here to support other tags
@@ -162,7 +191,6 @@ enum SectionType {
 }
 
 const PostSection = ({ p }: { p: PostSection; idx: number }) => {
-  console.log('here');
   return (
     <>
       <RichText
@@ -191,69 +219,29 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
           p: getBlogTypographyRenderer('p'),
         }}
       />
-      {p.footer}
+      {/*update to support new footer components*/}
+      {p.footer === 'BlogCallToAction' ? <BlogCallToAction /> : null}
     </>
   );
 };
 
 const PostPage = ({
   post,
+  postSections,
   suggestedPosts,
 }: {
   post: Post;
+  postSections: PostSection[];
   suggestedPosts: any[];
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const [endPosition, setEndPosition] = useState(0);
-  const [postRaw, setPostRaw] = useState<ElementNode[]>(
-    post.richcontent.raw.children
-  );
-  const [postSections, setPostSections] = useState<PostSection[]>();
 
   useEffect(() => {
     setEndPosition(blogBody.current?.offsetHeight || 0);
     // recalculate end position when blog sections are processed
     // because at that point the page height is finalized
   }, [postSections]);
-
-  useEffect(() => {
-    setPostRaw(post.richcontent.raw.children);
-  }, [setPostRaw, post]);
-
-  useEffect(() => {
-    const processed: PostSection[] = [];
-    let currentBlock: ElementNode[] = [];
-    for (const r of postRaw) {
-      let specialType: SectionType | undefined = undefined;
-      for (const child of r.children) {
-        // update here to support other tags
-        if (child.text === SectionType.CallToAction) {
-          specialType = SectionType.CallToAction;
-          break;
-        }
-      }
-      switch (specialType) {
-        // update here to support other tags
-        case SectionType.CallToAction:
-          processed.push({
-            nodes: currentBlock,
-            footer: <BlogCallToAction />,
-          });
-          currentBlock = [];
-          break;
-        default:
-          r.className = '.testing';
-          currentBlock.push(r);
-      }
-    }
-    if (currentBlock.length) {
-      processed.push({
-        nodes: currentBlock,
-        footer: null,
-      });
-    }
-    setPostSections(processed);
-  }, [postRaw]);
 
   return (
     <>
