@@ -25,7 +25,53 @@ import { Meta } from '../../components/common/Head/Meta';
 
 const NUM_SUGGESTED_POSTS = 3;
 
+interface Content {
+  text?: string;
+  href?: string;
+  type?: string;
+  children?: Content[];
+  openInNewTab?: boolean;
+  code?: boolean;
+  italic?: boolean;
+  bold?: boolean;
+}
+
 const getBlogTypographyRenderer = (type: string) => {
+  function ParagraphBody({ content }: { content: Content }) {
+    if (content.text) {
+      if (content.code) {
+        return <span className={styles.codeInline}>{content.text}</span>;
+      } else if (content.italic) {
+        return (
+          <i>
+            <span>{content.text}</span>
+          </i>
+        );
+      } else if (content.bold) {
+        return (
+          <b>
+            <span>{content.text}</span>
+          </b>
+        );
+      }
+      return <span>{content.text}</span>;
+    } else if (content.href) {
+      return (
+        <a
+          href={content.href}
+          {...(content.openInNewTab
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
+          {content?.children?.map((c, idx) => (
+            <ParagraphBody content={c} key={`child-${idx}`} />
+          ))}
+        </a>
+      );
+    }
+    return null;
+  }
+
   function ParagraphHeader({ children }: { children: any }) {
     return (
       <>
@@ -34,7 +80,9 @@ const getBlogTypographyRenderer = (type: string) => {
           {
             className: styles.blogText,
           },
-          children?.props?.content[0].text
+          children?.props?.content.map((c: Content, idx: number) => (
+            <ParagraphBody content={c} key={idx} />
+          ))
         )}
       </>
     );
@@ -216,6 +264,14 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
           h5: getBlogTypographyRenderer('h5'),
           h6: getBlogTypographyRenderer('h6'),
           p: getBlogTypographyRenderer('p'),
+          img: (props) => (
+            <Image
+              src={props.src || ''}
+              alt={props.altText}
+              width={props.width}
+              height={props.height}
+            />
+          ),
         }}
       />
       {/*update to support new footer components*/}
