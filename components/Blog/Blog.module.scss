@@ -226,9 +226,13 @@
       white-space: pre-wrap !important;
 
       @media screen and (max-width: 600px) {
-        font-size: 14px !important;
+        font-size: 12px !important;
       }
     }
+  }
+
+  .codeInline {
+    font-size: 14.5px !important;
   }
 
   pre {

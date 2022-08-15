@@ -41,12 +41,14 @@ const getBlogTypographyRenderer = (type: string) => {
     if (content.text) {
       if (content.code) {
         return (
-          <Code
-            language={'js'}
-            text={content.text}
-            showLineNumbers={false}
-            theme={highlightCodeTheme}
-          />
+          <span className={styles.codeInline}>
+            <Code
+              language={'js'}
+              text={content.text}
+              showLineNumbers={false}
+              theme={highlightCodeTheme}
+            />
+          </span>
         );
       } else if (content.italic) {
         return (
