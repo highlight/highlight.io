@@ -10,7 +10,7 @@ import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
-import { CodeBlock } from 'react-code-blocks';
+import { Code, CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../components/common/Typography/Typography';
 import { createElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
@@ -31,11 +31,36 @@ interface Content {
   type?: string;
   children?: Content[];
   openInNewTab?: boolean;
+  code?: boolean;
+  italic?: boolean;
+  bold?: boolean;
 }
 
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphBody({ content }: { content: Content }) {
     if (content.text) {
+      if (content.code) {
+        return (
+          <Code
+            language={'js'}
+            text={content.text}
+            showLineNumbers={false}
+            theme={highlightCodeTheme}
+          />
+        );
+      } else if (content.italic) {
+        return (
+          <i>
+            <span>{content.text}</span>
+          </i>
+        );
+      } else if (content.bold) {
+        return (
+          <b>
+            <span>{content.text}</span>
+          </b>
+        );
+      }
       return <span>{content.text}</span>;
     } else if (content.href) {
       return (
