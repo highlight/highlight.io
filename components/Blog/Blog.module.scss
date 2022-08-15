@@ -232,7 +232,14 @@
   }
 
   .codeInline {
-    font-size: 14.5px !important;
+    background-color: var(--color-purple-black);
+    border-radius: var(--size-xxSmall);
+    border: 1px solid var(--color-divider-on-dark);
+    font-family: 'IBM Plex Mono', 'Courier', 'monospace';
+    font-size: 14.5px;
+    font-weight: 400;
+    line-height: 24px;
+    padding: 1.5px 6px;
   }
 
   pre {

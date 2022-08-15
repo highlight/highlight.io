@@ -10,7 +10,7 @@ import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
-import { Code, CodeBlock } from 'react-code-blocks';
+import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../components/common/Typography/Typography';
 import { createElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
@@ -40,16 +40,7 @@ const getBlogTypographyRenderer = (type: string) => {
   function ParagraphBody({ content }: { content: Content }) {
     if (content.text) {
       if (content.code) {
-        return (
-          <span className={styles.codeInline}>
-            <Code
-              language={'js'}
-              text={content.text}
-              showLineNumbers={false}
-              theme={highlightCodeTheme}
-            />
-          </span>
-        );
+        return <span className={styles.codeInline}>{content.text}</span>;
       } else if (content.italic) {
         return (
           <i>
