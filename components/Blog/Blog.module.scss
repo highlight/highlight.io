@@ -138,6 +138,10 @@
 .authorDetails {
   display: flex;
   gap: var(--size-medium);
+
+  a {
+    color: var(--color-white);
+  }
 }
 
 .mainBlogPadding {
