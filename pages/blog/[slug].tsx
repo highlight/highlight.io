@@ -19,9 +19,8 @@ import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/Sugge
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
-import Dribble from '../../public/images/logo-dribbble.svg';
-import LinkedIn from '../../public/images/logo-linkedin.svg';
 import { Meta } from '../../components/common/Head/Meta';
+import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -351,12 +350,22 @@ const PostPage = ({
                       </span>
                       {post.author.githubLink && (
                         <a href={post.author.githubLink}>
-                          <Image src={Dribble} alt={'github icon'} />
+                          <FaGithub />
+                        </a>
+                      )}
+                      {post.author.twitterLink && (
+                        <a href={post.author.twitterLink}>
+                          <FaTwitter />
                         </a>
                       )}
                       {post.author.linkedInLink && (
                         <a href={post.author.linkedInLink}>
-                          <Image src={LinkedIn} alt={'linkedin icon'} />
+                          <FaLinkedin />
+                        </a>
+                      )}
+                      {post.author.personalWebsiteLink && (
+                        <a href={post.author.personalWebsiteLink}>
+                          <FaGlobe />
                         </a>
                       )}
                     </div>
