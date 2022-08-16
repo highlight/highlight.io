@@ -19,8 +19,10 @@ import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/Sugge
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
-import Dribble from '../../public/images/logo-dribbble.svg';
+import GitHub from '../../public/images/logo-github.svg';
 import LinkedIn from '../../public/images/logo-linkedin.svg';
+import Twitter from '../../public/images/logo-twitter.svg';
+import Globe from '../../public/images/globe.svg';
 import { Meta } from '../../components/common/Head/Meta';
 
 const NUM_SUGGESTED_POSTS = 3;
@@ -351,12 +353,22 @@ const PostPage = ({
                       </span>
                       {post.author.githubLink && (
                         <a href={post.author.githubLink}>
-                          <Image src={Dribble} alt={'github icon'} />
+                          <Image src={GitHub} alt="GitHub icon" />
+                        </a>
+                      )}
+                      {post.author.twitterLink && (
+                        <a href={post.author.twitterLink}>
+                          <Image src={Twitter} alt="Twitter icon" />
                         </a>
                       )}
                       {post.author.linkedInLink && (
                         <a href={post.author.linkedInLink}>
-                          <Image src={LinkedIn} alt={'linkedin icon'} />
+                          <Image src={LinkedIn} alt="LinkedIn icon" />
+                        </a>
+                      )}
+                      {post.author.personalWebsiteLink && (
+                        <a href={post.author.personalWebsiteLink}>
+                          <Image src={Globe} alt="globe icon" />
                         </a>
                       )}
                     </div>
