@@ -21,7 +21,6 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { Exception } from 'sass';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -150,22 +149,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
   const POSTS_QUERY = gql`
-    query GetPosts() {
-      posts(orderBy: publishedAt_DESC) {
-        slug
-        title
-        image {
-          url
+        query GetPosts() {
+            posts(orderBy: publishedAt_DESC) {
+                slug
+                title
+                image {
+                    url
+                }
+                richcontent {
+                    markdown
+                }
+                publishedAt
+                tags
+                readingTime
+            }
         }
-        richcontent {
-          markdown
-        }
-        publishedAt
-        tags
-        readingTime
-      }
-    }
-  `;
+    `;
   const data = await graphcms.request(QUERY, { slug: slug });
   const { posts } = await graphcms.request(POSTS_QUERY);
 
@@ -215,6 +214,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       nodes: currentBlock,
       footer: null,
     });
+  }
+
+  if (
+    !data.post.metaImage.url ||
+    !data.post.image.url ||
+    !data.post.author?.profilePhoto.url
+  ) {
+    throw new Error(
+      `missing required image for blog ${data.post.slug}. 
+meta: ${data.post.metaImage?.url}. 
+author: ${data.post.author?.profilePhoto?.url}. 
+image: ${data.post.image?.url}`
+    );
   }
 
   return {
@@ -297,16 +309,6 @@ const PostPage = ({
     // recalculate end position when blog sections are processed
     // because at that point the page height is finalized
   }, [postSections]);
-
-  if (
-    !post.metaImage.url ||
-    !post.image.url ||
-    !post.author?.profilePhoto.url
-  ) {
-    throw new Error(
-      `missing required image for blog ${post.slug}. meta: ${post.metaImage?.url}. author: ${post.author?.profilePhoto?.url}. image: ${post.image?.url}`
-    );
-  }
 
   return (
     <>
