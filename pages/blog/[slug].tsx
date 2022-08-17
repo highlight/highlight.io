@@ -264,12 +264,15 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
           h6: getBlogTypographyRenderer('h6'),
           p: getBlogTypographyRenderer('p'),
           img: (props) => (
-            <Image
-              src={props.src || ''}
-              alt={props.altText}
-              width={props.width}
-              height={props.height}
-            />
+            <div className={styles.blogImageContainer}>
+              <Image
+                className={styles.blogImage}
+                src={props.src || ''}
+                alt={props.altText}
+                width={props.width}
+                height={props.height}
+              />
+            </div>
           ),
         }}
       />
