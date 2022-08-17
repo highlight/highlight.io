@@ -149,22 +149,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
   const POSTS_QUERY = gql`
-    query GetPosts() {
-      posts(orderBy: publishedAt_DESC) {
-        slug
-        title
-        image {
-          url
+        query GetPosts() {
+            posts(orderBy: publishedAt_DESC) {
+                slug
+                title
+                image {
+                    url
+                }
+                richcontent {
+                    markdown
+                }
+                publishedAt
+                tags
+                readingTime
+            }
         }
-        richcontent {
-          markdown
-        }
-        publishedAt
-        tags
-        readingTime
-      }
-    }
-  `;
+    `;
   const data = await graphcms.request(QUERY, { slug: slug });
   const { posts } = await graphcms.request(POSTS_QUERY);
 
@@ -214,6 +214,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       nodes: currentBlock,
       footer: null,
     });
+  }
+
+  for (const p of posts) {
+    if (!p.image?.url) {
+      throw new Error(
+        `missing required main image for blog '${p.slug}'. image: ${p.image?.url}`
+      );
+    }
+  }
+  if (
+    !data.post.metaImage?.url ||
+    !data.post.image?.url ||
+    !data.post.author?.profilePhoto?.url
+  ) {
+    throw new Error(
+      `missing required detailed images for blog '${data.post.slug}'. 
+meta: ${data.post.metaImage?.url}. author: ${data.post.author?.profilePhoto?.url}. image: ${data.post.image?.url}`
+    );
   }
 
   return {
