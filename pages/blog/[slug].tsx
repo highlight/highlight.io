@@ -21,6 +21,7 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { Exception } from 'sass';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -296,6 +297,16 @@ const PostPage = ({
     // recalculate end position when blog sections are processed
     // because at that point the page height is finalized
   }, [postSections]);
+
+  if (
+    !post.metaImage.url ||
+    !post.image.url ||
+    !post.author?.profilePhoto.url
+  ) {
+    throw new Error(
+      `missing required image for blog ${post.slug}. meta: ${post.metaImage?.url}. author: ${post.author?.profilePhoto?.url}. image: ${post.image?.url}`
+    );
+  }
 
   return (
     <>
