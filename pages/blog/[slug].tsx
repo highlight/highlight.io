@@ -217,12 +217,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   for (const p of posts) {
-    if (!p.metaImage?.url || !p.image?.url || !p.author?.profilePhoto?.url) {
+    if (!p.image?.url) {
       throw new Error(
-        `missing required image for blog '${p.slug}'. 
-meta: ${p.metaImage?.url}. author: ${p.author?.profilePhoto?.url}. image: ${p.image?.url}`
+        `missing required main image for blog '${p.slug}'. image: ${p.image?.url}`
       );
     }
+  }
+  if (
+    !data.post.metaImage?.url ||
+    !data.post.image?.url ||
+    !data.post.author?.profilePhoto?.url
+  ) {
+    throw new Error(
+      `missing required detailed images for blog '${data.post.slug}'. 
+meta: ${data.post.metaImage?.url}. author: ${data.post.author?.profilePhoto?.url}. image: ${data.post.image?.url}`
+    );
   }
 
   return {
