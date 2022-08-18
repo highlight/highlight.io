@@ -1,4 +1,4 @@
-### Performance Stuff
+## Performance Stuff
 
 Paragraphs are separated by a blank line.
 
