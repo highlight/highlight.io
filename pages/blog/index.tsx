@@ -36,6 +36,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         image {
           url
         }
+        metaImage {
+          url
+        }
         title
         metaTitle
         description
