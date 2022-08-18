@@ -7,7 +7,8 @@ import { Typography } from '../../common/Typography/Typography';
 export const BlogPostSmall = ({
   slug,
   richcontent,
-  image: { url },
+  image,
+  metaImage,
   title,
   publishedAt,
   tags,
@@ -18,7 +19,14 @@ export const BlogPostSmall = ({
       <Link href={`/blog/${slug}`}>
         <a style={{ textDecoration: 'none' }}>
           <div className={styles.cardImage}>
-            <Image src={url} alt="" layout="fill" objectFit="cover" />
+            {(image?.url || metaImage?.url) && (
+              <Image
+                src={image?.url || metaImage?.url || ''}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+              />
+            )}
           </div>
           <div className={styles.postDateDiv}>
             <p>{`${new Date(publishedAt).toLocaleDateString('en-US', {
