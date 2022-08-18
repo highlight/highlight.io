@@ -1,7 +1,7 @@
 import { promises as fsp } from 'fs';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { useRef } from 'react';
+import { createElement, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
@@ -14,6 +14,8 @@ import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
 import { Typography } from '../../components/common/Typography/Typography';
+import { CodeBlock } from 'react-code-blocks';
+import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 
@@ -106,7 +108,7 @@ const DocPage = ({
         </title>
         <meta name="description" content={'TODO'} />
       </Head>
-      <Navbar />
+      <Navbar hideFreeTrialText />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           {docOptions
@@ -132,7 +134,17 @@ const DocPage = ({
             })}
         </div>
         <div className={styles.centerSection}>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h1: getDocsTypographyRenderer('h4'),
+              h2: getDocsTypographyRenderer('h4'),
+              h3: getDocsTypographyRenderer('h5'),
+              h4: getDocsTypographyRenderer('h5'),
+              h5: getDocsTypographyRenderer('h5'),
+              code: getDocsTypographyRenderer('code'),
+            }}
+          >
             {markdownText}
           </ReactMarkdown>
         </div>
@@ -140,6 +152,38 @@ const DocPage = ({
       </main>
     </>
   );
+};
+
+const getDocsTypographyRenderer = (type: string) => {
+  function ParagraphHeader({ ...props }) {
+    return (
+      <>
+        {type === 'code' ? (
+          props.inline ? (
+            <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
+          ) : (
+            <div className={styles.codeBlock}>
+              <CodeBlock
+                language={'js'}
+                text={props.children[0]}
+                showLineNumbers={false}
+                theme={highlightCodeTheme}
+              />
+            </div>
+          )
+        ) : (
+          createElement(
+            type,
+            {
+              className: styles.docsText,
+            },
+            props.children[0]
+          )
+        )}
+      </>
+    );
+  }
+  return ParagraphHeader;
 };
 
 export default DocPage;

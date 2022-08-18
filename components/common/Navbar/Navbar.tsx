@@ -14,7 +14,7 @@ import SvgBookIcon from '../../../public/images/BookIcon';
 import SvgEditIcon from '../../../public/images/EditIcon';
 import { Typography } from '../Typography/Typography';
 
-const Navbar = () => {
+const Navbar = ({ hideFreeTrialText }: { hideFreeTrialText?: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [developerOpen, setDeveloperOpen] = useState(false);
@@ -58,10 +58,17 @@ const Navbar = () => {
     >
       <Banner>
         <div className={styles.bannerContainer}>
-          <p>Want 1 month of free Highlight? </p>
-          <a href="http://app.highlight.run/" className={styles.callToAction}>
-            Register Here →
-          </a>
+          {!hideFreeTrialText && (
+            <>
+              <p>Want 1 month of free Highlight? </p>
+              <a
+                href="http://app.highlight.run/"
+                className={styles.callToAction}
+              >
+                Register Here →
+              </a>
+            </>
+          )}
         </div>
         <div className={styles.navContainer}>
           <ul className={classNames(styles.menuList, styles.header)}>
