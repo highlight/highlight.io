@@ -319,7 +319,7 @@ const PostPage = ({
       <Meta
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.description}
-        absoluteImageUrl={post.metaImage.url}
+        absoluteImageUrl={post?.metaImage?.url}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>
