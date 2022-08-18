@@ -216,18 +216,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
   }
 
-  for (const p of posts) {
-    if (!p.image?.url) {
-      throw new Error(
-        `missing required main image for blog '${p.slug}'. image: ${p.image?.url}`
-      );
-    }
-  }
-  if (
-    !data.post.metaImage?.url ||
-    !data.post.image?.url ||
-    !data.post.author?.profilePhoto?.url
-  ) {
+  // for (const p of posts) {
+  //   if (!p.image?.url) {
+  //     throw new Error(
+  //       `missing required main image for blog '${p.slug}'. image: ${p.image?.url}`
+  //     );
+  //   }
+  // }
+  if (!data.post.metaImage?.url || !data.post.author?.profilePhoto?.url) {
     throw new Error(
       `missing required detailed images for blog '${data.post.slug}'. 
 meta: ${data.post.metaImage?.url}. author: ${data.post.author?.profilePhoto?.url}. image: ${data.post.image?.url}`
@@ -397,17 +393,21 @@ const PostPage = ({
             </div>
           </div>
         </Section>
-        <Section className={styles.headerSection}>
-          <div className={classNames(styles.mainImage, homeStyles.anchorTitle)}>
-            <Image
-              src={post.image.url}
-              alt=""
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-          </div>
-        </Section>
+        {post.image?.url && (
+          <Section className={styles.headerSection}>
+            <div
+              className={classNames(styles.mainImage, homeStyles.anchorTitle)}
+            >
+              <Image
+                src={post.image.url}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+          </Section>
+        )}
         <Section className={styles.headerSection}>
           <div
             className={classNames(

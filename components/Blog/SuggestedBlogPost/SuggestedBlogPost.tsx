@@ -8,7 +8,8 @@ import classNames from 'classnames';
 export const SuggestedBlogPost = ({
   slug,
   richcontent,
-  image: { url },
+  image,
+  metaImage,
   title,
   publishedAt,
   tags,
@@ -20,7 +21,12 @@ export const SuggestedBlogPost = ({
         <div className={classNames(styles.blogPost, styles.suggestedBlogPost)}>
           <div className={styles.cardSection}>
             <div className={styles.cardImage}>
-              <Image src={url} alt="" layout="fill" objectFit="cover" />
+              <Image
+                src={image?.url || metaImage?.url || ''}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
           </div>
           <div className={styles.cardSection}>

@@ -18,10 +18,10 @@ export interface Post {
   slug: string;
   description: string;
   metaDescription?: string;
-  image: {
+  image?: {
     url: string;
   };
-  metaImage: {
+  metaImage?: {
     url: string;
   };
   title: string;
