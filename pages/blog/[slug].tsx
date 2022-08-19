@@ -41,19 +41,11 @@ const getBlogTypographyRenderer = (type: string) => {
       if (content.code) {
         return <span className={styles.codeInline}>{content.text}</span>;
       } else if (content.italic) {
-        return (
-          <i>
-            <span>{content.text}</span>
-          </i>
-        );
+        return <i>{content.text}</i>;
       } else if (content.bold) {
-        return (
-          <b>
-            <span>{content.text}</span>
-          </b>
-        );
+        return <b>{content.text}</b>;
       }
-      return <span>{content.text}</span>;
+      return <>{content.text}</>;
     } else if (content.href) {
       return (
         <a
@@ -216,13 +208,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
   }
 
-  // for (const p of posts) {
-  //   if (!p.image?.url) {
-  //     throw new Error(
-  //       `missing required main image for blog '${p.slug}'. image: ${p.image?.url}`
-  //     );
-  //   }
-  // }
   if (!data.post.metaImage?.url || !data.post.author?.profilePhoto?.url) {
     throw new Error(
       `missing required detailed images for blog '${data.post.slug}'. 
