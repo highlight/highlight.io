@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const QUERY = gql`
     query GetPosts($tag: [String!]) {
       posts(
-        orderBy: publishedAt_DESC
+        orderBy: postedAt_DESC
         where: { tags_contains_all: $tag, unlisted: false }
       ) {
         slug
@@ -54,12 +54,19 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         }
         tags
         readingTime
+        postedAt
       }
     }
   `;
 
   const { posts } = await graphcms.request(QUERY, {
     tag: query.tag ? [query.tag] : [],
+  });
+  const filteredPosts = posts.sort((a: any, b: any) => {
+    // sort by postedAt if the publishedAt field is the same
+    if (a.postedAt === b.postedAt) {
+      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+    }
   });
   const { posts: allPosts } = await graphcms.request(QUERY, {
     tag: [],
@@ -69,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      posts,
+      posts: filteredPosts,
       tags: uniqueTags,
       currentTag: query.tag || '',
     },
