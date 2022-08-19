@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const filteredPosts = posts.sort((a: any, b: any) => {
     // sort by postedAt if the publishedAt field is the same
     if (a.postedAt === b.postedAt) {
-      return a.publishedAt < b.publishedAt;
+      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
     }
   });
   const { posts: allPosts } = await graphcms.request(QUERY, {
