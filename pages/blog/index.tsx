@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const QUERY = gql`
     query GetPosts($tag: [String!]) {
       posts(
-        orderBy: publishedAt_DESC
+        orderBy: postedDate_DESC
         where: { tags_contains_all: $tag, unlisted: false }
       ) {
         slug
