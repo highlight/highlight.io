@@ -43,7 +43,10 @@ const getDocsPaths = async (
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
     const file_string = read[i];
-    const total_path = path.join(full_path, file_string);
+    let total_path = path.join(full_path, file_string);
+    if (file_string === 'index.md') {
+      total_path = full_path;
+    }
     const file_path = await fs_api.stat(total_path);
     if (file_path.isDirectory()) {
       paths = paths.concat(await getDocsPaths(fs_api, file_string));
@@ -51,7 +54,7 @@ const getDocsPaths = async (
       paths.push({
         heading: base,
         path: total_path,
-        slug: file_string.split('.')[0],
+        slug: total_path.split('.')[0],
       });
     }
   }
@@ -73,6 +76,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
   const currentDoc = docPaths.find((d) => d.slug === context?.params?.doc);
   const fileContents = await fsp.readFile(path.join(currentDoc?.path || ''));
+  // TODO - use the trimmed header for metadata
+  const fileContentsTrimmed = fileContents.slice(fileContents.indexOf('---'));
   return {
     props: {
       markdownText: fileContents.toString(),
