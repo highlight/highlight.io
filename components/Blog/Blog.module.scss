@@ -270,6 +270,10 @@
     font-weight: 600;
     text-decoration: none;
   }
+
+  a span {
+    word-break: break-all;
+  }
 }
 
 .postBodyDivider {
