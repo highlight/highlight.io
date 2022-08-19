@@ -1,3 +1,4 @@
+const { withAxiom } = require('next-axiom');
 const getStaticPages = require('./scripts/get-static-pages');
 
 /** @type {import('next').NextConfig} */
@@ -22,4 +23,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withAxiom(nextConfig);
