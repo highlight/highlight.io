@@ -192,9 +192,20 @@ const Terms = () => {
               <br />
               Our Service allows you to post, link, store, share and otherwise
               make available certain information, text, graphics, videos, or
-              other material (“Content”). You are responsible for Content that
-              you post on or through Service, including its legality,
-              reliability, and appropriateness.
+              other material (“Content”). Highlight does not control the
+              Personal Content sent to the Services; Customer has full control
+              and specifies the Content and categories it provides to Highlight.
+              Highlight shall process information sent by Customer’s end users
+              identified through Customer’s use of the Services. Examples of
+              Special Categories of Personal Data Customer may make available to
+              Highlight include: racial or ethnic origin, political opinions,
+              religious or philosophical beliefs, or trade union membership,
+              genetic data, or biometric data for the purpose of uniquely
+              identifying a natural person, data concerning health or a person’s
+              sex life or sexual orientation, or data relating to criminal
+              convictions or offences (hereinafter ‘sensitive data’). You are
+              responsible for Content that you post on or through Service,
+              including its legality, reliability, and appropriateness.
             </p>
             <p>
               By posting Content on or through Service, You represent and
@@ -211,24 +222,7 @@ const Terms = () => {
               post or display on or through Service and you are responsible for
               protecting those rights. We take no responsibility and assume no
               liability for Content you or any third party posts on or through
-              Service. However, by posting Content using Service you grant us
-              the right and license to use, modify, publicly perform, publicly
-              display, reproduce, and distribute such Content on and through
-              Service. You agree that this license includes the right for us to
-              make your Content available to other users of Service, who may
-              also use your Content subject to these Terms.
-            </p>
-            <p>
-              Highlight Inc. has the right but not the obligation to monitor and
-              edit all Content provided by users.
-            </p>
-            <p>
-              In addition, Content found on or through this Service are the
-              property of Highlight Inc. or used with permission. You may not
-              distribute, modify, transmit, reuse, download, repost, copy, or
-              use said Content, whether in whole or in part, for commercial
-              purposes or for personal gain, without express advance written
-              permission from us.
+              Service.
             </p>
             <p>
               <b>10. Prohibited Uses</b>
