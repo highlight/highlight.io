@@ -20,7 +20,7 @@ export async function getStaticProps() {
 
 const Privacy = ({ content }: { content: string }) => {
   return (
-    <>
+    <div>
       <Meta
         title={'Highlight: Privacy Policy'}
         description={'Highlight Privacy Policy'}
@@ -31,7 +31,7 @@ const Privacy = ({ content }: { content: string }) => {
           <MarkdownRender content={content} />
         </Section>
       </main>
-    </>
+    </div>
   );
 };
 
