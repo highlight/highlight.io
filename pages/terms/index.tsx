@@ -22,8 +22,8 @@ const Terms = ({ content }: { content: string }) => {
   return (
     <>
       <Meta
-        title={'Highlight: Privacy Policy'}
-        description={'Highlight Privacy Policy'}
+        title={'Highlight: Terms of Service'}
+        description={'Highlight Terms of Service'}
       />
       <Navbar />
       <main>
