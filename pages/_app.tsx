@@ -10,6 +10,8 @@ import Script from 'next/script';
 import MetaImage from '../public/images/meta-image.jpg';
 import Head from 'next/head';
 import { Meta } from '../components/common/Head/Meta';
+export { reportWebVitals } from 'next-axiom';
+
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
