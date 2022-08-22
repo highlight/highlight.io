@@ -1,4 +1,4 @@
-
+---
 title: Performance Impact
 slug: 9Zwe-performance-impact
 createdAt: 2021-10-14T00:18:49.000Z

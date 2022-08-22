@@ -1,4 +1,4 @@
-
+---
 title: Angular
 slug: l-ir-angular
 createdAt: 2022-05-26T18:54:36.000Z

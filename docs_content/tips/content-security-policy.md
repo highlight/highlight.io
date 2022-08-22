@@ -1,4 +1,4 @@
-
+---
 title: Content-Security-Policy
 slug: 9pQt-content-security-policy
 createdAt: 2022-03-01T00:39:25.000Z

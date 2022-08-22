@@ -1,4 +1,4 @@
-
+---
 title: Client SDK
 slug: 7uAC-client-sdk
 createdAt: 2022-04-01T19:38:31.000Z

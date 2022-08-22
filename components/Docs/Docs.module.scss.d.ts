@@ -1,4 +1,5 @@
 export const centerSection: string;
+export const chevronDown: string;
 export const codeBlock: string;
 export const docLink: string;
 export const docsText: string;
@@ -7,3 +8,4 @@ export const inlineCodeBlock: string;
 export const leftSection: string;
 export const mainWrapper: string;
 export const rightSection: string;
+export const tocRow: string;

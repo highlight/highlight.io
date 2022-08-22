@@ -14,6 +14,16 @@
   top: 0;
 }
 
+.tocRow {
+  display: flex;
+  align-items: center;
+}
+
+.chevronDown {
+  width: var(--size-medium) !important;
+  height: var(--size-medium) !important;
+}
+
 .inlineCodeBlock {
   border-radius: var(--space-unit);
   background-color: var(--color-pseudo-black);

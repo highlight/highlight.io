@@ -8,7 +8,6 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import ChevronDown from '../../../public/images/ChevronDownIcon';
 import Link from 'next/link';
 import SvgBookIcon from '../../../public/images/BookIcon';
 import SvgEditIcon from '../../../public/images/EditIcon';
