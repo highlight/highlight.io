@@ -44,6 +44,18 @@ const getBlogTypographyRenderer = (type: string) => {
         return <i>{content.text}</i>;
       } else if (content.bold) {
         return <b>{content.text}</b>;
+      } else if (content.text.indexOf('://') !== -1) {
+        return (
+          <>
+            {content.text.split('/').map((p) => (
+              <>
+                {p}
+                {'/'}
+                <wbr />
+              </>
+            ))}
+          </>
+        );
       }
       return <>{content.text}</>;
     } else if (content.href) {
@@ -384,7 +396,7 @@ const PostPage = ({
               className={classNames(styles.mainImage, homeStyles.anchorTitle)}
             >
               <Image
-                src={post.image.url}
+                src={post.image.url || ''}
                 alt=""
                 layout="fill"
                 objectFit="cover"
