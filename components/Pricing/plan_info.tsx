@@ -1,39 +1,37 @@
 export type PricingInfo = {
   tierName: string;
   numSessionCredits: number;
-  price: number;
-  contactSales: boolean;
+  price?: number;
   mostPopular: boolean;
+  discount?: number;
 };
 
 export const BasicInfo: PricingInfo = {
   tierName: 'Basic',
   numSessionCredits: 500,
   price: 0,
-  contactSales: false,
   mostPopular: false,
+  discount: 0,
 };
 
 export const EssentialsInfo: PricingInfo = {
   tierName: 'Essentials',
   numSessionCredits: 10000,
   price: 150,
-  contactSales: false,
   mostPopular: false,
+  discount: 20,
 };
 
 export const StartupInfo: PricingInfo = {
   tierName: 'Startup',
   numSessionCredits: 80000,
   price: 400,
-  contactSales: false,
   mostPopular: true,
+  discount: 20,
 };
 
 export const EnterpriseInfo: PricingInfo = {
   tierName: 'Enterprise',
   numSessionCredits: 0,
-  price: 0,
-  contactSales: true,
   mostPopular: false,
 };

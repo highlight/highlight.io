@@ -180,6 +180,11 @@
   background-color: transparent !important;
   color: var(--color-white);
   border: var(--color-white) solid 1px;
+
+  &:hover {
+    background-color: var(--brand-accent);
+    color: inherit;
+  }
 }
 
 .rightButton {

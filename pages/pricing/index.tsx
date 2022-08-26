@@ -108,19 +108,15 @@ const TierSection = ({
   tierName,
   numSessionCredits,
   price,
-  contactSales,
   discount,
   features,
   mostPopular,
-}: {
-  mostPopular: boolean;
-  tierName: string;
-  numSessionCredits: number;
-  price: number;
-  contactSales: boolean;
-  discount?: boolean;
+  monthly,
+}: PricingInfo & {
   features: PricingDetails;
+  monthly: boolean;
 }) => {
+  const contactSales = price === undefined;
   return (
     <div>
       {mostPopular && (
@@ -141,10 +137,10 @@ const TierSection = ({
               </Typography>
               <div
                 className={classNames(styles.discountPill, {
-                  [styles.discountPillVisible]: discount,
+                  [styles.discountPillVisible]: !monthly && discount,
                 })}
               >
-                - 20%
+                - {discount}%
               </div>
             </div>
             {contactSales ? (
@@ -179,7 +175,11 @@ const TierSection = ({
                   >
                     {'$'}
                   </Typography>
-                  <h3 className={styles.price}>{price}</h3>
+                  <h3 className={styles.price}>
+                    {monthly || !discount
+                      ? price
+                      : Math.round((1 - discount / 100) * price)}
+                  </h3>
                   <div className={styles.timeIndicator}>
                     <Typography type="copy3">{'/ mo'}</Typography>
                   </div>
@@ -187,7 +187,14 @@ const TierSection = ({
               )}
             </div>
           </div>
-          <PrimaryButton className={styles.pricingButton}>
+          <PrimaryButton
+            href={
+              contactSales
+                ? 'mailto:sales@highlight.io'
+                : 'https://app.highlight.run/?sign_up=1'
+            }
+            className={styles.pricingButton}
+          >
             <Typography type="copy2" emphasis={true}>
               {contactSales ? 'Contact Sales' : 'Start Free Trial'}
             </Typography>
@@ -321,40 +328,14 @@ const Pricing: NextPage = () => {
                 })}
               </div>
             </div>
-            <TierSection
-              mostPopular={false}
-              tierName="Basic"
-              numSessionCredits={500}
-              price={0}
-              contactSales={false}
-              features={BasicDetails}
-            />
-            <TierSection
-              mostPopular={false}
-              tierName="Essentials"
-              numSessionCredits={10000}
-              price={150}
-              contactSales={false}
-              features={EssentialsDetails}
-              discount={!monthly}
-            />
-            <TierSection
-              mostPopular={true}
-              tierName="Startup"
-              numSessionCredits={80000}
-              price={400}
-              contactSales={false}
-              features={StartupDetails}
-              discount={!monthly}
-            />
-            <TierSection
-              mostPopular={false}
-              tierName="Enterprise"
-              numSessionCredits={300000}
-              price={1500}
-              contactSales={true}
-              features={EnterpriseDetails}
-            />
+            {planInfo.map((p: PricingInfo, idx: number) => (
+              <TierSection
+                key={idx}
+                features={planDetails[idx]}
+                monthly={monthly}
+                {...p}
+              />
+            ))}
           </Section>
         )}
         <Section>
@@ -510,7 +491,7 @@ const BillingWidget = ({
   );
 };
 
-const MobileTierCarousel = ({ monthly }: { monthly?: boolean }) => {
+const MobileTierCarousel = ({ monthly }: { monthly: boolean }) => {
   const { width } = useWindowDimensions();
   const [planIndex, setPlanIndex] = useState(2);
   const [viewportRef, embla] = useEmblaCarousel({
@@ -534,15 +515,11 @@ const MobileTierCarousel = ({ monthly }: { monthly?: boolean }) => {
         <div className="embla__container">
           {planInfo.map((p: PricingInfo, i: number) => (
             <MobileTierSection
+              key={i}
               width={width <= 800 ? 248 : 332}
               selected={i == planIndex}
-              key={i}
-              mostPopular={p.mostPopular}
-              tierName={p.tierName}
-              numSessionCredits={p.numSessionCredits}
-              price={p.price}
-              contactSales={p.contactSales}
-              discount={p.price > 0 ? !monthly : undefined}
+              monthly={monthly}
+              {...p}
             />
           ))}
         </div>
@@ -612,21 +589,17 @@ const MobileTierSection = ({
   tierName,
   numSessionCredits,
   price,
-  contactSales,
   mostPopular,
   selected,
   width,
   discount,
+  monthly,
 }: {
-  mostPopular: boolean;
-  tierName: string;
-  numSessionCredits: number;
-  price: number;
-  contactSales: boolean;
+  monthly: boolean;
   selected: boolean;
   width: number;
-  discount?: boolean;
-}) => {
+} & PricingInfo) => {
+  const contactSales = price === undefined;
   return (
     <div
       style={{ minWidth: width }}
@@ -651,10 +624,10 @@ const MobileTierSection = ({
             </Typography>
             <div
               className={classNames(styles.discountPill, {
-                [styles.discountPillVisible]: discount,
+                [styles.discountPillVisible]: !monthly && discount,
               })}
             >
-              - 20%
+              - {discount}%
             </div>
           </div>
           <Typography type="copy3" className={styles.mobileSessionCredits}>
@@ -669,7 +642,11 @@ const MobileTierSection = ({
                 <Typography type="copy3" emphasis className={styles.moneySign}>
                   {'$'}
                 </Typography>
-                <h3 className={styles.price}>{price}</h3>
+                <h3 className={styles.price}>
+                  {monthly || !discount
+                    ? price
+                    : Math.round((1 - discount / 100) * price)}
+                </h3>
                 <div className={styles.timeIndicator}>
                   <Typography type="copy3">{'/ mo'}</Typography>
                 </div>
