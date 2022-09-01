@@ -1,9 +1,13 @@
 import { promises as fsp } from 'fs';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { createElement, useRef } from 'react';
+import { createElement, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import styles, { docsText } from '../../components/Docs/Docs.module.scss';
+import styles, {
+  chevronHover,
+  docsText,
+  tocChildren,
+} from '../../components/Docs/Docs.module.scss';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { CallToAction } from '../../components/common/CallToAction/CallToAction';
@@ -11,6 +15,8 @@ import Footer from '../../components/common/Footer/Footer';
 import remarkGfm from 'remark-gfm';
 import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
+import Minus from '../../public/images/MinusIcon';
+import { Collapse } from 'react-collapse';
 
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -19,6 +25,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { CodeBlock } from 'react-code-blocks';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import matter from 'gray-matter';
+import classNames from 'classnames';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 
@@ -100,7 +107,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 interface TocEntry {
   tocHeading?: string;
   tocSlug: string;
-  docPathId: number | null;
+  docPathId?: number | null;
   children: TocEntry[];
 }
 
@@ -119,6 +126,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // will require traversing up to all parents
   for (var d of docPaths) {
     let currentEntry = toc;
+    console.log('path', d.simple_path);
+    console.log('doc path', d);
     for (var a of d.array_path) {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
@@ -129,11 +138,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
       if (!foundEntry) {
         foundEntry = {
           tocSlug: a,
-          tocHeading: docPaths[docid].metadata.title,
-          docPathId: docid,
+          // tocHeading: docPaths[docid].metadata.title,
+          // docPathId: docid,
           children: [],
         };
         currentEntry.children.push(foundEntry);
+      }
+      if (d.array_path.indexOf(a) == d.array_path.length - 1) {
+        foundEntry.docPathId = docid;
+        foundEntry.tocHeading = docPaths[docid].metadata.title || 'test';
       }
       currentEntry = foundEntry;
     }
@@ -190,30 +203,69 @@ const readMarkdown = async (fs_api: any, filePath: string) => {
 const TableOfContents = ({
   toc,
   docPaths,
+  openParent,
 }: {
   toc: TocEntry;
+  openParent: boolean;
   docPaths: DocPath[];
 }) => {
+  const [open, setOpen] = useState(openParent);
+  const hasChildren = toc.children.length ? true : false;
+
+  const [isCurrentPage, setIsCurrentPage] = useState(false);
+
+  useEffect(() => {
+    const isCurrentPage =
+      path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
+      window.location.pathname;
+    setIsCurrentPage(isCurrentPage);
+  }, [docPaths, toc.docPathId]);
+
   return (
-    <>
-      <div className={styles.tocRow}>
-        <ChevronDown className={styles.chevronDown} />
-        <Typography type="copy3" emphasis>
+    <div>
+      <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
+        {hasChildren ? (
+          <ChevronDown className={styles.tocIcon} />
+        ) : (
+          <Minus className={styles.tocIcon} />
+        )}
+        <Typography
+          type="copy3"
+          emphasis
+          className={classNames(styles.tocItem, {
+            [styles.tocItemOpen]: hasChildren && open,
+            [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+          })}
+        >
           <Link
             href={path.join(
               '/docs',
               docPaths[toc.docPathId || 0]?.simple_path || ''
             )}
           >
-            {toc.tocHeading}
+            {toc?.tocHeading || 'nope'}
           </Link>
         </Typography>
       </div>
-      {toc.children.map((t) => (
-        // TODO(jaykhatri) - this 'docPaths' concept has to be stateful 🤔.
-        <TableOfContents docPaths={docPaths} key={t.docPathId} toc={t} />
-      ))}
-    </>
+      <Collapse isOpened={open}>
+        <div className={styles.tocChildren}>
+          <div className={styles.tocChildrenLineWrapper}>
+            <div className={styles.tocChildrenLine}></div>
+          </div>
+          <div className={styles.tocChildrenContent}>
+            {toc.children.map((t) => (
+              // TODO(jaykhatri) - this 'docPaths' concept has to be stateful 🤔.
+              <TableOfContents
+                openParent={open}
+                docPaths={docPaths}
+                key={t.docPathId}
+                toc={t}
+              />
+            ))}
+          </div>
+        </div>
+      </Collapse>
+    </div>
   );
 };
 

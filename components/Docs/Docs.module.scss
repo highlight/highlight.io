@@ -6,22 +6,66 @@
 .leftSection {
   display: flex;
   flex-direction: column;
-  width: 280px;
-  padding: var(--size-large) var(--size-xxLarge);
-  gap: 24px;
+  width: 300px;
+  padding: var(--size-large) var(--size-large);
   position: sticky;
   height: 100vh;
   top: 0;
 }
 
+.tocIcon {
+  width: var(--size-large) !important;
+  height: var(--size-large) !important;
+  transition: color 0.2s ease;
+}
+
 .tocRow {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 }
 
-.chevronDown {
-  width: var(--size-medium) !important;
-  height: var(--size-medium) !important;
+.tocItem a {
+  color: var(--copy-on-dark) !important;
+  font-weight: 400;
+}
+
+.tocItemOpen a {
+  color: var(--brand-accent-light) !important;
+  font-weight: 500;
+}
+
+.tocItemCurrent a {
+  color: var(--color-selected-light) !important;
+  font-weight: 500;
+}
+
+.tocRow:hover .tocIcon {
+  color: var(--brand-accent);
+}
+
+.tocChildren {
+  display: flex;
+  flex-direction: row;
+}
+
+.tocChildrenLineWrapper {
+  width: var(--size-large);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.tocChildrenLine {
+  background-color: var(--brand-accent-light);
+  opacity: 30%;
+  width: 2px;
+  height: 100%;
+}
+
+.tocChildrenContent {
+  display: flex;
+  flex-direction: column;
 }
 
 .inlineCodeBlock {
