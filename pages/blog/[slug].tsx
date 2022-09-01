@@ -153,18 +153,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
   const POSTS_QUERY = gql`
-        query GetPosts() {
-            posts(orderBy: publishedAt_DESC) {
-                slug
-                title
-                image {
-                    url
-                }
-                richcontent {
-                    markdown
-                }
-                publishedAt
-                tags
+    query GetPosts() {
+      posts(
+        orderBy: publishedAt_DESC
+        where: { unlisted: false }
+      ) {
+        slug
+        title
+        image {
+          url
+        }
+        richcontent {
+          markdown
+        }
+        publishedAt
+        tags
                 readingTime
             }
         }

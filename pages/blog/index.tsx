@@ -26,11 +26,13 @@ export const graphcms = new GraphQLClient(
 
 // need server-side request here to be able to filter the graphcms request via the query
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const tagProp = query.tag ? '$tag: [String!]' : '';
+  const tagFilter = query.tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
-    query GetPosts($tag: [String!]) {
+    query GetPosts(${tagProp}) {
       posts(
         orderBy: postedAt_DESC
-        where: { tags_contains_all: $tag, unlisted: false }
+        where: { ${tagFilter}, unlisted: false }
       ) {
         slug
         image {
@@ -65,7 +67,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const filteredPosts = posts.sort((a: any, b: any) => {
     // sort by postedAt if the publishedAt field is the same
     if (a.postedAt === b.postedAt) {
-      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+      return (
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      );
     }
   });
   const { posts: allPosts } = await graphcms.request(QUERY, {
