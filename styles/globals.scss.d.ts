@@ -10,6 +10,7 @@ export const emblaSlideInner: string;
 export const emblaViewport: string;
 export const isDraggable: string;
 export const isDragging: string;
+export const reactCollapseCollapse: string;
 export const slickActive: string;
 export const slickDots: string;
 export const slickInitialized: string;

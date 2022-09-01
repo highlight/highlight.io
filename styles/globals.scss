@@ -401,3 +401,7 @@ a {
     font-weight: 600 !important;
   }
 }
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
+}
