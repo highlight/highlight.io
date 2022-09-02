@@ -370,6 +370,12 @@
 
 // Custom font styles for blog-specific text!!!
 
+.blogText {
+  b {
+    font-weight: 600 !important;
+  }
+}
+
 h2.blogText + h3.blogText {
   margin-top: 0.8em !important;
 }
