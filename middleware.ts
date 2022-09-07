@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // this will redirect the domain landing page to the following page component
 const SUBDOMAIN_LANDING_PAGES = {
-  observability: '/blog',
+  observability: '/blog/frontend-observability',
 };
 
 export default function middleware(req: NextRequest) {
