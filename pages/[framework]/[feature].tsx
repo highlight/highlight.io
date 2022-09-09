@@ -14,21 +14,11 @@ import { CustomerReview } from '../../components/common/CustomerReview/CustomerR
 import styles from '../../components/Home/Home.module.scss';
 import { IMAGE_SHOW_OFFSET } from '..';
 import Image from 'next/image';
-import { ObfuscationSlider } from '../../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { Collapse } from 'antd';
 
-import MultipleIcon from '../../public/images/multiple.svg';
 import PuzzleIcon from '../../public/images/puzzle.svg';
-import ChartbarIcon from '../../public/images/chart-bar.svg';
-import MagnifierIcon from '../../public/images/magnifier.svg';
-import VerifiedIcon from '../../public/images/verified.svg';
-import PlugIcon from '../../public/images/plug.svg';
-
-import CollaborateImage from '../../public/images/collaborate.png';
-import SearchImage from '../../public/images/search.svg';
-import TwoHighlightersImage from '../../public/images/two-highlighters.gif';
-import Tablet1 from '../../public/images/tablet1.svg';
 import WebVitalsImage from '../../public/images/webvitals.svg';
+import VitalsChartImage from '../../public/images/vitalschart.svg';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { CodeSnippet } from '../../components/Home/CodeSnippet/CodeSnippet';
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
@@ -79,6 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     query GetFrontendFramework($slug: String!) {
       frontendFramework(where: { slug: $slug }) {
         frameworkName
+        snippet
         image {
           url
         }
@@ -247,15 +238,13 @@ const WebVitals = ({
                 <div ref={section1} className={styles.featuresSection}>
                   <div>
                     <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">
-                        cross-team collaboration
-                      </Typography>
+                      <Typography type="outline">Proactive alerting</Typography>
                     </div>
                     <h3>
                       <span className={styles.highlightedText}>
-                        Collaborate
+                        Get notified
                       </span>{' '}
-                      on bugs, everyone is kept in the loop.
+                      when your web vitals drop.
                     </h3>
                     <Collapse
                       accordion
@@ -269,11 +258,11 @@ const WebVitals = ({
                             className={styles.collapseHeader}
                             onMouseEnter={() => setFirstCollapseIndex('1')}
                           >
-                            <Image src={MultipleIcon} alt="" />
+                            <Image src={PuzzleIcon} alt="" />
                             <Typography
                               type="copy1"
                               emphasis={true}
-                            >{`There's never one stakeholder on a bug.`}</Typography>
+                            >{`Configure thresholds for getting notified.`}</Typography>
                           </div>
                         }
                         className={styles.sectionInfo}
@@ -282,10 +271,8 @@ const WebVitals = ({
                       >
                         <div className={styles.sectionBody}>
                           <Typography type="copy2">
-                            When something breaks on your web app, there are
-                            many teams that could get the first message about
-                            it. Highlight makes it easy to communicate and
-                            re-assign issues to make decisions on errors faster.
+                            Customize the values at which you should get
+                            notified for. Every web app is different.
                           </Typography>
                         </div>
                       </Panel>
@@ -307,7 +294,7 @@ const WebVitals = ({
                         showArrow={false}
                       >
                         <div className={styles.sectionBody}>
-                          <Typography type="copy2">{`We understand that Highlight isn't your issue tracking tool or your customer data platform. That's why we integrate with tools like Slack, Clickup and Zapier to keep everyone in the loop.`}</Typography>
+                          <Typography type="copy2">{`We support slack, email notifications and more. Alerts are only as good as their integrations.`}</Typography>
                         </div>
                       </Panel>
                     </Collapse>
@@ -316,13 +303,11 @@ const WebVitals = ({
                 <div ref={section2} className={styles.featuresSection}>
                   <div>
                     <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">Powerful search</Typography>
+                      <Typography type="outline">Customization</Typography>
                     </div>
                     <h3>
-                      <span className={styles.highlightedText}>
-                        Easily search
-                      </span>{' '}
-                      for a bug by session or specific property.
+                      <span className={styles.highlightedText}>Configure</span>{' '}
+                      and customize to your use case.
                     </h3>
                     <Collapse
                       accordion
@@ -336,11 +321,11 @@ const WebVitals = ({
                             className={styles.collapseHeader}
                             onMouseEnter={() => setSecondCollapseIndex('1')}
                           >
-                            <Image src={MagnifierIcon} alt="" />
+                            <Image src={PuzzleIcon} alt="" />
                             <Typography
                               type="copy1"
                               emphasis={true}
-                            >{`Get to the correct session instantly.`}</Typography>
+                            >{`Configure thresholds for getting notified.`}</Typography>
                           </div>
                         }
                         className={styles.sectionInfo}
@@ -349,10 +334,8 @@ const WebVitals = ({
                       >
                         <div className={styles.sectionBody}>
                           <Typography type="copy2">
-                            What if you step in the shoes of your users and
-                            debug from their perspective? With our search
-                            console, you can instantly find the right session
-                            and debug with confidence.
+                            Customize the values at which you should get
+                            notified for. Every web app is different.
                           </Typography>
                         </div>
                       </Panel>
@@ -362,9 +345,9 @@ const WebVitals = ({
                             className={styles.collapseHeader}
                             onMouseEnter={() => setSecondCollapseIndex('2')}
                           >
-                            <Image src={ChartbarIcon} alt="" />
+                            <Image src={PuzzleIcon} alt="" />
                             <Typography type="copy1" emphasis={true}>{`
-                    What is slowing down your users?`}</Typography>
+                    Integrate with your favorite tools.`}</Typography>
                           </div>
                         }
                         className={styles.sectionInfo}
@@ -373,11 +356,8 @@ const WebVitals = ({
                       >
                         <div className={styles.sectionBody}>
                           <Typography type="copy2">
-                            Are users not using a new feature? Or is there a
-                            known drop off in a specific user flow? Our search
-                            console gives you the ability to search based on
-                            URL, number of errors, user properties and much
-                            more!
+                            We support slack, email notifications and more.
+                            Alerts are only as good as their integrations.
                           </Typography>
                         </div>
                       </Panel>
@@ -399,7 +379,7 @@ const WebVitals = ({
                   <div
                     className={classNames(styles.imageInner, styles.hideMobile)}
                   >
-                    <Image src={CollaborateImage} alt="" />
+                    <Image src={VitalsChartImage} alt="" />
                   </div>
                   <div
                     className={classNames(
@@ -407,7 +387,7 @@ const WebVitals = ({
                       styles.tabletGraphic
                     )}
                   >
-                    <Image src={Tablet1} alt="" />
+                    <Image src={VitalsChartImage} alt="" />
                   </div>
                 </div>
                 <div
@@ -422,10 +402,7 @@ const WebVitals = ({
                       styles.search
                     )}
                   >
-                    <Image src={SearchImage} alt="" />
-                    <div className={styles.searchTwoHighlighters}>
-                      <Image src={TwoHighlightersImage} alt="" />
-                    </div>
+                    <Image src={VitalsChartImage} alt="" />
                   </div>
                   <div
                     className={classNames(
@@ -433,7 +410,7 @@ const WebVitals = ({
                       styles.tabletGraphic
                     )}
                   >
-                    <Image src={TwoHighlightersImage} alt="" />
+                    <Image src={VitalsChartImage} alt="" />
                   </div>
                 </div>
               </div>
@@ -453,7 +430,7 @@ const WebVitals = ({
                 />
               }
               canCopy={true}
-              language="html"
+              language="js"
               content={
                 framework.snippet ||
                 `<html>
