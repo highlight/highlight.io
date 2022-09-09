@@ -7,12 +7,14 @@ import styles from '../../Home/Home.module.scss';
 
 export const CodeSnippet = ({
   content,
+  image,
   HeaderImage,
   canCopy,
   ...props
 }: SyntaxHighlighterProps & {
   content: string;
-  HeaderImage: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  image?: JSX.Element;
+  HeaderImage?: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   canCopy?: boolean;
 }) => {
   return (
@@ -24,7 +26,8 @@ export const CodeSnippet = ({
           <div className={styles.codeSnippetCircle}></div>
         </div>
         <div className={styles.codeSnippetIcon}>
-          <HeaderImage color="white" />
+          {HeaderImage && <HeaderImage color="white" />}
+          {image && image}
         </div>
       </div>
       <div className={styles.codeSnippetContent}>

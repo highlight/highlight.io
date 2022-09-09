@@ -1,14 +1,10 @@
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
-import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
 import { gql, GraphQLClient } from 'graphql-request';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import Paginate from '../../components/common/Paginate/Paginate';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import classNames from 'classnames';
-import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
 import { Typography } from '../../components/common/Typography/Typography';
 import { Meta } from '../../components/common/Head/Meta';
 import { Section } from '../../components/common/Section/Section';
@@ -32,6 +28,10 @@ import CollaborateImage from '../../public/images/collaborate.png';
 import SearchImage from '../../public/images/search.svg';
 import TwoHighlightersImage from '../../public/images/two-highlighters.gif';
 import Tablet1 from '../../public/images/tablet1.svg';
+import WebVitalsImage from '../../public/images/webvitals.svg';
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
+import { CodeSnippet } from '../../components/Home/CodeSnippet/CodeSnippet';
+import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';
 
 const { Panel } = Collapse;
 
@@ -120,14 +120,9 @@ const WebVitals = ({
   const [featureImageIndex, setFeatureImageIndex] = useState(0);
   const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
   const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
-  const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
 
   const scrollListener = useCallback(() => {
     if (
-      (section3?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
-    ) {
-      setFeatureImageIndex(2);
-    } else if (
       (section2?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
     ) {
       setFeatureImageIndex(1);
@@ -196,18 +191,37 @@ const WebVitals = ({
       />
       <Navbar />
       <main>
-        <Section>
-          <div className={styles.splashSectionText}>
-            <div className={styles.sectionSubtitle}>
-              <Typography type="outline">Stop debugging in the dark</Typography>
+        <Section className={styles.heroVideoWrapper}>
+          <div className={styles.anchorFeature}>
+            <div className={styles.anchorHead}>
+              <div className={styles.sectionSubtitle}>
+                <Typography type="outline">frontend observability</Typography>
+              </div>
+              <h1>{`${FEATURES_MAP[feature]} for your ${framework.frameworkName} Application`}</h1>
+              <Typography type="copy1" onDark>
+                The Highlight snippet automatically instruments your web app to
+                record web vitals and frontend performance metrics. Maintain the
+                ⚡️ of your web app.
+              </Typography>
             </div>
-            <h2>{`${FEATURES_MAP[feature]} for your ${framework.frameworkName} app`}</h2>
-            <Typography type="copy2" onDark>
-              {`Stop wasting effort trying to track down and reproduce bugs. Through session replay, Highlight shows you exactly how and when errors happen.`}
-            </Typography>
-          </div>
-          <div className={styles.gridSectionImage}>
-            <Image src={CollaborateImage} alt="" />
+            <div
+              className={classNames(styles.buttonContainer, styles.heroImage)}
+            >
+              <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                <Typography type="copy2" emphasis={true}>
+                  Get started for free
+                </Typography>
+              </PrimaryButton>
+            </div>
+            <div
+              className={classNames(
+                styles.heroImage,
+                styles.imageInner,
+                styles.generatedImage
+              )}
+            >
+              <Image src={WebVitalsImage} alt="" />
+            </div>
           </div>
         </Section>
         <div className={styles.secondaryBackground}>
@@ -220,8 +234,9 @@ const WebVitals = ({
                 )}
               >
                 <h2>
-                  {`${FEATURES_MAP[feature]} for ${framework.frameworkName} ensure your app stays `}
-                  <span className={styles.highlightedText}>snappy</span>.
+                  Keep your Web App{' '}
+                  <span className={styles.highlightedText}>Snappy</span>, like
+                  it should be.
                 </h2>
               </div>
             </div>
@@ -369,74 +384,6 @@ const WebVitals = ({
                     </Collapse>
                   </div>
                 </div>
-                <div ref={section3} className={styles.featuresSection}>
-                  <div>
-                    <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">security-compliant</Typography>
-                    </div>
-                    <h3>
-                      Highlight is built for{' '}
-                      <span className={styles.highlightedText}>
-                        privacy and security.
-                      </span>
-                    </h3>
-                    <Collapse
-                      accordion
-                      destroyInactivePanel={true}
-                      activeKey={thirdCollapseIndex}
-                      className={styles.sectionCollapse}
-                    >
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setThirdCollapseIndex('1')}
-                          >
-                            <Image src={PlugIcon} alt="" />
-                            <Typography type="copy1" emphasis={true}>
-                              Leverage our privacy-first API.
-                            </Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="1"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            Highlight supports data redaction, obfuscation,
-                            masking and much more. The library also supports a
-                            Strict Privacy Mode which obfuscates all text nodes
-                            for very strict PII rules.
-                          </Typography>
-                        </div>
-                      </Panel>
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setThirdCollapseIndex('2')}
-                          >
-                            <Image src={VerifiedIcon} alt="" />
-                            <Typography type="copy1" emphasis={true}>
-                              {`We put compliance & trust at the forefront.`}
-                            </Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="2"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            Highlight supports several wellknown compliance
-                            frameworks including GDPR, CCPA, and SOC2.
-                          </Typography>
-                        </div>
-                      </Panel>
-                    </Collapse>
-                  </div>
-                </div>
               </div>
               <div
                 className={styles.featuresRightColumn}
@@ -489,19 +436,58 @@ const WebVitals = ({
                     <Image src={TwoHighlightersImage} alt="" />
                   </div>
                 </div>
-                <div
-                  className={classNames({
-                    [styles.hideImage]: featureImageIndex !== 2,
-                  })}
-                >
-                  <div className={styles.imageInner} style={{ height: 300 }}>
-                    <ObfuscationSlider />
-                  </div>
-                </div>
               </div>
             </div>
           </Section>
         </div>
+
+        <Section grid>
+          <div className={styles.gridSectionImageLeft}>
+            <CodeSnippet
+              image={
+                <Image
+                  src={framework.image?.url || ''}
+                  alt=""
+                  layout="fill"
+                  objectFit="contain"
+                />
+              }
+              canCopy={true}
+              language="html"
+              content={
+                framework.snippet ||
+                `<html>
+  <head>
+      <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
+      <script>
+          window.H.init("your-api-key")
+      </script>
+  </head>
+  <body>
+      <!-- Your Application -->
+  </body>
+</html>`
+              }
+            />
+          </div>
+          <div className={classNames(styles.sectionText, styles.codeSection)}>
+            <div className={styles.sectionSubtitle}>
+              <Typography type="outline">effortless setup</Typography>
+            </div>
+            <h2>
+              Use Highlight{' '}
+              <span className={styles.highlightedText}>within minutes</span>
+            </h2>
+            <Typography type="copy2" onDark>
+              {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
+            </Typography>
+            <div className={styles.buttonContainer}>
+              <PrimaryLink href="https://docs.highlight.run/getting-started">
+                Read more about our backend integrations in beta
+              </PrimaryLink>
+            </div>
+          </div>
+        </Section>
         <Section>
           <CompaniesReel />
         </Section>

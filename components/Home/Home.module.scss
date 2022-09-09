@@ -233,17 +233,6 @@
   }
 }
 
-.splashSectionText {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 60%;
-  width: 60%;
-  padding: 0px var(--size-xLarge);
-  min-width: 550px;
-  margin: var(--size-xLarge) 0;
-  gap: var(--size-large);
-}
-
 .heroImage {
   display: flex;
   align-items: center;
@@ -310,11 +299,6 @@
 .gridSectionImageLeft {
   margin: var(--size-xLarge) 0;
   grid-column: col-start / span 6;
-}
-
-.gridSectionImage {
-  margin: var(--size-xLarge) 0;
-  width: 40%;
 }
 
 .imageInner {
@@ -414,6 +398,10 @@
     & video {
       width: 70vw;
     }
+  }
+
+  .generatedImage {
+    margin-bottom: 200px;
   }
 
   .anchorImage {
@@ -631,6 +619,7 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      position: relative;
 
       svg {
         height: inherit;
