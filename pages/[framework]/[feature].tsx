@@ -201,7 +201,7 @@ const WebVitals = ({
             <div className={styles.sectionSubtitle}>
               <Typography type="outline">Stop debugging in the dark</Typography>
             </div>
-            <h2>{`${FEATURES_MAP[feature]} for your ${framework.frameworkName} App`}</h2>
+            <h2>{`${FEATURES_MAP[feature]} for your ${framework.frameworkName} app`}</h2>
             <Typography type="copy2" onDark>
               {`Stop wasting effort trying to track down and reproduce bugs. Through session replay, Highlight shows you exactly how and when errors happen.`}
             </Typography>
