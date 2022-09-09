@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
@@ -26,20 +25,20 @@ import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.svg';
 import TwoHighlightersImage from '../public/images/two-highlighters.gif';
 import Tablet1 from '../public/images/tablet1.svg';
-import Tablet2 from '../public/images/tablet2.png';
 
 import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
-import { Review, REVIEWS } from '../components/Home/Reviews';
+import { REVIEWS } from '../components/Home/Reviews';
 import { SnippetTab } from '../components/Home/SnippetTab/SnippetTab';
 import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
+import { CustomerReview } from '../components/common/CustomerReview/CustomerReview';
 
-const IMAGE_SHOW_OFFSET = 450;
+export const IMAGE_SHOW_OFFSET = 450;
 
 const { Panel } = Collapse;
 
@@ -50,51 +49,6 @@ export const FeatureItem = ({
   return (
     <div {...props} className={styles.featureItem}>
       {children}
-    </div>
-  );
-};
-
-export const CustomerReview = ({
-  companyLogo,
-  text,
-  author,
-  scale,
-}: Review) => {
-  return (
-    <div className={styles.reviewCard}>
-      <div
-        className={styles.companyLogo}
-        style={{
-          width: `${120 * (scale || 1)}px`,
-          objectFit: 'contain',
-        }}
-      >
-        <Image
-          src={companyLogo}
-          alt={author.name}
-          layout={'fill'}
-          objectFit={'contain'}
-          style={{
-            transform: `scale(${scale || 1})`,
-          }}
-        />
-      </div>
-      <div className={styles.reviewText}>
-        <Typography type="copy2">
-          <p>{text}</p>
-        </Typography>
-      </div>
-      <div className={styles.author}>
-        <div className={styles.authorImage}>
-          <Image src={author.image} alt={author.name} />
-        </div>
-        <div>
-          <Typography type="copy2" emphasis>
-            {author.name}
-          </Typography>
-          <Typography type="copy2">{`, ${author.role}`}</Typography>
-        </div>
-      </div>
     </div>
   );
 };
