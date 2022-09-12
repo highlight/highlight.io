@@ -11,7 +11,12 @@ export default function middleware(req: NextRequest) {
   for (const [k, v] of Object.entries(SUBDOMAIN_LANDING_PAGES)) {
     if (hostname?.startsWith(`${k}.`)) {
       if (pathname === '/') {
-        const domain = process.env.NEXT_PUBLIC_VERCEL_URL || req.nextUrl.origin;
+        let domain =
+          process.env.VERCEL_URL ||
+          process.env.NEXT_PUBLIC_VERCEL_URL ||
+          process.env.WEBSITE_URL ||
+          req.nextUrl.origin;
+        domain = domain.replace(/\/+$/, '');
         return NextResponse.rewrite(`${domain}${v}`);
       }
     }
