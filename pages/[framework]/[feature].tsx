@@ -238,13 +238,11 @@ const WebVitals = ({
                 <div ref={section1} className={styles.featuresSection}>
                   <div>
                     <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">Proactive alerting</Typography>
+                      <Typography type="outline">Customization</Typography>
                     </div>
                     <h3>
-                      <span className={styles.highlightedText}>
-                        Get notified
-                      </span>{' '}
-                      when your web vitals drop.
+                      <span className={styles.highlightedText}>Configure</span>{' '}
+                      and customize to your use case.
                     </h3>
                     <Collapse
                       accordion
@@ -303,11 +301,13 @@ const WebVitals = ({
                 <div ref={section2} className={styles.featuresSection}>
                   <div>
                     <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">Customization</Typography>
+                      <Typography type="outline">Proactive alerting</Typography>
                     </div>
                     <h3>
-                      <span className={styles.highlightedText}>Configure</span>{' '}
-                      and customize to your use case.
+                      <span className={styles.highlightedText}>
+                        Get notified
+                      </span>{' '}
+                      when your web vitals drop.
                     </h3>
                     <Collapse
                       accordion
