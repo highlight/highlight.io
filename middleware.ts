@@ -11,13 +11,11 @@ export default function middleware(req: NextRequest) {
   for (const [k, v] of Object.entries(SUBDOMAIN_LANDING_PAGES)) {
     if (hostname?.startsWith(`${k}.`)) {
       if (pathname === '/') {
-        let domain =
-          process.env.VERCEL_URL ||
-          process.env.NEXT_PUBLIC_VERCEL_URL ||
-          process.env.WEBSITE_URL ||
-          req.nextUrl.origin;
-        domain = domain.replace(/\/+$/, '');
-        return NextResponse.rewrite(`${domain}${v}`);
+        let url = req.nextUrl.origin || 'https://highlight.io/';
+        url = url.replace(/\/+$/, '');
+        // eslint-disable-next-line no-console
+        console.log('domain rewrite', hostname, url, v);
+        return NextResponse.rewrite(`${url}${v}`);
       }
     }
   }
