@@ -319,7 +319,10 @@ const PostPage = ({
   return (
     <>
       <Head>
-        <link rel="canonical" href={`https://highlight.io/blog/${post.slug}`} />
+        <link
+          rel="canonical"
+          href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/blog/${post.slug}`}
+        />
       </Head>
       <Meta
         title={post.metaTitle || post.title}
