@@ -21,7 +21,6 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import Head from 'next/head';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -318,16 +317,11 @@ const PostPage = ({
 
   return (
     <>
-      <Head>
-        <link
-          rel="canonical"
-          href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/blog/${post.slug}`}
-        />
-      </Head>
       <Meta
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.description}
         absoluteImageUrl={post?.metaImage?.url}
+        canonical={`/blog/${post.slug}`}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>

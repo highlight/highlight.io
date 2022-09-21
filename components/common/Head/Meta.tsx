@@ -1,13 +1,16 @@
 import Head from 'next/head';
 import MetaImage from '../../../public/images/meta-image.jpg';
+
 export const Meta = ({
   title,
   description,
   absoluteImageUrl,
+  canonical,
 }: {
   title: string;
   description: string;
   absoluteImageUrl?: string;
+  canonical?: string;
 }) => {
   const img =
     absoluteImageUrl ||
@@ -29,6 +32,12 @@ export const Meta = ({
       <meta property="og:site_name" content="Highlight" key="ogsitename" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
+      {canonical && (
+        <link
+          rel="canonical"
+          href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${canonical}`}
+        />
+      )}
     </Head>
   );
 };
