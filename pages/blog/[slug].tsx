@@ -21,6 +21,7 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import Head from 'next/head';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -116,6 +117,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const QUERY = gql`
     query GetPost($slug: String!) {
       post(where: { slug: $slug }) {
+        slug
         title
         metaTitle
         image {
@@ -316,6 +318,9 @@ const PostPage = ({
 
   return (
     <>
+      <Head>
+        <link rel="canonical" href={`https://highlight.io/blog/${post.slug}`} />
+      </Head>
       <Meta
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.description}
