@@ -33,10 +33,7 @@ export const Meta = ({
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
       {canonical && (
-        <link
-          rel="canonical"
-          href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${canonical}`}
-        />
+        <link rel="canonical" href={`https://www.highlight.io${canonical}`} />
       )}
     </Head>
   );
