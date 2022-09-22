@@ -116,6 +116,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const QUERY = gql`
     query GetPost($slug: String!) {
       post(where: { slug: $slug }) {
+        slug
         title
         metaTitle
         image {
@@ -320,6 +321,7 @@ const PostPage = ({
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.description}
         absoluteImageUrl={post?.metaImage?.url}
+        canonical={`/blog/${post.slug}`}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>
