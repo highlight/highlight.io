@@ -72,6 +72,7 @@
   flex: 1;
 
   p {
+    color: var(--copy-on-dark);
     font-weight: 400;
     font-size: 18px;
     line-height: 34px !important;
@@ -133,6 +134,9 @@
       display: flex;
       flex-flow: column;
       gap: 4px;
+      .caseDetailsSecitonText {
+        color: var(--copy-on-dark);
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ export const caseCustomerDetails: string;
 export const caseDetailsBlock: string;
 export const caseDetailsBody: string;
 export const caseDetailsLogo: string;
+export const caseDetailsSecitonText: string;
 export const caseOverline: string;
 export const casePageLink: string;
 export const casePageLinks: string;

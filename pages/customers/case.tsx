@@ -113,21 +113,29 @@ const CustomerCase: NextPage = () => {
                   About the company
                 </Typography>
                 <Typography type="copy3">
-                  Make your database collaborative, editable, and protected
-                  using SQL Front end software
+                  <span className={style.caseDetailsSecitonText}>
+                    Make your database collaborative, editable, and protected
+                    using SQL Front end software
+                  </span>
                 </Typography>
               </div>
               <div className={style.caseDetailsBlock}>
                 <Typography type="copy3" emphasis>
                   Founded
                 </Typography>
-                <Typography type="copy3">2018</Typography>
+                <Typography type="copy3">
+                  <span className={style.caseDetailsSecitonText}>2018</span>
+                </Typography>
               </div>
               <div className={style.caseDetailsBlock}>
                 <Typography type="copy3" emphasis>
                   Using Highlight since
                 </Typography>
-                <Typography type="copy3">Oct. 2020</Typography>
+                <Typography type="copy3">
+                  <span className={style.caseDetailsSecitonText}>
+                    Oct. 2020
+                  </span>
+                </Typography>
               </div>
             </div>
           </div>
