@@ -117,6 +117,18 @@ const CustomerCase: NextPage = () => {
                   using SQL Front end software
                 </Typography>
               </div>
+              <div className={style.caseDetailsBlock}>
+                <Typography type="copy3" emphasis>
+                  Founded
+                </Typography>
+                <Typography type="copy3">2018</Typography>
+              </div>
+              <div className={style.caseDetailsBlock}>
+                <Typography type="copy3" emphasis>
+                  Using Highlight since
+                </Typography>
+                <Typography type="copy3">Oct. 2020</Typography>
+              </div>
             </div>
           </div>
         </div>
