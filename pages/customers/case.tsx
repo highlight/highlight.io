@@ -26,8 +26,10 @@ const CustomerCase: NextPage = () => {
             </Link>
           </div>
           <div className={style.caseContent}>
-            <span className={style.caseOverline}>Customer Case Study</span>
-            <h2>Basedash</h2>
+            <div className={style.caseTitle}>
+              <span className={style.caseOverline}>Customer Case Study</span>
+              <h2>Basedash</h2>
+            </div>
             <CustomerQuote
               content="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
               authorAvatar="/images/avatars/basedash.jpg"
@@ -89,7 +91,7 @@ const CustomerCase: NextPage = () => {
                 <Link href="/customers/case">
                   <a>
                     <Typography type="copy2" emphasis>
-                      Previous Customer
+                      Next Customer
                     </Typography>
                     <Image src={basedashLogo} alt="Next company logo" />
                   </a>

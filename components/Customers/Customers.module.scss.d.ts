@@ -10,6 +10,7 @@ export const caseDetailsSecitonText: string;
 export const caseOverline: string;
 export const casePageLink: string;
 export const casePageLinks: string;
+export const caseTitle: string;
 export const companyDiv: string;
 export const companyLogo: string;
 export const customerCard: string;
