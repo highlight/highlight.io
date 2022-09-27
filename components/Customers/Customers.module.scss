@@ -49,6 +49,7 @@
 .detailsLayout {
   display: flex;
   align-items: flex-start;
+  width: fit-content;
   max-width: 1200px;
   margin: 122px 32px 240px 280px;
   gap: 118px;
@@ -87,56 +88,12 @@
   }
 }
 
-@media screen and (max-width: 1272px) {
-  .caseBackLink {
-    display: none;
-  }
-
-  .detailsLayout {
-    margin-left: 44px;
-    margin-right: 44px;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .detailsLayout {
-    margin-top: 72px;
-    margin-left: 44px;
-    margin-right: 44px;
-  }
-
-  .caseTitle {
-    text-align: center;
-  }
-
-  .caseCustomerDetails {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 512px) {
-  .detailsLayout {
-    margin-top: 64px;
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-
-  .casePageLinks {
-    flex-flow: column;
-  }
-}
-
-.caseOverline {
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #ebff5e;
-}
-
 .caseContent {
   display: flex;
   flex-direction: column;
   gap: 24px;
   flex: 1;
+  padding: 0 0;
 
   p {
     color: var(--copy-on-dark);
@@ -148,6 +105,51 @@
   h5 {
     margin-top: 48px !important;
   }
+}
+
+@media screen and (max-width: 1512px) {
+  .caseBackLink {
+    display: none;
+  }
+
+  .caseCustomerDetails {
+    display: none;
+  }
+
+  .caseContent {
+    max-width: 680px;
+    padding: 0 32px;
+  }
+
+  .detailsLayout {
+    margin-top: 72px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .caseTitle {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .caseContent {
+    padding: 0 16px;
+  }
+
+  .detailsLayout {
+    margin-top: 64px;
+  }
+
+  .casePageLinks {
+    flex-flow: column;
+  }
+}
+
+.caseOverline {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #ebff5e;
 }
 
 .caseCustomerDetails {
