@@ -1,0 +1,68 @@
+.caseListLayout {
+  margin: auto;
+  margin-top: 48px;
+  margin-bottom: 280px;
+  width: 1196px;
+
+  h2 {
+    text-align: center;
+  }
+}
+
+.caseListTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  h1 {
+    width: 768px;
+    text-align: center;
+    margin-bottom: 24px !important;
+  }
+}
+
+.caseList {
+  display: flex;
+  flex-direction: column;
+  margin-top: 128px;
+  margin-bottom: 160px;
+  width: 100%;
+  gap: 56px;
+}
+
+.caseCard {
+  border-radius: 6px;
+  border: 1px var(--color-divider-on-dark) solid;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+
+  display: flex;
+
+  .thumbnail {
+    position: relative;
+    height: 100%;
+    width: 488px;
+  }
+
+  .caseCardQuote {
+    margin: 24px;
+    display: flex;
+    flex-flow: column;
+    gap: 12px;
+    blockquote {
+      margin: 0;
+    }
+  }
+
+  .caseDetails {
+    display: flex;
+    flex-flow: column;
+    align-items: baseline;
+    gap: 32ps;
+
+    margin: 40px;
+    flex: 1;
+  }
+}

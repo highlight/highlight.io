@@ -1,16 +1,16 @@
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
-import BlueGradient from '../../public/images/bg_blue_gradient.svg';
-import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
-import homeStyles from '../../components/Home/Home.module.scss';
-import styles from '../../components/Customers/Customers.module.scss';
+import styles, {
+  thumbnail,
+} from '../../components/Customers/CustomersList.module.scss';
+import caseStyles from '../../components/Customers/Customers.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
-import { Section } from '../../components/common/Section/Section';
+import navbarStyles from '../../components/common/Navbar/Navbar.module.scss';
 import Footer from '../../components/common/Footer/Footer';
-import { CUSTOMER_REVIEWS } from '../../components/Customers/Customers';
-import { CustomerCard } from '../../components/Customers/CustomerCard/CustomerCard';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import { Meta } from '../../components/common/Head/Meta';
+import { Typography } from '../../components/common/Typography/Typography';
+import { CustomerQuote } from '../../components/Customers/CustomerQuote/CustomerQuote';
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 
 // Hides the page in production and renders it in dev. More info:
 // https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
@@ -25,41 +25,103 @@ export const getStaticProps: GetStaticProps = async () => {
 const Customers: NextPage = () => {
   return (
     <>
-      <Meta
-        title={'Highlight: See Customer Stories And Case Studies.'}
-        description={
-          "Highlight powers forward-thinking companies. Don't take our word for it. Learn straight from the people we help. Here's what our customers have to say:"
-        }
-      />
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
-        <Section>
-          <div className={homeStyles.anchorTitle}>
-            <h1>Customers</h1>
-            <p className={homeStyles.bodyLarge}>
-              {`From startups to enterprises, the most forward-thinking companies use Highlight. `}
-            </p>
+        <div className={styles.caseListLayout}>
+          <div className={styles.caseListTitle}>
+            <span style={{ color: 'var(--color-selected-light)' }}>
+              <Typography type="outline">Customer case studies</Typography>
+            </span>
+            <h1>
+              What{' '}
+              <span style={{ color: 'var(--color-selected-light)' }}>
+                our customers
+              </span>{' '}
+              have to say.
+            </h1>
+            <PrimaryButton>Get started for free</PrimaryButton>
           </div>
-        </Section>
-        <Section>
-          <div className={styles.reviewGrid}>
-            {CUSTOMER_REVIEWS.map((r, i) => {
-              return <CustomerCard {...r} key={i} />;
-            })}
+          <div className={styles.caseList}>
+            <CustomerCaseCard
+              logo=""
+              thumbnail="/images/avatars/secoda.jpg"
+              quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
+              author="Harry Hurst"
+              role="Co-founder"
+              slug="case"
+            />
+            <CustomerCaseCard
+              logo=""
+              thumbnail="/images/avatars/secoda.jpg"
+              quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
+              author="Harry Hurst"
+              role="Co-founder"
+              slug="case"
+            />
+            <CustomerCaseCard
+              logo=""
+              thumbnail="/images/avatars/secoda.jpg"
+              quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
+              author="Harry Hurst"
+              role="Co-founder"
+              slug="case"
+            />
           </div>
-        </Section>
+          <h2>See all our customers</h2>
+        </div>
         <FooterCallToAction />
       </main>
       <Footer />
     </>
+  );
+};
+
+const CustomerCaseCard = ({
+  quote,
+  thumbnail,
+  author,
+  role,
+  slug,
+}: {
+  thumbnail: string;
+  logo: string;
+  quote: string;
+  author: string;
+  role: string;
+  slug: string;
+}) => {
+  return (
+    <div className={styles.caseCard}>
+      <div className={styles.thumbnail}>
+        <Image
+          src={thumbnail}
+          layout="fill"
+          objectFit="cover"
+          alt="Case thumbnail"
+        />
+      </div>
+      <div className={styles.caseDetails}>
+        <div className={styles.caseCardQuote}>
+          <blockquote>
+            <Typography type="copy2" onDark>
+              {quote}
+            </Typography>
+          </blockquote>
+          <span>
+            <Typography type="copy2" emphasis>
+              {author},
+            </Typography>{' '}
+            <Typography type="copy2">{role}</Typography>
+          </span>
+        </div>
+        <PrimaryButton
+          href={`/customers/${slug}`}
+          className={navbarStyles.signUpButton}
+        >
+          Read case study
+        </PrimaryButton>
+      </div>
+    </div>
   );
 };
 
