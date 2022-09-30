@@ -3,13 +3,11 @@ import Image from 'next/image';
 import styles, {
   thumbnail,
 } from '../../components/Customers/CustomersList.module.scss';
-import caseStyles from '../../components/Customers/Customers.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import navbarStyles from '../../components/common/Navbar/Navbar.module.scss';
 import Footer from '../../components/common/Footer/Footer';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
-import { CustomerQuote } from '../../components/Customers/CustomerQuote/CustomerQuote';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 
 // Hides the page in production and renders it in dev. More info:
