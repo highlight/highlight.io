@@ -118,7 +118,7 @@ const Blog = ({
         </div>
         <div className={styles.tagContainer}>
           <div className={styles.tagHeader}>
-            <h4>Sort by tag</h4>
+            <h4 className={styles.tagSortTitle}>Sort by tag</h4>
             <div className={styles.tagDiv}>
               {tags.map((tag: string) => (
                 <Link
