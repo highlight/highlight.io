@@ -41,7 +41,7 @@ const Customers: NextPage = () => {
           </div>
           <div className={styles.caseList}>
             <CustomerCaseCard
-              logo=""
+              logo="/images/companies/impira.png"
               thumbnail="/images/avatars/secoda.jpg"
               quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
               author="Harry Hurst"
@@ -49,7 +49,7 @@ const Customers: NextPage = () => {
               slug="case"
             />
             <CustomerCaseCard
-              logo=""
+              logo="/images/companies/portal.png"
               thumbnail="/images/avatars/secoda.jpg"
               quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
               author="Harry Hurst"
@@ -57,7 +57,7 @@ const Customers: NextPage = () => {
               slug="case"
             />
             <CustomerCaseCard
-              logo=""
+              logo="/images/companies/pipe.png"
               thumbnail="/images/avatars/secoda.jpg"
               quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
               author="Harry Hurst"
@@ -75,8 +75,9 @@ const Customers: NextPage = () => {
 };
 
 const CustomerCaseCard = ({
-  quote,
   thumbnail,
+  logo,
+  quote,
   author,
   role,
   slug,
@@ -99,6 +100,15 @@ const CustomerCaseCard = ({
         />
       </div>
       <div className={styles.caseDetails}>
+        <div className={styles.companyCaseLogo}>
+          <Image
+            src={logo}
+            alt="Company logo"
+            layout="fill"
+            objectFit="contain"
+            objectPosition="left"
+          />
+        </div>
         <div className={styles.caseCardQuote}>
           <blockquote>
             <Typography type="copy2" onDark>

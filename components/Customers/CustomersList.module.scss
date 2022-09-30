@@ -65,4 +65,11 @@
     margin: 40px;
     flex: 1;
   }
+
+  .companyCaseLogo {
+    position: relative;
+    width: 100%;
+    height: 48px;
+    filter: invert(1);
+  }
 }
