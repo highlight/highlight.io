@@ -13,9 +13,9 @@ import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 // Hides the page in production and renders it in dev. More info:
 // https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
 export const getStaticProps: GetStaticProps = async () => {
-  if (process.env.NODE_ENV === 'production') {
-    return { notFound: true };
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   return { notFound: true };
+  // }
 
   return { props: {} };
 };
