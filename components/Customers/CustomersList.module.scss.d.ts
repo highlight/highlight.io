@@ -1,3 +1,5 @@
+export const allCustomersGrid: string;
+export const allCustomersLogo: string;
 export const caseCard: string;
 export const caseCardQuote: string;
 export const caseDetails: string;

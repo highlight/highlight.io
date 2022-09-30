@@ -21,6 +21,26 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Customers: NextPage = () => {
+  // Temporary list until this is fetched from cms
+  const placeholderCompanies = [
+    'pipe',
+    'portal',
+    'dripos',
+    'knock',
+    'hightouch',
+    'impira',
+    'mage',
+    'airplane',
+    'pipe',
+    'portal',
+    'dripos',
+    'knock',
+    'hightouch',
+    'impira',
+    'mage',
+    'airplane',
+  ];
+
   return (
     <>
       <Navbar />
@@ -66,11 +86,29 @@ const Customers: NextPage = () => {
             />
           </div>
           <h2>See all our customers</h2>
+          <div className={styles.allCustomersGrid}>
+            {placeholderCompanies.map((logo, i) => (
+              <CompanyLogo companyImage={logo} key={i} />
+            ))}
+          </div>
         </div>
         <FooterCallToAction />
       </main>
       <Footer />
     </>
+  );
+};
+
+const CompanyLogo = ({ companyImage }: { companyImage: string }) => {
+  return (
+    <div className={styles.allCustomersLogo}>
+      <Image
+        src={`/images/companies/${companyImage}.png`}
+        alt={`${companyImage} logo`}
+        layout="fill"
+        objectFit="contain"
+      />
+    </div>
   );
 };
 
