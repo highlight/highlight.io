@@ -31,3 +31,4 @@ export const suggestedPostTitle: string;
 export const tagContainer: string;
 export const tagDiv: string;
 export const tagHeader: string;
+export const tagSortTitle: string;
