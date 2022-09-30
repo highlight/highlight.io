@@ -17,7 +17,7 @@
   gap: 24px;
 
   h1 {
-    width: 768px;
+    max-width: 768px;
     text-align: center;
     margin-bottom: 24px !important;
   }
@@ -75,6 +75,28 @@
   }
 }
 
+@media screen and (max-width: 1232px) {
+  .caseListLayout {
+    max-width: 711px;
+    padding: 0 32px;
+  }
+
+  .caseListTitle {
+    h1 {
+      max-width: 572px;
+    }
+  }
+
+  .caseCard {
+    flex-direction: column;
+    height: fit-content;
+    .thumbnail {
+      height: 400px;
+      width: 100%;
+    }
+  }
+}
+
 .allCustomersGrid {
   margin-top: 80px;
   display: flex;
@@ -87,7 +109,7 @@
 
   .allCustomersLogo {
     position: relative;
-    width: 176px;
+    width: 164px;
     height: 40px;
   }
 }
