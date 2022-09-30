@@ -13,7 +13,7 @@ import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall
 import { Typography } from '../../components/common/Typography/Typography';
 import { Meta } from '../../components/common/Head/Meta';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 export const graphcms = new GraphQLClient(
   'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
