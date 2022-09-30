@@ -43,7 +43,7 @@ const Customers: NextPage = () => {
             <CustomerCaseCard
               logo="/images/companies/impira.png"
               thumbnail="/images/avatars/secoda.jpg"
-              quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
+              quote="Suspendisse a pellentesque nulla, eu mattis erat. Aliquam erat volutpat. Donec non cursus velit."
               author="Harry Hurst"
               role="Co-founder"
               slug="case"
@@ -51,7 +51,7 @@ const Customers: NextPage = () => {
             <CustomerCaseCard
               logo="/images/companies/portal.png"
               thumbnail="/images/avatars/secoda.jpg"
-              quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
+              quote="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu est nec sapien porta luctus. Aliquam magna risus, vulputate at laoreet sodales, laoreet eu ante."
               author="Harry Hurst"
               role="Co-founder"
               slug="case"
