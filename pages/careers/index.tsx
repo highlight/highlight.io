@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
@@ -10,17 +9,15 @@ import Footer from '../../components/common/Footer/Footer';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { OPEN_ROLES } from '../../components/Careers/careers';
 import Link from 'next/link';
+import { Meta } from '../../components/common/Head/Meta';
 
 const Careers = () => {
   return (
     <>
-      <Head>
-        <title>Careers At Highlight: Build The Best Debugging Tool Ever</title>
-        <meta
-          name="description"
-          content="We're building a platform for debugging apps with extremely high precision, with the goal of helping teams better understand how their app behaves. See careers:"
-        />
-      </Head>
+      <Meta
+        title="Careers At Highlight: Build The Best Debugging Tool Ever"
+        description="We're building a platform for debugging apps with extremely high precision, with the goal of helping teams better understand how their app behaves. See careers:"
+      />
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
           <Image src={PurpleGradient} alt="" />

@@ -1,6 +1,5 @@
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
-import Head from 'next/head';
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
@@ -11,6 +10,7 @@ import Footer from '../../components/common/Footer/Footer';
 import { CUSTOMER_REVIEWS } from '../../components/Customers/Customers';
 import { CustomerCard } from '../../components/Customers/CustomerCard/CustomerCard';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
+import { Meta } from '../../components/common/Head/Meta';
 
 // Hides the page in production and renders it in dev. More info:
 // https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
@@ -25,13 +25,12 @@ export const getStaticProps: GetStaticProps = async () => {
 const Customers: NextPage = () => {
   return (
     <>
-      <Head>
-        <title>Highlight: See Customer Stories And Case Studies.</title>
-        <meta
-          name="description"
-          content="Highlight powers forward-thinking companies. Don't take our word for it. Learn straight from the people we help. Here's what our customers have to say:"
-        />
-      </Head>
+      <Meta
+        title={'Highlight: See Customer Stories And Case Studies.'}
+        description={
+          "Highlight powers forward-thinking companies. Don't take our word for it. Learn straight from the people we help. Here's what our customers have to say:"
+        }
+      />
       <div className={homeStyles.bgPosition}>
         <div className={homeStyles.purpleDiv}>
           <Image src={PurpleGradient} alt="" />

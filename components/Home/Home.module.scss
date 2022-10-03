@@ -635,6 +635,10 @@
       @include hide-scrollbar;
     }
 
+    @media screen and (max-width: 600px) {
+      font-size: 12px !important;
+    }
+
     .codeSnippetCopy {
       position: absolute;
       bottom: var(--size-large);

@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
@@ -14,7 +13,7 @@ import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall
 import { Typography } from '../../components/common/Typography/Typography';
 import { Meta } from '../../components/common/Head/Meta';
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 6;
 
 export const graphcms = new GraphQLClient(
   'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
@@ -27,11 +26,19 @@ export const graphcms = new GraphQLClient(
 
 // need server-side request here to be able to filter the graphcms request via the query
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const tagProp = query.tag ? '$tag: [String!]' : '';
+  const tagFilter = query.tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
-    query GetPosts($tag: [String!]) {
-      posts(orderBy: publishedAt_DESC, where: { tags_contains_all: $tag }) {
+    query GetPosts(${tagProp}) {
+      posts(
+        orderBy: postedAt_DESC
+        where: { ${tagFilter}, unlisted: false }
+      ) {
         slug
         image {
+          url
+        }
+        metaImage {
           url
         }
         title
@@ -49,12 +56,21 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         }
         tags
         readingTime
+        postedAt
       }
     }
   `;
 
   const { posts } = await graphcms.request(QUERY, {
     tag: query.tag ? [query.tag] : [],
+  });
+  const filteredPosts = posts.sort((a: any, b: any) => {
+    // sort by postedAt if the publishedAt field is the same
+    if (a.postedAt === b.postedAt) {
+      return (
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      );
+    }
   });
   const { posts: allPosts } = await graphcms.request(QUERY, {
     tag: [],
@@ -64,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      posts,
+      posts: filteredPosts,
       tags: uniqueTags,
       currentTag: query.tag || '',
     },
@@ -89,13 +105,10 @@ const Blog = ({
 
   return (
     <>
-      <Head>
-        <title>Debugging Blog: Best Practices From The Highlight Team</title>
-        <Meta
-          title="Debugging Blog: Best Practices From The Highlight Team"
-          description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
-        />
-      </Head>
+      <Meta
+        title="Debugging Blog: Best Practices From The Highlight Team"
+        description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
+      />
       <Navbar />
       <main>
         <div className={styles.blogContainer}>
@@ -105,7 +118,7 @@ const Blog = ({
         </div>
         <div className={styles.tagContainer}>
           <div className={styles.tagHeader}>
-            <h4>Sort by tag</h4>
+            <h4 className={styles.tagSortTitle}>Sort by tag</h4>
             <div className={styles.tagDiv}>
               {tags.map((tag: string) => (
                 <Link

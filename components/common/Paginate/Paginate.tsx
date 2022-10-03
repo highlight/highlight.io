@@ -53,7 +53,12 @@ const Paginate = ({
         )
       )}
       {currentPage < pageCount && (
-        <div className={styles.pageNumber}>{`Next >`}</div>
+        <div
+          className={styles.pageNumber}
+          onClick={() => {
+            onPageChange(currentPage + 1);
+          }}
+        >{`Next >`}</div>
       )}
     </div>
   );

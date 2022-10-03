@@ -10,6 +10,8 @@ import Script from 'next/script';
 import MetaImage from '../public/images/meta-image.jpg';
 import Head from 'next/head';
 import { Meta } from '../components/common/Head/Meta';
+export { reportWebVitals } from 'next-axiom';
+
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -37,16 +39,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>
           Highlight: The Ultimate Debugging Tool For Fast-Moving Teams
         </title>
-        <Meta
-          title="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
-          description="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
-          absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
-        />
 
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
 
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Meta
+        title="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
+        description="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
+      />
       <Component {...pageProps} />
     </>
   );

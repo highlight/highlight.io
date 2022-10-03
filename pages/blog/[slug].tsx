@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Head from 'next/head';
 import homeStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Blog/Blog.module.scss';
 import { Section } from '../../components/common/Section/Section';
@@ -20,13 +19,62 @@ import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/Sugge
 import { ElementNode } from '@graphcms/rich-text-types';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
-import Dribble from '../../public/images/logo-dribbble.svg';
-import LinkedIn from '../../public/images/logo-linkedin.svg';
 import { Meta } from '../../components/common/Head/Meta';
+import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 const NUM_SUGGESTED_POSTS = 3;
 
+interface Content {
+  text?: string;
+  href?: string;
+  type?: string;
+  children?: Content[];
+  openInNewTab?: boolean;
+  code?: boolean;
+  italic?: boolean;
+  bold?: boolean;
+}
+
 const getBlogTypographyRenderer = (type: string) => {
+  function ParagraphBody({ content }: { content: Content }) {
+    if (content.text) {
+      if (content.code) {
+        return <span className={styles.codeInline}>{content.text}</span>;
+      } else if (content.italic) {
+        return <i>{content.text}</i>;
+      } else if (content.bold) {
+        return <b>{content.text}</b>;
+      } else if (content.text.indexOf('://') !== -1) {
+        return (
+          <>
+            {content.text.split('/').map((p) => (
+              <>
+                {p}
+                {'/'}
+                <wbr />
+              </>
+            ))}
+          </>
+        );
+      }
+      return <>{content.text}</>;
+    } else if (content.href) {
+      return (
+        <a
+          href={content.href}
+          {...(content.openInNewTab
+            ? { target: '_blank', rel: 'noopener noreferrer' }
+            : {})}
+        >
+          {content?.children?.map((c, idx) => (
+            <ParagraphBody content={c} key={`child-${idx}`} />
+          ))}
+        </a>
+      );
+    }
+    return null;
+  }
+
   function ParagraphHeader({ children }: { children: any }) {
     return (
       <>
@@ -35,7 +83,9 @@ const getBlogTypographyRenderer = (type: string) => {
           {
             className: styles.blogText,
           },
-          children?.props?.content[0].text
+          children?.props?.content.map((c: Content, idx: number) => (
+            <ParagraphBody content={c} key={idx} />
+          ))
         )}
       </>
     );
@@ -66,6 +116,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const QUERY = gql`
     query GetPost($slug: String!) {
       post(where: { slug: $slug }) {
+        slug
         title
         metaTitle
         image {
@@ -104,7 +155,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   `;
   const POSTS_QUERY = gql`
     query GetPosts() {
-      posts(orderBy: publishedAt_DESC) {
+      posts(
+        orderBy: publishedAt_DESC
+        where: { unlisted: false }
+      ) {
         slug
         title
         image {
@@ -115,10 +169,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
         publishedAt
         tags
-        readingTime
-      }
-    }
-  `;
+                readingTime
+            }
+        }
+    `;
   const data = await graphcms.request(QUERY, { slug: slug });
   const { posts } = await graphcms.request(POSTS_QUERY);
 
@@ -170,6 +224,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
   }
 
+  if (!data.post.metaImage?.url || !data.post.author?.profilePhoto?.url) {
+    throw new Error(
+      `missing required detailed images for blog '${data.post.slug}'. 
+meta: ${data.post.metaImage?.url}. author: ${data.post.author?.profilePhoto?.url}. image: ${data.post.image?.url}`
+    );
+  }
+
   return {
     props: {
       suggestedPosts,
@@ -217,6 +278,17 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
           h5: getBlogTypographyRenderer('h5'),
           h6: getBlogTypographyRenderer('h6'),
           p: getBlogTypographyRenderer('p'),
+          img: (props) => (
+            <div className={styles.blogImageContainer}>
+              <Image
+                className={styles.blogImage}
+                src={props.src || ''}
+                alt={props.altText}
+                width={props.width}
+                height={props.height}
+              />
+            </div>
+          ),
         }}
       />
       {/*update to support new footer components*/}
@@ -245,14 +317,12 @@ const PostPage = ({
 
   return (
     <>
-      <Head>
-        <title>{post.metaTitle || post.title}</title>
-        <Meta
-          title={post.metaTitle || post.title}
-          description={post.metaDescription || post.description}
-          absoluteImageUrl={post.metaImage.url}
-        />
-      </Head>
+      <Meta
+        title={post.metaTitle || post.title}
+        description={post.metaDescription || post.description}
+        absoluteImageUrl={post?.metaImage?.url}
+        canonical={`/blog/${post.slug}`}
+      />
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={styles.mainBlogPadding}>
         <Section>
@@ -299,12 +369,22 @@ const PostPage = ({
                       </span>
                       {post.author.githubLink && (
                         <a href={post.author.githubLink}>
-                          <Image src={Dribble} alt={'github icon'} />
+                          <FaGithub />
+                        </a>
+                      )}
+                      {post.author.twitterLink && (
+                        <a href={post.author.twitterLink}>
+                          <FaTwitter />
                         </a>
                       )}
                       {post.author.linkedInLink && (
                         <a href={post.author.linkedInLink}>
-                          <Image src={LinkedIn} alt={'linkedin icon'} />
+                          <FaLinkedin />
+                        </a>
+                      )}
+                      {post.author.personalWebsiteLink && (
+                        <a href={post.author.personalWebsiteLink}>
+                          <FaGlobe />
                         </a>
                       )}
                     </div>
@@ -315,17 +395,21 @@ const PostPage = ({
             </div>
           </div>
         </Section>
-        <Section className={styles.headerSection}>
-          <div className={classNames(styles.mainImage, homeStyles.anchorTitle)}>
-            <Image
-              src={post.image.url}
-              alt=""
-              layout="fill"
-              objectFit="cover"
-              priority
-            />
-          </div>
-        </Section>
+        {post.image?.url && (
+          <Section className={styles.headerSection}>
+            <div
+              className={classNames(styles.mainImage, homeStyles.anchorTitle)}
+            >
+              <Image
+                src={post.image.url || ''}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                priority
+              />
+            </div>
+          </Section>
+        )}
         <Section className={styles.headerSection}>
           <div
             className={classNames(

@@ -7,7 +7,6 @@ import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 
-import BigHeroSection from '../public/images/big-hero-section.gif';
 import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugLeft from '../public/images/hero-bug-left.gif';
 import HeroBugRight from '../public/images/hero-bug-right.gif';
@@ -267,14 +266,7 @@ const Home: NextPage = () => {
         </Section>
         <div className={classNames(styles.bigHero, styles.hideMobile)}>
           <div className={classNames(styles.hero)}>
-            <video
-              playsInline
-              autoPlay
-              muted
-              loop
-              poster="big-hero-section.svg"
-              id="big-hero-video"
-            >
+            <video playsInline autoPlay muted loop id="big-hero-video">
               <source src="/images/big-hero.mp4" type="video/mp4"></source>
             </video>
           </div>

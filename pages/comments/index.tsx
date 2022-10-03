@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import React from 'react';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
@@ -20,14 +19,10 @@ import { Meta } from '../../components/common/Head/Meta';
 const Comments: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>Comments - Highlight</title>
-
-        <Meta
-          title="Comments - Highlight"
-          description="Comments by Highlight"
-        />
-      </Head>
+      <Meta
+        title={'Comments - Highlight'}
+        description={'Comments by Highlight'}
+      />
       <div className={styles.bgPosition}>
         <div className={styles.purpleDiv}>
           <Image src={PurpleGradient} alt="" />
