@@ -4,7 +4,6 @@ import style from '../../components/Customers/Customers.module.scss';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
 import Navbar from '../../components/common/Navbar/Navbar';
-import { Section } from '../../components/common/Section/Section';
 import ReturnIcon from '../../public/images/ReturnIcon';
 import { CustomerQuote } from '../../components/Customers/CustomerQuote/CustomerQuote';
 import basedashLogo from '../../public/images/companies/basedash.png';
