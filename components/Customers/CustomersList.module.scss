@@ -53,7 +53,25 @@
     flex-flow: column;
     gap: 12px;
     blockquote {
+      position: relative;
       margin: 0;
+      h4 {
+        display: inline-block;
+        line-height: 0 !important;
+        width: 0;
+      }
+
+      .leftQuote {
+        position: absolute;
+        left: -24px;
+        top: 16px;
+      }
+
+      .rightQuote {
+        position: absolute;
+        padding-left: 8px;
+        bottom: 12px;
+      }
     }
   }
 

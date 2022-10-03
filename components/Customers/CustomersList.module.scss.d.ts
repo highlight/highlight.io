@@ -8,4 +8,6 @@ export const caseList: string;
 export const caseListLayout: string;
 export const caseListTitle: string;
 export const companyCaseLogo: string;
+export const leftQuote: string;
+export const rightQuote: string;
 export const thumbnail: string;

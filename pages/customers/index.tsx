@@ -149,9 +149,11 @@ const CustomerCaseCard = ({
         </div>
         <div className={styles.caseCardQuote}>
           <blockquote>
+            <h4 className={styles.leftQuote}>“</h4>
             <Typography type="copy2" onDark>
               {quote}
             </Typography>
+            <h4 className={styles.rightQuote}>”</h4>
           </blockquote>
           <span>
             <Typography type="copy2" emphasis>
