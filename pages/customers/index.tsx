@@ -162,7 +162,7 @@ const CustomerCaseCard = ({
         </div>
         <PrimaryButton
           href={`/customers/${slug}`}
-          className={navbarStyles.signUpButton}
+          className={styles.cardReadCaseButton}
         >
           Read case study
         </PrimaryButton>

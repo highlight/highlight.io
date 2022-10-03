@@ -73,6 +73,21 @@
     height: 48px;
     filter: invert(1);
   }
+
+  .cardReadCaseButton {
+    display: inline-block;
+    border-radius: 6px;
+    border: var(--color-secondary-200) 1px solid;
+    margin-top: 32px;
+    padding: 9px 24px;
+    background-color: var(--color-primary-500) !important;
+    color: var(--color-secondary-200);
+
+    &:hover {
+      color: var(--color-primary-500) !important;
+      background-color: var(--color-secondary-200) !important;
+    }
+  }
 }
 
 @media screen and (max-width: 1232px) {
@@ -111,5 +126,21 @@
     position: relative;
     width: 164px;
     height: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .caseListLayout {
+    padding: 0 20px;
+  }
+
+  .caseList {
+    gap: 40px;
+  }
+
+  .caseCard {
+    .thumbnail {
+      height: 240px;
+    }
   }
 }
