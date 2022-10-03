@@ -14,17 +14,27 @@
   }
 
   blockquote {
+    position: relative;
     margin: 0;
   }
 
   span.quote {
     display: inline-block;
+    position: absolute;
     font-size: 36px;
     font-weight: 600;
     line-height: 0;
-    bottom: 0;
-    position: relative;
-    top: 8px;
+    width: 0;
+
+    &.leftQuote {
+      left: -24px;
+      top: 16px;
+    }
+
+    &.rightQuote {
+      padding-left: 8px;
+      bottom: 12px;
+    }
   }
 
   img.avatar {

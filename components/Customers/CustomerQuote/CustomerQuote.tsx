@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import style from './CustomerQuote.module.scss';
 import { Typography } from '../../common/Typography/Typography';
+import classNames from 'classnames';
 
 export const CustomerQuote = ({
   content,
@@ -15,23 +16,11 @@ export const CustomerQuote = ({
 }) => (
   <div className={style.customerQuote}>
     <blockquote>
-      <span
-        className={style.quote}
-        style={{ position: 'absolute', top: '24px', left: '14px' }}
-      >
-        “
-      </span>
+      <span className={classNames(style.quote, style.leftQuote)}>“</span>
       <Typography type="copy2" emphasis>
         {content}
       </Typography>
-      <span
-        className={style.quote}
-        style={{
-          marginLeft: '6px',
-        }}
-      >
-        ”
-      </span>
+      <span className={classNames(style.quote, style.rightQuote)}>”</span>
     </blockquote>
     <div className={style.quoteAuthor}>
       <Image
