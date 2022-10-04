@@ -32,6 +32,10 @@
   gap: 56px;
 }
 
+.limeAccent {
+  color: var(--color-selected-light) !important;
+}
+
 .caseCard {
   border-radius: 6px;
   border: 1px var(--color-divider-on-dark) solid;

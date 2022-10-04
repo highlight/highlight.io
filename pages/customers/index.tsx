@@ -47,15 +47,12 @@ const Customers: NextPage = () => {
       <main>
         <div className={styles.caseListLayout}>
           <div className={styles.caseListTitle}>
-            <span style={{ color: 'var(--color-selected-light)' }}>
+            <span className={styles.limeAccent}>
               <Typography type="outline">Customer case studies</Typography>
             </span>
             <h1>
-              What{' '}
-              <span style={{ color: 'var(--color-selected-light)' }}>
-                our customers
-              </span>{' '}
-              have to say.
+              What <span className={styles.limeAccent}>our customers</span> have
+              to say.
             </h1>
             <PrimaryButton>Get started for free</PrimaryButton>
           </div>
