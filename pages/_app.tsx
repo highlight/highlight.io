@@ -12,7 +12,6 @@ import Head from 'next/head';
 import { Meta } from '../components/common/Head/Meta';
 export { reportWebVitals } from 'next-axiom';
 
-
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', nProgress.done);
@@ -20,20 +19,14 @@ Router.events.on('routeChangeComplete', nProgress.done);
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Script
-        id="ga-1"
-        strategy="lazyOnload"
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-P2T64QS94S"
-      ></Script>
-      <Script id="ga-2" strategy="lazyOnload">
+      <Script id="google-tag-manager" strategy="afterInteractive">
         {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-P2T64QS94S');
-            `}
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-P4GK7XG');
+      `}
       </Script>
       <Head>
         <title>
