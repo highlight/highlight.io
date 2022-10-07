@@ -60,6 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const QUERY = gql`
     query GetCustomer($slug: String!) {
       customer(where: { slug: $slug }) {
+        id
         slug
         image {
           url
@@ -111,13 +112,41 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
+  // Pagination
+  const PAGES_QUERY = gql`
+    query GetPages($id: String!) {
+      previousCase: customers(last: 1, before: $id) {
+        slug
+      }
+      nextCase: customers(first: 1, after: $id) {
+        slug
+      }
+    }
+  `;
+
+  const pageData = await graphcms.request(PAGES_QUERY, {
+    id: data.customer.id,
+  });
+
   return {
-    props: { customer: data.customer },
+    props: {
+      customer: data.customer,
+      previousCase: pageData.previousCase.shift() ?? null,
+      nextCase: pageData.nextCase.shift() ?? null,
+    },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
   };
 };
 
-const CustomerPage = ({ customer }: { customer: Customer }) => {
+const CustomerPage = ({
+  customer,
+  previousCase,
+  nextCase,
+}: {
+  customer: Customer;
+  previousCase: { slug: string };
+  nextCase: { slug: string };
+}) => {
   return (
     <>
       <Navbar />
@@ -136,6 +165,8 @@ const CustomerPage = ({ customer }: { customer: Customer }) => {
               <span className={style.caseOverline}>Customer Case Study</span>
               <h2>{customer.name}</h2>
             </div>
+            <pre>{JSON.stringify({ previousCase, nextCase }, null, 2)}</pre>
+
             <RichText
               content={customer.caseStudy.raw}
               references={customer.caseStudy.references} // placeholder
@@ -158,28 +189,45 @@ const CustomerPage = ({ customer }: { customer: Customer }) => {
             />
 
             <div className={style.casePageLinks}>
-              <div className={style.casePageLink}>
-                <Link href="/customers/case">
-                  <a>
-                    <Typography type="copy2" emphasis>
-                      Previous Customer
-                    </Typography>
-                    <Image src={basedashLogo} alt="Previous company logo" />
-                    {/* placeholder image */}
-                  </a>
-                </Link>
-              </div>
-              <div className={style.casePageLink}>
-                <Link href="/customers/case">
-                  <a>
-                    <Typography type="copy2" emphasis>
-                      Next Customer
-                    </Typography>
-                    <Image src={basedashLogo} alt="Next company logo" />
-                    {/* placeholder image */}
-                  </a>
-                </Link>
-              </div>
+              {previousCase?.slug && (
+                <div className={style.casePageLink}>
+                  <Link href={`/customers/${previousCase.slug}`}>
+                    <a>
+                      <Typography type="copy2" emphasis>
+                        Previous Customer
+                      </Typography>
+
+                      <Image
+                        src={`/images/companies/${previousCase.slug}.png`}
+                        height="140px"
+                        width="100%"
+                        objectFit="contain"
+                        objectPosition="left"
+                        alt="Previous company logo"
+                      />
+                    </a>
+                  </Link>
+                </div>
+              )}
+              {nextCase?.slug && (
+                <div className={style.casePageLink}>
+                  <Link href={`/customers/${nextCase.slug}`}>
+                    <a>
+                      <Typography type="copy2" emphasis>
+                        Next Customer
+                      </Typography>
+
+                      <Image
+                        src={`/images/companies/${nextCase.slug}.png`}
+                        layout="fill"
+                        objectFit="contain"
+                        objectPosition="left"
+                        alt="Next company logo"
+                      />
+                    </a>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
           <div className={style.caseCustomerDetails}>
