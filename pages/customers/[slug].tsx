@@ -241,7 +241,7 @@ const PageLink = ({ label, slug }: { label: string; slug: string }) => (
           height="32px"
           objectFit="contain"
           objectPosition="left"
-          alt="Previous company logo"
+          alt={`${slug} logo`}
         />
       </div>
     </a>
