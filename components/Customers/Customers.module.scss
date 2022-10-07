@@ -81,7 +81,10 @@
   margin-top: 80px;
 
   .casePageLink {
+    display: flex;
+    flex-direction: column;
     width: 187px;
+    gap: 16px;
     img {
       filter: invert(1);
     }

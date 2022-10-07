@@ -144,8 +144,8 @@ const CustomerPage = ({
   nextCase,
 }: {
   customer: Customer;
-  previousCase: { slug: string };
-  nextCase: { slug: string };
+  previousCase: { slug: string } | null;
+  nextCase: { slug: string } | null;
 }) => {
   return (
     <>
@@ -165,8 +165,6 @@ const CustomerPage = ({
               <span className={style.caseOverline}>Customer Case Study</span>
               <h2>{customer.name}</h2>
             </div>
-            <pre>{JSON.stringify({ previousCase, nextCase }, null, 2)}</pre>
-
             <RichText
               content={customer.caseStudy.raw}
               references={customer.caseStudy.references} // placeholder
@@ -189,44 +187,13 @@ const CustomerPage = ({
             />
 
             <div className={style.casePageLinks}>
-              {previousCase?.slug && (
-                <div className={style.casePageLink}>
-                  <Link href={`/customers/${previousCase.slug}`}>
-                    <a>
-                      <Typography type="copy2" emphasis>
-                        Previous Customer
-                      </Typography>
-
-                      <Image
-                        src={`/images/companies/${previousCase.slug}.png`}
-                        height="140px"
-                        width="100%"
-                        objectFit="contain"
-                        objectPosition="left"
-                        alt="Previous company logo"
-                      />
-                    </a>
-                  </Link>
-                </div>
+              {previousCase?.slug ? (
+                <PageLink label="Previous Customer" slug={previousCase.slug} />
+              ) : (
+                <div />
               )}
               {nextCase?.slug && (
-                <div className={style.casePageLink}>
-                  <Link href={`/customers/${nextCase.slug}`}>
-                    <a>
-                      <Typography type="copy2" emphasis>
-                        Next Customer
-                      </Typography>
-
-                      <Image
-                        src={`/images/companies/${nextCase.slug}.png`}
-                        layout="fill"
-                        objectFit="contain"
-                        objectPosition="left"
-                        alt="Next company logo"
-                      />
-                    </a>
-                  </Link>
-                </div>
+                <PageLink label="Next Customer" slug={nextCase.slug} />
               )}
             </div>
           </div>
@@ -259,6 +226,27 @@ const CustomerPage = ({
     </>
   );
 };
+
+const PageLink = ({ label, slug }: { label: string; slug: string }) => (
+  <Link href={`/customers/${slug}`}>
+    <a>
+      <div className={style.casePageLink}>
+        <Typography type="copy2" emphasis>
+          {label}
+        </Typography>
+
+        <Image
+          src={`/images/companies/${slug}.png`}
+          width="187px"
+          height="32px"
+          objectFit="contain"
+          objectPosition="left"
+          alt="Previous company logo"
+        />
+      </div>
+    </a>
+  </Link>
+);
 
 const CustomerDetailsSection = ({
   label,
