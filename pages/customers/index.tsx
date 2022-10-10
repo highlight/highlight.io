@@ -23,6 +23,12 @@ interface Customer {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // Hides the page in production and renders it in dev. More info:
+  // https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
+  // if (process.env.NODE_ENV === 'production') {
+  //   return { notFound: true };
+  // }
+
   const QUERY = gql`
     query GetCustomers() {
       customers() {
