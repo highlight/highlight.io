@@ -9,37 +9,57 @@ import Footer from '../../components/common/Footer/Footer';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
+import { gql } from 'graphql-request';
+import { Author } from '../../components/Blog/BlogPost/BlogPost';
+import { graphcms } from '../blog';
 
-// Hides the page in production and renders it in dev. More info:
-// https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
-export const getStaticProps: GetStaticProps = async () => {
-  if (process.env.NODE_ENV === 'production') {
-    return { notFound: true };
-  }
+interface Customer {
+  slug: string;
+  image?: {
+    url: string;
+  };
+  primaryQuote: {
+    id: string;
+    body: string;
+    author: Author;
+  };
+}
 
-  return { props: {} };
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const QUERY = gql`
+    query GetCustomers() {
+      customers() {
+        slug
+        image {
+          url
+        }
+        primaryQuote {
+          body
+          author {
+            firstName
+            lastName
+            title
+            profilePhoto {
+              url
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await graphcms.request(QUERY);
+
+  return {
+    props: {
+      customers: data.customers,
+    },
+    revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
+  };
 };
 
-const Customers: NextPage = () => {
-  // Temporary list until this is fetched from cms
-  const placeholderCompanies = [
-    'pipe',
-    'portal',
-    'dripos',
-    'knock',
-    'hightouch',
-    'impira',
-    'mage',
-    'airplane',
-    'pipe',
-    'portal',
-    'dripos',
-    'knock',
-    'hightouch',
-    'impira',
-    'mage',
-    'airplane',
-  ];
+const Customers = ({ customers }: { customers: Customer[] }) => {
+  const expandedCustomers = customers.slice(0, 6);
 
   return (
     <>
@@ -57,35 +77,22 @@ const Customers: NextPage = () => {
             <PrimaryButton>Get started for free</PrimaryButton>
           </div>
           <div className={styles.caseList}>
-            <CustomerCaseCard
-              logo="/images/companies/impira.png"
-              thumbnail="/images/avatars/secoda.jpg"
-              quote="Suspendisse a pellentesque nulla, eu mattis erat. Aliquam erat volutpat. Donec non cursus velit."
-              author="Harry Hurst"
-              role="Co-founder"
-              slug="case"
-            />
-            <CustomerCaseCard
-              logo="/images/companies/portal.png"
-              thumbnail="/images/avatars/secoda.jpg"
-              quote="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu est nec sapien porta luctus. Aliquam magna risus, vulputate at laoreet sodales, laoreet eu ante."
-              author="Harry Hurst"
-              role="Co-founder"
-              slug="case"
-            />
-            <CustomerCaseCard
-              logo="/images/companies/pipe.png"
-              thumbnail="/images/avatars/secoda.jpg"
-              quote="Highlight helps us find and fix hard to crack bugs and is a complimentary tool to our existing dev ops infrastructure. I’d recommend Highlight to any team that wants to ship fast."
-              author="Harry Hurst"
-              role="Co-founder"
-              slug="case"
-            />
+            {expandedCustomers.map((c) => (
+              <CustomerCaseCard
+                logo={`/images/companies/${c.slug}.png`}
+                author={`${c.primaryQuote.author.firstName} ${c.primaryQuote.author.lastName}`}
+                quote={c.primaryQuote.body}
+                role={c.primaryQuote.author.title}
+                slug={c.slug}
+                thumbnail={c.image?.url ?? ''}
+                key={c.slug}
+              />
+            ))}
           </div>
           <h2>See all our customers</h2>
           <div className={styles.allCustomersGrid}>
-            {placeholderCompanies.map((logo, i) => (
-              <CompanyLogo companyImage={logo} key={i} />
+            {customers.map(({ slug }, i) => (
+              <CompanyLogo slug={slug} key={i} />
             ))}
           </div>
         </div>
@@ -96,12 +103,12 @@ const Customers: NextPage = () => {
   );
 };
 
-const CompanyLogo = ({ companyImage }: { companyImage: string }) => {
+const CompanyLogo = ({ slug }: { slug: string }) => {
   return (
     <div className={styles.allCustomersLogo}>
       <Image
-        src={`/images/companies/${companyImage}.png`}
-        alt={`${companyImage} logo`}
+        src={`/images/companies/${slug}.png`}
+        alt={`${slug} logo`}
         layout="fill"
         objectFit="contain"
       />
