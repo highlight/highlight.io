@@ -1,10 +1,7 @@
-import { GetStaticProps, NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Image from 'next/image';
-import styles, {
-  thumbnail,
-} from '../../components/Customers/CustomersList.module.scss';
+import styles from '../../components/Customers/CustomersList.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
-import navbarStyles from '../../components/common/Navbar/Navbar.module.scss';
 import Footer from '../../components/common/Footer/Footer';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
