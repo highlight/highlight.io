@@ -172,7 +172,7 @@ const CustomerPage = ({
             </div>
             <RichText
               content={customer.caseStudy.raw}
-              references={customer.caseStudy.references} // placeholder
+              references={customer.caseStudy.references}
               renderers={{
                 embed: {
                   Quote(props) {
