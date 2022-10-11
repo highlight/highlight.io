@@ -12,7 +12,6 @@ import { FooterCallToAction } from '../../components/common/CallToAction/FooterC
 import Footer from '../../components/common/Footer/Footer';
 import Navbar from '../../components/common/Navbar/Navbar';
 import ReturnIcon from '../../public/images/ReturnIcon';
-import basedashLogo from '../../public/images/companies/basedash.png'; // placeholder
 
 interface Customer {
   slug: string;
@@ -20,6 +19,9 @@ interface Customer {
     url: string;
   };
   name: string;
+  about: string;
+  founded: string;
+  usingHighlightSince: string;
   caseStudy: {
     markdown: string;
     raw: { children: any[] };
@@ -62,6 +64,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       customer(where: { slug: $slug }) {
         id
         slug
+        about
+        founded
+        usingHighlightSince
         image {
           url
         }
@@ -210,12 +215,18 @@ const CustomerPage = ({
             <div className={style.caseDetailsBody}>
               <CustomerDetailsSection
                 label="About the company"
-                body="placeholder"
+                body={customer.about}
               />
-              <CustomerDetailsSection label="Founded" body="9999" />
+              <CustomerDetailsSection
+                label="Founded"
+                body={new Date(customer.founded).getFullYear().toString()}
+              />
               <CustomerDetailsSection
                 label="Using Highlight since"
-                body="placeholder"
+                body={new Date(customer.usingHighlightSince).toLocaleDateString(
+                  undefined,
+                  { month: 'short', year: 'numeric' }
+                )}
               />
             </div>
           </div>
