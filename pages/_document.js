@@ -21,11 +21,14 @@ class HighlightDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <noscript
-            dangerouslySetInnerHTML={{
-              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4GK7XG" height="0" width="0" style="display: none; visibility: hidden;" />`,
-            }}
-          />
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-P4GK7XG"
+              height="0"
+              width="0"
+              style="display: none; visibility: hidden;"
+            />
+          </noscript>
         </body>
       </Html>
     );
