@@ -1,5 +1,5 @@
 import { GraphQLClient, gql } from 'graphql-request';
-import { withHighlight } from '../highlight.config';
+import { withHighlight } from '../../highlight.config';
 
 async function handler(_: any, res: any) {
   res.statusCode = 200;
