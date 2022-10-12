@@ -1,3 +1,3 @@
-const { Highlight } = require('@highlight-run/next');
+import { Highlight } from '@highlight-run/next';
 
 export const withHighlight = Highlight({});
