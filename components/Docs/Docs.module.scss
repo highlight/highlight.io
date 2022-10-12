@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   width: 300px;
-  padding: var(--size-large) var(--size-large);
+  padding: var(--size-xxLarge) var(--size-large);
   position: sticky;
   height: 100vh;
   top: 0;
@@ -25,23 +25,30 @@
   margin-bottom: 8px;
 }
 
+.tocChild {
+  color: var(--copy-on-dark);
+  opacity: 0.7;
+}
+
+.tocItem {
+  line-height: 1.5rem !important;
+}
+
 .tocItem a {
   color: var(--copy-on-dark) !important;
   font-weight: 400;
 }
 
-.tocItemOpen a {
+.tocItemOpen a,
+.tocItemOpen {
   color: var(--brand-accent-light) !important;
   font-weight: 500;
+  opacity: 1;
 }
 
 .tocItemCurrent a {
   color: var(--color-selected-light) !important;
   font-weight: 500;
-}
-
-.tocRow:hover .tocIcon {
-  color: var(--brand-accent);
 }
 
 .tocChildren {
@@ -68,24 +75,57 @@
   flex-direction: column;
 }
 
+.pageTitle {
+  margin: 0 0 var(--size-large) !important;
+}
+
+.contentRender {
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 34px;
+    color: var(--copy-on-dark);
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
 .inlineCodeBlock {
   border-radius: var(--space-unit);
   background-color: var(--color-pseudo-black);
   padding: 2px 6px;
   border: 1px var(--color-divider-on-dark) solid;
   color: var(--copy-on-dark);
-  font-size: 14.5px;
+  font-size: 16px;
 }
 
 .codeBlock {
   margin-top: var(--size-medium);
   margin-bottom: var(--size-medium);
+  position: relative;
+  .codeCopyIcon {
+    position: absolute;
+    top: var(--size-medium);
+    right: var(--size-medium);
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-divider-on-dark);
+    border-radius: var(--border-radius);
+  }
+
   > span {
     background-color: transparent !important;
     padding: var(--size-large);
     border: 1px solid var(--color-divider-on-dark);
     border-radius: var(--border-radius) !important;
     white-space: pre-wrap !important;
+    font-size: 16px;
 
     @media screen and (max-width: 600px) {
       font-size: 14px !important;
@@ -97,7 +137,7 @@
   display: flex;
   flex-direction: column;
   width: 850px;
-  padding: var(--size-4xLarge);
+  padding: var(--size-large) var(--size-4xLarge) var(--size-4xLarge);
   border-right: 1px var(--color-divider-on-dark) solid;
   border-left: 1px var(--color-divider-on-dark) solid;
 }
@@ -111,10 +151,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.docsText {
-  color: yellow !important;
 }
 
 .docLink {
