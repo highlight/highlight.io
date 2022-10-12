@@ -1,6 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
+import { withHighlight } from '../highlight.config';
 
-export default async function handler(_: any, res: any) {
+async function handler(_: any, res: any) {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/xml');
 
@@ -46,3 +47,5 @@ ${pages.map(addPage).join('\n')}
 
   res.end(xml);
 }
+
+export default withHighlight(handler);
