@@ -81,7 +81,10 @@
   margin-top: 80px;
 
   .casePageLink {
+    display: flex;
+    flex-direction: column;
     width: 187px;
+    gap: 16px;
     img {
       filter: invert(1);
     }
@@ -164,8 +167,8 @@
   .caseDetailsLogo {
     width: 100%;
     position: relative;
-    height: 64px;
-    margin: 8px 24px;
+    height: 32px;
+    margin: 24px;
 
     img {
       filter: invert(1);
