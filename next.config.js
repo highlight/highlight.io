@@ -24,8 +24,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withHighlightConfig(withAxiom(nextConfig), {
-  uploadSourceMaps: true,
-  configureHighlightProxy: true,
-  apiKey: 'bvh0kh353uhqk4sfv0lg',
-});
+module.exports = withHighlightConfig(withAxiom(nextConfig), {});

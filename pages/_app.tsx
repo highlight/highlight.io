@@ -22,7 +22,6 @@ H.init('4d7k1xeo', {
     enabled: true,
     recordHeadersAndBody: true,
   },
-  tracingOrigins: ['highlight.io'],
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
