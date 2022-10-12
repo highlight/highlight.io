@@ -3,15 +3,8 @@ import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { createElement, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import styles, {
-  chevronHover,
-  docsText,
-  tocChildren,
-} from '../../components/Docs/Docs.module.scss';
+import styles from '../../components/Docs/Docs.module.scss';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
-import { Post } from '../../components/Blog/BlogPost/BlogPost';
-import { CallToAction } from '../../components/common/CallToAction/CallToAction';
-import Footer from '../../components/common/Footer/Footer';
 import remarkGfm from 'remark-gfm';
 import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
@@ -21,11 +14,14 @@ import { Collapse } from 'react-collapse';
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
+import CopyIcon from '../../public/images/document-duplicate.svg';
 import { Typography } from '../../components/common/Typography/Typography';
 import { CodeBlock } from 'react-code-blocks';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import matter from 'gray-matter';
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 
@@ -40,7 +36,18 @@ interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  // some parent pages are empty and should redirect to the first child page
+  redirect?: string;
 }
+
+// if index.md is empty, we want to default to the first child, unless that's the only page.
+const getDefaultChildPath = (files: string[]) => {
+  return files.find((filepath) => filepath !== 'index.md');
+};
+
+const isValidDirectory = (files: string[]) => {
+  return files.find((filename) => filename === 'index.md') != null;
+};
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
@@ -57,6 +64,11 @@ const getDocsPaths = async (
   }
   const full_path = path.join(DOCS_CONTENT_PATH, base);
   const read = await fs_api.readdir(full_path);
+  if (!isValidDirectory(read)) {
+    throw new Error(
+      `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
+    );
+  }
 
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
@@ -72,10 +84,22 @@ const getDocsPaths = async (
       );
     } else {
       let pp = '';
+      let redirect = '';
       let simple_path = path.join(base, file_string);
       if (file_string === 'index.md') {
         // get rid of "index.md" at the end
         pp = simple_path.split('/').slice(0, -1).join('/');
+        const { content } = await readMarkdown(
+          fsp,
+          path.join(total_path || '')
+        );
+        if (content === '') {
+          const firstChildPath = getDefaultChildPath(read);
+          const redirectPath = firstChildPath
+            ? path.join(base, firstChildPath)
+            : '';
+          redirect = redirectPath?.replace('.md', '');
+        }
       } else {
         // strip out any notion of ".md"
         pp = simple_path.replace('.md', '');
@@ -87,6 +111,7 @@ const getDocsPaths = async (
         total_path,
         indexPath: file_string === 'index.md',
         metadata: data,
+        ...(redirect ? { redirect } : {}),
       });
     }
   }
@@ -98,6 +123,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const staticPaths = docPaths.map((p) => {
     return path.join('/docs', p.simple_path);
   });
+  console.log('KAPA', docPaths);
   return {
     paths: staticPaths,
     fallback: true,
@@ -113,7 +139,6 @@ interface TocEntry {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
-
   let toc: TocEntry = {
     tocHeading: 'Home',
     tocSlug: 'home',
@@ -126,8 +151,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // will require traversing up to all parents
   for (var d of docPaths) {
     let currentEntry = toc;
-    console.log('path', d.simple_path);
-    console.log('doc path', d);
+    // console.log('path', d.simple_path);
+    // console.log('doc path', d);
     for (var a of d.array_path) {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
@@ -169,12 +194,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(d.array_path) === JSON.stringify(context?.params?.doc)
     );
   });
-  // console.log('path to read', path.join(currentDoc?.total_path || ''));
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(
     fsp,
     path.join(currentDoc?.total_path || '')
   );
+  console.log('welcome', currentDoc);
   return {
     props: {
       metadata: currentDoc?.metadata,
@@ -182,6 +207,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       slug: currentDoc?.simple_path,
       docOptions: docPaths,
       toc,
+      ...(currentDoc?.redirect ? { redirect: currentDoc.redirect } : {}),
     },
   };
 };
@@ -213,6 +239,8 @@ const TableOfContents = ({
   const hasChildren = toc.children.length ? true : false;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
+  const isTopLevel =
+    toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
 
   useEffect(() => {
     const isCurrentPage =
@@ -225,16 +253,23 @@ const TableOfContents = ({
     <div>
       <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
         {hasChildren ? (
-          <ChevronDown className={styles.tocIcon} />
+          <ChevronDown
+            className={classNames(styles.tocIcon, {
+              [styles.tocItemOpen]: hasChildren && open,
+              [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+              [styles.tocChild]: !isTopLevel,
+            })}
+          />
         ) : (
           <Minus className={styles.tocIcon} />
         )}
         <Typography
           type="copy3"
-          emphasis
+          emphasis={isTopLevel}
           className={classNames(styles.tocItem, {
             [styles.tocItemOpen]: hasChildren && open,
             [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+            [styles.tocChild]: !isTopLevel,
           })}
         >
           <Link
@@ -273,6 +308,7 @@ const DocPage = ({
   markdownText,
   slug,
   toc,
+  redirect,
   docOptions,
   metadata,
 }: {
@@ -281,8 +317,16 @@ const DocPage = ({
   toc: TocEntry;
   docOptions: DocPath[];
   metadata: any;
+  redirect?: string;
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  useEffect(() => {
+    if (redirect != null) {
+      router.push(redirect);
+    }
+  }, [redirect, router]);
+
   return (
     <>
       <Head>
@@ -297,18 +341,18 @@ const DocPage = ({
           ))}
         </div>
         <div className={styles.centerSection}>
+          <h2 className={styles.pageTitle}>{metadata.title}</h2>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
-            components={
-              {
-                // h1: getDocsTypographyRenderer('h4'),
-                // h2: getDocsTypographyRenderer('h4'),
-                // h3: getDocsTypographyRenderer('h5'),
-                // h4: getDocsTypographyRenderer('h5'),
-                // h5: getDocsTypographyRenderer('h5'),
-                // code: getDocsTypographyRenderer('code'),
-              }
-            }
+            className={styles.contentRender}
+            components={{
+              h1: getDocsTypographyRenderer('h4'),
+              h2: getDocsTypographyRenderer('h4'),
+              h3: getDocsTypographyRenderer('h5'),
+              h4: getDocsTypographyRenderer('h5'),
+              h5: getDocsTypographyRenderer('h5'),
+              code: getDocsTypographyRenderer('code'),
+            }}
           >
             {markdownText}
           </ReactMarkdown>
@@ -334,15 +378,25 @@ const getDocsTypographyRenderer = (type: string) => {
                 showLineNumbers={false}
                 theme={highlightCodeTheme}
               />
+              <div
+                className={styles.codeCopyIcon}
+                onClick={() => navigator.clipboard.writeText(props.children[0])}
+              >
+                <Image src={CopyIcon} alt="Copy" />
+              </div>
             </div>
           )
         ) : (
           createElement(
             type,
             {
-              className: styles.docsText,
+              className: styles.contentRender,
             },
-            props?.children[0] || ''
+            props?.node.children.map((c: any) =>
+              c.tagName === 'code'
+                ? createElement(c.tagName, {}, c.children[0].value)
+                : c.value
+            ) || ''
           )
         )}
       </>
