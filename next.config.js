@@ -24,4 +24,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withHighlightConfig(withAxiom(nextConfig), {});
+module.exports = withHighlightConfig(withAxiom(nextConfig));
