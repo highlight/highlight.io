@@ -4,7 +4,6 @@ import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { createElement, useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
-import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
 import remarkGfm from 'remark-gfm';
 import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
@@ -15,6 +14,7 @@ import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
 import CopyIcon from '../../public/images/document-duplicate.svg';
+import PageIcon from '../../public/images/page.svg';
 import { Typography } from '../../components/common/Typography/Typography';
 import { CodeBlock } from 'react-code-blocks';
 import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
@@ -39,6 +39,55 @@ interface DocPath {
   // some parent pages are empty and should redirect to the first child page
   redirect?: string;
 }
+
+const useHeadingsData = () => {
+  const router = useRouter();
+  const [nestedHeadings, setNestedHeadings] = useState<any>([]);
+
+  useEffect(() => {
+    const headingElements = Array.from(document.querySelectorAll('h4, h5'));
+    setNestedHeadings(headingElements);
+  }, [router.query]);
+
+  return { nestedHeadings };
+};
+
+// Checks which header is currently in view, and highlights the table of content item on the right.
+const useIntersectionObserver = (setActiveId: (s: string) => void) => {
+  const router = useRouter();
+  const headingElementsRef = useRef<any>({});
+  useEffect(() => {
+    const callback = (headings: any) => {
+      headingElementsRef.current = {};
+      headingElementsRef.current = headings.reduce(
+        (map: any, headingElement: any) => {
+          map[headingElement.target.id] = headingElement;
+          return map;
+        },
+        headingElementsRef.current
+      );
+
+      const visibleHeadings: any = [];
+      Object.keys(headingElementsRef.current).forEach((key) => {
+        const headingElement = headingElementsRef.current[key];
+        if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
+      });
+
+      if (visibleHeadings.length >= 1) {
+        setActiveId(visibleHeadings[visibleHeadings.length - 1].target.id);
+      }
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      rootMargin: '0px 0px -40% 0px',
+    });
+
+    const headingElements = Array.from(document.querySelectorAll('h4, h5'));
+    headingElements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, [setActiveId, router.query]);
+};
 
 // if index.md is empty, we want to default to the first child, unless that's the only page.
 const getDefaultChildPath = (files: string[]) => {
@@ -123,7 +172,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const staticPaths = docPaths.map((p) => {
     return path.join('/docs', p.simple_path);
   });
-  console.log('KAPA', docPaths);
   return {
     paths: staticPaths,
     fallback: true,
@@ -191,7 +239,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
     //   JSON.stringify(context?.params?.doc)
     // );
     return (
-      JSON.stringify(d.array_path) === JSON.stringify(context?.params?.doc)
+      JSON.stringify(d.array_path) ===
+      JSON.stringify(context?.params?.doc || [''])
     );
   });
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
@@ -199,7 +248,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     fsp,
     path.join(currentDoc?.total_path || '')
   );
-  console.log('welcome', currentDoc);
   return {
     props: {
       metadata: currentDoc?.metadata,
@@ -224,6 +272,45 @@ const readMarkdown = async (fs_api: any, filePath: string) => {
     content,
     data,
   };
+};
+
+const PageContents = ({ title }: { title: string }) => {
+  const { nestedHeadings } = useHeadingsData();
+  const [activeId, setActiveId] = useState<string>();
+  useIntersectionObserver(setActiveId);
+
+  return (
+    <div className={styles.pageContentTable}>
+      <div className={styles.pageContentTitle}>
+        <Image src={PageIcon} alt="" />
+        <Typography type="copy3" emphasis>
+          {title}
+        </Typography>
+      </div>
+      <div className={styles.pageContentList}>
+        <ul>
+          {nestedHeadings.map((heading: HTMLHeadingElement) => (
+            <li
+              key={heading.id}
+              className={heading.id === activeId ? styles.active : ''}
+            >
+              <a
+                href={`#${heading.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector(`#${heading.id}`)?.scrollIntoView({
+                    behavior: 'smooth',
+                  });
+                }}
+              >
+                {heading.innerText}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 const TableOfContents = ({
@@ -357,10 +444,24 @@ const DocPage = ({
             {markdownText}
           </ReactMarkdown>
         </div>
-        <div className={styles.rightSection}></div>
+        <div className={styles.rightSection}>
+          <PageContents title={metadata.title} />
+        </div>
       </main>
     </>
   );
+};
+
+const getIdFromHeaderProps = (props: any) => {
+  return props.node.children
+    .map((child: any) =>
+      child.tagName === 'code' ? child.children[0].value : child.value
+    )
+    .join('')
+    .replace(/[^a-zA-Z ]/g, '')
+    .trim()
+    .split(' ')
+    .join('-');
 };
 
 const getDocsTypographyRenderer = (type: string) => {
@@ -391,6 +492,11 @@ const getDocsTypographyRenderer = (type: string) => {
             type,
             {
               className: styles.contentRender,
+              ...(['h4', 'h5'].includes(type)
+                ? {
+                    id: getIdFromHeaderProps(props),
+                  }
+                : {}),
             },
             props?.node.children.map((c: any) =>
               c.tagName === 'code'
