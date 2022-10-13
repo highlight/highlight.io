@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { withHighlight } from '../../highlight.config';
+import { H } from '@highlight-run/next';
 
 async function handler(_: any, res: any) {
   res.statusCode = 200;
@@ -17,6 +18,7 @@ async function handler(_: any, res: any) {
     }
   );
 
+  const start = global.performance.now();
   const { posts } = await graphcms.request(gql`
     query GetPosts() {
       posts(orderBy: publishedAt_DESC) {
@@ -24,6 +26,13 @@ async function handler(_: any, res: any) {
       }
     }
   `);
+  H.metrics([
+    {
+      name: 'gqlReq-ms',
+      value: global.performance.now() - start,
+      tags: [{ name: 'foo', value: 'bar' }],
+    },
+  ]);
   const blogPages = posts.map((post: any) => `blog/${post.slug}`);
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
