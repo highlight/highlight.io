@@ -1,3 +1,4 @@
+export const active: string;
 export const centerSection: string;
 export const codeBlock: string;
 export const codeCopyIcon: string;
@@ -7,6 +8,9 @@ export const headingSection: string;
 export const inlineCodeBlock: string;
 export const leftSection: string;
 export const mainWrapper: string;
+export const pageContentList: string;
+export const pageContentTable: string;
+export const pageContentTitle: string;
 export const pageTitle: string;
 export const rightSection: string;
 export const tocChild: string;

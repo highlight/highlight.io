@@ -28,13 +28,7 @@ const nextConfig = {
     staticPages: getStaticPages(),
   },
   async redirects() {
-    return [
-      {
-        source: '/docs',
-        destination: `/docs/getting-started`,
-        permanent: false,
-      },
-    ];
+    return [];
   },
   async rewrites() {
     return [
