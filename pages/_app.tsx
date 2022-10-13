@@ -11,10 +11,18 @@ import MetaImage from '../public/images/meta-image.jpg';
 import Head from 'next/head';
 import { Meta } from '../components/common/Head/Meta';
 export { reportWebVitals } from 'next-axiom';
+import { H } from 'highlight.run';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', nProgress.done);
+
+H.init('4d7k1xeo', {
+  networkRecording: {
+    enabled: true,
+    recordHeadersAndBody: true,
+  },
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
