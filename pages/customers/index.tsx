@@ -15,6 +15,9 @@ interface Customer {
   image?: {
     url: string;
   };
+  companyLogo?: {
+    url: string;
+  };
   primaryQuote: {
     id: string;
     body: string;
@@ -34,6 +37,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       customers() {
         slug
         image {
+          url
+        }
+        companyLogo {
           url
         }
         primaryQuote {
@@ -82,7 +88,7 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
           <div className={styles.caseList}>
             {expandedCustomers.map((c) => (
               <CustomerCaseCard
-                logo={`/images/companies/${c.slug}.png`}
+                logo={c.companyLogo?.url}
                 author={`${c.primaryQuote.author.firstName} ${c.primaryQuote.author.lastName}`}
                 quote={c.primaryQuote.body}
                 role={c.primaryQuote.author.title}
@@ -94,8 +100,8 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
           </div>
           <h2>See all our customers</h2>
           <div className={styles.allCustomersGrid}>
-            {customers.map(({ slug }, i) => (
-              <CompanyLogo slug={slug} key={i} />
+            {customers.map(({ slug, companyLogo }, i) => (
+              <CompanyLogo slug={slug} logo={companyLogo?.url} key={i} />
             ))}
           </div>
         </div>
@@ -106,16 +112,20 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
   );
 };
 
-const CompanyLogo = ({ slug }: { slug: string }) => {
+const CompanyLogo = ({ slug, logo }: { slug: string; logo?: string }) => {
   return (
-    <div className={styles.allCustomersLogo}>
-      <Image
-        src={`/images/companies/${slug}.png`}
-        alt={`${slug} logo`}
-        layout="fill"
-        objectFit="contain"
-      />
-    </div>
+    <>
+      {logo && (
+        <div className={styles.allCustomersLogo}>
+          <Image
+            src={logo}
+            alt={`${slug} logo`}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
+      )}
+    </>
   );
 };
 
@@ -128,7 +138,7 @@ const CustomerCaseCard = ({
   slug,
 }: {
   thumbnail: string;
-  logo: string;
+  logo?: string;
   quote: string;
   author: string;
   role: string;
@@ -145,15 +155,17 @@ const CustomerCaseCard = ({
         />
       </div>
       <div className={styles.caseDetails}>
-        <div className={styles.companyCaseLogo}>
-          <Image
-            src={logo}
-            alt="Company logo"
-            layout="fill"
-            objectFit="contain"
-            objectPosition="left"
-          />
-        </div>
+        {logo && (
+          <div className={styles.companyCaseLogo}>
+            <Image
+              src={logo}
+              alt="Company logo"
+              layout="fill"
+              objectFit="contain"
+              objectPosition="left"
+            />
+          </div>
+        )}
         <div className={styles.caseCardQuote}>
           <blockquote>
             <h4 className={styles.leftQuote}>“</h4>

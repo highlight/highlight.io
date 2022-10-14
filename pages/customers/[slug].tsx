@@ -18,6 +18,9 @@ interface Customer {
   image?: {
     url: string;
   };
+  companyLogo?: {
+    url: string;
+  };
   name: string;
   about: string;
   founded: string;
@@ -68,6 +71,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         founded
         usingHighlightSince
         image {
+          url
+        }
+        companyLogo {
           url
         }
         name
@@ -122,9 +128,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     query GetPages($id: String!) {
       previousCase: customers(last: 1, before: $id) {
         slug
+        companyLogo {
+          url
+        }
       }
       nextCase: customers(first: 1, after: $id) {
         slug
+        companyLogo {
+          url
+        }
       }
     }
   `;
@@ -149,8 +161,8 @@ const CustomerPage = ({
   nextCase,
 }: {
   customer: Customer;
-  previousCase: { slug: string } | null;
-  nextCase: { slug: string } | null;
+  previousCase: { slug: string; companyLogo?: { url: string } } | null;
+  nextCase: { slug: string; companyLogo?: { url: string } } | null;
 }) => {
   return (
     <>
@@ -192,25 +204,35 @@ const CustomerPage = ({
             />
 
             <div className={style.casePageLinks}>
-              {previousCase?.slug ? (
-                <PageLink label="Previous Customer" slug={previousCase.slug} />
+              {previousCase ? (
+                <PageLink
+                  label="Previous Customer"
+                  slug={previousCase.slug}
+                  logo={previousCase.companyLogo?.url}
+                />
               ) : (
                 <div />
               )}
-              {nextCase?.slug && (
-                <PageLink label="Next Customer" slug={nextCase.slug} />
+              {nextCase && (
+                <PageLink
+                  label="Next Customer"
+                  slug={nextCase.slug}
+                  logo={nextCase.companyLogo?.url}
+                />
               )}
             </div>
           </div>
           <div className={style.caseCustomerDetails}>
             <div className={style.caseDetailsLogo}>
-              <Image
-                src={`/images/companies/${customer.slug}.png`}
-                layout="fill"
-                objectFit="contain"
-                objectPosition="left"
-                alt="Company Logo"
-              />
+              {customer.companyLogo?.url && (
+                <Image
+                  src={customer.companyLogo.url}
+                  layout="fill"
+                  objectFit="contain"
+                  objectPosition="left"
+                  alt="Company Logo"
+                />
+              )}
             </div>
             <div className={style.caseDetailsBody}>
               <CustomerDetailsSection
@@ -238,22 +260,31 @@ const CustomerPage = ({
   );
 };
 
-const PageLink = ({ label, slug }: { label: string; slug: string }) => (
+const PageLink = ({
+  label,
+  slug,
+  logo,
+}: {
+  label: string;
+  slug: string;
+  logo?: string;
+}) => (
   <Link href={`/customers/${slug}`}>
     <a>
       <div className={style.casePageLink}>
         <Typography type="copy2" emphasis>
           {label}
         </Typography>
-
-        <Image
-          src={`/images/companies/${slug}.png`}
-          width="187px"
-          height="32px"
-          objectFit="contain"
-          objectPosition="left"
-          alt={`${slug} logo`}
-        />
+        {logo && (
+          <Image
+            src={logo}
+            width="187px"
+            height="32px"
+            objectFit="contain"
+            objectPosition="left"
+            alt={`${slug} logo`}
+          />
+        )}
       </div>
     </a>
   </Link>
