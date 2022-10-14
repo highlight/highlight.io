@@ -67,6 +67,10 @@
   right: -35px;
   top: 30px;
   width: 280px;
+
+  @media screen and (max-width: 1288px) {
+    display: none;
+  }
 }
 
 .footerImageLeft {
@@ -114,6 +118,10 @@
   height: 249px;
   width: 249px;
   transform: scaleX(-1);
+
+  @media screen and (max-width: 1400px) {
+    display: none !important;
+  }
 }
 
 .obfuscationHandle {
