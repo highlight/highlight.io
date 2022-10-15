@@ -274,7 +274,7 @@ const readMarkdown = async (fs_api: any, filePath: string) => {
   const { content, data } = matter(fileContents, {
     delimiters: ['---', '---'],
     engines: {
-      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }),
+      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as Object,
     },
   });
   return {
@@ -437,7 +437,12 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           {toc.children.map((t) => (
-            <TableOfContents key={t.docPathId} toc={t} docPaths={docOptions} />
+            <TableOfContents
+              key={t.docPathId}
+              toc={t}
+              docPaths={docOptions}
+              openParent
+            />
           ))}
         </div>
         <div className={styles.centerSection}>
