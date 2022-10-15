@@ -430,7 +430,7 @@ const DocPage = ({
   return (
     <>
       <Head>
-        <title>{metadata.title}</title>
+        <title>{metadata.title || ''}</title>
         <meta name="description" content={'TODO'} />
       </Head>
       <Navbar hideFreeTrialText />
@@ -441,12 +441,12 @@ const DocPage = ({
               key={t.docPathId}
               toc={t}
               docPaths={docOptions}
-              openParent
+              openParent={false}
             />
           ))}
         </div>
         <div className={styles.centerSection}>
-          <h2 className={styles.pageTitle}>{metadata.title}</h2>
+          <h2 className={styles.pageTitle}>{metadata.title || ''}</h2>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             className={styles.contentRender}
@@ -463,7 +463,7 @@ const DocPage = ({
           </ReactMarkdown>
         </div>
         <div className={styles.rightSection}>
-          <PageContents title={metadata.title} />
+          <PageContents title={metadata.title || ''} />
         </div>
       </main>
     </>
