@@ -85,9 +85,6 @@
     flex-direction: column;
     width: 187px;
     gap: 16px;
-    img {
-      filter: invert(1);
-    }
   }
 }
 
@@ -169,10 +166,6 @@
     position: relative;
     height: 32px;
     margin: 24px;
-
-    img {
-      filter: invert(1);
-    }
   }
 
   .caseDetailsBody {
