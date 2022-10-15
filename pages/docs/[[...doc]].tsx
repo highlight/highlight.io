@@ -487,7 +487,7 @@ const getDocsTypographyRenderer = (type: string) => {
     return (
       <>
         {type === 'code' ? (
-          props.inline ? (
+          props && props.children && props.inline ? (
             <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
           ) : (
             <div className={styles.codeBlock}>
