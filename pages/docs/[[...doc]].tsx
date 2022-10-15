@@ -214,7 +214,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
       // 2. if not, create it. if so, set the new current toc entry
-      let foundEntry = currentEntry.children.find((t, ti) => {
+      let foundEntry = currentEntry?.children.find((t, ti) => {
         return t.tocSlug === a;
       });
       if (!foundEntry) {
@@ -224,7 +224,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
           // docPathId: docid,
           children: [],
         };
-        currentEntry.children.push(foundEntry);
+        currentEntry?.children.push(foundEntry);
       }
       if (d.array_path.indexOf(a) == d.array_path.length - 1) {
         foundEntry.docPathId = docid;
@@ -332,7 +332,7 @@ const TableOfContents = ({
   docPaths: DocPath[];
 }) => {
   const [open, setOpen] = useState(openParent);
-  const hasChildren = toc.children.length ? true : false;
+  const hasChildren = toc?.children.length ? true : false;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const isTopLevel =
@@ -384,7 +384,7 @@ const TableOfContents = ({
             <div className={styles.tocChildrenLine}></div>
           </div>
           <div className={styles.tocChildrenContent}>
-            {toc.children.map((t) => (
+            {toc?.children.map((t) => (
               // TODO(jaykhatri) - this 'docPaths' concept has to be stateful 🤔.
               <TableOfContents
                 openParent={open}
@@ -436,7 +436,7 @@ const DocPage = ({
       <Navbar hideFreeTrialText />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
-          {toc.children.map((t) => (
+          {toc?.children.map((t) => (
             <TableOfContents
               key={t.docPathId}
               toc={t}
@@ -471,9 +471,9 @@ const DocPage = ({
 };
 
 const getIdFromHeaderProps = (props: any) => {
-  return props.node.children
+  return props?.node?.children
     .map((child: any) =>
-      child.tagName === 'code' ? child.children[0].value : child.value
+      child.tagName === 'code' ? child?.children[0].value : child.value
     )
     .join('')
     .replace(/[^a-zA-Z ]/g, '')
@@ -516,9 +516,9 @@ const getDocsTypographyRenderer = (type: string) => {
                   }
                 : {}),
             },
-            props?.node.children.map((c: any) =>
+            props?.node?.children.map((c: any) =>
               c.tagName === 'code'
-                ? createElement(c.tagName, {}, c.children[0].value)
+                ? createElement(c.tagName, {}, c?.children[0].value)
                 : c.value
             ) || ''
           )
