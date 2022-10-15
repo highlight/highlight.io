@@ -1,65 +1,194 @@
-import { GetStaticProps, NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Image from 'next/image';
-import BlueGradient from '../../public/images/bg_blue_gradient.svg';
-import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
-import homeStyles from '../../components/Home/Home.module.scss';
-import styles from '../../components/Customers/Customers.module.scss';
+import styles from '../../components/Customers/CustomersList.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
-import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
-import { CUSTOMER_REVIEWS } from '../../components/Customers/Customers';
-import { CustomerCard } from '../../components/Customers/CustomerCard/CustomerCard';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import { Meta } from '../../components/common/Head/Meta';
+import { Typography } from '../../components/common/Typography/Typography';
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
+import { gql } from 'graphql-request';
+import { Author } from '../../components/Blog/BlogPost/BlogPost';
+import { graphcms } from '../blog';
 
-// Hides the page in production and renders it in dev. More info:
-// https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
-export const getStaticProps: GetStaticProps = async () => {
-  if (process.env.NODE_ENV === 'production') {
-    return { notFound: true };
-  }
+interface Customer {
+  slug: string;
+  image?: {
+    url: string;
+  };
+  companyLogo?: {
+    url: string;
+  };
+  primaryQuote: {
+    id: string;
+    body: string;
+    author: Author;
+  };
+}
 
-  return { props: {} };
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // Hides the page in production and renders it in dev. More info:
+  // https://linear.app/highlight/issue/HIG-2510/temporarily-update-customers-functionality
+  // if (process.env.NODE_ENV === 'production') {
+  //   return { notFound: true };
+  // }
+
+  const QUERY = gql`
+    query GetCustomers() {
+      customers() {
+        slug
+        image {
+          url
+        }
+        companyLogo {
+          url
+        }
+        primaryQuote {
+          body
+          author {
+            firstName
+            lastName
+            title
+            profilePhoto {
+              url
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await graphcms.request(QUERY);
+
+  return {
+    props: {
+      customers: data.customers,
+    },
+    revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
+  };
 };
 
-const Customers: NextPage = () => {
+const Customers = ({ customers }: { customers: Customer[] }) => {
+  const expandedCustomers = customers.slice(0, 6);
+
   return (
     <>
-      <Meta
-        title={'Highlight: See Customer Stories And Case Studies.'}
-        description={
-          "Highlight powers forward-thinking companies. Don't take our word for it. Learn straight from the people we help. Here's what our customers have to say:"
-        }
-      />
-      <div className={homeStyles.bgPosition}>
-        <div className={homeStyles.purpleDiv}>
-          <Image src={PurpleGradient} alt="" />
-        </div>
-        <div className={homeStyles.blueDiv}>
-          <Image src={BlueGradient} alt="" />
-        </div>
-      </div>
       <Navbar />
       <main>
-        <Section>
-          <div className={homeStyles.anchorTitle}>
-            <h1>Customers</h1>
-            <p className={homeStyles.bodyLarge}>
-              {`From startups to enterprises, the most forward-thinking companies use Highlight. `}
-            </p>
+        <div className={styles.caseListLayout}>
+          <div className={styles.caseListTitle}>
+            <span className={styles.limeAccent}>
+              <Typography type="outline">Customer case studies</Typography>
+            </span>
+            <h1>
+              What <span className={styles.limeAccent}>our customers</span> have
+              to say.
+            </h1>
+            <PrimaryButton>Get started for free</PrimaryButton>
           </div>
-        </Section>
-        <Section>
-          <div className={styles.reviewGrid}>
-            {CUSTOMER_REVIEWS.map((r, i) => {
-              return <CustomerCard {...r} key={i} />;
-            })}
+          <div className={styles.caseList}>
+            {expandedCustomers.map((c) => (
+              <CustomerCaseCard
+                logo={c.companyLogo?.url}
+                author={`${c.primaryQuote.author.firstName} ${c.primaryQuote.author.lastName}`}
+                quote={c.primaryQuote.body}
+                role={c.primaryQuote.author.title}
+                slug={c.slug}
+                thumbnail={c.image?.url ?? ''}
+                key={c.slug}
+              />
+            ))}
           </div>
-        </Section>
+          <h2>See all our customers</h2>
+          <div className={styles.allCustomersGrid}>
+            {customers.map(({ slug, companyLogo }, i) => (
+              <CompanyLogo slug={slug} logo={companyLogo?.url} key={i} />
+            ))}
+          </div>
+        </div>
         <FooterCallToAction />
       </main>
       <Footer />
     </>
+  );
+};
+
+const CompanyLogo = ({ slug, logo }: { slug: string; logo?: string }) => {
+  return (
+    <>
+      {logo && (
+        <div className={styles.allCustomersLogo}>
+          <Image
+            src={logo}
+            alt={`${slug} logo`}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
+      )}
+    </>
+  );
+};
+
+const CustomerCaseCard = ({
+  thumbnail,
+  logo,
+  quote,
+  author,
+  role,
+  slug,
+}: {
+  thumbnail: string;
+  logo?: string;
+  quote: string;
+  author: string;
+  role: string;
+  slug: string;
+}) => {
+  return (
+    <div className={styles.caseCard}>
+      <div className={styles.thumbnail}>
+        <Image
+          src={thumbnail}
+          layout="fill"
+          objectFit="cover"
+          alt="Case thumbnail"
+        />
+      </div>
+      <div className={styles.caseDetails}>
+        {logo && (
+          <div className={styles.companyCaseLogo}>
+            <Image
+              src={logo}
+              alt="Company logo"
+              layout="fill"
+              objectFit="contain"
+              objectPosition="left"
+            />
+          </div>
+        )}
+        <div className={styles.caseCardQuote}>
+          <blockquote>
+            <h4 className={styles.leftQuote}>“</h4>
+            <Typography type="copy2" onDark>
+              {quote}
+            </Typography>
+            <h4 className={styles.rightQuote}>”</h4>
+          </blockquote>
+          <span>
+            <Typography type="copy2" emphasis>
+              {author},
+            </Typography>{' '}
+            <Typography type="copy2">{role}</Typography>
+          </span>
+        </div>
+        <PrimaryButton
+          href={`/customers/${slug}`}
+          className={styles.cardReadCaseButton}
+        >
+          Read case study
+        </PrimaryButton>
+      </div>
+    </div>
   );
 };
 
