@@ -154,6 +154,15 @@ const getDocsPaths = async (
         pp = simple_path.replace('.md', '');
       }
       const { data } = await readMarkdown(fsp, path.join(total_path || ''));
+      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+        data.hasOwnProperty(item)
+      );
+      if (!hasRequiredMetadata) {
+        throw new Error(
+          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+        );
+      }
+
       paths.push({
         simple_path: pp,
         array_path: pp.split('/'),
@@ -413,6 +422,10 @@ const DocPage = ({
       router.push(redirect);
     }
   }, [redirect, router]);
+
+  // useEffect(() => {
+  //   fetch('/api/docs/search/next');
+  // }, [router]);
 
   return (
     <>
