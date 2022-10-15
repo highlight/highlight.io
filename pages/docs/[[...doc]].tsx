@@ -423,9 +423,9 @@ const DocPage = ({
     }
   }, [redirect, router]);
 
-  // useEffect(() => {
-  //   fetch('/api/docs/search/next');
-  // }, [router]);
+  useEffect(() => {
+    fetch('/api/docs/search/next');
+  }, [router]);
 
   return (
     <>
