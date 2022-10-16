@@ -9,8 +9,8 @@
   width: 300px;
   padding: var(--size-xxLarge) var(--size-large);
   position: sticky;
-  height: 100vh;
-  top: 0;
+  height: calc(100vh - 120px);
+  top: 120px;
   overflow: auto;
 }
 
@@ -225,8 +225,8 @@
   flex-direction: column;
   position: sticky;
   padding: var(--size-xLarge) var(--size-large);
-  top: 0;
-  height: 100vh;
+  top: 120px;
+  height: calc(100vh - 120px);
 }
 
 .headingSection {
