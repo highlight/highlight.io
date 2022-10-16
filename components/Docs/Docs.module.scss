@@ -11,6 +11,38 @@
   position: sticky;
   height: 100vh;
   top: 0;
+  overflow: auto;
+}
+
+.searchResultCard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-small);
+  padding: var(--size-small) var(--size-medium);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--color-divider-on-dark);
+  }
+
+  .content {
+    opacity: 0.7;
+    color: var(--copy-on-dark);
+    border-left: 4px solid var(--color-divider-on-dark);
+    padding-left: var(--size-medium);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+  }
+
+  .highlightedText {
+    color: var(--color-selected-light);
+    background-color: transparent;
+  }
 }
 
 .tocIcon {
@@ -46,7 +78,8 @@
   opacity: 1;
 }
 
-.tocItemCurrent a {
+.tocItemCurrent a,
+.tocItemCurrent {
   color: var(--color-selected-light) !important;
   font-weight: 500;
 }
@@ -83,10 +116,11 @@
   h4,
   h5 {
     scroll-margin-top: var(--size-large);
+    margin: var(--size-xLarge) 0 !important;
   }
 
   p {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 34px;
     color: var(--copy-on-dark);
@@ -106,10 +140,35 @@
   font-size: 16px;
 }
 
+.docSearchbar {
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: var(--border-radius);
+  padding: var(--size-xxSmall) var(--size-small);
+  display: flex;
+  gap: var(--size-xSmall);
+  align-items: center;
+  margin-bottom: var(--size-medium);
+
+  input {
+    font-family: 'Poppins';
+    background: transparent;
+    border: 0;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--color-copy-on-dark);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .codeBlock {
   margin-top: var(--size-medium);
   margin-bottom: var(--size-medium);
   position: relative;
+
   .codeCopyIcon {
     position: absolute;
     top: var(--size-medium);
@@ -122,6 +181,19 @@
     align-items: center;
     border: 1px solid var(--color-divider-on-dark);
     border-radius: var(--border-radius);
+    transition: color 0.2s ease;
+
+    img {
+      opacity: 0.5;
+    }
+
+    &:hover {
+      border-color: var(--color-copy-on-light);
+
+      img {
+        opacity: 1;
+      }
+    }
   }
 
   > span {
@@ -186,12 +258,14 @@
 
 .pageContentTitle {
   gap: var(--size-small);
+  width: 100%;
   display: flex;
   padding: var(--size-small) var(--size-medium);
   border-bottom: 1px solid var(--color-divider-on-dark);
 }
 
 .pageContentList {
+  width: 100%;
   padding: var(--size-small) var(--size-medium);
 
   ul {
@@ -200,7 +274,8 @@
     margin: 0;
 
     li {
-      margin-left: -20px;
+      margin: var(--size-xSmall) 0;
+      margin-left: -24px;
       list-style-type: '-';
       color: var(--copy-on-dark);
       opacity: 0.7;

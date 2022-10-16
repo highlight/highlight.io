@@ -9,6 +9,7 @@ import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
 import Minus from '../../public/images/MinusIcon';
 import { Collapse } from 'react-collapse';
+import Highlighter from 'react-highlight-words';
 
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -22,8 +23,12 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import removeMd from 'remove-markdown';
+import { SearchResult } from '../api/docs/search/[searchValue]';
+import { BiSearch } from 'react-icons/bi';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
+const SEARCH_RESULT_BLURB_LENGTH = 500;
 
 interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -100,7 +105,7 @@ const isValidDirectory = (files: string[]) => {
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
-const getDocsPaths = async (
+export const getDocsPaths = async (
   fs_api: any,
   base: string | undefined
 ): Promise<DocPath[]> => {
@@ -269,7 +274,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const readMarkdown = async (fs_api: any, filePath: string) => {
+export const readMarkdown = async (fs_api: any, filePath: string) => {
   const fileContents = await fs_api.readFile(path.join(filePath));
   const { content, data } = matter(fileContents, {
     delimiters: ['---', '---'],
@@ -288,7 +293,7 @@ const PageContents = ({ title }: { title: string }) => {
   const [activeId, setActiveId] = useState<string>();
   useIntersectionObserver(setActiveId);
 
-  return (
+  return nestedHeadings.length > 0 ? (
     <div className={styles.pageContentTable}>
       <div className={styles.pageContentTitle}>
         <Image src={PageIcon} alt="" />
@@ -319,6 +324,8 @@ const PageContents = ({ title }: { title: string }) => {
         </ul>
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 
@@ -357,7 +364,13 @@ const TableOfContents = ({
             })}
           />
         ) : (
-          <Minus className={styles.tocIcon} />
+          <Minus
+            className={classNames(styles.tocIcon, {
+              [styles.tocItemOpen]: hasChildren,
+              [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
+              [styles.tocChild]: !isTopLevel,
+            })}
+          />
         )}
         <Typography
           type="copy3"
@@ -400,6 +413,15 @@ const TableOfContents = ({
   );
 };
 
+const DocSearchbar = ({ onChange }: { onChange: (e: any) => void }) => {
+  return (
+    <div className={styles.docSearchbar}>
+      <BiSearch />
+      <input type="text" onChange={onChange} placeholder="Find anything" />
+    </div>
+  );
+};
+
 const DocPage = ({
   markdownText,
   slug,
@@ -417,15 +439,27 @@ const DocPage = ({
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+
   useEffect(() => {
     if (redirect != null) {
       router.push(redirect);
     }
   }, [redirect, router]);
 
-  useEffect(() => {
-    fetch('/api/docs/search/next');
-  }, [router]);
+  const onSearchChange = async (e: any) => {
+    if (e.target.value !== '') {
+      const results = await (
+        await fetch(`/api/docs/search/${e.target.value}`)
+      ).json();
+      setSearchResults(results);
+      setSearchValue(e.target.value);
+    } else {
+      setSearchResults([]);
+      setSearchValue('');
+    }
+  };
 
   return (
     <>
@@ -433,9 +467,10 @@ const DocPage = ({
         <title>{metadata ? metadata.title : ''}</title>
         <meta name="description" content={'TODO'} />
       </Head>
-      <Navbar hideFreeTrialText />
+      <Navbar hideFreeTrialText hideOnScroll={false} />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
+          <DocSearchbar onChange={onSearchChange} />
           {toc?.children.map((t) => (
             <TableOfContents
               key={t.docPathId}
@@ -445,25 +480,58 @@ const DocPage = ({
             />
           ))}
         </div>
-        <div className={styles.centerSection}>
-          <h2 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h2>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            className={styles.contentRender}
-            components={{
-              h1: getDocsTypographyRenderer('h4'),
-              h2: getDocsTypographyRenderer('h4'),
-              h3: getDocsTypographyRenderer('h5'),
-              h4: getDocsTypographyRenderer('h5'),
-              h5: getDocsTypographyRenderer('h5'),
-              code: getDocsTypographyRenderer('code'),
-            }}
-          >
-            {markdownText}
-          </ReactMarkdown>
-        </div>
+        {searchResults.length > 0 ? (
+          <div className={styles.centerSection}>
+            {searchResults.map((result: SearchResult, i) => (
+              <Link href={result.path} key={i} passHref>
+                <div
+                  className={styles.searchResultCard}
+                  onClick={() => {
+                    setSearchResults([]);
+                  }}
+                >
+                  <div>
+                    <Typography type="copy3">{result.title}</Typography>
+                  </div>
+                  <div className={styles.content}>
+                    <Highlighter
+                      highlightClassName={styles.highlightedText}
+                      searchWords={[searchValue]}
+                      autoEscape={true}
+                      textToHighlight={`${removeMd(
+                        result.content.slice(0, SEARCH_RESULT_BLURB_LENGTH)
+                      )}...`}
+                    />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.centerSection}>
+            <h4 className={styles.pageTitle}>
+              {metadata ? metadata.title : ''}
+            </h4>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              className={styles.contentRender}
+              components={{
+                h1: getDocsTypographyRenderer('h5'),
+                h2: getDocsTypographyRenderer('h5'),
+                h3: getDocsTypographyRenderer('h5'),
+                h4: getDocsTypographyRenderer('h5'),
+                h5: getDocsTypographyRenderer('h5'),
+                code: getDocsTypographyRenderer('code'),
+              }}
+            >
+              {markdownText}
+            </ReactMarkdown>
+          </div>
+        )}
         <div className={styles.rightSection}>
-          <PageContents title={metadata ? metadata.title : ''} />
+          {searchResults.length === 0 && (
+            <PageContents title={metadata ? metadata.title : ''} />
+          )}
         </div>
       </main>
     </>
