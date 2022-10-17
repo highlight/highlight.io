@@ -70,22 +70,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const Customers = ({ customers }: { customers: Customer[] }) => {
   const expandedCustomers = customers.slice(0, 6);
   const allCustomersLogos = [
-    'airplane',
-    'basedash',
-    'cabal',
+    'pipe',
+    'portal',
     'dripos',
+    'knock',
+    'hightouch',
+    'basedash',
+    'impira',
+    'mage',
+    'airplane',
     'examedi',
     'guruhotel',
     'hotplate',
-    'hightouch',
-    'impira',
-    'knock',
-    'mage',
-    'pipe',
-    'portal',
-    'sunsama',
-    'tributi',
     'writesonic',
+    'tributi',
+    'sunsama',
+    'cabal',
   ];
 
   return (
