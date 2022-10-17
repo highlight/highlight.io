@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const SUBDOMAIN_LANDING_PAGES = {
   observability: '/blog/frontend-observability',
   monitor: '/blog/frontend-observability',
+  nextjs: '/blog/feature-nextjs-integration',
 };
 
 export default function middleware(req: NextRequest) {
