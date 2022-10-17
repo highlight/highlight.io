@@ -25,10 +25,15 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import removeMd from 'remove-markdown';
 import { SearchResult } from '../api/docs/search/[searchValue]';
-import { BiChevronLeft, BiChevronRight, BiSearch } from 'react-icons/bi';
+import {
+  BiChevronLeft,
+  BiChevronRight,
+  BiLink,
+  BiSearch,
+} from 'react-icons/bi';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
-const SEARCH_RESULT_BLURB_LENGTH = 500;
+const SEARCH_RESULT_BLURB_LENGTH = 100;
 
 interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -290,8 +295,18 @@ export const readMarkdown = async (fs_api: any, filePath: string) => {
 
 const PageContents = ({ title }: { title: string }) => {
   const { nestedHeadings } = useHeadingsData();
+  const router = useRouter();
   const [activeId, setActiveId] = useState<string>();
   useIntersectionObserver(setActiveId);
+
+  useEffect(() => {
+    const selectedId = router.asPath.split('#');
+    if (selectedId.length > 1) {
+      document.querySelector(`#${selectedId[1]}`)?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }, [router.asPath]);
 
   return nestedHeadings.length > 0 ? (
     <div className={styles.pageContentTable}>
@@ -315,6 +330,8 @@ const PageContents = ({ title }: { title: string }) => {
                   document.querySelector(`#${heading.id}`)?.scrollIntoView({
                     behavior: 'smooth',
                   });
+                  const basePath = router.asPath.split('#')[0];
+                  router.push(`${basePath}#${heading.id}`);
                 }}
               >
                 {heading.innerText}
@@ -479,7 +496,37 @@ const DocPage = ({
       <Navbar hideFreeTrialText />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
-          <DocSearchbar onChange={onSearchChange} />
+          <div className={styles.leftInner}>
+            <DocSearchbar onChange={onSearchChange} />
+            {searchResults.length > 0 && (
+              <div className={styles.searchDiv}>
+                {searchResults.map((result: SearchResult, i) => (
+                  <Link href={result.path} key={i} passHref>
+                    <div
+                      className={styles.searchResultCard}
+                      onClick={() => {
+                        setSearchResults([]);
+                      }}
+                    >
+                      <div>
+                        <Typography type="copy3">{result.title}</Typography>
+                      </div>
+                      <div className={styles.content}>
+                        <Highlighter
+                          highlightClassName={styles.highlightedText}
+                          searchWords={[searchValue]}
+                          autoEscape={true}
+                          textToHighlight={`${removeMd(
+                            result.content.slice(0, SEARCH_RESULT_BLURB_LENGTH)
+                          )}...`}
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
           <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (
               <TableOfContents
@@ -522,86 +569,57 @@ const DocPage = ({
             </div>
           </Collapse>
         </div>
-        {searchResults.length > 0 ? (
-          <div className={styles.centerSection}>
-            {searchResults.map((result: SearchResult, i) => (
-              <Link href={result.path} key={i} passHref>
-                <div
-                  className={styles.searchResultCard}
-                  onClick={() => {
-                    setSearchResults([]);
-                  }}
-                >
-                  <div>
-                    <Typography type="copy3">{result.title}</Typography>
-                  </div>
-                  <div className={styles.content}>
-                    <Highlighter
-                      highlightClassName={styles.highlightedText}
-                      searchWords={[searchValue]}
-                      autoEscape={true}
-                      textToHighlight={`${removeMd(
-                        result.content.slice(0, SEARCH_RESULT_BLURB_LENGTH)
-                      )}...`}
-                    />
-                  </div>
-                </div>
+        <div className={styles.centerSection}>
+          <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            className={styles.contentRender}
+            components={{
+              h1: getDocsTypographyRenderer('h5'),
+              h2: getDocsTypographyRenderer('h5'),
+              h3: getDocsTypographyRenderer('h5'),
+              h4: getDocsTypographyRenderer('h5'),
+              h5: getDocsTypographyRenderer('h5'),
+              code: getDocsTypographyRenderer('code'),
+            }}
+          >
+            {markdownText}
+          </ReactMarkdown>
+          <div className={styles.pageNavigateRow}>
+            {currentPageIndex > 0 ? (
+              <Link
+                href={docOptions[currentPageIndex - 1].simple_path}
+                passHref
+              >
+                <a className={styles.pageNavigate}>
+                  <BiChevronLeft />
+                  <Typography type="copy2">
+                    {docOptions[currentPageIndex - 1].metadata.title}
+                  </Typography>
+                </a>
               </Link>
-            ))}
+            ) : (
+              <div></div>
+            )}
+            {currentPageIndex < docOptions.length - 1 ? (
+              <Link
+                href={docOptions[currentPageIndex + 1].simple_path}
+                passHref
+              >
+                <a className={styles.pageNavigate}>
+                  <Typography type="copy2">
+                    {docOptions[currentPageIndex + 1].metadata.title}
+                  </Typography>
+                  <BiChevronRight />
+                </a>
+              </Link>
+            ) : (
+              <div></div>
+            )}
           </div>
-        ) : (
-          <div className={styles.centerSection}>
-            <h4 className={styles.pageTitle}>
-              {metadata ? metadata.title : ''}
-            </h4>
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              className={styles.contentRender}
-              components={{
-                h1: getDocsTypographyRenderer('h5'),
-                h2: getDocsTypographyRenderer('h5'),
-                h3: getDocsTypographyRenderer('h5'),
-                h4: getDocsTypographyRenderer('h5'),
-                h5: getDocsTypographyRenderer('h5'),
-                code: getDocsTypographyRenderer('code'),
-              }}
-            >
-              {markdownText}
-            </ReactMarkdown>
-            <div className={styles.pageNavigateRow}>
-              {currentPageIndex > 0 && (
-                <Link
-                  href={docOptions[currentPageIndex - 1].simple_path}
-                  passHref
-                >
-                  <a className={styles.pageNavigate}>
-                    <BiChevronLeft />
-                    <Typography type="copy2">
-                      {docOptions[currentPageIndex - 1].metadata.title}
-                    </Typography>
-                  </a>
-                </Link>
-              )}
-              {currentPageIndex < docOptions.length - 1 && (
-                <Link
-                  href={docOptions[currentPageIndex + 1].simple_path}
-                  passHref
-                >
-                  <a className={styles.pageNavigate}>
-                    <Typography type="copy2">
-                      {docOptions[currentPageIndex + 1].metadata.title}
-                    </Typography>
-                    <BiChevronRight />
-                  </a>
-                </Link>
-              )}
-            </div>
-          </div>
-        )}
+        </div>
         <div className={styles.rightSection}>
-          {searchResults.length === 0 && (
-            <PageContents title={metadata ? metadata.title : ''} />
-          )}
+          <PageContents title={metadata ? metadata.title : ''} />
         </div>
       </main>
     </>
@@ -620,8 +638,17 @@ const getIdFromHeaderProps = (props: any) => {
     .join('-');
 };
 
+const copyHeadingIcon = (index: number) => {
+  return (
+    <span className={styles.headingCopyIcon} key={index}>
+      <BiLink />
+    </span>
+  );
+};
+
 const getDocsTypographyRenderer = (type: string) => {
   function ParagraphHeader({ ...props }) {
+    const router = useRouter();
     return (
       <>
         {type === 'code' ? (
@@ -651,14 +678,21 @@ const getDocsTypographyRenderer = (type: string) => {
               ...(['h4', 'h5'].includes(type)
                 ? {
                     id: getIdFromHeaderProps(props),
+                    onClick: () => {
+                      const basePath = router.asPath.split('#')[0];
+                      router.push(`${basePath}#${getIdFromHeaderProps(props)}`);
+                    },
                   }
                 : {}),
             },
-            props?.node?.children.map((c: any) =>
-              c.tagName === 'code'
-                ? createElement(c.tagName, {}, c?.children[0].value)
-                : c.value
-            ) || ''
+            [
+              ...props?.node?.children.map((c: any, i: number) =>
+                c.tagName === 'code'
+                  ? createElement(c.tagName, { key: i }, c?.children[0].value)
+                  : c.value
+              ),
+              copyHeadingIcon(props?.node?.children.length ?? 0),
+            ] || ''
           )
         )}
       </>
