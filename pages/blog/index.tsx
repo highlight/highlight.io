@@ -6,7 +6,6 @@ import { gql, GraphQLClient } from 'graphql-request';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
-import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
@@ -24,17 +23,22 @@ export const graphcms = new GraphQLClient(
   }
 );
 
-// need server-side request here to be able to filter the graphcms request via the query
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-  query,
-}) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
-  const tagProp = query.tag ? '$tag: [String!]' : '';
-  const tagFilter = query.tag ? 'tags_contains_all: $tag' : '';
+export async function getStaticProps() {
+  const { posts, tags } = await loadPosts(undefined);
+
+  return {
+    props: {
+      posts,
+      tags,
+      currentTag: '',
+    },
+    revalidate: 60,
+  };
+}
+
+const loadPosts = async (tag: string | undefined) => {
+  const tagProp = tag ? '$tag: [String!]' : '';
+  const tagFilter = tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
     query GetPosts(${tagProp}) {
       posts(
@@ -77,14 +81,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 `;
 
   const filteredRequest = graphcms.request(QUERY, {
-    tag: query.tag ? [query.tag] : [],
+    tag: tag ? [tag] : [],
   });
   const allTagsRequest = graphcms.request(TAGS_QUERY, {
     tag: [],
   });
 
   let requests = [filteredRequest];
-  if (query.tag) {
+  if (tag) {
     requests.push(allTagsRequest);
   } else {
     requests.push(filteredRequest);
@@ -103,11 +107,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const uniqueTags = Array.from(new Set(allTags.flat()));
 
   return {
-    props: {
-      posts: filteredPosts,
-      tags: uniqueTags,
-      currentTag: query.tag || '',
-    },
+    posts: filteredPosts,
+    tags: uniqueTags,
   };
 };
 
