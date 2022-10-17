@@ -28,9 +28,9 @@ async function handler(_: any, res: any) {
   `);
   H.metrics([
     {
-      name: 'gqlReq-ms',
+      name: 'sitemap-gql-latency-ms',
       value: global.performance.now() - start,
-      tags: [{ name: 'foo', value: 'bar' }],
+      tags: [{ name: 'site', value: process.env.WEBSITE_URL || '' }],
     },
   ]);
   const blogPages = posts.map((post: any) => `blog/${post.slug}`);
