@@ -25,7 +25,14 @@ export const graphcms = new GraphQLClient(
 );
 
 // need server-side request here to be able to filter the graphcms request via the query
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  query,
+}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
   const tagProp = query.tag ? '$tag: [String!]' : '';
   const tagFilter = query.tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
@@ -60,10 +67,30 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       }
     }
   `;
+  const TAGS_QUERY = gql`
+  query GetPosts(${tagProp}) {
+    posts(
+    ) {
+      tags
+    }
+  }
+`;
 
-  const { posts } = await graphcms.request(QUERY, {
+  const filteredRequest = graphcms.request(QUERY, {
     tag: query.tag ? [query.tag] : [],
   });
+  const allTagsRequest = graphcms.request(TAGS_QUERY, {
+    tag: [],
+  });
+
+  let requests = [filteredRequest];
+  if (query.tag) {
+    requests.push(allTagsRequest);
+  } else {
+    requests.push(filteredRequest);
+  }
+  const [{ posts }, { posts: allPosts }] = await Promise.all(requests);
+
   const filteredPosts = posts.sort((a: any, b: any) => {
     // sort by postedAt if the publishedAt field is the same
     if (a.postedAt === b.postedAt) {
@@ -71,9 +98,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       );
     }
-  });
-  const { posts: allPosts } = await graphcms.request(QUERY, {
-    tag: [],
   });
   const allTags = allPosts.map((post: any) => post.tags);
   const uniqueTags = Array.from(new Set(allTags.flat()));
