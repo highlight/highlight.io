@@ -464,7 +464,7 @@ const DocPage = ({
 
   useEffect(() => {
     setCurrentPageIndex(
-      docOptions.findIndex((d) => d.metadata.slug === metadata.slug)
+      docOptions.findIndex((d) => d.metadata?.slug === metadata?.slug)
     );
   }, [docOptions, metadata.slug]);
 
