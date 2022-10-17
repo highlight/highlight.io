@@ -464,9 +464,9 @@ const DocPage = ({
 
   useEffect(() => {
     setCurrentPageIndex(
-      docOptions.findIndex((d) => d.metadata?.slug === metadata?.slug)
+      docOptions.findIndex((d) => d?.metadata?.slug === metadata?.slug)
     );
-  }, [docOptions, metadata.slug]);
+  }, [docOptions, metadata?.slug]);
 
   useEffect(() => {
     if (redirect != null) {
