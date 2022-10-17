@@ -125,14 +125,22 @@
 }
 
 .pageTitle {
-  margin: 0 0 var(--size-large) !important;
+  margin: 0 0 var(--size-medium) !important;
 }
 
 .contentRender {
   h4,
   h5 {
     scroll-margin-top: var(--size-large);
-    margin: var(--size-xLarge) 0 !important;
+    margin: var(--size-large) 0 !important;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--color-copy-on-light);
+      text-decoration-thickness: 1px;
+      text-underline-offset: var(--size-xSmall);
+      cursor: pointer;
+    }
   }
 
   p {
@@ -157,6 +165,38 @@
   font-size: 16px;
 }
 
+h5:hover .headingCopyIcon {
+  display: inline-flex;
+}
+
+.headingCopyIcon {
+  vertical-align: middle;
+  align-items: center;
+  margin-top: -4px;
+  color: var(--color-copy-on-light);
+  display: none;
+
+  svg {
+    width: var(--size-large);
+    height: var(--size-large);
+    margin-left: var(--size-small);
+  }
+}
+
+.leftInner {
+  position: relative;
+}
+
+.searchDiv {
+  position: absolute;
+  background: var(--color-primary-background);
+  z-index: 100;
+  overflow: auto;
+  padding: var(--size-small) 0;
+  height: 60vh;
+  width: 100%;
+}
+
 .docSearchbar {
   border: 1px solid var(--color-divider-on-dark);
   border-radius: var(--border-radius);
@@ -165,6 +205,10 @@
   gap: var(--size-xSmall);
   align-items: center;
   margin-bottom: var(--size-medium);
+
+  svg {
+    flex: 0 0 24px;
+  }
 
   input {
     font-family: 'Poppins';
@@ -277,6 +321,8 @@
 .pageNavigateRow {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-divider-on-dark);
+  padding: var(--size-large) 0 var(--size-small);
 }
 
 .pageNavigate {
@@ -286,7 +332,8 @@
 
   svg {
     opacity: 0.5;
-    width: var(--size-medium);
+    width: var(--size-large);
+    height: var(--size-large);
   }
 
   &:hover {
