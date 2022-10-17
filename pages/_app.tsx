@@ -22,6 +22,7 @@ H.init('4d7k1xeo', {
     enabled: true,
     recordHeadersAndBody: true,
   },
+  tracingOrigins: true,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
