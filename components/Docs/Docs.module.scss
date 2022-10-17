@@ -6,12 +6,13 @@
 .leftSection {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  padding: var(--size-xxLarge) var(--size-large);
+  flex: 0 0 250px;
+  padding: var(--size-xLarge) var(--size-large);
   position: sticky;
-  height: calc(100vh - 120px);
-  top: 120px;
+  height: 100vh;
+  top: 0;
   overflow: auto;
+  z-index: 5;
 }
 
 .searchResultCard {
@@ -54,7 +55,18 @@
 .tocRow {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  padding: 4px 0;
+
+  &:hover {
+    border-radius: var(--border-radius);
+    background: #30294e4d;
+    color: var(--copy-on-dark);
+    cursor: pointer;
+
+    .tocChild {
+      opacity: 1;
+    }
+  }
 }
 
 .tocChild {
@@ -71,17 +83,20 @@
   font-weight: 400;
 }
 
+.tocItemChevronClosed {
+  transform: rotate(270deg);
+}
+
 .tocItemOpen a,
 .tocItemOpen {
-  color: var(--brand-accent-light) !important;
+  color: var(--color-copy-on-dark) !important;
   font-weight: 500;
-  opacity: 1;
 }
 
 .tocItemCurrent a,
 .tocItemCurrent {
-  color: var(--color-selected-light) !important;
-  font-weight: 500;
+  color: var(--color-copy-on-dark) !important;
+  opacity: 1 !important;
 }
 
 .tocChildren {
@@ -106,6 +121,7 @@
 .tocChildrenContent {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .pageTitle {
@@ -122,7 +138,8 @@
   p {
     font-size: 18px;
     font-weight: 400;
-    line-height: 34px;
+    line-height: 34px !important;
+    margin: var(--size-medium) 0 !important;
     color: var(--copy-on-dark);
   }
 
@@ -157,6 +174,7 @@
     font-size: 16px;
     line-height: 26px;
     color: var(--color-copy-on-dark);
+    flex: 1 1 auto;
 
     &:focus {
       outline: none;
@@ -213,20 +231,20 @@
 .centerSection {
   display: flex;
   flex-direction: column;
-  width: 850px;
-  padding: var(--size-large) var(--size-4xLarge) var(--size-4xLarge);
-  border-right: 1px var(--color-divider-on-dark) solid;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--size-xLarge) var(--size-4xLarge) var(--size-4xLarge);
   border-left: 1px var(--color-divider-on-dark) solid;
 }
 
 .rightSection {
   display: flex;
-  flex: 1 0 auto;
+  flex: 0 0 320px;
   flex-direction: column;
   position: sticky;
   padding: var(--size-xLarge) var(--size-large);
-  top: 120px;
-  height: calc(100vh - 120px);
+  top: 0;
+  height: 100vh;
 }
 
 .headingSection {
@@ -250,10 +268,35 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
-  width: 320px;
+  width: 100%;
 
   border: 1px solid var(--color-divider-on-dark);
   border-radius: var(--border-radius);
+}
+
+.pageNavigateRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pageNavigate {
+  display: flex;
+  align-items: center;
+  color: var(--color-copy-on-dark);
+
+  svg {
+    opacity: 0.5;
+    width: var(--size-medium);
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: var(--color-copy-on-dark);
+
+    svg {
+      opacity: 1;
+    }
+  }
 }
 
 .pageContentTitle {
@@ -297,6 +340,10 @@
   }
 }
 
+.tocMenu {
+  display: none;
+}
+
 @supports (-webkit-hyphens: none) {
   .contentRender {
     h4,
@@ -304,5 +351,56 @@
       padding-top: var(--size-large);
       margin-top: calc(-1 * var(--size-large));
     }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .mainWrapper {
+    flex-direction: column;
+  }
+
+  .contentRender {
+    h5 {
+      margin: 0 !important;
+    }
+  }
+
+  .leftSection {
+    background-color: var(--color-primary-background);
+    overflow: initial;
+    flex: 0 0 auto;
+    height: auto;
+    border-bottom: 1px solid var(--divider-on-dark);
+    padding: var(--size-large) var(--size-large);
+  }
+
+  .rightSection {
+    display: none;
+  }
+
+  .centerSection {
+    padding: var(--size-large) var(--size-xLarge) var(--size-4xLarge);
+  }
+
+  .tocMenu {
+    display: flex;
+  }
+
+  .tocContents {
+    padding-left: var(--size-small);
+  }
+
+  .tocMenuLarge {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .leftSection {
+    top: 0;
+  }
+
+  .centerSection {
+    padding: var(--size-large) var(--size-medium) var(--size-4xLarge);
   }
 }

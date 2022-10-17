@@ -13,13 +13,7 @@ import SvgBookIcon from '../../../public/images/BookIcon';
 import SvgEditIcon from '../../../public/images/EditIcon';
 import { Typography } from '../Typography/Typography';
 
-const Navbar = ({
-  hideFreeTrialText,
-  hideOnScroll = true,
-}: {
-  hideFreeTrialText?: boolean;
-  hideOnScroll?: boolean;
-}) => {
+const Navbar = ({ hideFreeTrialText }: { hideFreeTrialText?: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [developerOpen, setDeveloperOpen] = useState(false);
@@ -58,7 +52,7 @@ const Navbar = ({
   return (
     <div
       className={classNames(styles.container, {
-        [styles.hide]: scrolled && hideOnScroll,
+        [styles.hide]: scrolled,
       })}
     >
       <Banner>
