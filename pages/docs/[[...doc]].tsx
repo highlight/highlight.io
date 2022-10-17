@@ -601,7 +601,7 @@ const DocPage = ({
             ) : (
               <div></div>
             )}
-            {currentPageIndex < docOptions.length - 1 ? (
+            {currentPageIndex < docOptions?.length - 1 ? (
               <Link
                 href={docOptions[currentPageIndex + 1].simple_path}
                 passHref
@@ -691,7 +691,7 @@ const getDocsTypographyRenderer = (type: string) => {
                   ? createElement(c.tagName, { key: i }, c?.children[0].value)
                   : c.value
               ),
-              copyHeadingIcon(props?.node?.children.length ?? 0),
+              copyHeadingIcon(props?.node?.children?.length ?? 0),
             ] || ''
           )
         )}
