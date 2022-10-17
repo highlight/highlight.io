@@ -84,6 +84,7 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
     'hotplate',
     'writesonic',
     'tributi',
+    'superpowered',
     'sunsama',
     'cabal',
   ];
