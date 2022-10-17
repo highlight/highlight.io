@@ -25,7 +25,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import removeMd from 'remove-markdown';
 import { SearchResult } from '../api/docs/search/[searchValue]';
-import { BiSearch } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiSearch } from 'react-icons/bi';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 500;
@@ -50,7 +50,7 @@ const useHeadingsData = () => {
   const [nestedHeadings, setNestedHeadings] = useState<any>([]);
 
   useEffect(() => {
-    const headingElements = Array.from(document.querySelectorAll('h4, h5'));
+    const headingElements = Array.from(document.querySelectorAll('h5'));
     setNestedHeadings(headingElements);
   }, [router.query]);
 
@@ -358,6 +358,7 @@ const TableOfContents = ({
         {hasChildren ? (
           <ChevronDown
             className={classNames(styles.tocIcon, {
+              [styles.tocItemChevronClosed]: hasChildren && !open,
               [styles.tocItemOpen]: hasChildren && open,
               [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
               [styles.tocChild]: !isTopLevel,
@@ -441,6 +442,14 @@ const DocPage = ({
   const router = useRouter();
   const [searchResults, setSearchResults] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [open, setOpen] = useState(false);
+  const [currentPageIndex, setCurrentPageIndex] = useState(-1);
+
+  useEffect(() => {
+    setCurrentPageIndex(
+      docOptions.findIndex((d) => d.metadata.slug === metadata.slug)
+    );
+  }, [docOptions, metadata.slug]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -467,18 +476,51 @@ const DocPage = ({
         <title>{metadata ? metadata.title : ''}</title>
         <meta name="description" content={'TODO'} />
       </Head>
-      <Navbar hideFreeTrialText hideOnScroll={false} />
+      <Navbar hideFreeTrialText />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <DocSearchbar onChange={onSearchChange} />
-          {toc?.children.map((t) => (
-            <TableOfContents
-              key={t.docPathId}
-              toc={t}
-              docPaths={docOptions}
-              openParent={false}
+          <div className={styles.tocMenuLarge}>
+            {toc?.children.map((t) => (
+              <TableOfContents
+                key={t.docPathId}
+                toc={t}
+                docPaths={docOptions}
+                openParent={false}
+              />
+            ))}
+          </div>
+          <div
+            className={classNames(styles.tocRow, styles.tocMenu)}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <ChevronDown
+              className={classNames(styles.tocIcon, {
+                [styles.tocItemOpen]: open,
+              })}
             />
-          ))}
+            <Typography
+              type="copy3"
+              emphasis
+              className={classNames(styles.tocItem, {
+                [styles.tocItemOpen]: open,
+              })}
+            >
+              Menu
+            </Typography>
+          </div>
+          <Collapse isOpened={open}>
+            <div className={styles.tocContents}>
+              {toc?.children.map((t) => (
+                <TableOfContents
+                  key={t.docPathId}
+                  toc={t}
+                  docPaths={docOptions}
+                  openParent={false}
+                />
+              ))}
+            </div>
+          </Collapse>
         </div>
         {searchResults.length > 0 ? (
           <div className={styles.centerSection}>
@@ -526,6 +568,34 @@ const DocPage = ({
             >
               {markdownText}
             </ReactMarkdown>
+            <div className={styles.pageNavigateRow}>
+              {currentPageIndex > 0 && (
+                <Link
+                  href={docOptions[currentPageIndex - 1].simple_path}
+                  passHref
+                >
+                  <a className={styles.pageNavigate}>
+                    <BiChevronLeft />
+                    <Typography type="copy2">
+                      {docOptions[currentPageIndex - 1].metadata.title}
+                    </Typography>
+                  </a>
+                </Link>
+              )}
+              {currentPageIndex < docOptions.length - 1 && (
+                <Link
+                  href={docOptions[currentPageIndex + 1].simple_path}
+                  passHref
+                >
+                  <a className={styles.pageNavigate}>
+                    <Typography type="copy2">
+                      {docOptions[currentPageIndex + 1].metadata.title}
+                    </Typography>
+                    <BiChevronRight />
+                  </a>
+                </Link>
+              )}
+            </div>
           </div>
         )}
         <div className={styles.rightSection}>
