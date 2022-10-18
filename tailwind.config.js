@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         'highlight-yellow': '#EBFF5E',
         'copy-on-dark': '#DFDFDF',
+        'divider-on-dark': '#30294E',
       },
     },
   },
