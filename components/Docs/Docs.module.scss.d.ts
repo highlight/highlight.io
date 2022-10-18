@@ -22,6 +22,7 @@ export const pageTitle: string;
 export const rightSection: string;
 export const searchDiv: string;
 export const searchResultCard: string;
+export const spinner: string;
 export const tocChild: string;
 export const tocChildren: string;
 export const tocChildrenContent: string;

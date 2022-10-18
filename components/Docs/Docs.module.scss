@@ -6,12 +6,11 @@
 .leftSection {
   display: flex;
   flex-direction: column;
-  flex: 0 0 250px;
+  flex: 0 0 280px;
   padding: var(--size-xLarge) var(--size-large);
   position: sticky;
   height: 100vh;
   top: 0;
-  overflow: auto;
   z-index: 5;
 }
 
@@ -189,12 +188,23 @@ h5:hover .headingCopyIcon {
 
 .searchDiv {
   position: absolute;
+  top: 48px;
+  width: 480px;
+  max-width: calc(100vw - 32px);
+  left: 0;
   background: var(--color-primary-background);
+  border: 1px solid var(--color-divider-on-dark);
   z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   overflow: auto;
-  padding: var(--size-small) 0;
-  height: 60vh;
-  width: 100%;
+  padding: var(--size-xSmall);
+  max-height: 60vh;
+
+  .spinner {
+    margin: var(--size-medium);
+  }
 }
 
 .docSearchbar {
@@ -276,6 +286,7 @@ h5:hover .headingCopyIcon {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  max-width: 850px;
   min-width: 0;
   padding: var(--size-xLarge) var(--size-4xLarge) var(--size-4xLarge);
   border-left: 1px var(--color-divider-on-dark) solid;
@@ -368,12 +379,12 @@ h5:hover .headingCopyIcon {
       margin-left: -24px;
       list-style-type: '-';
       color: var(--copy-on-dark);
+      padding-left: var(--size-small);
       opacity: 0.7;
     }
     a {
       color: var(--copy-on-dark);
       font-weight: 400;
-      padding-left: var(--size-small);
     }
 
     .active {
@@ -404,6 +415,10 @@ h5:hover .headingCopyIcon {
 @media screen and (max-width: 1000px) {
   .mainWrapper {
     flex-direction: column;
+  }
+
+  .searchDiv {
+    width: 100%;
   }
 
   .contentRender {
