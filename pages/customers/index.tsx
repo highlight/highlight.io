@@ -69,6 +69,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Customers = ({ customers }: { customers: Customer[] }) => {
   const expandedCustomers = customers.slice(0, 6);
+  const allCustomersLogos = [
+    'pipe',
+    'portal',
+    'dripos',
+    'knock',
+    'hightouch',
+    'basedash',
+    'impira',
+    'mage',
+    'airplane',
+    'examedi',
+    'guruhotel',
+    'hotplate',
+    'writesonic',
+    'tributi',
+    'superpowered',
+    'sunsama',
+    'cabal',
+  ];
 
   return (
     <>
@@ -100,8 +119,8 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
           </div>
           <h2>See all our customers</h2>
           <div className={styles.allCustomersGrid}>
-            {customers.map(({ slug, companyLogo }, i) => (
-              <CompanyLogo slug={slug} logo={companyLogo?.url} key={i} />
+            {allCustomersLogos.map((name, i) => (
+              <CompanyLogo name={name} key={i} />
             ))}
           </div>
         </div>
@@ -112,20 +131,16 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
   );
 };
 
-const CompanyLogo = ({ slug, logo }: { slug: string; logo?: string }) => {
+const CompanyLogo = ({ name }: { name: string }) => {
   return (
-    <>
-      {logo && (
-        <div className={styles.allCustomersLogo}>
-          <Image
-            src={logo}
-            alt={`${slug} logo`}
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-      )}
-    </>
+    <div className={styles.allCustomersLogo}>
+      <Image
+        src={`/images/companies/white-logos/${name}.png`}
+        alt={`${name} logo`}
+        layout="fill"
+        objectFit="contain"
+      />
+    </div>
   );
 };
 
