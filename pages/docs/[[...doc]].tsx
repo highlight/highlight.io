@@ -1,7 +1,14 @@
 import { promises as fsp } from 'fs';
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { createElement, useEffect, useRef, useState } from 'react';
+import {
+  createElement,
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import remarkGfm from 'remark-gfm';
@@ -31,6 +38,8 @@ import {
   BiLink,
   BiSearch,
 } from 'react-icons/bi';
+import Spin from 'antd/lib/spin';
+import 'antd/lib/spin/style/index.css';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -431,11 +440,16 @@ const TableOfContents = ({
   );
 };
 
-const DocSearchbar = ({ onChange }: { onChange: (e: any) => void }) => {
+const DocSearchbar = (
+  props: DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
+) => {
   return (
     <div className={styles.docSearchbar}>
       <BiSearch />
-      <input type="text" onChange={onChange} placeholder="Find anything" />
+      <input {...props} type="text" placeholder="Find anything" />
     </div>
   );
 };
@@ -459,6 +473,8 @@ const DocPage = ({
   const router = useRouter();
   const [searchResults, setSearchResults] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
 
@@ -476,9 +492,11 @@ const DocPage = ({
 
   const onSearchChange = async (e: any) => {
     if (e.target.value !== '') {
+      setIsSearchLoading(true);
       const results = await (
         await fetch(`/api/docs/search/${e.target.value}`)
       ).json();
+      setIsSearchLoading(false);
       setSearchResults(results);
       setSearchValue(e.target.value);
     } else {
@@ -493,37 +511,57 @@ const DocPage = ({
         <title>{metadata ? metadata.title : ''}</title>
         <meta name="description" content={'TODO'} />
       </Head>
-      <Navbar hideFreeTrialText />
+      <Navbar hideFreeTrialText fixed />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
-            <DocSearchbar onChange={onSearchChange} />
-            {searchResults.length > 0 && (
+            <DocSearchbar
+              onChange={onSearchChange}
+              onFocus={() => {
+                setSearchOpen(true);
+              }}
+              onBlur={() => {
+                setSearchOpen(false);
+              }}
+            />
+            {searchValue !== '' && searchOpen && (
               <div className={styles.searchDiv}>
-                {searchResults.map((result: SearchResult, i) => (
-                  <Link href={result.path} key={i} passHref>
-                    <div
-                      className={styles.searchResultCard}
-                      onClick={() => {
-                        setSearchResults([]);
-                      }}
-                    >
-                      <div>
-                        <Typography type="copy3">{result.title}</Typography>
+                {isSearchLoading ? (
+                  <Spin className={styles.spinner} />
+                ) : (
+                  searchResults.map((result: SearchResult, i) => (
+                    <Link href={result.path} key={i} passHref>
+                      <div
+                        className={styles.searchResultCard}
+                        onClick={() => {
+                          setSearchResults([]);
+                        }}
+                      >
+                        <div>
+                          <Highlighter
+                            highlightClassName={styles.highlightedText}
+                            searchWords={[searchValue]}
+                            autoEscape={true}
+                            textToHighlight={result.title}
+                          />
+                        </div>
+                        <div className={styles.content}>
+                          <Highlighter
+                            highlightClassName={styles.highlightedText}
+                            searchWords={[searchValue]}
+                            autoEscape={true}
+                            textToHighlight={`${removeMd(
+                              result.content.slice(
+                                0,
+                                SEARCH_RESULT_BLURB_LENGTH
+                              )
+                            )}...`}
+                          />
+                        </div>
                       </div>
-                      <div className={styles.content}>
-                        <Highlighter
-                          highlightClassName={styles.highlightedText}
-                          searchWords={[searchValue]}
-                          autoEscape={true}
-                          textToHighlight={`${removeMd(
-                            result.content.slice(0, SEARCH_RESULT_BLURB_LENGTH)
-                          )}...`}
-                        />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  ))
+                )}
               </div>
             )}
           </div>

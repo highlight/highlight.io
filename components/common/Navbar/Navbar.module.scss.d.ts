@@ -3,6 +3,7 @@ export const callToAction: string;
 export const chevronDown: string;
 export const container: string;
 export const dropdownItem: string;
+export const fixed: string;
 export const header: string;
 export const headerBorder: string;
 export const headerInner: string;
