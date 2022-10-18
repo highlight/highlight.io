@@ -31,7 +31,7 @@ For sensitive input fields that your team would like to ignore user input for, y
 
 ## Strict Privacy Mode
 
-If you don't want to manually annotate what elements to not record then you can set `enableStrictPrivacy` to `true` when calling [`H.init()`](docId\:yo4FQx3odAtsQsbZOuG_m). Strict Privacy Mode will obfuscate all text and images. The text obfuscation is not reversible and is done on the client.
+If you don't want to manually annotate what elements to not record then you can set `enableStrictPrivacy` to `true` when calling [`H.init()`](/session-replay/privacy). Strict Privacy Mode will obfuscate all text and images. The text obfuscation is not reversible and is done on the client.
 
 Here are some examples:
 

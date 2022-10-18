@@ -27,4 +27,4 @@ Replace the Highlight snippet in your `index.html` with the one on <https://app.
 
 ## Changelog
 
-To see if a new version has any breaking changes, see [Changelog](docId\:G1mhprjRuXqJrpUT9ikUG).
+To see if a new version has any breaking changes, see [Changelog](https://highlight.canny.io/changelog).

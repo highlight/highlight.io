@@ -40,7 +40,7 @@ H.init(
 );
 ```
 
-Check out [H.init()](docId\:yo4FQx3odAtsQsbZOuG_m) docs for more details about the options to configure.
+Check out [H.init()](/api/h-init) docs for more details about the options to configure.
 
 If you prefer a full-fledged example, you can also reference our sample [Angular Repo with Highlight Configured](https://github.com/highlight-run/example-angular).
 

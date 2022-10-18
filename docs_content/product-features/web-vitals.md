@@ -29,5 +29,5 @@ Seeing how your web vital metrics perform over time is important to make sure yo
 
 ## Metric Monitors
 
-[](www.google.com)Metric monitor alerts can be added from the [Alerts](docId:0OM1OAgjJBP8lrJqqZ3Sv) page to warn you when any of your Web Vitals metrics exceed a certain threshold. You can configure both the aggregation function (average, p90, etc.) and threshold value.
+[](www.google.com)Metric monitor alerts can be added from the [Recording Network Requests and Responses](/product-features/alerts) page to warn you when any of your Web Vitals metrics exceed a certain threshold. You can configure both the aggregation function (average, p90, etc.) and threshold value.
 

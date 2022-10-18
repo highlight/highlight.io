@@ -46,7 +46,7 @@ The path that Highlight will use to send `.map` files. The default value is `./b
 
 ## `appVersion`
 
-The version of your current deployment. This is the same version string your provide as `version` to [H.init()](docId\:yo4FQx3odAtsQsbZOuG_m).  This ensures that we're always using the same set of sourcemaps for your current bundle. The default value is the current Git hash.
+The version of your current deployment. This is the same version string your provide as `version` to [H.init()](/api/h-init).  This ensures that we're always using the same set of sourcemaps for your current bundle. The default value is the current Git hash.
 
 ## Generating Sourcemaps
 

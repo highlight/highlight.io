@@ -60,11 +60,11 @@ Backend changes are dependent on the underlying language/framework used on the s
 
 Below are solutions for what we support today.
 
-[Go Backend Integration](docId\:OyIG4rOK_mSodkovjMovO)&#x20;
+[Go Backend Integration](/getting-started/backend-sdk/go)&#x20;
 
-[Next.js Backend Integration](docId\:eAyEQOeuZNon3yENThVMp)
+[Next.js Backend Integration](/getting-started/backend-sdk/nextjs)
 
-[Express Backend Integration](docId\:oNqirqCiq9HOyOgje0J2p) &#x20;
+[Express Backend Integration](/getting-started/backend-sdk/express) &#x20;
 
 ## Troubleshooting
 

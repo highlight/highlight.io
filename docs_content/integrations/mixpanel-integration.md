@@ -24,9 +24,9 @@ H.init(
 
 ### `track()`
 
-Calling [`H.track()`](docId\:wQNpdAbGd4VI3FJmNRjJy) will forward the data to Mixpanel's `track()`. Highlight will also add a Mixpanel property called `highlightSessionURL`  which contains the URL to the Highlight session where the track event happened.
+Calling [`H.track()`](/api/h-track) will forward the data to Mixpanel's `track()`. Highlight will also add a Mixpanel property called `highlightSessionURL`  which contains the URL to the Highlight session where the track event happened.
 
 ### `identify()`
 
-Calling [`H.identify()`](docId\:GqZdsap8637p2yEWmZzBJ) will forward the data to Mixpanel's `identify()`.
+Calling [`H.identify()`](/api-h-identify) will forward the data to Mixpanel's `identify()`.
 

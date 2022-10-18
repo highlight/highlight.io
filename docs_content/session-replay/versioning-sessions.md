@@ -7,7 +7,7 @@ updatedAt: 2022-03-21T18:25:40.000Z
 
 When using Highlight, it can be useful to know which app version a session is recorded on. Highlight helps you by letting you tag which app version a session was recorded on.
 
-To tag your sessions with a version, you can set the `version` field in the [`H.init()`](docId\:yo4FQx3odAtsQsbZOuG_m).
+To tag your sessions with a version, you can set the `version` field in the [`H.init()`](/api/h-init).
 
 ```typescript
 import App from "./App";
@@ -25,7 +25,7 @@ ReactDOM.render(
 
 ## Versioning Errors
 
-`version` is used for errors too, see [Versioning Errors](docId\:lXFvesAaHy9cs2Nc3xwNg) for more information.
+`version` is used for errors too, see [Versioning Errors](/error-monitoring/versioning-errors) for more information.
 
 
 

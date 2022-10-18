@@ -5,7 +5,7 @@ createdAt: 2022-05-06T23:05:46.000Z
 updatedAt: 2022-09-12T16:18:46.000Z
 ---
 
-Highlight records [Tracking Events](docId\:BNpFSC_W99ZevlKUUUEf3) and other metadata about sessions to make them easy to search and filter. Start with the `Quick Search` that will find the best matches depending on what you're looking for and customize your query further in the panel above the sessions feed.
+Highlight records [Tracking Events](/session-replay/tracking-events) and other metadata about sessions to make them easy to search and filter. Start with the `Quick Search` that will find the best matches depending on what you're looking for and customize your query further in the panel above the sessions feed.
 
 ![Quick Search Input.](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/l6Fxtyklubv4aEFnGY6-b_image.png)
 

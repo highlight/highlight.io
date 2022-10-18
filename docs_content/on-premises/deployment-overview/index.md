@@ -7,10 +7,10 @@ updatedAt: 2021-10-01T21:11:22.000Z
 
 If your company has strict security/data access requirements, you have the follow options for deploying Highlight on-prem:
 
-[AWS Deployment](docId\:eNAVbexTLcqWPHvbHY-Ah)
+[AWS Deployment](/on-premises/deployment-overview/aws-deployment)
 We have a step-by-step guide for deploying Highlight on a single EC2 instance, seen [here](https://docs2.highlight.run/aws-deployment).
 
-[Heroku Deployment](docId\:SV_3zSUzHW_YiCZHIRVmO)&#x20;
+[Heroku Deployment](/on-premises/deployment-overview/heroku-deployment)&#x20;
 We have a step-by-step guide for deploying Highlight on Heroku, seen [here](https://docs2.highlight.run/heroku-deployment).
 
 ### Custom Deployment

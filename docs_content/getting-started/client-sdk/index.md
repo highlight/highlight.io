@@ -9,19 +9,19 @@ updatedAt: 2022-05-26T18:53:53.000Z
 
 Get started with one of these guides if you're using a listed framework:
 
-*   [React.js](docId\:a5qoybjBTPZltvOSMXJw7)&#x20;
+*   [React.js](/getting-started/client-sdk/reactjs)&#x20;
 
-*   [Next.js](docId\:d3G0HZZ8r1u28kGfwC442)&#x20;
+*   [Next.js](/getting-started/client-sdk/nextjs)&#x20;
 
-*   [Vue.js](docId\:AmCXqaAHpNp-oz9w53jy6)&#x20;
+*   [Vue.js](/getting-started/client-sdk/vuejs)&#x20;
 
-*   [Gatsby.js](docId:4TkG0OS3iRJAlg_jIa7IL)&#x20;
+*   [Gatsby.js](/getting-started/client-sdk/gatsbyjs)&#x20;
 
-*   [HTML](docId\:XgeS-yhIeWnM9dOIAiv0l)
+*   [HTML](/getting-started/client-sdk/html)
 
-*   [SvelteKit](docId\:nQvOED-yuuH8Y-fkWyjRy)&#x20;
+*   [SvelteKit](/getting-started/client-sdk/sveltekit)&#x20;
 
-*   [Angular](docId\:QEimoLCsQ0JnhloZC7tFV)&#x20;
+*   [Angular](/getting-started/client-sdk/angular)&#x20;
 
 ## Installing the SDK
 

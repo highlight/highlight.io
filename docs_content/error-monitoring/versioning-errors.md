@@ -7,7 +7,7 @@ updatedAt: 2022-03-22T15:27:47.000Z
 
 When using Highlight, it can be useful to know which app version an error is introduced. Highlight helps you by letting you tag which app version an error was thrown in.
 
-To tag your errors with a version, you can set the `version` field in the [`H.init()`](docId\:yo4FQx3odAtsQsbZOuG_m).
+To tag your errors with a version, you can set the `version` field in the [`H.init()`](/api/h-init).
 
 ```typescript
 import App from "./App";
@@ -25,5 +25,5 @@ ReactDOM.render(
 
 ## Versioning Sessions
 
-`version` is used for sessions too, see [Versioning Sessions](docId:7IcWg2OqKtg2EIHzLGf23) for more information.
+`version` is used for sessions too, see [Versioning Sessions](/session-replay/versioning-sessions) for more information.
 
