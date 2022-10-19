@@ -70,16 +70,16 @@ export default async function handler(req: NextRequest) {
             style={{ marginBottom: 153 }}
             width="68"
             height="68"
-            viewBox="0 0 224 224"
+            viewBox="0 0 68 68"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="112" cy="112" r="112" fill="white" />
+            <circle cx="34" cy="34" r="34" fill="#6C37F4" />
             <path
               fillRule="evenodd"
               clipRule="evenodd"
-              d="M77 63C69.268 63 63 69.268 63 77V147C63 154.732 69.268 161 77 161H119L84 63H77ZM105 63L140 161H147C154.732 161 161 154.732 161 147V77C161 69.268 154.732 63 147 63H105Z"
-              fill="#6C37F4"
+              d="M23.375 19.125C21.0278 19.125 19.125 21.0278 19.125 23.375V44.625C19.125 46.9722 21.0278 48.875 23.375 48.875H36.125L25.5 19.125H23.375ZM31.875 19.125L42.5 48.875H44.625C46.9722 48.875 48.875 46.9722 48.875 44.625V23.375C48.875 21.0278 46.9722 19.125 44.625 19.125H31.875Z"
+              fill="white"
             />
           </svg>
           <span
@@ -129,10 +129,10 @@ export default async function handler(req: NextRequest) {
           style={{
             position: 'absolute',
             top: 0,
-            left: 400,
+            left: 550,
           }}
-          width={800}
-          height={627}
+          width={650}
+          height={650}
           src={`data:image/png;base64,${heroBase64}`}
         ></img>
       </div>
