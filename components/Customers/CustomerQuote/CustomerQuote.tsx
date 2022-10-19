@@ -27,6 +27,7 @@ export const CustomerQuote = ({
         className={style.avatar}
         src={authorAvatar}
         alt="Author picture"
+        objectFit="cover"
         width="48px"
         height="48px"
       />

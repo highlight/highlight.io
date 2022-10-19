@@ -11,7 +11,7 @@ To get started, go to <https://app.highlight.run/integrations> and click the "Co
 
 ## Features
 
-1.  [Comments](docId\:KUJjzlZW3FgFGRdLZk-QZ) can create a Linear issue filled out with the body of the comment and link back to the Session.
+1.  [Comments](/product-features/comments) can create a Linear issue filled out with the body of the comment and link back to the Session.
 
-2.  [Grouping Errors](docId\:nsklovPV2zpwXld8rW_8l) shows a shortcut to creating a Linear issue pre-populated with the Error stack trace and linking to the full context of how the error occurred.
+2.  [Grouping Errors](/error-monitoring/grouping-errors) shows a shortcut to creating a Linear issue pre-populated with the Error stack trace and linking to the full context of how the error occurred.
 

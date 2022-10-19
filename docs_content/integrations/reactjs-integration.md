@@ -11,7 +11,7 @@ Highlight ships [`@highlight-run/react`](https://github.com/highlight-run/react)
 
 Highlight provides an `ErrorBoundary` to help you provide a better experience for your users when your application crashes. Using an `ErrorBoundary` gives your application an opportunity to recover from a bad state.
 
-Highlight also allows you to show a crash report powered by [User Feedback](docId\:r8pllAqaZBYEKEpFN2-Zt). A crash report is shown in the session when the crash happens, giving you the context for the user feedback.
+Highlight also allows you to show a crash report powered by [User Feedback](/product-features/user-feedback). A crash report is shown in the session when the crash happens, giving you the context for the user feedback.
 
 ```typescript
 import { ErrorBoundary } from '@highlight-run/react';
@@ -86,7 +86,7 @@ The strings used for the Highlight crash report.
 
 `user`
 
-Allows you to attach additional user information to the feedback report. If you've called [`H.identify()`](docId\:GqZdsap8637p2yEWmZzBJ) in your application before, you won't have to set this, Highlight will infer the user's identity.
+Allows you to attach additional user information to the feedback report. If you've called [`H.identify()`](/api/h-identify) in your application before, you won't have to set this, Highlight will infer the user's identity.
 
 `title`
 

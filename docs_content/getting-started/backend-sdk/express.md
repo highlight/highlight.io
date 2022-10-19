@@ -9,7 +9,7 @@ Highlight ships  `@highlight-run/node` which can be installed alongside highligh
 
 ## Usage
 
-The usage of this Backend SDK requires one of our [Client SDK](docId:7uAC0lqxfaH3xH5IarVwf)s to be installed, so please follow the instructions there if you have not done so.
+The usage of this Backend SDK requires one of our [Client SDK](/getting-started/client-sdk)s to be installed, so please follow the instructions there if you have not done so.
 
 ### The `@highlight-run/node` Package
 

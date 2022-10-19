@@ -49,6 +49,8 @@ interface DocPath {
   array_path: string[];
   // e.g. 'tips/sessions-search-deep-linking.md'
   simple_path: string;
+  // e.g. '[/tips, /getting-started/client-sdk]'
+  relative_links: string[];
   // e.g. /Users/jaykhatri/projects/highlight-landing/docs_content/tips/sessions-search-deep-linking.md
   total_path: string;
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
@@ -172,7 +174,10 @@ export const getDocsPaths = async (
         // strip out any notion of ".md"
         pp = simple_path.replace('.md', '');
       }
-      const { data } = await readMarkdown(fsp, path.join(total_path || ''));
+      const { data, links } = await readMarkdown(
+        fsp,
+        path.join(total_path || '')
+      );
       const hasRequiredMetadata = ['title', 'slug'].every((item) =>
         data.hasOwnProperty(item)
       );
@@ -185,6 +190,7 @@ export const getDocsPaths = async (
       paths.push({
         simple_path: pp,
         array_path: pp.split('/'),
+        relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
         indexPath: file_string === 'index.md',
         metadata: data,
@@ -223,17 +229,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 
   let docid = 0;
+  // for each document path, contains relative links used by that document
+  const docRelLinks = new Map<string, Array<string>>();
   // TODO(jaykhatri) - gotta pass the open state to child doc paths below;
   // will require traversing up to all parents
-  for (var d of docPaths) {
+  for (const d of docPaths) {
+    docRelLinks.set(`/${d.simple_path}`, d.relative_links);
     let currentEntry = toc;
     // console.log('path', d.simple_path);
     // console.log('doc path', d);
-    for (var a of d.array_path) {
+    for (const a of d.array_path) {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
       // 2. if not, create it. if so, set the new current toc entry
-      let foundEntry = currentEntry?.children.find((t, ti) => {
+      let foundEntry = currentEntry?.children.find((t) => {
         return t.tocSlug === a;
       });
       if (!foundEntry) {
@@ -259,6 +268,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
   //   }
   // };
   // traverse(toc);
+
+  // validate that any relative links referenced in md files actually exist.
+  for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
+    for (const link of relativeLinks) {
+      if (!docRelLinks.has(link)) {
+        throw new Error(
+          `Link ${link} used in ${simplePath} is not a valid relative link.`
+        );
+      }
+    }
+  }
 
   const currentDoc = docPaths.find((d) => {
     // console.log(
@@ -296,9 +316,13 @@ export const readMarkdown = async (fs_api: any, filePath: string) => {
       yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as Object,
     },
   });
+  const links = new Set<string>(
+    [...content.matchAll(/\[\S+]\(([\w/-]+)\)/gi)].map((m) => m[1])
+  );
   return {
     content,
     data,
+    links,
   };
 };
 
@@ -365,7 +389,7 @@ const TableOfContents = ({
   docPaths: DocPath[];
 }) => {
   const [open, setOpen] = useState(openParent);
-  const hasChildren = toc?.children.length ? true : false;
+  const hasChildren = !!toc?.children.length;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const isTopLevel =
@@ -456,7 +480,6 @@ const DocSearchbar = (
 
 const DocPage = ({
   markdownText,
-  slug,
   toc,
   redirect,
   docOptions,
@@ -619,6 +642,7 @@ const DocPage = ({
               h4: getDocsTypographyRenderer('h5'),
               h5: getDocsTypographyRenderer('h5'),
               code: getDocsTypographyRenderer('code'),
+              a: getDocsTypographyRenderer('a'),
             }}
           >
             {markdownText}
@@ -684,8 +708,15 @@ const copyHeadingIcon = (index: number) => {
   );
 };
 
-const getDocsTypographyRenderer = (type: string) => {
-  function ParagraphHeader({ ...props }) {
+const resolveLink = (href: string): string => {
+  if (href.startsWith('/')) {
+    return `/docs${href}`;
+  }
+  return href;
+};
+
+const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
+  function DocsTypography({ ...props }) {
     const router = useRouter();
     return (
       <>
@@ -707,6 +738,10 @@ const getDocsTypographyRenderer = (type: string) => {
                 <Image src={CopyIcon} alt="Copy" />
               </div>
             </div>
+          )
+        ) : type === 'a' ? (
+          props.children?.length && (
+            <Link href={resolveLink(props.href)}>{props.children[0]}</Link>
           )
         ) : (
           createElement(
@@ -736,7 +771,7 @@ const getDocsTypographyRenderer = (type: string) => {
       </>
     );
   }
-  return ParagraphHeader;
+  return DocsTypography;
 };
 
 export default DocPage;

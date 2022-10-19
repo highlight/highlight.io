@@ -13,9 +13,8 @@ Highlight's WebGL recording is currently in beta. We are actively working on mak
 
 ## Getting Started
 
-Recording WebGL is disabled by default. To enable WebGL recording, enable canvas recording by following the instructions for [Canvas](docId:-46LfreM66BCi4uP1BkB2) recording.
+Recording WebGL is disabled by default. To enable WebGL recording, enable canvas recording by following the instructions for [Canvas](/product-features/canvas) recording.
 
 ## Caveats
 
-*   [Privacy](docId\:Nwmpmz7WSlvHP61e3RQSd) controls do not apply to WebGL right now
-
+*   [Privacy](/session-replay/privacy) controls do not apply to WebGL right now

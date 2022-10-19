@@ -7,7 +7,7 @@ updatedAt: 2022-03-07T22:43:17.000Z
 
 Many times during debugging, it's useful to know what the network request/response headers and bodies are. Highlight allows you to record network headers and bodies.
 
-You can enable recording of network requests and responses by setting `networkRecording.recordHeadersAndBody` (see [NetworkRecordingOptions](docId\:UXu0aO9T0Q81aMLYLWfTA)) to `true` when initializing Highlight.
+You can enable recording of network requests and responses by setting `networkRecording.recordHeadersAndBody` (see [NetworkRecordingOptions](/api/h-init/network-recording-options)) to `true` when initializing Highlight.
 
 Highlight monkey patches `XmlHttpRequest` and `fetch` to record data from your app's requests/responses including status codes, headers, and bodies.
 
@@ -60,5 +60,5 @@ This configuration is only available for `highlight.run` versions newer than `4.
 
 ## API
 
-See [NetworkRecordingOptions](docId\:UXu0aO9T0Q81aMLYLWfTA) for more information on how to configure network recording.
+See [NetworkRecordingOptions](/api/h-init/network-recording-options) for more information on how to configure network recording.
 

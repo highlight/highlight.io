@@ -11,7 +11,7 @@ We are actively working on improving recording of canvas elements. If you have a
 
 Highlight by default does not record the contents of `<canvas>` elements. This is usually why the session replay has blank areas where those areas should be `<canvas>` elements. We provide experimental recording of `<canvas>` contents.&#x20;
 
-Ensure you have installed [highlight.run >= 4.3.6](https://www.npmjs.com/package/highlight.run/v/4.3.6). Enable canvas recording by configuring [H.init()](docId\:yo4FQx3odAtsQsbZOuG_m).
+Ensure you have installed [highlight.run >= 4.3.6](https://www.npmjs.com/package/highlight.run/v/4.3.6). Enable canvas recording by configuring [H.init()](/api/h-init).
 
 ```javascript
 H.init('YOUR_PROJECT_ID', {
@@ -32,5 +32,5 @@ Even though this feature is experimental, it should not have any impact on your 
 
 ## Caveats
 
-*   [Privacy](docId\:Nwmpmz7WSlvHP61e3RQSd) controls do not apply to canvas recording right now
+*   [Privacy](/session-replay/privacy) controls do not apply to canvas recording right now
 

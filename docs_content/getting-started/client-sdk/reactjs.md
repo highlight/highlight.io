@@ -60,4 +60,4 @@ Start your app, go to it in the browser, then click around. Highlight will be re
 
 ## Configuration
 
-Learn more about the other developer experience goodies Highlight provides by seeing [React.js](docId\:aDYBJjUS4zykkLi21Jgcr).
+Learn more about the other developer experience goodies Highlight provides by seeing [React.js](/getting-started/client-sdk/reactjs).

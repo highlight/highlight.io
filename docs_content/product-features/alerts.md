@@ -19,5 +19,5 @@ If you haven't already integrated Highlight with Slack, clicking the "Channels T
 
 You may want to exclude certain environments from generating alerts. For example, in your team's dev environment, it's unlikely that you want to be notified of every error. You can do this by adding an excluded environment option.
 
-Learn more about [Environments](docId\:S1E94W0A_QwwRvIoadLEP).
+Learn more about [Environments](/product-features/environments).
 
