@@ -18,10 +18,6 @@ const QUERY = gql`
         firstName
         lastName
         title
-        twitterLink
-        linkedInLink
-        githubLink
-        personalWebsiteLink
         profilePhoto {
           url
         }
@@ -98,18 +94,35 @@ export default async function handler(req: NextRequest) {
             Highlight Blog Post
           </span>
           <span tw="text-4xl mb-12">{post?.title || slug}</span>
-          <span>
-            {post?.author?.firstName} {post?.author?.lastName}
-          </span>
-          <span
-            style={{
-              color: '#DFDFDF',
-              fontSize: 16,
-              fontFamily: '"PoppinsLight"',
-            }}
-          >
-            {post?.author?.title}
-          </span>
+          <div tw={'flex flex-row items-center'}>
+            <div tw={'flex flex-col'}>
+              {post?.author?.profilePhoto.url && (
+                <span tw={'pr-4'}>
+                  <img
+                    src={post?.author?.profilePhoto.url}
+                    width={50}
+                    height={50}
+                    alt={'author profile picture'}
+                    tw={'rounded-3xl'}
+                  />
+                </span>
+              )}
+            </div>
+            <div tw={'flex flex-col'}>
+              <span>
+                {post?.author?.firstName} {post?.author?.lastName}
+              </span>
+              <span
+                style={{
+                  color: '#DFDFDF',
+                  fontSize: 16,
+                  fontFamily: '"PoppinsLight"',
+                }}
+              >
+                {post?.author?.title}
+              </span>
+            </div>
+          </div>
         </div>
         <img
           alt={'highlight hero'}
