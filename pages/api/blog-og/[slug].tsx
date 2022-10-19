@@ -109,7 +109,8 @@ export default async function handler(req: NextRequest) {
           style={{
             position: 'absolute',
             top: 0,
-            left: 0,
+            left: 400,
+            width: 800,
           }}
           src={`${url.protocol}//${url.host}/images/hero.png`}
         ></img>
