@@ -35,12 +35,23 @@ async function handler(_: any, res: any) {
   ]);
   const blogPages = posts.map((post: any) => `blog/${post.slug}`);
 
+  const { customers } = await graphcms.request(gql`
+  query GetCustomers() {
+    customers() {
+      slug
+    }
+  }
+  `);
+  const customerPages = customers.map(
+    (customer: any) => `customers/${customer.slug}`
+  );
+
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
   const staticPages = staticPagePaths.map((path) => {
     return `${path.replace('pages', '').replace('index.tsx', '')}`;
   });
 
-  const pages = [...staticPages, ...blogPages];
+  const pages = [...staticPages, ...blogPages, ...customerPages];
 
   const addPage = (page: string) => {
     return `    <url>
