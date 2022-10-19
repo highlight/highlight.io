@@ -320,10 +320,7 @@ const PostPage = ({
       <Meta
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.description}
-        absoluteImageUrl={
-          post?.metaImage?.url ||
-          `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/blog-og/${post.slug}`
-        }
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/blog-og/${post.slug}`}
         canonical={`/blog/${post.slug}`}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
