@@ -3,6 +3,7 @@ import { NextRequest, URLPattern } from 'next/server';
 import { gql } from 'graphql-request';
 import { graphcms } from '../../blog';
 import { Post } from '../../../components/Blog/BlogPost/BlogPost';
+import { Buffer } from 'buffer';
 
 export const config = {
   runtime: 'experimental-edge',
