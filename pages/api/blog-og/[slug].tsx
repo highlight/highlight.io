@@ -1,7 +1,5 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
-import logo from '../../../public/images/highlight-logo-on-purple.svg';
-import hero from '../../../public/images/hero.svg';
 import { gql } from 'graphql-request';
 import { graphcms } from '../../blog';
 import { Post } from '../../../components/Blog/BlogPost/BlogPost';
@@ -44,6 +42,7 @@ const fontLight = fetch(
 export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
+  const url = new URL(req.url);
   const slug = new URLPattern({ pathname: '/api/blog-og/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await graphcms.request(QUERY, { slug })).post as
@@ -74,8 +73,8 @@ export default async function handler(req: NextRequest) {
           >
             <circle cx="112" cy="112" r="112" fill="white" />
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M77 63C69.268 63 63 69.268 63 77V147C63 154.732 69.268 161 77 161H119L84 63H77ZM105 63L140 161H147C154.732 161 161 154.732 161 147V77C161 69.268 154.732 63 147 63H105Z"
               fill="#6C37F4"
             />
@@ -105,6 +104,15 @@ export default async function handler(req: NextRequest) {
             {post?.author?.title}
           </span>
         </div>
+        <img
+          alt={'hero'}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+          src={`${url.protocol}//${url.host}/images/hero.png`}
+        ></img>
       </div>
     ),
     {
