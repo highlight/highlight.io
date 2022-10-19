@@ -7,11 +7,10 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
-import SvgBookIcon from '../../../public/images/BookIcon';
-import SvgEditIcon from '../../../public/images/EditIcon';
 import { Typography } from '../Typography/Typography';
+import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 
 const Navbar = ({
   hideFreeTrialText,
@@ -49,6 +48,7 @@ const Navbar = ({
         setDeveloperOpen(false);
       }
     }
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -99,9 +99,19 @@ const Navbar = ({
               </Link>
             </li>
             <li>
-              <Link href="/docs">
-                <a className={styles.menuItem}>Docs</a>
-              </Link>
+              <FeatureFlag
+                feature={Feature.LandingPageDocs}
+                off={
+                  <Link href="https://docs.highlight.run">
+                    <a className={styles.menuItem}>Docs</a>
+                  </Link>
+                }
+                on={
+                  <Link href="/docs">
+                    <a className={styles.menuItem}>Docs</a>
+                  </Link>
+                }
+              />
             </li>
           </ul>
         </div>
@@ -160,9 +170,19 @@ const Navbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href="/docs" className={styles.menuItemLarge}>
-                      Docs
-                    </Link>
+                    <FeatureFlag
+                      feature={Feature.LandingPageDocs}
+                      off={
+                        <Link href="https://docs.highlight.run">
+                          <a className={styles.menuItemLarge}>Docs</a>
+                        </Link>
+                      }
+                      on={
+                        <Link href="/docs">
+                          <a className={styles.menuItemLarge}>Docs</a>
+                        </Link>
+                      }
+                    />
                   </Typography>
                 </li>
               </ul>
