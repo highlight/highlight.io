@@ -225,15 +225,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
   let docid = 0;
   // TODO(jaykhatri) - gotta pass the open state to child doc paths below;
   // will require traversing up to all parents
-  for (var d of docPaths) {
+  for (const d of docPaths) {
     let currentEntry = toc;
     // console.log('path', d.simple_path);
     // console.log('doc path', d);
-    for (var a of d.array_path) {
+    for (const a of d.array_path) {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
       // 2. if not, create it. if so, set the new current toc entry
-      let foundEntry = currentEntry?.children.find((t, ti) => {
+      let foundEntry = currentEntry?.children.find((t) => {
         return t.tocSlug === a;
       });
       if (!foundEntry) {
@@ -365,7 +365,7 @@ const TableOfContents = ({
   docPaths: DocPath[];
 }) => {
   const [open, setOpen] = useState(openParent);
-  const hasChildren = toc?.children.length ? true : false;
+  const hasChildren = !!toc?.children.length;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const isTopLevel =
@@ -456,7 +456,6 @@ const DocSearchbar = (
 
 const DocPage = ({
   markdownText,
-  slug,
   toc,
   redirect,
   docOptions,
@@ -619,6 +618,7 @@ const DocPage = ({
               h4: getDocsTypographyRenderer('h5'),
               h5: getDocsTypographyRenderer('h5'),
               code: getDocsTypographyRenderer('code'),
+              a: getDocsTypographyRenderer('a'),
             }}
           >
             {markdownText}
@@ -684,8 +684,15 @@ const copyHeadingIcon = (index: number) => {
   );
 };
 
-const getDocsTypographyRenderer = (type: string) => {
-  function ParagraphHeader({ ...props }) {
+const resolveLink = (href: string): string => {
+  if (href.startsWith('/')) {
+    return `/docs${href}`
+  }
+  return href
+}
+
+const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
+  function DocsTypography({ ...props }) {
     const router = useRouter();
     return (
       <>
@@ -708,6 +715,10 @@ const getDocsTypographyRenderer = (type: string) => {
               </div>
             </div>
           )
+        ) : type === 'a' ? (
+            props.children?.length && <Link href={resolveLink(props.href)}>
+              {props.children[0]}
+            </Link>
         ) : (
           createElement(
             type,
@@ -736,7 +747,7 @@ const getDocsTypographyRenderer = (type: string) => {
       </>
     );
   }
-  return ParagraphHeader;
+  return DocsTypography;
 };
 
 export default DocPage;
