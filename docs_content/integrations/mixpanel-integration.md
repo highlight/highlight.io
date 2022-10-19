@@ -28,5 +28,5 @@ Calling [`H.track()`](/api/h-track) will forward the data to Mixpanel's `track()
 
 ### `identify()`
 
-Calling [`H.identify()`](/api-h-identify) will forward the data to Mixpanel's `identify()`.
+Calling [`H.identify()`](/api/h-identify) will forward the data to Mixpanel's `identify()`.
 

@@ -17,7 +17,7 @@ Check out the following links for a complete API specification.
 
 *   [H.getSessionDetails()](/api/h-get-session-details)&#x20;
 
-*   [H.sessionURL()](/api/h-session-url)&#x20;
+*   [H.getSessionURL()](/api/h-get-session-url)&#x20;
 
 *   [H.identify()](/api/h-identify)&#x20;
 
