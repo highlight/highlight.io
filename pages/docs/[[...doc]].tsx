@@ -481,7 +481,7 @@ const DocSearchbar = (
 };
 
 const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
-  const currentDocIndex = docOptions.findIndex(
+  const currentDocIndex = docOptions?.findIndex(
     (d) => d?.metadata?.slug === metadata?.slug
   );
   const currentDoc = docOptions[currentDocIndex];
