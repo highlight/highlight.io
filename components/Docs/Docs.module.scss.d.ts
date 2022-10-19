@@ -1,4 +1,5 @@
 export const active: string;
+export const breadcrumb: string;
 export const centerSection: string;
 export const codeBlock: string;
 export const codeCopyIcon: string;
@@ -19,6 +20,7 @@ export const pageContentTitle: string;
 export const pageNavigate: string;
 export const pageNavigateRow: string;
 export const pageTitle: string;
+export const resultTitle: string;
 export const rightSection: string;
 export const searchDiv: string;
 export const searchResultCard: string;

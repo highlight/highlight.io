@@ -24,8 +24,12 @@
   border-radius: var(--border-radius);
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &.active {
     background-color: var(--color-divider-on-dark);
+  }
+
+  .resultTitle {
+    color: var(--copy-on-dark);
   }
 
   .content {
@@ -199,6 +203,7 @@ h5:hover .headingCopyIcon {
   flex-direction: column;
   align-items: center;
   overflow: auto;
+  border-radius: var(--border-radius);
   padding: var(--size-xSmall);
   max-height: 60vh;
 
@@ -398,8 +403,27 @@ h5:hover .headingCopyIcon {
   }
 }
 
+.breadcrumb {
+  margin: var(--size-medium) 0;
+  color: var(--color-copy-on-light);
+  font-weight: 400;
+}
+
+.breadcrumb a {
+  color: var(--color-copy-on-light);
+  font-weight: 400;
+
+  &:hover {
+    color: var(--color-copy-on-dark);
+  }
+}
+
 .tocMenu {
   display: none;
+}
+
+.tocMenuLarge {
+  overflow: auto;
 }
 
 @supports (-webkit-hyphens: none) {
@@ -434,6 +458,7 @@ h5:hover .headingCopyIcon {
     height: auto;
     border-bottom: 1px solid var(--divider-on-dark);
     padding: var(--size-large) var(--size-large);
+    position: relative;
   }
 
   .rightSection {
@@ -442,6 +467,7 @@ h5:hover .headingCopyIcon {
 
   .centerSection {
     padding: var(--size-large) var(--size-xLarge) var(--size-4xLarge);
+    border: 0;
   }
 
   .tocMenu {
@@ -454,6 +480,10 @@ h5:hover .headingCopyIcon {
 
   .tocMenuLarge {
     display: none;
+  }
+
+  .codeBlock {
+    font-size: var(--size-small);
   }
 }
 

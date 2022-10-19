@@ -95,7 +95,7 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
       });
 
       if (visibleHeadings.length >= 1) {
-        setActiveId(visibleHeadings[visibleHeadings.length - 1].target.id);
+        setActiveId(visibleHeadings[0].target.id);
       }
     };
 
@@ -412,6 +412,7 @@ const TableOfContents = ({
               [styles.tocItemOpen]: hasChildren && open,
               [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
               [styles.tocChild]: !isTopLevel,
+              [styles.tocMenu]: isTopLevel,
             })}
           />
         ) : (
@@ -420,6 +421,7 @@ const TableOfContents = ({
               [styles.tocItemOpen]: hasChildren,
               [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
               [styles.tocChild]: !isTopLevel,
+              [styles.tocMenu]: isTopLevel,
             })}
           />
         )}
@@ -478,6 +480,29 @@ const DocSearchbar = (
   );
 };
 
+const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
+  const currentDocIndex = docOptions.findIndex(
+    (d) => d?.metadata?.slug === metadata?.slug
+  );
+  const currentDoc = docOptions[currentDocIndex];
+  const pathToSearch: string[] = [];
+  const trail: { title: string; path: string }[] = [
+    { title: 'Docs', path: '/docs' },
+  ];
+  currentDoc.array_path.forEach((section) => {
+    pathToSearch.push(section);
+    const simplePath = pathToSearch.join('/');
+    const nextBreadcrumb = docOptions.find(
+      (d) => d?.simple_path === simplePath
+    );
+    trail.push({
+      title: nextBreadcrumb?.metadata?.title,
+      path: `/docs/${nextBreadcrumb?.simple_path}`,
+    });
+  });
+  return trail;
+};
+
 const DocPage = ({
   markdownText,
   toc,
@@ -494,12 +519,13 @@ const DocPage = ({
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
+  const [hoveredResult, setHoveredResult] = useState(0);
 
   useEffect(() => {
     setCurrentPageIndex(
@@ -544,7 +570,25 @@ const DocPage = ({
                 setSearchOpen(true);
               }}
               onBlur={() => {
-                setSearchOpen(false);
+                setTimeout(() => {
+                  setSearchOpen(false);
+                }, 500);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowDown') {
+                  setHoveredResult((currHoveredResult) =>
+                    Math.min(currHoveredResult + 1, searchResults.length)
+                  );
+                }
+                if (e.key === 'ArrowUp') {
+                  setHoveredResult((currHoveredResult) =>
+                    Math.max(currHoveredResult - 1, 0)
+                  );
+                }
+                if (e.key === 'Enter') {
+                  router.push(`/docs/${searchResults[hoveredResult].path}`);
+                  setSearchOpen(false);
+                }
               }}
             />
             {searchValue !== '' && searchOpen && (
@@ -553,15 +597,18 @@ const DocPage = ({
                   <Spin className={styles.spinner} />
                 ) : (
                   searchResults.map((result: SearchResult, i) => (
-                    <Link href={result.path} key={i} passHref>
+                    <Link href={`/docs/${result.path}`} key={i}>
                       <div
-                        className={styles.searchResultCard}
-                        onClick={() => {
-                          setSearchResults([]);
+                        className={classNames(styles.searchResultCard, {
+                          [styles.active]: i === hoveredResult,
+                        })}
+                        onMouseEnter={() => {
+                          setHoveredResult(i);
                         }}
                       >
                         <div>
                           <Highlighter
+                            className={styles.resultTitle}
                             highlightClassName={styles.highlightedText}
                             searchWords={[searchValue]}
                             autoEscape={true}
@@ -618,7 +665,7 @@ const DocPage = ({
             </Typography>
           </div>
           <Collapse isOpened={open}>
-            <div className={styles.tocContents}>
+            <div className={classNames(styles.tocContents, styles.tocMenu)}>
               {toc?.children.map((t) => (
                 <TableOfContents
                   key={t.docPathId}
@@ -631,6 +678,18 @@ const DocPage = ({
           </Collapse>
         </div>
         <div className={styles.centerSection}>
+          <div className={styles.breadcrumb}>
+            {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
+              i === 0 ? (
+                <Link href={breadcrumb.path}>{breadcrumb.title}</Link>
+              ) : (
+                <>
+                  {` / `}
+                  <Link href={breadcrumb.path}>{breadcrumb.title}</Link>
+                </>
+              )
+            )}
+          </div>
           <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
