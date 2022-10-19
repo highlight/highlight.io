@@ -21,6 +21,7 @@ export const graphcms = new GraphQLClient(
     headers: {
       Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
     },
+    fetch,
   }
 );
 
