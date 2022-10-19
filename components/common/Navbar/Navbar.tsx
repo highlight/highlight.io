@@ -71,7 +71,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href={'/#customers'}>
+              <Link href={'/customers'}>
                 <a className={styles.menuItem}>Customers</a>
               </Link>
             </li>
