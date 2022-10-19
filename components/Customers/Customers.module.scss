@@ -102,7 +102,15 @@
     line-height: 34px !important;
     margin: 0 !important;
   }
-  h5 {
+
+  h1 {
+    font-size: 58px !important;
+    line-height: 76px !important;
+  }
+
+  h2 {
+    font-size: 26px !important;
+    line-height: 40px !important;
     margin-top: 48px !important;
   }
 }
@@ -110,6 +118,12 @@
 @media screen and (max-width: 1512px) {
   .caseBackLink {
     display: none;
+  }
+
+  .caseContent {
+    h1 {
+      text-align: center;
+    }
   }
 
   .caseCustomerDetails {
