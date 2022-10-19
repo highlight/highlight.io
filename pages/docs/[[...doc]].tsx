@@ -481,25 +481,27 @@ const DocSearchbar = (
 };
 
 const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
-  const currentDocIndex = docOptions?.findIndex(
-    (d) => d?.metadata?.slug === metadata?.slug
-  );
-  const currentDoc = docOptions[currentDocIndex];
-  const pathToSearch: string[] = [];
   const trail: { title: string; path: string }[] = [
     { title: 'Docs', path: '/docs' },
   ];
-  currentDoc.array_path.forEach((section) => {
-    pathToSearch.push(section);
-    const simplePath = pathToSearch.join('/');
-    const nextBreadcrumb = docOptions.find(
-      (d) => d?.simple_path === simplePath
+  if (metadata && docOptions) {
+    const currentDocIndex = docOptions?.findIndex(
+      (d) => d?.metadata?.slug === metadata?.slug
     );
-    trail.push({
-      title: nextBreadcrumb?.metadata?.title,
-      path: `/docs/${nextBreadcrumb?.simple_path}`,
+    const currentDoc = docOptions[currentDocIndex];
+    const pathToSearch: string[] = [];
+    currentDoc.array_path.forEach((section) => {
+      pathToSearch.push(section);
+      const simplePath = pathToSearch.join('/');
+      const nextBreadcrumb = docOptions.find(
+        (d) => d?.simple_path === simplePath
+      );
+      trail.push({
+        title: nextBreadcrumb?.metadata?.title,
+        path: `/docs/${nextBreadcrumb?.simple_path}`,
+      });
     });
-  });
+  }
   return trail;
 };
 
