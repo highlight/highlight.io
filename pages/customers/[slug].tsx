@@ -180,7 +180,6 @@ const CustomerPage = ({
           <div className={style.caseContent}>
             <div className={style.caseTitle}>
               <span className={style.caseOverline}>Customer Case Study</span>
-              <h2>{customer.name}</h2>
             </div>
             <RichText
               content={customer.caseStudy.raw}
