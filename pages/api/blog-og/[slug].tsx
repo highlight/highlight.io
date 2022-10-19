@@ -39,10 +39,16 @@ const fontLight = fetch(
   new URL('../../../styles/font/Poppins-Light.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer());
 
+const hero = fetch(
+  // @ts-ignore
+  new URL('../../../public/images/hero.png', import.meta.url)
+).then((res) => res.arrayBuffer());
+
 export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
-  const url = new URL(req.url);
+  const heroData = await hero;
+  const heroBase64 = Buffer.from(heroData).toString('base64');
   const slug = new URLPattern({ pathname: '/api/blog-og/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await graphcms.request(QUERY, { slug })).post as
@@ -105,14 +111,15 @@ export default async function handler(req: NextRequest) {
           </span>
         </div>
         <img
-          alt={'hero'}
+          alt={'highlight hero'}
           style={{
             position: 'absolute',
             top: 0,
             left: 400,
-            width: 800,
           }}
-          src={`${url.protocol}//${url.host}/images/hero.png`}
+          width={800}
+          height={627}
+          src={`data:image/png;base64,${heroBase64}`}
         ></img>
       </div>
     ),
