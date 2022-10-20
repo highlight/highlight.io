@@ -14,6 +14,7 @@ import Mage from '../../../public/images/companies/mage.png';
 import Secoda from '../../../public/images/companies/secoda.svg';
 import classNames from 'classnames';
 import { Typography } from '../../common/Typography/Typography';
+import Link from 'next/link';
 
 export const CompaniesReel = () => {
   return (
@@ -21,7 +22,8 @@ export const CompaniesReel = () => {
       <div className={styles.anchorHead}>
         <h2>{`Our customers`}</h2>
         <Typography type="copy2" onDark>
-          Highlight powers forward-thinking companies.
+          Highlight powers forward-thinking companies.{' '}
+          <Link href="/customers">Find out about our customers →</Link>
         </Typography>
       </div>
       <div className={styles.customerReel}>
