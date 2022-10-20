@@ -111,7 +111,7 @@ export const loadTagsFromHygraph = async () => {
   return uniqueTags;
 };
 
-const Blog = ({
+export const Blog = ({
   posts,
   tags,
   currentTag,
@@ -147,7 +147,7 @@ const Blog = ({
               {tags.map((tag: string) => (
                 <Link
                   key={tag}
-                  href={currentTag === tag ? '/blog' : `/blog?tag=${tag}`}
+                  href={currentTag === tag ? '/blog' : `/blog/tag/${tag}`}
                   passHref={true}
                 >
                   <div
