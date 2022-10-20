@@ -122,9 +122,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         image {
           url
         }
-        metaImage {
-          url
-        }
         description
         metaDescription
         publishedAt
@@ -224,10 +221,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
   }
 
-  if (!data.post.metaImage?.url || !data.post.author?.profilePhoto?.url) {
+  if (!data.post.author?.profilePhoto?.url) {
     throw new Error(
-      `missing required detailed images for blog '${data.post.slug}'. 
-meta: ${data.post.metaImage?.url}. author: ${data.post.author?.profilePhoto?.url}. image: ${data.post.image?.url}`
+      `missing required detailed images for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
     );
   }
 
