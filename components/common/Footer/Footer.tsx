@@ -3,6 +3,7 @@ import styles from './Footer.module.scss';
 import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
+import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 
 const Footer = () => {
   return (
@@ -61,14 +62,33 @@ const Footer = () => {
               <li>
                 <a href="https://feedback.highlight.run/changelog">Changelog</a>
               </li>
-              <li>
-                <a href="https://highlight.io/blog">Documentation</a>
-              </li>
-              <li>
-                <a href="https://docs.highlight.run/deployment-overview">
-                  On-Premise
-                </a>
-              </li>
+              <FeatureFlag
+                feature={Feature.LandingPageDocs}
+                off={
+                  <>
+                    <li>
+                      <Link href="https://docs.highlight.run">
+                        Documentation
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="https://docs.highlight.run/deployment-overview">
+                        On-Premise
+                      </Link>
+                    </li>
+                  </>
+                }
+                on={
+                  <>
+                    <li>
+                      <Link href="/docs">Documentation</Link>
+                    </li>
+                    <li>
+                      <Link href="/docs/deployment-overview">On-Premise</Link>
+                    </li>
+                  </>
+                }
+              />
             </ul>
           </Typography>
         </div>

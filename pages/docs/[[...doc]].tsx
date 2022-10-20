@@ -295,7 +295,7 @@ export const readMarkdown = async (fs_api: any, filePath: string) => {
   const { content, data } = matter(fileContents, {
     delimiters: ['---', '---'],
     engines: {
-      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as Object,
+      yaml: (s: any) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as Object,
     },
   });
   const links = new Set<string>(

@@ -10,6 +10,7 @@ import Banner from '../../common/Banner/Banner';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
+import { Feature, FeatureFlag } from '../../common/FeatureFlag/FeatureFlag';
 
 const SHOW_NAVBAR_OFFSET = 300;
 
@@ -87,9 +88,22 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <Link href={'/docs'} className={styles.menuItem}>
-                Docs
-              </Link>
+              <FeatureFlag
+                feature={Feature.LandingPageDocs}
+                off={
+                  <Link
+                    href={'https://docs.highlight.run'}
+                    className={styles.menuItem}
+                  >
+                    Docs
+                  </Link>
+                }
+                on={
+                  <Link href={'/docs'} className={styles.menuItem}>
+                    Docs
+                  </Link>
+                }
+              />
             </li>
           </ul>
         </div>
@@ -150,9 +164,22 @@ const BlogNavbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href="/docs" className={styles.menuItemLarge}>
-                      Docs
-                    </Link>
+                    <FeatureFlag
+                      feature={Feature.LandingPageDocs}
+                      off={
+                        <Link
+                          href={'https://docs.highlight.run'}
+                          className={styles.menuItemLarge}
+                        >
+                          Docs
+                        </Link>
+                      }
+                      on={
+                        <Link href="/docs" className={styles.menuItemLarge}>
+                          Docs
+                        </Link>
+                      }
+                    />
                   </Typography>
                 </li>
               </ul>
