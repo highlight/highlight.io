@@ -25,7 +25,9 @@ export const graphcms = new GraphQLClient(
 );
 
 export async function getStaticProps() {
-  const { posts, tags } = await loadPosts(undefined);
+  const postsRequest = loadPostsFromHygraph(undefined);
+  const tagsRequest = loadTagsFromHygraph();
+  const [posts, tags] = await Promise.all([postsRequest, tagsRequest]);
 
   return {
     props: {
@@ -37,7 +39,7 @@ export async function getStaticProps() {
   };
 }
 
-const loadPosts = async (tag: string | undefined) => {
+export const loadPostsFromHygraph = async (tag: string | undefined) => {
   const tagProp = tag ? '$tag: [String!]' : '';
   const tagFilter = tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
@@ -72,29 +74,10 @@ const loadPosts = async (tag: string | undefined) => {
       }
     }
   `;
-  const TAGS_QUERY = gql`
-  query GetPosts(${tagProp}) {
-    posts(
-    ) {
-      tags
-    }
-  }
-`;
 
-  const filteredRequest = graphcms.request(QUERY, {
+  const { posts } = await graphcms.request(QUERY, {
     tag: tag ? [tag] : [],
   });
-  const allTagsRequest = graphcms.request(TAGS_QUERY, {
-    tag: [],
-  });
-
-  let requests = [filteredRequest];
-  if (tag) {
-    requests.push(allTagsRequest);
-  } else {
-    requests.push(filteredRequest);
-  }
-  const [{ posts }, { posts: allPosts }] = await Promise.all(requests);
 
   const filteredPosts = posts.sort((a: any, b: any) => {
     // sort by postedAt if the publishedAt field is the same
@@ -104,13 +87,28 @@ const loadPosts = async (tag: string | undefined) => {
       );
     }
   });
-  const allTags = allPosts.map((post: any) => post.tags);
+
+  return filteredPosts;
+};
+
+export const loadTagsFromHygraph = async () => {
+  const TAGS_QUERY = gql`
+  query GetPosts() {
+    posts(
+    ) {
+      tags
+    }
+  }
+`;
+
+  const { posts } = await graphcms.request(TAGS_QUERY, {
+    tag: [],
+  });
+
+  const allTags = posts.map((post: any) => post.tags);
   const uniqueTags = Array.from(new Set(allTags.flat()));
 
-  return {
-    posts: filteredPosts,
-    tags: uniqueTags,
-  };
+  return uniqueTags;
 };
 
 const Blog = ({
