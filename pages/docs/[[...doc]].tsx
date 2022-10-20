@@ -144,9 +144,6 @@ export const getDocsPaths = async (
   for (var i = 0; i < read.length; i++) {
     const file_string = read[i];
     let total_path = path.join(full_path, file_string);
-    // if (file_string === 'index.md') {
-    //   total_path = full_path;
-    // }
     const file_path = await fs_api.stat(total_path);
     if (file_path.isDirectory()) {
       paths = paths.concat(
@@ -236,8 +233,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   for (const d of docPaths) {
     docRelLinks.set(`/${d.simple_path}`, d.relative_links);
     let currentEntry = toc;
-    // console.log('path', d.simple_path);
-    // console.log('doc path', d);
     for (const a of d.array_path) {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
@@ -248,8 +243,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       if (!foundEntry) {
         foundEntry = {
           tocSlug: a,
-          // tocHeading: docPaths[docid].metadata.title,
-          // docPathId: docid,
           children: [],
         };
         currentEntry?.children.push(foundEntry);
@@ -262,12 +255,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
     docid++;
   }
-  // const traverse = (toc: TocEntry) => {
-  //   for (var c of toc.children) {
-  //     traverse(c);
-  //   }
-  // };
-  // traverse(toc);
 
   // validate that any relative links referenced in md files actually exist.
   for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
@@ -281,11 +268,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   const currentDoc = docPaths.find((d) => {
-    // console.log(
-    //   'hello',
-    //   JSON.stringify(d.array_path),
-    //   JSON.stringify(context?.params?.doc)
-    // );
     return (
       JSON.stringify(d.array_path) ===
       JSON.stringify(context?.params?.doc || [''])

@@ -99,7 +99,7 @@ const Navbar = ({
               </Link>
             </li>
             <li>
-              <Link href="/docs">
+              <Link href="https://docs.highlight.run">
                 <a className={styles.menuItem}>Docs</a>
               </Link>
             </li>
