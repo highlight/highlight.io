@@ -80,6 +80,7 @@
   --text-primary-inverted: #000;
   --text-primary: var(--color-white);
   --color-link: var(--color-purple);
+  --color-pseudo-black: #1d0a26;
 
   --brand-accent: var(--color-secondary-300);
   --brand-accent-light: var(--color-secondary-200);
@@ -98,6 +99,7 @@
   --color-primary-400: #120532;
   --color-primary-500: #0d0225;
   --color-copy-on-dark: #dfdfdf;
+  --color-copy-on-light: #645d74;
   --color-divider-on-dark: #30294e;
 
   // Logo
@@ -176,7 +178,7 @@ h1 {
 h2 {
   font-size: 58px;
   line-height: 76px !important;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.5px;
 }
 
 h3 {
@@ -399,4 +401,8 @@ a {
     line-height: 30px !important;
     font-weight: 600 !important;
   }
+}
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
 }

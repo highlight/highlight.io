@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
 import PcPlayMedia from '../../public/images/pc-play-media.svg';
 import Wallet from '../../public/images/wallet.svg';
@@ -21,7 +21,6 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { Typography } from '../../components/common/Typography/Typography';
-import { useState } from 'react';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
 import useEmblaCarousel from 'embla-carousel-react';
 
@@ -41,6 +40,10 @@ import {
   StartupInfo,
 } from '../../components/Pricing/plan_info';
 import { Meta } from '../../components/common/Head/Meta';
+import {
+  Feature,
+  IsFeatureOn,
+} from '../../components/common/FeatureFlag/FeatureFlag';
 
 // Plans and info used for both mobile and desktop views.
 const planDetails: Array<PricingDetails> = [
@@ -56,6 +59,10 @@ const planInfo: Array<PricingInfo> = [
   EnterpriseInfo,
 ];
 
+const docsUrl = IsFeatureOn(Feature.LandingPageDocs)
+  ? '/docs'
+  : 'https://docs.highlight.run';
+
 const FAQS = [
   {
     question: 'Do you offer a discount for non-profits?',
@@ -64,17 +71,17 @@ const FAQS = [
   },
   {
     question: 'How long does it take to setup Highlight?',
-    answer: `It generally takes an engineer less than ten minutes to understand the concepts of Highlight and integrate the app into their workflow. For more information on setup, take a look at our <a href="https://docs.highlight.run">docs</a>. `,
+    answer: `It generally takes an engineer less than ten minutes to understand the concepts of Highlight and integrate the app into their workflow. For more information on setup, take a look at our <a href="${docsUrl}">docs</a>. `,
     icon: Stopwatch,
   },
   {
     question: 'Can I deploy Highlight on-premise?',
-    answer: `Yes! To get a glimpse at how our deployment process looks, take a look <a href="https://docs.highlight.run/docs/on-premise">here</a> (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact <a href="mailto:sales@highlight.io">sales</a>. `,
+    answer: `Yes! To get a glimpse at how our deployment process looks, take a look <a href="${docsUrl}/on-premise">here</a> (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact <a href="mailto:sales@highlight.io">sales</a>. `,
     icon: Globe,
   },
   {
     question: "Is Highlight secure? Where's my data stored?",
-    answer: `Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our <a href="/#privacy">security section</a> and <a href="https://docs.highlight.run" target="_blank">docs</a>. If we don't answer your question there, <a href="mailto:jay@highlight.io">let us know</a>. `,
+    answer: `Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our <a href="/#privacy">security section</a> and <a href="${docsUrl}" target="_blank">docs</a>. If we don't answer your question there, <a href="mailto:jay@highlight.io">let us know</a>. `,
     icon: Security,
   },
   {
