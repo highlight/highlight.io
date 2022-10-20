@@ -56,21 +56,9 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
           url
         }
         title
-        metaTitle
-        description
-        metaDescription
         publishedAt
-        publishedBy {
-          name
-          picture
-        }
-        richcontent {
-          markdown
-          raw
-        }
         tags
         readingTime
-        postedAt
       }
     }
   `;
