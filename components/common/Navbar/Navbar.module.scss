@@ -173,6 +173,10 @@
   flex: 1 1 auto;
   align-items: center;
 
+  p {
+    margin: var(--size-xSmall) 0 !important;
+  }
+
   .callToAction {
     color: #72e4fc;
     font-weight: 500;
@@ -190,6 +194,10 @@
   height: 2px;
   width: 0;
   background-color: var(--color-selected-light);
+}
+
+.fixed {
+  position: relative;
 }
 
 @media screen and (max-width: 800px) {
