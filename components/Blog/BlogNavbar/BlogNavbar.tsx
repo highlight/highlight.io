@@ -10,6 +10,7 @@ import Banner from '../../common/Banner/Banner';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
+import { Feature, FeatureFlag } from '../../common/FeatureFlag/FeatureFlag';
 
 const SHOW_NAVBAR_OFFSET = 300;
 
@@ -87,51 +88,23 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <a href="https://docs.highlight.run/" className={styles.menuItem}>
-                Docs
-              </a>
+              <FeatureFlag
+                feature={Feature.LandingPageDocs}
+                off={
+                  <Link
+                    href={'https://docs.highlight.run'}
+                    className={styles.menuItem}
+                  >
+                    Docs
+                  </Link>
+                }
+                on={
+                  <Link href={'/docs'} className={styles.menuItem}>
+                    Docs
+                  </Link>
+                }
+              />
             </li>
-            {/* <li>
-              <a
-                onClick={() => {
-                  setDeveloperOpen(true);
-                }}
-                className={styles.menuItem}
-              >
-                Developers <ChevronDown />
-              </a>
-              {developerOpen && (
-                <ul ref={dropdownRef} className={styles.menuDropdown}>
-                  <li>
-                    <Link href={'/changelog'}>
-                      <a className={styles.menuItem}>
-                        <div className={styles.dropdownItem}>
-                          <SvgEditIcon />
-                          <div>
-                            <h4>Changelog</h4>
-                            <div>Updates to our products</div>
-                          </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <a
-                      href="https://docs.highlight.run/"
-                      className={styles.menuItem}
-                    >
-                      <div className={styles.dropdownItem}>
-                        <SvgBookIcon />
-                        <div>
-                          <h4>Docs</h4>
-                          <div>Read our documentation</div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li> */}
           </ul>
         </div>
       </Banner>
@@ -191,12 +164,22 @@ const BlogNavbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <a
-                      href="https://docs.highlight.run/"
-                      className={styles.menuItemLarge}
-                    >
-                      Docs
-                    </a>
+                    <FeatureFlag
+                      feature={Feature.LandingPageDocs}
+                      off={
+                        <Link
+                          href={'https://docs.highlight.run'}
+                          className={styles.menuItemLarge}
+                        >
+                          Docs
+                        </Link>
+                      }
+                      on={
+                        <Link href="/docs" className={styles.menuItemLarge}>
+                          Docs
+                        </Link>
+                      }
+                    />
                   </Typography>
                 </li>
               </ul>

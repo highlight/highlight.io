@@ -36,6 +36,7 @@ import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
+import Link from 'next/link';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -811,8 +812,10 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
               <Typography type="copy2" onDark>
-                Don&apos;t take our word for it. Here&apos;s what our customers
-                have to say.
+                Don&apos;t take our word.{' '}
+                <Link href="/customers">
+                  Read our customer review section →
+                </Link>
               </Typography>
             </div>
           </div>

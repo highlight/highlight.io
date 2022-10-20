@@ -7,14 +7,18 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import ChevronDown from '../../../public/images/ChevronDownIcon';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
-import SvgBookIcon from '../../../public/images/BookIcon';
-import SvgEditIcon from '../../../public/images/EditIcon';
 import { Typography } from '../Typography/Typography';
+import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 
-const Navbar = () => {
+const Navbar = ({
+  hideFreeTrialText,
+  fixed,
+}: {
+  hideFreeTrialText?: boolean;
+  fixed?: boolean;
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [developerOpen, setDeveloperOpen] = useState(false);
@@ -44,6 +48,7 @@ const Navbar = () => {
         setDeveloperOpen(false);
       }
     }
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -53,15 +58,23 @@ const Navbar = () => {
   return (
     <div
       className={classNames(styles.container, {
-        [styles.hide]: scrolled,
+        [styles.hide]: scrolled && !fixed,
+        [styles.fixed]: fixed,
       })}
     >
       <Banner>
         <div className={styles.bannerContainer}>
-          <p>Want 1 month of free Highlight? </p>
-          <a href="http://app.highlight.run/" className={styles.callToAction}>
-            Register Here →
-          </a>
+          {!hideFreeTrialText && (
+            <>
+              <p>Want 1 month of free Highlight? </p>
+              <a
+                href="http://app.highlight.run/"
+                className={styles.callToAction}
+              >
+                Register Here →
+              </a>
+            </>
+          )}
         </div>
         <div className={styles.navContainer}>
           <ul className={classNames(styles.menuList, styles.header)}>
@@ -71,7 +84,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link href={'/#customers'}>
+              <Link href={'/customers'}>
                 <a className={styles.menuItem}>Customers</a>
               </Link>
             </li>
@@ -86,51 +99,20 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a href="https://docs.highlight.run/" className={styles.menuItem}>
-                Docs
-              </a>
+              <FeatureFlag
+                feature={Feature.LandingPageDocs}
+                off={
+                  <Link href="https://docs.highlight.run">
+                    <a className={styles.menuItem}>Docs</a>
+                  </Link>
+                }
+                on={
+                  <Link href="/docs">
+                    <a className={styles.menuItem}>Docs</a>
+                  </Link>
+                }
+              />
             </li>
-            {/* <li>
-              <a
-                onClick={() => {
-                  setDeveloperOpen(true);
-                }}
-                className={styles.menuItem}
-              >
-                Developers <ChevronDown />
-              </a>
-              {developerOpen && (
-                <ul ref={dropdownRef} className={styles.menuDropdown}>
-                  <li>
-                    <Link href={'/changelog'}>
-                      <a className={styles.menuItem}>
-                        <div className={styles.dropdownItem}>
-                          <SvgEditIcon />
-                          <div>
-                            <h4>Changelog</h4>
-                            <div>Updates to our products</div>
-                          </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </li>
-                  <li>
-                    <a
-                      href="https://docs.highlight.run/"
-                      className={styles.menuItem}
-                    >
-                      <div className={styles.dropdownItem}>
-                        <SvgBookIcon />
-                        <div>
-                          <h4>Docs</h4>
-                          <div>Read our documentation</div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li> */}
           </ul>
         </div>
       </Banner>
@@ -188,12 +170,19 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <a
-                      href="https://docs.highlight.run/"
-                      className={styles.menuItemLarge}
-                    >
-                      Docs
-                    </a>
+                    <FeatureFlag
+                      feature={Feature.LandingPageDocs}
+                      off={
+                        <Link href="https://docs.highlight.run">
+                          <a className={styles.menuItemLarge}>Docs</a>
+                        </Link>
+                      }
+                      on={
+                        <Link href="/docs">
+                          <a className={styles.menuItemLarge}>Docs</a>
+                        </Link>
+                      }
+                    />
                   </Typography>
                 </li>
               </ul>
