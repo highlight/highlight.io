@@ -52,6 +52,18 @@ export default async function handler(req: NextRequest) {
     | Post
     | undefined;
 
+  let profilePic: string = '';
+  if (post?.author?.profilePhoto.url) {
+    const req = await fetch(post?.author?.profilePhoto.url);
+    if (
+      new Set<string>(['image/jpeg', 'image/png']).has(
+        req.headers.get('content-type') || ''
+      )
+    ) {
+      profilePic = post?.author?.profilePhoto.url;
+    }
+  }
+
   return new ImageResponse(
     (
       <div
@@ -96,10 +108,10 @@ export default async function handler(req: NextRequest) {
           <span tw="text-4xl mb-12">{post?.title || slug}</span>
           <div tw={'flex flex-row items-center'}>
             <div tw={'flex flex-col'}>
-              {post?.author?.profilePhoto.url && (
+              {profilePic && (
                 <span tw={'pr-4'}>
                   <img
-                    src={post?.author?.profilePhoto.url}
+                    src={profilePic}
                     width={50}
                     height={50}
                     alt={'author profile picture'}
