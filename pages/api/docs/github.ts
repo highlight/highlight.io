@@ -60,7 +60,7 @@ export const getGithubDocsPaths = async (path: string = docsRoot) => {
       const text = await file.text();
       const sections = text.split('---');
       docs.set(
-        path.path,
+        path.path.split(`${docsRoot}/`, 2)[1]!.split('.md', 1)[0]!,
         yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta
       );
     }
