@@ -563,15 +563,15 @@ const DocPage = ({
                   setHoveredResult((currHoveredResult) =>
                     Math.min(currHoveredResult + 1, searchResults.length)
                   );
-                }
-                if (e.key === 'ArrowUp') {
+                } else if (e.key === 'ArrowUp') {
                   setHoveredResult((currHoveredResult) =>
                     Math.max(currHoveredResult - 1, 0)
                   );
-                }
-                if (e.key === 'Enter') {
+                } else if (e.key === 'Enter') {
                   router.push(`/docs/${searchResults[hoveredResult].path}`);
                   setSearchOpen(false);
+                } else {
+                  setIsSearchLoading(true);
                 }
               }}
             />
