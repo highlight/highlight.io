@@ -386,46 +386,44 @@ const TableOfContents = ({
 
   return (
     <div>
-      <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
-        {hasChildren ? (
-          <ChevronDown
-            className={classNames(styles.tocIcon, {
-              [styles.tocItemChevronClosed]: hasChildren && !open,
+      <Link
+        href={path.join(
+          '/docs',
+          docPaths[toc.docPathId || 0]?.simple_path || ''
+        )}
+      >
+        <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
+          {hasChildren ? (
+            <ChevronDown
+              className={classNames(styles.tocIcon, {
+                [styles.tocItemChevronClosed]: hasChildren && !open,
+                [styles.tocItemOpen]: hasChildren && open,
+                [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            />
+          ) : (
+            <Minus
+              className={classNames(styles.tocIcon, {
+                [styles.tocItemOpen]: hasChildren,
+                [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            />
+          )}
+          <Typography
+            type="copy3"
+            emphasis={isTopLevel}
+            className={classNames(styles.tocItem, {
               [styles.tocItemOpen]: hasChildren && open,
               [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
               [styles.tocChild]: !isTopLevel,
-              [styles.tocMenu]: isTopLevel,
             })}
-          />
-        ) : (
-          <Minus
-            className={classNames(styles.tocIcon, {
-              [styles.tocItemOpen]: hasChildren,
-              [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
-              [styles.tocChild]: !isTopLevel,
-              [styles.tocMenu]: isTopLevel,
-            })}
-          />
-        )}
-        <Typography
-          type="copy3"
-          emphasis={isTopLevel}
-          className={classNames(styles.tocItem, {
-            [styles.tocItemOpen]: hasChildren && open,
-            [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
-            [styles.tocChild]: !isTopLevel,
-          })}
-        >
-          <Link
-            href={path.join(
-              '/docs',
-              docPaths[toc.docPathId || 0]?.simple_path || ''
-            )}
           >
             {toc?.tocHeading || 'nope'}
-          </Link>
-        </Typography>
-      </div>
+          </Typography>
+        </div>
+      </Link>
       <Collapse isOpened={open}>
         <div className={styles.tocChildren}>
           <div className={styles.tocChildrenLineWrapper}>
