@@ -40,6 +40,7 @@ import {
 } from 'react-icons/bi';
 import Spin from 'antd/lib/spin';
 import 'antd/lib/spin/style/index.css';
+import { Callout } from '../../components/Docs/Callout/Callout';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -766,6 +767,10 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
         {type === 'code' ? (
           props && props.children && props.inline ? (
             <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
+          ) : props?.className === 'language-video' ? (
+            <div dangerouslySetInnerHTML={{ __html: props.children }}></div>
+          ) : props?.className === 'language-hint' ? (
+            <Callout content={props.children[0]} />
           ) : (
             <div className={styles.codeBlock}>
               <CodeBlock

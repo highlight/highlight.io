@@ -5,9 +5,9 @@ createdAt: 2022-03-01T00:39:25.000Z
 updatedAt: 2022-03-01T01:08:28.000Z
 ---
 
-:::hint
+```hint
 You should keep reading this if your application runs in an environment that enforces content security policies.
-:::
+```
 
 `Content-Security-Policy` allows you to tell the browser what and how your page can interact with third-party scripts.
 

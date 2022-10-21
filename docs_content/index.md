@@ -11,7 +11,7 @@ Highlight is a tool that helps teams reproduce end-to-end user sessions to bette
 
 With Highlight, **engineering teams** can replay errors with high precision, which includes a complete session replay, outgoing network requests, dense stack traces and insight into the app's state management system (redux, apollo's cache, etc.). At the same time, **product teams** can analyze user activity, collaborate with engineering teams and find the reason for user drop offs to gain insight into UX.
 
-```html
+```video
 <style>
   .archbee-editor {
     white-space: initial !important;
@@ -260,7 +260,6 @@ With Highlight, **engineering teams** can replay errors with high precision, w
   </div>
 
   <script>
-    console.log('hello')
     const modal = document.querySelector(".modal");
     const heroImage = document.querySelector(".custom-hero-image");
     const video = document.querySelector(".hero-video");

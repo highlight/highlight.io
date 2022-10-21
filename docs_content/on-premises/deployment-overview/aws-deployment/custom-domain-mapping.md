@@ -7,11 +7,11 @@ updatedAt: 2021-10-01T19:04:09.000Z
 
 
 
-:::hint
+```hint
 ## Before proceeding
 
 Before going through these instructions, make sure that you have access to the DNS settings on a custom domain of your choice. Most customers choose something like highlight.company-name.com, but this is up to you!
-:::
+```
 
 ### Point an elastic IP address to your instance
 

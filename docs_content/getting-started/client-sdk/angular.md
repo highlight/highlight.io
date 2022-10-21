@@ -13,7 +13,7 @@ Let's get you up and running with Highlight. **We should be done in less than 2 
 
 Install `highlight.run` using your package manager.
 
-:::codeblocktabs
+```codeblocktabs
 ```none
 npm install highlight.run
 ```
@@ -21,7 +21,7 @@ npm install highlight.run
 ```shell
 yarn add highlight.run
 ```
-:::
+```
 
 ## Initialize
 

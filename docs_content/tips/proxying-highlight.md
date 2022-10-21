@@ -5,11 +5,11 @@ createdAt: 2021-10-11T21:13:07.000Z
 updatedAt: 2022-01-27T19:51:23.000Z
 ---
 
-:::hint
+```hint
 Proxying is only available starting on our [Startup tier](https://www.highlight.run/pricing). If you would like use this, you will need to reach out to <support@highlight.run>.&#x20;
 
 
-:::
+```
 
 If you're not seeing sessions or errors on Highlight, chances are that requests to Highlight are being blocked. This can happen for different reasons such as a third-party browser extensions, browser configuration, or VPN settings.
 

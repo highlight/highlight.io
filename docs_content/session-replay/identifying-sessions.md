@@ -24,11 +24,11 @@ You can replace the placeholder user avatars Highlight uses with an image that y
 
 The image URL usually comes from your authentication provider (Firebase, Auth0, Active Directory, etc.). You can forward that URL to Highlight.&#x20;
 
-:::hint
+```hint
 ## Saving the image
 
 Highlight does not make a copy of the image. Highlight will render the image directly. This means the image will adhere to any authorization policies.
-:::
+```
 
 ```typescript
 H.identify(
