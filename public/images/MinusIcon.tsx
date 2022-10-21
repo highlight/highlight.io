@@ -11,6 +11,7 @@ function SvgMinusIcon(props: React.SVGProps<SVGSVGElement>) {
       {...props}
     >
       <path
+        className={props.className}
         d="M16 12H8"
         stroke="#DFDFDF"
         strokeWidth="1.5"
