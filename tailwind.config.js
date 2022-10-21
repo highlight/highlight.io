@@ -10,6 +10,11 @@ module.exports = {
         'highlight-yellow': '#EBFF5E',
         'copy-on-dark': '#DFDFDF',
         'divider-on-dark': '#30294E',
+        'dark-background': '#0D0225',
+        'copy-on-light': '#645D74',
+      },
+      fontFamily: {
+        sans: 'Poppins',
       },
     },
   },
