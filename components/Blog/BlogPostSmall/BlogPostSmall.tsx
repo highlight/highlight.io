@@ -6,7 +6,6 @@ import { Typography } from '../../common/Typography/Typography';
 
 export const BlogPostSmall = ({
   slug,
-  richcontent,
   image,
   metaImage,
   title,
@@ -28,16 +27,16 @@ export const BlogPostSmall = ({
               />
             )}
           </div>
-          <div className={styles.postDateDiv}>
-            <p>{`${new Date(publishedAt).toLocaleDateString('en-US', {
-              day: 'numeric',
-              year: 'numeric',
-              month: 'short',
-            })} • ${
-              readingTime ||
-              Math.floor(richcontent.markdown.split(' ').length / 200)
-            } min. read`}</p>
-          </div>
+          {readingTime ? (
+            <div className={styles.postDateDiv}>
+              <p>{`${new Date(publishedAt).toLocaleDateString('en-US', {
+                day: 'numeric',
+                year: 'numeric',
+                month: 'short',
+              })} • ${readingTime} min. read`}</p>
+            </div>
+          ) : null}
+
           <Typography type="copy1" emphasis>
             {title}
           </Typography>
