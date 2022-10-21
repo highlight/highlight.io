@@ -1,5 +1,4 @@
 import { promises as fsp } from 'fs';
-import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import {
   createElement,
@@ -40,6 +39,7 @@ import {
 } from 'react-icons/bi';
 import Spin from 'antd/lib/spin';
 import 'antd/lib/spin/style/index.css';
+import { Meta } from '../../components/common/Head/Meta';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -497,6 +497,7 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
 
 const DocPage = ({
   markdownText,
+  slug,
   toc,
   redirect,
   docOptions,
@@ -518,6 +519,12 @@ const DocPage = ({
   const [open, setOpen] = useState(false);
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
   const [hoveredResult, setHoveredResult] = useState(0);
+
+  const description = markdownText
+    .replaceAll(/[`[(]+.+[`\])]+/gi, '')
+    .replaceAll(/#+/gi, '')
+    .split('\n')
+    .join(' ');
 
   useEffect(() => {
     setCurrentPageIndex(
@@ -548,10 +555,12 @@ const DocPage = ({
 
   return (
     <>
-      <Head>
-        <title>{metadata ? metadata.title : ''}</title>
-        <meta name="description" content={'TODO'} />
-      </Head>
+      <Meta
+        title={metadata.title || ''}
+        description={description}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
+        canonical={`/docs/${slug}`}
+      />
       <Navbar hideFreeTrialText fixed />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
@@ -822,6 +831,7 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
       </>
     );
   }
+
   return DocsTypography;
 };
 
