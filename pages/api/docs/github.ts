@@ -73,7 +73,12 @@ export const getGithubDocsPaths = async (path: string = docsRoot) => {
   return docs;
 };
 
-export const getGithubDoc = async (slug: string): Promise<DocMeta> => {
+export const getGithubDoc = async (
+  slug: string
+): Promise<{
+  meta: DocMeta;
+  content: string;
+}> => {
   const path = `${docsRoot}/${slug}.md`;
   const response = await fetch(
     `https://api.github.com/repos/highlight-run/highlight-landing/contents/${path}`,
@@ -86,7 +91,10 @@ export const getGithubDoc = async (slug: string): Promise<DocMeta> => {
     if (json.type === 'file') {
       const text = new Buffer(json.content, json.encoding).toString('ascii');
       const sections = text.split('---');
-      return yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta;
+      return {
+        meta: yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta,
+        content: sections[2],
+      };
     } else {
       throw Error(`slug ${slug} is a directory; expected a file`);
     }

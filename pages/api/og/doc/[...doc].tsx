@@ -19,7 +19,7 @@ export default async function handler(req: NextRequest) {
   const doc = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
     ?.pathname.groups.doc;
 
-  const docMeta = await getGithubDoc(doc || 'index');
+  const { meta } = await getGithubDoc(doc || 'index');
 
   return new ImageResponse(
     (
@@ -34,10 +34,10 @@ export default async function handler(req: NextRequest) {
           backgroundColor: '#0D0225',
         }}
       >
-        <div tw="flex flex-col w-1/2 font-bold text-white text-left p-12">
+        <div tw="flex flex-col h-full w-1/2 font-bold text-white text-left justify-between p-12">
           <svg
-            width="112"
-            height="112"
+            width="68"
+            height="68"
             viewBox="0 0 224 224"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -50,18 +50,31 @@ export default async function handler(req: NextRequest) {
               fill="#6C37F4"
             />
           </svg>
-          <span
-            style={{
-              color: '#EBFF5E',
-              fontSize: 18,
-              lineHeight: 4,
-              letterSpacing: 1,
-              textTransform: 'uppercase',
-            }}
-          >
-            Highlight Docs
-          </span>
-          <span tw="text-4xl mb-12">{docMeta.title || doc}</span>
+          <div tw="flex flex-col">
+            <span
+              style={{
+                color: '#EBFF5E',
+                fontSize: 18,
+                lineHeight: 4,
+                letterSpacing: 1,
+                textTransform: 'uppercase',
+              }}
+            >
+              Highlight Docs
+            </span>
+            <span tw="text-4xl">{meta.title}</span>
+            <span
+              style={{
+                color: '#DFDFDF',
+                fontSize: 16,
+                fontFamily: '"PoppinsLight"',
+              }}
+            >
+              Stop wasting effort trying to track down and reproduce bugs.
+              Through session replay, Highlight shows you exactly how and when
+              your bugs happen. Get started today!
+            </span>
+          </div>
         </div>
         <img
           alt={'highlight hero'}
