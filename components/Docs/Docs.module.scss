@@ -426,6 +426,11 @@ h5:hover .headingCopyIcon {
   overflow: auto;
 }
 
+.customComponent {
+  font-family: 'Poppins';
+  white-space: normal;
+}
+
 @supports (-webkit-hyphens: none) {
   .contentRender {
     h4,

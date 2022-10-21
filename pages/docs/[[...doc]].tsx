@@ -40,6 +40,7 @@ import {
 } from 'react-icons/bi';
 import Spin from 'antd/lib/spin';
 import 'antd/lib/spin/style/index.css';
+import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -766,6 +767,10 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
         {type === 'code' ? (
           props && props.children && props.inline ? (
             <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
+          ) : props.className === 'language-welcomevideo' ? (
+            <div className={styles.customComponent}>
+              <HeroVideo />
+            </div>
           ) : (
             <div className={styles.codeBlock}>
               <CodeBlock
