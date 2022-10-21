@@ -57,18 +57,26 @@
   width: var(--size-large) !important;
   height: var(--size-large) !important;
   transition: color 0.2s ease;
+  color: var(--color-copy-on-light);
+  stroke: var(--color-divider-on-dark);
 }
 
 .tocRow {
   display: flex;
   align-items: center;
   padding: 4px 0;
+  color: var(--copy-on-dark);
 
   &:hover {
     border-radius: var(--border-radius);
     background: #30294e4d;
     color: var(--copy-on-dark);
     cursor: pointer;
+
+    .tocIcon {
+      color: var(--color-copy-on-dark);
+      stroke: var(--color-copy-on-dark);
+    }
 
     .tocChild {
       opacity: 1;
@@ -103,6 +111,7 @@
 .tocItemCurrent a,
 .tocItemCurrent {
   color: var(--color-copy-on-dark) !important;
+  stroke: var(--color-copy-on-dark);
   opacity: 1 !important;
 }
 
