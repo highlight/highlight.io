@@ -26,6 +26,20 @@ async function handler(_: any, res: any) {
       }
     }
   `);
+  const { customers } = await graphcms.request(gql`
+    query GetCustomers() {
+      customers() {
+        slug
+      }
+    }
+  `);
+  const { changelogs } = await graphcms.request(gql`
+    query GetChangelogs() {
+      changelogs() {
+        slug
+      }
+    }
+  `);
   H.metrics([
     {
       name: 'sitemap-gql-latency-ms',
@@ -33,17 +47,13 @@ async function handler(_: any, res: any) {
       tags: [{ name: 'site', value: process.env.WEBSITE_URL || '' }],
     },
   ]);
-  const blogPages = posts.map((post: any) => `blog/${post.slug}`);
 
-  const { customers } = await graphcms.request(gql`
-  query GetCustomers() {
-    customers() {
-      slug
-    }
-  }
-  `);
+  const blogPages = posts.map((post: any) => `blog/${post.slug}`);
   const customerPages = customers.map(
     (customer: any) => `customers/${customer.slug}`
+  );
+  const changelogPages = changelogs.map(
+    (changelog: any) => `changelogs/${changelog.slug}`
   );
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
@@ -51,7 +61,12 @@ async function handler(_: any, res: any) {
     return `${path.replace('pages', '').replace('index.tsx', '')}`;
   });
 
-  const pages = [...staticPages, ...blogPages, ...customerPages];
+  const pages = [
+    ...staticPages,
+    ...blogPages,
+    ...customerPages,
+    ...changelogPages,
+  ];
 
   const addPage = (page: string) => {
     return `    <url>
