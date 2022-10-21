@@ -61,6 +61,12 @@ interface DocPath {
   redirect?: string;
 }
 
+export interface Doc {
+  content: string;
+  data: { [key: string]: any };
+  links: Set<string>;
+}
+
 const useHeadingsData = () => {
   const router = useRouter();
   const [nestedHeadings, setNestedHeadings] = useState<any>([]);
@@ -292,6 +298,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export const readMarkdown = async (fs_api: any, filePath: string) => {
   const fileContents = await fs_api.readFile(path.join(filePath));
+  return parseMarkdown(fileContents);
+};
+
+export const parseMarkdown = (fileContents: string): Doc => {
   const { content, data } = matter(fileContents, {
     delimiters: ['---', '---'],
     engines: {

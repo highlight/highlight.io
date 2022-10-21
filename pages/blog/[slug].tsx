@@ -151,25 +151,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
   const POSTS_QUERY = gql`
-    query GetPosts() {
-      posts(
-        orderBy: publishedAt_DESC
-        where: { unlisted: false }
-      ) {
-        slug
-        title
-        image {
-          url
-        }
-        richcontent {
-          markdown
-        }
-        publishedAt
-        tags
-                readingTime
-            }
-        }
-    `;
+      query GetPosts() {
+          posts(
+              orderBy: publishedAt_DESC
+              where: { unlisted: false }
+          ) {
+              slug
+              title
+              image {
+                  url
+              }
+              richcontent {
+                  markdown
+              }
+              publishedAt
+              tags
+              readingTime
+          }
+      }
+  `;
   const data = await graphcms.request(QUERY, { slug: slug });
   const { posts } = await graphcms.request(POSTS_QUERY);
 
@@ -316,7 +316,7 @@ const PostPage = ({
       <Meta
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.description}
-        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/blog-og/${post.slug}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/blog/${post.slug}`}
         canonical={`/blog/${post.slug}`}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
