@@ -507,7 +507,7 @@ const DocPage = ({
   slug: string;
   toc: TocEntry;
   docOptions: DocPath[];
-  metadata: any;
+  metadata?: { title: string; slug: string };
   redirect?: string;
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
@@ -556,7 +556,7 @@ const DocPage = ({
   return (
     <>
       <Meta
-        title={metadata.title || ''}
+        title={metadata?.title || ''}
         description={description}
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
         canonical={`/docs/${slug}`}
