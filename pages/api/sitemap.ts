@@ -53,7 +53,7 @@ async function handler(_: any, res: any) {
     (customer: any) => `customers/${customer.slug}`
   );
   const changelogPages = changelogs.map(
-    (changelog: any) => `changelogs/${changelog.slug}`
+    (changelog: any) => `changelog/${changelog.slug}`
   );
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
