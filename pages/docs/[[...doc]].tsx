@@ -503,7 +503,7 @@ const DocPage = ({
   docOptions,
   metadata,
 }: {
-  markdownText: string;
+  markdownText?: string;
   slug: string;
   toc: TocEntry;
   docOptions: DocPath[];
@@ -520,7 +520,7 @@ const DocPage = ({
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
   const [hoveredResult, setHoveredResult] = useState(0);
 
-  const description = markdownText
+  const description = (markdownText || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
     .split('\n')
@@ -705,7 +705,7 @@ const DocPage = ({
               a: getDocsTypographyRenderer('a'),
             }}
           >
-            {markdownText}
+            {markdownText || ''}
           </ReactMarkdown>
           <div className={styles.pageNavigateRow}>
             {currentPageIndex > 0 ? (
