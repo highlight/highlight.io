@@ -38,7 +38,7 @@ If you are not using Vercel or would like to configure this manually, you can se
 
 Import the `@highlight-run/next` Package
 
-:::codeblocktabs
+```codeblocktabs
 ```shell
 npm install @highlight-run/next
 ```
@@ -46,7 +46,7 @@ npm install @highlight-run/next
 ```shell
 yarn add @highlight-run/next
 ```
-:::
+```
 
 ### Wrapping your next.config.js
 

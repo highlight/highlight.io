@@ -1,5 +1,8 @@
 export const active: string;
 export const breadcrumb: string;
+export const callout: string;
+export const calloutContent: string;
+export const calloutIcon: string;
 export const centerSection: string;
 export const codeBlock: string;
 export const codeCopyIcon: string;
@@ -11,6 +14,7 @@ export const docSearchbar: string;
 export const headingCopyIcon: string;
 export const headingSection: string;
 export const highlightedText: string;
+export const icon: string;
 export const inlineCodeBlock: string;
 export const leftInner: string;
 export const leftSection: string;

@@ -11,7 +11,7 @@ If Highlight ships a breaking change (new feature, security fix, etc.), we'll ne
 
 ## Using a Package Manager
 
-:::codeblocktabs
+```codeblocktabs
 ```curl
 npm install highlight.run@latest
 ```
@@ -19,7 +19,7 @@ npm install highlight.run@latest
 ```none
 yarn upgrade highlight.run@latest
 ```
-:::
+```
 
 ## HTML/CDN
 

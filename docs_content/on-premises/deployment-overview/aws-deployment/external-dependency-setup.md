@@ -29,12 +29,12 @@ updatedAt: 2021-10-01T20:22:21.000Z
 
 
 
-:::hint
+```hint
 ### Note these values down!
 
 
 For the below instructions, you'll need the output values in the "Configuration and SSL" section. Keep track of them.
-:::
+```
 
 1\. Navigate to the "Project settings" page:
 
@@ -76,7 +76,7 @@ In order to have our EC2 instance access the AWS bucket, we need to create an AW
             "Action": [
                 "s3:*"
             ],
-            "Resource": "arn:aws:s3:::my-company-highlight-sessions"
+            "Resource": "arn:aws:s3```my-company-highlight-sessions"
         }
     ]
 }

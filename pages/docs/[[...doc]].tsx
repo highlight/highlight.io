@@ -40,6 +40,7 @@ import {
 import Spin from 'antd/lib/spin';
 import 'antd/lib/spin/style/index.css';
 import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
+import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
@@ -788,6 +789,8 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
             <div className={styles.customComponent}>
               <HeroVideo />
             </div>
+          ) : props.className === 'language-hint' ? (
+            <Callout content={props.children[0]} />
           ) : (
             <div className={styles.codeBlock}>
               <CodeBlock
