@@ -1,5 +1,4 @@
 import { promises as fsp } from 'fs';
-import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import {
   createElement,
@@ -40,6 +39,9 @@ import {
 } from 'react-icons/bi';
 import Spin from 'antd/lib/spin';
 import 'antd/lib/spin/style/index.css';
+import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
+import { Callout } from '../../components/Docs/Callout/Callout';
+import { Meta } from '../../components/common/Head/Meta';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -59,6 +61,12 @@ interface DocPath {
   metadata: any;
   // some parent pages are empty and should redirect to the first child page
   redirect?: string;
+}
+
+export interface Doc {
+  content: string;
+  data: { [key: string]: any };
+  links: Set<string>;
 }
 
 const useHeadingsData = () => {
@@ -292,6 +300,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export const readMarkdown = async (fs_api: any, filePath: string) => {
   const fileContents = await fs_api.readFile(path.join(filePath));
+  return parseMarkdown(fileContents);
+};
+
+export const parseMarkdown = (fileContents: string): Doc => {
   const { content, data } = matter(fileContents, {
     delimiters: ['---', '---'],
     engines: {
@@ -386,46 +398,44 @@ const TableOfContents = ({
 
   return (
     <div>
-      <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
-        {hasChildren ? (
-          <ChevronDown
-            className={classNames(styles.tocIcon, {
-              [styles.tocItemChevronClosed]: hasChildren && !open,
+      <Link
+        href={path.join(
+          '/docs',
+          docPaths[toc.docPathId || 0]?.simple_path || ''
+        )}
+      >
+        <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
+          {hasChildren ? (
+            <ChevronDown
+              className={classNames(styles.tocIcon, {
+                [styles.tocItemChevronClosed]: hasChildren && !open,
+                [styles.tocItemOpen]: hasChildren && open,
+                [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            />
+          ) : (
+            <Minus
+              className={classNames(styles.tocIcon, {
+                [styles.tocItemOpen]: hasChildren,
+                [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            />
+          )}
+          <Typography
+            type="copy3"
+            emphasis={isTopLevel}
+            className={classNames(styles.tocItem, {
               [styles.tocItemOpen]: hasChildren && open,
               [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
               [styles.tocChild]: !isTopLevel,
-              [styles.tocMenu]: isTopLevel,
             })}
-          />
-        ) : (
-          <Minus
-            className={classNames(styles.tocIcon, {
-              [styles.tocItemOpen]: hasChildren,
-              [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
-              [styles.tocChild]: !isTopLevel,
-              [styles.tocMenu]: isTopLevel,
-            })}
-          />
-        )}
-        <Typography
-          type="copy3"
-          emphasis={isTopLevel}
-          className={classNames(styles.tocItem, {
-            [styles.tocItemOpen]: hasChildren && open,
-            [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
-            [styles.tocChild]: !isTopLevel,
-          })}
-        >
-          <Link
-            href={path.join(
-              '/docs',
-              docPaths[toc.docPathId || 0]?.simple_path || ''
-            )}
           >
             {toc?.tocHeading || 'nope'}
-          </Link>
-        </Typography>
-      </div>
+          </Typography>
+        </div>
+      </Link>
       <Collapse isOpened={open}>
         <div className={styles.tocChildren}>
           <div className={styles.tocChildrenLineWrapper}>
@@ -489,16 +499,17 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
 
 const DocPage = ({
   markdownText,
+  slug,
   toc,
   redirect,
   docOptions,
   metadata,
 }: {
-  markdownText: string;
+  markdownText?: string;
   slug: string;
   toc: TocEntry;
   docOptions: DocPath[];
-  metadata: any;
+  metadata?: { title: string; slug: string };
   redirect?: string;
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
@@ -510,6 +521,12 @@ const DocPage = ({
   const [open, setOpen] = useState(false);
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
   const [hoveredResult, setHoveredResult] = useState(0);
+
+  const description = (markdownText || '')
+    .replaceAll(/[`[(]+.+[`\])]+/gi, '')
+    .replaceAll(/#+/gi, '')
+    .split('\n')
+    .join(' ');
 
   useEffect(() => {
     setCurrentPageIndex(
@@ -540,10 +557,12 @@ const DocPage = ({
 
   return (
     <>
-      <Head>
-        <title>{metadata ? metadata.title : ''}</title>
-        <meta name="description" content={'TODO'} />
-      </Head>
+      <Meta
+        title={metadata?.title || ''}
+        description={description}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
+        canonical={`/docs/${slug}`}
+      />
       <Navbar hideFreeTrialText fixed />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
@@ -688,7 +707,7 @@ const DocPage = ({
               a: getDocsTypographyRenderer('a'),
             }}
           >
-            {markdownText}
+            {markdownText || ''}
           </ReactMarkdown>
           <div className={styles.pageNavigateRow}>
             {currentPageIndex > 0 ? (
@@ -766,6 +785,12 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
         {type === 'code' ? (
           props && props.children && props.inline ? (
             <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
+          ) : props.className === 'language-welcomevideo' ? (
+            <div className={styles.customComponent}>
+              <HeroVideo />
+            </div>
+          ) : props.className === 'language-hint' ? (
+            <Callout content={props.children[0]} />
           ) : (
             <div className={styles.codeBlock}>
               <CodeBlock
@@ -814,6 +839,7 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
       </>
     );
   }
+
   return DocsTypography;
 };
 

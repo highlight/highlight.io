@@ -5,11 +5,11 @@ createdAt: 2021-09-13T23:56:14.000Z
 updatedAt: 2022-08-03T19:08:25.000Z
 ---
 
-:::hint
+```hint
 ## Should I continue reading?
 
 If you publicly deploy sourcemaps with your application then you do not need this guide. This guide is for applications that don't ship sourcemaps with their application.
-:::
+```
 
 When debugging an error in Highlight, it might be useful to get a stack trace from the original file in your codebase (rather than a minified file) to help understand what is going wrong. In order to do this, Highlight needs access to the sourcemaps from your codebase. Sourcemaps can be sent to Highlight in your CI/CD process.
 

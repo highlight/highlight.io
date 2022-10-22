@@ -57,18 +57,26 @@
   width: var(--size-large) !important;
   height: var(--size-large) !important;
   transition: color 0.2s ease;
+  color: var(--color-copy-on-light);
+  stroke: var(--color-divider-on-dark);
 }
 
 .tocRow {
   display: flex;
   align-items: center;
   padding: 4px 0;
+  color: var(--copy-on-dark);
 
   &:hover {
     border-radius: var(--border-radius);
     background: #30294e4d;
     color: var(--copy-on-dark);
     cursor: pointer;
+
+    .tocIcon {
+      color: var(--color-copy-on-dark);
+      stroke: var(--color-copy-on-dark);
+    }
 
     .tocChild {
       opacity: 1;
@@ -103,6 +111,7 @@
 .tocItemCurrent a,
 .tocItemCurrent {
   color: var(--color-copy-on-dark) !important;
+  stroke: var(--color-copy-on-dark);
   opacity: 1 !important;
 }
 
@@ -428,6 +437,62 @@ h5:hover .headingCopyIcon {
 
 .tocMenuLarge {
   overflow: auto;
+}
+
+.customComponent {
+  font-family: 'Poppins';
+  white-space: normal;
+}
+
+.callout {
+  display: flex;
+  background: var(--color-divider-on-dark);
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: var(--size-medium);
+  padding: var(--size-medium);
+  white-space: normal;
+  gap: var(--size-small);
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-white);
+    font-size: var(--size-medium);
+    line-height: 26px !important;
+    letter-spacing: 0;
+  }
+
+  p {
+    color: var(--color-copy-on-dark);
+    font-family: 'Poppins';
+    font-size: var(--size-medium);
+    line-height: 26px !important;
+    margin: 0 !important;
+  }
+
+  .calloutIcon {
+    flex: 0 0 40px;
+    width: 40px;
+
+    .icon {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-copy-on-light);
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--border-radius);
+
+      svg {
+        color: var(--color-copy-on-dark);
+      }
+    }
+  }
+
+  .calloutContent {
+    flex: 1 1 auto;
+  }
 }
 
 @supports (-webkit-hyphens: none) {

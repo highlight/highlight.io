@@ -41,7 +41,7 @@ func main() {
 
 Add the following middleware to your router:
 
-:::codeblocktabs
+```codeblocktabs
 ```go
 import (
 	highlightChi "github.com/highlight-run/highlight-go/middleware/chi"
@@ -69,13 +69,13 @@ func main() {
 }
 
 ```
-:::
+```
 
 ## Instrumenting Handlers
 
 Great! Now we've configured the highlight client and can track sessions from the frontend to the backend. All we need to do now is instrument our backend code to transmit events or errors where relevant.
 
-:::codeblocktabs
+```codeblocktabs
 ```go
 package main
 
@@ -159,7 +159,7 @@ func PingHandler(c *gin.Context) {
 }
 
 ```
-:::
+```
 
 
 
