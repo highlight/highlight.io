@@ -13,7 +13,7 @@ Let's get you up and running with Highlight. **We should be done in less than 2 
 
 Install `@highlight-run/gatsby-plugin-highlight` using your package manager.
 
-:::codeblocktabs
+```codeblocktabs
 ```none
 npm install @highlight-run/gatsby-plugin-highlight
 ```
@@ -21,7 +21,7 @@ npm install @highlight-run/gatsby-plugin-highlight
 ```shell
 yarn add @highlight-run/gatsby-plugin-highlight
 ```
-:::
+```
 
 ## Register Highlight as a Gatsby Plugin
 

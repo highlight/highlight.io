@@ -7,9 +7,9 @@ updatedAt: 2022-07-11T21:04:21.000Z
 
 Highlight is able to record websites that use WebGL.
 
-:::hint
+```hint
 Highlight's WebGL recording is currently in beta. We are actively working on making this production ready. If you have any questions please reach out to us at support\@highlight.run
-:::
+```
 
 ## Getting Started
 

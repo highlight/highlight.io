@@ -17,11 +17,11 @@ We have a step-by-step guide for deploying Highlight on Heroku, seen [here](http
 
 &#x20;If you'd like to deploy using a custom method (with common large-scale deployment tooling, for example), we're happy to help out with the process. Contact sales\@highlight.run with more information regarding your schedule and we'll be in touch.
 
-:::hint
+```hint
 ## Deploy Keys!
 
 Don't forget to email sales\@highlight.run for your deploy key, otherwise on-prem Highlight won't run!
-:::
+```
 
 
 
