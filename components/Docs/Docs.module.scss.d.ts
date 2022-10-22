@@ -8,6 +8,7 @@ export const codeBlock: string;
 export const codeCopyIcon: string;
 export const content: string;
 export const contentRender: string;
+export const customComponent: string;
 export const docLink: string;
 export const docSearchbar: string;
 export const headingCopyIcon: string;

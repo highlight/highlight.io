@@ -39,6 +39,7 @@ import {
 } from 'react-icons/bi';
 import Spin from 'antd/lib/spin';
 import 'antd/lib/spin/style/index.css';
+import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 
@@ -784,9 +785,11 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
         {type === 'code' ? (
           props && props.children && props.inline ? (
             <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
-          ) : props?.className === 'language-video' ? (
-            <div dangerouslySetInnerHTML={{ __html: props.children }}></div>
-          ) : props?.className === 'language-hint' ? (
+          ) : props.className === 'language-welcomevideo' ? (
+            <div className={styles.customComponent}>
+              <HeroVideo />
+            </div>
+          ) : props.className === 'language-hint' ? (
             <Callout content={props.children[0]} />
           ) : (
             <div className={styles.codeBlock}>

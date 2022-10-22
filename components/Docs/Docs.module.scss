@@ -435,6 +435,11 @@ h5:hover .headingCopyIcon {
   overflow: auto;
 }
 
+.customComponent {
+  font-family: 'Poppins';
+  white-space: normal;
+}
+
 .callout {
   display: flex;
   background: var(--color-divider-on-dark);
