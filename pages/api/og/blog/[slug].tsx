@@ -1,9 +1,10 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
 import { gql } from 'graphql-request';
-import { graphcms } from '../../blog';
-import { Post } from '../../../components/Blog/BlogPost/BlogPost';
+import { graphcms } from '../../../blog';
+import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
 import { Buffer } from 'buffer';
+import { font, fontLight, hero } from '../util';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -26,27 +27,12 @@ const QUERY = gql`
   }
 `;
 
-const font = fetch(
-  // @ts-ignore
-  new URL('../../../styles/font/Poppins-SemiBold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer());
-
-const fontLight = fetch(
-  // @ts-ignore
-  new URL('../../../styles/font/Poppins-Light.ttf', import.meta.url)
-).then((res) => res.arrayBuffer());
-
-const hero = fetch(
-  // @ts-ignore
-  new URL('../../../public/images/hero.png', import.meta.url)
-).then((res) => res.arrayBuffer());
-
 export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
   const heroData = await hero;
   const heroBase64 = Buffer.from(heroData).toString('base64');
-  const slug = new URLPattern({ pathname: '/api/blog-og/:slug' }).exec(req.url)
+  const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await graphcms.request(QUERY, { slug })).post as
     | Post
