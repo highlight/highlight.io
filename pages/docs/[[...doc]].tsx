@@ -541,8 +541,8 @@ const DocPage = ({
   }, [redirect, router]);
 
   const onSearchChange = async (e: any) => {
+    setIsSearchLoading(true);
     if (e.target.value !== '') {
-      setIsSearchLoading(true);
       const results = await (
         await fetch(`/api/docs/search/${e.target.value}`)
       ).json();
@@ -550,6 +550,7 @@ const DocPage = ({
       setSearchResults(results);
       setSearchValue(e.target.value);
     } else {
+      setIsSearchLoading(false);
       setSearchResults([]);
       setSearchValue('');
     }
@@ -589,12 +590,10 @@ const DocPage = ({
                 } else if (e.key === 'Enter') {
                   router.push(`/docs/${searchResults[hoveredResult].path}`);
                   setSearchOpen(false);
-                } else {
-                  setIsSearchLoading(true);
                 }
               }}
             />
-            {searchValue !== '' && searchOpen && (
+            {searchOpen && (searchResults.length > 0 || isSearchLoading) && (
               <div className={styles.searchDiv}>
                 {isSearchLoading ? (
                   <Spin className={styles.spinner} />
