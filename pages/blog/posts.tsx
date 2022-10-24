@@ -1,4 +1,4 @@
-import { Post } from '../../components/Blog/BlogPost/BlogPost';
+import { Author, Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Typography } from '../../components/common/Typography/Typography';
 import Image from 'next/image';
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -214,101 +214,99 @@ const TabItem = ({
   );
 };
 
+function getDateAndReadingTime(publishedAt: string, readingMinutes: number) {
+  const publishedDate = new Date(publishedAt).toLocaleDateString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  return `${publishedDate} • ${readingMinutes} min. read`;
+}
+
+const postItemStyle = classNames(
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg cursor-pointer border-divider-on-dark p-7 hover:border-copy-on-light active:bg-black/40 active:transition-none'
+);
+
 const PostItem = ({ post }: { post: Post }) => {
-  const publishedDate = new Date(post.publishedAt).toLocaleDateString(
-    undefined,
-    {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    }
+  return (
+    <Link href={`/blog/${post.slug}`}>
+      <div className={classNames(postItemStyle, 'hidden mobile:block')}>
+        <Typography type="copy4" className="text-copy-on-dark">
+          {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
+        </Typography>
+
+        <h5 className="mt-1">{post.title}</h5>
+        <div className="mt-3">{post.author && <Author {...post.author} />}</div>
+        <div className="flex gap-2.5 absolute right-7 bottom-7">
+          {post.tags?.map((tag, i) => (
+            <PostTag tag={tag} key={i} />
+          ))}
+        </div>
+      </div>
+    </Link>
   );
+};
+
+const MobilePostItem = ({ post }: { post: Post }) => {
+  const tag: string | undefined = post.tags[post.tags.length - 1];
 
   return (
-    <div className="relative flex-col hidden w-full gap-3 border border-solid rounded-lg mobile:flex border-divider-on-dark p-7">
-      <div className="flex flex-col gap-1">
-        <Typography type="copy4" className="text-copy-on-dark">
-          {publishedDate} · {post.readingTime} min. read
+    <Link href={`/blog/${post.slug}`}>
+      <div className={classNames(postItemStyle, 'mobile:hidden block')}>
+        {tag && <PostTag tag={tag} />}
+        <h3 className="mt-3">{post.title}</h3>
+        <Typography type="copy4" className="mt-1 text-copy-on-dark">
+          {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
         </Typography>
-        <Link href={`/blog/${post.slug}`}>
-          <h5 className="cursor-pointer">{post.title}</h5>
-        </Link>
+        <div className="mt-6">
+          {post.author && <Author {...post.author} hidePhoto />}
+        </div>
       </div>
-      <div className="flex gap-3">
+    </Link>
+  );
+};
+
+function PostTag({ tag }: { tag: string }) {
+  return (
+    <div /* should be button, placeholder */
+      className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer"
+    >
+      <Typography type="copy4">{tag}</Typography>
+    </div>
+  );
+}
+
+function Author({
+  profilePhoto,
+  firstName,
+  lastName,
+  title,
+  hidePhoto,
+}: Author & { hidePhoto?: boolean }) {
+  return (
+    <div className="flex gap-3">
+      {!hidePhoto && (
         <div className="overflow-hidden rounded-full w-12 h-12 border-solid border-[3px] border-divider-on-dark relative">
           <Image
-            src={post.author?.profilePhoto.url ?? ''}
+            src={profilePhoto.url ?? ''}
             layout="fill"
             alt="author picture"
             objectFit="cover"
           />
         </div>
-        <div className="flex flex-col">
-          <Typography type="copy3" emphasis>
-            {post.author?.firstName} {post.author?.lastName}
-          </Typography>
-
-          <Typography type="copy4" className="text-copy-on-dark">
-            {post.author?.title}
-          </Typography>
-        </div>
-      </div>
-      <div className="flex gap-2.5 absolute right-7 bottom-7">
-        {post.tags?.map((name, i) => (
-          <div /* should be button, placeholder */
-            key={i}
-            className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer"
-          >
-            <Typography type="copy4">{name}</Typography>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const MobilePostItem = ({
-  post,
-}: {
-  post: typeof placeholderPosts[number];
-}) => {
-  const publishedDate =
-    post.publishedAt &&
-    new Date(post.publishedAt).toLocaleDateString(undefined, {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
-
-  return (
-    <div className="relative flex flex-col w-full border border-solid rounded-lg mobile:hidden border-divider-on-dark p-7">
-      {post.tags?.slice(0, 1).map((name, i) => (
-        <div /* should be button, placeholder */
-          key={i}
-          className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer"
-        >
-          <Typography type="copy4">{name}</Typography>
-        </div>
-      ))}
-      <div className="flex flex-col gap-1 mt-3">
-        <Link href={`/blog/${post.slug}`}>
-          <h3 className="cursor-pointer">{post.title}</h3>
-        </Link>
-        <Typography type="copy4" className="text-copy-on-dark">
-          {publishedDate} · {post.readingTime} min. read
-        </Typography>
-      </div>
-      <div className="flex flex-col mt-6">
+      )}
+      <div className="flex flex-col">
         <Typography type="copy3" emphasis>
-          {post.author?.firstName} {post.author?.lastName}
+          {firstName} {lastName}
         </Typography>
 
         <Typography type="copy4" className="text-copy-on-dark">
-          {post.author?.title}
+          {title}
         </Typography>
       </div>
     </div>
   );
-};
+}
 
 export default Blog;
