@@ -14,9 +14,11 @@ import {
   HiCog,
   HiCollection,
   HiCursorClick,
+  HiGlobeAlt,
   HiOutlineSearch,
   HiSearch,
 } from 'react-icons/hi';
+import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export const graphcms = new GraphQLClient(
   'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
@@ -271,12 +273,27 @@ function PostTag({ tag }: { tag: string }) {
   );
 }
 
+const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
+  <a
+    href={href}
+    className="transition-colors text-copy-on-dark"
+    target={'_blank'}
+    rel="noreferrer"
+  >
+    {icon}
+  </a>
+);
+
 function Author({
   profilePhoto,
   firstName,
   lastName,
   title,
   hidePhoto,
+  personalWebsiteLink,
+  twitterLink,
+  githubLink,
+  linkedInLink,
 }: Author & { hidePhoto?: boolean }) {
   return (
     <div className="flex gap-3">
@@ -291,9 +308,23 @@ function Author({
         </div>
       )}
       <div className="flex flex-col">
-        <Typography type="copy3" emphasis>
-          {firstName} {lastName}
-        </Typography>
+        <div className="flex items-center gap-2">
+          <Typography type="copy3" emphasis>
+            {firstName} {lastName}
+          </Typography>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {personalWebsiteLink && (
+              <SocialLink href={personalWebsiteLink} icon={<HiGlobeAlt />} />
+            )}
+            {twitterLink && (
+              <SocialLink href={twitterLink} icon={<FaTwitter />} />
+            )}
+            {githubLink && <SocialLink href={githubLink} icon={<FaGithub />} />}
+            {linkedInLink && (
+              <SocialLink href={linkedInLink} icon={<FaLinkedin />} />
+            )}
+          </div>
+        </div>
 
         <Typography type="copy4" className="text-copy-on-dark">
           {title}
