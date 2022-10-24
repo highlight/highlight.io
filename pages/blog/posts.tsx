@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const data = (await graphcms.request(query)) as { posts: Post[] };
 
-  return { props: { posts: data.posts } };
+  return { props: { posts: data.posts }, revalidate: 60 * 60 };
 };
 
 const searchBarBaseStyle = classNames(
