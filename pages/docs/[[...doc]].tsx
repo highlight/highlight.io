@@ -390,6 +390,10 @@ const TableOfContents = ({
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
 
   useEffect(() => {
+    setOpen(isTopLevel);
+  }, [isTopLevel]);
+
+  useEffect(() => {
     const isCurrentPage =
       path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
       window.location.pathname;
@@ -428,7 +432,7 @@ const TableOfContents = ({
             emphasis={isTopLevel}
             className={classNames(styles.tocItem, {
               [styles.tocItemOpen]: hasChildren && open,
-              [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+              [styles.tocItemCurrent]: (!hasChildren || open) && isCurrentPage,
               [styles.tocChild]: !isTopLevel,
             })}
           >
@@ -652,20 +656,22 @@ const DocPage = ({
             className={classNames(styles.tocRow, styles.tocMenu)}
             onClick={() => setOpen((o) => !o)}
           >
-            <ChevronDown
-              className={classNames(styles.tocIcon, {
-                [styles.tocItemOpen]: open,
-              })}
-            />
-            <Typography
-              type="copy3"
-              emphasis
-              className={classNames(styles.tocItem, {
-                [styles.tocItemOpen]: open,
-              })}
-            >
-              Menu
-            </Typography>
+            <div className={styles.tocMenuLabel}>
+              <ChevronDown
+                className={classNames(styles.tocIcon, {
+                  [styles.tocItemOpen]: open,
+                })}
+              />
+              <Typography
+                type="copy3"
+                emphasis
+                className={classNames(styles.tocItem, {
+                  [styles.tocItemOpen]: open,
+                })}
+              >
+                Menu
+              </Typography>
+            </div>
           </div>
           <Collapse isOpened={open}>
             <div className={classNames(styles.tocContents, styles.tocMenu)}>
@@ -829,7 +835,11 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
             [
               ...props?.node?.children.map((c: any, i: number) =>
                 c.tagName === 'code'
-                  ? createElement(c.tagName, { key: i }, c?.children[0].value)
+                  ? createElement(
+                      c.tagName,
+                      { key: i, className: styles.inlineCodeBlock },
+                      c?.children[0].value
+                    )
                   : c.value
               ),
               copyHeadingIcon(props?.node?.children?.length ?? 0),
