@@ -18,27 +18,6 @@ import {
   HiSearch,
 } from 'react-icons/hi';
 
-const placeholderPost: Partial<
-  Omit<Post, 'author'> & { author: Partial<Post['author']> }
-> = {
-  title: 'How we Animate Product Updates at Highlight',
-  slug: 'animate-product-updates',
-  publishedAt: '2022-09-18',
-  readingTime: 4,
-  author: {
-    title: 'Designer, Advisor',
-    firstName: 'Clint',
-    lastName: 'Kadera',
-    linkedInLink: 'https://linkedin.com',
-    profilePhoto: { url: '/images/avatars/portal.jpg' },
-  },
-  tags: ['Improve workflow', 'Tips & Tricks'],
-};
-
-const placeholderPosts: typeof placeholderPost[] = new Array(4).fill(
-  placeholderPost
-);
-
 export const graphcms = new GraphQLClient(
   'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
   {
