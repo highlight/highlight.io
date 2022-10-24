@@ -5,6 +5,7 @@ const SUBDOMAIN_LANDING_PAGES = {
   observability: '/blog/frontend-observability',
   monitor: '/blog/frontend-observability',
   nextjs: '/blog/feature-nextjs-integration',
+  nodejs: '/blog/feature-nodejs-integration',
 };
 
 export default function middleware(req: NextRequest) {
