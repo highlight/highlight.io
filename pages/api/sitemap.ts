@@ -1,6 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { withHighlight } from '../../highlight.config';
 import { H } from '@highlight-run/next';
+import { getGithubDocsPaths } from './docs/github';
 
 async function handler(_: any, res: any) {
   res.statusCode = 200;
@@ -19,27 +20,30 @@ async function handler(_: any, res: any) {
   );
 
   const start = global.performance.now();
-  const { posts } = await graphcms.request(gql`
-    query GetPosts() {
-      posts(orderBy: publishedAt_DESC) {
-        slug
+  const [{ posts }, { customers }, { changelogs }, docs] = await Promise.all([
+    await graphcms.request(gql`
+      query GetPosts() {
+        posts(orderBy: publishedAt_DESC) {
+          slug
+        }
       }
-    }
-  `);
-  const { customers } = await graphcms.request(gql`
-    query GetCustomers() {
-      customers() {
-        slug
+    `),
+    await graphcms.request(gql`
+      query GetCustomers() {
+        customers() {
+          slug
+        }
       }
-    }
-  `);
-  const { changelogs } = await graphcms.request(gql`
-    query GetChangelogs() {
-      changelogs() {
-        slug
+    `),
+    await graphcms.request(gql`
+      query GetChangelogs() {
+        changelogs() {
+          slug
+        }
       }
-    }
-  `);
+    `),
+    await getGithubDocsPaths(),
+  ]);
   H.metrics([
     {
       name: 'sitemap-gql-latency-ms',
@@ -50,10 +54,13 @@ async function handler(_: any, res: any) {
 
   const blogPages = posts.map((post: any) => `blog/${post.slug}`);
   const customerPages = customers.map(
-    (customer: any) => `customers/${customer.slug}`
+    (customer: { slug: string }) => `customers/${customer.slug}`
   );
   const changelogPages = changelogs.map(
-    (changelog: any) => `changelog/${changelog.slug}`
+    (changelog: { slug: string }) => `changelog/${changelog.slug}`
+  );
+  const docsPages = Array.from(docs.keys()).map(
+    (slug: string) => `docs/${slug}`
   );
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
@@ -66,6 +73,7 @@ async function handler(_: any, res: any) {
     ...blogPages,
     ...customerPages,
     ...changelogPages,
+    ...docsPages,
   ];
 
   const addPage = (page: string) => {
