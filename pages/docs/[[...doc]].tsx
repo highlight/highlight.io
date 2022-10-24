@@ -29,7 +29,6 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import removeMd from 'remove-markdown';
 import { SearchResult } from '../api/docs/search/[searchValue]';
 import {
   BiChevronLeft,
@@ -44,7 +43,6 @@ import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
-const SEARCH_RESULT_BLURB_LENGTH = 100;
 
 interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -622,12 +620,7 @@ const DocPage = ({
                             highlightClassName={styles.highlightedText}
                             searchWords={[searchValue]}
                             autoEscape={true}
-                            textToHighlight={`${removeMd(
-                              result.content.slice(
-                                0,
-                                SEARCH_RESULT_BLURB_LENGTH
-                              )
-                            )}...`}
+                            textToHighlight={result.content}
                           />
                         </div>
                       </div>
