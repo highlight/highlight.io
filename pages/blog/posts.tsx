@@ -6,10 +6,17 @@ import { FooterCallToAction } from '../../components/common/CallToAction/FooterC
 import Footer from '../../components/common/Footer/Footer';
 import { ReactElement } from 'react';
 import Link from 'next/link';
-import { SearchIcon20, SearchIcon24 } from '../../components/Blog/Icons';
 import classNames from 'classnames';
 import { gql, GraphQLClient } from 'graphql-request';
 import { GetStaticProps } from 'next';
+import {
+  HiCloud,
+  HiCog,
+  HiCollection,
+  HiCursorClick,
+  HiOutlineSearch,
+  HiSearch,
+} from 'react-icons/hi';
 
 const placeholderPost: Partial<
   Omit<Post, 'author'> & { author: Partial<Post['author']> }
@@ -87,7 +94,7 @@ const Blog = ({ posts }: { posts: Post[] }) => {
           <div className="box-content flex-col hidden gap-6 border-0 border-r border-solid pr-14 w-72 border-divider-on-dark desktop:flex">
             {/* sidebar */}
             <div className="w-full px-2 h-[34px] border border-solid rounded-md text-copy-on-dark border-divider-on-dark items-center flex gap-1">
-              <SearchIcon20 />
+              <HiSearch />
               <input
                 type="text"
                 placeholder="Search Posts..."
@@ -95,16 +102,13 @@ const Blog = ({ posts }: { posts: Post[] }) => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <SidebarItem label="All posts" icon={<SearchIcon20 />} />
+              <SidebarItem label="All posts" icon={<HiCollection />} />
               <SidebarItem
                 label="Frontend Monitoring"
-                icon={<SearchIcon20 />}
+                icon={<HiCursorClick />}
               />
-              <SidebarItem label="Observability" icon={<SearchIcon20 />} />
-              <SidebarItem
-                label="Highlight Engineering"
-                icon={<SearchIcon20 />}
-              />
+              <SidebarItem label="Observability" icon={<HiCloud />} />
+              <SidebarItem label="Highlight Engineering" icon={<HiCog />} />
             </div>
           </div>
           <div className="w-full max-w-4xl pb-32 ">
@@ -124,7 +128,7 @@ const Blog = ({ posts }: { posts: Post[] }) => {
             {/* tablet and mobile filters */}
             <div className="px-12">
               <div className="flex desktop:hidden items-center w-full gap-2.5 px-3.5 border border-solid rounded-md h-14 text-copy-on-dark border-divider-on-dark box-border">
-                <SearchIcon24 />
+                <HiOutlineSearch className="w-6 h-6" />
                 <input
                   type="text"
                   placeholder="Search Posts..."
@@ -135,10 +139,10 @@ const Blog = ({ posts }: { posts: Post[] }) => {
             <div
               className="flex max-w-full gap-8 px-12 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden" /* */
             >
-              <TabItem label="All" icon={<SearchIcon20 />} active />
-              <TabItem label="Frontend Monitoring" icon={<SearchIcon20 />} />
-              <TabItem label="Observability" icon={<SearchIcon20 />} />
-              <TabItem label="Highlight Engineering" icon={<SearchIcon20 />} />
+              <TabItem label="All" icon={<HiCollection />} active />
+              <TabItem label="Frontend Monitoring" icon={<HiCursorClick />} />
+              <TabItem label="Observability" icon={<HiCloud />} />
+              <TabItem label="Highlight Engineering" icon={<HiCog />} />
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 px-12 pt-10 border-0 border-t border-solid border-divider-on-dark desktop:pl-11">
