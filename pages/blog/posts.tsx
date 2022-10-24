@@ -8,6 +8,8 @@ import { ReactElement } from 'react';
 import Link from 'next/link';
 import { SearchIcon20, SearchIcon24 } from '../../components/Blog/Icons';
 import classNames from 'classnames';
+import { gql, GraphQLClient } from 'graphql-request';
+import { GetStaticProps } from 'next';
 
 const placeholderPost: Partial<
   Omit<Post, 'author'> & { author: Partial<Post['author']> }
@@ -30,7 +32,53 @@ const placeholderPosts: typeof placeholderPost[] = new Array(4).fill(
   placeholderPost
 );
 
-const Blog = () => {
+export const graphcms = new GraphQLClient(
+  'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
+  {
+    headers: {
+      Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
+    },
+  }
+);
+
+export const getStaticProps: GetStaticProps = async () => {
+  const query = gql`
+    query GetPosts() {
+      posts(
+        orderBy: postedAt_DESC
+        where: { unlisted: false }
+      ) {
+        slug
+        title
+        metaTitle
+        description
+        metaDescription
+        publishedAt
+        author {
+          firstName
+          lastName
+          title
+          twitterLink
+          linkedInLink
+          githubLink
+          personalWebsiteLink
+          profilePhoto {
+            url
+          }
+        }
+        tags
+        readingTime
+        postedAt
+      }
+    }
+  `;
+
+  const data = (await graphcms.request(query)) as { posts: Post[] };
+
+  return { props: { posts: data.posts } };
+};
+
+const Blog = ({ posts }: { posts: Post[] }) => {
   return (
     <>
       <Navbar />
@@ -94,7 +142,7 @@ const Blog = () => {
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 px-12 pt-10 border-0 border-t border-solid border-divider-on-dark desktop:pl-11">
-              {placeholderPosts.map((post) => (
+              {posts.map((post) => (
                 <>
                   <PostItem post={post} key={post.slug} />
                   <MobilePostItem post={post} key={post.slug} />
@@ -166,14 +214,15 @@ const TabItem = ({
   );
 };
 
-const PostItem = ({ post }: { post: typeof placeholderPosts[number] }) => {
-  const publishedDate =
-    post.publishedAt &&
-    new Date(post.publishedAt).toLocaleDateString(undefined, {
+const PostItem = ({ post }: { post: Post }) => {
+  const publishedDate = new Date(post.publishedAt).toLocaleDateString(
+    undefined,
+    {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
-    });
+    }
+  );
 
   return (
     <div className="relative flex-col hidden w-full gap-3 border border-solid rounded-lg mobile:flex border-divider-on-dark p-7">
@@ -188,7 +237,7 @@ const PostItem = ({ post }: { post: typeof placeholderPosts[number] }) => {
       <div className="flex gap-3">
         <div className="overflow-hidden rounded-full w-12 h-12 border-solid border-[3px] border-divider-on-dark relative">
           <Image
-            src={post.author?.profilePhoto?.url ?? ''}
+            src={post.author?.profilePhoto.url ?? ''}
             layout="fill"
             alt="author picture"
             objectFit="cover"
