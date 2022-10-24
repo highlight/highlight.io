@@ -20,11 +20,8 @@ import Highlighter from 'react-highlight-words';
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
-import CopyIcon from '../../public/images/document-duplicate.svg';
 import PageIcon from '../../public/images/page.svg';
 import { Typography } from '../../components/common/Typography/Typography';
-import { CodeBlock } from 'react-code-blocks';
-import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -42,6 +39,7 @@ import 'antd/lib/spin/style/index.css';
 import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -792,20 +790,11 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
           ) : props.className === 'language-hint' ? (
             <Callout content={props.children[0]} />
           ) : (
-            <div className={styles.codeBlock}>
-              <CodeBlock
-                language={'js'}
-                text={props.children[0]}
-                showLineNumbers={false}
-                theme={highlightCodeTheme}
-              />
-              <div
-                className={styles.codeCopyIcon}
-                onClick={() => navigator.clipboard.writeText(props.children[0])}
-              >
-                <Image src={CopyIcon} alt="Copy" />
-              </div>
-            </div>
+            <HighlightCodeBlock
+              language={'js'}
+              text={props.children[0]}
+              showLineNumbers={false}
+            />
           )
         ) : type === 'a' ? (
           props.children?.length && (

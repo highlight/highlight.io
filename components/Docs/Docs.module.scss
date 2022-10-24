@@ -438,6 +438,11 @@ h5:hover .headingCopyIcon {
 .customComponent {
   font-family: 'Poppins';
   white-space: normal;
+
+  span {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .callout {

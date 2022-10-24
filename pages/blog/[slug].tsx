@@ -21,6 +21,7 @@ import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -257,14 +258,11 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
         renderers={{
           code_block: ({ children }: { children: any }) => {
             return (
-              <div className={styles.codeBlock}>
-                <CodeBlock
-                  language={'js'}
-                  text={children?.props?.content[0].text}
-                  showLineNumbers={false}
-                  theme={highlightCodeTheme}
-                />
-              </div>
+              <HighlightCodeBlock
+                language={'js'}
+                text={children?.props?.content[0].text}
+                showLineNumbers={false}
+              />
             );
           },
           h1: getBlogTypographyRenderer('h1'),
