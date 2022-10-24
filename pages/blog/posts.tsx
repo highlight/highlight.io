@@ -244,26 +244,24 @@ function getDateAndReadingTime(publishedAt: string, readingMinutes: number) {
 }
 
 const postItemStyle = classNames(
-  'relative w-full gap-3 transition-colors border border-solid rounded-lg cursor-pointer border-divider-on-dark p-7 hover:border-copy-on-light active:bg-black/40 active:transition-none'
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:border-copy-on-light '
 );
 
 const PostItem = ({ post }: { post: Post }) => {
   return (
-    <Link href={`/blog/${post.slug}`}>
-      <div className={classNames(postItemStyle, 'hidden mobile:block')}>
-        <Typography type="copy4" className="text-copy-on-dark">
-          {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
-        </Typography>
+    <div className={classNames(postItemStyle, 'hidden mobile:block')}>
+      <Typography type="copy4" className="text-copy-on-dark">
+        {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
+      </Typography>
 
-        <h5 className="mt-1">{post.title}</h5>
-        <div className="mt-3">{post.author && <Author {...post.author} />}</div>
-        <div className="flex gap-2.5 absolute right-7 bottom-7">
-          {post.tags?.map((tag, i) => (
-            <PostTag tag={tag} key={i} />
-          ))}
-        </div>
+      <h5 className="mt-1">{post.title}</h5>
+      <div className="mt-3">{post.author && <Author {...post.author} />}</div>
+      <div className="flex gap-2.5 absolute right-7 bottom-7">
+        {post.tags?.map((tag, i) => (
+          <PostTag tag={tag} key={i} />
+        ))}
       </div>
-    </Link>
+    </div>
   );
 };
 
@@ -271,18 +269,16 @@ const MobilePostItem = ({ post }: { post: Post }) => {
   const tag: string | undefined = post.tags[post.tags.length - 1];
 
   return (
-    <Link href={`/blog/${post.slug}`}>
-      <div className={classNames(postItemStyle, 'mobile:hidden block')}>
-        {tag && <PostTag tag={tag} />}
-        <h3 className="mt-3">{post.title}</h3>
-        <Typography type="copy4" className="mt-1 text-copy-on-dark">
-          {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
-        </Typography>
-        <div className="mt-6">
-          {post.author && <Author {...post.author} hidePhoto />}
-        </div>
+    <div className={classNames(postItemStyle, 'mobile:hidden block')}>
+      {tag && <PostTag tag={tag} />}
+      <h3 className="mt-3">{post.title}</h3>
+      <Typography type="copy4" className="mt-1 text-copy-on-dark">
+        {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
+      </Typography>
+      <div className="mt-6">
+        {post.author && <Author {...post.author} hidePhoto />}
       </div>
-    </Link>
+    </div>
   );
 };
 
