@@ -85,6 +85,14 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { posts: data.posts } };
 };
 
+const searchBarBaseStyle = classNames(
+  'border border-solid rounded-md w-full text-copy-on-dark border-divider-on-dark items-center flex focus-within:border-copy-on-light transition-colors'
+);
+
+const searchBarInputBaseStyle = classNames(
+  'box-border h-full w-0 flex-1 font-sans leading-none bg-transparent border-none outline-none text-copy-on-dark'
+);
+
 const Blog = ({ posts }: { posts: Post[] }) => {
   return (
     <>
@@ -93,12 +101,14 @@ const Blog = ({ posts }: { posts: Post[] }) => {
         <div className="flex mx-auto mt-32 max-w-fit">
           <div className="box-content flex-col hidden gap-6 border-0 border-r border-solid pr-14 w-72 border-divider-on-dark desktop:flex">
             {/* sidebar */}
-            <div className="w-full px-2 h-[34px] border border-solid rounded-md text-copy-on-dark border-divider-on-dark items-center flex gap-1">
+            <div
+              className={classNames(searchBarBaseStyle, 'px-2 h-[34px] gap-1')}
+            >
               <HiSearch />
               <input
                 type="text"
                 placeholder="Search Posts..."
-                className="box-border flex-1 w-1 font-sans text-sm leading-none bg-transparent border-none text-copy-on-dark"
+                className={classNames(searchBarInputBaseStyle, 'text-sm')}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -126,13 +136,18 @@ const Blog = ({ posts }: { posts: Post[] }) => {
             </div>
 
             {/* tablet and mobile filters */}
-            <div className="px-12">
-              <div className="flex desktop:hidden items-center w-full gap-2.5 px-3.5 border border-solid rounded-md h-14 text-copy-on-dark border-divider-on-dark box-border">
+            <div className="flex px-12 desktop:hidden">
+              <div
+                className={classNames(
+                  searchBarBaseStyle,
+                  'h-14 gap-2.5 px-3.5 box-border'
+                )}
+              >
                 <HiOutlineSearch className="w-6 h-6" />
                 <input
                   type="text"
                   placeholder="Search Posts..."
-                  className="box-border flex-1 w-1 font-sans text-xl leading-none bg-transparent border-none text-copy-on-dark"
+                  className={classNames(searchBarInputBaseStyle, 'text-xl')}
                 />
               </div>
             </div>
