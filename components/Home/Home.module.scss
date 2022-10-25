@@ -142,10 +142,10 @@
     border-style: inset solid inset inset;
     border-color: rgba(0, 0, 0, 0) #0d0225 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
     border-image: initial;
-    height: 0px;
+    height: 0;
     margin-left: -10px;
     margin-right: 10px;
-    width: 0px;
+    width: 0;
   }
 
   .arrow2 {
@@ -153,9 +153,9 @@
     border-style: inset inset inset solid;
     border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #0d0225;
     border-image: initial;
-    height: 0px;
+    height: 0;
     margin-right: -10px;
-    width: 0px;
+    width: 0;
   }
 }
 
@@ -223,7 +223,7 @@
   flex-direction: column;
   flex: 1 1 50%;
   width: 50%;
-  padding: 0px var(--size-xLarge);
+  padding: 0 var(--size-xLarge);
   min-width: 550px;
   margin: var(--size-xLarge) 0;
 
@@ -745,6 +745,7 @@
   .tryButtonContainer {
     display: flex;
     justify-content: center;
+    margin: 0 !important;
   }
 }
 
@@ -785,14 +786,12 @@
 
 .buttonArrow {
   margin: 0 var(--size-small);
-  padding: var(--size-medium) var(--size-large);
   color: var(--text-primary);
   border-radius: var(--size-xxSmall);
-  display: block;
   text-decoration: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
-  background-color: none;
+  background-color: unset;
   display: inline-flex;
   justify-content: center;
   align-items: center;
