@@ -5,19 +5,10 @@ import Navbar from '../../components/common/Navbar/Navbar';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
 import { ReactElement } from 'react';
-import Link from 'next/link';
 import classNames from 'classnames';
-import { gql, GraphQLClient } from 'graphql-request';
+import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
-import {
-  HiCloud,
-  HiCog,
-  HiCollection,
-  HiCursorClick,
-  HiGlobeAlt,
-  HiOutlineSearch,
-  HiSearch,
-} from 'react-icons/hi';
+import { HiGlobeAlt, HiOutlineSearch, HiSearch } from 'react-icons/hi';
 import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { graphcms } from './index';
