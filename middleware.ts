@@ -8,7 +8,7 @@ const SUBDOMAIN_LANDING_PAGES = {
   nodejs: '/blog/feature-nodejs-integration',
 };
 
-const DOCS_REDIRECTS = {
+export const DOCS_REDIRECTS = {
   'client-sdk': '/docs/getting-started/client-sdk',
   reactjs: '/docs/getting-started/client-sdk/reactjs',
   nextjs: '/docs/getting-started/client-sdk/nextjs',
