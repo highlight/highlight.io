@@ -2,7 +2,7 @@ import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
-import { gql, GraphQLClient, Variables } from 'graphql-request';
+import { gql } from 'graphql-request';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
@@ -58,7 +58,7 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
     tag: tag ? [tag] : [],
   });
 
-  const filteredPosts = posts.sort((a: any, b: any) => {
+  return posts.sort((a: any, b: any) => {
     // sort by postedAt if the publishedAt field is the same
     if (a.postedAt === b.postedAt) {
       return (
@@ -66,8 +66,6 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
       );
     }
   });
-
-  return filteredPosts;
 };
 
 export const loadTagsFromHygraph = async () => {
@@ -85,9 +83,7 @@ export const loadTagsFromHygraph = async () => {
   });
 
   const allTags = posts.map((post: any) => post.tags);
-  const uniqueTags = Array.from(new Set(allTags.flat()));
-
-  return uniqueTags;
+  return Array.from(new Set(allTags.flat()));
 };
 
 export const Blog = ({
