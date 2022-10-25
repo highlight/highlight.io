@@ -34,7 +34,7 @@ function TagIcon({
 export function PostTag({ name, slug }: Pick<Tag, 'name' | 'slug'>) {
   return (
     <Link href={getTagUrl(slug)}>
-      <div className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer">
+      <div className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer hover:bg-copy-on-light transition-colors active:bg-black active:transition-none capitalize">
         <Typography type="copy4">{name}</Typography>
       </div>
     </Link>
