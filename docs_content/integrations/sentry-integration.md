@@ -5,7 +5,7 @@ createdAt: 2021-10-18T22:03:24.000Z
 updatedAt: 2022-06-01T17:58:57.000Z
 ---
 
-Highlight's [H.getSessionURL()](/api/h-get-session-url) gives you the URL to view a session. You can use this with [Sentry's Custom Contexts](https://docs.sentry.io/platforms/javascript/enriching-events/context/) to quickly view what happened in the session right before an error was thrown.
+Highlight's [H.getSessionURL()](/api/client/h-get-session-url) gives you the URL to view a session. You can use this with [Sentry's Custom Contexts](https://docs.sentry.io/platforms/javascript/enriching-events/context/) to quickly view what happened in the session right before an error was thrown.
 
 ## Vanilla Javascript
 

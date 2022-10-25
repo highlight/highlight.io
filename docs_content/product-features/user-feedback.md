@@ -7,7 +7,7 @@ updatedAt: 2021-12-10T23:18:41.000Z
 
 Feedback from your user can come at anytime and anywhere in your app. We've made it easy for you to collect feedback that retains context of what the user was doing up until giving feedback.
 
-If you'd like to send Highlight your user's feedback that is shown during the session replay, you can implement your own UI using [H.addSessionFeedback()](/api/h-add-session-feedback) or use the Highlight-provided UI with [H.toggleSessionFeedbackModal()](/api/h-toggle-session-feedback-modal).
+If you'd like to send Highlight your user's feedback that is shown during the session replay, you can implement your own UI using [H.addSessionFeedback()](/api/client/h-add-session-feedback) or use the Highlight-provided UI with [H.toggleSessionFeedbackModal()](/api/client/h-toggle-session-feedback-modal).
 
 ## Example Use Case
 
