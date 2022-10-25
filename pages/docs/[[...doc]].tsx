@@ -40,6 +40,7 @@ import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import { DOCS_REDIRECTS } from '../../middleware';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -268,6 +269,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
       if (!docRelLinks.has(link)) {
         throw new Error(
           `Link ${link} used in ${simplePath} is not a valid relative link.`
+        );
+      }
+    }
+  }
+
+  // validate that any archbee redirect URLs are valid.
+  for (const [oldLink, newLink] of Object.entries(DOCS_REDIRECTS)) {
+    if (newLink.startsWith('/docs/')) {
+      const doc = newLink.split('/docs').pop() || '';
+      if (!docRelLinks.has(doc)) {
+        console.log(docRelLinks, doc);
+        throw new Error(
+          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
         );
       }
     }

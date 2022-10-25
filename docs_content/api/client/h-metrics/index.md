@@ -13,7 +13,7 @@ H.metrics(metrics: Metric[]) => void;
 
 ## `metrics`* (Metrics\[]) *Required
 
-A list of metrics that you'd like to report. Check out [Metrics](/api/h-metrics/metrics)&#x20;
+A list of metrics that you'd like to report. Check out [Metrics](/api/client/h-metrics/metrics)&#x20;
 
 ### Example
 
