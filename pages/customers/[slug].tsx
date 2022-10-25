@@ -6,7 +6,7 @@ import { CustomerQuote } from '../../components/Customers/CustomerQuote/Customer
 import { graphcms } from '../blog';
 import style from '../../components/Customers/Customers.module.scss';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { Typography } from '../../components/common/Typography/Typography';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';

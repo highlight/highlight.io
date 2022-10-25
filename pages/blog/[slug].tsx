@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import homeStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Blog/Blog.module.scss';
 import { Section } from '../../components/common/Section/Section';

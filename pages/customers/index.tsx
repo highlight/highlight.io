@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styles from '../../components/Customers/CustomersList.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';

@@ -25,7 +25,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import removeMd from 'remove-markdown';
 import { SearchResult } from '../api/docs/search/[searchValue]';
 import {

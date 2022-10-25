@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from '../../Home/Home.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Airplane from '../../../public/images/companies/airplane.png';
 import Basedash from '../../../public/images/companies/basedash.png';
 import Knock from '../../../public/images/companies/knock.png';

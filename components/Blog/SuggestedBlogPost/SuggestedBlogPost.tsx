@@ -1,5 +1,5 @@
 import styles from '../Blog.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
 import { Post } from '../BlogPost/BlogPost';

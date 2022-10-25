@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import HighlightLogoFull from '../../../public/images/highlight-logo.png';
 import HighlightLogoWhiteFull from '../../../public/images/highlight-logo-white.png';
 import styles from './HighlightLogo.module.scss';

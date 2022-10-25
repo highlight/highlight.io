@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import BlueGradient from '../../public/images/bg_blue_gradient.svg';
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
 import homeStyles from '../../components/Home/Home.module.scss';

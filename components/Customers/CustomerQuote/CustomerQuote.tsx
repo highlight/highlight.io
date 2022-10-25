@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import style from './CustomerQuote.module.scss';
 import { Typography } from '../../common/Typography/Typography';
 import classNames from 'classnames';
