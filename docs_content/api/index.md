@@ -7,7 +7,7 @@ slug: api
 
 Check out the following API references.
 
-*   [Client](/api/client)&#x20;
+*   [Frontend](/api/client)&#x20;
 
 *   [Next.JS](/api/nextjs)&#x20;
 

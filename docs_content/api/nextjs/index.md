@@ -1,6 +1,6 @@
 ---
-title: API Reference
-slug: api
+title: Next.JS
+slug: nextjs
 ---
 
 ## Next.JS API Reference

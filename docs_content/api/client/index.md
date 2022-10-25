@@ -1,5 +1,5 @@
 ---
-title: Client API Reference
+title: Frontend
 slug: api
 ---
 
