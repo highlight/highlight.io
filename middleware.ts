@@ -134,8 +134,6 @@ export default function middleware(req: NextRequest) {
       if (pathname === `/docs/${k}`) {
         let url = req.nextUrl.origin || 'https://highlight.io/';
         url = url.replace(/\/+$/, '');
-        // eslint-disable-next-line no-console
-        console.log('docs 301 redirect', pathname, url, v);
         return NextResponse.redirect(`${url}${v}`, { status: 301 });
       }
     }
