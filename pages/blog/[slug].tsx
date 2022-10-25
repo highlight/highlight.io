@@ -19,7 +19,7 @@ import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
-import { GraphQLRequest } from '../util';
+import { GraphQLRequest } from '../../utils/graphql';
 
 const NUM_SUGGESTED_POSTS = 3;
 

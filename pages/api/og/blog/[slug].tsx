@@ -4,7 +4,7 @@ import { gql } from 'graphql-request';
 import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
 import { Buffer } from 'buffer';
 import { font, fontLight, hero } from '../util';
-import { GraphQLRequest } from '../../../util';
+import { GraphQLRequest } from '../../../../utils/graphql';
 
 export const config = {
   runtime: 'experimental-edge',

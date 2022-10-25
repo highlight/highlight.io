@@ -8,7 +8,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { gql } from 'graphql-request';
 import { Author } from '../../components/Blog/BlogPost/BlogPost';
-import { GraphQLRequest } from '../util';
+import { GraphQLRequest } from '../../utils/graphql';
 
 interface Customer {
   slug: string;

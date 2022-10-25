@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
 import { Typography } from '../../components/common/Typography/Typography';
 import { Meta } from '../../components/common/Head/Meta';
-import { GraphQLRequest } from '../util';
+import { GraphQLRequest } from '../../utils/graphql';
 
 const ITEMS_PER_PAGE = 6;
 

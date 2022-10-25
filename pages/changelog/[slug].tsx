@@ -12,7 +12,7 @@ import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import ReactMarkdown from 'react-markdown';
 import { Meta } from '../../components/common/Head/Meta';
-import { GraphQLRequest } from '../util';
+import { GraphQLRequest } from '../../utils/graphql';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`

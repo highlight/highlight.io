@@ -11,7 +11,7 @@ import { FooterCallToAction } from '../../components/common/CallToAction/FooterC
 import Footer from '../../components/common/Footer/Footer';
 import Navbar from '../../components/common/Navbar/Navbar';
 import ReturnIcon from '../../public/images/ReturnIcon';
-import { GraphQLRequest } from '../util';
+import { GraphQLRequest } from '../../utils/graphql';
 
 interface Customer {
   slug: string;
