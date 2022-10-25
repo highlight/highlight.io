@@ -19,18 +19,11 @@ import {
   HiSearch,
 } from 'react-icons/hi';
 import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
-
-export const graphcms = new GraphQLClient(
-  'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
-  {
-    headers: {
-      Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-    },
-  }
-);
+import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
+import { graphcms } from './index';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const query = gql`
+  const postsQuery = gql`
     query GetPosts() {
       posts(
         orderBy: postedAt_DESC
@@ -61,9 +54,30 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   `;
 
-  const data = (await graphcms.request(query)) as { posts: Post[] };
+  const postsData = (await graphcms.request(postsQuery)) as { posts: Post[] };
 
-  return { props: { posts: data.posts }, revalidate: 60 * 60 };
+  // `tags_relations` is a temporary name, I don't want to replace the existing `tags` field outright
+  // but intend to at some point, then this would be renamed to just `tags`
+  const tagsQuery = gql`
+    query GetTags() {
+      tags {
+        name
+        slug
+      }
+    }
+  `;
+
+  const tagsData = (await graphcms.request(tagsQuery)) as {
+    tags: Tag[];
+  };
+
+  return {
+    props: {
+      posts: postsData.posts,
+      tags: tagsData.tags as Omit<Tag, 'posts'>[],
+    },
+    revalidate: 60 * 60,
+  };
 };
 
 const searchBarBaseStyle = classNames(
@@ -74,7 +88,13 @@ const searchBarInputBaseStyle = classNames(
   'box-border h-full w-0 flex-1 font-sans leading-none bg-transparent border-none outline-none text-copy-on-dark'
 );
 
-const Blog = ({ posts }: { posts: Post[] }) => {
+const Blog = ({
+  posts,
+  tags,
+}: {
+  posts: Post[];
+  tags: Omit<Tag, 'posts'>[];
+}) => {
   return (
     <>
       <Navbar />
@@ -93,13 +113,10 @@ const Blog = ({ posts }: { posts: Post[] }) => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <SidebarItem label="All posts" icon={<HiCollection />} />
-              <SidebarItem
-                label="Frontend Monitoring"
-                icon={<HiCursorClick />}
-              />
-              <SidebarItem label="Observability" icon={<HiCloud />} />
-              <SidebarItem label="Highlight Engineering" icon={<HiCog />} />
+              <SidebarTag name="All" slug="" key="all" current />
+              {tags.map((tag) => (
+                <SidebarTag {...tag} key={tag.slug} />
+              ))}
             </div>
           </div>
           <div className="w-full max-w-4xl pb-32 ">
@@ -132,13 +149,11 @@ const Blog = ({ posts }: { posts: Post[] }) => {
                 />
               </div>
             </div>
-            <div
-              className="flex max-w-full gap-8 px-12 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden" /* */
-            >
-              <TabItem label="All" icon={<HiCollection />} active />
-              <TabItem label="Frontend Monitoring" icon={<HiCursorClick />} />
-              <TabItem label="Observability" icon={<HiCloud />} />
-              <TabItem label="Highlight Engineering" icon={<HiCog />} />
+            <div className="flex max-w-full gap-8 px-12 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
+              <TagTab name="All" slug="" key="all" current />
+              {tags.map((tag) => (
+                <TagTab {...tag} key={tag.slug} />
+              ))}
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 px-12 pt-10 border-0 border-t border-solid border-divider-on-dark desktop:pl-11">
@@ -158,59 +173,6 @@ const Blog = ({ posts }: { posts: Post[] }) => {
       </main>
       <Footer />
     </>
-  );
-};
-
-const SidebarItem = ({
-  label,
-  icon,
-}: {
-  label: string;
-  icon: ReactElement;
-}) => {
-  return (
-    <div className="flex gap-[3px] items-center text-copy-on-dark opacity-70 h-[30px] select-none cursor-pointer hover:opacity-100 transition-opacity active:opacity-50 active:transition-none ">
-      {icon} <Typography type="copy3">{label}</Typography>
-    </div>
-  );
-};
-
-const TabItem = ({
-  label,
-  icon,
-  active,
-}: {
-  label: string;
-  icon: ReactElement;
-  active?: boolean;
-}) => {
-  const activeStyle = classNames(
-    'border-b-2 border-0 border-solid border-highlight-yellow text-highlight-yellow '
-  );
-
-  return (
-    <div
-      className={classNames(
-        'flex gap-2 flex-0 items-center text-copy-on-dark h-[30px] select-none box-content cursor-pointer hover:opacity-100 transition-opacity active:opacity-50 active:transition-none leading-none px-1 pb-2 group',
-        active && activeStyle
-      )}
-    >
-      <span
-        className={classNames(
-          active
-            ? 'text-highlight-yellow'
-            : 'opacity-70 group-hover:opacity-100 transition-opacity',
-          'mt-1'
-        )}
-      >
-        {icon}
-      </span>
-      {
-        <Typography type="copy2" className="w-max" emphasis={active}>
-          {label}
-        </Typography>
-      }
-    </div>
   );
 };
 
@@ -239,7 +201,7 @@ const PostItem = ({ post }: { post: Post }) => {
       <div className="mt-3">{post.author && <Author {...post.author} />}</div>
       <div className="flex gap-2.5 absolute right-7 bottom-7">
         {post.tags?.map((tag, i) => (
-          <PostTag tag={tag} key={i} />
+          <PostTag name={tag} slug={tag} key={i} /> // temporary
         ))}
       </div>
     </div>
@@ -251,7 +213,7 @@ const MobilePostItem = ({ post }: { post: Post }) => {
 
   return (
     <div className={classNames(postItemStyle, 'mobile:hidden block')}>
-      {tag && <PostTag tag={tag} />}
+      {tag && <PostTag name={tag} slug={tag} />}
       <h3 className="mt-3">{post.title}</h3>
       <Typography type="copy4" className="mt-1 text-copy-on-dark">
         {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
@@ -262,16 +224,6 @@ const MobilePostItem = ({ post }: { post: Post }) => {
     </div>
   );
 };
-
-function PostTag({ tag }: { tag: string }) {
-  return (
-    <div /* should be button, placeholder */
-      className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer"
-    >
-      <Typography type="copy4">{tag}</Typography>
-    </div>
-  );
-}
 
 const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
   <a
