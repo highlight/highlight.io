@@ -4,24 +4,22 @@ import styles from '../../components/Blog/Blog.module.scss';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
-import { graphcms } from '.';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
-import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../components/common/Typography/Typography';
 import { createElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
 import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction';
 import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
-import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import { GraphQLRequest } from '../util';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -103,7 +101,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     }
   `;
-  const { posts } = await graphcms.request(QUERY);
+  const { posts } = await GraphQLRequest(QUERY);
 
   return {
     paths: posts.map((p: { slug: string }) => ({ params: { slug: p.slug } })),
@@ -171,8 +169,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           }
       }
   `;
-  const data = await graphcms.request(QUERY, { slug: slug });
-  const { posts } = await graphcms.request(POSTS_QUERY);
+  const data = await GraphQLRequest(QUERY, { slug: slug });
+  const { posts } = await GraphQLRequest(POSTS_QUERY);
 
   // Handle event slugs which don't exist in our CMS
   if (!data.post) {

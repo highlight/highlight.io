@@ -10,13 +10,13 @@ import { gql } from 'graphql-request';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useEffect, useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
-import { graphcms } from '../blog';
 import {
   ChangelogEntry,
   Entry,
 } from '../../components/Changelog/ChangelogEntry/ChangelogEntry';
 import { GetStaticProps } from 'next/types';
 import { Meta } from '../../components/common/Head/Meta';
+import { GraphQLRequest } from '../util';
 
 const ITEMS_PER_PAGE = 25;
 
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   `;
 
-  const { changelogs } = await graphcms.request(QUERY);
+  const { changelogs } = await GraphQLRequest(QUERY);
 
   return {
     props: {

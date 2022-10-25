@@ -2,7 +2,7 @@ import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
-import { gql, GraphQLClient } from 'graphql-request';
+import { gql, GraphQLClient, Variables } from 'graphql-request';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
@@ -11,18 +11,9 @@ import classNames from 'classnames';
 import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
 import { Typography } from '../../components/common/Typography/Typography';
 import { Meta } from '../../components/common/Head/Meta';
+import { GraphQLRequest } from '../util';
 
 const ITEMS_PER_PAGE = 6;
-
-export const graphcms = new GraphQLClient(
-  'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
-  {
-    headers: {
-      Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-    },
-    fetch,
-  }
-);
 
 export async function getStaticProps() {
   const postsRequest = loadPostsFromHygraph(undefined);
@@ -43,27 +34,27 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
   const tagProp = tag ? '$tag: [String!]' : '';
   const tagFilter = tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
-    query GetPosts(${tagProp}) {
-      posts(
-        orderBy: postedAt_DESC
-        where: { ${tagFilter}, unlisted: false }
-      ) {
-        slug
-        image {
-          url
-        }
-        metaImage {
-          url
-        }
-        title
-        publishedAt
-        tags
-        readingTime
+      query GetPosts(${tagProp}) {
+          posts(
+              orderBy: postedAt_DESC
+              where: { ${tagFilter}, unlisted: false }
+          ) {
+              slug
+              image {
+                  url
+              }
+              metaImage {
+                  url
+              }
+              title
+              publishedAt
+              tags
+              readingTime
+          }
       }
-    }
   `;
 
-  const { posts } = await graphcms.request(QUERY, {
+  const { posts } = await GraphQLRequest(QUERY, {
     tag: tag ? [tag] : [],
   });
 
@@ -81,15 +72,15 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
 
 export const loadTagsFromHygraph = async () => {
   const TAGS_QUERY = gql`
-  query GetPosts() {
-    posts(
-    ) {
-      tags
-    }
-  }
-`;
+      query GetPosts() {
+          posts(
+          ) {
+              tags
+          }
+      }
+  `;
 
-  const { posts } = await graphcms.request(TAGS_QUERY, {
+  const { posts } = await GraphQLRequest(TAGS_QUERY, {
     tag: [],
   });
 

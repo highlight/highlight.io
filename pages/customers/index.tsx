@@ -8,7 +8,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { gql } from 'graphql-request';
 import { Author } from '../../components/Blog/BlogPost/BlogPost';
-import { graphcms } from '../blog';
+import { GraphQLRequest } from '../util';
 
 interface Customer {
   slug: string;
@@ -33,31 +33,31 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // }
 
   const QUERY = gql`
-    query GetCustomers() {
-      customers() {
-        slug
-        image {
-          url
-        }
-        companyLogo {
-          url
-        }
-        primaryQuote {
-          body
-          author {
-            firstName
-            lastName
-            title
-            profilePhoto {
-              url
-            }
+      query GetCustomers() {
+          customers() {
+              slug
+              image {
+                  url
+              }
+              companyLogo {
+                  url
+              }
+              primaryQuote {
+                  body
+                  author {
+                      firstName
+                      lastName
+                      title
+                      profilePhoto {
+                          url
+                      }
+                  }
+              }
           }
-        }
       }
-    }
   `;
 
-  const data = await graphcms.request(QUERY);
+  const data = await GraphQLRequest(QUERY);
 
   return {
     props: {
