@@ -115,57 +115,55 @@ export const Blog = ({
     Math.min(ITEMS_PER_PAGE * currentPage, posts.length)
   );
 
-  return (
-    <>
-      <Meta
-        title="Debugging Blog: Best Practices From The Highlight Team"
-        description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
-      />
-      <Navbar />
-      <main>
-        <div className={styles.blogContainer}>
-          <h4>Blog article of the week</h4>
-          <BlogPost {...posts[0]} />
-          <hr />
-        </div>
-        <div className={styles.tagContainer}>
-          <div className={styles.tagHeader}>
-            <h4 className={styles.tagSortTitle}>Sort by tag</h4>
-            <div className={styles.tagDiv}>
-              {tags.map((tag: string) => (
-                <Link
-                  key={tag}
-                  href={currentTag === tag ? '/blog' : `/blog/tag/${tag}`}
-                  passHref={true}
+  return <>
+    <Meta
+      title="Debugging Blog: Best Practices From The Highlight Team"
+      description="Get debugging best practices, read customer stories, and get general dev tips. Learn to stop debugging in the dark with Highlight's blog and featured articles."
+    />
+    <Navbar />
+    <main>
+      <div className={styles.blogContainer}>
+        <h4>Blog article of the week</h4>
+        <BlogPost {...posts[0]} />
+        <hr />
+      </div>
+      <div className={styles.tagContainer}>
+        <div className={styles.tagHeader}>
+          <h4 className={styles.tagSortTitle}>Sort by tag</h4>
+          <div className={styles.tagDiv}>
+            {tags.map((tag: string) => (
+              <Link
+                key={tag}
+                href={currentTag === tag ? '/blog' : `/blog/tag/${tag}`}
+                passHref={true}
+                legacyBehavior>
+                <div
+                  className={classNames({
+                    [styles.selectedTag]: currentTag === tag,
+                  })}
                 >
-                  <div
-                    className={classNames({
-                      [styles.selectedTag]: currentTag === tag,
-                    })}
-                  >
-                    <Typography type="copy3">{tag}</Typography>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  <Typography type="copy3">{tag}</Typography>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
-        <div className={styles.blogContainer}>
-          {currentItems.map((p: Post, i: number) => (
-            <BlogPostSmall {...p} key={i} />
-          ))}
-          <Paginate
-            currentPage={currentPage}
-            onPageChange={setCurrentPage}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-          />
-        </div>
-        <FooterCallToAction />
-      </main>
-      <Footer />
-    </>
-  );
+      </div>
+      <div className={styles.blogContainer}>
+        {currentItems.map((p: Post, i: number) => (
+          <BlogPostSmall {...p} key={i} />
+        ))}
+        <Paginate
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+        />
+      </div>
+      <FooterCallToAction />
+    </main>
+    <Footer />
+  </>;
 };
 
 export default Blog;

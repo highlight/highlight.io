@@ -164,99 +164,95 @@ const CustomerPage = ({
   previousCase: { slug: string; companyLogo?: { url: string } } | null;
   nextCase: { slug: string; companyLogo?: { url: string } } | null;
 }) => {
-  return (
-    <>
-      <Navbar />
-      <main>
-        <div className={style.detailsLayout}>
-          <div className={style.caseBackLink}>
-            <Link href="/customers">
-              <a>
-                <ReturnIcon />
-                All customers
-              </a>
-            </Link>
-          </div>
-          <div className={style.caseContent}>
-            <div className={style.caseTitle}>
-              <span className={style.caseOverline}>Customer Case Study</span>
-            </div>
-            <RichText
-              content={customer.caseStudy.raw}
-              references={customer.caseStudy.references}
-              renderers={{
-                embed: {
-                  Quote(props) {
-                    const { id, body, author } = props as Customer['quote'];
-                    return (
-                      <CustomerQuote
-                        key={id}
-                        content={body}
-                        author={`${author.firstName} ${author.lastName}`}
-                        role={author.title}
-                        authorAvatar={author.profilePhoto.url}
-                      />
-                    );
-                  },
-                },
-              }}
-            />
+  return <>
+    <Navbar />
+    <main>
+      <div className={style.detailsLayout}>
+        <div className={style.caseBackLink}>
+          <Link href="/customers">
 
-            <div className={style.casePageLinks}>
-              {previousCase ? (
-                <PageLink
-                  label="Previous Customer"
-                  slug={previousCase.slug}
-                  logo={previousCase.companyLogo?.url}
-                />
-              ) : (
-                <div />
-              )}
-              {nextCase && (
-                <PageLink
-                  label="Next Customer"
-                  slug={nextCase.slug}
-                  logo={nextCase.companyLogo?.url}
-                />
-              )}
-            </div>
+            <ReturnIcon />All customers
+          </Link>
+        </div>
+        <div className={style.caseContent}>
+          <div className={style.caseTitle}>
+            <span className={style.caseOverline}>Customer Case Study</span>
           </div>
-          <div className={style.caseCustomerDetails}>
-            <div className={style.caseDetailsLogo}>
-              {customer.companyLogo?.url && (
-                <Image
-                  src={customer.companyLogo.url}
-                  layout="fill"
-                  objectFit="contain"
-                  objectPosition="left"
-                  alt="Company Logo"
-                />
-              )}
-            </div>
-            <div className={style.caseDetailsBody}>
-              <CustomerDetailsSection
-                label="About the company"
-                body={customer.about}
+          <RichText
+            content={customer.caseStudy.raw}
+            references={customer.caseStudy.references}
+            renderers={{
+              embed: {
+                Quote(props) {
+                  const { id, body, author } = props as Customer['quote'];
+                  return (
+                    <CustomerQuote
+                      key={id}
+                      content={body}
+                      author={`${author.firstName} ${author.lastName}`}
+                      role={author.title}
+                      authorAvatar={author.profilePhoto.url}
+                    />
+                  );
+                },
+              },
+            }}
+          />
+
+          <div className={style.casePageLinks}>
+            {previousCase ? (
+              <PageLink
+                label="Previous Customer"
+                slug={previousCase.slug}
+                logo={previousCase.companyLogo?.url}
               />
-              <CustomerDetailsSection
-                label="Founded"
-                body={new Date(customer.founded).getFullYear().toString()}
+            ) : (
+              <div />
+            )}
+            {nextCase && (
+              <PageLink
+                label="Next Customer"
+                slug={nextCase.slug}
+                logo={nextCase.companyLogo?.url}
               />
-              <CustomerDetailsSection
-                label="Using Highlight since"
-                body={new Date(customer.usingHighlightSince).toLocaleDateString(
-                  undefined,
-                  { month: 'short', year: 'numeric' }
-                )}
-              />
-            </div>
+            )}
           </div>
         </div>
-      </main>
-      <FooterCallToAction />
-      <Footer />
-    </>
-  );
+        <div className={style.caseCustomerDetails}>
+          <div className={style.caseDetailsLogo}>
+            {customer.companyLogo?.url && (
+              <Image
+                src={customer.companyLogo.url}
+                layout="fill"
+                objectFit="contain"
+                objectPosition="left"
+                alt="Company Logo"
+              />
+            )}
+          </div>
+          <div className={style.caseDetailsBody}>
+            <CustomerDetailsSection
+              label="About the company"
+              body={customer.about}
+            />
+            <CustomerDetailsSection
+              label="Founded"
+              body={new Date(customer.founded).getFullYear().toString()}
+            />
+            <CustomerDetailsSection
+              label="Using Highlight since"
+              body={new Date(customer.usingHighlightSince).toLocaleDateString(
+                undefined,
+                { month: 'short', year: 'numeric' }
+              )}
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <FooterCallToAction />
+    <Footer />
+  </>;
 };
 
 const PageLink = ({
@@ -268,25 +264,25 @@ const PageLink = ({
   slug: string;
   logo?: string;
 }) => (
-  <Link href={`/customers/${slug}`}>
-    <a>
-      <div className={style.casePageLink}>
-        <Typography type="copy2" emphasis>
-          {label}
-        </Typography>
-        {logo && (
-          <Image
-            src={logo}
-            width="187px"
-            height="32px"
-            objectFit="contain"
-            objectPosition="left"
-            alt={`${slug} logo`}
-          />
-        )}
-      </div>
-    </a>
-  </Link>
+  (<Link href={`/customers/${slug}`}>
+
+    <div className={style.casePageLink}>
+      <Typography type="copy2" emphasis>
+        {label}
+      </Typography>
+      {logo && (
+        <Image
+          src={logo}
+          width="187px"
+          height="32px"
+          objectFit="contain"
+          objectPosition="left"
+          alt={`${slug} logo`}
+        />
+      )}
+    </div>
+
+  </Link>)
 );
 
 const CustomerDetailsSection = ({

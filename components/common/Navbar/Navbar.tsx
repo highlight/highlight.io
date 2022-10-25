@@ -79,36 +79,36 @@ const Navbar = ({
         <div className={styles.navContainer}>
           <ul className={classNames(styles.menuList, styles.header)}>
             <li>
-              <Link href={'/pricing'}>
-                <a className={styles.menuItem}>Pricing</a>
+              <Link href={'/pricing'} className={styles.menuItem}>
+                Pricing
               </Link>
             </li>
             <li>
-              <Link href={'/customers'}>
-                <a className={styles.menuItem}>Customers</a>
+              <Link href={'/customers'} className={styles.menuItem}>
+                Customers
               </Link>
             </li>
             <li>
-              <Link href={'/blog'}>
-                <a className={styles.menuItem}>Blog</a>
+              <Link href={'/blog'} className={styles.menuItem}>
+                Blog
               </Link>
             </li>
             <li>
-              <Link href={'https://careers.highlight.run'}>
-                <a className={styles.menuItem}>Careers</a>
+              <Link href={'https://careers.highlight.run'} className={styles.menuItem}>
+                Careers
               </Link>
             </li>
             <li>
               <FeatureFlag
                 feature={Feature.LandingPageDocs}
                 off={
-                  <Link href="https://docs.highlight.run">
-                    <a className={styles.menuItem}>Docs</a>
+                  <Link href="https://docs.highlight.run" className={styles.menuItem}>
+                    Docs
                   </Link>
                 }
                 on={
-                  <Link href="/docs">
-                    <a className={styles.menuItem}>Docs</a>
+                  <Link href="/docs" className={styles.menuItem}>
+                    Docs
                   </Link>
                 }
               />
@@ -128,10 +128,10 @@ const Navbar = ({
           })}
         >
           <div className={classNames(styles.navContainer, styles.headerLeft)}>
-            <Link href={'/'}>
-              <a className={styles.urlStyle}>
-                {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
-              </a>
+            <Link href={'/'} className={styles.urlStyle}>
+
+              {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
+
             </Link>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
@@ -142,8 +142,8 @@ const Navbar = ({
               <ul className={classNames(styles.menuList, styles.header)}>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href={'/pricing'}>
-                      <a className={styles.menuItemLarge}>Pricing</a>
+                    <Link href={'/pricing'} className={styles.menuItemLarge}>
+                      Pricing
                     </Link>
                   </Typography>
                 </li>
@@ -156,15 +156,15 @@ const Navbar = ({
                 </li> */}
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href={'/blog'}>
-                      <a className={styles.menuItemLarge}>Blog</a>
+                    <Link href={'/blog'} className={styles.menuItemLarge}>
+                      Blog
                     </Link>
                   </Typography>
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href={'https://careers.highlight.run'}>
-                      <a className={styles.menuItemLarge}>Careers</a>
+                    <Link href={'https://careers.highlight.run'} className={styles.menuItemLarge}>
+                      Careers
                     </Link>
                   </Typography>
                 </li>
@@ -173,13 +173,13 @@ const Navbar = ({
                     <FeatureFlag
                       feature={Feature.LandingPageDocs}
                       off={
-                        <Link href="https://docs.highlight.run">
-                          <a className={styles.menuItemLarge}>Docs</a>
+                        <Link href="https://docs.highlight.run" className={styles.menuItemLarge}>
+                          Docs
                         </Link>
                       }
                       on={
-                        <Link href="/docs">
-                          <a className={styles.menuItemLarge}>Docs</a>
+                        <Link href="/docs" className={styles.menuItemLarge}>
+                          Docs
                         </Link>
                       }
                     />
