@@ -28,8 +28,8 @@ export const CustomerQuote = ({
         src={authorAvatar}
         alt="Author picture"
         objectFit="cover"
-        width="48px"
-        height="48px"
+        width={48}
+        height={48}
       />
       <Typography type="copy3" emphasis>
         {author},
