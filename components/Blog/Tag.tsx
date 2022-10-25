@@ -13,7 +13,7 @@ export type Tag = {
 };
 
 // temporarily leads to /blog/posts but should lead to /blog
-const getTagUrl = (slug: string) => `/blog/posts${slug && `?tag=`}${slug}`;
+const getTagUrl = (slug: string) => `/blog/posts${slug && `?tag=` + slug}`;
 
 function TagIcon({
   slug,
