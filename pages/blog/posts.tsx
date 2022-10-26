@@ -104,7 +104,7 @@ const Blog = ({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <SidebarTag name="All" slug="" key="all" current />
+              <SidebarTag name="All" slug="all" key="all" current />
               {tags.map((tag) => (
                 <SidebarTag {...tag} key={tag.slug} />
               ))}
@@ -141,7 +141,7 @@ const Blog = ({
               </div>
             </div>
             <div className="flex max-w-full gap-8 px-12 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
-              <TagTab name="All" slug="" key="all" current />
+              <TagTab name="All" slug="all" key="all" current />
               {tags.map((tag) => (
                 <TagTab {...tag} key={tag.slug} />
               ))}

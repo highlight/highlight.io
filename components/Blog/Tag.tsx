@@ -12,7 +12,7 @@ export type Tag = {
   posts: Post[];
 };
 
-// temporarily leads to /blog/posts but should lead to /blog
+// TODO(fabio) temporarily leads to /blog/posts but should lead to /blog
 const getTagUrl = (slug: string) => `/blog/posts${slug && `?tag=` + slug}`;
 
 function TagIcon({
@@ -23,7 +23,7 @@ function TagIcon({
   className?: string;
 }) {
   const iconMap: Record<Tag['slug'], ReactElement> = {
-    '': <HiCollection />, // "All"
+    all: <HiCollection />,
     placeholder: <HiCog className={className} />,
     test: <HiTruck className={className} />,
   };
