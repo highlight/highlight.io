@@ -88,21 +88,23 @@ export function TagTab({
   );
 
   return (
-    <div className={classNames(tabBaseStyle, tabColorStyle)}>
-      <span
-        className={classNames(
-          current
-            ? 'text-highlight-yellow'
-            : 'opacity-70 group-hover:opacity-100 transition-opacity',
-          'mt-1'
-        )}
-      >
-        <TagIcon slug={slug} />
-      </span>
+    <Link href={getTagUrl(slug)}>
+      <div className={classNames(tabBaseStyle, tabColorStyle)}>
+        <span
+          className={classNames(
+            current
+              ? 'text-highlight-yellow'
+              : 'opacity-70 group-hover:opacity-100 transition-opacity',
+            'mt-1'
+          )}
+        >
+          <TagIcon slug={slug} />
+        </span>
 
-      <Typography type="copy2" className="w-max" emphasis={current}>
-        {name}
-      </Typography>
-    </div>
+        <Typography type="copy2" className="w-max" emphasis={current}>
+          {name}
+        </Typography>
+      </div>
+    </Link>
   );
 }
