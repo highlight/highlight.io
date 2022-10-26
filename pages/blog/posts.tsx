@@ -184,17 +184,12 @@ const Blog = ({
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
-              {
-                /* there's something about the way next renders the list of posts that i'm *not* understanding,
-                 * for some reason, posts duplicate */
-
-                filteredPosts().map((post) => (
-                  <>
-                    <PostItem post={post} key={post.slug + 'desktop'} />
-                    <MobilePostItem post={post} key={post.slug + 'mobile'} />
-                  </>
-                ))
-              }
+              {filteredPosts().map((post) => (
+                <>
+                  <PostItem post={post} key={post.slug + 'desktop'} />
+                  <MobilePostItem post={post} key={post.slug + 'mobile'} />
+                </>
+              ))}
               <button className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer">
                 Load More
               </button>
