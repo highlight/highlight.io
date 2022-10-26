@@ -49,8 +49,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const postsData = (await GraphQLRequest(postsQuery)) as { posts: Post[] };
 
-  // `tags_relations` is a temporary name, I don't want to replace the existing `tags` field outright
-  // but intend to at some point, then this would be renamed to just `tags`
   const tagsQuery = gql`
     query GetTags() {
       tags {
