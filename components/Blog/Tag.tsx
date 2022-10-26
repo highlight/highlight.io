@@ -23,7 +23,7 @@ function TagIcon({
   className?: string;
 }) {
   const iconMap: Record<Tag['slug'], ReactElement> = {
-    all: <HiCollection />,
+    all: <HiCollection className={className} />,
     placeholder: <HiCog className={className} />,
     test: <HiTruck className={className} />,
   };
@@ -34,7 +34,7 @@ function TagIcon({
 export function PostTag({ name, slug }: Pick<Tag, 'name' | 'slug'>) {
   return (
     <Link href={getTagUrl(slug)}>
-      <div className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer hover:bg-copy-on-light transition-colors active:bg-black active:transition-none capitalize">
+      <div className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer hover:bg-copy-on-light transition-colors active:bg-black active:transition-none capitalize text-copy-on-dark">
         <Typography type="copy4">{name}</Typography>
       </div>
     </Link>
@@ -51,8 +51,17 @@ export function SidebarTag({
 }) {
   return (
     <Link href={getTagUrl(slug)}>
-      <div className="flex gap-[3px] items-center text-copy-on-dark opacity-70 h-[30px] select-none cursor-pointer hover:opacity-100 transition-opacity active:opacity-50 active:transition-none">
-        <TagIcon slug={slug} /> <Typography type="copy3">{name}</Typography>
+      <div className="flex gap-[3px] items-center text-copy-on-dark h-[30px] select-none cursor-pointer transition-all active:transition-none group hover:bg-divider-on-dark/30 active:bg-dark-background pl-[3px]">
+        <TagIcon
+          slug={slug}
+          className="transition-all text-copy-on-light group-hover:text-copy-on-dark"
+        />{' '}
+        <Typography
+          type="copy3"
+          className="transition-all opacity-70 group-hover:opacity-100"
+        >
+          {name}
+        </Typography>
       </div>
     </Link>
   );

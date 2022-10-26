@@ -90,8 +90,8 @@ const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex mx-auto mt-32 max-w-fit">
-          <div className="box-content flex-col hidden gap-6 border-0 border-r border-solid pr-14 w-72 border-divider-on-dark desktop:flex">
+        <div className="flex items-start mx-auto mt-32 gap-3.5 max-w-fit">
+          <div className="flex-col hidden gap-6 border border-solid rounded-lg border-divider-on-dark  px-9 py-7 w-[352px] desktop:flex ">
             {/* sidebar */}
             <div
               className={classNames(searchBarBaseStyle, 'px-2 h-[34px] gap-1')}
@@ -110,8 +110,8 @@ const Blog = ({
               ))}
             </div>
           </div>
-          <div className="w-full max-w-4xl pb-32 ">
-            <div className="flex flex-col w-full mb-[30px] desktop:mb-10 desktop:ml-11 px-12 desktop:px-0">
+          <div className="w-full max-w-4xl pb-32 px-[42px]">
+            <div className="flex flex-col w-full mb-[30px] desktop:mb-10">
               <Typography type="outline" className="mb-2 text-highlight-yellow">
                 The Highlight Blog
               </Typography>
@@ -125,7 +125,7 @@ const Blog = ({
             </div>
 
             {/* tablet and mobile filters */}
-            <div className="flex px-12 desktop:hidden">
+            <div className="flex desktop:hidden">
               <div
                 className={classNames(
                   searchBarBaseStyle,
@@ -140,14 +140,14 @@ const Blog = ({
                 />
               </div>
             </div>
-            <div className="flex max-w-full gap-8 px-12 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
+            <div className="flex max-w-full gap-8 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
               <TagTab name="All" slug="all" key="all" current />
               {tags.map((tag) => (
                 <TagTab {...tag} key={tag.slug} />
               ))}
             </div>
 
-            <div className="box-border flex flex-col items-center w-full gap-10 px-12 pt-10 border-0 border-t border-solid border-divider-on-dark desktop:pl-11">
+            <div className="box-border flex flex-col items-center w-full gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
               {posts.map((post) => (
                 <>
                   <PostItem post={post} key={post.slug} />
