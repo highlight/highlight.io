@@ -14,6 +14,7 @@ import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export const getStaticProps: GetStaticProps = async () => {
   const postsQuery = gql`
@@ -53,20 +54,20 @@ export const getStaticProps: GetStaticProps = async () => {
     query GetTags() {
       tags {
         name
+        description
         slug
       }
     }
   `;
 
-  const tagsData = (await GraphQLRequest(tagsQuery)) as {
-    tags: Tag[];
-  };
+  const tags = (await GraphQLRequest(tagsQuery)).tags as Tag[];
 
   return {
     props: {
       posts: postsData.posts,
-      tags: tagsData.tags as Omit<Tag, 'posts'>[],
+      tags,
     },
+
     revalidate: 60 * 60,
   };
 };
@@ -86,6 +87,12 @@ const Blog = ({
   posts: Post[];
   tags: Omit<Tag, 'posts'>[];
 }) => {
+  const router = useRouter();
+  const { tag } = router.query;
+  const tagSlug = Array.isArray(tag) ? tag[0] : tag;
+
+  const currentTag = tags.find(({ slug }) => slug === (tagSlug ?? 'all'))!;
+
   return (
     <>
       <Navbar />
@@ -105,9 +112,11 @@ const Blog = ({
             </div>
             <div className="flex flex-col gap-2">
               <SidebarTag name="All" slug="all" key="all" current />
-              {tags.map((tag) => (
-                <SidebarTag {...tag} key={tag.slug} />
-              ))}
+              {tags
+                .filter(({ slug }) => slug !== 'all')
+                .map((tag) => (
+                  <SidebarTag {...tag} key={tag.slug} />
+                ))}
             </div>
           </div>
           <div className="w-full max-w-4xl px-[42px]">
@@ -116,11 +125,10 @@ const Blog = ({
                 The Highlight Blog
               </Typography>
 
-              <h3 className="hidden mobile:inline">All posts</h3>
-              <h1 className="inline mobile:hidden">All posts</h1>
+              <h3 className="hidden mobile:inline">{currentTag.name}</h3>
+              <h1 className="inline mobile:hidden">{currentTag.name}</h1>
               <Typography type="copy2" className="mt-5 text-copy-on-dark">
-                Welcome to the Highlight Blog, where the Highlight team talks
-                about frontend engineering, observability and more!
+                {currentTag.description}
               </Typography>
             </div>
 
@@ -142,9 +150,11 @@ const Blog = ({
             </div>
             <div className="flex max-w-full gap-8 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
               <TagTab name="All" slug="all" key="all" current />
-              {tags.map((tag) => (
-                <TagTab {...tag} key={tag.slug} />
-              ))}
+              {tags
+                .filter(({ slug }) => slug !== 'all')
+                .map((tag) => (
+                  <TagTab {...tag} key={tag.slug} />
+                ))}
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
