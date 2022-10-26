@@ -111,11 +111,20 @@ const Blog = ({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <SidebarTag name="All" slug="all" key="all" current />
+              <SidebarTag
+                name="All"
+                slug="all"
+                key="all"
+                current={currentTag.slug === 'all'}
+              />
               {tags
                 .filter(({ slug }) => slug !== 'all')
                 .map((tag) => (
-                  <SidebarTag {...tag} key={tag.slug} />
+                  <SidebarTag
+                    {...tag}
+                    key={tag.slug}
+                    current={currentTag.slug === tag.slug}
+                  />
                 ))}
             </div>
           </div>
@@ -149,11 +158,20 @@ const Blog = ({
               </div>
             </div>
             <div className="flex max-w-full gap-8 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
-              <TagTab name="All" slug="all" key="all" current />
+              <TagTab
+                name="All"
+                slug="all"
+                key="all"
+                current={currentTag.slug === 'all'}
+              />
               {tags
                 .filter(({ slug }) => slug !== 'all')
                 .map((tag) => (
-                  <TagTab {...tag} key={tag.slug} />
+                  <TagTab
+                    {...tag}
+                    key={tag.slug}
+                    current={currentTag.slug === tag.slug}
+                  />
                 ))}
             </div>
 

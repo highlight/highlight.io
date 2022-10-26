@@ -45,21 +45,36 @@ export function PostTag({ name, slug }: Pick<Tag, 'name' | 'slug'>) {
 export function SidebarTag({
   name,
   slug,
+  current,
 }: {
   name: Tag['name'];
   slug: Tag['slug'];
   current?: boolean;
 }) {
+  const tabColorStyle = classNames(
+    current
+      ? 'text-highlight-yellow border-highlight-yellow'
+      : 'text-copy-on-dark border-transparent'
+  );
+
   return (
     <Link href={getTagUrl(slug)}>
       <div className="flex gap-[3px] items-center text-copy-on-dark h-[30px] select-none cursor-pointer transition-all active:transition-none group hover:bg-divider-on-dark/30 active:bg-dark-background pl-[3px]">
         <TagIcon
           slug={slug}
-          className="transition-all text-copy-on-light group-hover:text-copy-on-dark"
-        />{' '}
+          className={classNames(
+            'transition-all  group-hover:text-copy-on-dark',
+            current ? 'text-highlight-yellow' : 'text-copy-on-light'
+          )}
+        />
         <Typography
           type="copy3"
-          className="transition-all opacity-70 group-hover:opacity-100"
+          className={classNames(
+            'transition-all group-hover:opacity-100 group-hover:text-copy-on-dark',
+            current
+              ? 'text-highlight-yellow opacity-100 font-semibold'
+              : 'opacity-70'
+          )}
         >
           {name}
         </Typography>
