@@ -50,6 +50,7 @@ export const getGithubDocsPaths = async (path: string = docsRoot) => {
   const json = (await response.json()) as GithubTree[];
   const childPromises = [];
   let docs = new Map<string, DocMeta>();
+  if (!json?.length) return docs;
   for (const path of json) {
     if (path.type === 'dir') {
       childPromises.push(getGithubDocsPaths(path.path));

@@ -10,19 +10,19 @@ export interface Entry {
 
 export const ChangelogEntry = ({ slug, content, title, createdAt }: Entry) => {
   return (
-    <Link href={`/changelog/${slug}`}>
-      <a style={{ textDecoration: 'none' }}>
-        <div className={styles.blogPost}>
-          <div className={styles.cardSection}>
-            <h2>{title}</h2>
-            <div className={styles.authorDiv}>
-              <div>
-                <p>{`${new Date(createdAt).toLocaleDateString('en-US')}`}</p>
-              </div>
+    (<Link href={`/changelog/${slug}`} style={{ textDecoration: 'none' }}>
+
+      <div className={styles.blogPost}>
+        <div className={styles.cardSection}>
+          <h2>{title}</h2>
+          <div className={styles.authorDiv}>
+            <div>
+              <p>{`${new Date(createdAt).toLocaleDateString('en-US')}`}</p>
             </div>
           </div>
         </div>
-      </a>
-    </Link>
+      </div>
+
+    </Link>)
   );
 };

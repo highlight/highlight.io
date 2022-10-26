@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import React from 'react';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton';

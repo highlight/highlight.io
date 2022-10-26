@@ -2,7 +2,7 @@ import styles from '../Docs.module.scss';
 import { CodeBlock } from 'react-code-blocks';
 import { PropsWithChildren } from 'react';
 import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import CopyIcon from '../../../public/images/document-duplicate.svg';
 
 export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {

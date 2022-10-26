@@ -5,7 +5,7 @@ import { Author } from '../../components/Blog/BlogPost/BlogPost';
 import { CustomerQuote } from '../../components/Customers/CustomerQuote/CustomerQuote';
 import style from '../../components/Customers/Customers.module.scss';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { Typography } from '../../components/common/Typography/Typography';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
@@ -171,10 +171,8 @@ const CustomerPage = ({
         <div className={style.detailsLayout}>
           <div className={style.caseBackLink}>
             <Link href="/customers">
-              <a>
-                <ReturnIcon />
-                All customers
-              </a>
+              <ReturnIcon />
+              All customers
             </Link>
           </div>
           <div className={style.caseContent}>
@@ -269,23 +267,21 @@ const PageLink = ({
   logo?: string;
 }) => (
   <Link href={`/customers/${slug}`}>
-    <a>
-      <div className={style.casePageLink}>
-        <Typography type="copy2" emphasis>
-          {label}
-        </Typography>
-        {logo && (
-          <Image
-            src={logo}
-            width="187px"
-            height="32px"
-            objectFit="contain"
-            objectPosition="left"
-            alt={`${slug} logo`}
-          />
-        )}
-      </div>
-    </a>
+    <div className={style.casePageLink}>
+      <Typography type="copy2" emphasis>
+        {label}
+      </Typography>
+      {logo && (
+        <Image
+          src={logo}
+          width={187}
+          height={32}
+          objectFit="contain"
+          objectPosition="left"
+          alt={`${slug} logo`}
+        />
+      )}
+    </div>
   </Link>
 );
 
