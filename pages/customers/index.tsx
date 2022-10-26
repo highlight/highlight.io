@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styles from '../../components/Customers/CustomersList.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
@@ -8,7 +8,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { gql } from 'graphql-request';
 import { Author } from '../../components/Blog/BlogPost/BlogPost';
-import { graphcms } from '../blog';
+import { GraphQLRequest } from '../../utils/graphql';
 
 interface Customer {
   slug: string;
@@ -33,31 +33,31 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // }
 
   const QUERY = gql`
-    query GetCustomers() {
-      customers() {
-        slug
-        image {
-          url
-        }
-        companyLogo {
-          url
-        }
-        primaryQuote {
-          body
-          author {
-            firstName
-            lastName
-            title
-            profilePhoto {
-              url
-            }
+      query GetCustomers() {
+          customers() {
+              slug
+              image {
+                  url
+              }
+              companyLogo {
+                  url
+              }
+              primaryQuote {
+                  body
+                  author {
+                      firstName
+                      lastName
+                      title
+                      profilePhoto {
+                          url
+                      }
+                  }
+              }
           }
-        }
       }
-    }
   `;
 
-  const data = await graphcms.request(QUERY);
+  const data = await GraphQLRequest(QUERY);
 
   return {
     props: {
@@ -69,6 +69,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Customers = ({ customers }: { customers: Customer[] }) => {
   const expandedCustomers = customers.slice(0, 6);
+  const allCustomersLogos = [
+    'pipe',
+    'portal',
+    'dripos',
+    'knock',
+    'hightouch',
+    'basedash',
+    'impira',
+    'mage',
+    'airplane',
+    'examedi',
+    'guruhotel',
+    'hotplate',
+    'writesonic',
+    'tributi',
+    'superpowered',
+    'sunsama',
+    'cabal',
+  ];
 
   return (
     <>
@@ -100,8 +119,8 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
           </div>
           <h2>See all our customers</h2>
           <div className={styles.allCustomersGrid}>
-            {customers.map(({ slug, companyLogo }, i) => (
-              <CompanyLogo slug={slug} logo={companyLogo?.url} key={i} />
+            {allCustomersLogos.map((name, i) => (
+              <CompanyLogo name={name} key={i} />
             ))}
           </div>
         </div>
@@ -112,20 +131,16 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
   );
 };
 
-const CompanyLogo = ({ slug, logo }: { slug: string; logo?: string }) => {
+const CompanyLogo = ({ name }: { name: string }) => {
   return (
-    <>
-      {logo && (
-        <div className={styles.allCustomersLogo}>
-          <Image
-            src={logo}
-            alt={`${slug} logo`}
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-      )}
-    </>
+    <div className={styles.allCustomersLogo}>
+      <Image
+        src={`/images/companies/white-logos/${name}.png`}
+        alt={`${name} logo`}
+        layout="fill"
+        objectFit="contain"
+      />
+    </div>
   );
 };
 

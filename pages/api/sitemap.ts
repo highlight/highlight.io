@@ -1,5 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { withHighlight } from '../../highlight.config';
+import { H } from '@highlight-run/next';
+import { getGithubDocsPaths } from './docs/github';
 
 async function handler(_: any, res: any) {
   res.statusCode = 200;
@@ -17,21 +19,62 @@ async function handler(_: any, res: any) {
     }
   );
 
-  const { posts } = await graphcms.request(gql`
-    query GetPosts() {
-      posts(orderBy: publishedAt_DESC) {
-        slug
+  const start = global.performance.now();
+  const [{ posts }, { customers }, { changelogs }, docs] = await Promise.all([
+    await graphcms.request(gql`
+      query GetPosts() {
+        posts(orderBy: publishedAt_DESC) {
+          slug
+        }
       }
-    }
-  `);
+    `),
+    await graphcms.request(gql`
+      query GetCustomers() {
+        customers() {
+          slug
+        }
+      }
+    `),
+    await graphcms.request(gql`
+      query GetChangelogs() {
+        changelogs() {
+          slug
+        }
+      }
+    `),
+    await getGithubDocsPaths(),
+  ]);
+  H.metrics([
+    {
+      name: 'sitemap-gql-latency-ms',
+      value: global.performance.now() - start,
+      tags: [{ name: 'site', value: process.env.WEBSITE_URL || '' }],
+    },
+  ]);
+
   const blogPages = posts.map((post: any) => `blog/${post.slug}`);
+  const customerPages = customers.map(
+    (customer: { slug: string }) => `customers/${customer.slug}`
+  );
+  const changelogPages = changelogs.map(
+    (changelog: { slug: string }) => `changelog/${changelog.slug}`
+  );
+  const docsPages = Array.from(docs.keys()).map(
+    (slug: string) => `docs/${slug}`
+  );
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
   const staticPages = staticPagePaths.map((path) => {
     return `${path.replace('pages', '').replace('index.tsx', '')}`;
   });
 
-  const pages = [...staticPages, ...blogPages];
+  const pages = [
+    ...staticPages,
+    ...blogPages,
+    ...customerPages,
+    ...changelogPages,
+    ...docsPages,
+  ];
 
   const addPage = (page: string) => {
     return `    <url>

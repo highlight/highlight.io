@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
@@ -26,7 +25,6 @@ import CollaborateImage from '../public/images/collaborate.png';
 import SearchImage from '../public/images/search.svg';
 import TwoHighlightersImage from '../public/images/two-highlighters.gif';
 import Tablet1 from '../public/images/tablet1.svg';
-import Tablet2 from '../public/images/tablet2.png';
 
 import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
@@ -38,6 +36,7 @@ import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
+import Link from 'next/link';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -148,6 +147,11 @@ const Home: NextPage = () => {
   useEffect(() => {
     setOffsetPosition(section1.current?.offsetHeight || 0);
   }, [section1]);
+
+  useEffect(() => {
+    // invoke the sitemap api to validate next metrics integration
+    fetch('/sitemap.xml').then((r) => r.text());
+  }, []);
 
   useEffect(() => {
     const reviewsElement = reviewsRef.current;
@@ -808,8 +812,10 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
               <Typography type="copy2" onDark>
-                Don&apos;t take our word for it. Here&apos;s what our customers
-                have to say.
+                Don&apos;t take our word.{' '}
+                <Link href="/customers">
+                  Read our customer review section →
+                </Link>
               </Typography>
             </div>
           </div>

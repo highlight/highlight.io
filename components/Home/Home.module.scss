@@ -67,6 +67,10 @@
   right: -35px;
   top: 30px;
   width: 280px;
+
+  @media screen and (max-width: 1288px) {
+    display: none;
+  }
 }
 
 .footerImageLeft {
@@ -114,6 +118,10 @@
   height: 249px;
   width: 249px;
   transform: scaleX(-1);
+
+  @media screen and (max-width: 1400px) {
+    display: none !important;
+  }
 }
 
 .obfuscationHandle {
@@ -134,10 +142,10 @@
     border-style: inset solid inset inset;
     border-color: rgba(0, 0, 0, 0) #0d0225 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
     border-image: initial;
-    height: 0px;
+    height: 0;
     margin-left: -10px;
     margin-right: 10px;
-    width: 0px;
+    width: 0;
   }
 
   .arrow2 {
@@ -145,9 +153,9 @@
     border-style: inset inset inset solid;
     border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #0d0225;
     border-image: initial;
-    height: 0px;
+    height: 0;
     margin-right: -10px;
-    width: 0px;
+    width: 0;
   }
 }
 
@@ -215,7 +223,7 @@
   flex-direction: column;
   flex: 1 1 50%;
   width: 50%;
-  padding: 0px var(--size-xLarge);
+  padding: 0 var(--size-xLarge);
   min-width: 550px;
   margin: var(--size-xLarge) 0;
 
@@ -340,134 +348,134 @@
   text-align: center;
   margin: auto;
 
-  .sectionSubtitle {
-    margin-bottom: var(--size-xLarge);
-  }
-
-  .buttonContainer {
-    margin: var(--size-xxxLarge) 0 calc(22 * var(--space-unit));
-  }
-
   h1,
   h2 {
     margin-bottom: calc(10 * var(--space-unit)) !important;
   }
+}
 
-  .anchorHead {
-    max-width: 840px;
+.secondaryAnchor {
+  h2 {
+    margin: calc(18 * var(--space-unit)) 0 !important;
+  }
+}
+
+.sectionSubtitle {
+  margin-bottom: var(--size-xLarge);
+}
+
+.buttonContainer {
+  margin: var(--size-xxxLarge) 0 calc(22 * var(--space-unit));
+}
+
+.anchorHead {
+  max-width: 840px;
+}
+
+.anchorTitle {
+  max-width: 740px;
+}
+
+.hideVideo {
+  display: none !important;
+}
+
+.modalBg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.modalClose {
+  color: var(--color-gray-300);
+  position: absolute;
+  font-size: 40px;
+  top: var(--size-medium);
+  right: var(--size-medium);
+}
+
+.videoModal {
+  z-index: 999;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+
+  & video {
+    width: 70vw;
+  }
+}
+
+.anchorImage {
+  position: relative;
+  width: 100%;
+  max-height: 720px;
+  cursor: pointer;
+
+  .thumbnail {
+    transition: all 0.4s ease-in-out;
+    opacity: 0.2;
   }
 
-  .anchorTitle {
-    max-width: 740px;
-  }
-
-  .hideVideo {
-    display: none !important;
-  }
-
-  .modalBg {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-  }
-
-  .modalClose {
-    color: var(--color-gray-300);
-    position: absolute;
-    font-size: 40px;
-    top: var(--size-medium);
-    right: var(--size-medium);
-  }
-
-  .videoModal {
-    z-index: 999;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    left: 0;
-    top: 0;
-
-    & video {
-      width: 70vw;
-    }
-  }
-
-  .anchorImage {
-    position: relative;
-    width: 100%;
-    max-height: 720px;
-    cursor: pointer;
-
+  &:hover {
     .thumbnail {
-      transition: all 0.4s ease-in-out;
       opacity: 0.2;
     }
-
-    &:hover {
-      .thumbnail {
-        opacity: 0.2;
-      }
-      .playButton {
-        .playButtonIcon {
-          transform: scale(1.1);
-        }
-
-        .jayImage,
-        .playCard {
-          opacity: 1;
-        }
-      }
-    }
-
     .playButton {
-      position: absolute;
-      margin: auto;
-      z-index: 9;
-      width: 220px;
-      display: flex;
-      top: calc(50% - 55px);
-      justify-content: center;
-
       .playButtonIcon {
-        transition: all 0.4s ease-in-out;
+        transform: scale(1.1);
       }
 
-      .jayImage {
-        position: absolute;
-        z-index: 10;
-        height: var(--size-xxLarge);
-        width: var(--size-xxLarge);
-        display: flex;
-        right: 20%;
-        bottom: -5%;
-        transition: all 0.4s ease-in-out;
-        opacity: 1;
-      }
-
+      .jayImage,
       .playCard {
-        text-align: center;
-        position: absolute;
-        width: 300px;
-        top: 140px;
         opacity: 1;
-        transition: all 0.4s ease-in-out;
       }
-    }
-
-    img {
-      border-radius: var(--border-radius);
-      overflow: hidden;
     }
   }
 
-  .secondaryAnchor {
-    h2 {
-      margin: calc(18 * var(--space-unit)) 0 !important;
+  .playButton {
+    position: absolute;
+    margin: auto;
+    z-index: 9;
+    width: 220px;
+    display: flex;
+    top: calc(50% - 55px);
+    justify-content: center;
+
+    .playButtonIcon {
+      transition: all 0.4s ease-in-out;
     }
+
+    .jayImage {
+      position: absolute;
+      z-index: 10;
+      height: var(--size-xxLarge);
+      width: var(--size-xxLarge);
+      display: flex;
+      right: 20%;
+      bottom: -5%;
+      transition: all 0.4s ease-in-out;
+      opacity: 1;
+    }
+
+    .playCard {
+      text-align: center;
+      position: absolute;
+      width: 300px;
+      top: 140px;
+      opacity: 1;
+      transition: all 0.4s ease-in-out;
+    }
+  }
+
+  img {
+    border-radius: var(--border-radius);
+    overflow: hidden;
   }
 }
 
@@ -737,6 +745,7 @@
   .tryButtonContainer {
     display: flex;
     justify-content: center;
+    margin: 0 !important;
   }
 }
 
@@ -777,14 +786,12 @@
 
 .buttonArrow {
   margin: 0 var(--size-small);
-  padding: var(--size-medium) var(--size-large);
   color: var(--text-primary);
   border-radius: var(--size-xxSmall);
-  display: block;
   text-decoration: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
-  background-color: none;
+  background-color: unset;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -865,7 +872,7 @@
   width: 200px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   .hideMobile {
     display: none;
   }
@@ -963,7 +970,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .snippetContent {
     padding: 0;
   }

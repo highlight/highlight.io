@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from '../../Home/Home.module.scss';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Airplane from '../../../public/images/companies/airplane.png';
 import Basedash from '../../../public/images/companies/basedash.png';
 import Knock from '../../../public/images/companies/knock.png';
@@ -14,6 +14,7 @@ import Mage from '../../../public/images/companies/mage.png';
 import Secoda from '../../../public/images/companies/secoda.svg';
 import classNames from 'classnames';
 import { Typography } from '../../common/Typography/Typography';
+import Link from 'next/link';
 
 export const CompaniesReel = () => {
   return (
@@ -21,7 +22,8 @@ export const CompaniesReel = () => {
       <div className={styles.anchorHead}>
         <h2>{`Our customers`}</h2>
         <Typography type="copy2" onDark>
-          Highlight powers forward-thinking companies.
+          Highlight powers forward-thinking companies.{' '}
+          <Link href="/customers">Find out about our customers →</Link>
         </Typography>
       </div>
       <div className={styles.customerReel}>

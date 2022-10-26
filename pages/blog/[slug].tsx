@@ -1,26 +1,25 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import homeStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Blog/Blog.module.scss';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import { gql } from 'graphql-request';
-import { graphcms } from '.';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
 import { RichText } from '@graphcms/rich-text-react-renderer';
-import { CodeBlock } from 'react-code-blocks';
 import { Typography } from '../../components/common/Typography/Typography';
 import { createElement, useEffect, useRef, useState } from 'react';
 import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
 import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction';
 import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
 import { ElementNode } from '@graphcms/rich-text-types';
-import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import { GraphQLRequest } from '../../utils/graphql';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -102,7 +101,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     }
   `;
-  const { posts } = await graphcms.request(QUERY);
+  const { posts } = await GraphQLRequest(QUERY);
 
   return {
     paths: posts.map((p: { slug: string }) => ({ params: { slug: p.slug } })),
@@ -120,9 +119,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         title
         metaTitle
         image {
-          url
-        }
-        metaImage {
           url
         }
         description
@@ -154,27 +150,27 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
   const POSTS_QUERY = gql`
-    query GetPosts() {
-      posts(
-        orderBy: publishedAt_DESC
-        where: { unlisted: false }
-      ) {
-        slug
-        title
-        image {
-          url
-        }
-        richcontent {
-          markdown
-        }
-        publishedAt
-        tags
-                readingTime
-            }
-        }
-    `;
-  const data = await graphcms.request(QUERY, { slug: slug });
-  const { posts } = await graphcms.request(POSTS_QUERY);
+      query GetPosts() {
+          posts(
+              orderBy: publishedAt_DESC
+              where: { unlisted: false }
+          ) {
+              slug
+              title
+              image {
+                  url
+              }
+              richcontent {
+                  markdown
+              }
+              publishedAt
+              tags
+              readingTime
+          }
+      }
+  `;
+  const data = await GraphQLRequest(QUERY, { slug: slug });
+  const { posts } = await GraphQLRequest(POSTS_QUERY);
 
   // Handle event slugs which don't exist in our CMS
   if (!data.post) {
@@ -224,10 +220,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
   }
 
-  if (!data.post.metaImage?.url || !data.post.author?.profilePhoto?.url) {
+  if (!data.post.author?.profilePhoto?.url) {
     throw new Error(
-      `missing required detailed images for blog '${data.post.slug}'. 
-meta: ${data.post.metaImage?.url}. author: ${data.post.author?.profilePhoto?.url}. image: ${data.post.image?.url}`
+      `missing required detailed images for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
     );
   }
 
@@ -261,14 +256,11 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
         renderers={{
           code_block: ({ children }: { children: any }) => {
             return (
-              <div className={styles.codeBlock}>
-                <CodeBlock
-                  language={'js'}
-                  text={children?.props?.content[0].text}
-                  showLineNumbers={false}
-                  theme={highlightCodeTheme}
-                />
-              </div>
+              <HighlightCodeBlock
+                language={'js'}
+                text={children?.props?.content[0].text}
+                showLineNumbers={false}
+              />
             );
           },
           h1: getBlogTypographyRenderer('h1'),
@@ -315,132 +307,130 @@ const PostPage = ({
     // because at that point the page height is finalized
   }, [postSections]);
 
-  return (
-    <>
-      <Meta
-        title={post.metaTitle || post.title}
-        description={post.metaDescription || post.description}
-        absoluteImageUrl={post?.metaImage?.url}
-        canonical={`/blog/${post.slug}`}
-      />
-      <BlogNavbar title={post.title} endPosition={endPosition} />
-      <main ref={blogBody} className={styles.mainBlogPadding}>
-        <Section>
-          <div className={homeStyles.anchorTitle}>
-            <Typography type="copy2">
-              <p className={styles.dateDiv}>{`${new Date(
-                post.publishedAt
-              ).toLocaleDateString('en-US', {
-                day: 'numeric',
-                year: 'numeric',
-                month: 'short',
-              })} • ${
-                post.readingTime ||
-                Math.floor(post.richcontent.markdown.split(' ').length / 200)
-              } min read`}</p>
-            </Typography>
-            <h1 className={styles.blogText}>{post.title}</h1>
-            <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
-              {post.tags.map((tag: string) => (
-                <Link key={tag} href={`/blog?tag=${tag}`} passHref={true}>
-                  <div>{tag}</div>
-                </Link>
-              ))}
-            </div>
-            <div className={styles.authorDiv}>
-              <div
-                className={styles.avatar}
-                style={{ width: '50px', height: '50px', position: 'relative' }}
-              >
-                <Image
-                  src={
-                    post.author?.profilePhoto.url || post.publishedBy.picture
-                  }
-                  alt=""
-                  layout="fill"
-                />
-              </div>
-              {post.author && (
-                <div className={styles.authorDescription}>
-                  <Typography type="copy2" emphasis>
-                    <div className={styles.authorDetails}>
-                      <span>
-                        {post.author.firstName} {post.author.lastName}
-                      </span>
-                      {post.author.githubLink && (
-                        <a href={post.author.githubLink}>
-                          <FaGithub />
-                        </a>
-                      )}
-                      {post.author.twitterLink && (
-                        <a href={post.author.twitterLink}>
-                          <FaTwitter />
-                        </a>
-                      )}
-                      {post.author.linkedInLink && (
-                        <a href={post.author.linkedInLink}>
-                          <FaLinkedin />
-                        </a>
-                      )}
-                      {post.author.personalWebsiteLink && (
-                        <a href={post.author.personalWebsiteLink}>
-                          <FaGlobe />
-                        </a>
-                      )}
-                    </div>
-                  </Typography>
-                  <Typography type="copy3">{post.author.title}</Typography>
-                </div>
-              )}
-            </div>
+  return <>
+    <Meta
+      title={post.metaTitle || post.title}
+      description={post.metaDescription || post.description}
+      absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/blog/${post.slug}`}
+      canonical={`/blog/${post.slug}`}
+    />
+    <BlogNavbar title={post.title} endPosition={endPosition} />
+    <main ref={blogBody} className={styles.mainBlogPadding}>
+      <Section>
+        <div className={homeStyles.anchorTitle}>
+          <Typography type="copy2">
+            <p className={styles.dateDiv}>{`${new Date(
+              post.publishedAt
+            ).toLocaleDateString('en-US', {
+              day: 'numeric',
+              year: 'numeric',
+              month: 'short',
+            })} • ${
+              post.readingTime ||
+              Math.floor(post.richcontent.markdown.split(' ').length / 200)
+            } min read`}</p>
+          </Typography>
+          <h1 className={styles.blogText}>{post.title}</h1>
+          <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
+            {post.tags.map((tag: string) => (
+              <Link key={tag} href={`/blog?tag=${tag}`} passHref={true} legacyBehavior>
+                <div>{tag}</div>
+              </Link>
+            ))}
           </div>
-        </Section>
-        {post.image?.url && (
-          <Section className={styles.headerSection}>
+          <div className={styles.authorDiv}>
             <div
-              className={classNames(styles.mainImage, homeStyles.anchorTitle)}
+              className={styles.avatar}
+              style={{ width: '50px', height: '50px', position: 'relative' }}
             >
               <Image
-                src={post.image.url || ''}
+                src={
+                  post.author?.profilePhoto.url || post.publishedBy.picture
+                }
                 alt=""
                 layout="fill"
-                objectFit="cover"
-                priority
               />
             </div>
-          </Section>
-        )}
+            {post.author && (
+              <div className={styles.authorDescription}>
+                <Typography type="copy2" emphasis>
+                  <div className={styles.authorDetails}>
+                    <span>
+                      {post.author.firstName} {post.author.lastName}
+                    </span>
+                    {post.author.githubLink && (
+                      <a href={post.author.githubLink}>
+                        <FaGithub />
+                      </a>
+                    )}
+                    {post.author.twitterLink && (
+                      <a href={post.author.twitterLink}>
+                        <FaTwitter />
+                      </a>
+                    )}
+                    {post.author.linkedInLink && (
+                      <a href={post.author.linkedInLink}>
+                        <FaLinkedin />
+                      </a>
+                    )}
+                    {post.author.personalWebsiteLink && (
+                      <a href={post.author.personalWebsiteLink}>
+                        <FaGlobe />
+                      </a>
+                    )}
+                  </div>
+                </Typography>
+                <Typography type="copy3">{post.author.title}</Typography>
+              </div>
+            )}
+          </div>
+        </div>
+      </Section>
+      {post.image?.url && (
         <Section className={styles.headerSection}>
           <div
-            className={classNames(
-              homeStyles.anchorTitle,
-              styles.postBody,
-              styles.postBodyTop
-            )}
+            className={classNames(styles.mainImage, homeStyles.anchorTitle)}
           >
-            {postSections?.map((p, idx) => (
-              <PostSection key={idx} idx={idx} p={p} />
-            ))}
+            <Image
+              src={post.image.url || ''}
+              alt=""
+              layout="fill"
+              objectFit="cover"
+              priority
+            />
           </div>
         </Section>
-        <Section>
-          <div className={styles.postBodyDivider}></div>
-        </Section>
-        <Section>
-          <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
-            <h3 className={styles.otherArticlesHeader}>
-              Other articles you may like
-            </h3>
-            {suggestedPosts.map((p, i) => (
-              <SuggestedBlogPost {...p} key={i} />
-            ))}
-          </div>
-        </Section>
-      </main>
-      <FooterCallToAction />
-      <Footer />
-    </>
-  );
+      )}
+      <Section className={styles.headerSection}>
+        <div
+          className={classNames(
+            homeStyles.anchorTitle,
+            styles.postBody,
+            styles.postBodyTop
+          )}
+        >
+          {postSections?.map((p, idx) => (
+            <PostSection key={idx} idx={idx} p={p} />
+          ))}
+        </div>
+      </Section>
+      <Section>
+        <div className={styles.postBodyDivider}></div>
+      </Section>
+      <Section>
+        <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
+          <h3 className={styles.otherArticlesHeader}>
+            Other articles you may like
+          </h3>
+          {suggestedPosts.map((p, i) => (
+            <SuggestedBlogPost {...p} key={i} />
+          ))}
+        </div>
+      </Section>
+    </main>
+    <FooterCallToAction />
+    <Footer />
+  </>;
 };
 
 export default PostPage;

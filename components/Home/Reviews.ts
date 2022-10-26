@@ -1,4 +1,4 @@
-import { StaticImageData } from 'next/image';
+import { StaticImageData } from "next/legacy/image";
 import Basedash from '../../public/images/companies/basedash.png';
 import Knock from '../../public/images/companies/knock.png';
 import Impira from '../../public/images/companies/impira.png';
