@@ -13,7 +13,8 @@ export type Tag = {
 };
 
 // TODO(fabio) temporarily leads to /blog/posts but should lead to /blog
-const getTagUrl = (slug: string) => `/blog/posts${slug && `?tag=` + slug}`;
+const getTagUrl = (slug: string) =>
+  slug === 'all' ? `/blog/posts` : `/blog/posts?tag=${slug}`;
 
 function TagIcon({
   slug,
@@ -34,7 +35,7 @@ function TagIcon({
 export function PostTag({ name, slug }: Pick<Tag, 'name' | 'slug'>) {
   return (
     <Link href={getTagUrl(slug)}>
-      <div className="rounded-full bg-divider-on-dark w-fit px-3 py-0.5 select-none cursor-pointer hover:bg-copy-on-light transition-colors active:bg-black active:transition-none capitalize text-copy-on-dark">
+      <div className="rounded-full bg-white/[12%] w-fit px-3 py-0.5 select-none cursor-pointer hover:bg-copy-on-light transition-colors active:bg-black/25 active:transition-none capitalize text-copy-on-dark">
         <Typography type="copy4">{name}</Typography>
       </div>
     </Link>

@@ -12,6 +12,7 @@ import { HiGlobeAlt, HiOutlineSearch, HiSearch } from 'react-icons/hi';
 import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
+import Link from 'next/link';
 
 export const getStaticProps: GetStaticProps = async () => {
   const postsQuery = gql`
@@ -90,8 +91,8 @@ const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex items-start mx-auto mt-32 gap-3.5 max-w-fit">
-          <div className="flex-col hidden gap-6 border border-solid rounded-lg border-divider-on-dark  px-9 py-7 w-[352px] desktop:flex ">
+        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-fit">
+          <div className="flex-col hidden gap-6 border border-solid rounded-lg border-divider-on-dark  px-9 py-7 w-[352px] desktop:flex sticky top-36">
             {/* sidebar */}
             <div
               className={classNames(searchBarBaseStyle, 'px-2 h-[34px] gap-1')}
@@ -110,7 +111,7 @@ const Blog = ({
               ))}
             </div>
           </div>
-          <div className="w-full max-w-4xl pb-32 px-[42px]">
+          <div className="w-full max-w-4xl px-[42px]">
             <div className="flex flex-col w-full mb-[30px] desktop:mb-10">
               <Typography type="outline" className="mb-2 text-highlight-yellow">
                 The Highlight Blog
@@ -178,7 +179,7 @@ function getDateAndReadingTime(publishedAt: string, readingMinutes: number) {
 }
 
 const postItemStyle = classNames(
-  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:border-copy-on-light '
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:border-copy-on-light hover:bg-divider-on-dark'
 );
 
 const PostItem = ({ post }: { post: Post }) => {
@@ -188,7 +189,9 @@ const PostItem = ({ post }: { post: Post }) => {
         {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
       </Typography>
 
-      <h5 className="mt-1">{post.title}</h5>
+      <Link href={`/blog/${post.slug}`}>
+        <h5 className="mt-1">{post.title}</h5>
+      </Link>
       <div className="mt-3">{post.author && <Author {...post.author} />}</div>
       <div className="flex gap-2.5 absolute right-7 bottom-7">
         {post.tags?.map((tag, i) => (
@@ -205,7 +208,9 @@ const MobilePostItem = ({ post }: { post: Post }) => {
   return (
     <div className={classNames(postItemStyle, 'mobile:hidden block')}>
       {tag && <PostTag name={tag} slug={tag} />}
-      <h3 className="mt-3">{post.title}</h3>
+      <Link href={`/blog/${post.slug}`}>
+        <h3 className="mt-3">{post.title}</h3>
+      </Link>
       <Typography type="copy4" className="mt-1 text-copy-on-dark">
         {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
       </Typography>
