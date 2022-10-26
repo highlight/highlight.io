@@ -2,7 +2,7 @@ import styles from '../../components/Blog/Blog.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
 import { BlogPost, Post } from '../../components/Blog/BlogPost/BlogPost';
-import { gql, GraphQLClient } from 'graphql-request';
+import { gql } from 'graphql-request';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import { useState } from 'react';
 import Paginate from '../../components/common/Paginate/Paginate';
@@ -11,18 +11,9 @@ import classNames from 'classnames';
 import { BlogPostSmall } from '../../components/Blog/BlogPostSmall/BlogPostSmall';
 import { Typography } from '../../components/common/Typography/Typography';
 import { Meta } from '../../components/common/Head/Meta';
+import { GraphQLRequest } from '../../utils/graphql';
 
 const ITEMS_PER_PAGE = 6;
-
-export const graphcms = new GraphQLClient(
-  'https://api-us-west-2.graphcms.com/v2/cl2tzedef0o3p01yz7c7eetq8/master',
-  {
-    headers: {
-      Authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-    },
-    fetch,
-  }
-);
 
 export async function getStaticProps() {
   const postsRequest = loadPostsFromHygraph(undefined);
@@ -43,31 +34,31 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
   const tagProp = tag ? '$tag: [String!]' : '';
   const tagFilter = tag ? 'tags_contains_all: $tag' : '';
   const QUERY = gql`
-    query GetPosts(${tagProp}) {
-      posts(
-        orderBy: postedAt_DESC
-        where: { ${tagFilter}, unlisted: false }
-      ) {
-        slug
-        image {
-          url
-        }
-        metaImage {
-          url
-        }
-        title
-        publishedAt
-        tags
-        readingTime
+      query GetPosts(${tagProp}) {
+          posts(
+              orderBy: postedAt_DESC
+              where: { ${tagFilter}, unlisted: false }
+          ) {
+              slug
+              image {
+                  url
+              }
+              metaImage {
+                  url
+              }
+              title
+              publishedAt
+              tags
+              readingTime
+          }
       }
-    }
   `;
 
-  const { posts } = await graphcms.request(QUERY, {
+  const { posts } = await GraphQLRequest(QUERY, {
     tag: tag ? [tag] : [],
   });
 
-  const filteredPosts = posts.sort((a: any, b: any) => {
+  return posts.sort((a: any, b: any) => {
     // sort by postedAt if the publishedAt field is the same
     if (a.postedAt === b.postedAt) {
       return (
@@ -75,28 +66,24 @@ export const loadPostsFromHygraph = async (tag: string | undefined) => {
       );
     }
   });
-
-  return filteredPosts;
 };
 
 export const loadTagsFromHygraph = async () => {
   const TAGS_QUERY = gql`
-  query GetPosts() {
-    posts(
-    ) {
-      tags
-    }
-  }
-`;
+      query GetPosts() {
+          posts(
+          ) {
+              tags
+          }
+      }
+  `;
 
-  const { posts } = await graphcms.request(TAGS_QUERY, {
+  const { posts } = await GraphQLRequest(TAGS_QUERY, {
     tag: [],
   });
 
   const allTags = posts.map((post: any) => post.tags);
-  const uniqueTags = Array.from(new Set(allTags.flat()));
-
-  return uniqueTags;
+  return Array.from(new Set(allTags.flat()));
 };
 
 export const Blog = ({

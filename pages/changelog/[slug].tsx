@@ -10,9 +10,9 @@ import { gql } from 'graphql-request';
 import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import { graphcms } from '../blog';
 import ReactMarkdown from 'react-markdown';
 import { Meta } from '../../components/common/Head/Meta';
+import { GraphQLRequest } from '../../utils/graphql';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`
@@ -22,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     }
   `;
-  const { changelogs } = await graphcms.request(QUERY);
+  const { changelogs } = await GraphQLRequest(QUERY);
 
   return {
     paths: changelogs.map((p: { slug: string }) => ({
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       }
     }
   `;
-  const data = await graphcms.request(QUERY, { slug: slug });
+  const data = await GraphQLRequest(QUERY, { slug: slug });
 
   // Handle event slugs which don't exist in our CMS
   if (!data.changelog) {

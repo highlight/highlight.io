@@ -3,7 +3,6 @@ import { gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { Author } from '../../components/Blog/BlogPost/BlogPost';
 import { CustomerQuote } from '../../components/Customers/CustomerQuote/CustomerQuote';
-import { graphcms } from '../blog';
 import style from '../../components/Customers/Customers.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,6 +11,7 @@ import { FooterCallToAction } from '../../components/common/CallToAction/FooterC
 import Footer from '../../components/common/Footer/Footer';
 import Navbar from '../../components/common/Navbar/Navbar';
 import ReturnIcon from '../../public/images/ReturnIcon';
+import { GraphQLRequest } from '../../utils/graphql';
 
 interface Customer {
   slug: string;
@@ -49,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     }
   `;
-  const { customers } = await graphcms.request(QUERY);
+  const { customers } = await GraphQLRequest(QUERY);
 
   return {
     paths: customers.map((p: { slug: string }) => ({
@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
 
-  const data = await graphcms.request(QUERY, { slug: slug });
+  const data = await GraphQLRequest(QUERY, { slug: slug });
 
   // Handle event slugs which don't exist in our CMS
   if (!data.customer) {
@@ -141,7 +141,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
 
-  const pageData = await graphcms.request(PAGES_QUERY, {
+  const pageData = await GraphQLRequest(PAGES_QUERY, {
     id: data.customer.id,
   });
 
