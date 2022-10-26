@@ -1,6 +1,6 @@
 import { Author, Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Typography } from '../../components/common/Typography/Typography';
-import Image from 'next/image';
+import Image from 'next/legacy/image'; // TODO(fabio) use next 13's Image
 import Navbar from '../../components/common/Navbar/Navbar';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
@@ -11,7 +11,7 @@ import { GetStaticProps } from 'next';
 import { HiGlobeAlt, HiOutlineSearch, HiSearch } from 'react-icons/hi';
 import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
-import { graphcms } from './index';
+import { GraphQLRequest } from '../../utils/graphql';
 
 export const getStaticProps: GetStaticProps = async () => {
   const postsQuery = gql`
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   `;
 
-  const postsData = (await graphcms.request(postsQuery)) as { posts: Post[] };
+  const postsData = (await GraphQLRequest(postsQuery)) as { posts: Post[] };
 
   // `tags_relations` is a temporary name, I don't want to replace the existing `tags` field outright
   // but intend to at some point, then this would be renamed to just `tags`
@@ -58,7 +58,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   `;
 
-  const tagsData = (await graphcms.request(tagsQuery)) as {
+  const tagsData = (await GraphQLRequest(tagsQuery)) as {
     tags: Tag[];
   };
 
