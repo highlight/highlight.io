@@ -8,7 +8,8 @@ import { ReactElement } from 'react';
 import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
-import { HiGlobeAlt, HiOutlineSearch, HiSearch } from 'react-icons/hi';
+import { HiGlobeAlt } from 'react-icons/hi';
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
@@ -97,7 +98,7 @@ const Blog = ({
             <div
               className={classNames(searchBarBaseStyle, 'px-2 h-[34px] gap-1')}
             >
-              <HiSearch />
+              <HiMagnifyingGlass />
               <input
                 type="text"
                 placeholder="Search Posts..."
@@ -133,7 +134,7 @@ const Blog = ({
                   'h-14 gap-2.5 px-3.5 box-border'
                 )}
               >
-                <HiOutlineSearch className="w-6 h-6" />
+                <HiMagnifyingGlass className="w-6 h-6" />
                 <input
                   type="text"
                   placeholder="Search Posts..."
