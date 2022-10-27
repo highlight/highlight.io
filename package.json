@@ -30,7 +30,7 @@
     "lodash.debounce": "^4.0.8",
     "lottie-react": "^2.2.1",
     "next": "13",
-    "next-axiom": "^0.13.0",
+    "next-axiom": "^0.15.0",
     "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-code-blocks": "^0.0.9-0",
