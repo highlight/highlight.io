@@ -42,5 +42,6 @@ export const tocItemChevronClosed: string;
 export const tocItemCurrent: string;
 export const tocItemOpen: string;
 export const tocMenu: string;
+export const tocMenuLabel: string;
 export const tocMenuLarge: string;
 export const tocRow: string;
