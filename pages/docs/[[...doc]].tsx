@@ -435,7 +435,17 @@ const TableOfContents = ({
           )}
           legacyBehavior
         >
-          <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
+          <div
+            className={styles.tocRow}
+            onClick={() => {
+              setOpen((o) => !o);
+              if (window.scrollY >= 124) {
+                sessionStorage.setItem('scrollPosition', '124');
+              } else {
+                sessionStorage.setItem('scrollPosition', '0');
+              }
+            }}
+          >
             <Minus
               className={classNames(styles.tocIcon, {
                 [styles.tocItemOpen]: hasChildren,
@@ -562,6 +572,13 @@ const DocPage = ({
     }
   }, [redirect, router]);
 
+  useEffect(() => {
+    const storedScrollPosition = sessionStorage.getItem('scrollPosition');
+    if (storedScrollPosition) {
+      window.scrollTo(0, parseInt(storedScrollPosition));
+    }
+  }, [router]);
+
   const onSearchChange = async (e: any) => {
     if (e.target.value !== '') {
       const results = await (
@@ -671,6 +688,7 @@ const DocPage = ({
                 toc={t}
                 docPaths={docOptions}
                 openParent={false}
+                openTopLevel={true}
               />
             ))}
           </div>
@@ -703,7 +721,7 @@ const DocPage = ({
                   toc={t}
                   docPaths={docOptions}
                   openParent={false}
-                  openTopLevel={true}
+                  openTopLevel={false}
                 />
               ))}
             </div>
