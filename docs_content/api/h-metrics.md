@@ -13,7 +13,7 @@ H.metrics(metrics: Metric[]) => void;
 
 ## `metrics`* (Metrics\[]) *Required
 
-A list of metrics that you'd like to report. Check out [Metrics](/api/h-metrics/metrics)&#x20;
+A list of metrics that you'd like to report. Check out [Metrics](/api/h-metrics)&#x20;
 
 ### Example
 
@@ -29,3 +29,15 @@ H.metrics([{
 }
 ```
 
+
+## `name` *(string)*
+
+The name of the metric you are reporting.
+
+## `value` *(number)*
+
+The numeric value of the metric.
+
+## `tags` *({ name: string; value: string }\[])*
+
+A set of name,value pairs the represent tags about the metric. Tags can be used to filter and group metrics. See [Frontend Observability](/product-features/frontend-observability) for more details.

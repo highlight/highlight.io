@@ -42,6 +42,7 @@ import 'antd/lib/spin/style/index.css';
 import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
+import { CodeBlockTabs } from '../../components/Docs/CodeBlockTabs/CodeBlockTabs';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -59,8 +60,6 @@ interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
-  // some parent pages are empty and should redirect to the first child page
-  redirect?: string;
 }
 
 export interface Doc {
@@ -153,31 +152,25 @@ export const getDocsPaths = async (
     const file_string = read[i];
     let total_path = path.join(full_path, file_string);
     const file_path = await fs_api.stat(total_path);
+    const simple_path = path.join(base, file_string);
     if (file_path.isDirectory()) {
-      paths = paths.concat(
-        await getDocsPaths(fs_api, path.join(base, file_string))
-      );
+      paths = paths.concat(await getDocsPaths(fs_api, simple_path));
     } else {
       let pp = '';
-      let redirect = '';
-      let simple_path = path.join(base, file_string);
       if (file_string === 'index.md') {
-        // get rid of "index.md" at the end
+        // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
         pp = simple_path.split('/').slice(0, -1).join('/');
-        const { content } = await readMarkdown(
-          fsp,
-          path.join(total_path || '')
-        );
-        if (content === '') {
-          const firstChildPath = getDefaultChildPath(read);
-          const redirectPath = firstChildPath
-            ? path.join(base, firstChildPath)
-            : '';
-          redirect = redirectPath?.replace('.md', '');
-        }
       } else {
         // strip out any notion of ".md"
         pp = simple_path.replace('.md', '');
+        const pp_array = pp.split('/');
+        if (pp_array.length > 1) {
+          const parentDirectory = pp_array[pp_array.length - 2];
+          const currentPath = pp_array[pp_array.length - 1];
+          if (currentPath === `${parentDirectory}-overview`) {
+            pp = [...pp_array.slice(0, -1), 'overview'].join('/');
+          }
+        }
       }
       const { data, links } = await readMarkdown(
         fsp,
@@ -199,7 +192,6 @@ export const getDocsPaths = async (
         total_path,
         indexPath: file_string === 'index.md',
         metadata: data,
-        ...(redirect ? { redirect } : {}),
       });
     }
   }
@@ -293,7 +285,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       slug: currentDoc?.simple_path,
       docOptions: docPaths,
       toc,
-      ...(currentDoc?.redirect ? { redirect: currentDoc.redirect } : {}),
     },
   };
 };
@@ -377,9 +368,11 @@ const TableOfContents = ({
   toc,
   docPaths,
   openParent,
+  openTopLevel = false,
 }: {
   toc: TocEntry;
   openParent: boolean;
+  openTopLevel?: boolean;
   docPaths: DocPath[];
 }) => {
   const [open, setOpen] = useState(openParent);
@@ -390,8 +383,8 @@ const TableOfContents = ({
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
 
   useEffect(() => {
-    setOpen(isTopLevel);
-  }, [isTopLevel]);
+    setOpen(isTopLevel && openTopLevel);
+  }, [isTopLevel, openTopLevel]);
 
   useEffect(() => {
     const isCurrentPage =
@@ -402,31 +395,16 @@ const TableOfContents = ({
 
   return (
     <div>
-      <Link
-        href={path.join(
-          '/docs',
-          docPaths[toc.docPathId || 0]?.simple_path || ''
-        )}
-      >
+      {hasChildren ? (
         <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
-          {hasChildren ? (
-            <ChevronDown
-              className={classNames(styles.tocIcon, {
-                [styles.tocItemChevronClosed]: hasChildren && !open,
-                [styles.tocItemOpen]: hasChildren && open,
-                [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
-                [styles.tocChild]: !isTopLevel,
-              })}
-            />
-          ) : (
-            <Minus
-              className={classNames(styles.tocIcon, {
-                [styles.tocItemOpen]: hasChildren,
-                [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
-                [styles.tocChild]: !isTopLevel,
-              })}
-            />
-          )}
+          <ChevronDown
+            className={classNames(styles.tocIcon, {
+              [styles.tocItemChevronClosed]: hasChildren && !open,
+              [styles.tocItemOpen]: hasChildren && open,
+              [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+              [styles.tocChild]: !isTopLevel,
+            })}
+          />
           <Typography
             type="copy3"
             emphasis={isTopLevel}
@@ -439,7 +417,36 @@ const TableOfContents = ({
             {toc?.tocHeading || 'nope'}
           </Typography>
         </div>
-      </Link>
+      ) : (
+        <Link
+          href={path.join(
+            '/docs',
+            docPaths[toc.docPathId || 0]?.simple_path || ''
+          )}
+        >
+          <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
+            <Minus
+              className={classNames(styles.tocIcon, {
+                [styles.tocItemOpen]: hasChildren,
+                [styles.tocItemCurrent]: !hasChildren && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            />
+            <Typography
+              type="copy3"
+              emphasis={isTopLevel}
+              className={classNames(styles.tocItem, {
+                [styles.tocItemOpen]: hasChildren && open,
+                [styles.tocItemCurrent]:
+                  (!hasChildren || open) && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            >
+              {toc?.tocHeading || 'nope'}
+            </Typography>
+          </div>
+        </Link>
+      )}
       <Collapse isOpened={open}>
         <div className={styles.tocChildren}>
           <div className={styles.tocChildrenLineWrapper}>
@@ -649,6 +656,7 @@ const DocPage = ({
                 toc={t}
                 docPaths={docOptions}
                 openParent={false}
+                openTopLevel={true}
               />
             ))}
           </div>
@@ -681,6 +689,7 @@ const DocPage = ({
                   toc={t}
                   docPaths={docOptions}
                   openParent={false}
+                  openTopLevel={false}
                 />
               ))}
             </div>
@@ -795,6 +804,8 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
             <div className={styles.customComponent}>
               <HeroVideo />
             </div>
+          ) : props.className === 'language-codeblocktabs' ? (
+            <CodeBlockTabs content={props} />
           ) : props.className === 'language-hint' ? (
             <Callout content={props.children[0]} />
           ) : (

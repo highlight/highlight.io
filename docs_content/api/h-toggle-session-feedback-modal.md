@@ -63,7 +63,7 @@ See [Environments](/product-features/environments) to see how setting the enviro
 
 *The default value is *`production`*.*
 
-### `networkRecording` *(*[*NetworkRecordingOptions*](/api/h-init/network-recording-options)*)*
+### `networkRecording` *(*[*NetworkRecordingOptions*](/api/h-init)*)*
 
 Specifies how and what network requests and responses Highlight records.
 
