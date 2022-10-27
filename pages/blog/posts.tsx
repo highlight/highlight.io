@@ -15,6 +15,7 @@ import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { matchSorter } from 'match-sorter';
 
 export const getStaticProps: GetStaticProps = async () => {
   const postsQuery = gql`
@@ -96,10 +97,10 @@ const Blog = ({
   const [page, setPage] = useState<number>(1);
   const itemsPerPage = 4;
 
-  // TODO(fabio) use match-sorter https://www.npmjs.com/package/match-sorter
-  const filteredPosts = posts.filter((p) =>
-    p.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // TODO(fabio) searching by 'tags' key is temporary, should use 'tags_relations.name' instead once those are populated
+  const filteredPosts = matchSorter(posts, searchQuery, {
+    keys: [{ key: 'tags', maxRanking: matchSorter.rankings.CONTAINS }, 'title'],
+  });
   const paginatedPosts = filteredPosts.slice(0, itemsPerPage * page);
   const allPostsLoaded = paginatedPosts.length >= filteredPosts.length;
 
