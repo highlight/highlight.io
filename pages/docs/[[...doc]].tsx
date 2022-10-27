@@ -43,7 +43,7 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { DOCS_REDIRECTS } from '../../middleware';
 import debounce from 'lodash.debounce';
 
-const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
+const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
 interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -52,7 +52,7 @@ interface DocPath {
   simple_path: string;
   // e.g. '[/tips, /getting-started/client-sdk]'
   relative_links: string[];
-  // e.g. /Users/jaykhatri/projects/highlight-landing/docs_content/tips/sessions-search-deep-linking.md
+  // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
   total_path: string;
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
   indexPath: boolean;

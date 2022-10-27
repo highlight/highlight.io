@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 
 const token = process.env.GITHUB_TOKEN;
-const docsRoot = 'docs_content';
+const docsRoot = 'docs';
 const githubHeaders = {
   accept: 'application/vnd.github+json',
   authorization: `Bearer ${token}`,
