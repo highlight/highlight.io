@@ -5,7 +5,7 @@ createdAt: 2021-11-15T20:06:57.000Z
 updatedAt: 2021-11-15T23:43:54.000Z
 ---
 
-The session shortcut allows you to set a keyboard shortcut in your app/website that will open the current session in Highlight. You can enable session shortcut and the keyboard shortcut by setting `sessionShortcut` in [H.init()](/api/h-init).
+The session shortcut allows you to set a keyboard shortcut in your app/website that will open the current session in Highlight. You can enable session shortcut and the keyboard shortcut by setting `sessionShortcut` in [H.init()](/api/client/h-init).
 
 Scenarios of when you're using your app:
 

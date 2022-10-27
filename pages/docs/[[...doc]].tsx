@@ -20,15 +20,12 @@ import Highlighter from 'react-highlight-words';
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
-import CopyIcon from '../../public/images/document-duplicate.svg';
 import PageIcon from '../../public/images/page.svg';
 import { Typography } from '../../components/common/Typography/Typography';
-import { CodeBlock } from 'react-code-blocks';
-import highlightCodeTheme from '../../components/common/CodeBlock/highlight-code-theme';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import removeMd from 'remove-markdown';
 import { SearchResult } from '../api/docs/search/[searchValue]';
 import {
@@ -42,7 +39,8 @@ import 'antd/lib/spin/style/index.css';
 import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
-import { CodeBlockTabs } from '../../components/Docs/CodeBlockTabs/CodeBlockTabs';
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import { DOCS_REDIRECTS } from '../../middleware';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 const SEARCH_RESULT_BLURB_LENGTH = 100;
@@ -267,6 +265,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   }
 
+  // validate that any archbee redirect URLs are valid.
+  for (const [oldLink, newLink] of Object.entries(DOCS_REDIRECTS)) {
+    if (newLink.startsWith('/docs/')) {
+      const doc = newLink.split('/docs').pop() || '';
+      if (!docRelLinks.has(doc)) {
+        console.log(docRelLinks, doc);
+        throw new Error(
+          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
+        );
+      }
+    }
+  }
+
   const currentDoc = docPaths.find((d) => {
     return (
       JSON.stringify(d.array_path) ===
@@ -423,6 +434,7 @@ const TableOfContents = ({
             '/docs',
             docPaths[toc.docPathId || 0]?.simple_path || ''
           )}
+          legacyBehavior
         >
           <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
             <Minus
@@ -611,7 +623,7 @@ const DocPage = ({
                   <Spin className={styles.spinner} />
                 ) : (
                   searchResults.map((result: SearchResult, i) => (
-                    <Link href={`/docs/${result.path}`} key={i}>
+                    <Link href={`/docs/${result.path}`} key={i} legacyBehavior>
                       <div
                         className={classNames(styles.searchResultCard, {
                           [styles.active]: i === hoveredResult,
@@ -656,7 +668,6 @@ const DocPage = ({
                 toc={t}
                 docPaths={docOptions}
                 openParent={false}
-                openTopLevel={true}
               />
             ))}
           </div>
@@ -689,7 +700,7 @@ const DocPage = ({
                   toc={t}
                   docPaths={docOptions}
                   openParent={false}
-                  openTopLevel={false}
+                  openTopLevel={true}
                 />
               ))}
             </div>
@@ -699,11 +710,15 @@ const DocPage = ({
           <div className={styles.breadcrumb}>
             {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
               i === 0 ? (
-                <Link href={breadcrumb.path}>{breadcrumb.title}</Link>
+                <Link href={breadcrumb.path} legacyBehavior>
+                  {breadcrumb.title}
+                </Link>
               ) : (
                 <>
                   {` / `}
-                  <Link href={breadcrumb.path}>{breadcrumb.title}</Link>
+                  <Link href={breadcrumb.path} legacyBehavior>
+                    {breadcrumb.title}
+                  </Link>
                 </>
               )
             )}
@@ -729,13 +744,12 @@ const DocPage = ({
               <Link
                 href={docOptions[currentPageIndex - 1].simple_path}
                 passHref
+                className={styles.pageNavigate}
               >
-                <a className={styles.pageNavigate}>
-                  <BiChevronLeft />
-                  <Typography type="copy2">
-                    {docOptions[currentPageIndex - 1].metadata.title}
-                  </Typography>
-                </a>
+                <BiChevronLeft />
+                <Typography type="copy2">
+                  {docOptions[currentPageIndex - 1].metadata.title}
+                </Typography>
               </Link>
             ) : (
               <div></div>
@@ -744,13 +758,12 @@ const DocPage = ({
               <Link
                 href={docOptions[currentPageIndex + 1].simple_path}
                 passHref
+                className={styles.pageNavigate}
               >
-                <a className={styles.pageNavigate}>
-                  <Typography type="copy2">
-                    {docOptions[currentPageIndex + 1].metadata.title}
-                  </Typography>
-                  <BiChevronRight />
-                </a>
+                <Typography type="copy2">
+                  {docOptions[currentPageIndex + 1].metadata.title}
+                </Typography>
+                <BiChevronRight />
               </Link>
             ) : (
               <div></div>
@@ -804,29 +817,20 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
             <div className={styles.customComponent}>
               <HeroVideo />
             </div>
-          ) : props.className === 'language-codeblocktabs' ? (
-            <CodeBlockTabs content={props} />
           ) : props.className === 'language-hint' ? (
             <Callout content={props.children[0]} />
           ) : (
-            <div className={styles.codeBlock}>
-              <CodeBlock
-                language={'js'}
-                text={props.children[0]}
-                showLineNumbers={false}
-                theme={highlightCodeTheme}
-              />
-              <div
-                className={styles.codeCopyIcon}
-                onClick={() => navigator.clipboard.writeText(props.children[0])}
-              >
-                <Image src={CopyIcon} alt="Copy" />
-              </div>
-            </div>
+            <HighlightCodeBlock
+              language={'js'}
+              text={props.children[0]}
+              showLineNumbers={false}
+            />
           )
         ) : type === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)}>{props.children[0]}</Link>
+            <Link href={resolveLink(props.href)} legacyBehavior>
+              {props.children[0]}
+            </Link>
           )
         ) : (
           createElement(

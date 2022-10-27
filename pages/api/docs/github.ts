@@ -50,6 +50,7 @@ export const getGithubDocsPaths = async (path: string = docsRoot) => {
   const json = (await response.json()) as GithubTree[];
   const childPromises = [];
   let docs = new Map<string, DocMeta>();
+  if (!json?.length) return docs;
   for (const path of json) {
     if (path.type === 'dir') {
       childPromises.push(getGithubDocsPaths(path.path));
@@ -60,7 +61,7 @@ export const getGithubDocsPaths = async (path: string = docsRoot) => {
       const text = await file.text();
       const sections = text.split('---');
       docs.set(
-        path.path,
+        path.path.split(`${docsRoot}/`, 2)[1]!.split('.md', 1)[0]!,
         yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta
       );
     }

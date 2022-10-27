@@ -5,7 +5,7 @@ import VideoThumbnail from '../../../public/images/thumbnail.svg';
 import Jay from '../../../public/images/jay.png';
 import PlayButton from '../../../public/images/playButton.svg';
 import classNames from 'classnames';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { Typography } from '../../common/Typography/Typography';
 import { FaTimes } from 'react-icons/fa';
 

@@ -35,7 +35,7 @@ You have an app running on `https://piedpiper.com`. Your DNS record will point `
 
 ## Using the Proxy
 
-In your app where you call [H.init()](/api/h-init), you will need to set `backendUrl` to the DNS record you just created. For the example above:
+In your app where you call [H.init()](/api/client/h-init), you will need to set `backendUrl` to the DNS record you just created. For the example above:
 
 ```javascript
 H.init(

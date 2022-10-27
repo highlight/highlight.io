@@ -3,15 +3,15 @@ import { gql } from 'graphql-request';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { Author } from '../../components/Blog/BlogPost/BlogPost';
 import { CustomerQuote } from '../../components/Customers/CustomerQuote/CustomerQuote';
-import { graphcms } from '../blog';
 import style from '../../components/Customers/Customers.module.scss';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { Typography } from '../../components/common/Typography/Typography';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
 import Navbar from '../../components/common/Navbar/Navbar';
 import ReturnIcon from '../../public/images/ReturnIcon';
+import { GraphQLRequest } from '../../utils/graphql';
 
 interface Customer {
   slug: string;
@@ -49,7 +49,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }
     }
   `;
-  const { customers } = await graphcms.request(QUERY);
+  const { customers } = await GraphQLRequest(QUERY);
 
   return {
     paths: customers.map((p: { slug: string }) => ({
@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
 
-  const data = await graphcms.request(QUERY, { slug: slug });
+  const data = await GraphQLRequest(QUERY, { slug: slug });
 
   // Handle event slugs which don't exist in our CMS
   if (!data.customer) {
@@ -141,7 +141,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   `;
 
-  const pageData = await graphcms.request(PAGES_QUERY, {
+  const pageData = await GraphQLRequest(PAGES_QUERY, {
     id: data.customer.id,
   });
 
@@ -171,10 +171,8 @@ const CustomerPage = ({
         <div className={style.detailsLayout}>
           <div className={style.caseBackLink}>
             <Link href="/customers">
-              <a>
-                <ReturnIcon />
-                All customers
-              </a>
+              <ReturnIcon />
+              All customers
             </Link>
           </div>
           <div className={style.caseContent}>
@@ -269,23 +267,21 @@ const PageLink = ({
   logo?: string;
 }) => (
   <Link href={`/customers/${slug}`}>
-    <a>
-      <div className={style.casePageLink}>
-        <Typography type="copy2" emphasis>
-          {label}
-        </Typography>
-        {logo && (
-          <Image
-            src={logo}
-            width="187px"
-            height="32px"
-            objectFit="contain"
-            objectPosition="left"
-            alt={`${slug} logo`}
-          />
-        )}
-      </div>
-    </a>
+    <div className={style.casePageLink}>
+      <Typography type="copy2" emphasis>
+        {label}
+      </Typography>
+      {logo && (
+        <Image
+          src={logo}
+          width={187}
+          height={32}
+          objectFit="contain"
+          objectPosition="left"
+          alt={`${slug} logo`}
+        />
+      )}
+    </div>
   </Link>
 );
 

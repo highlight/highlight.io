@@ -5,7 +5,7 @@ createdAt: 2021-10-19T20:50:14.000Z
 updatedAt: 2021-10-19T20:57:59.000Z
 ---
 
-This method is used to get the Highlight session URL. This method provides the same URL as [H.getSessionUrl()](/api/h-get-session-url) but this also gives you a URL for the exact time (relative to the session recording) the method is called.
+This method is used to get the Highlight session URL. This method provides the same URL as [H.getSessionUrl()](/api/client/h-get-session-url) but this also gives you a URL for the exact time (relative to the session recording) the method is called.
 
 ```typescript
 H.getSessionDetails().then(({url, urlWithTimestamp}) => {

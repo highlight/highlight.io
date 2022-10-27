@@ -7,7 +7,7 @@ updatedAt: 2022-03-21T18:25:40.000Z
 
 When using Highlight, it can be useful to know which app version a session is recorded on. Highlight helps you by letting you tag which app version a session was recorded on.
 
-To tag your sessions with a version, you can set the `version` field in the [`H.init()`](/api/h-init).
+To tag your sessions with a version, you can set the `version` field in the [`H.init()`](/api/client/h-init).
 
 ```typescript
 import App from "./App";

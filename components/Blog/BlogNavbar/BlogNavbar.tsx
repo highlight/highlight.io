@@ -56,176 +56,174 @@ const BlogNavbar = ({
     };
   }, [dropdownRef]);
 
-  return (
-    <>
-      <Banner>
-        <div className={styles.bannerContainer}>
-          <p>Want 1 month of free Highlight? </p>
-          <a href="http://app.highlight.run/" className={styles.callToAction}>
-            Register Here →
-          </a>
-        </div>
-        <div className={styles.navContainer}>
-          <ul className={classNames(styles.menuList, styles.header)}>
-            <li>
-              <Link href={'/pricing'}>
-                <a className={styles.menuItem}>Pricing</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={'/#customers'}>
-                <a className={styles.menuItem}>Customers</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={'/blog'}>
-                <a className={styles.menuItem}>Blog</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={'https://careers.highlight.run'}>
-                <a className={styles.menuItem}>Careers</a>
-              </Link>
-            </li>
-            <li>
-              <FeatureFlag
-                feature={Feature.LandingPageDocs}
-                off={
-                  <Link
-                    href={'https://docs.highlight.run'}
-                    className={styles.menuItem}
-                  >
-                    Docs
-                  </Link>
-                }
-                on={
-                  <Link href={'/docs'} className={styles.menuItem}>
-                    Docs
-                  </Link>
-                }
-              />
-            </li>
-          </ul>
-        </div>
-      </Banner>
-      <header
-        className={classNames(styles.headerPadding, {
-          [styles.hideNavbar]: !scrolled,
-          [styles.mobileHeader]: isOpen,
+  return <>
+    <Banner>
+      <div className={styles.bannerContainer}>
+        <p>Want 1 month of free Highlight? </p>
+        <a href="http://app.highlight.run/" className={styles.callToAction}>
+          Register Here →
+        </a>
+      </div>
+      <div className={styles.navContainer}>
+        <ul className={classNames(styles.menuList, styles.header)}>
+          <li>
+            <Link href={'/pricing'} className={styles.menuItem}>
+              Pricing
+            </Link>
+          </li>
+          <li>
+            <Link href={'/#customers'} className={styles.menuItem}>
+              Customers
+            </Link>
+          </li>
+          <li>
+            <Link href={'/blog'} className={styles.menuItem}>
+              Blog
+            </Link>
+          </li>
+          <li>
+            <Link href={'https://careers.highlight.run'} className={styles.menuItem}>
+              Careers
+            </Link>
+          </li>
+          <li>
+            <FeatureFlag
+              feature={Feature.LandingPageDocs}
+              off={
+                <Link
+                  href={'https://docs.highlight.run'}
+                  className={styles.menuItem}
+                >
+                  Docs
+                </Link>
+              }
+              on={
+                <Link href={'/docs'} className={styles.menuItem}>
+                  Docs
+                </Link>
+              }
+            />
+          </li>
+        </ul>
+      </div>
+    </Banner>
+    <header
+      className={classNames(styles.headerPadding, {
+        [styles.hideNavbar]: !scrolled,
+        [styles.mobileHeader]: isOpen,
+      })}
+    >
+      <div
+        className={classNames(styles.header, styles.headerInner, {
+          [styles.openHeader]: isOpen,
+          [styles.headerBorder]: prevY != 0,
         })}
       >
-        <div
-          className={classNames(styles.header, styles.headerInner, {
-            [styles.openHeader]: isOpen,
-            [styles.headerBorder]: prevY != 0,
-          })}
-        >
-          <div className={classNames(styles.navContainer, styles.headerLeft)}>
-            <Link href={'/'}>
-              <a className={styles.urlStyle}>
-                {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
-              </a>
-            </Link>
-            <div className={styles.navPostTitle}>{title}</div>
-          </div>
-          <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
-          </div>
-          {isOpen && (
-            <div className={styles.mobileMenu}>
-              <ul className={classNames(styles.menuList, styles.header)}>
-                <li>
-                  <Typography type="copy3" emphasis={true}>
-                    <Link href={'/pricing'}>
-                      <a className={styles.menuItemLarge}>Pricing</a>
-                    </Link>
-                  </Typography>
-                </li>
-                <li>
-                  <Typography type="copy3" emphasis={true}>
-                    <Link href={'/#customers'}>
-                      <a className={styles.menuItemLarge}>Customers</a>
-                    </Link>
-                  </Typography>
-                </li>
-                <li>
-                  <Typography type="copy3" emphasis={true}>
-                    <Link href={'/blog'}>
-                      <a className={styles.menuItemLarge}>Blog</a>
-                    </Link>
-                  </Typography>
-                </li>
-                <li>
-                  <Typography type="copy3" emphasis={true}>
-                    <Link href={'https://careers.highlight.run'}>
-                      <a className={styles.menuItemLarge}>Careers</a>
-                    </Link>
-                  </Typography>
-                </li>
-                <li>
-                  <Typography type="copy3" emphasis={true}>
-                    <FeatureFlag
-                      feature={Feature.LandingPageDocs}
-                      off={
-                        <Link
-                          href={'https://docs.highlight.run'}
-                          className={styles.menuItemLarge}
-                        >
-                          Docs
-                        </Link>
-                      }
-                      on={
-                        <Link href="/docs" className={styles.menuItemLarge}>
-                          Docs
-                        </Link>
-                      }
-                    />
-                  </Typography>
-                </li>
-              </ul>
-              <div className={styles.menuButtons}>
-                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                  Get Started
-                </PrimaryButton>
-                <Typography type="copy3" emphasis={true}>
-                  <a
-                    href="https://app.highlight.run/"
-                    className={styles.menuItem}
-                  >
-                    Sign In
-                  </a>
-                </Typography>
-              </div>
-            </div>
-          )}
-          <div
-            className={classNames(
-              styles.navContainer,
-              styles.header,
-              styles.headerRight
-            )}
-          >
-            <PrimaryButton
-              href="https://app.highlight.run/?sign_up=1"
-              className={styles.signUpButton}
-            >
-              <Typography type="copy2" emphasis={true}>
-                Sign up
-              </Typography>
-            </PrimaryButton>
-          </div>
+        <div className={classNames(styles.navContainer, styles.headerLeft)}>
+          <Link href={'/'} className={styles.urlStyle}>
+
+            {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
+
+          </Link>
+          <div className={styles.navPostTitle}>{title}</div>
         </div>
+        <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+        </div>
+        {isOpen && (
+          <div className={styles.mobileMenu}>
+            <ul className={classNames(styles.menuList, styles.header)}>
+              <li>
+                <Typography type="copy3" emphasis={true}>
+                  <Link href={'/pricing'} className={styles.menuItemLarge}>
+                    Pricing
+                  </Link>
+                </Typography>
+              </li>
+              <li>
+                <Typography type="copy3" emphasis={true}>
+                  <Link href={'/#customers'} className={styles.menuItemLarge}>
+                    Customers
+                  </Link>
+                </Typography>
+              </li>
+              <li>
+                <Typography type="copy3" emphasis={true}>
+                  <Link href={'/blog'} className={styles.menuItemLarge}>
+                    Blog
+                  </Link>
+                </Typography>
+              </li>
+              <li>
+                <Typography type="copy3" emphasis={true}>
+                  <Link href={'https://careers.highlight.run'} className={styles.menuItemLarge}>
+                    Careers
+                  </Link>
+                </Typography>
+              </li>
+              <li>
+                <Typography type="copy3" emphasis={true}>
+                  <FeatureFlag
+                    feature={Feature.LandingPageDocs}
+                    off={
+                      <Link
+                        href={'https://docs.highlight.run'}
+                        className={styles.menuItemLarge}
+                      >
+                        Docs
+                      </Link>
+                    }
+                    on={
+                      <Link href="/docs" className={styles.menuItemLarge}>
+                        Docs
+                      </Link>
+                    }
+                  />
+                </Typography>
+              </li>
+            </ul>
+            <div className={styles.menuButtons}>
+              <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                Get Started
+              </PrimaryButton>
+              <Typography type="copy3" emphasis={true}>
+                <a
+                  href="https://app.highlight.run/"
+                  className={styles.menuItem}
+                >
+                  Sign In
+                </a>
+              </Typography>
+            </div>
+          </div>
+        )}
         <div
-          className={styles.loadingBar}
-          style={{
-            width: `${
-              (1 - Math.max(0, endPosition - prevY) / endPosition) * 100
-            }%`,
-          }}
-        ></div>
-      </header>
-    </>
-  );
+          className={classNames(
+            styles.navContainer,
+            styles.header,
+            styles.headerRight
+          )}
+        >
+          <PrimaryButton
+            href="https://app.highlight.run/?sign_up=1"
+            className={styles.signUpButton}
+          >
+            <Typography type="copy2" emphasis={true}>
+              Sign up
+            </Typography>
+          </PrimaryButton>
+        </div>
+      </div>
+      <div
+        className={styles.loadingBar}
+        style={{
+          width: `${
+            (1 - Math.max(0, endPosition - prevY) / endPosition) * 100
+          }%`,
+        }}
+      ></div>
+    </header>
+  </>;
 };
 
 export default BlogNavbar;

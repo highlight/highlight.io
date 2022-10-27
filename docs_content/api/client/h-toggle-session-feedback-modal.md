@@ -29,7 +29,7 @@ You may be interested in [Proxying](/tips/proxying-highlight) to make sure your 
 
 ### `manualStart`* (boolean)*
 
-Specifies if Highlight should not automatically start recording when the app starts. This should be used with [`H.start()`](/api/h-start)  and [`H.stop()`](/api/h-stop) if you want to control when Highlight records.
+Specifies if Highlight should not automatically start recording when the app starts. This should be used with [`H.start()`](/api/client/h-start)  and [`H.stop()`](/api/client/h-stop) if you want to control when Highlight records.
 
 The default value is `false`.
 

@@ -1,10 +1,10 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
 import { gql } from 'graphql-request';
-import { graphcms } from '../../../blog';
 import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
 import { Buffer } from 'buffer';
 import { font, fontLight, hero } from '../util';
+import { GraphQLRequest } from '../../../../utils/graphql';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -34,7 +34,7 @@ export default async function handler(req: NextRequest) {
   const heroBase64 = Buffer.from(heroData).toString('base64');
   const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
-  const post = (await graphcms.request(QUERY, { slug })).post as
+  const post = (await GraphQLRequest(QUERY, { slug }, false)).post as
     | Post
     | undefined;
 
