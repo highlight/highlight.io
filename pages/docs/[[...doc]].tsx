@@ -124,7 +124,12 @@ const isValidDirectory = (files: string[]) => {
   return files.find((filename) => filename === 'index.md') != null;
 };
 
-const ignoredDocsPaths = new Set<string>(['.git', 'LICENSE', 'README.md']);
+const ignoredDocsPaths = new Set<string>([
+  '.git',
+  '.github',
+  'LICENSE',
+  'README.md',
+]);
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
