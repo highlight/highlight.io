@@ -51,7 +51,7 @@
     "swipe-js-iso": "^2.1.5"
   },
   "devDependencies": {
-    "@svgr/webpack": "^6.3.0",
+    "@svgr/webpack": "^6.5.1",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash.debounce": "^4.0.7",
     "@types/node": "17.0.24",
