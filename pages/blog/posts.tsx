@@ -93,11 +93,15 @@ const Blog = ({
   const currentTag = tags.find(({ slug }) => slug === (tagSlug ?? 'all'))!;
 
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const filteredPosts = () =>
-    posts.filter((p) =>
-      p.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  const [page, setPage] = useState<number>(1);
+  const itemsPerPage = 4;
+
   // TODO(fabio) use match-sorter https://www.npmjs.com/package/match-sorter
+  const filteredPosts = posts.filter((p) =>
+    p.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const paginatedPosts = filteredPosts.slice(0, itemsPerPage * page);
+  const allPostsLoaded = paginatedPosts.length >= filteredPosts.length;
 
   return (
     <>
@@ -184,15 +188,20 @@ const Blog = ({
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
-              {filteredPosts().map((post) => (
+              {paginatedPosts.map((post) => (
                 <>
                   <PostItem post={post} key={post.slug + 'desktop'} />
                   <MobilePostItem post={post} key={post.slug + 'mobile'} />
                 </>
               ))}
-              <button className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer">
-                Load More
-              </button>
+              {!allPostsLoaded && (
+                <button
+                  className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer"
+                  onClick={() => setPage(page + 1)}
+                >
+                  Load More
+                </button>
+              )}
             </div>
           </div>
         </div>
