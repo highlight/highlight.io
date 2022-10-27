@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: column;
   flex: 0 0 280px;
-  padding: var(--size-xLarge) var(--size-large);
   position: sticky;
   height: 100vh;
   top: 0;
@@ -59,6 +58,7 @@
   transition: color 0.2s ease;
   color: var(--color-copy-on-light);
   stroke: var(--color-divider-on-dark);
+  flex: 0 0 var(--size-large);
 }
 
 .tocRow {
@@ -80,13 +80,13 @@
 
     .tocChild {
       opacity: 1;
+      color: var(--color-copy-on-dark);
     }
   }
 }
 
 .tocChild {
-  color: var(--copy-on-dark);
-  opacity: 0.7;
+  color: var(--color-copy-on-light);
 }
 
 .tocItem {
@@ -178,7 +178,6 @@
   padding: 2px 6px;
   border: 1px var(--color-divider-on-dark) solid;
   color: var(--copy-on-dark);
-  font-size: 16px;
 }
 
 h5:hover .headingCopyIcon {
@@ -201,6 +200,7 @@ h5:hover .headingCopyIcon {
 
 .leftInner {
   position: relative;
+  padding: var(--size-xLarge) var(--size-large) 0;
 }
 
 .searchDiv {
@@ -437,6 +437,7 @@ h5:hover .headingCopyIcon {
 
 .tocMenuLarge {
   overflow: auto;
+  padding: 0 var(--size-large);
 }
 
 .customComponent {
@@ -544,8 +545,19 @@ h5:hover .headingCopyIcon {
     border: 0;
   }
 
+  .leftInner {
+    padding: 0;
+  }
+
   .tocMenu {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .tocMenuLabel {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .tocContents {
