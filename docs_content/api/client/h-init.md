@@ -63,7 +63,7 @@ See [Environments](/product-features/environments) to see how setting the enviro
 
 *The default value is *`production`*.*
 
-### `networkRecording` *(*[*NetworkRecordingOptions*](/api/h-init)*)*
+### `networkRecording` *(*[*NetworkRecordingOptions*](/api/client/h-init)*)*
 
 Specifies how and what network requests and responses Highlight records.
 
@@ -142,7 +142,7 @@ Specifies the configuration for the Highlight feedback widget. This widget is us
 Specifies where the backend of the app lives. If specified, Highlight will attach the `X-Highlight-Request` header to outgoing requests whose destination URLs match a substring or regexp from this list, so that backend errors can be linked back to the session. If `true` is specified, all requests to the current domain will be matched. Example tracingOrigins: `['localhost', /^\//, 'backend.myapp.com']`
 
 
-These are the [H.init()](/api/h-init) options to configure how and what network requests/responses Highlight records. You can see [Recording Network Requests and Responses](/session-replay/recording-network-requests-and-responses) for more information about the feature.
+These are the [H.init()](/api/client/h-init) options to configure how and what network requests/responses Highlight records. You can see [Recording Network Requests and Responses](/session-replay/recording-network-requests-and-responses) for more information about the feature.
 
 ## `enabled` *(boolean)*
 

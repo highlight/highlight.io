@@ -270,7 +270,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = newLink.split('/docs').pop() || '';
       if (!docRelLinks.has(doc)) {
-        console.log(docRelLinks, doc);
         throw new Error(
           `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
         );
