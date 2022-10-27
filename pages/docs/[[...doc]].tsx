@@ -545,7 +545,7 @@ const DocPage = ({
   const [hoveredResult, setHoveredResult] = useState(0);
 
   const docOptionsWithContent = useMemo(() => {
-    return docOptions.filter((doc) => !doc.indexPath);
+    return docOptions?.filter((doc) => !doc.indexPath);
   }, [docOptions]);
 
   const description = (markdownText || '')
