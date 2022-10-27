@@ -5,7 +5,7 @@ createdAt: 2021-09-14T01:21:56.000Z
 updatedAt: 2022-10-14T00:25:20.000Z
 ---
 
-These are the [H.init()](/api/h-init) options to configure how and what network requests/responses Highlight records. You can see [Recording Network Requests and Responses](/session-replay/recording-network-requests-and-responses) for more information about the feature.
+These are the [H.init()](/api/client/h-init) options to configure how and what network requests/responses Highlight records. You can see [Recording Network Requests and Responses](/session-replay/recording-network-requests-and-responses) for more information about the feature.
 
 ## `enabled` *(boolean)*
 

@@ -86,7 +86,7 @@ The strings used for the Highlight crash report.
 
 `user`
 
-Allows you to attach additional user information to the feedback report. If you've called [`H.identify()`](/api/h-identify) in your application before, you won't have to set this, Highlight will infer the user's identity.
+Allows you to attach additional user information to the feedback report. If you've called [`H.identify()`](/api/client/h-identify) in your application before, you won't have to set this, Highlight will infer the user's identity.
 
 `title`
 

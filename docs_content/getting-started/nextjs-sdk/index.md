@@ -17,7 +17,7 @@ The Highlight Next.js SDK adds additional features to Highlight, including:
 
 The features in this SDK require the Highlight client SDK to be installed, so please follow the [Next.js](/getting-started/client-sdk/nextjs) instructions if you have not yet done so.
 
-For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should set `backendUrl`. See [H.init()](/api/h-init) for more details.
+For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should set `backendUrl`. See [H.init()](/api/client/h-init) for more details.
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {

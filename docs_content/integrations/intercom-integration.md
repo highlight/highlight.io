@@ -15,7 +15,7 @@ Whenever a user sends you a message on Intercom, Highlight will add a [custom us
 
 ### `trackEvent`
 
-Calling [Recording Network Requests and Responses](/api/h-track) will forward the data to Intercom's [`Intercom('trackEvent')`](https://developers.intercom.com/installing-intercom/docs/intercom-javascript#section-intercomtrackevent).
+Calling [Recording Network Requests and Responses](/api/client/h-track) will forward the data to Intercom's [`Intercom('trackEvent')`](https://developers.intercom.com/installing-intercom/docs/intercom-javascript#section-intercomtrackevent).
 
 ```typescript
 H.track('signup_button_clicked', {

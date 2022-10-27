@@ -5,7 +5,7 @@ createdAt: 2021-09-13T23:23:20.000Z
 updatedAt: 2022-07-19T21:02:40.000Z
 ---
 
-To tag sessions with user-specific identifiers (name, email, etc.), you can call the [`H.identify()`](/api/h-identify)method in your app. This will automatically index your sessions so that they can be filtered by these attributes.
+To tag sessions with user-specific identifiers (name, email, etc.), you can call the [`H.identify()`](/api/client/h-identify)method in your app. This will automatically index your sessions so that they can be filtered by these attributes.
 
 ```none
 H.identify(
@@ -16,11 +16,11 @@ H.identify(
 
 ## User Display Names
 
-By default, Highlight will show the `identifier` as the user's display name on the session viewer and session feed. You can override this by setting the `highlightDisplayName` or `email` fields in the [`H.identify()`](/api/h-identify) metadata.
+By default, Highlight will show the `identifier` as the user's display name on the session viewer and session feed. You can override this by setting the `highlightDisplayName` or `email` fields in the [`H.identify()`](/api/client/h-identify) metadata.
 
 ## Customer User Avatars
 
-You can replace the placeholder user avatars Highlight uses with an image that you provide. You can do this by setting the `avatar` field in the [`H.identify()`](/api/h-identify) metadata.
+You can replace the placeholder user avatars Highlight uses with an image that you provide. You can do this by setting the `avatar` field in the [`H.identify()`](/api/client/h-identify) metadata.
 
 The image URL usually comes from your authentication provider (Firebase, Auth0, Active Directory, etc.). You can forward that URL to Highlight.&#x20;
 
@@ -39,11 +39,11 @@ H.identify(
 
 ## API
 
-See the [H.identify()](/api/h-identify) API documentation for more information on how to use it.
+See the [H.identify()](/api/client/h-identify) API documentation for more information on how to use it.
 
 ## What happens before a user is identified?
 
-All key session information is tracked regardless of whether a session is identified. Highlight will generate an identifier for a user which you can see in the session player unless you set your own by calling [H.identify()](/api/h-identify).
+All key session information is tracked regardless of whether a session is identified. Highlight will generate an identifier for a user which you can see in the session player unless you set your own by calling [H.identify()](/api/client/h-identify).
 
 When a user is identified we will attempt to **assign their information to previous sessions** from the same browser. If this happens you will see an indicator in the UI showing the data was inferred for a session and that the session was never explicitly identified.
 

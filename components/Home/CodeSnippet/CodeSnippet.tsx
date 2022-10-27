@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { CodeBlock } from 'react-code-blocks';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import CopyIcon from '../../../public/images/copy.svg';
