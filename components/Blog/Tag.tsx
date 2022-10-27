@@ -1,6 +1,14 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import { HiCog, HiCollection, HiTag, HiTruck } from 'react-icons/hi';
+import {
+  HiCode,
+  HiCog,
+  HiCollection,
+  HiDatabase,
+  HiTag,
+  HiTerminal,
+  HiTruck,
+} from 'react-icons/hi';
 import { ReactElement } from 'react-markdown/lib/react-markdown';
 import { Typography } from '../common/Typography/Typography';
 import { Post } from './BlogPost/BlogPost';
@@ -27,6 +35,9 @@ function TagIcon({
     all: <HiCollection className={className} />,
     placeholder: <HiCog className={className} />,
     test: <HiTruck className={className} />,
+    data: <HiDatabase className={className} />,
+    coding: <HiCode className={className} />,
+    developers: <HiTerminal className={className} />,
   };
 
   return iconMap[slug] ?? <HiTag className={className} />;
