@@ -5,6 +5,7 @@ import {
   DetailedHTMLProps,
   InputHTMLAttributes,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -26,7 +27,6 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/legacy/image';
-import removeMd from 'remove-markdown';
 import { SearchResult } from '../api/docs/search/[searchValue]';
 import {
   BiChevronLeft,
@@ -41,6 +41,7 @@ import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
+import debounce from 'lodash.debounce';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
 
@@ -278,7 +279,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = newLink.split('/docs').pop() || '';
       if (!docRelLinks.has(doc)) {
-        console.log(docRelLinks, doc);
         throw new Error(
           `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
         );
@@ -553,7 +553,6 @@ const DocPage = ({
   }, [redirect, router]);
 
   const onSearchChange = async (e: any) => {
-    setIsSearchLoading(true);
     if (e.target.value !== '') {
       const results = await (
         await fetch(`/api/docs/search/${e.target.value}`)
@@ -568,6 +567,17 @@ const DocPage = ({
     }
   };
 
+  const debouncedResults = useMemo(() => {
+    setIsSearchLoading(true);
+    return debounce(onSearchChange, 300);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      debouncedResults.cancel();
+    };
+  });
+
   return (
     <>
       <Meta
@@ -581,33 +591,31 @@ const DocPage = ({
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
             <DocSearchbar
-              onChange={onSearchChange}
+              onChange={debouncedResults}
               onFocus={() => {
                 setSearchOpen(true);
               }}
               onBlur={() => {
                 setTimeout(() => {
                   setSearchOpen(false);
-                }, 500);
+                }, 200);
               }}
               onKeyDown={(e) => {
                 if (e.key === 'ArrowDown') {
                   setHoveredResult((currHoveredResult) =>
                     Math.min(currHoveredResult + 1, searchResults.length)
                   );
-                }
-                if (e.key === 'ArrowUp') {
+                } else if (e.key === 'ArrowUp') {
                   setHoveredResult((currHoveredResult) =>
                     Math.max(currHoveredResult - 1, 0)
                   );
-                }
-                if (e.key === 'Enter') {
+                } else if (e.key === 'Enter') {
                   router.push(`/docs/${searchResults[hoveredResult].path}`);
                   setSearchOpen(false);
                 }
               }}
             />
-            {searchValue !== '' && searchOpen && (
+            {searchOpen && (searchResults.length > 0 || isSearchLoading) && (
               <div className={styles.searchDiv}>
                 {isSearchLoading ? (
                   <Spin className={styles.spinner} />
@@ -636,12 +644,7 @@ const DocPage = ({
                             highlightClassName={styles.highlightedText}
                             searchWords={[searchValue]}
                             autoEscape={true}
-                            textToHighlight={`${removeMd(
-                              result.content.slice(
-                                0,
-                                SEARCH_RESULT_BLURB_LENGTH
-                              )
-                            )}...`}
+                            textToHighlight={result.content}
                           />
                         </div>
                       </div>
