@@ -43,7 +43,7 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { DOCS_REDIRECTS } from '../../middleware';
 import debounce from 'lodash.debounce';
 
-const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
+const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
 interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -52,7 +52,7 @@ interface DocPath {
   simple_path: string;
   // e.g. '[/tips, /getting-started/client-sdk]'
   relative_links: string[];
-  // e.g. /Users/jaykhatri/projects/highlight-landing/docs_content/tips/sessions-search-deep-linking.md
+  // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
   total_path: string;
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
   indexPath: boolean;
@@ -124,6 +124,13 @@ const isValidDirectory = (files: string[]) => {
   return files.find((filename) => filename === 'index.md') != null;
 };
 
+const ignoredDocsPaths = new Set<string>([
+  '.git',
+  '.github',
+  'LICENSE',
+  'README.md',
+]);
+
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
 export const getDocsPaths = async (
@@ -148,6 +155,9 @@ export const getDocsPaths = async (
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
     const file_string = read[i];
+    if (ignoredDocsPaths.has(file_string)) {
+      continue;
+    }
     let total_path = path.join(full_path, file_string);
     const file_path = await fs_api.stat(total_path);
     const simple_path = path.join(base, file_string);
