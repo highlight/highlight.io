@@ -1,21 +1,19 @@
-import { Author, Post } from '../../components/Blog/BlogPost/BlogPost';
+import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Typography } from '../../components/common/Typography/Typography';
-import Image from 'next/legacy/image'; // TODO(fabio) use next 13's Image
 import Navbar from '../../components/common/Navbar/Navbar';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
-import { ReactElement, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
-import { HiGlobeAlt } from 'react-icons/hi';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
-import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { matchSorter } from 'match-sorter';
+import { PostAuthor } from '../../components/Blog/Author';
 
 export const getStaticProps: GetStaticProps = async () => {
   const postsQuery = gql`
@@ -284,7 +282,9 @@ const PostItem = ({ post }: { post: Post }) => {
       <Link href={`/blog/${post.slug}`}>
         <h5 className="mt-1">{post.title}</h5>
       </Link>
-      <div className="mt-3">{post.author && <Author {...post.author} />}</div>
+      <div className="mt-3">
+        {post.author && <PostAuthor {...post.author} />}
+      </div>
       <div className="flex gap-2.5 absolute right-7 bottom-7">
         {post.tags_relations?.map((tag) => (
           <PostTag {...tag} key={tag.slug} />
@@ -316,71 +316,10 @@ const MobilePostItem = ({ post }: { post: Post }) => {
         {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
       </Typography>
       <div className="mt-6">
-        {post.author && <Author {...post.author} hidePhoto />}
+        {post.author && <PostAuthor {...post.author} hidePhoto />}
       </div>
     </div>
   );
 };
-
-const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
-  <a
-    href={href}
-    className="transition-colors text-copy-on-dark"
-    target={'_blank'}
-    rel="noreferrer"
-  >
-    {icon}
-  </a>
-);
-
-function Author({
-  profilePhoto,
-  firstName,
-  lastName,
-  title,
-  hidePhoto,
-  personalWebsiteLink,
-  twitterLink,
-  githubLink,
-  linkedInLink,
-}: Author & { hidePhoto?: boolean }) {
-  return (
-    <div className="flex gap-3">
-      {!hidePhoto && (
-        <div className="overflow-hidden rounded-full w-12 h-12 border-solid border-[3px] border-divider-on-dark relative">
-          <Image
-            src={profilePhoto.url ?? ''}
-            layout="fill"
-            alt="author picture"
-            objectFit="cover"
-          />
-        </div>
-      )}
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2">
-          <Typography type="copy3" emphasis>
-            {firstName} {lastName}
-          </Typography>
-          <div className="flex flex-wrap gap-2 mt-1">
-            {personalWebsiteLink && (
-              <SocialLink href={personalWebsiteLink} icon={<HiGlobeAlt />} />
-            )}
-            {twitterLink && (
-              <SocialLink href={twitterLink} icon={<FaTwitter />} />
-            )}
-            {githubLink && <SocialLink href={githubLink} icon={<FaGithub />} />}
-            {linkedInLink && (
-              <SocialLink href={linkedInLink} icon={<FaLinkedin />} />
-            )}
-          </div>
-        </div>
-
-        <Typography type="copy4" className="text-copy-on-dark">
-          {title}
-        </Typography>
-      </div>
-    </div>
-  );
-}
 
 export default Blog;
