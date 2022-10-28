@@ -564,6 +564,10 @@ const DocPage = ({
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
   const [hoveredResult, setHoveredResult] = useState(0);
 
+  const docOptionsWithContent = useMemo(() => {
+    return docOptions?.filter((doc) => !doc.indexPath);
+  }, [docOptions]);
+
   const description = (markdownText || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
@@ -572,9 +576,11 @@ const DocPage = ({
 
   useEffect(() => {
     setCurrentPageIndex(
-      docOptions.findIndex((d) => d?.metadata?.slug === metadata?.slug)
+      docOptionsWithContent.findIndex(
+        (d) => d?.metadata?.slug === metadata?.slug
+      )
     );
-  }, [docOptions, metadata?.slug]);
+  }, [docOptionsWithContent, metadata?.slug]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -773,26 +779,26 @@ const DocPage = ({
           <div className={styles.pageNavigateRow}>
             {currentPageIndex > 0 ? (
               <Link
-                href={docOptions[currentPageIndex - 1].simple_path}
+                href={docOptionsWithContent[currentPageIndex - 1].simple_path}
                 passHref
                 className={styles.pageNavigate}
               >
                 <BiChevronLeft />
                 <Typography type="copy2">
-                  {docOptions[currentPageIndex - 1].metadata.title}
+                  {docOptionsWithContent[currentPageIndex - 1].metadata.title}
                 </Typography>
               </Link>
             ) : (
               <div></div>
             )}
-            {currentPageIndex < docOptions?.length - 1 ? (
+            {currentPageIndex < docOptionsWithContent?.length - 1 ? (
               <Link
-                href={docOptions[currentPageIndex + 1].simple_path}
+                href={docOptionsWithContent[currentPageIndex + 1].simple_path}
                 passHref
                 className={styles.pageNavigate}
               >
                 <Typography type="copy2">
-                  {docOptions[currentPageIndex + 1].metadata.title}
+                  {docOptionsWithContent[currentPageIndex + 1].metadata.title}
                 </Typography>
                 <BiChevronRight />
               </Link>
