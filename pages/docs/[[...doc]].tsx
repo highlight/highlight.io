@@ -47,6 +47,13 @@ import debounce from 'lodash.debounce';
 const IGNORED_DOCS_PATHS = new Set<string>([
   '.git',
   '.github',
+  '.gitignore',
+  '.husky',
+  '.vscode',
+  '.prettierrc',
+  'node_modules',
+  'package.json',
+  'yarn.lock',
   'CHANGELOG.md',
   'CODE_OF_CONDUCT.md',
   'CONTRIBUTING.md',
