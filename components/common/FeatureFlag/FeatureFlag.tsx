@@ -8,7 +8,7 @@ export const IsFeatureOn = (feature: Feature): boolean => {
   if (process.env.NODE_ENV === 'development') return true;
   switch (feature) {
     case Feature.LandingPageDocs:
-      return false;
+      return true;
   }
   return false;
 };

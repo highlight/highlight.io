@@ -5,6 +5,7 @@ import {
   DetailedHTMLProps,
   InputHTMLAttributes,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -25,8 +26,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Image from "next/legacy/image";
-import removeMd from 'remove-markdown';
+import Image from 'next/legacy/image';
 import { SearchResult } from '../api/docs/search/[searchValue]';
 import {
   BiChevronLeft,
@@ -41,9 +41,9 @@ import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
+import debounce from 'lodash.debounce';
 
-const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs_content');
-const SEARCH_RESULT_BLURB_LENGTH = 100;
+const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
 interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -52,14 +52,12 @@ interface DocPath {
   simple_path: string;
   // e.g. '[/tips, /getting-started/client-sdk]'
   relative_links: string[];
-  // e.g. /Users/jaykhatri/projects/highlight-landing/docs_content/tips/sessions-search-deep-linking.md
+  // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
   total_path: string;
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
-  // some parent pages are empty and should redirect to the first child page
-  redirect?: string;
 }
 
 export interface Doc {
@@ -126,6 +124,13 @@ const isValidDirectory = (files: string[]) => {
   return files.find((filename) => filename === 'index.md') != null;
 };
 
+const ignoredDocsPaths = new Set<string>([
+  '.git',
+  '.github',
+  'LICENSE',
+  'README.md',
+]);
+
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
 export const getDocsPaths = async (
@@ -150,33 +155,30 @@ export const getDocsPaths = async (
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
     const file_string = read[i];
+    if (ignoredDocsPaths.has(file_string)) {
+      continue;
+    }
     let total_path = path.join(full_path, file_string);
     const file_path = await fs_api.stat(total_path);
+    const simple_path = path.join(base, file_string);
     if (file_path.isDirectory()) {
-      paths = paths.concat(
-        await getDocsPaths(fs_api, path.join(base, file_string))
-      );
+      paths = paths.concat(await getDocsPaths(fs_api, simple_path));
     } else {
       let pp = '';
-      let redirect = '';
-      let simple_path = path.join(base, file_string);
       if (file_string === 'index.md') {
-        // get rid of "index.md" at the end
+        // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
         pp = simple_path.split('/').slice(0, -1).join('/');
-        const { content } = await readMarkdown(
-          fsp,
-          path.join(total_path || '')
-        );
-        if (content === '') {
-          const firstChildPath = getDefaultChildPath(read);
-          const redirectPath = firstChildPath
-            ? path.join(base, firstChildPath)
-            : '';
-          redirect = redirectPath?.replace('.md', '');
-        }
       } else {
         // strip out any notion of ".md"
         pp = simple_path.replace('.md', '');
+        const pp_array = pp.split('/');
+        if (pp_array.length > 1) {
+          const parentDirectory = pp_array[pp_array.length - 2];
+          const currentPath = pp_array[pp_array.length - 1];
+          if (currentPath === `${parentDirectory}-overview`) {
+            pp = [...pp_array.slice(0, -1), 'overview'].join('/');
+          }
+        }
       }
       const { data, links } = await readMarkdown(
         fsp,
@@ -198,7 +200,6 @@ export const getDocsPaths = async (
         total_path,
         indexPath: file_string === 'index.md',
         metadata: data,
-        ...(redirect ? { redirect } : {}),
       });
     }
   }
@@ -279,7 +280,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = newLink.split('/docs').pop() || '';
       if (!docRelLinks.has(doc)) {
-        console.log(docRelLinks, doc);
         throw new Error(
           `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
         );
@@ -305,7 +305,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       slug: currentDoc?.simple_path,
       docOptions: docPaths,
       toc,
-      ...(currentDoc?.redirect ? { redirect: currentDoc.redirect } : {}),
     },
   };
 };
@@ -389,9 +388,11 @@ const TableOfContents = ({
   toc,
   docPaths,
   openParent,
+  openTopLevel = false,
 }: {
   toc: TocEntry;
   openParent: boolean;
+  openTopLevel?: boolean;
   docPaths: DocPath[];
 }) => {
   const [open, setOpen] = useState(openParent);
@@ -402,6 +403,10 @@ const TableOfContents = ({
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
 
   useEffect(() => {
+    setOpen(isTopLevel && openTopLevel);
+  }, [isTopLevel, openTopLevel]);
+
+  useEffect(() => {
     const isCurrentPage =
       path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
       window.location.pathname;
@@ -410,23 +415,47 @@ const TableOfContents = ({
 
   return (
     <div>
-      <Link
-        href={path.join(
-          '/docs',
-          docPaths[toc.docPathId || 0]?.simple_path || ''
-        )}
-        legacyBehavior>
+      {hasChildren ? (
         <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
-          {hasChildren ? (
-            <ChevronDown
-              className={classNames(styles.tocIcon, {
-                [styles.tocItemChevronClosed]: hasChildren && !open,
-                [styles.tocItemOpen]: hasChildren && open,
-                [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
-                [styles.tocChild]: !isTopLevel,
-              })}
-            />
-          ) : (
+          <ChevronDown
+            className={classNames(styles.tocIcon, {
+              [styles.tocItemChevronClosed]: hasChildren && !open,
+              [styles.tocItemOpen]: hasChildren && open,
+              [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
+              [styles.tocChild]: !isTopLevel,
+            })}
+          />
+          <Typography
+            type="copy3"
+            emphasis={isTopLevel}
+            className={classNames(styles.tocItem, {
+              [styles.tocItemOpen]: hasChildren && open,
+              [styles.tocItemCurrent]: (!hasChildren || open) && isCurrentPage,
+              [styles.tocChild]: !isTopLevel,
+            })}
+          >
+            {toc?.tocHeading || 'nope'}
+          </Typography>
+        </div>
+      ) : (
+        <Link
+          href={path.join(
+            '/docs',
+            docPaths[toc.docPathId || 0]?.simple_path || ''
+          )}
+          legacyBehavior
+        >
+          <div
+            className={styles.tocRow}
+            onClick={() => {
+              setOpen((o) => !o);
+              if (window.scrollY >= 124) {
+                sessionStorage.setItem('scrollPosition', '124');
+              } else {
+                sessionStorage.setItem('scrollPosition', '0');
+              }
+            }}
+          >
             <Minus
               className={classNames(styles.tocIcon, {
                 [styles.tocItemOpen]: hasChildren,
@@ -434,20 +463,21 @@ const TableOfContents = ({
                 [styles.tocChild]: !isTopLevel,
               })}
             />
-          )}
-          <Typography
-            type="copy3"
-            emphasis={isTopLevel}
-            className={classNames(styles.tocItem, {
-              [styles.tocItemOpen]: hasChildren && open,
-              [styles.tocItemCurrent]: !hasChildren && open && isCurrentPage,
-              [styles.tocChild]: !isTopLevel,
-            })}
-          >
-            {toc?.tocHeading || 'nope'}
-          </Typography>
-        </div>
-      </Link>
+            <Typography
+              type="copy3"
+              emphasis={isTopLevel}
+              className={classNames(styles.tocItem, {
+                [styles.tocItemOpen]: hasChildren && open,
+                [styles.tocItemCurrent]:
+                  (!hasChildren || open) && isCurrentPage,
+                [styles.tocChild]: !isTopLevel,
+              })}
+            >
+              {toc?.tocHeading || 'nope'}
+            </Typography>
+          </div>
+        </Link>
+      )}
       <Collapse isOpened={open}>
         <div className={styles.tocChildren}>
           <div className={styles.tocChildrenLineWrapper}>
@@ -534,6 +564,10 @@ const DocPage = ({
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
   const [hoveredResult, setHoveredResult] = useState(0);
 
+  const docOptionsWithContent = useMemo(() => {
+    return docOptions?.filter((doc) => !doc.indexPath);
+  }, [docOptions]);
+
   const description = (markdownText || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
@@ -542,9 +576,11 @@ const DocPage = ({
 
   useEffect(() => {
     setCurrentPageIndex(
-      docOptions.findIndex((d) => d?.metadata?.slug === metadata?.slug)
+      docOptionsWithContent.findIndex(
+        (d) => d?.metadata?.slug === metadata?.slug
+      )
     );
-  }, [docOptions, metadata?.slug]);
+  }, [docOptionsWithContent, metadata?.slug]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -552,9 +588,15 @@ const DocPage = ({
     }
   }, [redirect, router]);
 
+  useEffect(() => {
+    const storedScrollPosition = sessionStorage.getItem('scrollPosition');
+    if (storedScrollPosition) {
+      window.scrollTo(0, parseInt(storedScrollPosition));
+    }
+  }, [router]);
+
   const onSearchChange = async (e: any) => {
     if (e.target.value !== '') {
-      setIsSearchLoading(true);
       const results = await (
         await fetch(`/api/docs/search/${e.target.value}`)
       ).json();
@@ -562,202 +604,215 @@ const DocPage = ({
       setSearchResults(results);
       setSearchValue(e.target.value);
     } else {
+      setIsSearchLoading(false);
       setSearchResults([]);
       setSearchValue('');
     }
   };
 
-  return <>
-    <Meta
-      title={metadata?.title || ''}
-      description={description}
-      absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
-      canonical={`/docs/${slug}`}
-    />
-    <Navbar hideFreeTrialText fixed />
-    <main ref={blogBody} className={styles.mainWrapper}>
-      <div className={styles.leftSection}>
-        <div className={styles.leftInner}>
-          <DocSearchbar
-            onChange={onSearchChange}
-            onFocus={() => {
-              setSearchOpen(true);
-            }}
-            onBlur={() => {
-              setTimeout(() => {
-                setSearchOpen(false);
-              }, 500);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'ArrowDown') {
-                setHoveredResult((currHoveredResult) =>
-                  Math.min(currHoveredResult + 1, searchResults.length)
-                );
-              }
-              if (e.key === 'ArrowUp') {
-                setHoveredResult((currHoveredResult) =>
-                  Math.max(currHoveredResult - 1, 0)
-                );
-              }
-              if (e.key === 'Enter') {
-                router.push(`/docs/${searchResults[hoveredResult].path}`);
-                setSearchOpen(false);
-              }
-            }}
-          />
-          {searchValue !== '' && searchOpen && (
-            <div className={styles.searchDiv}>
-              {isSearchLoading ? (
-                <Spin className={styles.spinner} />
-              ) : (
-                searchResults.map((result: SearchResult, i) => (
-                  <Link href={`/docs/${result.path}`} key={i} legacyBehavior>
-                    <div
-                      className={classNames(styles.searchResultCard, {
-                        [styles.active]: i === hoveredResult,
-                      })}
-                      onMouseEnter={() => {
-                        setHoveredResult(i);
-                      }}
-                    >
-                      <div>
-                        <Highlighter
-                          className={styles.resultTitle}
-                          highlightClassName={styles.highlightedText}
-                          searchWords={[searchValue]}
-                          autoEscape={true}
-                          textToHighlight={result.title}
-                        />
-                      </div>
-                      <div className={styles.content}>
-                        <Highlighter
-                          highlightClassName={styles.highlightedText}
-                          searchWords={[searchValue]}
-                          autoEscape={true}
-                          textToHighlight={`${removeMd(
-                            result.content.slice(
-                              0,
-                              SEARCH_RESULT_BLURB_LENGTH
-                            )
-                          )}...`}
-                        />
-                      </div>
-                    </div>
-                  </Link>
-                ))
-              )}
-            </div>
-          )}
-        </div>
-        <div className={styles.tocMenuLarge}>
-          {toc?.children.map((t) => (
-            <TableOfContents
-              key={t.docPathId}
-              toc={t}
-              docPaths={docOptions}
-              openParent={false}
+  const debouncedResults = useMemo(() => {
+    setIsSearchLoading(true);
+    return debounce(onSearchChange, 300);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      debouncedResults.cancel();
+    };
+  });
+
+  return (
+    <>
+      <Meta
+        title={metadata?.title || ''}
+        description={description}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
+        canonical={`/docs/${slug}`}
+      />
+      <Navbar hideFreeTrialText fixed />
+      <main ref={blogBody} className={styles.mainWrapper}>
+        <div className={styles.leftSection}>
+          <div className={styles.leftInner}>
+            <DocSearchbar
+              onChange={debouncedResults}
+              onFocus={() => {
+                setSearchOpen(true);
+              }}
+              onBlur={() => {
+                setTimeout(() => {
+                  setSearchOpen(false);
+                }, 200);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowDown') {
+                  setHoveredResult((currHoveredResult) =>
+                    Math.min(currHoveredResult + 1, searchResults.length)
+                  );
+                } else if (e.key === 'ArrowUp') {
+                  setHoveredResult((currHoveredResult) =>
+                    Math.max(currHoveredResult - 1, 0)
+                  );
+                } else if (e.key === 'Enter') {
+                  router.push(`/docs/${searchResults[hoveredResult].path}`);
+                  setSearchOpen(false);
+                }
+              }}
             />
-          ))}
-        </div>
-        <div
-          className={classNames(styles.tocRow, styles.tocMenu)}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <ChevronDown
-            className={classNames(styles.tocIcon, {
-              [styles.tocItemOpen]: open,
-            })}
-          />
-          <Typography
-            type="copy3"
-            emphasis
-            className={classNames(styles.tocItem, {
-              [styles.tocItemOpen]: open,
-            })}
-          >
-            Menu
-          </Typography>
-        </div>
-        <Collapse isOpened={open}>
-          <div className={classNames(styles.tocContents, styles.tocMenu)}>
+            {searchOpen && (searchResults.length > 0 || isSearchLoading) && (
+              <div className={styles.searchDiv}>
+                {isSearchLoading ? (
+                  <Spin className={styles.spinner} />
+                ) : (
+                  searchResults.map((result: SearchResult, i) => (
+                    <Link href={`/docs/${result.path}`} key={i} legacyBehavior>
+                      <div
+                        className={classNames(styles.searchResultCard, {
+                          [styles.active]: i === hoveredResult,
+                        })}
+                        onMouseEnter={() => {
+                          setHoveredResult(i);
+                        }}
+                      >
+                        <div>
+                          <Highlighter
+                            className={styles.resultTitle}
+                            highlightClassName={styles.highlightedText}
+                            searchWords={[searchValue]}
+                            autoEscape={true}
+                            textToHighlight={result.title}
+                          />
+                        </div>
+                        <div className={styles.content}>
+                          <Highlighter
+                            highlightClassName={styles.highlightedText}
+                            searchWords={[searchValue]}
+                            autoEscape={true}
+                            textToHighlight={result.content}
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+          <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (
               <TableOfContents
                 key={t.docPathId}
                 toc={t}
                 docPaths={docOptions}
                 openParent={false}
+                openTopLevel={true}
               />
             ))}
           </div>
-        </Collapse>
-      </div>
-      <div className={styles.centerSection}>
-        <div className={styles.breadcrumb}>
-          {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
-            i === 0 ? (
-              <Link href={breadcrumb.path} legacyBehavior>{breadcrumb.title}</Link>
+          <div
+            className={classNames(styles.tocRow, styles.tocMenu)}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <div className={styles.tocMenuLabel}>
+              <ChevronDown
+                className={classNames(styles.tocIcon, {
+                  [styles.tocItemOpen]: open,
+                })}
+              />
+              <Typography
+                type="copy3"
+                emphasis
+                className={classNames(styles.tocItem, {
+                  [styles.tocItemOpen]: open,
+                })}
+              >
+                Menu
+              </Typography>
+            </div>
+          </div>
+          <Collapse isOpened={open}>
+            <div className={classNames(styles.tocContents, styles.tocMenu)}>
+              {toc?.children.map((t) => (
+                <TableOfContents
+                  key={t.docPathId}
+                  toc={t}
+                  docPaths={docOptions}
+                  openParent={false}
+                  openTopLevel={false}
+                />
+              ))}
+            </div>
+          </Collapse>
+        </div>
+        <div className={styles.centerSection}>
+          <div className={styles.breadcrumb}>
+            {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
+              i === 0 ? (
+                <Link href={breadcrumb.path} legacyBehavior>
+                  {breadcrumb.title}
+                </Link>
+              ) : (
+                <>
+                  {` / `}
+                  <Link href={breadcrumb.path} legacyBehavior>
+                    {breadcrumb.title}
+                  </Link>
+                </>
+              )
+            )}
+          </div>
+          <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            className={styles.contentRender}
+            components={{
+              h1: getDocsTypographyRenderer('h5'),
+              h2: getDocsTypographyRenderer('h5'),
+              h3: getDocsTypographyRenderer('h5'),
+              h4: getDocsTypographyRenderer('h5'),
+              h5: getDocsTypographyRenderer('h5'),
+              code: getDocsTypographyRenderer('code'),
+              a: getDocsTypographyRenderer('a'),
+            }}
+          >
+            {markdownText || ''}
+          </ReactMarkdown>
+          <div className={styles.pageNavigateRow}>
+            {currentPageIndex > 0 ? (
+              <Link
+                href={docOptionsWithContent[currentPageIndex - 1].simple_path}
+                passHref
+                className={styles.pageNavigate}
+              >
+                <BiChevronLeft />
+                <Typography type="copy2">
+                  {docOptionsWithContent[currentPageIndex - 1].metadata.title}
+                </Typography>
+              </Link>
             ) : (
-              <>
-                {` / `}
-                <Link href={breadcrumb.path} legacyBehavior>{breadcrumb.title}</Link>
-              </>
-            )
-          )}
+              <div></div>
+            )}
+            {currentPageIndex < docOptionsWithContent?.length - 1 ? (
+              <Link
+                href={docOptionsWithContent[currentPageIndex + 1].simple_path}
+                passHref
+                className={styles.pageNavigate}
+              >
+                <Typography type="copy2">
+                  {docOptionsWithContent[currentPageIndex + 1].metadata.title}
+                </Typography>
+                <BiChevronRight />
+              </Link>
+            ) : (
+              <div></div>
+            )}
+          </div>
         </div>
-        <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          className={styles.contentRender}
-          components={{
-            h1: getDocsTypographyRenderer('h5'),
-            h2: getDocsTypographyRenderer('h5'),
-            h3: getDocsTypographyRenderer('h5'),
-            h4: getDocsTypographyRenderer('h5'),
-            h5: getDocsTypographyRenderer('h5'),
-            code: getDocsTypographyRenderer('code'),
-            a: getDocsTypographyRenderer('a'),
-          }}
-        >
-          {markdownText || ''}
-        </ReactMarkdown>
-        <div className={styles.pageNavigateRow}>
-          {currentPageIndex > 0 ? (
-            (<Link
-              href={docOptions[currentPageIndex - 1].simple_path}
-              passHref
-              className={styles.pageNavigate}>
-
-              <BiChevronLeft />
-              <Typography type="copy2">
-                {docOptions[currentPageIndex - 1].metadata.title}
-              </Typography>
-
-            </Link>)
-          ) : (
-            <div></div>
-          )}
-          {currentPageIndex < docOptions?.length - 1 ? (
-            (<Link
-              href={docOptions[currentPageIndex + 1].simple_path}
-              passHref
-              className={styles.pageNavigate}>
-
-              <Typography type="copy2">
-                {docOptions[currentPageIndex + 1].metadata.title}
-              </Typography>
-              <BiChevronRight />
-
-            </Link>)
-          ) : (
-            <div></div>
-          )}
+        <div className={styles.rightSection}>
+          <PageContents title={metadata ? metadata.title : ''} />
         </div>
-      </div>
-      <div className={styles.rightSection}>
-        <PageContents title={metadata ? metadata.title : ''} />
-      </div>
-    </main>
-  </>;
+      </main>
+    </>
+  );
 };
 
 const getIdFromHeaderProps = (props: any) => {
@@ -790,53 +845,61 @@ const resolveLink = (href: string): string => {
 const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
-    return <>
-      {type === 'code' ? (
-        props && props.children && props.inline ? (
-          <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
-        ) : props.className === 'language-welcomevideo' ? (
-          <div className={styles.customComponent}>
-            <HeroVideo />
-          </div>
-        ) : props.className === 'language-hint' ? (
-          <Callout content={props.children[0]} />
+    return (
+      <>
+        {type === 'code' ? (
+          props && props.children && props.inline ? (
+            <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
+          ) : props.className === 'language-welcomevideo' ? (
+            <div className={styles.customComponent}>
+              <HeroVideo />
+            </div>
+          ) : props.className === 'language-hint' ? (
+            <Callout content={props.children[0]} />
+          ) : (
+            <HighlightCodeBlock
+              language={'js'}
+              text={props.children[0]}
+              showLineNumbers={false}
+            />
+          )
+        ) : type === 'a' ? (
+          props.children?.length && (
+            <Link href={resolveLink(props.href)} legacyBehavior>
+              {props.children[0]}
+            </Link>
+          )
         ) : (
-          <HighlightCodeBlock
-            language={'js'}
-            text={props.children[0]}
-            showLineNumbers={false}
-          />
-        )
-      ) : type === 'a' ? (
-        props.children?.length && (
-          <Link href={resolveLink(props.href)} legacyBehavior>{props.children[0]}</Link>
-        )
-      ) : (
-        createElement(
-          type,
-          {
-            className: styles.contentRender,
-            ...(['h4', 'h5'].includes(type)
-              ? {
-                  id: getIdFromHeaderProps(props),
-                  onClick: () => {
-                    const basePath = router.asPath.split('#')[0];
-                    router.push(`${basePath}#${getIdFromHeaderProps(props)}`);
-                  },
-                }
-              : {}),
-          },
-          [
-            ...props?.node?.children.map((c: any, i: number) =>
-              c.tagName === 'code'
-                ? createElement(c.tagName, { key: i }, c?.children[0].value)
-                : c.value
-            ),
-            copyHeadingIcon(props?.node?.children?.length ?? 0),
-          ] || ''
-        )
-      )}
-    </>;
+          createElement(
+            type,
+            {
+              className: styles.contentRender,
+              ...(['h4', 'h5'].includes(type)
+                ? {
+                    id: getIdFromHeaderProps(props),
+                    onClick: () => {
+                      const basePath = router.asPath.split('#')[0];
+                      router.push(`${basePath}#${getIdFromHeaderProps(props)}`);
+                    },
+                  }
+                : {}),
+            },
+            [
+              ...props?.node?.children.map((c: any, i: number) =>
+                c.tagName === 'code'
+                  ? createElement(
+                      c.tagName,
+                      { key: i, className: styles.inlineCodeBlock },
+                      c?.children[0].value
+                    )
+                  : c.value
+              ),
+              copyHeadingIcon(props?.node?.children?.length ?? 0),
+            ] || ''
+          )
+        )}
+      </>
+    );
   }
 
   return DocsTypography;
