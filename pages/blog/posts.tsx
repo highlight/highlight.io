@@ -43,6 +43,10 @@ export const getStaticProps: GetStaticProps = async () => {
           }
         }
         tags
+        tags_relations {
+          name
+          slug
+        }
         readingTime
         postedAt
       }
@@ -106,9 +110,11 @@ const Blog = ({
   const [page, setPage] = useState<number>(1);
   const itemsPerPage = 4;
 
-  // TODO(fabio) searching by 'tags' key is temporary, should use 'tags_relations.name' instead once those are populated
   const filteredPosts = matchSorter(posts, searchQuery, {
-    keys: [{ key: 'tags', maxRanking: matchSorter.rankings.CONTAINS }, 'title'],
+    keys: [
+      { key: 'tags_relations.name', maxRanking: matchSorter.rankings.CONTAINS },
+      'title',
+    ],
   });
   const paginatedPosts = filteredPosts.slice(0, itemsPerPage * page);
   const allPostsLoaded = paginatedPosts.length >= filteredPosts.length;
@@ -232,8 +238,8 @@ const PostItem = ({ post }: { post: Post }) => {
       </Link>
       <div className="mt-3">{post.author && <Author {...post.author} />}</div>
       <div className="flex gap-2.5 absolute right-7 bottom-7">
-        {post.tags?.map((tag, i) => (
-          <PostTag name={tag} slug={tag} key={i} /> // temporary
+        {post.tags_relations?.map((tag) => (
+          <PostTag {...tag} key={tag.slug} />
         ))}
       </div>
     </div>
@@ -241,11 +247,11 @@ const PostItem = ({ post }: { post: Post }) => {
 };
 
 const MobilePostItem = ({ post }: { post: Post }) => {
-  const tag: string | undefined = post.tags[post.tags.length - 1];
+  const tag: Tag | undefined = post.tags_relations[post.tags.length - 1];
 
   return (
     <div className={classNames(postItemStyle, 'mobile:hidden block')}>
-      {tag && <PostTag name={tag} slug={tag} />}
+      {tag && <PostTag {...tag} />}
       <Link href={`/blog/${post.slug}`}>
         <h3 className="mt-3">{post.title}</h3>
       </Link>

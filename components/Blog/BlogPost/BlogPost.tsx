@@ -1,7 +1,8 @@
 import styles from '../Blog.module.scss';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
+import { Tag } from '../Tag';
 
 export interface Author {
   firstName: string;
@@ -36,6 +37,7 @@ export interface Post {
     raw: any;
   };
   tags: Array<string>;
+  tags_relations: Tag[];
   readingTime?: number;
   author?: Author;
 }
@@ -51,8 +53,7 @@ export const BlogPost = ({
   readingTime,
 }: Post) => {
   return (
-    (<Link href={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
-
+    <Link href={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
       <div className={styles.blogPost}>
         <div className={styles.cardSection}>
           <div className={styles.cardImage}>
@@ -80,7 +81,12 @@ export const BlogPost = ({
           <h3>{title}</h3>
           <div className={styles.tagDiv}>
             {tags.map((tag: string) => (
-              <Link key={tag} href={`/blog?tag=${tag}`} passHref={true} legacyBehavior>
+              <Link
+                key={tag}
+                href={`/blog?tag=${tag}`}
+                passHref={true}
+                legacyBehavior
+              >
                 <div>
                   <Typography type="copy3">{tag}</Typography>
                 </div>
@@ -89,7 +95,6 @@ export const BlogPost = ({
           </div>
         </div>
       </div>
-
-    </Link>)
+    </Link>
   );
 };
