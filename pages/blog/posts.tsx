@@ -129,7 +129,7 @@ const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-fit">
+        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-4xl  desktop:max-w-7xl">
           <div className="flex-col hidden gap-6 border border-solid rounded-lg border-divider-on-dark  px-9 py-7 w-[352px] desktop:flex sticky top-36">
             {/* sidebar */}
             <div
