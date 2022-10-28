@@ -42,6 +42,7 @@ export const getStaticProps: GetStaticProps = async () => {
             url
           }
         }
+        featured
         tags
         tags_relations {
           name
@@ -124,6 +125,8 @@ const Blog = ({
   const displayedPosts = filteredPosts.slice(0, itemsPerPage * page);
   const allPostsLoaded = displayedPosts.length >= filteredPosts.length;
 
+  const featuredPosts = posts.filter((p) => p.featured);
+
   return (
     <>
       <Navbar />
@@ -161,7 +164,10 @@ const Blog = ({
 
               <h3 className="hidden mobile:inline">{currentTag.name}</h3>
               <h1 className="inline mobile:hidden">{currentTag.name}</h1>
-              <Typography type="copy2" className="mt-5 text-copy-on-dark">
+              <Typography
+                type="copy2"
+                className="w-full mt-5 text-copy-on-dark"
+              >
                 {currentTag.description}
               </Typography>
             </div>
@@ -194,7 +200,26 @@ const Blog = ({
               ))}
             </div>
 
-            <div className="box-border flex flex-col items-center w-[904px] gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
+            <div className="box-border flex flex-col items-center w-full max-w-[904px] gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
+              {featuredPosts.length > 0 && (
+                <div className="w-full pb-6 border-0 border-b border-solid border-divider-on-dark">
+                  <h5 className="text-copy-on-light">Featured Post</h5>
+                  <div className="flex flex-col gap-6 mt-5">
+                    {featuredPosts.map((post) => (
+                      <>
+                        <PostItem
+                          post={post}
+                          key={post.slug + 'featured desktop'}
+                        />
+                        <MobilePostItem
+                          post={post}
+                          key={post.slug + 'featured mobile'}
+                        />
+                      </>
+                    ))}
+                  </div>
+                </div>
+              )}
               {displayedPosts.map((post) => (
                 <>
                   <PostItem post={post} key={post.slug + 'desktop'} />
@@ -202,7 +227,10 @@ const Blog = ({
                 </>
               ))}
               {displayedPosts.length === 0 && (
-                <Typography type="copy2" className="text-copy-on-light">
+                <Typography
+                  type="copy2"
+                  className="w-full max-w-[904px] text-center inline-block text-copy-on-light"
+                >
                   No posts found
                 </Typography>
               )}
@@ -235,12 +263,20 @@ function getDateAndReadingTime(publishedAt: string, readingMinutes: number) {
 }
 
 const postItemStyle = classNames(
-  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:border-copy-on-light hover:bg-divider-on-dark'
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:bg-divider-on-dark'
 );
 
 const PostItem = ({ post }: { post: Post }) => {
   return (
-    <div className={classNames(postItemStyle, 'hidden mobile:block')}>
+    <div
+      className={classNames(
+        postItemStyle,
+        post.featured
+          ? 'border-highlight-yellow'
+          : 'border-divider-on-dark p-7 hover:border-copy-on-light',
+        'hidden mobile:block'
+      )}
+    >
       <Typography type="copy4" className="text-copy-on-dark">
         {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
       </Typography>
@@ -259,10 +295,19 @@ const PostItem = ({ post }: { post: Post }) => {
 };
 
 const MobilePostItem = ({ post }: { post: Post }) => {
-  const tag: Tag | undefined = post.tags_relations[post.tags.length - 1];
+  const tag: Tag | undefined =
+    post.tags_relations[post.tags_relations.length - 1];
 
   return (
-    <div className={classNames(postItemStyle, 'mobile:hidden block')}>
+    <div
+      className={classNames(
+        postItemStyle,
+        post.featured
+          ? 'border-highlight-yellow'
+          : 'border-divider-on-dark p-7 hover:border-copy-on-light',
+        'mobile:hidden block'
+      )}
+    >
       {tag && <PostTag {...tag} />}
       <Link href={`/blog/${post.slug}`}>
         <h3 className="mt-3">{post.title}</h3>

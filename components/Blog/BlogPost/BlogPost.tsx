@@ -36,6 +36,7 @@ export interface Post {
     markdown: string;
     raw: any;
   };
+  featured: boolean;
   tags: Array<string>;
   tags_relations: Tag[];
   readingTime?: number;
