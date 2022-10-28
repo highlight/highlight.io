@@ -110,7 +110,12 @@ const Blog = ({
   const [page, setPage] = useState<number>(1);
   const itemsPerPage = 4;
 
-  const filteredPosts = matchSorter(posts, searchQuery, {
+  const taggedPosts = posts.filter(
+    (p) =>
+      currentTag.slug === 'all' ||
+      p.tags_relations.some((t) => t.slug === currentTag.slug)
+  );
+  const filteredPosts = matchSorter(taggedPosts, searchQuery, {
     keys: [
       { key: 'tags_relations.name', maxRanking: matchSorter.rankings.CONTAINS },
       'title',
