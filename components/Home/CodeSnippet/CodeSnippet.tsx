@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import { CodeBlock } from 'react-code-blocks';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import CopyIcon from '../../../public/images/copy.svg';
@@ -10,7 +10,7 @@ export const CodeSnippet = ({
   HeaderImage,
   canCopy,
   ...props
-}: SyntaxHighlighterProps & {
+}: Omit<SyntaxHighlighterProps, 'children'> & {
   content: string;
   HeaderImage: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
   canCopy?: boolean;
