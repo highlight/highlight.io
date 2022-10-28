@@ -81,6 +81,13 @@ const searchBarInputBaseStyle = classNames(
   'box-border h-full w-0 flex-1 font-sans leading-none bg-transparent border-none outline-none text-copy-on-dark'
 );
 
+const allTag: Omit<Tag, 'posts'> = {
+  name: 'All posts',
+  slug: 'all',
+  description:
+    'Welcome to the Highlight Blog, where the Highlight team talks about frontend engineering, observability and more!',
+};
+
 const Blog = ({
   posts,
   tags,
@@ -91,7 +98,9 @@ const Blog = ({
   const router = useRouter();
   const { tag } = router.query;
   const tagSlug = Array.isArray(tag) ? tag[0] : tag;
-  const currentTag = tags.find(({ slug }) => slug === (tagSlug ?? 'all'))!;
+  const shownTags = [allTag, ...tags];
+  const currentTag: Omit<Tag, 'posts'> =
+    tags.find(({ slug }) => slug === tagSlug) ?? allTag;
 
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [page, setPage] = useState<number>(1);
@@ -124,21 +133,13 @@ const Blog = ({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <SidebarTag
-                name="All"
-                slug="all"
-                key="all"
-                current={currentTag.slug === 'all'}
-              />
-              {tags
-                .filter(({ slug }) => slug !== 'all')
-                .map((tag) => (
-                  <SidebarTag
-                    {...tag}
-                    key={tag.slug}
-                    current={currentTag.slug === tag.slug}
-                  />
-                ))}
+              {shownTags.map((tag) => (
+                <SidebarTag
+                  {...tag}
+                  key={tag.slug}
+                  current={currentTag.slug === tag.slug}
+                />
+              ))}
             </div>
           </div>
           <div className="w-full max-w-4xl px-[42px]">
@@ -171,21 +172,13 @@ const Blog = ({
               </div>
             </div>
             <div className="flex max-w-full gap-8 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
-              <TagTab
-                name="All"
-                slug="all"
-                key="all"
-                current={currentTag.slug === 'all'}
-              />
-              {tags
-                .filter(({ slug }) => slug !== 'all')
-                .map((tag) => (
-                  <TagTab
-                    {...tag}
-                    key={tag.slug}
-                    current={currentTag.slug === tag.slug}
-                  />
-                ))}
+              {shownTags.map((tag) => (
+                <TagTab
+                  {...tag}
+                  key={tag.slug}
+                  current={currentTag.slug === tag.slug}
+                />
+              ))}
             </div>
 
             <div className="box-border flex flex-col items-center w-full gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
