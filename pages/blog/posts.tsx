@@ -173,6 +173,8 @@ const Blog = ({
                 <input
                   type="text"
                   placeholder="Search Posts..."
+                  value={searchQuery}
+                  onChange={(ev) => setSearchQuery(ev.currentTarget.value)}
                   className={classNames(searchBarInputBaseStyle, 'text-xl')}
                 />
               </div>
