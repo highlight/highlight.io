@@ -43,6 +43,24 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { DOCS_REDIRECTS } from '../../middleware';
 import debounce from 'lodash.debounce';
 
+// ignored files from https://github.com/highlight-run/docs
+const IGNORED_DOCS_PATHS = new Set<string>([
+  '.git',
+  '.github',
+  '.gitignore',
+  '.husky',
+  '.vscode',
+  '.prettierrc',
+  'node_modules',
+  'package.json',
+  'yarn.lock',
+  'CHANGELOG.md',
+  'CODE_OF_CONDUCT.md',
+  'CONTRIBUTING.md',
+  'LICENSE',
+  'README.md',
+  'SECURITY.md',
+]);
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
 interface DocPath {
@@ -115,21 +133,9 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
   }, [setActiveId, router.query]);
 };
 
-// if index.md is empty, we want to default to the first child, unless that's the only page.
-const getDefaultChildPath = (files: string[]) => {
-  return files.find((filepath) => filepath !== 'index.md');
-};
-
 const isValidDirectory = (files: string[]) => {
   return files.find((filename) => filename === 'index.md') != null;
 };
-
-const ignoredDocsPaths = new Set<string>([
-  '.git',
-  '.github',
-  'LICENSE',
-  'README.md',
-]);
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
@@ -155,7 +161,7 @@ export const getDocsPaths = async (
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
     const file_string = read[i];
-    if (ignoredDocsPaths.has(file_string)) {
+    if (IGNORED_DOCS_PATHS.has(file_string)) {
       continue;
     }
     let total_path = path.join(full_path, file_string);
