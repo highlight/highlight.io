@@ -501,6 +501,83 @@ h5:hover .headingCopyIcon {
   }
 }
 
+.codeBlockTabs {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--size-small);
+  overflow: hidden;
+  border: 1px solid var(--color-divider-on-dark);
+
+  .codeBlockTabBar {
+    background-color: var(--color-divider-on-dark);
+    width: 100%;
+    padding: 0 var(--size-small);
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 42px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .codeBlockTabSelect {
+    border-radius: var(--border-radius);
+    background-color: var(--color-primary-500);
+    display: flex;
+    padding: 2px var(--size-xSmall);
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--size-xxSmall);
+    width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    & > div {
+      display: flex;
+      align-items: center;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .codeBlockTabList {
+    border-radius: var(--border-radius);
+    background-color: var(--color-primary-500);
+    position: absolute;
+    top: 42px;
+    padding: 2px var(--size-xSmall);
+    border: 1px solid var(--color-divider-on-dark);
+    z-index: 50;
+    width: 120px;
+
+    & > div {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    & > div:hover {
+      cursor: pointer;
+    }
+  }
+
+  .codeBlockTabContent {
+    width: 100%;
+    padding: 0 var(--size-medium);
+  }
+
+  .codeBlockTabBlock > span {
+    border: 0;
+    padding: 0;
+  }
+
+  .codeBlockTabBlock > div {
+    top: 0;
+  }
+}
+
 @supports (-webkit-hyphens: none) {
   .contentRender {
     h4,

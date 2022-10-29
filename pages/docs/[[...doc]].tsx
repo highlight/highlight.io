@@ -42,6 +42,7 @@ import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
 import debounce from 'lodash.debounce';
+import { CodeBlockTabs } from '../../components/Docs/CodeBlockTabs/CodeBlockTabs';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
@@ -129,6 +130,7 @@ const ignoredDocsPaths = new Set<string>([
   '.github',
   'LICENSE',
   'README.md',
+  'CODE_OF_CONDUCT.md',
 ]);
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
@@ -856,6 +858,8 @@ const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
             </div>
           ) : props.className === 'language-hint' ? (
             <Callout content={props.children[0]} />
+          ) : props.className === 'language-codeblocktabs' ? (
+            <CodeBlockTabs content={props.children[0]} />
           ) : (
             <HighlightCodeBlock
               language={'js'}
