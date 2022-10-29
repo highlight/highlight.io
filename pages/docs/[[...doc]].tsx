@@ -401,7 +401,7 @@ const TableOfContents = ({
   openTopLevel?: boolean;
   docPaths: DocPath[];
 }) => {
-  const [open, setOpen] = useState(openParent);
+  const [open, setOpen] = useState(openTopLevel || openParent);
   const hasChildren = !!toc?.children.length;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
