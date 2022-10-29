@@ -1,7 +1,6 @@
 import yaml from 'js-yaml';
 
 const token = process.env.GITHUB_TOKEN;
-const docsRoot = '';
 const githubHeaders = {
   accept: 'application/vnd.github+json',
   authorization: `Bearer ${token}`,
@@ -40,7 +39,7 @@ interface DocMeta {
   updatedAt: string;
 }
 
-export const getGithubDocsPaths = async (path: string = docsRoot) => {
+export const getGithubDocsPaths = async (path: string = '') => {
   const response = await fetch(
     `https://api.github.com/repos/highlight-run/docs/contents/${path}`,
     {
@@ -61,7 +60,7 @@ export const getGithubDocsPaths = async (path: string = docsRoot) => {
       const text = await file.text();
       const sections = text.split('---');
       docs.set(
-        path.path.split(`${docsRoot}/`, 2)[1]!.split('.md', 1)[0]!,
+        path.path!.split('.md', 1)[0]!,
         yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta
       );
     }
@@ -80,9 +79,8 @@ export const getGithubDoc = async (
   meta: DocMeta;
   content: string;
 }> => {
-  const path = `${docsRoot}/${slug}.md`;
   const response = await fetch(
-    `https://api.github.com/repos/highlight-run/docs/contents/${path}`,
+    `https://api.github.com/repos/highlight-run/docs/contents/${slug}.md`,
     {
       headers: githubHeaders,
     }
