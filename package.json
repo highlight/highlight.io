@@ -23,7 +23,7 @@
     "classnames": "^2.3.1",
     "embla-carousel-react": "^7.0.0-rc05",
     "graphql": "^16.4.0",
-    "graphql-request": "^4.2.0",
+    "graphql-request": "^5.0.0",
     "gray-matter": "^4.0.3",
     "highlight.run": "^4.5.3",
     "js-yaml": "^4.1.0",
