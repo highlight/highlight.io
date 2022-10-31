@@ -11,7 +11,7 @@
     "styles": "yarn typed-scss-modules ./ --watch --ignore '**/node_modules'"
   },
   "dependencies": {
-    "@graphcms/rich-text-react-renderer": "^0.5.0",
+    "@graphcms/rich-text-react-renderer": "^0.6.1",
     "@highlight-run/next": "^1.4.0",
     "@types/nprogress": "^0.2.0",
     "@types/react-copy-to-clipboard": "^5.0.2",
