@@ -169,6 +169,7 @@
 
   img {
     width: 100%;
+    border-radius: var(--border-radius);
   }
 }
 
@@ -438,6 +439,21 @@ h5:hover .headingCopyIcon {
 .tocMenuLarge {
   overflow: auto;
   padding: 0 var(--size-large);
+  scrollbar-color: var(--divider-on-dark) var(--color-primary-background);
+
+  &::-webkit-scrollbar {
+    width: var(--size-xSmall);
+    height: var(--size-xSmall);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-primary-background);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--divider-on-dark);
+    border-radius: var(--size-medium);
+  }
 }
 
 .customComponent {
