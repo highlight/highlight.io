@@ -166,7 +166,26 @@ export const getDocsPaths = async (
       `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
     );
   }
-  read.sort();
+  read.sort((a: string, b: string) => {
+    const firstStringSplit = a.split('_');
+    const secondStringSplit = b.split('_');
+    const firstPrefix = Number(firstStringSplit[0]);
+    const secondPrefix = Number(secondStringSplit[0]);
+    if (firstPrefix && secondPrefix && firstPrefix != secondPrefix) {
+      return firstPrefix - secondPrefix;
+    }
+    const firstFileString = firstStringSplit[firstStringSplit.length - 1];
+    const secondFileString = secondStringSplit[secondStringSplit.length - 1];
+    if (firstFileString > secondFileString) {
+      return 1;
+    }
+    if (firstFileString < secondFileString) {
+      return -1;
+    }
+    if (firstFileString === secondFileString) {
+      return 0;
+    }
+  });
 
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
