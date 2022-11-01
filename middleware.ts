@@ -67,21 +67,6 @@ export const DOCS_REDIRECTS = {
   'performance-data': '/docs/product-features/performance-data',
   'session-search': '/docs/product-features/session-search',
   'frontend-observability': '/docs/product-features/frontend-observability',
-  'deployment-overview': '/docs/on-premises/deployment-overview',
-  'aws-deployment': '/docs/on-premises/deployment-overview/aws-deployment',
-  'ec2-instance-setup':
-    '/docs/on-premises/deployment-overview/aws-deployment/ec2-instance-setup',
-  'custom-domain-mapping':
-    '/docs/on-premises/deployment-overview/aws-deployment/custom-domain-mapping',
-  'external-dependency-setup':
-    '/docs/on-premises/deployment-overview/aws-deployment/external-dependency-setup',
-  'configuration-and-ssl':
-    '/docs/on-premises/deployment-overview/aws-deployment/configuration-and-ssl',
-  'heroku-deployment':
-    '/docs/on-premises/deployment-overview/heroku-deployment',
-  'external-dependency-setup-cloned':
-    '/docs/on-premises/deployment-overview/heroku-deployment/external-dependency-setup',
-  'frequently-asked-questions': '/docs/on-premises/frequently-asked-questions',
   'intercom-integration': '/docs/integrations/intercom-integration',
   'sentry-integration': '/docs/integrations/sentry-integration',
   'slack-integration': '/docs/integrations/slack-integration',
