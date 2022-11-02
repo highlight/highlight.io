@@ -134,7 +134,16 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
 };
 
 const isValidDirectory = (files: string[]) => {
-  return files.find((filename) => filename === 'index.md') != null;
+  return files.find((filename) => filename.includes('index.md')) != null;
+};
+
+const removeOrderingPrefix = (path: string) => {
+  const arrayPath = path.split('/');
+  const cleanPath = arrayPath.map((p) => {
+    const prefixLocation = p.indexOf('_');
+    return prefixLocation === -1 ? p : p.slice(prefixLocation + 1);
+  });
+  return cleanPath.join('/');
 };
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
@@ -157,6 +166,26 @@ export const getDocsPaths = async (
       `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
     );
   }
+  read.sort((a: string, b: string) => {
+    const firstStringSplit = a.split('_');
+    const secondStringSplit = b.split('_');
+    const firstPrefix = Number(firstStringSplit[0]);
+    const secondPrefix = Number(secondStringSplit[0]);
+    if (firstPrefix && secondPrefix && firstPrefix != secondPrefix) {
+      return firstPrefix - secondPrefix;
+    }
+    const firstFileString = firstStringSplit[firstStringSplit.length - 1];
+    const secondFileString = secondStringSplit[secondStringSplit.length - 1];
+    if (firstFileString > secondFileString) {
+      return 1;
+    }
+    if (firstFileString < secondFileString) {
+      return -1;
+    }
+    if (firstFileString === secondFileString) {
+      return 0;
+    }
+  });
 
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
@@ -171,7 +200,7 @@ export const getDocsPaths = async (
       paths = paths.concat(await getDocsPaths(fs_api, simple_path));
     } else {
       let pp = '';
-      if (file_string === 'index.md') {
+      if (file_string.includes('index.md')) {
         // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
         pp = simple_path.split('/').slice(0, -1).join('/');
       } else {
@@ -181,7 +210,9 @@ export const getDocsPaths = async (
         if (pp_array.length > 1) {
           const parentDirectory = pp_array[pp_array.length - 2];
           const currentPath = pp_array[pp_array.length - 1];
-          if (currentPath === `${parentDirectory}-overview`) {
+          if (
+            currentPath === `${removeOrderingPrefix(parentDirectory)}-overview`
+          ) {
             pp = [...pp_array.slice(0, -1), 'overview'].join('/');
           }
         }
@@ -200,11 +231,11 @@ export const getDocsPaths = async (
       }
 
       paths.push({
-        simple_path: pp,
-        array_path: pp.split('/'),
+        simple_path: removeOrderingPrefix(pp),
+        array_path: removeOrderingPrefix(pp).split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
-        indexPath: file_string === 'index.md',
+        indexPath: file_string.includes('index.md'),
         metadata: data,
       });
     }
