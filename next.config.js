@@ -18,7 +18,7 @@ const nextConfig = {
     domains: ['media.graphassets.com', 'lh3.googleusercontent.com'],
   },
   productionBrowserSourceMaps: true,
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   env: {
     staticPages: getStaticPages(),

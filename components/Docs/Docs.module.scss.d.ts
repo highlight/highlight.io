@@ -27,6 +27,7 @@ export const pageNavigateRow: string;
 export const pageTitle: string;
 export const resultTitle: string;
 export const rightSection: string;
+export const searchContainer: string;
 export const searchDiv: string;
 export const searchResultCard: string;
 export const spinner: string;
