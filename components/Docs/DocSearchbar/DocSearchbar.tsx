@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import debounce from 'lodash.debounce';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, {
   DetailedHTMLProps,
   InputHTMLAttributes,
@@ -52,7 +51,9 @@ const DocSearchComboBox = (props: any) => {
         <Popover
           popoverRef={popoverRef}
           isOpen={props.isSearchOpen}
-          onClose={state.close}
+          onClose={() => {
+            state.setInputValue('');
+          }}
           popoverClassName={styles.searchDiv}
         >
           <ListBox
@@ -73,16 +74,16 @@ interface SearchbarProps
     HTMLInputElement
   > {}
 
-const DocSearchbar = ({ ...props }: SearchbarProps) => {
+const DocSearchbar = (props: SearchbarProps) => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchValue, setSearchValue] = useState('');
-  const router = useRouter();
 
   let onSelectionChange = () => {
     setTimeout(() => {
       setSearchResults([]);
       setSearchValue('');
     }, 300);
+    debouncedResults.cancel();
   };
 
   const onSearchChange = async (e: any) => {
@@ -99,12 +100,6 @@ const DocSearchbar = ({ ...props }: SearchbarProps) => {
   const debouncedResults = useMemo(() => {
     return debounce(onSearchChange, 300);
   }, []);
-
-  useEffect(() => {
-    return () => {
-      debouncedResults.cancel();
-    };
-  });
 
   return (
     <DocSearchComboBox
