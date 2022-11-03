@@ -10,6 +10,7 @@ import Banner from '../Banner/Banner';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
 import { Typography } from '../Typography/Typography';
+import { FaChevronDown } from 'react-icons/fa';
 import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 
 const Navbar = ({
@@ -76,6 +77,8 @@ const Navbar = ({
             </>
           )}
         </div>
+        {
+          /*
         <div className={styles.navContainer}>
           <ul className={classNames(styles.menuList, styles.header)}>
             <li>
@@ -115,6 +118,8 @@ const Navbar = ({
             </li>
           </ul>
         </div>
+        */
+        }
       </Banner>
       <header
         className={classNames({
@@ -205,12 +210,64 @@ const Navbar = ({
             className={classNames(
               styles.navContainer,
               styles.header,
-              styles.headerRight
+              styles.headerCenter
             )}
           >
             <a
               href="https://app.highlight.run/"
-              className={styles.signInButton}
+              className={styles.headerButton}
+            >
+              <Typography type="copy2" emphasis={true}>
+                Product
+              </Typography>
+              <FaChevronDown />
+            </a>
+            <Link
+              href="/pricing"
+              className={styles.headerButton}
+            >
+              <Typography type="copy2" emphasis={true}>
+                Pricing
+              </Typography>
+            </Link>
+            <Link
+              href="/customers"
+              className={styles.headerButton}
+            >
+              <Typography type="copy2" emphasis={true}>
+                Customers
+              </Typography>
+            </Link>
+            <a
+              href="https://app.highlight.run/"
+              className={styles.headerButton}
+            >
+              <Typography type="copy2" emphasis={true}>
+                Resources
+              </Typography>
+              <FaChevronDown />
+            </a>
+
+
+          </div>
+          <div
+            className={classNames(
+              styles.navContainer,
+              styles.header,
+              styles.headerRight
+            )}
+          >
+            <Link
+              href="/docs"
+              className={styles.headerButton}
+            >
+              <Typography type="copy2" emphasis={true}>
+                Docs
+              </Typography>
+            </Link>
+            <a
+              href="https://app.highlight.run/"
+              className={styles.headerButton}
             >
               <Typography type="copy2" emphasis={true}>
                 Sign in
