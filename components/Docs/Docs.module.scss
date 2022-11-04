@@ -18,11 +18,9 @@
   background-color: var(--color-divider-on-dark);
 }
 
-.content {
+.emptyContent {
   opacity: 0.7;
   color: var(--copy-on-dark);
-  border-left: 4px solid var(--color-divider-on-dark);
-  padding-left: var(--size-medium);
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
@@ -41,6 +39,17 @@
 
   &:hover {
     background-color: var(--color-divider-on-dark);
+  }
+
+  .content {
+    opacity: 0.7;
+    color: var(--copy-on-dark);
+    border-left: 4px solid var(--color-divider-on-dark);
+    padding-left: var(--size-medium);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
   }
 
   .resultTitle {

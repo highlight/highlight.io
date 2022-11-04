@@ -68,7 +68,7 @@ const DocSearchComboBox = (props: any) => {
               activeClass={props.activeClass}
             />
           ) : (
-            <div className={styles.content}>No results found</div>
+            <div className={styles.emptyContent}>No results found</div>
           )}
         </Popover>
       )}
