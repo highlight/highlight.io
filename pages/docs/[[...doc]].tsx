@@ -42,6 +42,7 @@ import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
 import debounce from 'lodash.debounce';
+import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
 
 // ignored files from https://github.com/highlight-run/docs
 const IGNORED_DOCS_PATHS = new Set<string>([
@@ -537,20 +538,6 @@ const TableOfContents = ({
   );
 };
 
-const DocSearchbar = (
-  props: DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
-) => {
-  return (
-    <div className={styles.docSearchbar}>
-      <BiSearch />
-      <input {...props} type="text" placeholder="Find anything" />
-    </div>
-  );
-};
-
 const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
   const trail: { title: string; path: string }[] = [
     { title: 'Docs', path: '/docs' },
@@ -593,13 +580,8 @@ const DocPage = ({
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchValue, setSearchValue] = useState('');
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
-  const [hoveredResult, setHoveredResult] = useState(0);
 
   const docOptionsWithContent = useMemo(() => {
     return docOptions?.filter((doc) => !doc.indexPath);
@@ -632,32 +614,6 @@ const DocPage = ({
     }
   }, [router]);
 
-  const onSearchChange = async (e: any) => {
-    if (e.target.value !== '') {
-      const results = await (
-        await fetch(`/api/docs/search/${e.target.value}`)
-      ).json();
-      setIsSearchLoading(false);
-      setSearchResults(results);
-      setSearchValue(e.target.value);
-    } else {
-      setIsSearchLoading(false);
-      setSearchResults([]);
-      setSearchValue('');
-    }
-  };
-
-  const debouncedResults = useMemo(() => {
-    setIsSearchLoading(true);
-    return debounce(onSearchChange, 300);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      debouncedResults.cancel();
-    };
-  });
-
   return (
     <>
       <Meta
@@ -670,69 +626,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
-            <DocSearchbar
-              onChange={debouncedResults}
-              onFocus={() => {
-                setSearchOpen(true);
-              }}
-              onBlur={() => {
-                setTimeout(() => {
-                  setSearchOpen(false);
-                }, 200);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'ArrowDown') {
-                  setHoveredResult((currHoveredResult) =>
-                    Math.min(currHoveredResult + 1, searchResults.length)
-                  );
-                } else if (e.key === 'ArrowUp') {
-                  setHoveredResult((currHoveredResult) =>
-                    Math.max(currHoveredResult - 1, 0)
-                  );
-                } else if (e.key === 'Enter') {
-                  router.push(`/docs/${searchResults[hoveredResult].path}`);
-                  setSearchOpen(false);
-                }
-              }}
-            />
-            {searchOpen && (searchResults.length > 0 || isSearchLoading) && (
-              <div className={styles.searchDiv}>
-                {isSearchLoading ? (
-                  <Spin className={styles.spinner} />
-                ) : (
-                  searchResults.map((result: SearchResult, i) => (
-                    <Link href={`/docs/${result.path}`} key={i} legacyBehavior>
-                      <div
-                        className={classNames(styles.searchResultCard, {
-                          [styles.active]: i === hoveredResult,
-                        })}
-                        onMouseEnter={() => {
-                          setHoveredResult(i);
-                        }}
-                      >
-                        <div>
-                          <Highlighter
-                            className={styles.resultTitle}
-                            highlightClassName={styles.highlightedText}
-                            searchWords={[searchValue]}
-                            autoEscape={true}
-                            textToHighlight={result.title}
-                          />
-                        </div>
-                        <div className={styles.content}>
-                          <Highlighter
-                            highlightClassName={styles.highlightedText}
-                            searchWords={[searchValue]}
-                            autoEscape={true}
-                            textToHighlight={result.content}
-                          />
-                        </div>
-                      </div>
-                    </Link>
-                  ))
-                )}
-              </div>
-            )}
+            <DocSearchbar />
           </div>
           <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (

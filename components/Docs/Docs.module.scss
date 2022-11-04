@@ -13,6 +13,11 @@
   z-index: 5;
 }
 
+.active {
+  border-radius: var(--border-radius);
+  background-color: var(--color-divider-on-dark);
+}
+
 .searchResultCard {
   width: 100%;
   display: flex;
@@ -22,10 +27,6 @@
   cursor: pointer;
   border-radius: var(--border-radius);
   transition: all 0.2s ease-in-out;
-
-  &.active {
-    background-color: var(--color-divider-on-dark);
-  }
 
   &:hover {
     background-color: var(--color-divider-on-dark);
@@ -204,10 +205,13 @@ h5:hover .headingCopyIcon {
   padding: var(--size-xLarge) var(--size-large) 0;
 }
 
+.searchContainer {
+  position: relative;
+}
+
 .searchDiv {
   position: absolute;
-  top: 48px;
-  width: 480px;
+  width: 100%;
   max-width: calc(100vw - 32px);
   left: 0;
   background: var(--color-primary-background);
@@ -220,6 +224,10 @@ h5:hover .headingCopyIcon {
   border-radius: var(--border-radius);
   padding: var(--size-xSmall);
   max-height: 60vh;
+
+  ul {
+    width: 100%;
+  }
 
   .spinner {
     margin: var(--size-medium);
