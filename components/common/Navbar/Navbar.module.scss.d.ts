@@ -25,6 +25,7 @@ export const mobileMenu: string;
 export const navContainer: string;
 export const navMenu: string;
 export const navPostTitle: string;
+export const navTitle: string;
 export const openHeader: string;
 export const signUpButton: string;
 export const urlStyle: string;

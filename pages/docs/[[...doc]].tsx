@@ -635,7 +635,7 @@ const DocPage = ({
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
         canonical={`/docs/${slug}`}
       />
-      <Navbar hideFreeTrialText fixed />
+      <Navbar title="Docs" hideBanner hideNavButtons fixed />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>

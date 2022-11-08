@@ -15,10 +15,16 @@ import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 
 const Navbar = ({
   hideFreeTrialText,
+  hideNavButtons,
+  hideBanner,
   fixed,
+  title,
 }: {
   hideFreeTrialText?: boolean;
+  hideNavButtons?: boolean;
+  hideBanner?: boolean;
   fixed?: boolean;
+  title?: string;
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -63,64 +69,23 @@ const Navbar = ({
         [styles.fixed]: fixed,
       })}
     >
-      <Banner>
-        <div className={styles.bannerContainer}>
-          {!hideFreeTrialText && (
-            <>
-              <p>Want 1 month of free Highlight? </p>
-              <a
-                href="http://app.highlight.run/"
-                className={styles.callToAction}
-              >
-                Register Here →
-              </a>
-            </>
-          )}
-        </div>
-        {
-          /*
-        <div className={styles.navContainer}>
-          <ul className={classNames(styles.menuList, styles.header)}>
-            <li>
-              <Link href={'/pricing'} className={styles.menuItem}>
-                Pricing
-              </Link>
-            </li>
-            <li>
-              <Link href={'/customers'} className={styles.menuItem}>
-                Customers
-              </Link>
-            </li>
-            <li>
-              <Link href={'/blog'} className={styles.menuItem}>
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link href={'https://careers.highlight.run'} className={styles.menuItem}>
-                Careers
-              </Link>
-            </li>
-            <li>
-              <FeatureFlag
-                feature={Feature.LandingPageDocs}
-                off={
-                  <Link href="https://docs.highlight.run" className={styles.menuItem}>
-                    Docs
-                  </Link>
-                }
-                on={
-                  <Link href="/docs" className={styles.menuItem}>
-                    Docs
-                  </Link>
-                }
-              />
-            </li>
-          </ul>
-        </div>
-        */
-        }
-      </Banner>
+      {!hideBanner && (
+        <Banner>
+          <div className={styles.bannerContainer}>
+            {!hideFreeTrialText && (
+              <>
+                <p>Want 1 month of free Highlight? </p>
+                <a
+                  href="http://app.highlight.run/"
+                  className={styles.callToAction}
+                >
+                  Register Here →
+                </a>
+              </>
+            )}
+          </div>
+        </Banner>
+      )}
       <header
         className={classNames({
           [styles.mobileHeader]: isOpen,
@@ -138,6 +103,13 @@ const Navbar = ({
               {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
 
             </Link>
+
+            {
+            //TODO: Change color on menu open
+            }
+            <p className={styles.navTitle}>
+              {title ? title : "Docs"}
+            </p>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
@@ -206,50 +178,52 @@ const Navbar = ({
               </div>
             </div>
           )}
-          <div
-            className={classNames(
-              styles.navContainer,
-              styles.header,
-              styles.headerCenter
-            )}
-          >
-            <a
-              href="https://app.highlight.run/"
-              className={styles.headerButton}
+          {!hideNavButtons && (
+            <div
+              className={classNames(
+                styles.navContainer,
+                styles.header,
+                styles.headerCenter
+              )}
             >
-              <Typography type="copy2" emphasis={true}>
-                Product
-              </Typography>
-              <FaChevronDown />
-            </a>
-            <Link
-              href="/pricing"
-              className={styles.headerButton}
-            >
-              <Typography type="copy2" emphasis={true}>
-                Pricing
-              </Typography>
-            </Link>
-            <Link
-              href="/customers"
-              className={styles.headerButton}
-            >
-              <Typography type="copy2" emphasis={true}>
-                Customers
-              </Typography>
-            </Link>
-            <a
-              href="https://app.highlight.run/"
-              className={styles.headerButton}
-            >
-              <Typography type="copy2" emphasis={true}>
-                Resources
-              </Typography>
-              <FaChevronDown />
-            </a>
-
-
-          </div>
+              {/*
+              <a
+                href="https://app.highlight.run/"
+                className={styles.headerButton}
+              >
+                <Typography type="copy2" emphasis={true}>
+                  Product
+                </Typography>
+                <FaChevronDown />
+              </a>
+              */}
+              <Link
+                href="/pricing"
+                className={styles.headerButton}
+              >
+                <Typography type="copy2" emphasis={true}>
+                  Pricing
+                </Typography>
+              </Link>
+              <Link
+                href="/customers"
+                className={styles.headerButton}
+              >
+                <Typography type="copy2" emphasis={true}>
+                  Customers
+                </Typography>
+              </Link>
+              <a
+                href="https://app.highlight.run/"
+                className={styles.headerButton}
+              >
+                <Typography type="copy2" emphasis={true}>
+                  Resources
+                </Typography>
+                <FaChevronDown />
+              </a>
+            </div>
+          )}
           <div
             className={classNames(
               styles.navContainer,
