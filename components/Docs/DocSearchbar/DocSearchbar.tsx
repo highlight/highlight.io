@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import classNames from 'classnames';
 import debounce from 'lodash.debounce';
 import Link from 'next/link';
@@ -12,6 +13,7 @@ import React, {
 import { useComboBox } from 'react-aria';
 import Highlighter from 'react-highlight-words';
 import { BiSearch } from 'react-icons/bi';
+import { FaSpinner } from 'react-icons/fa';
 import { Item, useComboBoxState } from 'react-stately';
 import { SearchResult } from '../../../pages/api/docs/search/[searchValue]';
 import ListBox from '../../common/ListBox/ListBox';
@@ -47,21 +49,27 @@ const DocSearchComboBox = (props: any) => {
           placeholder="Find anything"
         />
       </div>
-      {props.isSearchOpen && (
+      {state.inputValue && (
         <Popover
           popoverRef={popoverRef}
-          isOpen={props.isSearchOpen}
+          isOpen={state.inputValue}
           onClose={() => {
             state.setInputValue('');
           }}
           popoverClassName={styles.searchDiv}
         >
-          <ListBox
-            {...listBoxProps}
-            listBoxRef={listBoxRef}
-            state={state}
-            activeClass={props.activeClass}
-          />
+          {props.isSearchLoading ? (
+            <Spin className={styles.spinner} />
+          ) : props.hasSearchResults ? (
+            <ListBox
+              {...listBoxProps}
+              listBoxRef={listBoxRef}
+              state={state}
+              activeClass={props.activeClass}
+            />
+          ) : (
+            <div className={styles.emptyContent}>No results found</div>
+          )}
         </Popover>
       )}
     </div>
@@ -77,6 +85,7 @@ interface SearchbarProps
 const DocSearchbar = (props: SearchbarProps) => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchValue, setSearchValue] = useState('');
+  const [isSearchLoading, setIsSearchLoading] = useState(true);
 
   let onSelectionChange = () => {
     setTimeout(() => {
@@ -87,13 +96,16 @@ const DocSearchbar = (props: SearchbarProps) => {
   };
 
   const onSearchChange = async (e: any) => {
+    setIsSearchLoading(true);
     if (e) {
       const results = await (await fetch(`/api/docs/search/${e}`)).json();
       setSearchResults(results);
       setSearchValue(e);
+      setIsSearchLoading(false);
     } else {
       setSearchResults([]);
       setSearchValue('');
+      setIsSearchLoading(false);
     }
   };
 
@@ -103,9 +115,13 @@ const DocSearchbar = (props: SearchbarProps) => {
 
   return (
     <DocSearchComboBox
-      onInputChange={debouncedResults}
+      onInputChange={(e: string) => {
+        setIsSearchLoading(true);
+        debouncedResults(e);
+      }}
       onSelectionChange={onSelectionChange}
-      isSearchOpen={searchResults.length > 0 && searchValue.length > 0}
+      hasSearchResults={searchResults.length > 0}
+      isSearchLoading={isSearchLoading}
       activeClass={styles.active}
       aria-label="Search bar"
     >

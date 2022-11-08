@@ -11,6 +11,7 @@ export const contentRender: string;
 export const customComponent: string;
 export const docLink: string;
 export const docSearchbar: string;
+export const emptyContent: string;
 export const headingCopyIcon: string;
 export const headingSection: string;
 export const highlightedText: string;
