@@ -1,5 +1,24 @@
 import yaml from 'js-yaml';
-import { IGNORED_DOCS_PATHS, processDocPath } from '../../docs/[[...doc]]';
+import path from 'path';
+
+// ignored files from https://github.com/highlight-run/docs
+export const IGNORED_DOCS_PATHS = new Set<string>([
+  '.git',
+  '.github',
+  '.gitignore',
+  '.husky',
+  '.vscode',
+  '.prettierrc',
+  'node_modules',
+  'package.json',
+  'yarn.lock',
+  'CHANGELOG.md',
+  'CODE_OF_CONDUCT.md',
+  'CONTRIBUTING.md',
+  'LICENSE',
+  'README.md',
+  'SECURITY.md',
+]);
 
 const token = process.env.GITHUB_TOKEN;
 const githubHeaders = {
@@ -39,6 +58,38 @@ interface DocMeta {
   createdAt: string;
   updatedAt: string;
 }
+
+export const removeOrderingPrefix = (path: string) => {
+  const arrayPath = path.split('/');
+  const cleanPath = arrayPath.map((p) => {
+    const prefixLocation = p.indexOf('_');
+    return prefixLocation === -1 ? p : p.slice(prefixLocation + 1);
+  });
+  return cleanPath.join('/');
+};
+
+export const processDocPath = function (base: string, fileString: string) {
+  const simple_path = path.join(base, fileString);
+  let pp: string;
+  if (fileString.includes('index.md')) {
+    // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
+    pp = simple_path.split('/').slice(0, -1).join('/');
+  } else {
+    // strip out any notion of ".md"
+    pp = simple_path.replace('.md', '');
+    const pp_array = pp.split('/');
+    if (pp_array.length > 1) {
+      const parentDirectory = pp_array[pp_array.length - 2];
+      if (
+        pp_array[pp_array.length - 1] ===
+        `${removeOrderingPrefix(parentDirectory)}-overview`
+      ) {
+        pp = [...pp_array.slice(0, -1), 'overview'].join('/');
+      }
+    }
+  }
+  return removeOrderingPrefix(pp);
+};
 
 export const getGithubDocsPaths = async (path: string = '') => {
   const response = await fetch(
