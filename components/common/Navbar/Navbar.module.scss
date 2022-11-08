@@ -46,6 +46,7 @@
 
 .navMenu {
   display: none;
+  color: var(--copy-on-light);
 
   svg {
     width: var(--size-large);
@@ -111,7 +112,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--size-small);
-  color: var(--text-white);
+  color: var(--darker-copy-on-dark);
   transition: color 0.2s ease;
   text-decoration: none;
   cursor: pointer;
@@ -119,7 +120,7 @@
   font-weight: 600;
 
   &:hover {
-    color: var(--text-gray);
+    color: var(--text-white);
   }
 }
 
@@ -129,7 +130,7 @@
   border: 1px solid var(--brand-accent-light) !important;
   background-color: transparent !important;
   color: var(--brand-accent-light) !important;
-  border-radius: 6px;
+  border-radius: var(--size-xSmall);
 
   &:hover {
     border-color: var(--color-secondary-300) !important;
@@ -155,6 +156,7 @@
   width: 33.33%;
   width: calc(100% / 3);
 }
+
 
 .urlStyle {
   text-decoration: none;
@@ -196,6 +198,13 @@
   }
 }
 
+.navTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--copy-on-light);
+  padding: 0 var(--size-xSmall);
+}
+
 .navPostTitle {
   font-size: 18px;
   line-height: 32px;
@@ -221,15 +230,22 @@
   .navPostTitle {
     display: none;
   }
-}
 
-@media screen and (max-width: 600px) {
-  .headerInner {
-    padding: var(--size-medium) var(--size-large);
+  .navMenu {
+    display: flex;
+    padding: 10px;
+    border-radius: 6px;
   }
+}  
+
+@media screen and (max-width: 1280px) {
 
   .openHeader {
     background-color: var(--color-primary-200);
+  }
+
+  .headerInner {
+    padding: var(--size-medium) var(--size-large);
   }
 
   .navContainer {
@@ -240,9 +256,7 @@
     background: var(--color-primary-background);
   }
 
-  .navMenu {
-    display: flex;
-  }
+
 
   .mobileMenu {
     align-items: center;
@@ -257,7 +271,7 @@
     padding: var(--size-medium) var(--size-medium) var(--size-xLarge)
       var(--size-medium);
     position: absolute;
-    top: 64px;
+    top: 90px;
     width: 100%;
 
     li {
@@ -320,4 +334,13 @@
   .headerLeft {
     display: flex;
   }
+}
+
+@media screen and (min-width:801px) and (max-width: 1280px) {
+  .navMenu {
+    display: flex;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--color-divider-on-dark);
+  } 
 }
