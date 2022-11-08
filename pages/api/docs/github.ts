@@ -1,4 +1,5 @@
 import yaml from 'js-yaml';
+import { IGNORED_DOCS_PATHS, processDocPath } from '../../docs/[[...doc]]';
 
 const token = process.env.GITHUB_TOKEN;
 const githubHeaders = {
@@ -51,23 +52,33 @@ export const getGithubDocsPaths = async (path: string = '') => {
   let docs = new Map<string, DocMeta>();
   if (!json?.length) return docs;
   for (const path of json) {
+    if (IGNORED_DOCS_PATHS.has(path.path)) {
+      continue;
+    }
     if (path.type === 'dir') {
       childPromises.push(getGithubDocsPaths(path.path));
     } else if (path.type === 'file') {
-      const file = await fetch(path.download_url, {
-        headers: { ...githubHeaders, accept: '' },
-      });
-      const text = await file.text();
-      const sections = text.split('---');
-      docs.set(
-        path.path!.split('.md', 1)[0]!,
-        yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta
+      childPromises.push(
+        (async () => {
+          const slug = processDocPath('', path.path);
+          const file = await fetch(path.download_url, {
+            headers: { ...githubHeaders, accept: '' },
+          });
+          const text = await file.text();
+          const sections = text.split('---');
+          docs.set(
+            slug,
+            yaml.load(sections[1], { schema: yaml.JSON_SCHEMA }) as DocMeta
+          );
+        })()
       );
     }
   }
   for (const childDocs of await Promise.all(childPromises)) {
-    for (const [path, doc] of childDocs.entries()) {
-      docs.set(path, doc);
+    if (childDocs) {
+      for (const [path, doc] of childDocs.entries()) {
+        docs.set(path, doc);
+      }
     }
   }
   return docs;
