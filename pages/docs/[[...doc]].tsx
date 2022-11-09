@@ -1,6 +1,6 @@
 import { promises as fsp } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { createElement, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import remarkGfm from 'remark-gfm';
@@ -18,15 +18,14 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/legacy/image';
-import { BiChevronLeft, BiChevronRight, BiLink } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import 'antd/lib/spin/style/index.css';
-import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
-import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
 import { IGNORED_DOCS_PATHS, processDocPath } from '../api/docs/github';
+import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
+import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
@@ -133,6 +132,10 @@ export const getDocsPaths = async (
     const secondPrefix = Number(secondStringSplit[0]);
     if (firstPrefix && secondPrefix && firstPrefix != secondPrefix) {
       return firstPrefix - secondPrefix;
+    } else if (firstPrefix && !secondPrefix) {
+      return -1;
+    } else if (!firstPrefix && secondPrefix) {
+      return 1;
     }
     const firstFileString = firstStringSplit[firstStringSplit.length - 1];
     const secondFileString = secondStringSplit[secondStringSplit.length - 1];
@@ -621,7 +624,15 @@ const DocPage = ({
             </div>
           </Collapse>
         </div>
-        <div className={styles.centerSection}>
+        <div
+          className={classNames(styles.centerSection, {
+            [styles.sdkCenterSection]:
+              docOptionsWithContent[currentPageIndex] &&
+              docOptionsWithContent[currentPageIndex].array_path.includes(
+                'sdk'
+              ),
+          })}
+        >
           <div className={styles.breadcrumb}>
             {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
               i === 0 ? (
@@ -639,21 +650,26 @@ const DocPage = ({
             )}
           </div>
           <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            className={styles.contentRender}
-            components={{
-              h1: getDocsTypographyRenderer('h5'),
-              h2: getDocsTypographyRenderer('h5'),
-              h3: getDocsTypographyRenderer('h5'),
-              h4: getDocsTypographyRenderer('h5'),
-              h5: getDocsTypographyRenderer('h5'),
-              code: getDocsTypographyRenderer('code'),
-              a: getDocsTypographyRenderer('a'),
-            }}
-          >
-            {markdownText || ''}
-          </ReactMarkdown>
+          {docOptionsWithContent[currentPageIndex] &&
+          docOptionsWithContent[currentPageIndex].array_path.includes('sdk') ? (
+            <DocSection content={markdownText || ''} />
+          ) : (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              className={styles.contentRender}
+              components={{
+                h1: getDocsTypographyRenderer('h5'),
+                h2: getDocsTypographyRenderer('h5'),
+                h3: getDocsTypographyRenderer('h5'),
+                h4: getDocsTypographyRenderer('h5'),
+                h5: getDocsTypographyRenderer('h5'),
+                code: getDocsTypographyRenderer('code'),
+                a: getDocsTypographyRenderer('a'),
+              }}
+            >
+              {markdownText || ''}
+            </ReactMarkdown>
+          )}
           <div className={styles.pageNavigateRow}>
             {currentPageIndex > 0 ? (
               <Link
@@ -685,102 +701,17 @@ const DocPage = ({
             )}
           </div>
         </div>
-        <div className={styles.rightSection}>
-          <PageContents title={metadata ? metadata.title : ''} />
-        </div>
+        {docOptionsWithContent[currentPageIndex] &&
+          !docOptionsWithContent[currentPageIndex].array_path.includes(
+            'sdk'
+          ) && (
+            <div className={styles.rightSection}>
+              <PageContents title={metadata ? metadata.title : ''} />
+            </div>
+          )}
       </main>
     </>
   );
-};
-
-const getIdFromHeaderProps = (props: any) => {
-  return props?.node?.children
-    .map((child: any) =>
-      child.tagName === 'code' ? child?.children[0].value : child.value
-    )
-    .join('')
-    .replace(/[^a-zA-Z ]/g, '')
-    .trim()
-    .split(' ')
-    .join('-');
-};
-
-const copyHeadingIcon = (index: number) => {
-  return (
-    <span className={styles.headingCopyIcon} key={index}>
-      <BiLink />
-    </span>
-  );
-};
-
-const resolveLink = (href: string): string => {
-  if (href.startsWith('/')) {
-    return `/docs${href}`;
-  }
-  return href;
-};
-
-const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
-  function DocsTypography({ ...props }) {
-    const router = useRouter();
-    return (
-      <>
-        {type === 'code' ? (
-          props && props.children && props.inline ? (
-            <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
-          ) : props.className === 'language-welcomevideo' ? (
-            <div className={styles.customComponent}>
-              <HeroVideo />
-            </div>
-          ) : props.className === 'language-hint' ? (
-            <Callout content={props.children[0]} />
-          ) : (
-            <HighlightCodeBlock
-              language={'js'}
-              text={props.children[0]}
-              showLineNumbers={false}
-            />
-          )
-        ) : type === 'a' ? (
-          props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
-              {props.children[0]}
-            </Link>
-          )
-        ) : (
-          createElement(
-            type,
-            {
-              className: styles.contentRender,
-              ...(['h4', 'h5'].includes(type)
-                ? {
-                    id: getIdFromHeaderProps(props),
-                    onClick: () => {
-                      const basePath = router.asPath.split('#')[0];
-                      router.push(`${basePath}#${getIdFromHeaderProps(props)}`);
-                    },
-                  }
-                : {}),
-            },
-            [
-              ...props?.node?.children.map((c: any, i: number) =>
-                c.tagName === 'code'
-                  ? createElement(
-                      c.tagName,
-                      { key: i, className: styles.inlineCodeBlock },
-                      c?.children[0].value
-                    )
-                  : c.value
-              ),
-              copyHeadingIcon(props?.node?.children?.length ?? 0),
-            ] || ''
-          )
-        )}
-      </>
-    );
-  }
-
-  return DocsTypography;
 };
 
 export default DocPage;

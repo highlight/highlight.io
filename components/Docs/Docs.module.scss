@@ -183,6 +183,36 @@
   }
 }
 
+.sdkRender {
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: var(--size-large);
+    margin: var(--size-xSmall) 0 !important;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--color-copy-on-light);
+      text-decoration-thickness: 1px;
+      text-underline-offset: var(--size-xSmall);
+      cursor: pointer;
+    }
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px !important;
+    margin: var(--size-medium) 0 !important;
+    color: var(--copy-on-dark);
+  }
+
+  img {
+    width: 100%;
+    border-radius: var(--border-radius);
+  }
+}
+
 .inlineCodeBlock {
   border-radius: var(--space-unit);
   background-color: var(--color-pseudo-black);
@@ -329,6 +359,10 @@ h5:hover .headingCopyIcon {
   min-width: 0;
   padding: var(--size-xLarge) var(--size-4xLarge) var(--size-4xLarge);
   border-left: 1px var(--color-divider-on-dark) solid;
+}
+
+.sdkCenterSection {
+  max-width: none;
 }
 
 .rightSection {
@@ -537,6 +571,94 @@ h5:hover .headingCopyIcon {
   }
 }
 
+.sdkDocSection {
+  display: flex;
+  margin-bottom: 60px;
+  gap: var(--size-xxLarge);
+
+  .sdkLeftColumn {
+    flex: 1 0 50%;
+  }
+
+  .sdkRightColumn {
+    padding-top: var(--size-4xLarge);
+    position: sticky;
+    align-self: flex-start;
+    top: 0;
+    flex: 0 0 50%;
+  }
+
+  h6 {
+    margin: var(--size-small) 0 !important;
+  }
+
+  p {
+    margin: var(--size-small) 0 var(--size-large) !important;
+  }
+}
+
+.methodParameter {
+  padding: var(--size-medium) 0;
+  border-top: 1px solid var(--color-divider-on-dark);
+
+  h5 {
+    display: flex;
+    font-family: 'Fira Code' !important;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    gap: var(--size-xSmall);
+    margin: var(--size-xSmall) 0 !important;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    code {
+      color: var(--color-copy-on-dark);
+      font-weight: 400;
+      font-size: 14.5px;
+      line-height: 24px;
+      background-color: rgba(29, 10, 38, 1);
+      border: 1px solid var(--color-divider-on-dark);
+    }
+  }
+
+  p {
+    color: var(--color-copy-on-light);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px !important;
+    margin: var(--size-xSmall) 0 !important;
+  }
+}
+
+.innerParameterContainer {
+  margin-top: var(--size-medium);
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: var(--size-xxSmall);
+  display: flex;
+  flex-direction: column;
+
+  .innerParameterHeading {
+    background: #30294e;
+    padding: var(--size-xxSmall) var(--size-small);
+    font-size: 12px;
+    line-height: 22px;
+    color: var(--color-copy-on-dark);
+  }
+
+  .methodParameter {
+    padding: var(--size-xSmall) var(--size-small);
+  }
+
+  p {
+    font-size: 12px;
+  }
+}
+
 @supports (-webkit-hyphens: none) {
   .contentRender {
     h4,
@@ -556,7 +678,8 @@ h5:hover .headingCopyIcon {
     width: 100%;
   }
 
-  .contentRender {
+  .contentRender,
+  .sdkRender {
     h5 {
       margin: 0 !important;
     }
