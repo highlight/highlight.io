@@ -1,14 +1,30 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import {
+  HiChatAlt2,
+  HiCheckCircle,
   HiCode,
   HiCog,
   HiCollection,
+  HiColorSwatch,
+  HiCursorClick,
   HiDatabase,
+  HiDesktopComputer,
+  HiDocument,
+  HiDocumentSearch,
+  HiEyeOff,
+  HiSearchCircle,
+  HiShare,
+  HiSparkles,
   HiTag,
   HiTerminal,
   HiTruck,
 } from 'react-icons/hi';
+import { AiFillBug } from 'react-icons/ai';
+import { IoIosRocket, IoIosStopwatch } from 'react-icons/io';
+import { RiReactjsLine } from 'react-icons/ri';
+import { SiApachekafka } from 'react-icons/si';
+
 import { ReactElement } from 'react-markdown/lib/react-markdown';
 import { Typography } from '../common/Typography/Typography';
 import { Post } from './BlogPost/BlogPost';
@@ -20,9 +36,8 @@ export type Tag = {
   posts: Post[];
 };
 
-// TODO(fabio) temporarily leads to /blog/posts but should lead to /blog
 const getTagUrl = (slug: string) =>
-  slug === 'all' ? `/blog/posts` : `/blog/posts?tag=${slug}`;
+  slug === 'all' ? `/blog` : `/blog/tag/${slug}`;
 
 function TagIcon({
   slug,
@@ -38,6 +53,22 @@ function TagIcon({
     data: <HiDatabase className={className} />,
     coding: <HiCode className={className} />,
     developers: <HiTerminal className={className} />,
+    design: <HiColorSwatch className={className} />,
+    feature: <HiSparkles className={className} />,
+    privacy: <HiEyeOff className={className} />,
+    performance: <IoIosStopwatch className={className} />,
+    monitoring: <HiDesktopComputer className={className} />,
+    debugging: <AiFillBug className={className} />,
+    launch: <IoIosRocket className={className} />,
+    ux: <HiCursorClick className={className} />,
+    react: <RiReactjsLine className={className} />,
+    'data-validation': <HiCheckCircle className={className} />,
+    documentation: <HiDocument className={className} />,
+    logging: <HiDocumentSearch className={className} />,
+    opensearch: <HiSearchCircle className={className} />,
+    'apache-kafka': <SiApachekafka className={className} />,
+    'message-broker': <HiChatAlt2 className={className} />,
+    'distributed-queue': <HiShare className={className} />,
   };
 
   return iconMap[slug] ?? <HiTag className={className} />;
