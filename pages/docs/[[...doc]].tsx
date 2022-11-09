@@ -627,6 +627,7 @@ const DocPage = ({
         <div
           className={classNames(styles.centerSection, {
             [styles.sdkCenterSection]:
+              currentPageIndex != -1 &&
               docOptionsWithContent[currentPageIndex] &&
               docOptionsWithContent[currentPageIndex].array_path.includes(
                 'sdk'
@@ -650,7 +651,8 @@ const DocPage = ({
             )}
           </div>
           <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
-          {docOptionsWithContent[currentPageIndex] &&
+          {currentPageIndex != -1 &&
+          docOptionsWithContent[currentPageIndex] &&
           docOptionsWithContent[currentPageIndex].array_path.includes('sdk') ? (
             <DocSection content={markdownText || ''} />
           ) : (
@@ -701,7 +703,8 @@ const DocPage = ({
             )}
           </div>
         </div>
-        {docOptionsWithContent[currentPageIndex] &&
+        {currentPageIndex != -1 &&
+          docOptionsWithContent[currentPageIndex] &&
           !docOptionsWithContent[currentPageIndex].array_path.includes(
             'sdk'
           ) && (
