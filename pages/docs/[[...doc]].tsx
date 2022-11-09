@@ -1,14 +1,6 @@
 import { promises as fsp } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import {
-  createElement,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { createElement, useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import remarkGfm from 'remark-gfm';
@@ -16,7 +8,6 @@ import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
 import Minus from '../../public/images/MinusIcon';
 import { Collapse } from 'react-collapse';
-import Highlighter from 'react-highlight-words';
 
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -27,41 +18,20 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/legacy/image';
-import { SearchResult } from '../api/docs/search/[searchValue]';
-import {
-  BiChevronLeft,
-  BiChevronRight,
-  BiLink,
-  BiSearch,
-} from 'react-icons/bi';
-import Spin from 'antd/lib/spin';
+import { BiChevronLeft, BiChevronRight, BiLink } from 'react-icons/bi';
 import 'antd/lib/spin/style/index.css';
 import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
 import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
-import debounce from 'lodash.debounce';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
+import {
+  IGNORED_DOCS_PATHS,
+  processDocPath,
+  removeOrderingPrefix,
+} from '../api/docs/github';
 
-// ignored files from https://github.com/highlight-run/docs
-const IGNORED_DOCS_PATHS = new Set<string>([
-  '.git',
-  '.github',
-  '.gitignore',
-  '.husky',
-  '.vscode',
-  '.prettierrc',
-  'node_modules',
-  'package.json',
-  'yarn.lock',
-  'CHANGELOG.md',
-  'CODE_OF_CONDUCT.md',
-  'CONTRIBUTING.md',
-  'LICENSE',
-  'README.md',
-  'SECURITY.md',
-]);
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
 interface DocPath {
@@ -138,15 +108,6 @@ const isValidDirectory = (files: string[]) => {
   return files.find((filename) => filename.includes('index.md')) != null;
 };
 
-const removeOrderingPrefix = (path: string) => {
-  const arrayPath = path.split('/');
-  const cleanPath = arrayPath.map((p) => {
-    const prefixLocation = p.indexOf('_');
-    return prefixLocation === -1 ? p : p.slice(prefixLocation + 1);
-  });
-  return cleanPath.join('/');
-};
-
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
 export const getDocsPaths = async (
@@ -196,28 +157,12 @@ export const getDocsPaths = async (
     }
     let total_path = path.join(full_path, file_string);
     const file_path = await fs_api.stat(total_path);
-    const simple_path = path.join(base, file_string);
     if (file_path.isDirectory()) {
-      paths = paths.concat(await getDocsPaths(fs_api, simple_path));
+      paths = paths.concat(
+        await getDocsPaths(fs_api, path.join(base, file_string))
+      );
     } else {
-      let pp = '';
-      if (file_string.includes('index.md')) {
-        // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
-        pp = simple_path.split('/').slice(0, -1).join('/');
-      } else {
-        // strip out any notion of ".md"
-        pp = simple_path.replace('.md', '');
-        const pp_array = pp.split('/');
-        if (pp_array.length > 1) {
-          const parentDirectory = pp_array[pp_array.length - 2];
-          const currentPath = pp_array[pp_array.length - 1];
-          if (
-            currentPath === `${removeOrderingPrefix(parentDirectory)}-overview`
-          ) {
-            pp = [...pp_array.slice(0, -1), 'overview'].join('/');
-          }
-        }
-      }
+      const pp = processDocPath(base, file_string);
       const { data, links } = await readMarkdown(
         fsp,
         path.join(total_path || '')
