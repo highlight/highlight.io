@@ -20,6 +20,7 @@ import { Meta } from '../../components/common/Head/Meta';
 import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { GraphQLRequest } from '../../utils/graphql';
+import { PostTag } from '../../components/Blog/Tag';
 
 const NUM_SUGGESTED_POSTS = 3;
 
@@ -133,6 +134,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           markdown
         }
         tags
+        tags_relations {
+          name
+          slug
+        }
         readingTime
         author {
           firstName
@@ -332,10 +337,8 @@ const PostPage = ({
           </Typography>
           <h1 className={styles.blogText}>{post.title}</h1>
           <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
-            {post.tags.map((tag: string) => (
-              <Link key={tag} href={`/blog?tag=${tag}`} passHref={true} legacyBehavior>
-                <div>{tag}</div>
-              </Link>
+            {post.tags_relations.map((tag) => (
+              <PostTag {...tag} key={tag.slug} />
             ))}
           </div>
           <div className={styles.authorDiv}>
