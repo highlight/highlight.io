@@ -28,6 +28,7 @@ export interface Post {
   title: string;
   metaTitle?: string;
   publishedAt: string;
+  postedAt: string;
   publishedBy: {
     name: string;
     picture: string;
