@@ -516,7 +516,7 @@ const DocPage = ({
   metadata,
 }: {
   markdownText?: string;
-  relPath: string;
+  relPath?: string;
   slug: string;
   toc: TocEntry;
   docOptions: DocPath[];
@@ -566,7 +566,7 @@ const DocPage = ({
         description={description}
         absoluteImageUrl={`https://${
           process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath.replace('.md', '')}`}
+        }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar hideFreeTrialText fixed />
