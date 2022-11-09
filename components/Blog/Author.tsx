@@ -39,7 +39,7 @@ export function PostAuthor({
           />
         </div>
       )}
-      <div className="flex flex-col">
+      <div className="flex flex-col items-start">
         <div className="flex items-center gap-2">
           <Typography type="copy3" emphasis>
             {firstName} {lastName}
