@@ -26,11 +26,7 @@ import { Meta } from '../../components/common/Head/Meta';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
-import {
-  IGNORED_DOCS_PATHS,
-  processDocPath,
-  removeOrderingPrefix,
-} from '../api/docs/github';
+import { IGNORED_DOCS_PATHS, processDocPath } from '../api/docs/github';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
@@ -43,6 +39,8 @@ interface DocPath {
   relative_links: string[];
   // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
   total_path: string;
+  // e.g. 'tips/sessions-search-deep-linking.md'
+  rel_path: string;
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
   indexPath: boolean;
   // metadata stored at the top of each md file.
@@ -177,10 +175,11 @@ export const getDocsPaths = async (
       }
 
       paths.push({
-        simple_path: removeOrderingPrefix(pp),
-        array_path: removeOrderingPrefix(pp).split('/'),
+        simple_path: pp,
+        array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
+        rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
       });
@@ -276,16 +275,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
+  const absPath = path.join(currentDoc?.total_path || '');
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
-  const { content } = await readMarkdown(
-    fsp,
-    path.join(currentDoc?.total_path || '')
-  );
+  const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
       metadata: currentDoc?.metadata,
       markdownText: content,
       slug: currentDoc?.simple_path,
+      relPath: currentDoc?.rel_path,
       docOptions: docPaths,
       toc,
     },
@@ -510,6 +508,7 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
 
 const DocPage = ({
   markdownText,
+  relPath,
   slug,
   toc,
   redirect,
@@ -517,6 +516,7 @@ const DocPage = ({
   metadata,
 }: {
   markdownText?: string;
+  relPath?: string;
   slug: string;
   toc: TocEntry;
   docOptions: DocPath[];
@@ -564,7 +564,9 @@ const DocPage = ({
       <Meta
         title={metadata?.title || ''}
         description={description}
-        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
+        absoluteImageUrl={`https://${
+          process.env.NEXT_PUBLIC_VERCEL_URL
+        }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar hideFreeTrialText fixed />
