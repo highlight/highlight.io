@@ -124,6 +124,80 @@
   }
 }
 
+.popoverButton {
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: var(--text-white);
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.popoverPanel {
+  position:absolute;
+  background-color: var(--color-primary-500);
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: var(--size-xSmall) ;
+  margin-top: 10px;
+  padding: 12px; 
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.innerPopoverPanel {
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: 6px;
+  margin-top: var(--size-small);
+  padding-left: 12px; 
+  padding-right: 12px; 
+  padding-bottom: 12px; 
+}
+
+.copyOnLight {
+  color: var(--copy-on-light);
+}
+
+.gridContainer {
+  display:grid;
+  place-items: left;
+  grid-template-columns: 290px 290px;
+  row-gap: 6px;
+  padding-left: var(--size-xSmall);
+  padding-right: var(--size-xSmall);
+}
+
+.innerGridContainer {
+  display:grid;
+  place-items: left;
+  grid-template-columns: 290px 290px;
+  row-gap: 6px;
+}
+
+.gridItem {
+  text-align: left;
+  color: var(--copy-on-dark);
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 !important;
+  transition: color 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-white);
+  }
+}
+
+.innerGridItem {
+  display: flex;
+  align-items: center;
+  gap: var(--size-xSmall);
+}
+
 .signUpButton {
   padding: var(--size-xSmall) var(--size-medium) !important;
   margin-left: var(--size-large) !important;

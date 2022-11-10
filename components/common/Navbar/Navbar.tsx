@@ -7,11 +7,117 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { AiFillGithub, AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
 import { Typography } from '../Typography/Typography';
 import { FaChevronDown } from 'react-icons/fa';
 import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
+import { Popover } from '@headlessui/react'
+import * as Icons from "react-icons/hi";
+
+const ResourceDropdown = ({
+  isOpen
+}: {
+  isOpen?: boolean;
+}) => {
+
+  const mainLinks = [
+    {
+      title: "Frontend Monitoring",
+      link: "/blog/tag/monitoring"
+    },
+    {
+      title: "Performance Monitoring",
+      link: "/blog/tag/performance"
+    },
+    {
+      title: "Debugging and Troubleshooting",
+      link: "/blog/tag/debugging"
+    },
+    {
+      title: "Session Replay",
+      link: "/blog/tag/feature"
+    },
+    {
+      title: "Frontend Tooling",
+      link: "/blog/tag/react"
+    },
+    {
+      title: "Highlight Engineering",
+      link: "/blog/tag/developers"
+    },
+  ]
+
+  const otherLinks = [
+    {
+      title: "Status Page",
+      icon: <Icons.HiCloud className={styles.copyOnLight} />,
+      link: "/"
+    },
+    {
+      title: "Community",
+      icon: <Icons.HiUserGroup className={styles.copyOnLight} />,
+      link: "/blog"
+    },
+    {
+      title: "Changelog",
+      icon: <Icons.HiClipboardList className={styles.copyOnLight} />,
+      link: "/"
+    },
+    {
+      title: "Feedback",
+      icon: <Icons.HiChat className={styles.copyOnLight} />,
+      link: "/"
+    },
+    {
+      title: "Github",
+      icon: <AiFillGithub className={styles.copyOnLight} />,
+      link: "https://github.com/highlight-run"
+    },
+  ]
+
+  return (
+    <Popover>
+          <Popover.Button className={styles.popoverButton}>
+            <a className={styles.headerButton}>
+              <Typography type="copy2" emphasis={true}>
+                Resources
+              </Typography>
+              <FaChevronDown />
+            </a>
+          </Popover.Button>
+          {!isOpen && <Popover.Panel className={styles.popoverPanel}>
+            <div className={styles.gridContainer}>
+              {mainLinks.map((item) => (
+                <Link href={item.link} className={styles.gridItem}>
+                  <Typography type="copy3" emphasis={true}>
+                    {item.title}
+                  </Typography>
+                </Link>
+              ))}
+            </div>
+            <div className={styles.innerPopoverPanel}>
+              <p className={styles.copyOnLight}>
+                <Typography type="copy4" emphasis={false}>
+                  Other
+                </Typography>
+              </p>
+              <div className={styles.innerGridContainer}>
+                {otherLinks.map((item) => (
+                  <Link href={item.link} className={classNames(styles.gridItem, styles.innerGridItem)}>
+                    {item.icon}
+                    <Typography type="copy3" emphasis={true}>
+                      {item.title}
+                    </Typography>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </Popover.Panel>}
+    </Popover>
+  );
+};
+
 
 const Navbar = ({
   hideFreeTrialText,
@@ -213,15 +319,8 @@ const Navbar = ({
                   Customers
                 </Typography>
               </Link>
-              <a
-                href="https://app.highlight.run/"
-                className={styles.headerButton}
-              >
-                <Typography type="copy2" emphasis={true}>
-                  Resources
-                </Typography>
-                <FaChevronDown />
-              </a>
+             
+              <ResourceDropdown isOpen={scrolled && !fixed} />
             </div>
           )}
           <div
