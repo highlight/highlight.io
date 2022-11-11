@@ -145,8 +145,11 @@ export const Blog = ({
       'title',
     ],
   });
-  const displayedPosts = filteredPosts.slice(0, itemsPerPage * page);
-  const allPostsLoaded = displayedPosts.length >= filteredPosts.length;
+  const displayedPosts = filteredPosts.slice(
+    itemsPerPage * (page - 1),
+    itemsPerPage * page
+  );
+  const allPostsLoaded = itemsPerPage * page >= filteredPosts.length;
 
   return (
     <>
