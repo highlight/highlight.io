@@ -78,3 +78,10 @@
     src: local('IBMPlexMono Regular'), local('IBMPlexMonoRegular'),
         url('./font/IBMPlexMono-Regular.ttf') format('ttf');
 }
+
+@font-face {
+    font-weight: 1 999;
+    font-family: 'Fira Code';
+    src: local('FiraCode'),
+        url('./font/FiraCode-VariableFont_wght.ttf') format("truetype-variations");
+}
