@@ -162,6 +162,10 @@
   color: var(--copy-on-light);
 }
 
+.white {
+  color: var(--color-white);
+}
+
 .gridContainer {
   display:grid;
   place-items: left;

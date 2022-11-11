@@ -52,22 +52,22 @@ const ResourceDropdown = ({
     {
       title: "Status Page",
       icon: <Icons.HiCloud className={styles.copyOnLight} />,
-      link: "/"
+      link: "https://highlight.hyperping.io/"
     },
     {
       title: "Community",
       icon: <Icons.HiUserGroup className={styles.copyOnLight} />,
-      link: "/blog"
+      link: "https://discord.gg/yxaXEAqgwN"
     },
     {
       title: "Changelog",
       icon: <Icons.HiClipboardList className={styles.copyOnLight} />,
-      link: "/"
+      link: "https://feedback.highlight.run/changelog"
     },
     {
       title: "Feedback",
       icon: <Icons.HiChat className={styles.copyOnLight} />,
-      link: "/"
+      link: "https://feedback.highlight.run"
     },
     {
       title: "Github",
@@ -78,42 +78,48 @@ const ResourceDropdown = ({
 
   return (
     <Popover>
-          <Popover.Button className={styles.popoverButton}>
-            <a className={styles.headerButton}>
-              <Typography type="copy2" emphasis={true}>
-                Resources
+      {({ open }) => (
+      <>
+      <Popover.Button className={styles.popoverButton}>
+        <a className={classNames(styles.headerButton, {
+        [styles.white]: open,
+        })}>
+          <Typography type="copy2" emphasis={true}>
+            Resources
+          </Typography>
+          <FaChevronDown />
+        </a>
+      </Popover.Button>
+      {!isOpen && <Popover.Panel className={styles.popoverPanel}>
+        <div className={styles.gridContainer}>
+          {mainLinks.map((item) => (
+            <Link key={item.title} href={item.link} className={styles.gridItem}>
+              <Typography type="copy3" emphasis={true}>
+                {item.title}
               </Typography>
-              <FaChevronDown />
-            </a>
-          </Popover.Button>
-          {!isOpen && <Popover.Panel className={styles.popoverPanel}>
-            <div className={styles.gridContainer}>
-              {mainLinks.map((item) => (
-                <Link key={item.title} href={item.link} className={styles.gridItem}>
-                  <Typography type="copy3" emphasis={true}>
-                    {item.title}
-                  </Typography>
-                </Link>
-              ))}
-            </div>
-            <div className={styles.innerPopoverPanel}>
-              <p className={styles.copyOnLight}>
-                <Typography type="copy4" emphasis={false}>
-                  Other
+            </Link>
+          ))}
+        </div>
+        <div className={styles.innerPopoverPanel}>
+          <p className={styles.copyOnLight}>
+            <Typography type="copy4" emphasis={false}>
+              Other
+            </Typography>
+          </p>
+          <div className={styles.innerGridContainer}>
+            {otherLinks.map((item) => (
+              <Link key={item.title} href={item.link} className={classNames(styles.gridItem, styles.innerGridItem)}>
+                {item.icon}
+                <Typography type="copy3" emphasis={true}>
+                  {item.title}
                 </Typography>
-              </p>
-              <div className={styles.innerGridContainer}>
-                {otherLinks.map((item) => (
-                  <Link key={item.title} href={item.link} className={classNames(styles.gridItem, styles.innerGridItem)}>
-                    {item.icon}
-                    <Typography type="copy3" emphasis={true}>
-                      {item.title}
-                    </Typography>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </Popover.Panel>}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Popover.Panel>}
+      </>
+      )}
     </Popover>
   );
 };

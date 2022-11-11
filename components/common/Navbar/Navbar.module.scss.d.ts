@@ -37,3 +37,4 @@ export const popoverButton: string;
 export const popoverPanel: string;
 export const signUpButton: string;
 export const urlStyle: string;
+export const white: string;
