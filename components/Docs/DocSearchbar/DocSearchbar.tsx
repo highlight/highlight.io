@@ -22,14 +22,10 @@ import Popover from '../../common/Popover/Popover';
 import styles from '../Docs.module.scss';
 import { db } from '../../db';
 import { DocPath } from '../../../pages/docs/[[...doc]]';
-
-const SEARCH_RESULT_BLURB_LENGTH = 60;
-export interface SearchResult {
-  title: string;
-  path: string;
-  indexPath: boolean;
-  content: string;
-}
+import {
+  SEARCH_RESULT_BLURB_LENGTH,
+  SearchResult,
+} from '../../../pages/api/docs/search/[searchValue]';
 
 const DocSearchComboBox = (props: any) => {
   let state = useComboBoxState({ ...props });
@@ -101,21 +97,17 @@ const DocSearchbar = (props: SearchbarProps) => {
   const [isSearchLoading, setIsSearchLoading] = useState(true);
 
   const storeDocs = useCallback(() => {
-    try {
-      return db.docs.bulkAdd(
-        props.docPaths.map((d) => ({
-          slug: d.simple_path,
-          content: d.content,
-          metadata: d.metadata,
-        }))
-      );
-    } catch (e) {
-      // duplicate entries are ignored
-    }
+    return db.docs.bulkPut(
+      props.docPaths.map((d) => ({
+        slug: d.simple_path,
+        content: d.content,
+        metadata: d.metadata,
+      }))
+    );
   }, [props.docPaths]);
 
   useEffect(() => {
-    storeDocs().then();
+    storeDocs();
   }, [storeDocs]);
 
   let onSelectionChange = () => {
@@ -135,20 +127,25 @@ const DocSearchbar = (props: SearchbarProps) => {
           (doc) => doc.content.toLowerCase().indexOf(e.toLowerCase()) !== -1
         )
         .toArray();
-      setSearchResults(
-        docs.map((d) => {
-          const idx = d.content.indexOf(e);
-          return {
-            content: d.content.slice(
-              idx - SEARCH_RESULT_BLURB_LENGTH / 2,
-              idx + SEARCH_RESULT_BLURB_LENGTH / 2
-            ),
-            title: d.metadata.title,
-            path: d.slug,
-            indexPath: false,
-          };
-        })
-      );
+      if (docs?.length) {
+        setSearchResults(
+          docs.map((d) => {
+            const idx = d.content.indexOf(e);
+            return {
+              content: d.content.slice(
+                idx - SEARCH_RESULT_BLURB_LENGTH / 2,
+                idx + SEARCH_RESULT_BLURB_LENGTH / 2
+              ),
+              title: d.metadata.title,
+              path: d.slug,
+              indexPath: false,
+            };
+          })
+        );
+      } else {
+        const results = await (await fetch(`/api/docs/search/${e}`)).json();
+        setSearchResults(results);
+      }
       setIsSearchLoading(false);
     } else {
       setSearchResults([]);
