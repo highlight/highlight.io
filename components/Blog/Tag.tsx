@@ -22,8 +22,8 @@ export type Tag = {
   posts: Post[];
 };
 
-const getTagUrl = (slug: string) =>
-  slug === 'all' ? `/blog` : `/blog/tag/${slug}`;
+export const getTagUrl = (slug: string) =>
+  slug === 'all' || !slug ? `/blog` : `/blog/tag/${slug}`;
 
 function TagIcon({
   slug,

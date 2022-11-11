@@ -8,7 +8,13 @@ import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
-import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
+import {
+  getTagUrl,
+  PostTag,
+  SidebarTag,
+  Tag,
+  TagTab,
+} from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -117,12 +123,17 @@ export const Blog = ({
   tags: Omit<Tag, 'posts'>[];
   currentTagSlug: string;
 }) => {
+  const pageQuery = useRouter().query.page ?? '1';
+
+  let page = 1;
+  if (Array.isArray(pageQuery)) page = parseInt(pageQuery[0]);
+  else page = parseInt(pageQuery);
+
   const shownTags = [allTag, ...tags];
   const currentTag: Omit<Tag, 'posts'> =
     tags.find(({ slug }) => slug === currentTagSlug) ?? allTag;
 
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [page, setPage] = useState<number>(1);
   const itemsPerPage = 4;
 
   const featuredPosts = posts.filter((p) => p.featured);
@@ -250,12 +261,12 @@ export const Blog = ({
                 </Typography>
               )}
               {!allPostsLoaded && (
-                <button
-                  className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer"
-                  onClick={() => setPage(page + 1)}
+                <Link
+                  className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                  href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
                 >
                   Load More
-                </button>
+                </Link>
               )}
             </div>
           </div>
