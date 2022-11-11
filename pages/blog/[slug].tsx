@@ -171,6 +171,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
               }
               publishedAt
               tags
+              tags_relations {
+                name
+                slug
+              }
               readingTime
           }
       }
@@ -302,7 +306,7 @@ const PostPage = ({
 }: {
   post: Post;
   postSections: PostSection[];
-  suggestedPosts: any[];
+  suggestedPosts: Post[];
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const [endPosition, setEndPosition] = useState(0);
