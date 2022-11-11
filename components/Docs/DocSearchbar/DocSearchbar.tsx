@@ -1,3 +1,5 @@
+'use client';
+
 import { Spin } from 'antd';
 import classNames from 'classnames';
 import debounce from 'lodash.debounce';
@@ -5,6 +7,7 @@ import Link from 'next/link';
 import React, {
   DetailedHTMLProps,
   InputHTMLAttributes,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -13,12 +16,20 @@ import React, {
 import { useComboBox } from 'react-aria';
 import Highlighter from 'react-highlight-words';
 import { BiSearch } from 'react-icons/bi';
-import { FaSpinner } from 'react-icons/fa';
 import { Item, useComboBoxState } from 'react-stately';
-import { SearchResult } from '../../../pages/api/docs/search/[searchValue]';
 import ListBox from '../../common/ListBox/ListBox';
 import Popover from '../../common/Popover/Popover';
 import styles from '../Docs.module.scss';
+import { db } from '../../db';
+import { DocPath } from '../../../pages/docs/[[...doc]]';
+
+const SEARCH_RESULT_BLURB_LENGTH = 60;
+export interface SearchResult {
+  title: string;
+  path: string;
+  indexPath: boolean;
+  content: string;
+}
 
 const DocSearchComboBox = (props: any) => {
   let state = useComboBoxState({ ...props });
@@ -80,12 +91,32 @@ interface SearchbarProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  > {}
+  > {
+  docPaths: DocPath[];
+}
 
 const DocSearchbar = (props: SearchbarProps) => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [isSearchLoading, setIsSearchLoading] = useState(true);
+
+  const storeDocs = useCallback(() => {
+    try {
+      return db.docs.bulkAdd(
+        props.docPaths.map((d) => ({
+          slug: d.simple_path,
+          content: d.content,
+          metadata: d.metadata,
+        }))
+      );
+    } catch (e) {
+      // duplicate entries are ignored
+    }
+  }, [props.docPaths]);
+
+  useEffect(() => {
+    storeDocs().then();
+  }, [storeDocs]);
 
   let onSelectionChange = () => {
     setTimeout(() => {
@@ -98,9 +129,26 @@ const DocSearchbar = (props: SearchbarProps) => {
   const onSearchChange = async (e: any) => {
     setIsSearchLoading(true);
     if (e) {
-      const results = await (await fetch(`/api/docs/search/${e}`)).json();
-      setSearchResults(results);
       setSearchValue(e);
+      const docs = await db.docs
+        .filter(
+          (doc) => doc.content.toLowerCase().indexOf(e.toLowerCase()) !== -1
+        )
+        .toArray();
+      setSearchResults(
+        docs.map((d) => {
+          const idx = d.content.indexOf(e);
+          return {
+            content: d.content.slice(
+              idx - SEARCH_RESULT_BLURB_LENGTH / 2,
+              idx + SEARCH_RESULT_BLURB_LENGTH / 2
+            ),
+            title: d.metadata.title,
+            path: d.slug,
+            indexPath: false,
+          };
+        })
+      );
       setIsSearchLoading(false);
     } else {
       setSearchResults([]);

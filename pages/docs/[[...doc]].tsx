@@ -30,7 +30,7 @@ import { IGNORED_DOCS_PATHS, processDocPath } from '../api/docs/github';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
-interface DocPath {
+export interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
   array_path: string[];
   // e.g. 'tips/sessions-search-deep-linking.md'
@@ -45,6 +45,7 @@ interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  content: string;
 }
 
 export interface Doc {
@@ -161,7 +162,7 @@ export const getDocsPaths = async (
       );
     } else {
       const pp = processDocPath(base, file_string);
-      const { data, links } = await readMarkdown(
+      const { data, links, content } = await readMarkdown(
         fsp,
         path.join(total_path || '')
       );
@@ -182,6 +183,7 @@ export const getDocsPaths = async (
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
+        content: content,
       });
     }
   }
@@ -280,6 +282,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
+      docPaths,
       metadata: currentDoc?.metadata,
       markdownText: content,
       slug: currentDoc?.simple_path,
@@ -507,6 +510,7 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
 };
 
 const DocPage = ({
+  docPaths,
   markdownText,
   relPath,
   slug,
@@ -515,6 +519,7 @@ const DocPage = ({
   docOptions,
   metadata,
 }: {
+  docPaths: DocPath[];
   markdownText?: string;
   relPath?: string;
   slug: string;
@@ -573,7 +578,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
-            <DocSearchbar />
+            <DocSearchbar docPaths={docPaths} />
           </div>
           <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (
