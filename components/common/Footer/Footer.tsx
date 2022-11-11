@@ -14,7 +14,7 @@ const Footer = () => {
             <HighlightLogo />
           </div>
           <div className={styles.socialDiv}>
-            <a href="https://twitter.com/highlightrun">
+            <a href="https://twitter.com/highlightio">
               <FaTwitter className={styles.socialIcon} />
             </a>
             <a href="https://www.linkedin.com/company/highlightrun">
@@ -132,7 +132,7 @@ const Footer = () => {
           <HighlightLogo />
         </div>
         <div className={styles.socialDiv}>
-          <a href="https://twitter.com/highlightrun">
+          <a href="https://twitter.com/highlightio">
             <FaTwitter className={styles.socialIcon} />
           </a>
           <a href="https://www.linkedin.com/company/highlightrun">
