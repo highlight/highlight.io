@@ -141,29 +141,34 @@ export const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-4xl  desktop:max-w-7xl">
-          <div className="flex-col hidden gap-6 border border-solid rounded-lg border-divider-on-dark  px-9 py-7 w-[352px] desktop:flex sticky top-[153px]">
-            {/* sidebar */}
-            <div
-              className={classNames(searchBarBaseStyle, 'px-2 h-[34px] gap-1')}
-            >
-              <HiMagnifyingGlass />
-              <input
-                type="text"
-                placeholder="Search Posts..."
-                value={searchQuery}
-                onChange={(ev) => setSearchQuery(ev.currentTarget.value)}
-                className={classNames(searchBarInputBaseStyle, 'text-sm')}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              {shownTags.map((tag) => (
-                <SidebarTag
-                  {...tag}
-                  key={tag.slug}
-                  current={currentTag.slug === tag.slug}
+        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-4xl desktop:max-w-7xl">
+          <div className="sticky w-[352px] hidden pb-[300px] -mb-[300px] h-screen desktop:inline-block overflow-y-scroll top-[153px] box-border">
+            <div className="flex flex-col max-h-full gap-6 border border-solid rounded-lg border-divider-on-dark px-9 py-7">
+              {/* sidebar */}
+              <div
+                className={classNames(
+                  searchBarBaseStyle,
+                  'px-2 h-[34px] gap-1 flex-none'
+                )}
+              >
+                <HiMagnifyingGlass />
+                <input
+                  type="text"
+                  placeholder="Search Posts..."
+                  value={searchQuery}
+                  onChange={(ev) => setSearchQuery(ev.currentTarget.value)}
+                  className={classNames(searchBarInputBaseStyle, 'text-sm')}
                 />
-              ))}
+              </div>
+              <div className="flex flex-col flex-1 max-h-full gap-2 overflow-y-scroll">
+                {shownTags.map((tag) => (
+                  <SidebarTag
+                    {...tag}
+                    key={tag.slug}
+                    current={currentTag.slug === tag.slug}
+                  />
+                ))}
+              </div>
             </div>
           </div>
           <div className="w-full max-w-4xl px-[42px]">
