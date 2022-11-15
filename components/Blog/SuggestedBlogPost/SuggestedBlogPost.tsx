@@ -1,5 +1,5 @@
 import styles from '../Blog.module.scss';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
 import { Post } from '../BlogPost/BlogPost';
@@ -9,20 +9,18 @@ export const SuggestedBlogPost = ({
   slug,
   richcontent,
   image,
-  metaImage,
   title,
   publishedAt,
   tags,
   readingTime,
 }: Post) => {
   return (
-    (<Link href={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
-
+    <Link href={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
       <div className={classNames(styles.blogPost, styles.suggestedBlogPost)}>
         <div className={styles.cardSection}>
           <div className={styles.cardImage}>
             <Image
-              src={image?.url || metaImage?.url || ''}
+              src={image?.url || ''}
               alt=""
               layout="fill"
               objectFit="cover"
@@ -49,7 +47,12 @@ export const SuggestedBlogPost = ({
           </div>
           <div className={styles.tagDiv}>
             {tags.map((tag: string) => (
-              <Link key={tag} href={`/blog?tag=${tag}`} passHref={true} legacyBehavior>
+              <Link
+                key={tag}
+                href={`/blog?tag=${tag}`}
+                passHref={true}
+                legacyBehavior
+              >
                 <div>
                   <Typography type="copy3">{tag}</Typography>
                 </div>
@@ -58,7 +61,6 @@ export const SuggestedBlogPost = ({
           </div>
         </div>
       </div>
-
-    </Link>)
+    </Link>
   );
 };
