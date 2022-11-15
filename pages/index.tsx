@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
@@ -110,6 +110,10 @@ const Home: NextPage = () => {
   const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
   const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
   const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
+  const search = () => {
+    window.rudderanalytics.page();
+    window.rudderanalytics.track('Track Event');
+  };
 
   const scrollListener = useCallback(() => {
     if (
