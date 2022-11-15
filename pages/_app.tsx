@@ -13,7 +13,7 @@ import { Meta } from '../components/common/Head/Meta';
 export { reportWebVitals } from 'next-axiom';
 import { H } from 'highlight.run';
 import { useEffect } from 'react';
-import { rudderInitialize } from './rudderInitialize';
+import { rudderInitialize } from '../scripts/rudder-initialize';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
