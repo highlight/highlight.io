@@ -22,6 +22,8 @@
     "antd": "^4.23.6",
     "buffer": "^6.0.3",
     "classnames": "^2.3.1",
+    "dexie": "^3.2.2",
+    "dexie-react-hooks": "^1.1.1",
     "embla-carousel-react": "^7.0.0-rc05",
     "graphql": "^16.4.0",
     "graphql-request": "^5.0.0",

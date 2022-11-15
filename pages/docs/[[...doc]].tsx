@@ -29,7 +29,7 @@ import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyR
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
-interface DocPath {
+export interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
   array_path: string[];
   // e.g. 'tips/sessions-search-deep-linking.md'
@@ -44,6 +44,7 @@ interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  content: string;
 }
 
 export interface Doc {
@@ -164,7 +165,7 @@ export const getDocsPaths = async (
       );
     } else {
       const pp = processDocPath(base, file_string);
-      const { data, links } = await readMarkdown(
+      const { data, links, content } = await readMarkdown(
         fsp,
         path.join(total_path || '')
       );
@@ -185,6 +186,7 @@ export const getDocsPaths = async (
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
+        content: content,
       });
     }
   }
@@ -576,7 +578,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
-            <DocSearchbar />
+            <DocSearchbar docPaths={docOptions} />
           </div>
           <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (

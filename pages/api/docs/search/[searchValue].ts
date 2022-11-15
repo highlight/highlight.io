@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { getDocsPaths, readMarkdown } from '../../../docs/[[...doc]]';
 import removeMd from 'remove-markdown';
 
-const SEARCH_RESULT_BLURB_LENGTH = 60;
+export const SEARCH_RESULT_BLURB_LENGTH = 60;
 export interface SearchResult {
   title: string;
   path: string;
