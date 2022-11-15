@@ -102,6 +102,31 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
   }, [setActiveId, router.query]);
 };
 
+const sortByFilePrefix = (a: string, b: string) => {
+  const firstStringSplit = a.split('_');
+  const secondStringSplit = b.split('_');
+  const firstPrefix = Number(firstStringSplit[0]);
+  const secondPrefix = Number(secondStringSplit[0]);
+  if (firstPrefix && secondPrefix && firstPrefix != secondPrefix) {
+    return firstPrefix - secondPrefix;
+  } else if (firstPrefix && !secondPrefix) {
+    return -1;
+  } else if (!firstPrefix && secondPrefix) {
+    return 1;
+  }
+  const firstFileString = firstStringSplit[firstStringSplit.length - 1];
+  const secondFileString = secondStringSplit[secondStringSplit.length - 1];
+  if (firstFileString > secondFileString) {
+    return 1;
+  }
+  if (firstFileString < secondFileString) {
+    return -1;
+  }
+  if (firstFileString === secondFileString) {
+    return 0;
+  }
+};
+
 const isValidDirectory = (files: string[]) => {
   return files.find((filename) => filename.includes('index.md')) != null;
 };
@@ -117,7 +142,7 @@ export const getDocsPaths = async (
   // - parent w/o content
   // - parent w/ content
   if (!base) {
-    base = '';
+    base = 'general-docs';
   }
   const full_path = path.join(DOCS_CONTENT_PATH, base);
   const read = await fs_api.readdir(full_path);
@@ -126,31 +151,7 @@ export const getDocsPaths = async (
       `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
     );
   }
-  read.sort((a: string, b: string) => {
-    const firstStringSplit = a.split('_');
-    const secondStringSplit = b.split('_');
-    const firstPrefix = Number(firstStringSplit[0]);
-    const secondPrefix = Number(secondStringSplit[0]);
-    if (firstPrefix && secondPrefix && firstPrefix != secondPrefix) {
-      return firstPrefix - secondPrefix;
-    } else if (firstPrefix && !secondPrefix) {
-      return -1;
-    } else if (!firstPrefix && secondPrefix) {
-      return 1;
-    }
-    const firstFileString = firstStringSplit[firstStringSplit.length - 1];
-    const secondFileString = secondStringSplit[secondStringSplit.length - 1];
-    if (firstFileString > secondFileString) {
-      return 1;
-    }
-    if (firstFileString < secondFileString) {
-      return -1;
-    }
-    if (firstFileString === secondFileString) {
-      return 0;
-    }
-  });
-
+  read.sort(sortByFilePrefix);
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
     const file_string = read[i];
@@ -164,7 +165,68 @@ export const getDocsPaths = async (
         await getDocsPaths(fs_api, path.join(base, file_string))
       );
     } else {
-      const pp = processDocPath(base, file_string);
+      const pp = processDocPath(base, file_string)
+        .replaceAll('general-docs/', '')
+        .replaceAll('general-docs', '');
+      const { data, links, content } = await readMarkdown(
+        fsp,
+        path.join(total_path || '')
+      );
+      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+        data.hasOwnProperty(item)
+      );
+      if (!hasRequiredMetadata) {
+        throw new Error(
+          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+        );
+      }
+
+      paths.push({
+        simple_path: pp,
+        array_path: pp.split('/'),
+        relative_links: Array.from(links).filter((l) => l.startsWith('/')),
+        total_path,
+        rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
+        indexPath: file_string.includes('index.md'),
+        metadata: data,
+        content: content,
+      });
+    }
+  }
+  return paths;
+};
+
+export const getSdkPaths = async (
+  fs_api: any,
+  base: string | undefined
+): Promise<DocPath[]> => {
+  if (!base) {
+    base = 'sdk-docs';
+  }
+  const full_path = path.join(DOCS_CONTENT_PATH, base);
+  const read = await fs_api.readdir(full_path);
+  if (!isValidDirectory(read)) {
+    throw new Error(
+      `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
+    );
+  }
+  read.sort(sortByFilePrefix);
+  let paths: DocPath[] = [];
+  for (var i = 0; i < read.length; i++) {
+    const file_string = read[i];
+    if (IGNORED_DOCS_PATHS.has(file_string)) {
+      continue;
+    }
+    let total_path = path.join(full_path, file_string);
+    const file_path = await fs_api.stat(total_path);
+    if (file_path.isDirectory()) {
+      paths = paths.concat(
+        await getDocsPaths(fs_api, path.join(base, file_string))
+      );
+    } else {
+      const pp = processDocPath(base, file_string)
+        .replaceAll('sdk-docs/', 'sdk/')
+        .replaceAll('sdk-docs', 'sdk');
       const { data, links, content } = await readMarkdown(
         fsp,
         path.join(total_path || '')
@@ -195,7 +257,8 @@ export const getDocsPaths = async (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const docPaths = await getDocsPaths(fsp, undefined);
-  const staticPaths = docPaths.map((p) => {
+  const sdkPaths = await getSdkPaths(fsp, undefined);
+  const staticPaths = [...docPaths, ...sdkPaths].map((p) => {
     return path.join('/docs', p.simple_path);
   });
   return {
@@ -213,6 +276,7 @@ interface TocEntry {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
+  const sdkPaths = await getSdkPaths(fsp, undefined);
   let toc: TocEntry = {
     tocHeading: 'Home',
     tocSlug: 'home',
@@ -255,9 +319,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
     for (const link of relativeLinks) {
       if (!docRelLinks.has(link)) {
-        throw new Error(
-          `Link ${link} used in ${simplePath} is not a valid relative link.`
-        );
+        // throw new Error(
+        //   `Link ${link} used in ${simplePath} is not a valid relative link.`
+        // );
       }
     }
   }
@@ -267,14 +331,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = newLink.split('/docs').pop() || '';
       if (!docRelLinks.has(doc)) {
-        throw new Error(
-          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
-        );
+        // throw new Error(
+        //   `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
+        // );
       }
     }
   }
 
-  const currentDoc = docPaths.find((d) => {
+  const allPaths = [...docPaths, ...sdkPaths];
+  const currentDoc = allPaths.find((d) => {
     return (
       JSON.stringify(d.array_path) ===
       JSON.stringify(context?.params?.doc || [''])
@@ -289,7 +354,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       markdownText: content,
       slug: currentDoc?.simple_path,
       relPath: currentDoc?.rel_path,
-      docOptions: docPaths,
+      docOptions: allPaths,
       toc,
     },
   };
@@ -545,7 +610,7 @@ const DocPage = ({
 
   useEffect(() => {
     setCurrentPageIndex(
-      docOptionsWithContent.findIndex(
+      docOptionsWithContent?.findIndex(
         (d) => d?.metadata?.slug === metadata?.slug
       )
     );

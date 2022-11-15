@@ -1,10 +1,17 @@
 import { promises as fsp } from 'fs';
 import path from 'path';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getDocsPaths, readMarkdown } from '../../../docs/[[...doc]]';
+import {
+  getDocsPaths,
+  getSdkPaths,
+  readMarkdown,
+} from '../../../docs/[[...doc]]';
 import removeMd from 'remove-markdown';
 
 export const SEARCH_RESULT_BLURB_LENGTH = 60;
+
+const removeHtmlTags = (content: string) =>
+  content.replace(/(<([^>]+)>)/gi, '');
 export interface SearchResult {
   title: string;
   path: string;
@@ -18,8 +25,9 @@ export default async function handler(
 ) {
   const searchValue = [req.query.searchValue].flat().join('').toLowerCase();
   const docPaths = await getDocsPaths(fsp, undefined);
+  const sdkPaths = await getSdkPaths(fsp, undefined);
   const paths: SearchResult[] = await Promise.all(
-    docPaths.map(async (doc) => {
+    [...docPaths, ...sdkPaths].map(async (doc) => {
       const { content } = await readMarkdown(
         fsp,
         path.join(doc?.total_path || '')
@@ -39,7 +47,7 @@ export default async function handler(
       !path.indexPath
   );
   const searchResults = filteredResults.map((result) => {
-    const parsedContent = removeMd(result.content);
+    const parsedContent = removeHtmlTags(removeMd(result.content));
     const firstOccurence = parsedContent.toLowerCase().indexOf(searchValue);
     return {
       ...result,
