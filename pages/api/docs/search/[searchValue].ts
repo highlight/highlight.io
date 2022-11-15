@@ -4,10 +4,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { getDocsPaths, readMarkdown } from '../../../docs/[[...doc]]';
 import removeMd from 'remove-markdown';
 
-const SEARCH_RESULT_BLURB_LENGTH = 60;
+export const SEARCH_RESULT_BLURB_LENGTH = 60;
 export interface SearchResult {
   title: string;
   path: string;
+  indexPath: boolean;
   content: string;
 }
 
@@ -26,14 +27,16 @@ export default async function handler(
       return {
         title: doc?.metadata.title,
         path: doc?.simple_path,
+        indexPath: doc?.indexPath,
         content: content,
       };
     })
   );
   const filteredResults = paths.filter(
     (path) =>
-      path.title.toLowerCase().includes(searchValue) ||
-      path.content.toLowerCase().includes(searchValue)
+      (path.title.toLowerCase().includes(searchValue) ||
+        path.content.toLowerCase().includes(searchValue)) &&
+      !path.indexPath
   );
   const searchResults = filteredResults.map((result) => {
     const parsedContent = removeMd(result.content);

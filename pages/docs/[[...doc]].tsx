@@ -1,14 +1,6 @@
 import { promises as fsp } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import {
-  createElement,
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import remarkGfm from 'remark-gfm';
@@ -16,7 +8,6 @@ import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
 import Minus from '../../public/images/MinusIcon';
 import { Collapse } from 'react-collapse';
-import Highlighter from 'react-highlight-words';
 
 import path from 'path';
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -27,43 +18,18 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Image from 'next/legacy/image';
-import { SearchResult } from '../api/docs/search/[searchValue]';
-import {
-  BiChevronLeft,
-  BiChevronRight,
-  BiLink,
-  BiSearch,
-} from 'react-icons/bi';
-import Spin from 'antd/lib/spin';
+import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import 'antd/lib/spin/style/index.css';
-import { HeroVideo } from '../../components/Home/HeroVideo/HeroVideo';
-import { Callout } from '../../components/Docs/Callout/Callout';
 import { Meta } from '../../components/common/Head/Meta';
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { DOCS_REDIRECTS } from '../../middleware';
-import debounce from 'lodash.debounce';
+import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
+import { IGNORED_DOCS_PATHS, processDocPath } from '../api/docs/github';
+import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
+import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 
-// ignored files from https://github.com/highlight-run/docs
-const IGNORED_DOCS_PATHS = new Set<string>([
-  '.git',
-  '.github',
-  '.gitignore',
-  '.husky',
-  '.vscode',
-  '.prettierrc',
-  'node_modules',
-  'package.json',
-  'yarn.lock',
-  'CHANGELOG.md',
-  'CODE_OF_CONDUCT.md',
-  'CONTRIBUTING.md',
-  'LICENSE',
-  'README.md',
-  'SECURITY.md',
-]);
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
-interface DocPath {
+export interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
   array_path: string[];
   // e.g. 'tips/sessions-search-deep-linking.md'
@@ -72,10 +38,13 @@ interface DocPath {
   relative_links: string[];
   // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
   total_path: string;
+  // e.g. 'tips/sessions-search-deep-linking.md'
+  rel_path: string;
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  content: string;
 }
 
 export interface Doc {
@@ -134,7 +103,7 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
 };
 
 const isValidDirectory = (files: string[]) => {
-  return files.find((filename) => filename === 'index.md') != null;
+  return files.find((filename) => filename.includes('index.md')) != null;
 };
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
@@ -157,6 +126,30 @@ export const getDocsPaths = async (
       `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
     );
   }
+  read.sort((a: string, b: string) => {
+    const firstStringSplit = a.split('_');
+    const secondStringSplit = b.split('_');
+    const firstPrefix = Number(firstStringSplit[0]);
+    const secondPrefix = Number(secondStringSplit[0]);
+    if (firstPrefix && secondPrefix && firstPrefix != secondPrefix) {
+      return firstPrefix - secondPrefix;
+    } else if (firstPrefix && !secondPrefix) {
+      return -1;
+    } else if (!firstPrefix && secondPrefix) {
+      return 1;
+    }
+    const firstFileString = firstStringSplit[firstStringSplit.length - 1];
+    const secondFileString = secondStringSplit[secondStringSplit.length - 1];
+    if (firstFileString > secondFileString) {
+      return 1;
+    }
+    if (firstFileString < secondFileString) {
+      return -1;
+    }
+    if (firstFileString === secondFileString) {
+      return 0;
+    }
+  });
 
   let paths: DocPath[] = [];
   for (var i = 0; i < read.length; i++) {
@@ -166,27 +159,13 @@ export const getDocsPaths = async (
     }
     let total_path = path.join(full_path, file_string);
     const file_path = await fs_api.stat(total_path);
-    const simple_path = path.join(base, file_string);
     if (file_path.isDirectory()) {
-      paths = paths.concat(await getDocsPaths(fs_api, simple_path));
+      paths = paths.concat(
+        await getDocsPaths(fs_api, path.join(base, file_string))
+      );
     } else {
-      let pp = '';
-      if (file_string === 'index.md') {
-        // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
-        pp = simple_path.split('/').slice(0, -1).join('/');
-      } else {
-        // strip out any notion of ".md"
-        pp = simple_path.replace('.md', '');
-        const pp_array = pp.split('/');
-        if (pp_array.length > 1) {
-          const parentDirectory = pp_array[pp_array.length - 2];
-          const currentPath = pp_array[pp_array.length - 1];
-          if (currentPath === `${parentDirectory}-overview`) {
-            pp = [...pp_array.slice(0, -1), 'overview'].join('/');
-          }
-        }
-      }
-      const { data, links } = await readMarkdown(
+      const pp = processDocPath(base, file_string);
+      const { data, links, content } = await readMarkdown(
         fsp,
         path.join(total_path || '')
       );
@@ -204,8 +183,10 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
-        indexPath: file_string === 'index.md',
+        rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
+        indexPath: file_string.includes('index.md'),
         metadata: data,
+        content: content,
       });
     }
   }
@@ -299,16 +280,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
+  const absPath = path.join(currentDoc?.total_path || '');
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
-  const { content } = await readMarkdown(
-    fsp,
-    path.join(currentDoc?.total_path || '')
-  );
+  const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
       metadata: currentDoc?.metadata,
       markdownText: content,
       slug: currentDoc?.simple_path,
+      relPath: currentDoc?.rel_path,
       docOptions: docPaths,
       toc,
     },
@@ -506,20 +486,6 @@ const TableOfContents = ({
   );
 };
 
-const DocSearchbar = (
-  props: DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
-) => {
-  return (
-    <div className={styles.docSearchbar}>
-      <BiSearch />
-      <input {...props} type="text" placeholder="Find anything" />
-    </div>
-  );
-};
-
 const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
   const trail: { title: string; path: string }[] = [
     { title: 'Docs', path: '/docs' },
@@ -547,6 +513,7 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
 
 const DocPage = ({
   markdownText,
+  relPath,
   slug,
   toc,
   redirect,
@@ -554,6 +521,7 @@ const DocPage = ({
   metadata,
 }: {
   markdownText?: string;
+  relPath?: string;
   slug: string;
   toc: TocEntry;
   docOptions: DocPath[];
@@ -562,13 +530,8 @@ const DocPage = ({
 }) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [searchValue, setSearchValue] = useState('');
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [isSearchLoading, setIsSearchLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPageIndex, setCurrentPageIndex] = useState(-1);
-  const [hoveredResult, setHoveredResult] = useState(0);
 
   const docOptionsWithContent = useMemo(() => {
     return docOptions?.filter((doc) => !doc.indexPath);
@@ -601,107 +564,21 @@ const DocPage = ({
     }
   }, [router]);
 
-  const onSearchChange = async (e: any) => {
-    if (e.target.value !== '') {
-      const results = await (
-        await fetch(`/api/docs/search/${e.target.value}`)
-      ).json();
-      setIsSearchLoading(false);
-      setSearchResults(results);
-      setSearchValue(e.target.value);
-    } else {
-      setIsSearchLoading(false);
-      setSearchResults([]);
-      setSearchValue('');
-    }
-  };
-
-  const debouncedResults = useMemo(() => {
-    setIsSearchLoading(true);
-    return debounce(onSearchChange, 300);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      debouncedResults.cancel();
-    };
-  });
-
   return (
     <>
       <Meta
         title={metadata?.title || ''}
         description={description}
-        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc/${slug}`}
+        absoluteImageUrl={`https://${
+          process.env.NEXT_PUBLIC_VERCEL_URL
+        }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner hideNavButtons fixed />
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
-            <DocSearchbar
-              onChange={debouncedResults}
-              onFocus={() => {
-                setSearchOpen(true);
-              }}
-              onBlur={() => {
-                setTimeout(() => {
-                  setSearchOpen(false);
-                }, 200);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'ArrowDown') {
-                  setHoveredResult((currHoveredResult) =>
-                    Math.min(currHoveredResult + 1, searchResults.length)
-                  );
-                } else if (e.key === 'ArrowUp') {
-                  setHoveredResult((currHoveredResult) =>
-                    Math.max(currHoveredResult - 1, 0)
-                  );
-                } else if (e.key === 'Enter') {
-                  router.push(`/docs/${searchResults[hoveredResult].path}`);
-                  setSearchOpen(false);
-                }
-              }}
-            />
-            {searchOpen && (searchResults.length > 0 || isSearchLoading) && (
-              <div className={styles.searchDiv}>
-                {isSearchLoading ? (
-                  <Spin className={styles.spinner} />
-                ) : (
-                  searchResults.map((result: SearchResult, i) => (
-                    <Link href={`/docs/${result.path}`} key={i} legacyBehavior>
-                      <div
-                        className={classNames(styles.searchResultCard, {
-                          [styles.active]: i === hoveredResult,
-                        })}
-                        onMouseEnter={() => {
-                          setHoveredResult(i);
-                        }}
-                      >
-                        <div>
-                          <Highlighter
-                            className={styles.resultTitle}
-                            highlightClassName={styles.highlightedText}
-                            searchWords={[searchValue]}
-                            autoEscape={true}
-                            textToHighlight={result.title}
-                          />
-                        </div>
-                        <div className={styles.content}>
-                          <Highlighter
-                            highlightClassName={styles.highlightedText}
-                            searchWords={[searchValue]}
-                            autoEscape={true}
-                            textToHighlight={result.content}
-                          />
-                        </div>
-                      </div>
-                    </Link>
-                  ))
-                )}
-              </div>
-            )}
+            <DocSearchbar docPaths={docOptions} />
           </div>
           <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (
@@ -749,7 +626,16 @@ const DocPage = ({
             </div>
           </Collapse>
         </div>
-        <div className={styles.centerSection}>
+        <div
+          className={classNames(styles.centerSection, {
+            [styles.sdkCenterSection]:
+              currentPageIndex != -1 &&
+              docOptionsWithContent[currentPageIndex] &&
+              docOptionsWithContent[currentPageIndex].array_path.includes(
+                'sdk'
+              ),
+          })}
+        >
           <div className={styles.breadcrumb}>
             {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
               i === 0 ? (
@@ -767,21 +653,27 @@ const DocPage = ({
             )}
           </div>
           <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            className={styles.contentRender}
-            components={{
-              h1: getDocsTypographyRenderer('h5'),
-              h2: getDocsTypographyRenderer('h5'),
-              h3: getDocsTypographyRenderer('h5'),
-              h4: getDocsTypographyRenderer('h5'),
-              h5: getDocsTypographyRenderer('h5'),
-              code: getDocsTypographyRenderer('code'),
-              a: getDocsTypographyRenderer('a'),
-            }}
-          >
-            {markdownText || ''}
-          </ReactMarkdown>
+          {currentPageIndex != -1 &&
+          docOptionsWithContent[currentPageIndex] &&
+          docOptionsWithContent[currentPageIndex].array_path.includes('sdk') ? (
+            <DocSection content={markdownText || ''} />
+          ) : (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              className={styles.contentRender}
+              components={{
+                h1: getDocsTypographyRenderer('h5'),
+                h2: getDocsTypographyRenderer('h5'),
+                h3: getDocsTypographyRenderer('h5'),
+                h4: getDocsTypographyRenderer('h5'),
+                h5: getDocsTypographyRenderer('h5'),
+                code: getDocsTypographyRenderer('code'),
+                a: getDocsTypographyRenderer('a'),
+              }}
+            >
+              {markdownText || ''}
+            </ReactMarkdown>
+          )}
           <div className={styles.pageNavigateRow}>
             {currentPageIndex > 0 ? (
               <Link
@@ -813,102 +705,18 @@ const DocPage = ({
             )}
           </div>
         </div>
-        <div className={styles.rightSection}>
-          <PageContents title={metadata ? metadata.title : ''} />
-        </div>
+        {currentPageIndex != -1 &&
+          docOptionsWithContent[currentPageIndex] &&
+          !docOptionsWithContent[currentPageIndex].array_path.includes(
+            'sdk'
+          ) && (
+            <div className={styles.rightSection}>
+              <PageContents title={metadata ? metadata.title : ''} />
+            </div>
+          )}
       </main>
     </>
   );
-};
-
-const getIdFromHeaderProps = (props: any) => {
-  return props?.node?.children
-    .map((child: any) =>
-      child.tagName === 'code' ? child?.children[0].value : child.value
-    )
-    .join('')
-    .replace(/[^a-zA-Z ]/g, '')
-    .trim()
-    .split(' ')
-    .join('-');
-};
-
-const copyHeadingIcon = (index: number) => {
-  return (
-    <span className={styles.headingCopyIcon} key={index}>
-      <BiLink />
-    </span>
-  );
-};
-
-const resolveLink = (href: string): string => {
-  if (href.startsWith('/')) {
-    return `/docs${href}`;
-  }
-  return href;
-};
-
-const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
-  function DocsTypography({ ...props }) {
-    const router = useRouter();
-    return (
-      <>
-        {type === 'code' ? (
-          props && props.children && props.inline ? (
-            <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
-          ) : props.className === 'language-welcomevideo' ? (
-            <div className={styles.customComponent}>
-              <HeroVideo />
-            </div>
-          ) : props.className === 'language-hint' ? (
-            <Callout content={props.children[0]} />
-          ) : (
-            <HighlightCodeBlock
-              language={'js'}
-              text={props.children[0]}
-              showLineNumbers={false}
-            />
-          )
-        ) : type === 'a' ? (
-          props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
-              {props.children[0]}
-            </Link>
-          )
-        ) : (
-          createElement(
-            type,
-            {
-              className: styles.contentRender,
-              ...(['h4', 'h5'].includes(type)
-                ? {
-                    id: getIdFromHeaderProps(props),
-                    onClick: () => {
-                      const basePath = router.asPath.split('#')[0];
-                      router.push(`${basePath}#${getIdFromHeaderProps(props)}`);
-                    },
-                  }
-                : {}),
-            },
-            [
-              ...props?.node?.children.map((c: any, i: number) =>
-                c.tagName === 'code'
-                  ? createElement(
-                      c.tagName,
-                      { key: i, className: styles.inlineCodeBlock },
-                      c?.children[0].value
-                    )
-                  : c.value
-              ),
-              copyHeadingIcon(props?.node?.children?.length ?? 0),
-            ] || ''
-          )
-        )}
-      </>
-    );
-  }
-
-  return DocsTypography;
 };
 
 export default DocPage;
