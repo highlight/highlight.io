@@ -230,6 +230,8 @@
 }
 
 .headerLeft {
+  display: flex;
+  gap: var(--size-xSmall);
   justify-content: flex-start;
   width: 33.33%;
   width: calc(100% / 3);
@@ -291,8 +293,8 @@
 .navTitle {
   font-size: 22px;
   font-weight: 600;
+  margin: none;
   color: var(--copy-on-light);
-  padding: 0 var(--size-xSmall);
 }
 
 .navPostTitle {
@@ -367,7 +369,7 @@
     padding: var(--size-medium) var(--size-medium) var(--size-xLarge)
       var(--size-medium);
     position: absolute;
-    top: 75px;
+    top: 76px;
     width: 100%;
 
     li {
@@ -425,10 +427,12 @@
         color: var(--text-gray);
       }
     }
+
   }
 
   .headerLeft {
     display: flex;
+    height: var(--size-large);
   }
 }
 

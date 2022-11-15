@@ -14,7 +14,6 @@ import { FaChevronDown } from 'react-icons/fa';
 import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 import { Popover, Transition } from '@headlessui/react'
 import * as Icons from "react-icons/hi";
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 const ResourceDropdown = ({
   isOpen
@@ -244,9 +243,11 @@ const Navbar = ({
             {
             //TODO: Change color on menu open
             }
-            <p className={styles.navTitle}>
-              {title}
-            </p>
+            <Typography type="copy3" emphasis={true}>
+              <p className={styles.navTitle}>
+                {title}
+              </p>
+            </Typography>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <AiOutlineClose className={styles.copyOnDark} /> : <AiOutlineMenu />}
