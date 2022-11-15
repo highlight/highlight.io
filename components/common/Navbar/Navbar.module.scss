@@ -56,6 +56,7 @@
 
 .mobileMenu {
   display: none;
+  top: 100px;
 }
 
 .menuList {
@@ -117,7 +118,7 @@
   text-decoration: none;
   cursor: pointer;
   outline: none;
-  font-weight: 600;
+  font-weight: 400;
 
   &:hover {
     color: var(--text-white);
@@ -138,15 +139,19 @@
   }
 }
 
-.popoverPanel {
-  position:absolute;
+.popover {
+  position: absolute;
   background-color: var(--color-primary-500);
+  left: 50%;
+  padding-top: var(--size-medium);
+  transform: translate(-50%, 0);
+}
+
+.popoverPanel {
   border: 1px solid var(--color-divider-on-dark);
   border-radius: var(--size-xSmall) ;
-  margin-top: 10px;
+  box-shadow: 0px 12px 36px -2px var(--color-divider-on-dark);
   padding: 12px; 
-  left: 50%;
-  transform: translate(-50%, 0);
 }
 
 .innerPopoverPanel {
@@ -160,6 +165,10 @@
 
 .copyOnLight {
   color: var(--copy-on-light);
+}
+
+.copyOnDark {
+  color: var(--copy-on-dark);
 }
 
 .white {
@@ -183,22 +192,25 @@
 }
 
 .gridItem {
+  display: flex;
+  align-items: center;
+  gap: var(--size-xxSmall);
   text-align: left;
   color: var(--copy-on-dark);
-  font-weight: 600;
+  opacity: 0.7;
+  font-weight: 400;
   font-size: 16px;
   margin: 0 !important;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease, color 0.2s ease;
   cursor: pointer;
 
   &:hover {
     color: var(--text-white);
+    opacity: 1; 
   }
 }
 
 .innerGridItem {
-  display: flex;
-  align-items: center;
   gap: var(--size-xSmall);
 }
 
@@ -301,22 +313,30 @@
 }
 
 @media screen and (max-width: 800px) {
-  .bannerContainer {
-    flex: 0;
-  }
-
   .navPostTitle {
     display: none;
   }
+
+  .mobileMenu{
+    top: 90px;
+  }
+}  
+
+@media only screen and (min-width:801px) and (max-width: 1200px) {
+  .mobileMenu {
+    top:118px;
+  }
+
+}
+
+@media screen and (max-width: 1200px) {
 
   .navMenu {
     display: flex;
     padding: 10px;
     border-radius: 6px;
-  }
-}  
-
-@media screen and (max-width: 1280px) {
+    border: 1px var(--color-divider-on-dark);
+  } 
 
   .openHeader {
     background-color: var(--color-primary-200);
@@ -334,8 +354,6 @@
     background: var(--color-primary-background);
   }
 
-
-
   .mobileMenu {
     align-items: center;
     background-color: var(--color-primary-200);
@@ -349,7 +367,7 @@
     padding: var(--size-medium) var(--size-medium) var(--size-xLarge)
       var(--size-medium);
     position: absolute;
-    top: 90px;
+    top: 75px;
     width: 100%;
 
     li {
@@ -414,11 +432,3 @@
   }
 }
 
-@media screen and (min-width:801px) and (max-width: 1280px) {
-  .navMenu {
-    display: flex;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--color-divider-on-dark);
-  } 
-}

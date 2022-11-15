@@ -1,6 +1,7 @@
 export const bannerContainer: string;
 export const callToAction: string;
 export const chevronDown: string;
+export const copyOnDark: string;
 export const copyOnLight: string;
 export const container: string;
 export const dropdownItem: string;
@@ -33,6 +34,7 @@ export const navMenu: string;
 export const navPostTitle: string;
 export const navTitle: string;
 export const openHeader: string;
+export const popover: string;
 export const popoverButton: string;
 export const popoverPanel: string;
 export const signUpButton: string;

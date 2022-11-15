@@ -12,38 +12,45 @@ import Link from 'next/link';
 import { Typography } from '../Typography/Typography';
 import { FaChevronDown } from 'react-icons/fa';
 import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
-import { Popover } from '@headlessui/react'
+import { Popover, Transition } from '@headlessui/react'
 import * as Icons from "react-icons/hi";
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 const ResourceDropdown = ({
   isOpen
 }: {
   isOpen?: boolean;
 }) => {
-
+  const [isShowing, setIsShowing] = useState(false)
   const mainLinks = [
     {
       title: "Frontend Monitoring",
+      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/monitoring"
     },
     {
       title: "Performance Monitoring",
+      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/performance"
     },
     {
       title: "Debugging and Troubleshooting",
+      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/debugging"
     },
     {
       title: "Session Replay",
+      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/feature"
     },
     {
       title: "Frontend Tooling",
+      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/react"
     },
     {
       title: "Highlight Engineering",
+      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/developers"
     },
   ]
@@ -80,50 +87,68 @@ const ResourceDropdown = ({
     <Popover>
       {({ open }) => (
       <>
-      <Popover.Button className={styles.popoverButton}>
+      <Popover.Button 
+        onMouseEnter={() => setIsShowing(true)}
+        onMouseLeave={() => setIsShowing(false)}
+        className={styles.popoverButton}
+      >
         <a className={classNames(styles.headerButton, {
-        [styles.white]: open,
+        [styles.white]: isShowing, 
         })}>
-          <Typography type="copy2" emphasis={true}>
+          <Typography type="copy2">
             Resources
           </Typography>
           <FaChevronDown />
         </a>
       </Popover.Button>
-      {!isOpen && <Popover.Panel className={styles.popoverPanel}>
-        <div className={styles.gridContainer}>
-          {mainLinks.map((item) => (
-            <Link key={item.title} href={item.link} className={styles.gridItem}>
-              <Typography type="copy3" emphasis={true}>
-                {item.title}
-              </Typography>
-            </Link>
-          ))}
-        </div>
-        <div className={styles.innerPopoverPanel}>
-          <p className={styles.copyOnLight}>
-            <Typography type="copy4" emphasis={false}>
-              Other
-            </Typography>
-          </p>
-          <div className={styles.innerGridContainer}>
-            {otherLinks.map((item) => (
-              <Link key={item.title} href={item.link} className={classNames(styles.gridItem, styles.innerGridItem)}>
-                {item.icon}
-                <Typography type="copy3" emphasis={true}>
-                  {item.title}
+      <Transition
+        show={isShowing}
+        onMouseEnter={() => setIsShowing(true)}
+        onMouseLeave={() => setIsShowing(false)}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
+      >
+        {!isOpen && <Popover.Panel className={styles.popover}>
+          <div className={styles.popoverPanel}>
+            <div className={styles.gridContainer}>
+              {mainLinks.map((item) => (
+                <Link key={item.title} href={item.link} className={styles.gridItem}>
+                  {item.icon}
+                  <Typography type="copy3" >
+                    {item.title}
+                  </Typography>
+                </Link>
+              ))}
+            </div>
+            <div className={styles.innerPopoverPanel}>
+              <p className={styles.copyOnLight}>
+                <Typography type="copy4">
+                  Other
                 </Typography>
-              </Link>
-            ))}
+              </p>
+              <div className={styles.innerGridContainer}>
+                {otherLinks.map((item) => (
+                  <Link key={item.title} href={item.link} className={classNames(styles.gridItem, styles.innerGridItem)}>
+                    {item.icon}
+                    <Typography type="copy3" >
+                      {item.title}
+                    </Typography>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </Popover.Panel>}
+        </Popover.Panel>}
+      </Transition>
       </>
       )}
     </Popover>
   );
 };
-
 
 const Navbar = ({
   hideFreeTrialText,
@@ -224,7 +249,7 @@ const Navbar = ({
             </p>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+            {isOpen ? <AiOutlineClose className={styles.copyOnDark} /> : <AiOutlineMenu />}
           </div>
           {isOpen && (
             <div className={styles.mobileMenu}>
@@ -313,7 +338,7 @@ const Navbar = ({
                 href="/pricing"
                 className={styles.headerButton}
               >
-                <Typography type="copy2" emphasis={true}>
+                <Typography type="copy2">
                   Pricing
                 </Typography>
               </Link>
@@ -321,7 +346,7 @@ const Navbar = ({
                 href="/customers"
                 className={styles.headerButton}
               >
-                <Typography type="copy2" emphasis={true}>
+                <Typography type="copy2">
                   Customers
                 </Typography>
               </Link>
@@ -340,7 +365,7 @@ const Navbar = ({
               href="/docs"
               className={styles.headerButton}
             >
-              <Typography type="copy2" emphasis={true}>
+              <Typography type="copy2">
                 Docs
               </Typography>
             </Link>
@@ -348,7 +373,7 @@ const Navbar = ({
               href="https://app.highlight.run/"
               className={styles.headerButton}
             >
-              <Typography type="copy2" emphasis={true}>
+              <Typography type="copy2">
                 Sign in
               </Typography>
             </a>
