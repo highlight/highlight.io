@@ -7056,6 +7056,11 @@ rimraf@^3.0.2:
   dependencies:
     glob "^7.1.3"
 
+rudder-sdk-js@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/rudder-sdk-js/-/rudder-sdk-js-2.20.0.tgz#fa515c29bb3374cfa2a0751b97dd3671107c48ec"
+  integrity sha512-faYlnAZmmOMixghbQdLwwAGVAt250yxvtiZVFspqm/XqYqftOvj1CmzC/ELq2UYR2aUXviqww6LqcWV8AwDozw==
+
 run-parallel@^1.1.9:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.2.0.tgz#66d1368da7bdf921eb9d95bd1a9229e7f21a43ee"
