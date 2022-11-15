@@ -27,6 +27,8 @@ import {
   SearchResult,
 } from '../../../pages/api/docs/search/[searchValue]';
 
+const SEARCH_DEBOUNCE_MS = 200;
+
 const DocSearchComboBox = (props: any) => {
   let state = useComboBoxState({ ...props });
 
@@ -114,7 +116,7 @@ const DocSearchbar = (props: SearchbarProps) => {
     setTimeout(() => {
       setSearchResults([]);
       setSearchValue('');
-    }, 300);
+    }, SEARCH_DEBOUNCE_MS);
     debouncedResults.cancel();
   };
 
@@ -155,7 +157,7 @@ const DocSearchbar = (props: SearchbarProps) => {
   };
 
   const debouncedResults = useMemo(() => {
-    return debounce(onSearchChange, 300);
+    return debounce(onSearchChange, SEARCH_DEBOUNCE_MS);
   }, []);
 
   return (
