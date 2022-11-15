@@ -282,7 +282,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
-      docPaths,
       metadata: currentDoc?.metadata,
       markdownText: content,
       slug: currentDoc?.simple_path,
@@ -510,7 +509,6 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
 };
 
 const DocPage = ({
-  docPaths,
   markdownText,
   relPath,
   slug,
@@ -519,7 +517,6 @@ const DocPage = ({
   docOptions,
   metadata,
 }: {
-  docPaths: DocPath[];
   markdownText?: string;
   relPath?: string;
   slug: string;
@@ -578,7 +575,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.leftInner}>
-            <DocSearchbar docPaths={docPaths} />
+            <DocSearchbar docPaths={docOptions} />
           </div>
           <div className={styles.tocMenuLarge}>
             {toc?.children.map((t) => (
