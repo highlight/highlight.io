@@ -320,6 +320,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
     for (const link of relativeLinks) {
       if (!docRelLinks.has(link)) {
+        // TODO(vkorolik) readd after sdk docs are migrated
         // throw new Error(
         //   `Link ${link} used in ${simplePath} is not a valid relative link.`
         // );
@@ -332,6 +333,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = newLink.split('/docs').pop() || '';
       if (!docRelLinks.has(doc)) {
+        // TODO(vkorolik) readd after sdk docs are migrated
         // throw new Error(
         //   `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
         // );
