@@ -114,8 +114,8 @@ const ResourceDropdown = ({
         {!isOpen && <Popover.Panel className={styles.popover}>
           <div className={styles.popoverPanel}>
             <div className={styles.gridContainer}>
-              {mainLinks.map((item) => (
-                <Link key={item.title} href={item.link} className={styles.gridItem}>
+              {mainLinks.map((item, index) => (
+                <Link key={index} href={item.link} className={styles.gridItem}>
                   {item.icon}
                   <Typography type="copy3" >
                     {item.title}
@@ -130,13 +130,13 @@ const ResourceDropdown = ({
                 </Typography>
               </p>
               <div className={styles.innerGridContainer}>
-                {otherLinks.map((item) => (
-                  <Link key={item.title} href={item.link} className={classNames(styles.gridItem, styles.innerGridItem)}>
+                {otherLinks.map((item, index) => (
+                  <a key={index} href={item.link} target="_blank" rel="noopener" className={classNames(styles.gridItem, styles.innerGridItem)}>
                     {item.icon}
                     <Typography type="copy3" >
                       {item.title}
                     </Typography>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
