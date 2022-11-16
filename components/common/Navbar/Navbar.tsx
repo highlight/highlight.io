@@ -8,12 +8,12 @@ import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
 import { AiFillGithub, AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import Link from 'next/link';
-import { Typography } from '../Typography/Typography';
-import { FaChevronDown } from 'react-icons/fa';
-import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 import { Popover, Transition } from '@headlessui/react'
+import { Typography } from '../Typography/Typography';
+import Link from 'next/link';
+import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 import * as Icons from "react-icons/hi";
+import { FaChevronDown } from 'react-icons/fa';
 
 const ResourceDropdown = ({
   isOpen
@@ -55,11 +55,6 @@ const ResourceDropdown = ({
       link: "https://highlight.hyperping.io/"
     },
     {
-      title: "Community",
-      icon: <Icons.HiUserGroup className={styles.copyOnLight} />,
-      link: "https://discord.gg/yxaXEAqgwN"
-    },
-    {
       title: "Changelog",
       icon: <Icons.HiClipboardList className={styles.copyOnLight} />,
       link: "https://feedback.highlight.run/changelog"
@@ -88,16 +83,18 @@ const ResourceDropdown = ({
         <a className={classNames(styles.headerButton, {
         [styles.white]: isShowing, 
         })}>
-          <Typography type="copy2">
-            Resources
-          </Typography>
-          <FaChevronDown />
+          <div className="flex gap-[6.5px] items-center">
+            <Typography type="copy2">
+              Resources
+            </Typography>
+            <FaChevronDown className="w-[10px]" />
+          </div>
         </a>
       </Popover.Button>
       <Transition
         show={isShowing}
         onMouseEnter={() => setIsShowing(true)}
-        onMouseLeave={() => setIsShowing(false)}
+        onMouseLeave={() => setIsShowing(true)}
         enter="transition ease-out duration-200"
         enterFrom="opacity-0 translate-y-1"
         enterTo="opacity-100 translate-y-0"
@@ -107,6 +104,11 @@ const ResourceDropdown = ({
       >
         {!isOpen && <Popover.Panel className={styles.popover}>
           <div className={styles.popoverPanel}>
+            <div className="pl-2 pb-[6px]">
+                <Typography type="copy4" className={classNames(styles.copyOnLight)}>
+                  From the Highlight blog
+                </Typography>
+              </div>
             <div className={styles.gridContainer}>
               {mainLinks.map((item, index) => (
                 <Link key={index} href={item.link} className={styles.gridItem}>
@@ -117,11 +119,11 @@ const ResourceDropdown = ({
               ))}
             </div>
             <div className={styles.innerPopoverPanel}>
-              <p className={styles.copyOnLight}>
-                <Typography type="copy4">
+              <div className="pt-2 pb-1">
+                <Typography type="copy4" className={classNames(styles.copyOnLight)}>
                   Other
                 </Typography>
-              </p>
+              </div>
               <div className={styles.innerGridContainer}>
                 {otherLinks.map((item, index) => (
                   <a key={index} href={item.link} target="_blank" rel="noreferrer" className={classNames(styles.gridItem, styles.innerGridItem)}>
