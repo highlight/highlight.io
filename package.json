@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@graphcms/rich-text-react-renderer": "^0.6.1",
+    "@headlessui/react": "^1.7.4",
+    "@heroicons/react": "^2.0.13",
     "@highlight-run/next": "^1.4.0",
     "@radix-ui/react-dropdown-menu": "^2.0.1",
     "@types/nprogress": "^0.2.0",
