@@ -10,7 +10,6 @@ export const SuggestedBlogPost = ({
   slug,
   richcontent,
   image,
-  metaImage,
   title,
   publishedAt,
   tags_relations,
@@ -26,7 +25,7 @@ export const SuggestedBlogPost = ({
         <div className={styles.cardSection}>
           <div className={styles.cardImage}>
             <Image
-              src={image?.url || metaImage?.url || ''}
+              src={image?.url || ''}
               alt=""
               layout="fill"
               objectFit="cover"

@@ -22,9 +22,6 @@ export interface Post {
   image?: {
     url: string;
   };
-  metaImage?: {
-    url: string;
-  };
   title: string;
   metaTitle?: string;
   publishedAt: string;
@@ -48,7 +45,6 @@ export const BlogPost = ({
   slug,
   richcontent,
   image,
-  metaImage,
   title,
   publishedAt,
   tags,
@@ -59,9 +55,9 @@ export const BlogPost = ({
       <div className={styles.blogPost}>
         <div className={styles.cardSection}>
           <div className={styles.cardImage}>
-            {(image?.url || metaImage?.url) && (
+            {image?.url && (
               <Image
-                src={image?.url || metaImage?.url || ''}
+                src={image?.url || ''}
                 alt=""
                 layout="fill"
                 objectFit="cover"
