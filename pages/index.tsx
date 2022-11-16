@@ -110,10 +110,6 @@ const Home: NextPage = () => {
   const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
   const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
   const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
-  const search = () => {
-    window.rudderanalytics.page();
-    window.rudderanalytics.track('Track Event');
-  };
 
   const scrollListener = useCallback(() => {
     if (
