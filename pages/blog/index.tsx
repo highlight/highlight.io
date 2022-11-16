@@ -149,7 +149,7 @@ export const Blog = ({
     itemsPerPage * (page - 1),
     itemsPerPage * page
   );
-  const allPostsLoaded = itemsPerPage * page >= filteredPosts.length;
+  const isLastPage = itemsPerPage * page >= filteredPosts.length;
 
   return (
     <>
@@ -263,14 +263,24 @@ export const Blog = ({
                   No posts found
                 </Typography>
               )}
-              {!allPostsLoaded && (
-                <Link
-                  className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
-                  href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
-                >
-                  Load More
-                </Link>
-              )}
+              <div className="flex w-full gap-4 place-content-center">
+                {page !== 1 && (
+                  <Link
+                    className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                    href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
+                  >
+                    Previous Page
+                  </Link>
+                )}
+                {!isLastPage && (
+                  <Link
+                    className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                    href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
+                  >
+                    Next Page
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
