@@ -237,7 +237,11 @@ const Navbar = ({
             //TODO: Change color on menu open
             }
             <Typography type="copy3" emphasis={true}>
-              <p className={styles.navTitle}>
+              <p className={classNames(styles.navTitle, {
+                [styles.copyOnDark]: isOpen,
+                [styles.copyOnLight]: !isOpen,
+              })}
+              >
                 {title}
               </p>
             </Typography>
