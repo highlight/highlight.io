@@ -19,7 +19,7 @@
     "@types/react-copy-to-clipboard": "^5.0.2",
     "@types/react-swipe": "^6.0.2",
     "@types/react-syntax-highlighter": "^15.5.5",
-    "@vercel/og": "^0.0.19",
+    "@vercel/og": "^0.0.20",
     "antd": "^4.23.6",
     "autoprefixer": "^10.4.13",
     "buffer": "^6.0.3",
