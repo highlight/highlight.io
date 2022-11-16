@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../Docs.module.scss';
 import { Listbox } from '@headlessui/react';
 import { Typography } from '../../common/Typography/Typography';
@@ -41,6 +41,16 @@ function DocSelect() {
       )
     ]
   );
+
+  useEffect(() => {
+    setSelectedDocs(
+      DOCS_TYPES[
+        findSelectedDocByArrayPath(
+          Array.isArray(router.query.doc) ? router.query.doc : []
+        )
+      ]
+    );
+  }, [router.query.doc]);
 
   return (
     <Listbox value={selectedDocs} onChange={setSelectedDocs}>

@@ -7,9 +7,8 @@
   flex-direction: column;
   flex: 0 0 300px;
   position: sticky;
-  height: 100vh;
-  top: 0;
-  padding-top: 62px;
+  height: calc(100vh - 54px);
+  top: 54px;
   z-index: 5;
 }
 
@@ -260,7 +259,7 @@ h5:hover .headingCopyIcon {
     align-items: center;
     padding: 0 var(--size-xxSmall);
     color: var(--color-copy-on-dark);
-    stroke: var(--color-copy-on-dark);
+    stroke: none !important;
   }
 
   span {
@@ -479,9 +478,8 @@ h5:hover .headingCopyIcon {
   flex-direction: column;
   position: sticky;
   padding: var(--size-xLarge) var(--size-large);
-  top: 0;
-  padding-top: 80px;
-  height: 100vh;
+  top: 80px;
+  height: calc(100vh - 80px);
 }
 
 .headingSection {
