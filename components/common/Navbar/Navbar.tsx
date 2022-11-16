@@ -110,7 +110,6 @@ const ResourceDropdown = ({
             <div className={styles.gridContainer}>
               {mainLinks.map((item, index) => (
                 <Link key={index} href={item.link} className={styles.gridItem}>
-                  {item.icon}
                   <Typography type="copy3" >
                     {item.title}
                   </Typography>
