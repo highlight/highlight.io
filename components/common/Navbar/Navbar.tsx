@@ -24,32 +24,26 @@ const ResourceDropdown = ({
   const mainLinks = [
     {
       title: "Frontend Monitoring",
-      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/monitoring"
     },
     {
       title: "Performance Monitoring",
-      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/performance"
     },
     {
       title: "Debugging and Troubleshooting",
-      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/debugging"
     },
     {
       title: "Session Replay",
-      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/feature"
     },
     {
       title: "Frontend Tooling",
-      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/react"
     },
     {
       title: "Highlight Engineering",
-      icon: <Icons.HiMinusSm className={styles.copyOnLight} />,
       link: "/blog/tag/developers"
     },
   ]
