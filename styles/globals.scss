@@ -1,4 +1,8 @@
 /* stylelint-disable */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 :root {
   --color-purple-100: #ede9fe;
   --color-purple-200: #ddd6fe;
@@ -71,6 +75,8 @@
   --color-editor-secondary-text: #4078f2;
 
   --copy-on-dark: #dfdfdf;
+  --darker-copy-on-dark: #9D97AA;
+  --copy-on-light: #645d74;
   --divider-on-dark: var(--color-purple-800);
 
   --color-primary-background: var(--color-primary-500);
@@ -99,6 +105,7 @@
   --color-primary-400: #120532;
   --color-primary-500: #0d0225;
   --color-copy-on-dark: #dfdfdf;
+  --color-darker-copy-on-dark: #9D97AA;
   --color-copy-on-light: #645d74;
   --color-divider-on-dark: #30294e;
 

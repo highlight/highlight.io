@@ -10,7 +10,7 @@ export const Typography = ({
   className,
   ...props
 }: React.PropsWithChildren<{
-  type: 'copy1' | 'copy2' | 'copy3' | 'outline';
+  type: 'copy1' | 'copy2' | 'copy3' | 'copy4' | 'outline';
   emphasis?: boolean;
   onDark?: boolean;
   className?: string;
@@ -22,6 +22,7 @@ export const Typography = ({
         [styles.copy1]: props.type === 'copy1',
         [styles.copy2]: props.type === 'copy2',
         [styles.copy3]: props.type === 'copy3',
+        [styles.copy4]: props.type === 'copy4',
         [styles.outline]: props.type === 'outline',
         [styles.emphasis]: emphasis,
         [styles.onDark]: onDark,
