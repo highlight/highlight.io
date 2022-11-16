@@ -131,7 +131,7 @@ const ResourceDropdown = ({
               </p>
               <div className={styles.innerGridContainer}>
                 {otherLinks.map((item, index) => (
-                  <a key={index} href={item.link} target="_blank" rel="noopener" className={classNames(styles.gridItem, styles.innerGridItem)}>
+                  <a key={index} href={item.link} target="_blank" rel="noreferrer" className={classNames(styles.gridItem, styles.innerGridItem)}>
                     {item.icon}
                     <Typography type="copy3" >
                       {item.title}
