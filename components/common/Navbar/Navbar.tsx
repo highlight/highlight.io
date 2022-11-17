@@ -7,14 +7,14 @@ import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { useEffect, useRef, useState } from 'react';
 import Banner from '../Banner/Banner';
-import { AiFillGithub, AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Popover, Transition } from '@headlessui/react'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
 import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
-import * as Icons from "react-icons/hi";
-import { FaChevronDown } from 'react-icons/fa';
+import ResourceDropdown from './ResourceDropdown';
+import ProductDropdown from './ResourceDropdown';
 
+/*
 const ResourceDropdown = ({
   isOpen
 }: {
@@ -143,6 +143,7 @@ const ResourceDropdown = ({
     </Popover>
   );
 };
+*/
 
 const Navbar = ({
   hideFreeTrialText,
@@ -323,17 +324,7 @@ const Navbar = ({
                 styles.headerCenter
               )}
             >
-              {/*
-              <a
-                href="https://app.highlight.run/"
-                className={styles.headerButton}
-              >
-                <Typography type="copy2" emphasis={true}>
-                  Product
-                </Typography>
-                <FaChevronDown />
-              </a>
-              */}
+              <ProductDropdown isOpen={scrolled && !fixed} />
               <Link
                 href="/pricing"
                 className={styles.headerButton}
