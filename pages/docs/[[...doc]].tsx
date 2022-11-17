@@ -54,14 +54,14 @@ export interface Doc {
   links: Set<string>;
 }
 
-const useHeadingsData = () => {
+const useHeadingsData = (headingTag: string) => {
   const router = useRouter();
   const [nestedHeadings, setNestedHeadings] = useState<any>([]);
 
   useEffect(() => {
-    const headingElements = Array.from(document.querySelectorAll('h5'));
+    const headingElements = Array.from(document.querySelectorAll(headingTag));
     setNestedHeadings(headingElements);
-  }, [router.query]);
+  }, [headingTag, router.query]);
 
   return { nestedHeadings };
 };
@@ -385,8 +385,67 @@ export const parseMarkdown = (fileContents: string): Doc => {
   };
 };
 
+const SdkTableOfContents = () => {
+  const { nestedHeadings } = useHeadingsData('h4');
+  const router = useRouter();
+  const [activeId, setActiveId] = useState<string>();
+  useIntersectionObserver(setActiveId);
+
+  useEffect(() => {
+    const selectedId = router.asPath.split('#');
+    if (selectedId.length > 1) {
+      document.querySelector(`#${selectedId[1]}`)?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }, [router.asPath]);
+
+  return (
+    <>
+      {nestedHeadings.map((heading: HTMLHeadingElement, i: number) => (
+        <Link href={`#${heading.id}`} key={i} legacyBehavior>
+          <div
+            className={styles.tocRow}
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector(`#${heading.id}`)?.scrollIntoView({
+                behavior: 'smooth',
+              });
+              const basePath = router.asPath.split('#')[0];
+              const newUrl = `${basePath}#${heading.id}`;
+              window.history.replaceState(
+                {
+                  ...window.history.state,
+                  as: newUrl,
+                  url: newUrl,
+                },
+                '',
+                newUrl
+              );
+            }}
+          >
+            <Minus
+              className={classNames(styles.tocIcon, styles.tocChild, {
+                [styles.tocItemCurrent]: heading.id === activeId,
+              })}
+            />
+            <Typography
+              type="copy3"
+              className={classNames(styles.tocItem, styles.tocChild, {
+                [styles.tocItemCurrent]: heading.id === activeId,
+              })}
+            >
+              {heading.innerText || 'nope'}
+            </Typography>
+          </div>
+        </Link>
+      ))}
+    </>
+  );
+};
+
 const PageContents = ({ title }: { title: string }) => {
-  const { nestedHeadings } = useHeadingsData();
+  const { nestedHeadings } = useHeadingsData('h5');
   const router = useRouter();
   const [activeId, setActiveId] = useState<string>();
   useIntersectionObserver(setActiveId);
@@ -423,7 +482,16 @@ const PageContents = ({ title }: { title: string }) => {
                     behavior: 'smooth',
                   });
                   const basePath = router.asPath.split('#')[0];
-                  router.push(`${basePath}#${heading.id}`);
+                  const newUrl = `${basePath}#${heading.id}`;
+                  window.history.replaceState(
+                    {
+                      ...window.history.state,
+                      as: newUrl,
+                      url: newUrl,
+                    },
+                    '',
+                    newUrl
+                  );
                 }}
               >
                 {heading.innerText}
@@ -663,15 +731,19 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.tocMenuLarge}>
-            {toc?.children.map((t) => (
-              <TableOfContents
-                key={t.docPathId}
-                toc={t}
-                docPaths={docOptions}
-                openParent={false}
-                openTopLevel={true}
-              />
-            ))}
+            {isSdkDocs ? (
+              <SdkTableOfContents />
+            ) : (
+              toc?.children.map((t) => (
+                <TableOfContents
+                  key={t.docPathId}
+                  toc={t}
+                  docPaths={docOptions}
+                  openParent={false}
+                  openTopLevel={true}
+                />
+              ))
+            )}
           </div>
           <div
             className={classNames(styles.tocRow, styles.tocMenu)}
@@ -696,15 +768,19 @@ const DocPage = ({
           </div>
           <Collapse isOpened={open}>
             <div className={classNames(styles.tocContents, styles.tocMenu)}>
-              {toc?.children.map((t) => (
-                <TableOfContents
-                  key={t.docPathId}
-                  toc={t}
-                  docPaths={docOptions}
-                  openParent={false}
-                  openTopLevel={false}
-                />
-              ))}
+              {isSdkDocs ? (
+                <SdkTableOfContents />
+              ) : (
+                toc?.children.map((t) => (
+                  <TableOfContents
+                    key={t.docPathId}
+                    toc={t}
+                    docPaths={docOptions}
+                    openParent={false}
+                    openTopLevel={false}
+                  />
+                ))
+              )}
             </div>
           </Collapse>
         </div>
@@ -731,9 +807,9 @@ const DocPage = ({
                   )
                 )}
             </div>
-            <h4 className={styles.pageTitle}>
+            <h3 className={styles.pageTitle}>
               {metadata ? metadata.title : ''}
-            </h4>
+            </h3>
             {isSdkDocs ? (
               <DocSection content={markdownText || ''} />
             ) : (
