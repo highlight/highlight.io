@@ -319,8 +319,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     docRelLinks.set(`/${d.simple_path}`, d.relative_links);
   }
 
-  console.log('vadim', docRelLinks);
-
   // validate that any relative links referenced in md files actually exist.
   for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
     for (const link of relativeLinks) {

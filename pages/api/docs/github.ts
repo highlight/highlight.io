@@ -88,6 +88,10 @@ export const processDocPath = function (base: string, fileString: string) {
       }
     }
   }
+  pp = pp.replaceAll('sdk-docs/', 'sdk/');
+  pp = pp.replaceAll('sdk-docs', 'sdk');
+  pp = pp.replaceAll('general-docs/', '');
+  pp = pp.replaceAll('general-docs', '');
   return removeOrderingPrefix(pp);
 };
 
