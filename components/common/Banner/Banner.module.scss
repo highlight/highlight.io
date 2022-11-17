@@ -28,15 +28,10 @@
   .banner {
     flex-direction: column;
     height: auto;
-    padding: var(--size-xSmall) var(--size-medium) var(--size-medium);
-
-    a {
-      padding: 0 var(--size-medium);
-    }
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1200px) {
   .banner {
     display: none;
   }

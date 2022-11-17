@@ -718,8 +718,7 @@ const DocPage = ({
         }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
-      <Navbar hideFreeTrialText fixed />
-
+      <Navbar title="Docs" hideBanner hideNavButtons fixed />
       <div className={styles.contentInnerBar}>
         <div className={styles.leftInner}>
           <DocSelect />
