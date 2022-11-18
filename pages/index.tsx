@@ -216,7 +216,7 @@ const Home: NextPage = () => {
                 </Typography>
               </PrimaryButton>
             </div>
-            {/*<HeroVideo />*/}
+            <HeroVideo />
           </div>
         </Section>
         <Section>
