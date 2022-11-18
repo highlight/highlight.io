@@ -1,12 +1,10 @@
-import { AiFillGithub } from 'react-icons/ai';
 import { Popover, Transition } from '@headlessui/react'
 import { Typography } from '../Typography/Typography';
 import { useState } from 'react';
 
 import { FaChevronDown } from 'react-icons/fa';
-import * as Icons from "react-icons/hi";
 
-import styles from './Navbar.module.scss';
+import styles from './ProductDropdown.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
 
@@ -17,53 +15,53 @@ const ProductDropdown = ({
   isOpen?: boolean;
 }) => {
   const [isShowing, setIsShowing] = useState(false)
-  const mainLinks = [
+  const frontendLinks = [
     {
-      title: "Frontend Monitoring",
-      link: "/blog/tag/monitoring"
+      title: "Angular",
+      link: ""
     },
     {
-      title: "Performance Monitoring",
-      link: "/blog/tag/performance"
+      title: "Gatsby.js",
+      link: ""
     },
     {
-      title: "Debugging and Troubleshooting",
-      link: "/blog/tag/debugging"
+      title: "HTML",
+      link: ""
     },
     {
-      title: "Session Replay",
-      link: "/blog/tag/feature"
+      title: "Next.js",
+      link: ""
     },
     {
-      title: "Frontend Tooling",
-      link: "/blog/tag/react"
+      title: "React.js",
+      link: ""
     },
     {
-      title: "Highlight Engineering",
-      link: "/blog/tag/developers"
+      title: "SvelteKit",
+      link: ""
+    },
+    {
+      title: "Vue.js",
+      link: ""
     },
   ]
 
-  const otherLinks = [
+  const backendLinks = [
     {
-      title: "Status Page",
-      icon: <Icons.HiCloud className={styles.copyOnLight} />,
-      link: "https://highlight.hyperping.io/"
+      title: "Express",
+      link: ""
     },
     {
-      title: "Changelog",
-      icon: <Icons.HiClipboardList className={styles.copyOnLight} />,
-      link: "https://feedback.highlight.run/changelog"
+      title: "Golang",
+      link: ""
     },
     {
-      title: "Feedback",
-      icon: <Icons.HiChat className={styles.copyOnLight} />,
-      link: "https://feedback.highlight.run"
+      title: "Next.js",
+      link: ""
     },
     {
-      title: "Github",
-      icon: <AiFillGithub className={styles.copyOnLight} />,
-      link: "https://github.com/highlight-run"
+      title: "Node.js",
+      link: ""
     },
   ]
 
@@ -81,7 +79,7 @@ const ProductDropdown = ({
         })}>
           <div className="flex gap-[6.5px] items-center">
             <Typography type="copy2">
-              Resources
+              Product
             </Typography>
             <FaChevronDown className="w-[10px]" />
           </div>
@@ -100,35 +98,38 @@ const ProductDropdown = ({
       >
         {!isOpen && <Popover.Panel className={styles.popover}>
           <div className={styles.popoverPanel}>
-            <div className="pl-2 pb-[6px]">
-                <Typography type="copy4" className={classNames(styles.copyOnLight)}>
-                  From the Highlight blog
-                </Typography>
-              </div>
             <div className={styles.gridContainer}>
-              {mainLinks.map((item, index) => (
-                <Link key={index} href={item.link} className={styles.gridItem}>
-                  <Typography type="copy3" >
-                    {item.title}
-                  </Typography>
-                </Link>
-              ))}
-            </div>
-            <div className={styles.innerPopoverPanel}>
-              <div className="pt-2 pb-1">
-                <Typography type="copy4" className={classNames(styles.copyOnLight)}>
-                  Other
-                </Typography>
-              </div>
-              <div className={styles.innerGridContainer}>
-                {otherLinks.map((item, index) => (
-                  <a key={index} href={item.link} target="_blank" rel="noreferrer" className={classNames(styles.gridItem, styles.innerGridItem)}>
-                    {item.icon}
-                    <Typography type="copy3" >
-                      {item.title}
+              <div className={styles.innerContainer}>
+                <div className="pb-1">
+                    <Typography type="copy4" className="pl-2 text-color-copy-on-light">
+                      Frontend
                     </Typography>
-                  </a>
-                ))}
+                </div>
+                <div className={styles.innerGridLeft}>
+                  {frontendLinks.map((item, index) => (
+                    <Link key={index} href={item.link} className={styles.link}>
+                      <Typography type="copy3">
+                        {item.title}
+                      </Typography>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.innerContainer}>
+                <div className="pb-1">
+                  <Typography type="copy4" className="pl-2 text-color-copy-on-light">
+                    Backend
+                  </Typography>
+                </div>
+                <div className={styles.innerGridRight}>
+                  {backendLinks.map((item, index) => (
+                    <Link key={index} href={item.link} className={styles.link}>
+                      <Typography type="copy3">
+                        {item.title}
+                      </Typography>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

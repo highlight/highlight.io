@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import * as Icons from "react-icons/hi";
 
-import styles from './Navbar.module.scss';
+import styles from './ResourceDropdown.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
 
@@ -122,7 +122,7 @@ const ResourceDropdown = ({
               </div>
               <div className={styles.innerGridContainer}>
                 {otherLinks.map((item, index) => (
-                  <a key={index} href={item.link} target="_blank" rel="noreferrer" className={classNames(styles.gridItem, styles.innerGridItem)}>
+                  <a key={index} href={item.link} target="_blank" rel="noreferrer" className={styles.gridItem}>
                     {item.icon}
                     <Typography type="copy3" >
                       {item.title}
