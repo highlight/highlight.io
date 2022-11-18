@@ -14,7 +14,6 @@ import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 import ResourceDropdown from './ResourceDropdown';
 import ProductDropdown from './ProductDropdown';
 
-
 const Navbar = ({
   hideFreeTrialText,
   hideNavButtons,
@@ -194,7 +193,7 @@ const Navbar = ({
                 styles.headerCenter
               )}
             >
-              {/*<ProductDropdown isOpen={scrolled && !fixed} /> */}
+              <ProductDropdown isOpen={scrolled && !fixed} />
               <Link
                 href="/pricing"
                 className={styles.headerButton}

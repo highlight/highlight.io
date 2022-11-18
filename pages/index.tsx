@@ -216,10 +216,11 @@ const Home: NextPage = () => {
                 </Typography>
               </PrimaryButton>
             </div>
-            <HeroVideo />
+            {/*<HeroVideo />*/}
           </div>
         </Section>
         <Section>
+
           <div className={styles.anchorFeature} id="features">
             <div className={styles.anchorTitle}>
               <h2>
