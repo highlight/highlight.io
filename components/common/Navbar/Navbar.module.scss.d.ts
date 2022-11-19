@@ -1,4 +1,5 @@
 export const bannerContainer: string;
+export const bannerContainerBlog: string;
 export const callToAction: string;
 export const chevronDown: string;
 export const copyOnDark: string;
@@ -14,6 +15,7 @@ export const headerButton: string;
 export const headerCenter: string;
 export const headerInner: string;
 export const headerLeft: string;
+export const headerLeftBlog: string;
 export const headerPadding: string;
 export const headerRight: string;
 export const hide: string;
