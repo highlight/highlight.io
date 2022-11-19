@@ -12,7 +12,6 @@ import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
 import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 import ResourceDropdown from './ResourceDropdown';
-import ProductDropdown from './ProductDropdown';
 
 const Navbar = ({
   hideFreeTrialText,
@@ -105,9 +104,7 @@ const Navbar = ({
 
             </Link>
 
-            {
-            //TODO: Change color on menu open
-            }
+
             <Typography type="copy3" emphasis={true}>
               <p className={classNames(styles.navTitle, {
                 [styles.copyOnDark]: isOpen,
@@ -193,7 +190,6 @@ const Navbar = ({
                 styles.headerCenter
               )}
             >
-              {/*<ProductDropdown isOpen={scrolled && !fixed} /> */}
               <Link
                 href="/pricing"
                 className={styles.headerButton}
