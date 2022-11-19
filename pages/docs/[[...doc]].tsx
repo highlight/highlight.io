@@ -315,15 +315,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
     docid++;
   }
+  for (const d of sdkPaths) {
+    docRelLinks.set(`/${d.simple_path}`, d.relative_links);
+  }
 
   // validate that any relative links referenced in md files actually exist.
   for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
     for (const link of relativeLinks) {
-      if (!docRelLinks.has(link)) {
-        // TODO(vkorolik) readd after sdk docs are migrated
-        // throw new Error(
-        //   `Link ${link} used in ${simplePath} is not a valid relative link.`
-        // );
+      if (!docRelLinks.has(link.split('#')[0])) {
+        throw new Error(
+          `Link ${link} used in ${simplePath} is not a valid relative link.`
+        );
       }
     }
   }
@@ -331,12 +333,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // validate that any archbee redirect URLs are valid.
   for (const [oldLink, newLink] of Object.entries(DOCS_REDIRECTS)) {
     if (newLink.startsWith('/docs/')) {
-      const doc = newLink.split('/docs').pop() || '';
+      const doc = (newLink.split('/docs').pop() || '').split('#')[0];
       if (!docRelLinks.has(doc)) {
-        // TODO(vkorolik) readd after sdk docs are migrated
-        // throw new Error(
-        //   `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
-        // );
+        throw new Error(
+          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
+        );
       }
     }
   }
