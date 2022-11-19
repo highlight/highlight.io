@@ -211,6 +211,7 @@
 }
 
 .innerGridItem {
+
 }
 
 .signUpButton {
@@ -234,6 +235,12 @@
   justify-content: flex-start;
   width: 33.33%;
   width: calc(100% / 3);
+}
+
+.headerLeftBlog {
+  display: flex;
+  gap: var(--size-xSmall);
+  justify-content: flex-start;
 }
 
 .headerCenter {
@@ -289,6 +296,23 @@
   }
 }
 
+.bannerContainerBlog {
+  gap: var(--size-small);
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: start;
+
+  p {
+    margin: var(--size-xSmall) 0 !important;
+  }
+
+  .callToAction {
+    color: #72e4fc;
+    font-weight: 500;
+  }
+}
+
 .navTitle {
   font-size: 22px;
   font-weight: 600;
@@ -323,6 +347,10 @@
 }  
 
 @media only screen and (min-width:801px) and (max-width: 1200px) {
+  .navPostTitle {
+    display: none;
+  }
+  
   .mobileMenu {
     top:118px;
   }
