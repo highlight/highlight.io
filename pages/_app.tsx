@@ -14,6 +14,7 @@ export { reportWebVitals } from 'next-axiom';
 import { H } from 'highlight.run';
 import { useEffect } from 'react';
 import { rudderInitialize } from '../scripts/rudder-initialize';
+import { SSRProvider } from 'react-aria';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -45,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
+    <SSRProvider>
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -70,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
       />
       <Component {...pageProps} />
-    </>
+    </SSRProvider>
   );
 }
 

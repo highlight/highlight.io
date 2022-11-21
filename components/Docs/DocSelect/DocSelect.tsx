@@ -5,7 +5,6 @@ import { Typography } from '../../common/Typography/Typography';
 import classNames from 'classnames';
 import SvgChevronDownIcon from '../../../public/images/ChevronDownIcon';
 import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const DOCS_TYPES = [
