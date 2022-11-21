@@ -2790,13 +2790,13 @@
     "@typescript-eslint/types" "5.44.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vercel/og@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.npmjs.org/@vercel/og/-/og-0.0.19.tgz"
-  integrity sha512-1LrPUlCoe8T+aEI1fGdvJDhwewK1/wpYlQnF+E9ERgJMFCnmWH4FA+NYBkQaJqxUUeHoutIxNZTHQFT39+I+BQ==
+"@vercel/og@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@vercel/og/-/og-0.0.21.tgz#9d2421a241a0cfbdc3841b88bf323d980339da40"
+  integrity sha512-WgMahG5c8UM7xtn/mT+ljUpDMSDnSlu8AXL52JtTwxb1odrd0GWqZg2N1X38wulPj+sCccNpDdFmmAuw0GLc+Q==
   dependencies:
     "@resvg/resvg-wasm" "2.0.0-alpha.4"
-    satori "0.0.42"
+    satori "0.0.44"
     yoga-wasm-web "0.1.2"
 
 acorn-jsx@^5.3.2:
@@ -3746,6 +3746,11 @@ embla-carousel@7.0.3:
   version "7.0.3"
   resolved "https://registry.npmjs.org/embla-carousel/-/embla-carousel-7.0.3.tgz"
   integrity sha512-Zo8E/qNb8J7n/jcfQxPrfdARlTgsMvmcXshn3J/2oxWVLwL/3N4cAhuqLQiud/oCjZzl+A8maCJDe2PDVlc/cA==
+
+emoji-regex@^10.2.1:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-10.2.1.tgz#a41c330d957191efd3d9dfe6e1e8e1e9ab048b3f"
+  integrity sha512-97g6QgOk8zlDRdgq1WxwgTMgEWGVAQvB5Fdpgc1MkNy56la5SKP9GsMXKDOdqwn90/41a8yPwIGk1Y6WVbeMQA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -6954,15 +6959,16 @@ sass@^1.50.0:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
-satori@0.0.42:
-  version "0.0.42"
-  resolved "https://registry.npmjs.org/satori/-/satori-0.0.42.tgz"
-  integrity sha512-ZZaNp2Ya1ACJ4Yf++e9Ccc1Rb6GcKjC9Nhcl4SQFcdM4VqCLfWHR6Iq7AdRCTcJDDuO8u/qGE2Cs+McVoqJenw==
+satori@0.0.44:
+  version "0.0.44"
+  resolved "https://registry.yarnpkg.com/satori/-/satori-0.0.44.tgz#278d2c383a3248973c93843c0f72da5c69c9eafa"
+  integrity sha512-WKUxXC2qeyno6J3ucwwLozPL6j1HXOZiN5wIUf7iqAhlx1RUC/6ePIKHi7iPc3Cy6DYuZcJriZXxXkSdo2FQHg==
   dependencies:
     "@shuding/opentype.js" "1.4.0-beta.0"
     css-background-parser "^0.1.0"
     css-box-shadow "1.0.0-3"
     css-to-react-native "^3.0.0"
+    emoji-regex "^10.2.1"
     postcss-value-parser "^4.2.0"
     yoga-layout-prebuilt "^1.10.0"
 
