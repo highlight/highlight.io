@@ -1,5 +1,8 @@
 import yaml from 'js-yaml';
-import path from 'path';
+
+export const config = {
+  runtime: 'experimental-edge',
+};
 
 // ignored files from https://github.com/highlight-run/docs
 export const IGNORED_DOCS_PATHS = new Set<string>([
@@ -69,7 +72,10 @@ export const removeOrderingPrefix = (path: string) => {
 };
 
 export const processDocPath = function (base: string, fileString: string) {
-  const simple_path = path.join(base, fileString);
+  if (base !== '' && !base.endsWith('/')) {
+    base = base + '/';
+  }
+  const simple_path = [base, fileString].join('');
   let pp: string;
   if (fileString.includes('index.md')) {
     // index.md contains the title of a subheading, which can't have content. get rid of "index.md" at the end
