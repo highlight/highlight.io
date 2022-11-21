@@ -81,7 +81,7 @@ export const processDocPath = function (base: string, fileString: string) {
     if (pp_array.length > 1) {
       const parentDirectory = pp_array[pp_array.length - 2];
       if (
-        pp_array[pp_array.length - 1] ===
+        removeOrderingPrefix(pp_array[pp_array.length - 1]) ===
         `${removeOrderingPrefix(parentDirectory)}-overview`
       ) {
         pp = [...pp_array.slice(0, -1), 'overview'].join('/');

@@ -61,7 +61,9 @@ function DocSelect() {
             {selectedDocs.name}
           </Typography>
         </div>
-        <SvgChevronDownIcon className={styles.tocIcon} />
+        <SvgChevronDownIcon
+          className={classNames(styles.tocIcon, styles.chevronDown)}
+        />
       </Listbox.Button>
       <Listbox.Options className={styles.docSelectList}>
         {DOCS_TYPES.map((doc) => (
