@@ -18,31 +18,31 @@ const ProductDropdown = ({
   const frontendLinks = [
     {
       title: "Angular",
-      link: ""
+      link: "/products"
     },
     {
       title: "Gatsby.js",
-      link: ""
+      link: "/products"
     },
     {
       title: "HTML",
-      link: ""
+      link: "/products"
     },
     {
       title: "Next.js",
-      link: ""
+      link: "/products"
     },
     {
       title: "React.js",
-      link: ""
+      link: "/products"
     },
     {
       title: "SvelteKit",
-      link: ""
+      link: "/products"
     },
     {
       title: "Vue.js",
-      link: ""
+      link: "/products"
     },
   ]
 

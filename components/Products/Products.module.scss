@@ -1,0 +1,56 @@
+.highlightedBadge {
+  display: inline-block;
+  color: var(--color-primary-500);
+  background-color: var(--color-selected-light);
+  padding: 0 var(--size-small);
+  margin-bottom: var(--size-large);
+  border-radius: 100px;
+}
+
+.subtleBadge {
+  display: inline-block;
+  color: var(--color-primary-500);
+  background-color: var(--color-selected-light);
+  padding: 0 var(--size-small);
+  margin-bottom: var(--size-large);
+  border-radius: 100px;
+}
+
+.anchorFeature {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  margin-top: 105px;
+
+  h1,
+  h2 {
+    margin-bottom: calc(10 * var(--space-unit)) !important;
+  }
+}
+
+.featureBox {
+  display: flex;
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: 16px;
+  max-width: 450px;
+  padding: var(--size-large);
+}
+
+.featureBoxIcon {
+  color: var(--darker-copy-on-dark);
+  padding: var(--size-small);
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: 6px;
+  height: 40px;
+}
+
+.featureBoxText {
+  display: flex;
+  flex-direction: column;
+  margin-left: 17px;
+}
