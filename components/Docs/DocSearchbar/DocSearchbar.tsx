@@ -115,11 +115,13 @@ const DocSearchbar = (props: SearchbarProps) => {
   }, [storeDocs]);
 
   let onSelectionChange = (idx: number) => {
-    setSearchResults([]);
-    setSearchValue('');
-    debouncedResults.cancel();
     const result = searchResults[idx];
-    router.push(`/docs/${result.path}`).then();
+    if (result) {
+      setSearchResults([]);
+      setSearchValue('');
+      debouncedResults.cancel();
+      router.push(`/docs/${result.path}`).then();
+    }
   };
 
   const onSearchChange = async (e: any) => {
@@ -128,18 +130,24 @@ const DocSearchbar = (props: SearchbarProps) => {
       setSearchValue(e);
       const docs = await db.docs
         .filter(
-          (doc) => doc.content.toLowerCase().indexOf(e.toLowerCase()) !== -1
+          (doc) =>
+            doc.metadata.title.toLowerCase().indexOf(e.toLowerCase()) !== -1 ||
+            doc.content.toLowerCase().indexOf(e.toLowerCase()) !== -1
         )
         .toArray();
       if (docs?.length) {
         setSearchResults(
           docs.map((d) => {
-            const idx = d.content.indexOf(e);
+            let idx = d.content.indexOf(e);
+            if (idx === -1) {
+              idx = Math.floor(d.content.length / 2);
+            }
+            const content = d.content.slice(
+              Math.max(0, idx - SEARCH_RESULT_BLURB_LENGTH / 2),
+              Math.min(d.content.length, idx + SEARCH_RESULT_BLURB_LENGTH / 2)
+            );
             return {
-              content: d.content.slice(
-                idx - SEARCH_RESULT_BLURB_LENGTH / 2,
-                idx + SEARCH_RESULT_BLURB_LENGTH / 2
-              ),
+              content,
               title: d.metadata.title,
               path: d.slug,
               indexPath: false,
