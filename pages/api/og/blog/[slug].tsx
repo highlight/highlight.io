@@ -2,7 +2,6 @@ import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
 import { gql } from 'graphql-request';
 import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
-import { Buffer } from 'buffer';
 import { font, fontLight, hero } from '../util';
 import { GraphQLRequest } from '../../../../utils/graphql';
 
@@ -31,7 +30,7 @@ export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
   const heroData = await hero;
-  const heroBase64 = Buffer.from(heroData).toString('base64');
+  const heroBase64 = btoa(String.fromCharCode(...new Uint8Array(heroData)));
   const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await GraphQLRequest(QUERY, { slug }, false)).post as
