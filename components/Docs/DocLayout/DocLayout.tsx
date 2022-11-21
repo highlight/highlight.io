@@ -24,10 +24,10 @@ export const DocSection = ({ content }: { content: string }) => {
           );
         },
         overrides: {
-          h1: DocsMarkdownRenderer('h5'),
-          h2: DocsMarkdownRenderer('h5'),
-          h3: DocsMarkdownRenderer('h5'),
-          h4: DocsMarkdownRenderer('h5'),
+          h1: DocsMarkdownRenderer('h4'),
+          h2: DocsMarkdownRenderer('h4'),
+          h3: DocsMarkdownRenderer('h4'),
+          h4: DocsMarkdownRenderer('h4'),
           h5: DocsMarkdownRenderer('h5'),
           code: DocsMarkdownRenderer('code'),
           a: DocsMarkdownRenderer('a'),

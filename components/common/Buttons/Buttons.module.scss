@@ -17,6 +17,7 @@
 .primaryButton {
   background-color: var(--brand-accent-light);
   color: var(--text-primary-inverted);
+  border-radius: var(--size-xSmall);
 
   &:hover {
     background-color: var(--brand-accent);

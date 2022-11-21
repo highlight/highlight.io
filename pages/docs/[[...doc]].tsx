@@ -26,6 +26,7 @@ import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
 import { IGNORED_DOCS_PATHS, processDocPath } from '../api/docs/github';
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
 import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
+import DocSelect from '../../components/Docs/DocSelect/DocSelect';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
 
@@ -53,14 +54,14 @@ export interface Doc {
   links: Set<string>;
 }
 
-const useHeadingsData = () => {
+const useHeadingsData = (headingTag: string) => {
   const router = useRouter();
   const [nestedHeadings, setNestedHeadings] = useState<any>([]);
 
   useEffect(() => {
-    const headingElements = Array.from(document.querySelectorAll('h5'));
+    const headingElements = Array.from(document.querySelectorAll(headingTag));
     setNestedHeadings(headingElements);
-  }, [router.query]);
+  }, [headingTag, router.query]);
 
   return { nestedHeadings };
 };
@@ -314,14 +315,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
     docid++;
   }
+  for (const d of sdkPaths) {
+    docRelLinks.set(`/${d.simple_path}`, d.relative_links);
+  }
 
   // validate that any relative links referenced in md files actually exist.
   for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
     for (const link of relativeLinks) {
-      if (!docRelLinks.has(link)) {
-        // throw new Error(
-        //   `Link ${link} used in ${simplePath} is not a valid relative link.`
-        // );
+      if (!docRelLinks.has(link.split('#')[0])) {
+        throw new Error(
+          `Link ${link} used in ${simplePath} is not a valid relative link.`
+        );
       }
     }
   }
@@ -329,7 +333,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   // validate that any archbee redirect URLs are valid.
   for (const [oldLink, newLink] of Object.entries(DOCS_REDIRECTS)) {
     if (newLink.startsWith('/docs/')) {
-      const doc = newLink.split('/docs').pop() || '';
+      const doc = (newLink.split('/docs').pop() || '').split('#')[0];
       if (!docRelLinks.has(doc)) {
         // throw new Error(
         //   `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
@@ -382,8 +386,67 @@ export const parseMarkdown = (fileContents: string): Doc => {
   };
 };
 
+const SdkTableOfContents = () => {
+  const { nestedHeadings } = useHeadingsData('h4');
+  const router = useRouter();
+  const [activeId, setActiveId] = useState<string>();
+  useIntersectionObserver(setActiveId);
+
+  useEffect(() => {
+    const selectedId = router.asPath.split('#');
+    if (selectedId.length > 1) {
+      document.querySelector(`#${selectedId[1]}`)?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }, [router.asPath]);
+
+  return (
+    <>
+      {nestedHeadings.map((heading: HTMLHeadingElement, i: number) => (
+        <Link href={`#${heading.id}`} key={i} legacyBehavior>
+          <div
+            className={styles.tocRow}
+            onClick={(e) => {
+              e.preventDefault();
+              document.querySelector(`#${heading.id}`)?.scrollIntoView({
+                behavior: 'smooth',
+              });
+              const basePath = router.asPath.split('#')[0];
+              const newUrl = `${basePath}#${heading.id}`;
+              window.history.replaceState(
+                {
+                  ...window.history.state,
+                  as: newUrl,
+                  url: newUrl,
+                },
+                '',
+                newUrl
+              );
+            }}
+          >
+            <Minus
+              className={classNames(styles.tocIcon, styles.tocChild, {
+                [styles.tocItemCurrent]: heading.id === activeId,
+              })}
+            />
+            <Typography
+              type="copy3"
+              className={classNames(styles.tocItem, styles.tocChild, {
+                [styles.tocItemCurrent]: heading.id === activeId,
+              })}
+            >
+              {heading.innerText || 'nope'}
+            </Typography>
+          </div>
+        </Link>
+      ))}
+    </>
+  );
+};
+
 const PageContents = ({ title }: { title: string }) => {
-  const { nestedHeadings } = useHeadingsData();
+  const { nestedHeadings } = useHeadingsData('h5');
   const router = useRouter();
   const [activeId, setActiveId] = useState<string>();
   useIntersectionObserver(setActiveId);
@@ -420,7 +483,16 @@ const PageContents = ({ title }: { title: string }) => {
                     behavior: 'smooth',
                   });
                   const basePath = router.asPath.split('#')[0];
-                  router.push(`${basePath}#${heading.id}`);
+                  const newUrl = `${basePath}#${heading.id}`;
+                  window.history.replaceState(
+                    {
+                      ...window.history.state,
+                      as: newUrl,
+                      url: newUrl,
+                    },
+                    '',
+                    newUrl
+                  );
                 }}
               >
                 {heading.innerText}
@@ -629,6 +701,14 @@ const DocPage = ({
     }
   }, [router]);
 
+  const isSdkDocs = useMemo(() => {
+    return (
+      currentPageIndex != -1 &&
+      docOptionsWithContent[currentPageIndex] &&
+      docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
+    );
+  }, [currentPageIndex, docOptionsWithContent]);
+
   return (
     <>
       <Meta
@@ -639,22 +719,31 @@ const DocPage = ({
         }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
-      <Navbar hideFreeTrialText fixed />
+      <Navbar title="Docs" hideBanner hideNavButtons fixed />
+      <div className={styles.contentInnerBar}>
+        <div className={styles.leftInner}>
+          <DocSelect />
+        </div>
+        <div className={styles.centerInner}>
+          <DocSearchbar docPaths={docOptions} />
+        </div>
+      </div>
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
-          <div className={styles.leftInner}>
-            <DocSearchbar docPaths={docOptions} />
-          </div>
           <div className={styles.tocMenuLarge}>
-            {toc?.children.map((t) => (
-              <TableOfContents
-                key={t.docPathId}
-                toc={t}
-                docPaths={docOptions}
-                openParent={false}
-                openTopLevel={true}
-              />
-            ))}
+            {isSdkDocs ? (
+              <SdkTableOfContents />
+            ) : (
+              toc?.children.map((t) => (
+                <TableOfContents
+                  key={t.docPathId}
+                  toc={t}
+                  docPaths={docOptions}
+                  openParent={false}
+                  openTopLevel={true}
+                />
+              ))
+            )}
           </div>
           <div
             className={classNames(styles.tocRow, styles.tocMenu)}
@@ -679,106 +768,104 @@ const DocPage = ({
           </div>
           <Collapse isOpened={open}>
             <div className={classNames(styles.tocContents, styles.tocMenu)}>
-              {toc?.children.map((t) => (
-                <TableOfContents
-                  key={t.docPathId}
-                  toc={t}
-                  docPaths={docOptions}
-                  openParent={false}
-                  openTopLevel={false}
-                />
-              ))}
+              {isSdkDocs ? (
+                <SdkTableOfContents />
+              ) : (
+                toc?.children.map((t) => (
+                  <TableOfContents
+                    key={t.docPathId}
+                    toc={t}
+                    docPaths={docOptions}
+                    openParent={false}
+                    openTopLevel={false}
+                  />
+                ))
+              )}
             </div>
           </Collapse>
         </div>
-        <div
-          className={classNames(styles.centerSection, {
-            [styles.sdkCenterSection]:
-              currentPageIndex != -1 &&
-              docOptionsWithContent[currentPageIndex] &&
-              docOptionsWithContent[currentPageIndex].array_path.includes(
-                'sdk'
-              ),
-          })}
-        >
-          <div className={styles.breadcrumb}>
-            {getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
-              i === 0 ? (
-                <Link href={breadcrumb.path} legacyBehavior>
-                  {breadcrumb.title}
+        <div className={styles.contentSection}>
+          <div
+            className={classNames(styles.centerSection, {
+              [styles.sdkCenterSection]: isSdkDocs,
+            })}
+          >
+            <div className={styles.breadcrumb}>
+              {!isSdkDocs &&
+                getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
+                  i === 0 ? (
+                    <Link href={breadcrumb.path} legacyBehavior>
+                      {breadcrumb.title}
+                    </Link>
+                  ) : (
+                    <>
+                      {` / `}
+                      <Link href={breadcrumb.path} legacyBehavior>
+                        {breadcrumb.title}
+                      </Link>
+                    </>
+                  )
+                )}
+            </div>
+            <h3 className={styles.pageTitle}>
+              {metadata ? metadata.title : ''}
+            </h3>
+            {isSdkDocs ? (
+              <DocSection content={markdownText || ''} />
+            ) : (
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                className={styles.contentRender}
+                components={{
+                  h1: getDocsTypographyRenderer('h5'),
+                  h2: getDocsTypographyRenderer('h5'),
+                  h3: getDocsTypographyRenderer('h5'),
+                  h4: getDocsTypographyRenderer('h5'),
+                  h5: getDocsTypographyRenderer('h5'),
+                  code: getDocsTypographyRenderer('code'),
+                  a: getDocsTypographyRenderer('a'),
+                }}
+              >
+                {markdownText || ''}
+              </ReactMarkdown>
+            )}
+            <div className={styles.pageNavigateRow}>
+              {currentPageIndex > 0 ? (
+                <Link
+                  href={docOptionsWithContent[currentPageIndex - 1].simple_path}
+                  passHref
+                  className={styles.pageNavigate}
+                >
+                  <BiChevronLeft />
+                  <Typography type="copy2">
+                    {docOptionsWithContent[currentPageIndex - 1].metadata.title}
+                  </Typography>
                 </Link>
               ) : (
-                <>
-                  {` / `}
-                  <Link href={breadcrumb.path} legacyBehavior>
-                    {breadcrumb.title}
-                  </Link>
-                </>
-              )
-            )}
+                <div></div>
+              )}
+              {currentPageIndex < docOptionsWithContent?.length - 1 ? (
+                <Link
+                  href={docOptionsWithContent[currentPageIndex + 1].simple_path}
+                  passHref
+                  className={styles.pageNavigate}
+                >
+                  <Typography type="copy2">
+                    {docOptionsWithContent[currentPageIndex + 1].metadata.title}
+                  </Typography>
+                  <BiChevronRight />
+                </Link>
+              ) : (
+                <div></div>
+              )}
+            </div>
           </div>
-          <h4 className={styles.pageTitle}>{metadata ? metadata.title : ''}</h4>
-          {currentPageIndex != -1 &&
-          docOptionsWithContent[currentPageIndex] &&
-          docOptionsWithContent[currentPageIndex].array_path.includes('sdk') ? (
-            <DocSection content={markdownText || ''} />
-          ) : (
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              className={styles.contentRender}
-              components={{
-                h1: getDocsTypographyRenderer('h5'),
-                h2: getDocsTypographyRenderer('h5'),
-                h3: getDocsTypographyRenderer('h5'),
-                h4: getDocsTypographyRenderer('h5'),
-                h5: getDocsTypographyRenderer('h5'),
-                code: getDocsTypographyRenderer('code'),
-                a: getDocsTypographyRenderer('a'),
-              }}
-            >
-              {markdownText || ''}
-            </ReactMarkdown>
-          )}
-          <div className={styles.pageNavigateRow}>
-            {currentPageIndex > 0 ? (
-              <Link
-                href={docOptionsWithContent[currentPageIndex - 1].simple_path}
-                passHref
-                className={styles.pageNavigate}
-              >
-                <BiChevronLeft />
-                <Typography type="copy2">
-                  {docOptionsWithContent[currentPageIndex - 1].metadata.title}
-                </Typography>
-              </Link>
-            ) : (
-              <div></div>
-            )}
-            {currentPageIndex < docOptionsWithContent?.length - 1 ? (
-              <Link
-                href={docOptionsWithContent[currentPageIndex + 1].simple_path}
-                passHref
-                className={styles.pageNavigate}
-              >
-                <Typography type="copy2">
-                  {docOptionsWithContent[currentPageIndex + 1].metadata.title}
-                </Typography>
-                <BiChevronRight />
-              </Link>
-            ) : (
-              <div></div>
-            )}
-          </div>
-        </div>
-        {currentPageIndex != -1 &&
-          docOptionsWithContent[currentPageIndex] &&
-          !docOptionsWithContent[currentPageIndex].array_path.includes(
-            'sdk'
-          ) && (
+          {!isSdkDocs && (
             <div className={styles.rightSection}>
               <PageContents title={metadata ? metadata.title : ''} />
             </div>
           )}
+        </div>
       </main>
     </>
   );

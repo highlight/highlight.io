@@ -12,10 +12,18 @@ import Head from 'next/head';
 import { Meta } from '../components/common/Head/Meta';
 export { reportWebVitals } from 'next-axiom';
 import { H } from 'highlight.run';
+import { useEffect } from 'react';
+import { rudderInitialize } from '../scripts/rudder-initialize';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
-Router.events.on('routeChangeComplete', nProgress.done);
+Router.events.on('routeChangeComplete', () => {
+  if (window.rudderanalytics) {
+    window.rudderanalytics.page();
+  }
+
+  nProgress.done();
+});
 
 H.init('4d7k1xeo', {
   networkRecording: {
@@ -26,6 +34,16 @@ H.init('4d7k1xeo', {
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    const initialize = async () => {
+      await rudderInitialize();
+      window.rudderanalytics.page();
+      window.rudderanalytics.identify();
+    };
+
+    initialize();
+  }, []);
+
   return (
     <>
       <Script id="google-tag-manager" strategy="afterInteractive">
