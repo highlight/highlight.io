@@ -30,7 +30,6 @@
     "highlight.run": "^4.5.3",
     "js-yaml": "^4.1.0",
     "lodash.debounce": "^4.0.8",
-    "lottie-react": "^2.2.1",
     "markdown-to-jsx": "^7.1.7",
     "next": "^13.0.4",
     "next-axiom": "^0.15.0",
