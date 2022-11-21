@@ -98,8 +98,9 @@ const DocSearchbar = (props: SearchbarProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [isSearchLoading, setIsSearchLoading] = useState(true);
 
-  const storeDocs = useCallback(() => {
-    return db.docs.bulkPut(
+  const storeDocs = useCallback(async () => {
+    await db.docs.clear();
+    await db.docs.bulkPut(
       props.docPaths.map((d) => ({
         slug: d.simple_path,
         content: d.content,
@@ -109,7 +110,7 @@ const DocSearchbar = (props: SearchbarProps) => {
   }, [props.docPaths]);
 
   useEffect(() => {
-    storeDocs();
+    storeDocs().then();
   }, [storeDocs]);
 
   let onSelectionChange = () => {
