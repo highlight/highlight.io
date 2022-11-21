@@ -144,7 +144,7 @@ export const getGithubDoc = async (
 ): Promise<{
   meta: DocMeta;
   content: string;
-}> => {
+} | null> => {
   const response = await fetch(
     `https://api.github.com/repos/highlight-run/docs/contents/${slug}.md`,
     {
@@ -163,7 +163,9 @@ export const getGithubDoc = async (
     } else {
       throw Error(`slug ${slug} is a directory; expected a file`);
     }
-  } else {
+  } else if (!slug.endsWith('/index')) {
     return getGithubDoc(`${slug}/index`);
+  } else {
+    return null;
   }
 };

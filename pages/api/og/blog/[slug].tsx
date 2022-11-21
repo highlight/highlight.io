@@ -30,7 +30,11 @@ export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
   const heroData = await hero;
-  const heroBase64 = btoa(String.fromCharCode(...new Uint8Array(heroData)));
+  const heroBase64 = btoa(
+    new Uint8Array(heroData).reduce(function (p, c) {
+      return p + String.fromCharCode(c);
+    }, '')
+  );
   const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await GraphQLRequest(QUERY, { slug }, false)).post as
