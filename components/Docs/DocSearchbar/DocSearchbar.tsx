@@ -3,7 +3,6 @@
 import { Spin } from 'antd';
 import classNames from 'classnames';
 import debounce from 'lodash.debounce';
-import Link from 'next/link';
 import React, {
   DetailedHTMLProps,
   InputHTMLAttributes,
@@ -26,6 +25,7 @@ import {
   SEARCH_RESULT_BLURB_LENGTH,
   SearchResult,
 } from '../../../pages/api/docs/search/[searchValue]';
+import { useRouter } from 'next/router';
 
 const SEARCH_DEBOUNCE_MS = 200;
 
@@ -94,6 +94,7 @@ interface SearchbarProps
 }
 
 const DocSearchbar = (props: SearchbarProps) => {
+  const router = useRouter();
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [isSearchLoading, setIsSearchLoading] = useState(true);
@@ -113,12 +114,12 @@ const DocSearchbar = (props: SearchbarProps) => {
     storeDocs().then();
   }, [storeDocs]);
 
-  let onSelectionChange = () => {
-    setTimeout(() => {
-      setSearchResults([]);
-      setSearchValue('');
-    }, SEARCH_DEBOUNCE_MS);
+  let onSelectionChange = (idx: number) => {
+    setSearchResults([]);
+    setSearchValue('');
     debouncedResults.cancel();
+    const result = searchResults[idx];
+    router.push(`/docs/${result.path}`).then();
   };
 
   const onSearchChange = async (e: any) => {
@@ -175,30 +176,25 @@ const DocSearchbar = (props: SearchbarProps) => {
     >
       {searchResults.map((result: SearchResult, i) => (
         <Item key={i} textValue={result.title}>
-          <Link href={`/docs/${result.path}`} legacyBehavior>
-            <div
-              className={classNames(styles.searchResultCard)}
-              onClick={() => setSearchValue('')}
-            >
-              <div>
-                <Highlighter
-                  className={styles.resultTitle}
-                  highlightClassName={styles.highlightedText}
-                  searchWords={[searchValue]}
-                  autoEscape={true}
-                  textToHighlight={result.title}
-                />
-              </div>
-              <div className={styles.content}>
-                <Highlighter
-                  highlightClassName={styles.highlightedText}
-                  searchWords={[searchValue]}
-                  autoEscape={true}
-                  textToHighlight={result.content}
-                />
-              </div>
+          <div className={classNames(styles.searchResultCard)}>
+            <div>
+              <Highlighter
+                className={styles.resultTitle}
+                highlightClassName={styles.highlightedText}
+                searchWords={[searchValue]}
+                autoEscape={true}
+                textToHighlight={result.title}
+              />
             </div>
-          </Link>
+            <div className={styles.content}>
+              <Highlighter
+                highlightClassName={styles.highlightedText}
+                searchWords={[searchValue]}
+                autoEscape={true}
+                textToHighlight={result.content}
+              />
+            </div>
+          </div>
         </Item>
       ))}
     </DocSearchComboBox>
