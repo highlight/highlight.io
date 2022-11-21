@@ -22,6 +22,12 @@ const DOCS_TYPES = [
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/nextjs',
   },
+  {
+    id: 4,
+    name: 'Client SDK Documentation',
+    icon: <DocumentTextIcon />,
+    url: '/docs/sdk/client',
+  },
 ];
 
 const findSelectedDocByArrayPath = (arrayPath: string[]) => {
