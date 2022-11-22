@@ -463,7 +463,9 @@ const PageContents = ({ title }: { title: string }) => {
   return nestedHeadings.length > 0 ? (
     <div className={styles.pageContentTable}>
       <div className={styles.pageContentTitle}>
-        <Image src={PageIcon} alt="" />
+        <div className={styles.pageContentIcon}>
+          <Image src={PageIcon} alt="" />
+        </div>
         <Typography type="copy3" emphasis>
           {title}
         </Typography>
@@ -495,7 +497,8 @@ const PageContents = ({ title }: { title: string }) => {
                   );
                 }}
               >
-                {heading.innerText}
+                <span className={styles.pageContentBullet}>-</span>
+                <span>{heading.innerText}</span>
               </a>
             </li>
           ))}
@@ -624,8 +627,8 @@ const TableOfContents = ({
 };
 
 const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
-  const trail: { title: string; path: string }[] = [
-    { title: 'Docs', path: '/docs' },
+  const trail: { title: string; path: string; hasContent: boolean }[] = [
+    { title: 'Docs', path: '/docs', hasContent: true },
   ];
   if (metadata && docOptions) {
     const currentDocIndex = docOptions?.findIndex(
@@ -642,6 +645,7 @@ const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
       trail.push({
         title: nextBreadcrumb?.metadata?.title,
         path: `/docs/${nextBreadcrumb?.simple_path}`,
+        hasContent: nextBreadcrumb?.content != '',
       });
     });
   }
@@ -797,12 +801,17 @@ const DocPage = ({
                     <Link href={breadcrumb.path} legacyBehavior>
                       {breadcrumb.title}
                     </Link>
-                  ) : (
+                  ) : breadcrumb.hasContent ? (
                     <>
                       {` / `}
                       <Link href={breadcrumb.path} legacyBehavior>
                         {breadcrumb.title}
                       </Link>
+                    </>
+                  ) : (
+                    <>
+                      {` / `}
+                      {breadcrumb.title}
                     </>
                   )
                 )}

@@ -5,11 +5,10 @@ import { Typography } from '../../common/Typography/Typography';
 import classNames from 'classnames';
 import SvgChevronDownIcon from '../../../public/images/ChevronDownIcon';
 import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const DOCS_TYPES = [
-  { id: 1, name: 'Regular Docs', icon: <DocumentIcon />, url: '/docs' },
+  { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs' },
   {
     id: 2,
     name: 'Node.js SDK Documentation',
@@ -21,6 +20,12 @@ const DOCS_TYPES = [
     name: 'Next.js SDK Documentation',
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/nextjs',
+  },
+  {
+    id: 4,
+    name: 'Client SDK Documentation',
+    icon: <DocumentTextIcon />,
+    url: '/docs/sdk/client',
   },
 ];
 
@@ -61,7 +66,9 @@ function DocSelect() {
             {selectedDocs.name}
           </Typography>
         </div>
-        <SvgChevronDownIcon className={styles.tocIcon} />
+        <SvgChevronDownIcon
+          className={classNames(styles.tocIcon, styles.chevronDown)}
+        />
       </Listbox.Button>
       <Listbox.Options className={styles.docSelectList}>
         {DOCS_TYPES.map((doc) => (
@@ -76,9 +83,7 @@ function DocSelect() {
           >
             <div className={styles.tocChild}>
               <div className={styles.tocIcon}>{doc.icon}</div>
-              <Typography type="copy3" emphasis>
-                {doc.name}
-              </Typography>
+              <Typography type="copy3">{doc.name}</Typography>
             </div>
           </Listbox.Option>
         ))}
