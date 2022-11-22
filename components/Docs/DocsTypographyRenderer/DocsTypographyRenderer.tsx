@@ -8,6 +8,16 @@ import { BiLink } from 'react-icons/bi';
 import { createElement } from 'react';
 import classNames from 'classnames';
 
+const getIdFromHTMLHeaderProps = (props: any) => {
+  return props?.children
+    .map((child: any) => (child.props ? child.props.children[0].value : child))
+    .join('')
+    .replace(/[^a-zA-Z ]/g, '')
+    .trim()
+    .split(' ')
+    .join('-');
+};
+
 const getIdFromHeaderProps = (props: any) => {
   return props?.node?.children
     .map((child: any) =>
@@ -36,7 +46,7 @@ const resolveLink = (href: string): string => {
 };
 
 export const DocsMarkdownRenderer = (
-  renderType: 'h5' | 'h6' | 'code' | 'a' | 'div'
+  renderType: 'h4' | 'h5' | 'h6' | 'code' | 'a' | 'div'
 ) => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
@@ -67,10 +77,26 @@ export const DocsMarkdownRenderer = (
               className: styles.contentRender,
               ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(renderType)
                 ? {
-                    id: props.id,
+                    id: getIdFromHTMLHeaderProps(props),
                     onClick: () => {
+                      document
+                        .querySelector(`#${getIdFromHeaderProps(props)}`)
+                        ?.scrollIntoView({
+                          behavior: 'smooth',
+                        });
                       const basePath = router.asPath.split('#')[0];
-                      router.push(`${basePath}#${props.id}`);
+                      const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
+                        props
+                      )}`;
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl
+                      );
                     },
                   }
                 : {}),
@@ -124,10 +150,26 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
               className: classNames(styles.contentRender),
               ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(renderType)
                 ? {
-                    id: props.id,
+                    id: getIdFromHTMLHeaderProps(props),
                     onClick: () => {
+                      document
+                        .querySelector(`#${getIdFromHeaderProps(props)}`)
+                        ?.scrollIntoView({
+                          behavior: 'smooth',
+                        });
                       const basePath = router.asPath.split('#')[0];
-                      router.push(`${basePath}#${props.id}`);
+                      const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
+                        props
+                      )}`;
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl
+                      );
                     },
                   }
                 : {}),
@@ -189,8 +231,24 @@ export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
                 ? {
                     id: getIdFromHeaderProps(props),
                     onClick: () => {
+                      document
+                        .querySelector(`#${getIdFromHeaderProps(props)}`)
+                        ?.scrollIntoView({
+                          behavior: 'smooth',
+                        });
                       const basePath = router.asPath.split('#')[0];
-                      router.push(`${basePath}#${getIdFromHeaderProps(props)}`);
+                      const newUrl = `${basePath}#${getIdFromHeaderProps(
+                        props
+                      )}`;
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl
+                      );
                     },
                   }
                 : {}),
