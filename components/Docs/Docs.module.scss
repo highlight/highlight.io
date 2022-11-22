@@ -756,8 +756,9 @@ h5:hover .headingCopyIcon {
     font-size: 16px;
     line-height: 26px;
     align-items: center;
-    gap: var(--size-xSmall);
+    gap: 0 var(--size-xSmall);
     margin: var(--size-xSmall) 0 !important;
+    flex-wrap: wrap;
 
     &:hover {
       text-decoration: none;
