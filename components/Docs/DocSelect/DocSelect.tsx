@@ -8,7 +8,7 @@ import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 
 const DOCS_TYPES = [
-  { id: 1, name: 'Regular Docs', icon: <DocumentIcon />, url: '/docs' },
+  { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs' },
   {
     id: 2,
     name: 'Node.js SDK Documentation',
