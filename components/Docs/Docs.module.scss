@@ -842,6 +842,7 @@ h5:hover .headingCopyIcon {
     padding: var(--size-large) var(--size-large);
     position: relative;
     max-width: none;
+    top: 0;
   }
 
   .rightSection {
@@ -885,12 +886,9 @@ h5:hover .headingCopyIcon {
   }
 
   .searchContainer {
-    width: 100%;
+    width: 300px;
     .docSearchbar {
       width: 100%;
-    }
-
-    .searchDiv {
     }
   }
 
@@ -938,5 +936,9 @@ h5:hover .headingCopyIcon {
       width: 100%;
       padding: 0;
     }
+  }
+
+  .searchContainer {
+    width: 100%;
   }
 }
