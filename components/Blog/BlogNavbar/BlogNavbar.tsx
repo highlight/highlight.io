@@ -58,7 +58,7 @@ const BlogNavbar = ({
 
   return <>
     <Banner>
-      <div className={styles.bannerContainer}>
+      <div className={styles.bannerContainerBlog}>
         <p>Want 1 month of free Highlight? </p>
         <a href="http://app.highlight.run/" className={styles.callToAction}>
           Register Here →
@@ -119,16 +119,15 @@ const BlogNavbar = ({
           [styles.headerBorder]: prevY != 0,
         })}
       >
-        <div className={classNames(styles.navContainer, styles.headerLeft)}>
-          <Link href={'/'} className={styles.urlStyle}>
+        <Link href={'/'} className={styles.urlStyle}>
+          {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
+        </Link>
+        <div className={classNames(styles.navContainer, styles.headerLeftBlog)}>
 
-            {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
-
-          </Link>
           <div className={styles.navPostTitle}>{title}</div>
         </div>
         <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
+          {isOpen ? <AiOutlineClose className={styles.copyOnDark} /> : <AiOutlineMenu />}
         </div>
         {isOpen && (
           <div className={styles.mobileMenu}>

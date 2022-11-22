@@ -1,6 +1,5 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
-import { Buffer } from 'buffer';
 import { font, fontLight, hero } from '../util';
 import 'fs';
 import path from 'path';
@@ -14,12 +13,15 @@ export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
   const heroData = await hero;
-  const heroBase64 = Buffer.from(heroData).toString('base64');
-
+  const heroBase64 = btoa(
+    new Uint8Array(heroData).reduce(function (p, c) {
+      return p + String.fromCharCode(c);
+    }, '')
+  );
   const doc = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
     ?.pathname.groups.doc;
 
-  const { meta } = await getGithubDoc(doc || 'index');
+  const d = await getGithubDoc(doc || 'index');
 
   return new ImageResponse(
     (
@@ -62,7 +64,7 @@ export default async function handler(req: NextRequest) {
             >
               Highlight Docs
             </span>
-            <span tw="text-4xl">{meta.title}</span>
+            <span tw="text-4xl">{d?.meta.title}</span>
             <span
               style={{
                 color: '#DFDFDF',

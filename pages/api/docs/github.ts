@@ -81,13 +81,17 @@ export const processDocPath = function (base: string, fileString: string) {
     if (pp_array.length > 1) {
       const parentDirectory = pp_array[pp_array.length - 2];
       if (
-        pp_array[pp_array.length - 1] ===
+        removeOrderingPrefix(pp_array[pp_array.length - 1]) ===
         `${removeOrderingPrefix(parentDirectory)}-overview`
       ) {
         pp = [...pp_array.slice(0, -1), 'overview'].join('/');
       }
     }
   }
+  pp = pp.replaceAll('sdk-docs/', 'sdk/');
+  pp = pp.replaceAll('sdk-docs', 'sdk');
+  pp = pp.replaceAll('general-docs/', '');
+  pp = pp.replaceAll('general-docs', '');
   return removeOrderingPrefix(pp);
 };
 
@@ -140,7 +144,7 @@ export const getGithubDoc = async (
 ): Promise<{
   meta: DocMeta;
   content: string;
-}> => {
+} | null> => {
   const response = await fetch(
     `https://api.github.com/repos/highlight-run/docs/contents/${slug}.md`,
     {
@@ -159,7 +163,9 @@ export const getGithubDoc = async (
     } else {
       throw Error(`slug ${slug} is a directory; expected a file`);
     }
-  } else {
+  } else if (!slug.endsWith('/index')) {
     return getGithubDoc(`${slug}/index`);
+  } else {
+    return null;
   }
 };
