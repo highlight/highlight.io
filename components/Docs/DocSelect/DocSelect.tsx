@@ -83,9 +83,7 @@ function DocSelect() {
           >
             <div className={styles.tocChild}>
               <div className={styles.tocIcon}>{doc.icon}</div>
-              <Typography type="copy3" emphasis>
-                {doc.name}
-              </Typography>
+              <Typography type="copy3">{doc.name}</Typography>
             </div>
           </Listbox.Option>
         ))}
