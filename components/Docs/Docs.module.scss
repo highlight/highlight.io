@@ -10,6 +10,7 @@
   height: calc(100vh - 54px);
   top: 54px;
   z-index: 5;
+  max-width: 300px;
 }
 
 .active {
@@ -99,6 +100,9 @@
 }
 
 .tocItem {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   line-height: 1.5rem !important;
 }
 
@@ -621,6 +625,7 @@ h5:hover .headingCopyIcon {
 
 .tocMenuLarge {
   overflow: auto;
+  overflow-x: hidden;
   padding: var(--size-small) var(--size-large);
   scrollbar-color: var(--divider-on-dark) var(--color-primary-background);
 
@@ -751,8 +756,9 @@ h5:hover .headingCopyIcon {
     font-size: 16px;
     line-height: 26px;
     align-items: center;
-    gap: var(--size-xSmall);
+    gap: 0 var(--size-xSmall);
     margin: var(--size-xSmall) 0 !important;
+    flex-wrap: wrap;
 
     &:hover {
       text-decoration: none;
@@ -817,7 +823,7 @@ h5:hover .headingCopyIcon {
   }
 
   .searchDiv {
-    width: 100%;
+    max-width: none;
   }
 
   .contentRender,
@@ -836,10 +842,16 @@ h5:hover .headingCopyIcon {
     border-bottom: 1px solid var(--divider-on-dark);
     padding: var(--size-large) var(--size-large);
     position: relative;
+    max-width: none;
+    top: 0;
   }
 
   .rightSection {
     display: none;
+  }
+
+  .contentSection {
+    width: 100%;
   }
 
   .centerSection {
@@ -873,6 +885,31 @@ h5:hover .headingCopyIcon {
   .codeBlock {
     font-size: var(--size-small);
   }
+
+  .searchContainer {
+    width: 300px;
+    .docSearchbar {
+      width: 100%;
+    }
+  }
+
+  .sdkDocSection {
+    flex-direction: column;
+    gap: var(--size-small);
+
+    .sdkLeftColumn {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
+    .sdkRightColumn {
+      padding-top: 0;
+      width: 100%;
+      position: relative;
+      flex: 1 1 auto;
+      max-width: none;
+    }
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -892,10 +929,17 @@ h5:hover .headingCopyIcon {
 
     .leftInner {
       flex: 0 0 auto;
+      width: 100%;
     }
 
     .centerInner {
       height: auto;
+      width: 100%;
+      padding: 0;
     }
+  }
+
+  .searchContainer {
+    width: 100%;
   }
 }
