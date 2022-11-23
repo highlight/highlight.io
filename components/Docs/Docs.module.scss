@@ -96,7 +96,7 @@
 }
 
 .tocChild {
-  color: var(--color-copy-on-light);
+  color: var(--darker-copy-on-dark);
 }
 
 .tocItem {
@@ -651,12 +651,12 @@ h5:hover .headingCopyIcon {
 
 .breadcrumb {
   margin: var(--size-medium) 0;
-  color: var(--color-copy-on-light);
+  color: var(--darker-copy-on-dark);
   font-weight: 400;
 }
 
 .breadcrumb a {
-  color: var(--color-copy-on-light);
+  color: var(--darker-copy-on-dark);
   font-weight: 400;
 
   &:hover {
@@ -822,7 +822,7 @@ h5:hover .headingCopyIcon {
   }
 
   p {
-    color: var(--color-copy-on-light);
+    color: var(--darker-copy-on-dark);
     font-weight: 400;
     font-size: 14px;
     line-height: 22px !important;
