@@ -2,16 +2,16 @@
   display: inline-block;
   color: var(--color-primary-500);
   background-color: var(--color-selected-light);
-  padding: 0 var(--size-small);
+  padding: 2px var(--size-small);
   margin-bottom: var(--size-large);
   border-radius: 100px;
 }
 
 .subtleBadge {
   display: inline-block;
-  color: var(--color-primary-500);
-  background-color: var(--color-selected-light);
-  padding: 0 var(--size-small);
+  color: white;
+  background-color: var(--color-divider-on-purple);
+  padding: 2px var(--size-small);
   margin-bottom: var(--size-large);
   border-radius: 100px;
 }
@@ -25,7 +25,7 @@
   align-items: center;
   text-align: center;
   margin: auto;
-  margin-top: 105px;
+  margin-top: 120px;
 
   h1,
   h2 {
@@ -53,4 +53,103 @@
   display: flex;
   flex-direction: column;
   margin-left: 17px;
+}
+
+.snippet {
+  background: var(--color-primary-500);
+  border-radius: 20px;
+  overflow: hidden;
+
+  width: 100%;
+}
+
+.snippetTop {
+  background: rgba(255, 255, 255, 0.1);;
+  border-bottom: 1px solid #30294E;
+  height: 40px;
+  width: 100%;
+}
+
+.snippetText {
+  text-align: left;
+  padding: var(--size-large);
+  padding-top: 60px;
+}
+
+.codeSnippetFrame {
+  background-color: var(--color-primary-500);
+  border-radius: var(--border-radius);
+  width: 100%;
+  overflow: hidden;
+
+  .codeSnippetTopbar {
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid #30294E;
+    padding: var(--size-large);
+    align-items: center;
+
+    .codeSnippetButtons {
+      display: flex;
+      position: absolute;
+      gap: var(--size-small);
+    }
+
+    .codeSnippetIcon {
+      height: calc(7 * var(--space-unit));
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      svg {
+        height: inherit;
+      }
+    }
+
+    .codeSnippetCircle {
+      height: calc(4 * var(--space-unit));
+      width: calc(4 * var(--space-unit));
+      border-radius: calc(4 * var(--space-unit));
+      border: 1px solid rgba(255, 255, 255, 0.1);;
+    }
+  }
+
+  .codeSnippetContent {
+    padding: var(--size-large) var(--size-large) calc(20 * var(--space-unit));
+    overflow: scroll;
+    position: relative;
+    text-align: left;
+
+    @media screen and (max-width: 600px) {
+      font-size: 12px !important;
+    }
+
+    .codeSnippetCopy {
+      position: absolute;
+      bottom: var(--size-large);
+      right: var(--size-large);
+      width: calc(16 * var(--space-unit));
+      height: calc(16 * var(--space-unit));
+      border-radius: var(--border-radius);
+      border: 1px solid var(--color-white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      .codeSnippetCopyIcon {
+        width: var(--size-medium);
+        height: var(--size-medium);
+      }
+
+      img {
+        border-radius: 0;
+      }
+
+      &:hover {
+        border-color: var(--color-secondary-200);
+      }
+    }
+  }
 }

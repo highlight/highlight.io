@@ -3,7 +3,7 @@ import { CodeBlock } from 'react-code-blocks';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import CopyIcon from '../../public/images/copy.svg';
 import highlightCodeTheme from './../common/CodeBlock/highlight-code-theme';
-import styles from 'Products.module.scss' 
+import styles from './Products.module.scss' 
 
 const ProductCodeSnippet = ({
   content,

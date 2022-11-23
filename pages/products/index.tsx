@@ -13,10 +13,12 @@ import styles from '../../components/Products/Products.module.scss'
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 
+
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
 import Footer from '../../components/common/Footer/Footer';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
+import ProductCodeSnippet from '../../components/Products/ProductCodeSnippet';
 
 const Products: NextPage = () => {
 
@@ -82,8 +84,47 @@ const Products: NextPage = () => {
             />
           </div>
         </div>
-        <div className="flex justify-center">
-          
+        <div className="flex justify-center bg-color-primary-200">
+          <div className={styles.anchorFeature}>
+            <div className={landingStyles.anchorHead}>
+              <div className={styles.subtleBadge}>
+                <Typography type="copy4" emphasis>
+                  Badge Text 
+                </Typography>
+              </div>
+              <h2>
+                Get started in your <br />
+                {`Next.js`} app <br /> 
+                today.
+              </h2>
+              <Typography type="copy1" onDark>
+                What if monitoring your {`Next.js`} app was as easy as deploying it? 
+                With session replay and error monitoring, Highlight’s got you covered. 
+                This should be around 3-4 lines long.
+              </Typography>
+              <div className={classNames(landingStyles.buttonContainer, landingStyles.heroImage)}>
+                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>
+                    Get started for free
+                  </Typography>
+                </PrimaryButton>
+              </div>
+            </div>
+              
+          <ProductCodeSnippet
+            canCopy={true}
+            language="javascript"
+            content={`import { Highlight } from "@highlight-run/node";
+
+const app = express();
+
+const highlightOptions = {};
+const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
+
+// This should be before any other error middleware and after all controllers
+app.use(highlightHandler);`}
+          />
+          </div>
         </div>
         <FooterCallToAction />
       </main>
