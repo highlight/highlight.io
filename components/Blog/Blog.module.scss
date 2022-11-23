@@ -28,6 +28,7 @@
 .suggestedBlogPost {
   margin: var(--size-xSmall) 0 !important;
   padding: var(--size-small) 0 !important;
+  cursor: pointer;
 
   .cardImage {
     min-height: 160px;

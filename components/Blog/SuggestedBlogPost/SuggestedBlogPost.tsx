@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
 import { Post } from '../BlogPost/BlogPost';
 import classNames from 'classnames';
+import { PostTag } from '../Tag';
 
 export const SuggestedBlogPost = ({
   slug,
@@ -11,11 +12,15 @@ export const SuggestedBlogPost = ({
   image,
   title,
   publishedAt,
-  tags,
+  tags_relations,
   readingTime,
 }: Post) => {
   return (
-    <Link href={`/blog/${slug}`} style={{ textDecoration: 'none' }}>
+    <Link
+      href={`/blog/${slug}`}
+      style={{ textDecoration: 'none' }}
+      legacyBehavior
+    >
       <div className={classNames(styles.blogPost, styles.suggestedBlogPost)}>
         <div className={styles.cardSection}>
           <div className={styles.cardImage}>
@@ -46,17 +51,8 @@ export const SuggestedBlogPost = ({
             </Typography>
           </div>
           <div className={styles.tagDiv}>
-            {tags.map((tag: string) => (
-              <Link
-                key={tag}
-                href={`/blog?tag=${tag}`}
-                passHref={true}
-                legacyBehavior
-              >
-                <div>
-                  <Typography type="copy3">{tag}</Typography>
-                </div>
-              </Link>
+            {tags_relations.map((tag) => (
+              <PostTag {...tag} key={tag.slug + slug} />
             ))}
           </div>
         </div>
