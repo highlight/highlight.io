@@ -58,17 +58,9 @@ export async function loadPostsFromHygraph(tag?: string) {
     tag: tag ? [tag] : [],
   })) as { posts: Post[] };
 
-  return posts
-    .filter((p) => (tag ? p.tags_relations.some((t) => t.slug === tag) : true))
-    .sort((a, b) => {
-      // sort by postedAt if the publishedAt field is the same
-      if (a.postedAt === b.postedAt) {
-        return (
-          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-        );
-      }
-      return 0;
-    }) as Post[];
+  return posts.filter((p) =>
+    tag ? p.tags_relations.some((t) => t.slug === tag) : true
+  ) as Post[];
 }
 
 export async function loadTagsFromHygraph() {
@@ -144,6 +136,7 @@ export const Blog = ({
       { key: 'tags_relations.name', maxRanking: matchSorter.rankings.CONTAINS },
       'title',
     ],
+    sorter: (items) => items,
   });
   const displayedPosts = filteredPosts.slice(
     itemsPerPage * (page - 1),
@@ -291,14 +284,14 @@ export const Blog = ({
   );
 };
 
-function getDateAndReadingTime(publishedAt: string, readingMinutes: number) {
-  const publishedDate = new Date(publishedAt).toLocaleDateString(undefined, {
+function getDateAndReadingTime(postedAt: string, readingMinutes: number) {
+  const postedDate = new Date(postedAt).toLocaleDateString(undefined, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   });
 
-  return `${publishedDate} • ${readingMinutes} min. read`;
+  return `${postedDate} • ${readingMinutes} min. read`;
 }
 
 const postItemStyle = classNames(
@@ -317,7 +310,7 @@ const PostItem = ({ post }: { post: Post }) => {
       )}
     >
       <Typography type="copy4" className="text-copy-on-dark">
-        {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
+        {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
       </Typography>
 
       <Link href={`/blog/${post.slug}`}>
@@ -354,7 +347,7 @@ const MobilePostItem = ({ post }: { post: Post }) => {
         <h3 className="mt-3">{post.title}</h3>
       </Link>
       <Typography type="copy4" className="mt-1 text-copy-on-dark">
-        {getDateAndReadingTime(post.publishedAt, post.readingTime ?? 0)}
+        {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
       </Typography>
       <div className="mt-6">
         {post.author && <PostAuthor {...post.author} hidePhoto />}
