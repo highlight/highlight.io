@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import { loadPostsFromHygraph, loadTagsFromHygraph, Blog } from '..';
+import { loadPostsFromHygraph, loadTagsFromHygraph, Blog } from '../index';
 
 export async function getStaticPaths(): Promise<{
   paths: string[];
@@ -22,7 +22,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       posts,
       tags,
-      currentTag: '',
+      currentTagSlug: params!.tag,
     },
     revalidate: 60,
   };

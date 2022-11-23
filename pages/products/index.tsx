@@ -38,7 +38,7 @@ const Products: NextPage = () => {
                   Highlight for Next.js
                 </Typography>
               </div>
-              <h1 className="text-black">
+              <h1>
                 The{' '}
                 <span className={landingStyles.highlightedText}>{"Next.js"}</span><br />
                 monitoring toolkit <br />
