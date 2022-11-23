@@ -131,13 +131,17 @@ export const Blog = ({
   const featuredPosts = posts.filter((p) => p.featured);
   const unfeaturedPosts = posts.filter((p) => !p.featured);
 
-  const filteredPosts = matchSorter(unfeaturedPosts, searchQuery, {
-    keys: [
-      { key: 'tags_relations.name', maxRanking: matchSorter.rankings.CONTAINS },
-      'title',
-    ],
-    sorter: (items) => items,
-  });
+  const filteredPosts = searchQuery
+    ? matchSorter(unfeaturedPosts, searchQuery, {
+        keys: [
+          'title',
+          {
+            key: 'tags_relations.name',
+            maxRanking: matchSorter.rankings.CONTAINS,
+          },
+        ],
+      })
+    : unfeaturedPosts;
   const displayedPosts = filteredPosts.slice(
     itemsPerPage * (page - 1),
     itemsPerPage * page
