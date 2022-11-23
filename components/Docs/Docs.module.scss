@@ -96,7 +96,7 @@
 }
 
 .tocChild {
-  color: var(--color-copy-on-light);
+  color: var(--darker-copy-on-dark);
 }
 
 .tocItem {
@@ -155,6 +155,11 @@
 
 .pageTitle {
   margin: 0 0 var(--size-medium) !important;
+}
+
+.sdkPageTitle {
+  font-size: 26px;
+  line-height: 36px;
 }
 
 .contentRender {
@@ -382,6 +387,26 @@ h5:hover .headingCopyIcon {
 
   ul {
     width: 100%;
+
+    &::-webkit-scrollbar {
+      width: var(--size-xSmall);
+      height: var(--size-xSmall);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-primary-background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: var(--size-medium);
+    }
+
+    &:hover {
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--divider-on-dark);
+      }
+    }
   }
 
   .spinner {
@@ -461,6 +486,26 @@ h5:hover .headingCopyIcon {
     border-radius: var(--border-radius) !important;
     white-space: pre !important;
     font-size: 16px;
+
+    &::-webkit-scrollbar {
+      width: var(--size-xSmall);
+      height: var(--size-xSmall);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-primary-background);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: var(--size-medium);
+    }
+
+    &:hover {
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--divider-on-dark);
+      }
+    }
 
     @media screen and (max-width: 600px) {
       font-size: 14px !important;
@@ -606,12 +651,12 @@ h5:hover .headingCopyIcon {
 
 .breadcrumb {
   margin: var(--size-medium) 0;
-  color: var(--color-copy-on-light);
+  color: var(--darker-copy-on-dark);
   font-weight: 400;
 }
 
 .breadcrumb a {
-  color: var(--color-copy-on-light);
+  color: var(--darker-copy-on-dark);
   font-weight: 400;
 
   &:hover {
@@ -713,8 +758,10 @@ h5:hover .headingCopyIcon {
 
 .sdkDocSection {
   display: flex;
-  margin-bottom: 60px;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
   gap: var(--size-xxLarge);
+  border-bottom: 1px solid var(--divider-on-dark);
 
   .sdkLeftColumn {
     flex: 1 0 50%;
@@ -775,7 +822,7 @@ h5:hover .headingCopyIcon {
   }
 
   p {
-    color: var(--color-copy-on-light);
+    color: var(--darker-copy-on-dark);
     font-weight: 400;
     font-size: 14px;
     line-height: 22px !important;
@@ -793,7 +840,7 @@ h5:hover .headingCopyIcon {
   .innerParameterHeading {
     background: #30294e;
     padding: var(--size-xxSmall) var(--size-small);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 22px;
     color: var(--color-copy-on-dark);
   }
@@ -803,7 +850,7 @@ h5:hover .headingCopyIcon {
   }
 
   p {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -900,6 +947,10 @@ h5:hover .headingCopyIcon {
     .sdkLeftColumn {
       flex: 1 1 auto;
       width: 100%;
+
+      h6 {
+        font-size: 20px;
+      }
     }
 
     .sdkRightColumn {
@@ -908,11 +959,19 @@ h5:hover .headingCopyIcon {
       position: relative;
       flex: 1 1 auto;
       max-width: none;
+
+      h6 {
+        font-size: 22px;
+      }
     }
   }
 }
 
 @media screen and (max-width: 600px) {
+  .inlineCodeBlock {
+    word-break: break-word;
+  }
+
   .leftSection {
     top: 0;
   }
