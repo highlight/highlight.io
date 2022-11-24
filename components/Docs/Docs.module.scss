@@ -764,7 +764,7 @@ h5:hover .headingCopyIcon {
   border-bottom: 1px solid var(--divider-on-dark);
 
   .sdkLeftColumn {
-    flex: 1 0 50%;
+    flex: 1 0 calc(50% - var(--size-xxLarge));
   }
 
   .sdkRightColumn {
@@ -833,9 +833,10 @@ h5:hover .headingCopyIcon {
 .innerParameterContainer {
   margin-top: var(--size-medium);
   border: 1px solid var(--color-divider-on-dark);
-  border-radius: var(--size-xxSmall);
+  border-radius: var(--size-small);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .innerParameterHeading {
     background: #30294e;
@@ -995,6 +996,12 @@ h5:hover .headingCopyIcon {
       height: auto;
       width: 100%;
       padding: 0;
+      border: 0;
+    }
+
+    .docSelectText {
+      margin-left: var(--size-xxSmall);
+      gap: var(--size-xSmall);
     }
   }
 
