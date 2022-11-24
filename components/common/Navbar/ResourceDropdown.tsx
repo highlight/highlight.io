@@ -20,27 +20,27 @@ const ResourceDropdown = ({
   const mainLinks = [
     {
       title: "Frontend Monitoring",
-      link: "/blog/tag/monitoring"
+      link: "/blog/tag/frontend-monitoring"
     },
     {
       title: "Performance Monitoring",
-      link: "/blog/tag/performance"
+      link: "/blog/tag/performance-monitoring"
     },
     {
-      title: "Debugging and Troubleshooting",
-      link: "/blog/tag/debugging"
+      title: "Debugging & Troubleshooting",
+      link: "/blog/tag/debugging-and-troubleshooting"
     },
     {
       title: "Session Replay",
-      link: "/blog/tag/feature"
+      link: "/blog/tag/session-replay"
     },
     {
-      title: "Frontend Tooling",
-      link: "/blog/tag/react"
+      title: "Developer Tooling",
+      link: "/blog/tag/developer-tooling"
     },
     {
       title: "Highlight Engineering",
-      link: "/blog/tag/developers"
+      link: "/blog/tag/highlight-engineering"
     },
   ]
 

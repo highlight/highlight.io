@@ -2,6 +2,7 @@ import styles from '../Blog.module.scss';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
+import { Tag } from '../Tag';
 
 export interface Author {
   firstName: string;
@@ -24,6 +25,7 @@ export interface Post {
   title: string;
   metaTitle?: string;
   publishedAt: string;
+  postedAt: string;
   publishedBy: {
     name: string;
     picture: string;
@@ -32,7 +34,9 @@ export interface Post {
     markdown: string;
     raw: any;
   };
+  featured: boolean;
   tags: Array<string>;
+  tags_relations: Tag[];
   readingTime?: number;
   author?: Author;
 }

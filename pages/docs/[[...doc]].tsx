@@ -816,7 +816,11 @@ const DocPage = ({
                   )
                 )}
             </div>
-            <h3 className={styles.pageTitle}>
+            <h3
+              className={classNames(styles.pageTitle, {
+                [styles.sdkPageTitle]: isSdkDocs,
+              })}
+            >
               {metadata ? metadata.title : ''}
             </h3>
             {isSdkDocs ? (
