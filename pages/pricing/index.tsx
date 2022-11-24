@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
 import CheckMark from '../../public/images/checkmark.svg';
@@ -40,10 +40,6 @@ import {
   StartupInfo,
 } from '../../components/Pricing/plan_info';
 import { Meta } from '../../components/common/Head/Meta';
-import {
-  Feature,
-  IsFeatureOn,
-} from '../../components/common/FeatureFlag/FeatureFlag';
 
 // Plans and info used for both mobile and desktop views.
 const planDetails: Array<PricingDetails> = [
@@ -59,9 +55,7 @@ const planInfo: Array<PricingInfo> = [
   EnterpriseInfo,
 ];
 
-const docsUrl = IsFeatureOn(Feature.LandingPageDocs)
-  ? '/docs'
-  : 'https://docs.highlight.run';
+const docsUrl = '/docs';
 
 const FAQS = [
   {
