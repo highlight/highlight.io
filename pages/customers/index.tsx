@@ -170,31 +170,33 @@ const CustomerCaseCard = ({
         />
       </div>
       <div className={styles.caseDetails}>
-        {logo && (
-          <div className={styles.companyCaseLogo}>
-            <Image
-              src={logo}
-              alt="Company logo"
-              layout="fill"
-              objectFit="contain"
-              objectPosition="left"
-            />
+        <div>
+          {logo && (
+            <div className={styles.companyCaseLogo}>
+              <Image
+                src={logo}
+                alt="Company logo"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="left"
+              />
+            </div>
+          )}
+          <div className={styles.caseCardQuote}>
+            <blockquote>
+              <h4 className={styles.leftQuote}>“</h4>
+              <Typography type="copy2" onDark>
+                {quote}
+              </Typography>
+              <h4 className={styles.rightQuote}>”</h4>
+            </blockquote>
+            <span>
+              <Typography type="copy2" emphasis>
+                {author},
+              </Typography>{' '}
+              <Typography type="copy2">{role}</Typography>
+            </span>
           </div>
-        )}
-        <div className={styles.caseCardQuote}>
-          <blockquote>
-            <h4 className={styles.leftQuote}>“</h4>
-            <Typography type="copy2" onDark>
-              {quote}
-            </Typography>
-            <h4 className={styles.rightQuote}>”</h4>
-          </blockquote>
-          <span>
-            <Typography type="copy2" emphasis>
-              {author},
-            </Typography>{' '}
-            <Typography type="copy2">{role}</Typography>
-          </span>
         </div>
         <PrimaryButton
           href={`/customers/${slug}`}
