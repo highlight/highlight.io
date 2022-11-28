@@ -191,7 +191,7 @@ export const Blog = ({
               </div>
             </div>
           </div>
-          <div className="w-full max-w-[988px] px-[42px]">
+          <div className="w-[988px] max-w-full px-[42px]">
             <div className="flex flex-col w-full mb-[30px] desktop:mb-10">
               <Typography
                 type="copy4"
