@@ -152,10 +152,10 @@ export const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-4xl desktop:max-w-7xl">
-          <div className="sticky w-[352px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
+        <div className="flex items-start desktop:mx-11 mt-[29px] mb-36 gap-3.5 max-w-max mx-auto">
+          <div className="sticky flex-shrink-0 w-[352px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
+            {/* sidebar */}
             <div className="flex flex-col max-h-full gap-6 border border-solid rounded-lg border-divider-on-dark px-9 py-7">
-              {/* sidebar */}
               <div
                 className={classNames(
                   searchBarBaseStyle,
@@ -182,10 +182,14 @@ export const Blog = ({
               </div>
             </div>
           </div>
-          <div className="w-full max-w-4xl px-[42px]">
+          <div className="w-full max-w-[988px] px-[42px]">
             <div className="flex flex-col w-full mb-[30px] desktop:mb-10">
-              <Typography type="outline" className="mb-2 text-highlight-yellow">
-                The Highlight Blog
+              <Typography
+                type="copy4"
+                emphasis
+                className="mb-2 text-highlight-yellow"
+              >
+                THE HIGHLIGHT BLOG
               </Typography>
 
               <h3 className="hidden mobile:inline">{currentTag.name}</h3>
