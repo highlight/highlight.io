@@ -274,7 +274,7 @@ export const Blog = ({
                 </Typography>
               )}
               <div className="flex w-full gap-4 place-content-center">
-                {page !== 1 && (
+                {page > 1 && (
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
