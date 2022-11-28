@@ -263,7 +263,7 @@ export const Blog = ({
               {displayedPosts.length === 0 && (
                 <Typography
                   type="copy2"
-                  className="w-full max-w-[904px] text-center inline-block text-copy-on-light"
+                  className="w-[904px] text-center inline-block text-copy-on-light"
                 >
                   No posts found
                 </Typography>
