@@ -153,7 +153,7 @@ export const Blog = ({
       <Navbar />
       <main>
         <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-4xl desktop:max-w-7xl">
-          <div className="sticky w-[352px] hidden pb-[300px] -mb-[300px] h-screen desktop:inline-block overflow-y-scroll top-[153px] box-border">
+          <div className="sticky w-[352px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
             <div className="flex flex-col max-h-full gap-6 border border-solid rounded-lg border-divider-on-dark px-9 py-7">
               {/* sidebar */}
               <div
