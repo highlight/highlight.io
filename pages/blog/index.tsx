@@ -132,8 +132,12 @@ export const Blog = ({
   const [searchQuery, setSearchQuery] = useState<string>('');
   const itemsPerPage = 4;
 
-  const featuredPosts = posts.filter((p) => p.featured);
-  const unfeaturedPosts = posts.filter((p) => !p.featured);
+  const shouldFeature = !searchQuery && currentTag.slug === allTag.slug;
+
+  const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
+  const unfeaturedPosts = posts.filter((p) =>
+    shouldFeature ? !p.featured : true
+  );
 
   const filteredPosts = searchQuery
     ? matchSorter(unfeaturedPosts, searchQuery, {
@@ -146,6 +150,7 @@ export const Blog = ({
         ],
       })
     : unfeaturedPosts;
+  page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
   const displayedPosts = filteredPosts.slice(
     itemsPerPage * (page - 1),
     itemsPerPage * page
