@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const searchBarBaseStyle = classNames(
-  'border border-solid rounded-md w-full text-copy-on-dark border-divider-on-dark items-center flex focus-within:border-copy-on-light transition-colors'
+  'border-solid w-full text-copy-on-dark border-divider-on-dark items-center flex focus-within:border-copy-on-light transition-colors'
 );
 
 const searchBarInputBaseStyle = classNames(
@@ -153,13 +153,13 @@ export const Blog = ({
       <Navbar />
       <main>
         <div className="flex items-start desktop:mx-11 mt-[29px] mb-36 gap-3.5 max-w-max mx-auto">
-          <div className="sticky flex-shrink-0 w-[352px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
+          <div className="sticky flex-shrink-0 w-[296px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
             {/* sidebar */}
-            <div className="flex flex-col max-h-full gap-6 border border-solid rounded-lg border-divider-on-dark px-9 py-7">
+            <div className="flex flex-col max-h-full border border-solid rounded-lg border-divider-on-dark">
               <div
                 className={classNames(
                   searchBarBaseStyle,
-                  'px-2 h-[34px] gap-1 flex-none'
+                  'h-[34px] gap-1 flex-none px-2 border-b'
                 )}
               >
                 <HiMagnifyingGlass />
@@ -171,7 +171,7 @@ export const Blog = ({
                   className={classNames(searchBarInputBaseStyle, 'text-sm')}
                 />
               </div>
-              <div className="flex flex-col flex-1 max-h-full gap-2 overflow-y-scroll">
+              <div className="flex flex-col flex-1 max-h-full gap-2 p-2 overflow-y-scroll">
                 {shownTags.map((tag) => (
                   <SidebarTag
                     {...tag}
@@ -207,7 +207,7 @@ export const Blog = ({
               <div
                 className={classNames(
                   searchBarBaseStyle,
-                  'h-14 gap-2.5 px-3.5 box-border'
+                  'h-14 gap-2.5 px-3.5 box-border rounded-md border'
                 )}
               >
                 <HiMagnifyingGlass className="w-6 h-6" />
