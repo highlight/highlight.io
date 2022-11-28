@@ -312,7 +312,7 @@ function getDateAndReadingTime(postedAt: string, readingMinutes: number) {
 }
 
 const postItemStyle = classNames(
-  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:bg-divider-on-dark'
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg p-7 hover:bg-divider-on-dark border-divider-on-dark hover:border-copy-on-light'
 );
 
 const PostItem = ({ post }: { post: Post }) => {
@@ -320,9 +320,7 @@ const PostItem = ({ post }: { post: Post }) => {
     <div
       className={classNames(
         postItemStyle,
-        post.featured
-          ? 'border-highlight-yellow'
-          : 'border-divider-on-dark p-7 hover:border-copy-on-light',
+        post.featured && 'shadow-[8px_8px_0_0_#5420D1]',
         'hidden mobile:block'
       )}
     >
@@ -353,9 +351,7 @@ const MobilePostItem = ({ post }: { post: Post }) => {
     <div
       className={classNames(
         postItemStyle,
-        post.featured
-          ? 'border-highlight-yellow'
-          : 'border-divider-on-dark p-7 hover:border-copy-on-light',
+        post.featured && 'shadow-[8px_8px_0_0_#5420D1]',
         'mobile:hidden block'
       )}
     >
