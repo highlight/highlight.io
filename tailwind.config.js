@@ -3,11 +3,11 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/index.tsx",
-    "./pages/*.{js,ts,jsx,tsx}",
-    "./components/common/Navbar/*.{js,ts,jsx,tsx}",
-    "./components/common/Navbar/Navbar.tsx",
+    './app/**/*.{js,ts,jsx,tsx}',
+    './pages/index.tsx',
+    './pages/*.{js,ts,jsx,tsx}',
+    './components/common/Navbar/*.{js,ts,jsx,tsx}',
+    './components/common/Navbar/Navbar.tsx',
   ],
   theme: {
     extend: {
@@ -17,6 +17,7 @@ module.exports = {
         'divider-on-dark': '#30294E',
         'dark-background': '#0D0225',
         'copy-on-light': '#645D74',
+        'purple-dark': '#5420D1',
         'color-selected-light': '#ebff5e',
         'color-selected-dark': '#8dc31a',
         'color-secondary-100': '#b9f2fe',

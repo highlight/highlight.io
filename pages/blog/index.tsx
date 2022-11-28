@@ -99,6 +99,10 @@ const searchBarInputBaseStyle = classNames(
   'box-border h-full w-0 flex-1 font-sans leading-none bg-transparent border-none outline-none text-copy-on-dark'
 );
 
+const pageLinkStyle = classNames(
+  'w-56 bg-divider-on-dark font-sans text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-copy-on-light transition-colors active:transition-none active:bg-purple-dark text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark'
+);
+
 const allTag: Omit<Tag, 'posts'> = {
   name: 'All posts',
   slug: 'all',
@@ -267,7 +271,7 @@ export const Blog = ({
               <div className="flex w-full gap-4 place-content-center">
                 {page !== 1 && (
                   <Link
-                    className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                    className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
                   >
                     Previous Page
@@ -275,7 +279,7 @@ export const Blog = ({
                 )}
                 {!isLastPage && (
                   <Link
-                    className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                    className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
                   >
                     Next Page
