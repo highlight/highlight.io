@@ -36,7 +36,7 @@ const Footer = () => {
                 <Link href="/pricing">Pricing</Link>
               </li>
               <li>
-                <a href="https://app.highlight.run/?sign_up=1">Sign up</a>
+                <a href="https://app.highlight.io/?sign_up=1">Sign up</a>
               </li>
               <li>
                 <Link href="/#features">Features</Link>
