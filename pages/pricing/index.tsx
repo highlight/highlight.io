@@ -192,7 +192,7 @@ const TierSection = ({
             href={
               contactSales
                 ? 'mailto:sales@highlight.io'
-                : 'https://app.highlight.run/?sign_up=1'
+                : 'https://app.highlight.io/?sign_up=1'
             }
             className={styles.pricingButton}
           >
