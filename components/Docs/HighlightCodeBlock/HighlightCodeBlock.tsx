@@ -11,16 +11,17 @@ import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/20/solid'
 
 export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
   const [copied, setCopied] = useState(false);
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(0);
+  console.log(selected);
   return (
     <div className={styles.codeBlock}>
       {props.topbar &&
         <div className={styles.codeBlockTopper}>
-          {props.types && <div className="w-36 ml-6 mt-3">
+          {props.product.types && <div className="w-36 ml-6 mt-3">
             <Listbox value={selected} onChange={setSelected}>
               <div className="relative mt-1">
                 <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-1 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                  <span className="block truncate">{props.types[selected]}</span>
+                  <span className="block truncate">{props.product.types[selected]}</span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <ChevronUpDownIcon
                       className="h-5 w-5 text-gray-400"
@@ -35,14 +36,14 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
                   leaveTo="opacity-0"
                 >
                   <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {props.types.map((type: string, index: Key) => (
+                    {props.product.types.map((type: string, index: Key) => (
                       <Listbox.Option
                         key={index}
                         className={({ active }) =>
                           `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
                           }`
                         }
-                        value={type}
+                        value={index}
                       >
                         {({ selected }) => (
                           <>
@@ -70,7 +71,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
       }
       <CodeBlock
         language={props.language}
-        text={props.text || props.snippets[selected] || ""}
+        text={props.text || props.product.snippets[selected] || ""}
         showLineNumbers={props.showLineNumbers}
         theme={highlightCodeTheme}
       />

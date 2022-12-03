@@ -68,6 +68,7 @@
 }
 
 .divider {
+  display: none;
   height: 1px;
   padding-left: var(--size-xSmall);
   padding-right: var(--size-xSmall);
@@ -102,12 +103,16 @@
   gap: var(--size-xxLarge);
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (max-width: 720px) {
   .anchorFeature{
     margin-top: 120px;
   }
 
   .featureBox {
     padding: var(--size-large);
+  }
+
+  .divider {
+    display: flex;
   }
 }

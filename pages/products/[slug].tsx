@@ -1,8 +1,8 @@
-import type { NextPage } from 'next';
 import React from 'react';
 import Navbar from '../../components/common/Navbar/Navbar';
 import FeatureBox from '../../components/Products/FeatureBox';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { BsPlayCircleFill, BsBarChartFill, BsFillTerminalFill } from 'react-icons/bs'
 import { PRODUCTS, iProduct } from '../../components/Products/products';
@@ -162,10 +162,9 @@ const Products = ({ product }: { product: iProduct }) => {
             <div className="w-4/5 mb-20 md:mb-40">
               <HighlightCodeBlock
                 language={'js'}
-                text={product.snippets[0]}
+                product={product}
                 showLineNumbers={false}
                 topbar={true}
-                types={product.types}
               />
             </div>
           </div>
@@ -175,7 +174,7 @@ const Products = ({ product }: { product: iProduct }) => {
             <div className="flex justify-center">
               <Image src={ProductsReplay} alt="" />
             </div>
-            <div className="lg:w-1/2">
+            <div className="lg:w-1/2 text-center lg:text-left">
               <h3>
                 Reproduce issues with <br />
                 high-fidelity session <br />
@@ -187,11 +186,9 @@ const Products = ({ product }: { product: iProduct }) => {
                   With session replay and error monitoring, Highlight&apos;s got you covered.
                 </p>
               </Typography>
-              <PrimaryButton href="/docs" className={styles.hollowButton}>
-                <Typography type="copy3" emphasis={true}>
-                  Go to docs
-                </Typography>
-              </PrimaryButton>
+              <Link href="/docs">
+                Go to Docs →
+              </Link>
             </div>
           </div>
 
@@ -201,7 +198,7 @@ const Products = ({ product }: { product: iProduct }) => {
             <div className="flex justify-center lg:hidden">
               <Image src={ProductsErrors} alt="" />
             </div>
-            <div className="lg:w-1/2">
+            <div className="lg:w-1/2 text-center lg:text-left">
               <h3>
                 Get a ping when exceptions or error logs are thrown.
               </h3>
@@ -211,11 +208,9 @@ const Products = ({ product }: { product: iProduct }) => {
                   With session replay and error monitoring, Highlight&apos;s got you covered.
                 </p>
               </Typography>
-              <PrimaryButton href="https://app.highlight.run/?sign_up=1" className={styles.hollowButton}>
-                <Typography type="copy3" emphasis={true}>
-                  Get Started
-                </Typography>
-              </PrimaryButton>
+              <Link href="/docs">
+                Go to Docs →
+              </Link>
             </div>
             <div className="hidden justify-center lg:flex">
               <Image src={ProductsErrors} alt="" />
@@ -228,7 +223,7 @@ const Products = ({ product }: { product: iProduct }) => {
             <div className="flex justify-center">
               <Image src={ProductsGraph} alt="" />
             </div>
-            <div className="lg:w-1/2">
+            <div className="lg:w-1/2 text-center lg:text-left">
               <h3>
                 Monitor the metrics that keep your customers around.
               </h3>
@@ -238,11 +233,9 @@ const Products = ({ product }: { product: iProduct }) => {
                   With session replay and error monitoring, Highlight&apos;s got you covered.
                 </p>
               </Typography>
-              <PrimaryButton href="https://app.highlight.run/?sign_up=1" className={styles.hollowButton}>
-                <Typography type="copy3" emphasis={true}>
-                  Get Started
-                </Typography>
-              </PrimaryButton>
+              <Link href="/docs">
+                Go to Docs →
+              </Link>
             </div>
           </div>
         </div>

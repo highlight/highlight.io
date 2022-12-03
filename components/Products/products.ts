@@ -183,7 +183,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     slug: 'express',
     title: "Express",
     types: ["Backend", "Frontend"],
-    snippets: [expressSnippet],
+    snippets: [expressSnippet, defaultFrontendSnippet],
   },
 
   'go': {
@@ -191,7 +191,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     slug: 'go',
     title: "Golang",
     types: ["Backend", "Frontend"],
-    snippets: [goSnippet],
+    snippets: [goSnippet, defaultFrontendSnippet],
   },
 
   'node': {
@@ -199,7 +199,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     slug: 'node',
     title: "Node.js",
     types: ["Backend", "Frontend"],
-    snippets: [nodeSnippet],
+    snippets: [nodeSnippet, defaultFrontendSnippet],
   },
 
   'next-backend': {
@@ -207,7 +207,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     slug: 'next-backend',
     title: "Next.js",
     types: ["Backend", "Frontend"],
-    snippets: [nextBackendSnippet],
+    snippets: [nextBackendSnippet, nextSnippet],
   }, 
 
   'angular': {
@@ -236,7 +236,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     slug: 'next',
     title: "Next.js",
     types: ["Frontend", "Backend"],
-    snippets: [nextSnippet],
+    snippets: [nextSnippet, nextBackendSnippet],
   }, 
 
   'react': {
