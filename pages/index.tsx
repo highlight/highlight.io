@@ -210,7 +210,7 @@ const Home: NextPage = () => {
             <div
               className={classNames(styles.buttonContainer, styles.heroImage)}
             >
-              <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+              <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                 <Typography type="copy2" emphasis={true}>
                   Get started for free
                 </Typography>

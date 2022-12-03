@@ -82,6 +82,7 @@
   .caseDetails {
     display: flex;
     flex-flow: column;
+    justify-content: space-between;
     align-items: baseline;
     gap: 32ps;
 
@@ -93,13 +94,13 @@
     position: relative;
     width: 100%;
     height: 35px;
+    min-height: 35px;
   }
 
   .cardReadCaseButton {
     display: inline-block;
     border-radius: 6px;
     border: var(--color-secondary-200) 1px solid;
-    margin-top: 32px;
     padding: 9px 24px;
     background-color: var(--color-primary-500) !important;
     color: var(--color-secondary-200);
