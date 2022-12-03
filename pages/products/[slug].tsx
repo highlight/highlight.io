@@ -103,7 +103,7 @@ const Products = ({ product }: { product: iProduct }) => {
                 The{' '}
                 <span className={landingStyles.highlightedText}>{product.title}</span><br />
                 monitoring toolkit <br className="hidden sm:flex" />
-                you've been waiting <br className="hidden sm:flex" />
+                you&apos;ve been waiting <br className="hidden sm:flex" />
                 for.
               </h1>
               <Typography type="copy1" onDark>
@@ -159,7 +159,7 @@ const Products = ({ product }: { product: iProduct }) => {
                 </h2>
                 <Typography type="copy1" onDark>
                   What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight's got you covered.
+                  With session replay and error monitoring, Highlight&apos;s got you covered.
                   This should be around 3-4 lines long.
                 </Typography>
               </div>
@@ -197,7 +197,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <Typography type="copy2" onDark >
                 <p className="text-color-darker-copy-on-dark">
                   What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight's got you covered.
+                  With session replay and error monitoring, Highlight&apos;s got you covered.
                 </p>
               </Typography>
               <PrimaryButton href="/docs" className={styles.hollowButton}>
@@ -221,7 +221,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <Typography type="copy2" onDark >
                 <p className="text-color-darker-copy-on-dark">
                   What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight's got you covered.
+                  With session replay and error monitoring, Highlight&apos;s got you covered.
                 </p>
               </Typography>
               <PrimaryButton href="https://app.highlight.run/?sign_up=1" className={styles.hollowButton}>
@@ -248,7 +248,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <Typography type="copy2" onDark >
                 <p className="text-color-darker-copy-on-dark">
                   What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight's got you covered.
+                  With session replay and error monitoring, Highlight&apos;s got you covered.
                 </p>
               </Typography>
               <PrimaryButton href="https://app.highlight.run/?sign_up=1" className={styles.hollowButton}>
