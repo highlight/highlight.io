@@ -208,7 +208,6 @@ const Navbar = ({
                   Customers
                 </Typography>
               </Link>
-             
               <ResourceDropdown isOpen={scrolled && !fixed} />
             </div>
           )}

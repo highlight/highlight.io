@@ -9,15 +9,15 @@ const FeatureBox = ({
 }: {
   title: string;
   desc: string;
-  icon: JSX.Element; 
+  icon: JSX.Element;
 }) => {
   return (
     <div className={styles.featureBox}>
       <div className={styles.featureBoxIcon}>
-      {icon}
+        {icon}
       </div>
       <div className={styles.featureBoxText}>
-        <Typography type="copy2" emphasis>
+        <Typography type="copy2" emphasis className="text-white">
           {title}
         </Typography>
         <Typography type="copy3" className="text-color-darker-copy-on-dark">

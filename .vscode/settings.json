@@ -36,7 +36,7 @@
 	"editor.hover.enabled": true,
 	"editor.colorDecorators": true,
 	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"openInGitHub.defaultBranch": "master",
 	"openInGitHub.defaultRemote": "origin",
