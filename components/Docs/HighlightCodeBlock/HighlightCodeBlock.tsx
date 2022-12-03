@@ -70,7 +70,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
       }
       <CodeBlock
         language={props.language}
-        text={props.text}
+        text={props.text || props.snippets[selected] || ""}
         showLineNumbers={props.showLineNumbers}
         theme={highlightCodeTheme}
       />

@@ -57,19 +57,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const Products = ({ product }: { product: iProduct }) => {
 
-  const snippet =
-    `
-  import { Highlight } from "@highlight-run/node";
-  
-  const app = express();
-                  
-  const highlightOptions = {};
-  const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
-  
-  // This should be before any other error middleware and after all controllers
-  app.use(highlightHandler);
-  `;
-
   return (
     <div>
       <Banner>
