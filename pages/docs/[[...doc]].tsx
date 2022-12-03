@@ -613,7 +613,7 @@ const TableOfContents = ({
             {toc?.children.map((t) => (
               // TODO(jaykhatri) - this 'docPaths' concept has to be stateful 🤔.
               <TableOfContents
-                openParent={open}
+                openParent={open && !isTopLevel}
                 docPaths={docPaths}
                 key={t.docPathId}
                 toc={t}

@@ -1,16 +1,13 @@
 import React from 'react';
 
-export enum Feature {
-  LandingPageDocs,
-}
+export enum Feature {}
 
 export const IsFeatureOn = (feature: Feature): boolean => {
   if (process.env.NODE_ENV === 'development') return true;
   switch (feature) {
-    case Feature.LandingPageDocs:
-      return true;
+    default:
+      return false;
   }
-  return false;
 };
 
 interface Props {

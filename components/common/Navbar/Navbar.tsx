@@ -5,12 +5,11 @@ import {
 import styles from './Navbar.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Banner from '../Banner/Banner';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
-import { Feature, FeatureFlag } from '../FeatureFlag/FeatureFlag';
 import ResourceDropdown from './ResourceDropdown';
 import ProductDropdown from './ProductDropdown';
 
@@ -29,10 +28,7 @@ const Navbar = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [developerOpen, setDeveloperOpen] = useState(false);
   const [prevY, setPrevY] = useState(0);
-
-  const dropdownRef = useRef<null | HTMLUListElement>(null);
 
   const changeBackground = () => {
     const currentScrollPos = window.pageYOffset;
@@ -49,20 +45,6 @@ const Navbar = ({
     window.addEventListener('scroll', changeBackground);
   });
 
-  // Bind the navbar dropdowns to close on outside click
-  useEffect(() => {
-    function handleClickOutside(event: any) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDeveloperOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [dropdownRef]);
-
   return (
     <div
       className={classNames(styles.container, {
@@ -77,7 +59,7 @@ const Navbar = ({
               <>
                 <p>Want 1 month of free Highlight? </p>
                 <a
-                  href="http://app.highlight.run/"
+                  href="http://app.highlight.io/"
                   className={styles.callToAction}
                 >
                   Register Here →
@@ -100,24 +82,26 @@ const Navbar = ({
         >
           <div className={classNames(styles.navContainer, styles.headerLeft)}>
             <Link href={'/'} className={styles.urlStyle}>
-
               {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
-
             </Link>
 
-
             <Typography type="copy3" emphasis={true}>
-              <p className={classNames(styles.navTitle, {
-                [styles.copyOnDark]: isOpen,
-                [styles.copyOnLight]: !isOpen,
-              })}
+              <p
+                className={classNames(styles.navTitle, {
+                  [styles.copyOnDark]: isOpen,
+                  [styles.copyOnLight]: !isOpen,
+                })}
               >
                 {title}
               </p>
             </Typography>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <AiOutlineClose className={styles.copyOnDark} /> : <AiOutlineMenu />}
+            {isOpen ? (
+              <AiOutlineClose className={styles.copyOnDark} />
+            ) : (
+              <AiOutlineMenu />
+            )}
           </div>
           {isOpen && (
             <div className={styles.mobileMenu}>
@@ -145,36 +129,29 @@ const Navbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link href={'https://careers.highlight.run'} className={styles.menuItemLarge}>
+                    <Link
+                      href={'https://careers.highlight.run'}
+                      className={styles.menuItemLarge}
+                    >
                       Careers
                     </Link>
                   </Typography>
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <FeatureFlag
-                      feature={Feature.LandingPageDocs}
-                      off={
-                        <Link href="https://docs.highlight.run" className={styles.menuItemLarge}>
-                          Docs
-                        </Link>
-                      }
-                      on={
-                        <Link href="/docs" className={styles.menuItemLarge}>
-                          Docs
-                        </Link>
-                      }
-                    />
+                    <Link href="/docs" className={styles.menuItemLarge}>
+                      Docs
+                    </Link>
                   </Typography>
                 </li>
               </ul>
               <div className={styles.menuButtons}>
-                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                   Get Started
                 </PrimaryButton>
                 <Typography type="copy3" emphasis={true}>
                   <a
-                    href="https://app.highlight.run/"
+                    href="https://app.highlight.io/"
                     className={styles.menuItem}
                   >
                     Sign In
@@ -200,14 +177,10 @@ const Navbar = ({
                   Pricing
                 </Typography>
               </Link>
-              <Link
-                href="/customers"
-                className={styles.headerButton}
-              >
-                <Typography type="copy2">
-                  Customers
-                </Typography>
+              <Link href="/customers" className={styles.headerButton}>
+                <Typography type="copy2">Customers</Typography>
               </Link>
+
               <ResourceDropdown isOpen={scrolled && !fixed} />
             </div>
           )}
@@ -218,24 +191,14 @@ const Navbar = ({
               styles.headerRight
             )}
           >
-            <Link
-              href="/docs"
-              className={styles.headerButton}
-            >
-              <Typography type="copy2">
-                Docs
-              </Typography>
+            <Link href="/docs" className={styles.headerButton}>
+              <Typography type="copy2">Docs</Typography>
             </Link>
-            <a
-              href="https://app.highlight.run/"
-              className={styles.headerButton}
-            >
-              <Typography type="copy2">
-                Sign in
-              </Typography>
+            <a href="https://app.highlight.io/" className={styles.headerButton}>
+              <Typography type="copy2">Sign in</Typography>
             </a>
             <PrimaryButton
-              href="https://app.highlight.run/?sign_up=1"
+              href="https://app.highlight.io/?sign_up=1"
               className={styles.signUpButton}
             >
               <Typography type="copy2" emphasis={true}>

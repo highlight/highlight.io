@@ -14,7 +14,6 @@ import GoImage from '../../../public/images/language/GoIcon';
 
 import styles from '../../Home/Home.module.scss';
 import { CodeSnippet } from '../CodeSnippet/CodeSnippet';
-import { Feature, FeatureFlag } from '../../common/FeatureFlag/FeatureFlag';
 
 export interface SnippetTabObject {
   image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
@@ -36,19 +35,9 @@ const SetupDescription = (
       {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
     </Typography>
     <div className={styles.buttonContainer}>
-      <FeatureFlag
-        feature={Feature.LandingPageDocs}
-        off={
-          <PrimaryLink href="https://docs.highlight.run/getting-started">
-            Read more about our backend integrations in beta
-          </PrimaryLink>
-        }
-        on={
-          <PrimaryLink href="/docs/getting-started">
-            Read more about our backend integrations in beta
-          </PrimaryLink>
-        }
-      />
+      <PrimaryLink href="/docs/getting-started">
+        Read more about our backend integrations in beta
+      </PrimaryLink>
     </div>
   </div>
 );
