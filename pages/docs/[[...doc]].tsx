@@ -335,9 +335,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = (newLink.split('/docs').pop() || '').split('#')[0];
       if (!docRelLinks.has(doc)) {
-        // throw new Error(
-        //   `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
-        // );
+        throw new Error(
+          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
+        );
       }
     }
   }
@@ -716,7 +716,13 @@ const DocPage = ({
   return (
     <>
       <Meta
-        title={metadata?.title || ''}
+        title={
+          metadata?.title?.length
+            ? metadata?.title === 'Welcome to Highlight'
+              ? 'Documentation'
+              : metadata?.title
+            : ''
+        }
         description={description}
         absoluteImageUrl={`https://${
           process.env.NEXT_PUBLIC_VERCEL_URL
