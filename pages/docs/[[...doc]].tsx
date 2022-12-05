@@ -716,7 +716,13 @@ const DocPage = ({
   return (
     <>
       <Meta
-        title={metadata?.title || ''}
+        title={
+          metadata?.title?.length
+            ? metadata?.title === 'Welcome to Highlight'
+              ? 'Documentation'
+              : metadata?.title
+            : ''
+        }
         description={description}
         absoluteImageUrl={`https://${
           process.env.NEXT_PUBLIC_VERCEL_URL
