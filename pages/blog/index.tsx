@@ -251,10 +251,7 @@ export const Blog = ({
                         <PostItem
                           post={post}
                           key={post.slug + 'featured desktop'}
-                        />
-                        <MobilePostItem
-                          post={post}
-                          key={post.slug + 'featured mobile'}
+                          feature
                         />
                       </>
                     ))}
@@ -267,10 +264,7 @@ export const Blog = ({
                 </div>
               )}
               {displayedPosts.map((post) => (
-                <>
-                  <PostItem post={post} key={post.slug + 'desktop'} />
-                  <MobilePostItem post={post} key={post.slug + 'mobile'} />
-                </>
+                <PostItem post={post} key={post.slug + 'desktop'} />
               ))}
               {displayedPosts.length === 0 && (
                 <Typography
@@ -324,57 +318,56 @@ const postItemStyle = classNames(
   'relative w-full gap-3 transition-colors border border-solid rounded-lg p-7 hover:bg-divider-on-dark border-divider-on-dark hover:border-copy-on-light'
 );
 
-const PostItem = ({ post }: { post: Post }) => {
-  return (
-    <div
-      className={classNames(
-        postItemStyle,
-        post.featured && 'shadow-[8px_8px_0_0_#5420D1]',
-        'hidden mobile:block'
-      )}
-    >
-      <Typography type="copy4" className="text-copy-on-dark">
-        {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
-      </Typography>
-
-      <Link href={`/blog/${post.slug}`}>
-        <h5 className="mt-1">{post.title}</h5>
-      </Link>
-      <div className="mt-3">
-        {post.author && <PostAuthor {...post.author} />}
-      </div>
-      <div className="flex gap-2.5 absolute right-7 bottom-7">
-        {post.tags_relations?.map((tag) => (
-          <PostTag {...tag} key={tag.slug} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const MobilePostItem = ({ post }: { post: Post }) => {
-  const tag: Tag | undefined =
-    post.tags_relations[post.tags_relations.length - 1];
+const PostItem = ({
+  post,
+  feature: featured = false,
+}: { post: Post } & { feature?: boolean }) => {
+  const firstTag = post.tags_relations[0];
 
   return (
-    <div
-      className={classNames(
-        postItemStyle,
-        post.featured && 'shadow-[8px_8px_0_0_#5420D1]',
-        'mobile:hidden block'
-      )}
-    >
-      {tag && <PostTag {...tag} />}
-      <Link href={`/blog/${post.slug}`}>
-        <h3 className="mt-3">{post.title}</h3>
-      </Link>
-      <Typography type="copy4" className="mt-1 text-copy-on-dark">
-        {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
-      </Typography>
-      <div className="mt-6">
-        {post.author && <PostAuthor {...post.author} hidePhoto />}
+    <>
+      <div
+        className={classNames(
+          postItemStyle,
+          featured && 'shadow-[8px_8px_0_0_#5420D1]',
+          'hidden mobile:block'
+        )}
+      >
+        <Typography type="copy4" className="text-copy-on-dark">
+          {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
+        </Typography>
+
+        <Link href={`/blog/${post.slug}`}>
+          <h5 className="mt-1">{post.title}</h5>
+        </Link>
+        <div className="mt-3">
+          {post.author && <PostAuthor {...post.author} />}
+        </div>
+        <div className="flex gap-2.5 absolute right-7 bottom-7">
+          {post.tags_relations?.map((tag) => (
+            <PostTag {...tag} key={tag.slug} />
+          ))}
+        </div>
       </div>
-    </div>
+      <div
+        className={classNames(
+          postItemStyle,
+          featured && 'shadow-[8px_8px_0_0_#5420D1]',
+          'mobile:hidden block'
+        )}
+      >
+        {firstTag && <PostTag {...firstTag} />}
+        <Link href={`/blog/${post.slug}`}>
+          <h3 className="mt-3">{post.title}</h3>
+        </Link>
+        <Typography type="copy4" className="mt-1 text-copy-on-dark">
+          {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
+        </Typography>
+        <div className="mt-6">
+          {post.author && <PostAuthor {...post.author} hidePhoto />}
+        </div>
+      </div>
+    </>
   );
 };
 
