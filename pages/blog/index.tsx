@@ -278,6 +278,7 @@ export const Blog = ({
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
+                    scroll={false}
                   >
                     Previous Page
                   </Link>
@@ -286,6 +287,7 @@ export const Blog = ({
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
+                    scroll={false}
                   >
                     Next Page
                   </Link>
