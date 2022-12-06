@@ -261,6 +261,11 @@ export const Blog = ({
                   </div>
                 </div>
               )}
+              {featuredPosts.length > 0 && (
+                <div className="w-full -mb-4">
+                  <h5 className="text-copy-on-light">All Posts</h5>
+                </div>
+              )}
               {displayedPosts.map((post) => (
                 <>
                   <PostItem post={post} key={post.slug + 'desktop'} />
