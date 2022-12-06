@@ -447,6 +447,7 @@ h5:hover .headingCopyIcon {
 .codeBlock {
   background-color: var(--color-primary-500);
   border-radius: var(--size-xSmall);
+  box-shadow: 0px 36px 120px rgba(108, 55, 244, 0.1);
   text-align: left;
   margin-top: var(--size-medium);
   margin-bottom: var(--size-medium);
@@ -455,9 +456,14 @@ h5:hover .headingCopyIcon {
 
   .codeBlockTopper {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: rgba(255, 255, 255, 0.1);;
-    border-bottom: 1px solid #30294E;
-    height: 50px;
+    border: 1px solid #30294E;
+    border-top-left-radius: var(--size-xSmall);
+    border-top-right-radius: var(--size-xSmall);
+    height: 60px;
     width: 100%;
   }
 

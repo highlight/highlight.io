@@ -10,6 +10,7 @@ export interface iProduct {
 }
 
 const defaultFrontendSnippet: string = `
+
 import React from 'react'
 import { H } from 'highlight.run'
 import { ErrorBoundary } from '@highlight-run/react'
@@ -27,6 +28,7 @@ ReactDOM.render(
 `
 
 const expressSnippet: string =  `
+
 import { Highlight } from '@highlight-run/node'
 // or like this with commonjs
 const Highlight = require('@highlight-run/node')
@@ -49,6 +51,7 @@ app.use('/error', () => {
 `
 
 const goSnippet: string = `
+
 import (
   "github.com/highlight-run/highlight-go"
 )
@@ -62,6 +65,7 @@ func main() {
 `
 
 const nodeSnippet: string = `
+
 import { H } from '@highlight-run/node'
 
 const highlightOptions = {}
@@ -71,6 +75,7 @@ if (!H.isInitialized()) {
 `
 
 const nextBackendSnippet: string = `
+
 import { withHighlight } from '../highlight.config'
 
 const handler = async (req, res) => {
@@ -81,6 +86,7 @@ export default withHighlight(handler)
 `
 
 const angularSnippet: string = `
+
 //main.ts
 import { H } from 'highlight.run';
 
@@ -95,6 +101,7 @@ H.init(
 `
 
 const gatsbySnippet: string = `
+
 module.exports = {
 	plugins: [
 		{
@@ -108,6 +115,7 @@ module.exports = {
 `
 
 const htmlSnippet: string = `
+
 <html>
 	<head>
 		<script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
@@ -122,6 +130,7 @@ const htmlSnippet: string = `
 `
 
 const nextSnippet: string = `
+
 import type { AppProps } from 'next/app'
 import { H } from 'highlight.run'
 import { ErrorBoundary } from '@highlight-run/react'
@@ -139,6 +148,7 @@ export default MyApp
 `
 
 const reactSnippet: string = `
+
 import React from 'react'
 import { H } from 'highlight.run'
 import { ErrorBoundary } from '@highlight-run/react'
@@ -156,6 +166,7 @@ ReactDOM.render(
 `
 
 const vueSnippet: string = `
+
 import { H } from 'highlight.run'
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -166,6 +177,7 @@ createApp(App).mount('#app')
 `
 
 const svelteSnippet: string = `
+
 ... %svelte.head%
 
 <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>

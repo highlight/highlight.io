@@ -5,6 +5,7 @@ import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-c
 import Image from 'next/legacy/image';
 import CopyIcon from '../../../public/images/document-duplicate.svg';
 import CheckmarkIcon from '../../../public/images/checkmark_circle.svg';
+import { Typography } from '../../common/Typography/Typography';
 import classNames from 'classnames';
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/20/solid'
@@ -17,11 +18,13 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
     <div className={styles.codeBlock}>
       {props.topbar &&
         <div className={styles.codeBlockTopper}>
-          {props.product.types && <div className="w-36 ml-6 mt-3">
+          {props.product.types && <div className="w-36 ml-6">
             <Listbox value={selected} onChange={setSelected}>
               <div className="relative mt-1">
-                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-1 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                  <span className="block truncate">{props.product.types[selected]}</span>
+                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-3 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                  <Typography type="copy4" emphasis>
+                    <span className="block truncate">{props.product.types[selected]}</span>
+                  </Typography>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <ChevronUpDownIcon
                       className="h-5 w-5 text-gray-400"
@@ -76,7 +79,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
         theme={highlightCodeTheme}
       />
       <div
-        className={classNames(styles.codeCopyIcon, `${props.topbar ? "mt-9" : ""}`)}
+        className={classNames(styles.codeCopyIcon, `${props.topbar ? "mt-0" : ""}`)}
         onClick={() => {
           navigator.clipboard.writeText(props.text);
           setCopied(true);
@@ -91,5 +94,5 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
         </div>
       )}
     </div>
-  );
+  )
 };

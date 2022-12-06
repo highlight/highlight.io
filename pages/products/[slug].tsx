@@ -157,6 +157,11 @@ const Products = ({ product }: { product: iProduct }) => {
                     Get started for free
                   </Typography>
                 </PrimaryButton>
+                <PrimaryButton href="/docs" className={navStyles.signUpButton}>
+                  <Typography type="copy2" emphasis={true}>
+                    Read our docs
+                  </Typography>
+                </PrimaryButton>
               </div>
             </div>
             <div className="w-4/5 mb-20 md:mb-40">
