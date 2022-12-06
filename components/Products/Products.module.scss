@@ -95,6 +95,7 @@
   width: 100%;
   max-width: calc(var(--max-width) + (var(--size-large) * 2));
   margin: 0 auto;
+  margin-bottom: 200px;
   padding: 50px var(--size-large);
   display: flex;
   flex-direction: column;
@@ -114,5 +115,9 @@
 
   .divider {
     display: flex;
+  }
+
+  .infoContainer {
+    margin-bottom: 0px;
   }
 }

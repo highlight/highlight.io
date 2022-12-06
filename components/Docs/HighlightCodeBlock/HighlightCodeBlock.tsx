@@ -20,7 +20,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
         <div className={styles.codeBlockTopper}>
           {props.product.types && <div className="w-36 ml-6">
             <Listbox value={selected} onChange={setSelected}>
-              <div className="relative mt-1">
+              <div className="relative">
                 <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-3 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                   <Typography type="copy4" emphasis>
                     <span className="block truncate">{props.product.types[selected]}</span>
