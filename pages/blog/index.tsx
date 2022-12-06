@@ -150,11 +150,13 @@ export const Blog = ({
         ],
       })
     : unfeaturedPosts;
+
   page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
-  const displayedPosts = filteredPosts.slice(
-    itemsPerPage * (page - 1),
-    itemsPerPage * page
-  );
+
+  const displayedPosts = searchQuery
+    ? filteredPosts
+    : filteredPosts.slice(itemsPerPage * (page - 1), itemsPerPage * page);
+
   const isLastPage = itemsPerPage * page >= filteredPosts.length;
 
   return (
@@ -274,7 +276,7 @@ export const Blog = ({
                 </Typography>
               )}
               <div className="flex w-full gap-4 place-content-center">
-                {page > 1 && (
+                {!searchQuery && page > 1 && (
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
@@ -283,7 +285,7 @@ export const Blog = ({
                     Previous Page
                   </Link>
                 )}
-                {!isLastPage && (
+                {!searchQuery && !isLastPage && (
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
