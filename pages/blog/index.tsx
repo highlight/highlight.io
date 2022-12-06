@@ -110,6 +110,7 @@ const allTag: Omit<Tag, 'posts'> = {
     'Welcome to the Highlight Blog, where the Highlight team talks about frontend engineering, observability and more!',
 };
 
+// https://usehooks-ts.com/react-hook/use-debounce
 function useDebounce<T>(value: T, delay?: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
