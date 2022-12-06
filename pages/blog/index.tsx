@@ -3,7 +3,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
@@ -110,6 +110,20 @@ const allTag: Omit<Tag, 'posts'> = {
     'Welcome to the Highlight Blog, where the Highlight team talks about frontend engineering, observability and more!',
 };
 
+function useDebounce<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
 export const Blog = ({
   posts,
   tags,
@@ -130,17 +144,19 @@ export const Blog = ({
     tags.find(({ slug }) => slug === currentTagSlug) ?? allTag;
 
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const itemsPerPage = 4;
 
-  const shouldFeature = !searchQuery && currentTag.slug === allTag.slug;
+  const shouldFeature =
+    !debouncedSearchQuery && currentTag.slug === allTag.slug;
 
   const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
   const unfeaturedPosts = posts.filter((p) =>
     shouldFeature ? !p.featured : true
   );
 
-  const filteredPosts = searchQuery
-    ? matchSorter(unfeaturedPosts, searchQuery, {
+  const filteredPosts = debouncedSearchQuery
+    ? matchSorter(unfeaturedPosts, debouncedSearchQuery, {
         keys: [
           'title',
           {
@@ -153,7 +169,7 @@ export const Blog = ({
 
   page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
 
-  const displayedPosts = searchQuery
+  const displayedPosts = debouncedSearchQuery
     ? filteredPosts
     : filteredPosts.slice(itemsPerPage * (page - 1), itemsPerPage * page);
 
@@ -275,7 +291,7 @@ export const Blog = ({
                 </Typography>
               )}
               <div className="flex w-full gap-4 place-content-center">
-                {!searchQuery && page > 1 && (
+                {!debouncedSearchQuery && page > 1 && (
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
@@ -284,7 +300,7 @@ export const Blog = ({
                     Previous Page
                   </Link>
                 )}
-                {!searchQuery && !isLastPage && (
+                {!debouncedSearchQuery && !isLastPage && (
                   <Link
                     className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
