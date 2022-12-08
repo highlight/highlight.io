@@ -145,9 +145,9 @@ const Products = ({ product }: { product: iProduct }) => {
                   today.
                 </h2>
                 <Typography type="copy1" onDark>
-                  What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight&apos;s got you covered.
-                  This should be around 3-4 lines long.
+                  Highlight's SDKs will integrate closely with your application.
+                  Rest assured that the seamless integration with {product.title} will
+                  help monitor the most for your app.
                 </Typography>
               </div>
 
@@ -187,8 +187,9 @@ const Products = ({ product }: { product: iProduct }) => {
               </h3>
               <Typography type="copy2" onDark >
                 <p className="text-color-darker-copy-on-dark">
-                  What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight&apos;s got you covered.
+                  With our pixel-perfect replays in your {product.title} app,
+                  you'll get to the bottom of issues in no time and better understand how
+                  your app is being used.
                 </p>
               </Typography>
               <Link href="/docs">
@@ -209,8 +210,8 @@ const Products = ({ product }: { product: iProduct }) => {
               </h3>
               <Typography type="copy2" onDark >
                 <p className="text-color-darker-copy-on-dark">
-                  What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight&apos;s got you covered.
+                  Our alerting infrastructure can take abnormal metrics or errors raised in your
+                  {product.title} app and notify your engineering team over Slack, Discord, and more!
                 </p>
               </Typography>
               <Link href="/docs">
@@ -234,8 +235,8 @@ const Products = ({ product }: { product: iProduct }) => {
               </h3>
               <Typography type="copy2" onDark >
                 <p className="text-color-darker-copy-on-dark">
-                  What if monitoring your {product.title} app was as easy as deploying it?
-                  With session replay and error monitoring, Highlight&apos;s got you covered.
+                  Track performance, request timings, and other custom metrics in the frontend or backend
+                  of your {product.title} app.
                 </p>
               </Typography>
               <Link href="/docs">
