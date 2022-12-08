@@ -76,6 +76,7 @@ async function handler(_: any, res: any) {
     ...customerPages,
     ...changelogPages,
     ...docsPages,
+    ...productPages,
   ];
 
   const addPage = (page: string) => {
