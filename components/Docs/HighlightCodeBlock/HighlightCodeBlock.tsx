@@ -13,7 +13,6 @@ import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/20/solid'
 export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
   const [copied, setCopied] = useState(false);
   const [selected, setSelected] = useState(0);
-  console.log(selected);
   return (
     <div className={styles.codeBlock}>
       {props.topbar &&
