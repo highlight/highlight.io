@@ -4,7 +4,11 @@ import FeatureBox from '../../components/Products/FeatureBox';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { BsPlayCircleFill, BsBarChartFill, BsFillTerminalFill } from 'react-icons/bs'
+import {
+  BsPlayCircleFill,
+  BsBarChartFill,
+  BsFillTerminalFill,
+} from 'react-icons/bs';
 import { PRODUCTS, iProduct } from '../../components/Products/products';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -12,14 +16,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Section } from '../../components/common/Section/Section';
 import { Typography } from '../../components/common/Typography/Typography';
 import landingStyles from '../../components/Home/Home.module.scss';
-import styles from '../../components/Products/Products.module.scss'
-import navStyles from '../../components/common/Navbar/Navbar.module.scss'
+import styles from '../../components/Products/Products.module.scss';
+import navStyles from '../../components/common/Navbar/Navbar.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
-import ProductsReplay from '../../public/images/products-replay.svg'
-import ProductsErrors from '../../public/images/products-errors.svg'
-import ProductsGraph from '../../public/images/products-graph.svg'
+import ProductsReplay from '../../public/images/products-replay.svg';
+import ProductsErrors from '../../public/images/products-errors.svg';
+import ProductsGraph from '../../public/images/products-graph.svg';
 
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
@@ -36,7 +40,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking',
   };
 };
-
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
@@ -56,7 +59,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const Products = ({ product }: { product: iProduct }) => {
-
   return (
     <div>
       <Banner>
@@ -88,17 +90,25 @@ const Products = ({ product }: { product: iProduct }) => {
               </div>
               <h1>
                 The{' '}
-                <span className={landingStyles.highlightedText}>{product.title}</span><br />
+                <span className={landingStyles.highlightedText}>
+                  {product.title}
+                </span>
+                <br />
                 monitoring toolkit <br className="hidden sm:flex" />
                 you&apos;ve been waiting <br className="hidden sm:flex" />
                 for.
               </h1>
               <Typography type="copy1" onDark>
-                What if monitoring your {product.title} app was as easy as deploying it?
-                With session replay and error monitoring,
+                What if monitoring your {product.title} app was as easy as
+                deploying it? With session replay and error monitoring,
                 Highlight’s got you covered.
               </Typography>
-              <div className={classNames(styles.buttonContainer, landingStyles.heroImage)}>
+              <div
+                className={classNames(
+                  styles.buttonContainer,
+                  landingStyles.heroImage
+                )}
+              >
                 <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                   <Typography type="copy2" emphasis={true}>
                     Get started for free
@@ -145,13 +155,18 @@ const Products = ({ product }: { product: iProduct }) => {
                   today.
                 </h2>
                 <Typography type="copy1" onDark>
-                  Highlight's SDKs will integrate closely with your application.
-                  Rest assured that the seamless integration with {product.title} will
-                  help monitor the most for your app.
+                  Highlight&apos;s SDKs will integrate closely with your
+                  application. Rest assured that the seamless integration with{' '}
+                  {product.title} will help monitor the most for your app.
                 </Typography>
               </div>
 
-              <div className={classNames(landingStyles.buttonContainer, landingStyles.heroImage)}>
+              <div
+                className={classNames(
+                  landingStyles.buttonContainer,
+                  landingStyles.heroImage
+                )}
+              >
                 <PrimaryButton href="https://app.highlight.run/?sign_up=1">
                   <Typography type="copy2" emphasis={true}>
                     Get started for free
@@ -185,16 +200,14 @@ const Products = ({ product }: { product: iProduct }) => {
                 high-fidelity session <br />
                 replay.
               </h3>
-              <Typography type="copy2" onDark >
+              <Typography type="copy2" onDark>
                 <p className="text-color-darker-copy-on-dark">
                   With our pixel-perfect replays in your {product.title} app,
-                  you'll get to the bottom of issues in no time and better understand how
-                  your app is being used.
+                  you&apos;ll get to the bottom of issues in no time and better
+                  understand how your app is being used.
                 </p>
               </Typography>
-              <Link href="/docs">
-                Go to Docs →
-              </Link>
+              <Link href="/docs">Go to Docs →</Link>
             </div>
           </div>
 
@@ -205,18 +218,16 @@ const Products = ({ product }: { product: iProduct }) => {
               <Image src={ProductsErrors} alt="" />
             </div>
             <div className="lg:w-1/2 text-center lg:text-left">
-              <h3>
-                Get a ping when exceptions or error logs are thrown.
-              </h3>
-              <Typography type="copy2" onDark >
+              <h3>Get a ping when exceptions or error logs are thrown.</h3>
+              <Typography type="copy2" onDark>
                 <p className="text-color-darker-copy-on-dark">
-                  Our alerting infrastructure can take abnormal metrics or errors raised in your
-                  {product.title} app and notify your engineering team over Slack, Discord, and more!
+                  Our alerting infrastructure can take abnormal metrics or
+                  errors raised in your
+                  {product.title} app and notify your engineering team over
+                  Slack, Discord, and more!
                 </p>
               </Typography>
-              <Link href="/docs">
-                Go to Docs →
-              </Link>
+              <Link href="/docs">Go to Docs →</Link>
             </div>
             <div className="hidden justify-center lg:flex">
               <Image src={ProductsErrors} alt="" />
@@ -230,18 +241,14 @@ const Products = ({ product }: { product: iProduct }) => {
               <Image src={ProductsGraph} alt="" />
             </div>
             <div className="lg:w-1/2 text-center lg:text-left">
-              <h3>
-                Monitor the metrics that keep your customers around.
-              </h3>
-              <Typography type="copy2" onDark >
+              <h3>Monitor the metrics that keep your customers around.</h3>
+              <Typography type="copy2" onDark>
                 <p className="text-color-darker-copy-on-dark">
-                  Track performance, request timings, and other custom metrics in the frontend or backend
-                  of your {product.title} app.
+                  Track performance, request timings, and other custom metrics
+                  in the frontend or backend of your {product.title} app.
                 </p>
               </Typography>
-              <Link href="/docs">
-                Go to Docs →
-              </Link>
+              <Link href="/docs">Go to Docs →</Link>
             </div>
           </div>
         </div>
@@ -251,8 +258,8 @@ const Products = ({ product }: { product: iProduct }) => {
         <FooterCallToAction />
       </div>
       <Footer />
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default Products;
