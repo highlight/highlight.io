@@ -222,9 +222,8 @@ const Products = ({ product }: { product: iProduct }) => {
               <Typography type="copy2" onDark>
                 <p className="text-color-darker-copy-on-dark">
                   Our alerting infrastructure can take abnormal metrics or
-                  errors raised in your
-                  {product.title} app and notify your engineering team over
-                  Slack, Discord, and more!
+                  errors raised in your {product.title} app and notify your
+                  engineering team over Slack, Discord, and more!
                 </p>
               </Typography>
               <Link href="/docs">Go to Docs →</Link>
