@@ -8,8 +8,10 @@ export default function Highlight404() {
     <>
       <Navbar />
       <main>
-        <div className="flex items-center m-36 gap-3.5 max-w-max mx-auto">
-          <h1>404 - We could not find the page you are looking for. </h1>
+        <div className="m-36 gap-4 max-w-max mx-auto">
+          <div className="flex items-center flex-col gap-4">
+            <h3>Sorry, we could not find the page you are looking for. </h3>
+          </div>
         </div>
         <FooterCallToAction />
       </main>
