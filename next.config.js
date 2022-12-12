@@ -24,7 +24,13 @@ const nextConfig = {
     staticPages: getStaticPages(),
   },
   async redirects() {
-    return [];
+    return [
+      {
+        source: '/careers/:slug*',
+        destination: 'https://careers.highlight.io',
+        permanent: false,
+      },
+    ];
   },
   async rewrites() {
     return [
