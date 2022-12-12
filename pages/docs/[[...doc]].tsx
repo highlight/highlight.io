@@ -264,7 +264,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -707,7 +707,8 @@ const DocPage = ({
 
   const isSdkDocs = useMemo(() => {
     return (
-      currentPageIndex != -1 &&
+      currentPageIndex !== -1 &&
+      docOptionsWithContent &&
       docOptionsWithContent[currentPageIndex] &&
       docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
     );
