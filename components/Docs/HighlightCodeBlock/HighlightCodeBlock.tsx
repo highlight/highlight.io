@@ -17,10 +17,10 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
     <div className={styles.codeBlock}>
       {props.topbar &&
         <div className={styles.codeBlockTopper}>
-          {props.product.types && <div className="w-36 ml-6">
+          {props.product.types && <div className="w-28 ml-6">
             <Listbox value={selected} onChange={setSelected}>
               <div className="relative">
-                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-3 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-2 my-[10px] pl-3 pr-4 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                   <Typography type="copy4" emphasis>
                     <span className="block truncate">{props.product.types[selected]}</span>
                   </Typography>
@@ -37,12 +37,12 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md border-2 border-divider-on-dark bg-color-primary-500 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                     {props.product.types.map((type: string, index: Key) => (
                       <Listbox.Option
                         key={index}
                         className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                          `relative cursor-default select-none mx-1 py-1 pl-2 pr-4 rounded-md ${active ? 'bg-divider-on-dark text-white' : 'text-copy-on-dark'
                           }`
                         }
                         value={index}
@@ -53,13 +53,10 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
                               className={`block truncate ${selected ? 'font-medium' : 'font-normal'
                                 }`}
                             >
-                              {type}
+                              <Typography type="copy4" emphasis={true}>
+                                {type}
+                              </Typography>
                             </span>
-                            {selected ? (
-                              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                <CheckIcon className="h-5 w-5" aria-hidden="true" />
-                              </span>
-                            ) : null}
                           </>
                         )}
                       </Listbox.Option>
@@ -78,7 +75,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
         theme={highlightCodeTheme}
       />
       <div
-        className={classNames(styles.codeCopyIcon, `${props.topbar ? "mt-0" : ""}`)}
+        className={classNames(styles.codeCopyIcon, `${props.topbar ? "mt-1" : ""}`)}
         onClick={() => {
           navigator.clipboard.writeText(props.text);
           setCopied(true);
