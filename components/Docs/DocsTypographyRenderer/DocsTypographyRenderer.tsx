@@ -195,9 +195,7 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
   return DocsTypography;
 };
 
-export const getDocsTypographyRenderer = (
-  type: 'h5' | 'code' | 'a' | 'ul' | 'li'
-) => {
+export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
     return (
@@ -219,12 +217,14 @@ export const getDocsTypographyRenderer = (
             />
           )
         ) : type === 'ul' ? (
-          <ul style={{ listStyle: 'circle inside' }}>
+          <ul style={{ listStyle: 'disc inside' }}>
             {props.children.map((c: any, i: number) => {
-              c.type === 'li' && (
-                <li className={styles.listItem} key={i}>
-                  {c.props.children[1]}
-                </li>
+              return (
+                c.type === 'li' && (
+                  <li className={styles.listItem} key={i}>
+                    {c.props.children.map((e) => e)}
+                  </li>
+                )
               );
             })}
           </ul>
