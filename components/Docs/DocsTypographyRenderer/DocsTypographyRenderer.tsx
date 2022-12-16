@@ -222,7 +222,7 @@ export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
               return (
                 c.type === 'li' && (
                   <li className={styles.listItem} key={i}>
-                    {c.props.children.map((e) => e)}
+                    {c.props.children.map((e: any) => e)}
                   </li>
                 )
               );
