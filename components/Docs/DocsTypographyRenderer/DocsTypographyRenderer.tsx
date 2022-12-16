@@ -200,9 +200,6 @@ export const getDocsTypographyRenderer = (
 ) => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
-    if (type === 'li') {
-      console.log('children', props.children);
-    }
     return (
       <>
         {type === 'code' ? (
