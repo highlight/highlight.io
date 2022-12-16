@@ -195,9 +195,14 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
   return DocsTypography;
 };
 
-export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
+export const getDocsTypographyRenderer = (
+  type: 'h5' | 'code' | 'a' | 'ul' | 'li'
+) => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
+    if (type === 'li') {
+      console.log('children', props.children);
+    }
     return (
       <>
         {type === 'code' ? (
@@ -216,6 +221,16 @@ export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
               showLineNumbers={false}
             />
           )
+        ) : type === 'ul' ? (
+          <ul style={{ listStyle: 'circle inside' }}>
+            {props.children.map((c: any, i: number) => {
+              c.type === 'li' && (
+                <li className={styles.listItem} key={i}>
+                  {c.props.children[1]}
+                </li>
+              );
+            })}
+          </ul>
         ) : type === 'a' ? (
           props.children?.length && (
             <Link href={resolveLink(props.href)} legacyBehavior>
