@@ -145,7 +145,7 @@ const Products = ({ product }: { product: iProduct }) => {
             <div className={landingStyles.anchorHead}>
               <div className={styles.subtleBadge}>
                 <Typography type="copy4" emphasis>
-                  Badge Text
+                  Highlight for {product.title}
                 </Typography>
               </div>
               <div className="px-8">
