@@ -217,7 +217,7 @@ export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
             />
           )
         ) : type === 'ul' ? (
-          <ul style={{ listStyle: 'disc inside' }}>
+          <ul style={{ listStyle: 'disc outside' }}>
             {props.children.map((c: any, i: number) => {
               return (
                 c.type === 'li' && (

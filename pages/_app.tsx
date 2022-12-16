@@ -20,7 +20,7 @@ Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
 Router.events.on('routeChangeComplete', () => {
   if (window.rudderanalytics) {
-    window.rudderanalytics.page();
+    window.rudderanalytics?.page();
   }
 
   nProgress.done();
@@ -38,8 +38,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const initialize = async () => {
       await rudderInitialize();
-      window.rudderanalytics.page();
-      window.rudderanalytics.identify();
+      window.rudderanalytics?.page();
+      window.rudderanalytics?.identify();
     };
 
     initialize();
