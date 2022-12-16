@@ -13,6 +13,13 @@
   max-width: 300px;
 }
 
+.listItem {
+}
+
+.listItem > * {
+  display: inline;
+}
+
 .active {
   border-radius: var(--border-radius);
   background-color: var(--color-divider-on-dark);
