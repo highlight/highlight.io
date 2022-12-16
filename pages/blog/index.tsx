@@ -3,7 +3,7 @@ import { Typography } from '../../components/common/Typography/Typography';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
@@ -92,11 +92,15 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const searchBarBaseStyle = classNames(
-  'border border-solid rounded-md w-full text-copy-on-dark border-divider-on-dark items-center flex focus-within:border-copy-on-light transition-colors'
+  'border-solid w-full text-copy-on-dark border-divider-on-dark items-center flex focus-within:border-copy-on-light transition-colors'
 );
 
 const searchBarInputBaseStyle = classNames(
   'box-border h-full w-0 flex-1 font-sans leading-none bg-transparent border-none outline-none text-copy-on-dark'
+);
+
+const pageLinkStyle = classNames(
+  'w-56 bg-divider-on-dark font-sans text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-copy-on-light transition-colors active:transition-none active:bg-purple-dark text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark'
 );
 
 const allTag: Omit<Tag, 'posts'> = {
@@ -105,6 +109,21 @@ const allTag: Omit<Tag, 'posts'> = {
   description:
     'Welcome to the Highlight Blog, where the Highlight team talks about frontend engineering, observability and more!',
 };
+
+// https://usehooks-ts.com/react-hook/use-debounce
+function useDebounce<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay || 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 
 export const Blog = ({
   posts,
@@ -126,13 +145,19 @@ export const Blog = ({
     tags.find(({ slug }) => slug === currentTagSlug) ?? allTag;
 
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
   const itemsPerPage = 4;
 
-  const featuredPosts = posts.filter((p) => p.featured);
-  const unfeaturedPosts = posts.filter((p) => !p.featured);
+  const shouldFeature =
+    !debouncedSearchQuery && currentTag.slug === allTag.slug;
 
-  const filteredPosts = searchQuery
-    ? matchSorter(unfeaturedPosts, searchQuery, {
+  const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
+  const unfeaturedPosts = posts.filter((p) =>
+    shouldFeature ? !p.featured : true
+  );
+
+  const filteredPosts = debouncedSearchQuery
+    ? matchSorter(unfeaturedPosts, debouncedSearchQuery, {
         keys: [
           'title',
           {
@@ -142,24 +167,27 @@ export const Blog = ({
         ],
       })
     : unfeaturedPosts;
-  const displayedPosts = filteredPosts.slice(
-    itemsPerPage * (page - 1),
-    itemsPerPage * page
-  );
+
+  page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
+
+  const displayedPosts = debouncedSearchQuery
+    ? filteredPosts
+    : filteredPosts.slice(itemsPerPage * (page - 1), itemsPerPage * page);
+
   const isLastPage = itemsPerPage * page >= filteredPosts.length;
 
   return (
     <>
       <Navbar />
       <main>
-        <div className="flex items-start mx-auto mt-[29px] mb-36 gap-3.5 max-w-4xl desktop:max-w-7xl">
-          <div className="sticky w-[352px] hidden pb-[300px] -mb-[300px] h-screen desktop:inline-block overflow-y-scroll top-[153px] box-border">
-            <div className="flex flex-col max-h-full gap-6 border border-solid rounded-lg border-divider-on-dark px-9 py-7">
-              {/* sidebar */}
+        <div className="flex items-start desktop:mx-11 mt-[29px] mb-36 gap-3.5 max-w-max mx-auto">
+          <div className="sticky flex-shrink-0 w-[296px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
+            {/* sidebar */}
+            <div className="flex flex-col max-h-full border border-solid rounded-lg border-divider-on-dark">
               <div
                 className={classNames(
                   searchBarBaseStyle,
-                  'px-2 h-[34px] gap-1 flex-none'
+                  'h-[34px] gap-1 flex-none px-2 border-b'
                 )}
               >
                 <HiMagnifyingGlass />
@@ -171,7 +199,7 @@ export const Blog = ({
                   className={classNames(searchBarInputBaseStyle, 'text-sm')}
                 />
               </div>
-              <div className="flex flex-col flex-1 max-h-full gap-2 overflow-y-scroll">
+              <div className="flex flex-col flex-1 max-h-full gap-2 p-2 overflow-y-scroll">
                 {shownTags.map((tag) => (
                   <SidebarTag
                     {...tag}
@@ -182,10 +210,14 @@ export const Blog = ({
               </div>
             </div>
           </div>
-          <div className="w-full max-w-4xl px-[42px]">
+          <div className="w-[988px] max-w-full px-[42px]">
             <div className="flex flex-col w-full mb-[30px] desktop:mb-10">
-              <Typography type="outline" className="mb-2 text-highlight-yellow">
-                The Highlight Blog
+              <Typography
+                type="copy4"
+                emphasis
+                className="mb-2 text-highlight-yellow"
+              >
+                THE HIGHLIGHT BLOG
               </Typography>
 
               <h3 className="hidden mobile:inline">{currentTag.name}</h3>
@@ -203,7 +235,7 @@ export const Blog = ({
               <div
                 className={classNames(
                   searchBarBaseStyle,
-                  'h-14 gap-2.5 px-3.5 box-border'
+                  'h-14 gap-2.5 px-3.5 box-border rounded-md border'
                 )}
               >
                 <HiMagnifyingGlass className="w-6 h-6" />
@@ -236,43 +268,44 @@ export const Blog = ({
                         <PostItem
                           post={post}
                           key={post.slug + 'featured desktop'}
-                        />
-                        <MobilePostItem
-                          post={post}
-                          key={post.slug + 'featured mobile'}
+                          feature
                         />
                       </>
                     ))}
                   </div>
                 </div>
               )}
+              {featuredPosts.length > 0 && (
+                <div className="w-full -mb-4">
+                  <h5 className="text-copy-on-light">All Posts</h5>
+                </div>
+              )}
               {displayedPosts.map((post) => (
-                <>
-                  <PostItem post={post} key={post.slug + 'desktop'} />
-                  <MobilePostItem post={post} key={post.slug + 'mobile'} />
-                </>
+                <PostItem post={post} key={post.slug + 'desktop'} />
               ))}
               {displayedPosts.length === 0 && (
                 <Typography
                   type="copy2"
-                  className="w-full max-w-[904px] text-center inline-block text-copy-on-light"
+                  className="w-[904px] text-center inline-block text-copy-on-light"
                 >
                   No posts found
                 </Typography>
               )}
               <div className="flex w-full gap-4 place-content-center">
-                {page !== 1 && (
+                {!debouncedSearchQuery && page > 1 && (
                   <Link
-                    className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                    className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
+                    scroll={false}
                   >
                     Previous Page
                   </Link>
                 )}
-                {!isLastPage && (
+                {!debouncedSearchQuery && !isLastPage && (
                   <Link
-                    className="w-56 border border-solid bg-dark-background font-sans border-divider-on-dark text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-divider-on-dark transition-colors active:transition-none active:bg-black/20 text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark"
+                    className={pageLinkStyle}
                     href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
+                    scroll={false}
                   >
                     Next Page
                   </Link>
@@ -299,64 +332,59 @@ function getDateAndReadingTime(postedAt: string, readingMinutes: number) {
 }
 
 const postItemStyle = classNames(
-  'relative w-full gap-3 transition-colors border border-solid rounded-lg border-divider-on-dark p-7 hover:bg-divider-on-dark'
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg p-7 hover:bg-divider-on-dark border-divider-on-dark hover:border-copy-on-light'
 );
 
-const PostItem = ({ post }: { post: Post }) => {
-  return (
-    <div
-      className={classNames(
-        postItemStyle,
-        post.featured
-          ? 'border-highlight-yellow'
-          : 'border-divider-on-dark p-7 hover:border-copy-on-light',
-        'hidden mobile:block'
-      )}
-    >
-      <Typography type="copy4" className="text-copy-on-dark">
-        {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
-      </Typography>
-
-      <Link href={`/blog/${post.slug}`}>
-        <h5 className="mt-1">{post.title}</h5>
-      </Link>
-      <div className="mt-3">
-        {post.author && <PostAuthor {...post.author} />}
-      </div>
-      <div className="flex gap-2.5 absolute right-7 bottom-7">
-        {post.tags_relations?.map((tag) => (
-          <PostTag {...tag} key={tag.slug} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const MobilePostItem = ({ post }: { post: Post }) => {
-  const tag: Tag | undefined =
-    post.tags_relations[post.tags_relations.length - 1];
+const PostItem = ({
+  post,
+  feature: featured = false,
+}: { post: Post } & { feature?: boolean }) => {
+  const firstTag = post.tags_relations[0];
 
   return (
-    <div
-      className={classNames(
-        postItemStyle,
-        post.featured
-          ? 'border-highlight-yellow'
-          : 'border-divider-on-dark p-7 hover:border-copy-on-light',
-        'mobile:hidden block'
-      )}
-    >
-      {tag && <PostTag {...tag} />}
-      <Link href={`/blog/${post.slug}`}>
-        <h3 className="mt-3">{post.title}</h3>
-      </Link>
-      <Typography type="copy4" className="mt-1 text-copy-on-dark">
-        {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
-      </Typography>
-      <div className="mt-6">
-        {post.author && <PostAuthor {...post.author} hidePhoto />}
+    <>
+      <div
+        className={classNames(
+          postItemStyle,
+          featured && 'shadow-[8px_8px_0_0_#5420D1]',
+          'hidden mobile:block'
+        )}
+      >
+        <Typography type="copy4" className="text-copy-on-dark">
+          {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
+        </Typography>
+
+        <Link href={`/blog/${post.slug}`}>
+          <h5 className="mt-1">{post.title}</h5>
+        </Link>
+        <div className="mt-3">
+          {post.author && <PostAuthor {...post.author} />}
+        </div>
+        <div className="flex gap-2.5 absolute right-7 bottom-7">
+          {post.tags_relations?.map((tag) => (
+            <PostTag {...tag} key={tag.slug} />
+          ))}
+        </div>
       </div>
-    </div>
+      <div
+        className={classNames(
+          postItemStyle,
+          featured && 'shadow-[8px_8px_0_0_#5420D1]',
+          'mobile:hidden block'
+        )}
+      >
+        {firstTag && <PostTag {...firstTag} />}
+        <Link href={`/blog/${post.slug}`}>
+          <h3 className="mt-3">{post.title}</h3>
+        </Link>
+        <Typography type="copy4" className="mt-1 text-copy-on-dark">
+          {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
+        </Typography>
+        <div className="mt-6">
+          {post.author && <PostAuthor {...post.author} hidePhoto />}
+        </div>
+      </div>
+    </>
   );
 };
 

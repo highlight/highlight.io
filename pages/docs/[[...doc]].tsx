@@ -264,7 +264,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -335,9 +335,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
     if (newLink.startsWith('/docs/')) {
       const doc = (newLink.split('/docs').pop() || '').split('#')[0];
       if (!docRelLinks.has(doc)) {
-        // throw new Error(
-        //   `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
-        // );
+        throw new Error(
+          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
+        );
       }
     }
   }
@@ -707,7 +707,8 @@ const DocPage = ({
 
   const isSdkDocs = useMemo(() => {
     return (
-      currentPageIndex != -1 &&
+      currentPageIndex !== -1 &&
+      docOptionsWithContent &&
       docOptionsWithContent[currentPageIndex] &&
       docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
     );
@@ -716,7 +717,13 @@ const DocPage = ({
   return (
     <>
       <Meta
-        title={metadata?.title || ''}
+        title={
+          metadata?.title?.length
+            ? metadata?.title === 'Welcome to Highlight'
+              ? 'Documentation'
+              : metadata?.title
+            : ''
+        }
         description={description}
         absoluteImageUrl={`https://${
           process.env.NEXT_PUBLIC_VERCEL_URL
@@ -835,6 +842,7 @@ const DocPage = ({
                   h3: getDocsTypographyRenderer('h5'),
                   h4: getDocsTypographyRenderer('h5'),
                   h5: getDocsTypographyRenderer('h5'),
+                  ul: getDocsTypographyRenderer('ul'),
                   code: getDocsTypographyRenderer('code'),
                   a: getDocsTypographyRenderer('a'),
                 }}

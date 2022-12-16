@@ -195,7 +195,7 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
   return DocsTypography;
 };
 
-export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
+export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
     return (
@@ -216,6 +216,18 @@ export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a') => {
               showLineNumbers={false}
             />
           )
+        ) : type === 'ul' ? (
+          <ul style={{ listStyle: 'disc outside' }}>
+            {props.children.map((c: any, i: number) => {
+              return (
+                c.type === 'li' && (
+                  <li className={styles.listItem} key={i}>
+                    {c.props.children.map((e: any) => e)}
+                  </li>
+                )
+              );
+            })}
+          </ul>
         ) : type === 'a' ? (
           props.children?.length && (
             <Link href={resolveLink(props.href)} legacyBehavior>
