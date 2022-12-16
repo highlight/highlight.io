@@ -88,7 +88,7 @@ export const DOCS_REDIRECTS = {
   environments: '/docs/product-features/environments',
   gatsbyjs: '/docs/getting-started/client-sdk/gatsbyjs',
   html: '/docs/getting-started/client-sdk/html',
-  metrics: '/docs/getting-started/fullstack-frameworks/next-js/metrics-overview',
+  metrics: '/docs/getting-started/nextjs-sdk/metrics',
   nextjs: '/docs/getting-started/client-sdk/nextjs',
   other: '/docs/getting-started/client-sdk/other',
   privacy: '/docs/session-replay/privacy',
