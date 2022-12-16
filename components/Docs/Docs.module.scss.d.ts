@@ -28,6 +28,7 @@ export const innerParameterContainer: string;
 export const innerParameterHeading: string;
 export const leftInner: string;
 export const leftSection: string;
+export const listItem: string;
 export const mainWrapper: string;
 export const methodParameter: string;
 export const pageContentBullet: string;
