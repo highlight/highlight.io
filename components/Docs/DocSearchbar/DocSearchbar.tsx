@@ -113,6 +113,10 @@ const DocSearchbar = (props: SearchbarProps) => {
     );
   }, [props.docPaths]);
 
+  useEffect(() => {
+    storeDocs();
+  }, [storeDocs]);
+
   let onSelectionChange = (idx: number) => {
     const result = searchResults[idx];
     if (result) {
