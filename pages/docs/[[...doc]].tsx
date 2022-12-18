@@ -264,7 +264,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -707,7 +707,8 @@ const DocPage = ({
 
   const isSdkDocs = useMemo(() => {
     return (
-      currentPageIndex != -1 &&
+      currentPageIndex !== -1 &&
+      docOptionsWithContent &&
       docOptionsWithContent[currentPageIndex] &&
       docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
     );
@@ -843,6 +844,7 @@ const DocPage = ({
                   h3: getDocsTypographyRenderer('h5'),
                   h4: getDocsTypographyRenderer('h5'),
                   h5: getDocsTypographyRenderer('h5'),
+                  ul: getDocsTypographyRenderer('ul'),
                   code: getDocsTypographyRenderer('code'),
                   a: getDocsTypographyRenderer('a'),
                 }}
