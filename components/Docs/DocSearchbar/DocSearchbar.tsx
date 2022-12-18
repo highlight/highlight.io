@@ -180,11 +180,11 @@ const DocSearchbar = (props: SearchbarProps) => {
             };
           })
         );
-      } else {
-        console.log('from api');
-        const results = await (await fetch(`/api/docs/search/${e}`)).json();
-        setSearchResults([]);
       }
+      setIsSearchLoading(false);
+    } else {
+      setSearchResults([]);
+      setSearchValue('');
       setIsSearchLoading(false);
     }
   };
