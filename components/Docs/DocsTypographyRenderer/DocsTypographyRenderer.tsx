@@ -198,9 +198,6 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
 export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
-    if (type === 'li') {
-      console.log('children', props.children);
-    }
     return (
       <>
         {type === 'code' ? (

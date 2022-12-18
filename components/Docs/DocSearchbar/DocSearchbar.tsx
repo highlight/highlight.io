@@ -101,12 +101,9 @@ const DocSearchbar = (props: SearchbarProps) => {
   const [isSearchLoading, setIsSearchLoading] = useState(true);
 
   const storeDocs = useCallback(async () => {
-    console.log('clearing docs put');
     await db.docs.clear();
-    console.log('putting docs put', props.docPaths.length);
     await db.docs.bulkPut(
       props.docPaths.map((d) => {
-        console.log('title', d.metadata.title);
         return {
           slug: d.simple_path,
           content: d.content,
@@ -114,12 +111,7 @@ const DocSearchbar = (props: SearchbarProps) => {
         };
       })
     );
-    console.log('finishing docs put');
   }, [props.docPaths]);
-
-  useEffect(() => {
-    storeDocs().then(() => console.log('stored'));
-  }, [storeDocs]);
 
   let onSelectionChange = (idx: number) => {
     const result = searchResults[idx];
@@ -193,10 +185,6 @@ const DocSearchbar = (props: SearchbarProps) => {
         const results = await (await fetch(`/api/docs/search/${e}`)).json();
         setSearchResults([]);
       }
-      setIsSearchLoading(false);
-    } else {
-      setSearchResults([]);
-      setSearchValue('');
       setIsSearchLoading(false);
     }
   };
