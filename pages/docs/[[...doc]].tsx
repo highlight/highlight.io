@@ -839,10 +839,10 @@ const DocPage = ({
                 components={{
                   h1: getDocsTypographyRenderer('h5'),
                   h2: getDocsTypographyRenderer('h5'),
+                  ul: getDocsTypographyRenderer('ul'),
                   h3: getDocsTypographyRenderer('h5'),
                   h4: getDocsTypographyRenderer('h5'),
                   h5: getDocsTypographyRenderer('h5'),
-                  ul: getDocsTypographyRenderer('ul'),
                   code: getDocsTypographyRenderer('code'),
                   a: getDocsTypographyRenderer('a'),
                 }}

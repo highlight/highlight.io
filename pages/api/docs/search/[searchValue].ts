@@ -6,6 +6,7 @@ import {
   getSdkPaths,
   readMarkdown,
 } from '../../../docs/[[...doc]]';
+import RangeTuple from 'fuse.js';
 import removeMd from 'remove-markdown';
 
 export const SEARCH_RESULT_BLURB_LENGTH = 60;
@@ -14,9 +15,11 @@ const removeHtmlTags = (content: string) =>
   content.replace(/(<([^>]+)>)/gi, '');
 export interface SearchResult {
   title: string;
+  titleMatch?: ReadonlyArray<[number, number]>| undefined;
   path: string;
   indexPath: boolean;
   content: string;
+  contentMatch?: ReadonlyArray<[number, number]>| undefined;
 }
 
 export default async function handler(

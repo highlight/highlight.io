@@ -13,6 +13,7 @@ import React, {
   useState,
 } from 'react';
 import { useComboBox } from 'react-aria';
+import Fuse from 'fuse.js';
 import Highlighter from 'react-highlight-words';
 import { BiSearch } from 'react-icons/bi';
 import { Item, useComboBoxState } from 'react-stately';
@@ -102,16 +103,18 @@ const DocSearchbar = (props: SearchbarProps) => {
   const storeDocs = useCallback(async () => {
     await db.docs.clear();
     await db.docs.bulkPut(
-      props.docPaths.map((d) => ({
-        slug: d.simple_path,
-        content: d.content,
-        metadata: d.metadata,
-      }))
+      props.docPaths.map((d) => {
+        return {
+          slug: d.simple_path,
+          content: d.content,
+          metadata: d.metadata,
+        };
+      })
     );
   }, [props.docPaths]);
 
   useEffect(() => {
-    storeDocs().then();
+    storeDocs();
   }, [storeDocs]);
 
   let onSelectionChange = (idx: number) => {
@@ -124,39 +127,63 @@ const DocSearchbar = (props: SearchbarProps) => {
     }
   };
 
-  const onSearchChange = async (e: any) => {
+  const onSearchChange = async (e: string) => {
     setIsSearchLoading(true);
     if (e) {
       setSearchValue(e);
-      const docs = await db.docs
-        .filter(
-          (doc) =>
-            doc.metadata.title.toLowerCase().indexOf(e.toLowerCase()) !== -1 ||
-            doc.content.toLowerCase().indexOf(e.toLowerCase()) !== -1
-        )
-        .toArray();
+      const chars = e.split('');
+      const d = await db.docs.toArray();
+
+      const fuse = new Fuse(d, {
+        includeScore: true,
+        ignoreLocation: true,
+        keys: [
+          { name: 'metadata.title', weight: 0.8 },
+          { name: 'content', weight: 0.2 },
+        ],
+        includeMatches: true,
+        shouldSort: true,
+      });
+      const docs = fuse.search(e);
+
       if (docs?.length) {
         setSearchResults(
           docs.map((d) => {
-            let idx = d.content.indexOf(e);
-            if (idx === -1) {
-              idx = Math.floor(d.content.length / 2);
-            }
-            const content = d.content.slice(
-              Math.max(0, idx - SEARCH_RESULT_BLURB_LENGTH / 2),
-              Math.min(d.content.length, idx + SEARCH_RESULT_BLURB_LENGTH / 2)
+            // console.log('mapping', d.item.metadata.title, d.matches);
+            const titleMatch = d.matches?.find(
+              (e) => e.key === 'metadata.title'
             );
+            const contentMatch = d.matches?.find((e) => e.key === 'content');
+            var content = d.item.content;
+            if (contentMatch) {
+              var minContentIndex = Infinity;
+              for (var i of contentMatch.indices) {
+                minContentIndex = Math.min(i[0], minContentIndex);
+              }
+              content = content.slice(
+                minContentIndex,
+                Math.min(
+                  content.length,
+                  minContentIndex + SEARCH_RESULT_BLURB_LENGTH
+                )
+              );
+            } else {
+              content = content.slice(
+                0,
+                Math.min(content.length, 0 + SEARCH_RESULT_BLURB_LENGTH)
+              );
+            }
+
             return {
               content,
-              title: d.metadata.title,
-              path: d.slug,
+              contentMatch: contentMatch?.indices,
+              titleMatch: titleMatch?.indices,
+              title: d.item.metadata.title,
+              path: d.item.slug,
               indexPath: false,
             };
           })
         );
-      } else {
-        const results = await (await fetch(`/api/docs/search/${e}`)).json();
-        setSearchResults(results);
       }
       setIsSearchLoading(false);
     } else {
@@ -187,6 +214,13 @@ const DocSearchbar = (props: SearchbarProps) => {
           <div className={classNames(styles.searchResultCard)}>
             <div>
               <Highlighter
+                findChunks={(options) => {
+                  return (
+                    result.titleMatch?.map((m) => {
+                      return { start: m[0], end: m[1] };
+                    }) || []
+                  );
+                }}
                 className={styles.resultTitle}
                 highlightClassName={styles.highlightedText}
                 searchWords={[searchValue]}
@@ -196,6 +230,13 @@ const DocSearchbar = (props: SearchbarProps) => {
             </div>
             <div className={styles.content}>
               <Highlighter
+                findChunks={(options) => {
+                  return (
+                    result.contentMatch?.map((m) => {
+                      return { start: m[0], end: m[1] };
+                    }) || []
+                  );
+                }}
                 highlightClassName={styles.highlightedText}
                 searchWords={[searchValue]}
                 autoEscape={true}
