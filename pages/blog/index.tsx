@@ -302,7 +302,7 @@ function PageController({
         </Typography>
       ) : (
         <Link
-          href={`${tag}?page=${page - 1 || 1}`}
+          href={`${getTagUrl(tag)}?page=${page - 1 || 1}`}
           className="grid h-full w-[94px] border border-current rounded-l-md place-items-center"
         >
           Previous
