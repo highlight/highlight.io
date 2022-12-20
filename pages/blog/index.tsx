@@ -272,26 +272,44 @@ export const Blog = ({
 function PageController({ page, count }: { page: number; count: number }) {
   return (
     <div className="flex flex-row items-center self-center h-9">
-      <Link
-        href={`?page=${page - 1 || 1}`}
-        className="grid h-full w-[94px] border border-current rounded-l-md place-items-center"
-        scroll={false}
-      >
-        Previous
-      </Link>
+      {page <= 1 ? (
+        <Typography
+          type="copy3"
+          emphasis
+          className="grid h-full w-[94px] border border-current rounded-l-md place-items-center text-copy-on-light select-none"
+        >
+          Previous
+        </Typography>
+      ) : (
+        <Link
+          href={`?page=${page + 1 || 1}`}
+          className="grid h-full w-[94px] border border-current rounded-l-md place-items-center"
+        >
+          Previous
+        </Link>
+      )}
       <Typography
         type="copy3"
         className="grid h-full px-3 border-y text-copy-on-light border-divider-on-dark place-items-center"
       >
         {page} / {Math.ceil(count)}
       </Typography>
-      <Link
-        href={`?page=${page + 1 || 1}`}
-        className="grid h-full w-[94px] border border-current rounded-r-md place-items-center"
-        scroll={false}
-      >
-        Next
-      </Link>
+      {page >= Math.ceil(count) ? (
+        <Typography
+          type="copy3"
+          emphasis
+          className="grid h-full w-[94px] border border-current rounded-r-md place-items-center text-copy-on-light select-none"
+        >
+          Next
+        </Typography>
+      ) : (
+        <Link
+          href={`?page=${page + 1 || 1}`}
+          className="grid h-full w-[94px] border border-current rounded-r-md place-items-center"
+        >
+          Next
+        </Link>
+      )}
     </div>
   );
 }
