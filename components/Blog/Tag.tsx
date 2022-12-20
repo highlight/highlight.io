@@ -64,12 +64,6 @@ export function SidebarTag({
   slug: Tag['slug'];
   current?: boolean;
 }) {
-  const tabColorStyle = classNames(
-    current
-      ? 'text-highlight-yellow border-highlight-yellow'
-      : 'text-copy-on-dark border-transparent'
-  );
-
   return (
     <Link href={getTagUrl(slug)}>
       <div className="flex gap-[3px] items-center text-copy-on-dark h-[30px] select-none cursor-pointer transition-all active:transition-none group hover:bg-divider-on-dark/30 active:bg-dark-background pl-[3px]">
@@ -77,17 +71,16 @@ export function SidebarTag({
           slug={slug}
           className={classNames(
             'transition-all  group-hover:text-copy-on-dark',
-            current ? 'text-highlight-yellow' : 'text-copy-on-light'
+            current ? 'text-white' : 'text-copy-on-light'
           )}
         />
         <Typography
           type="copy3"
           className={classNames(
             'transition-all group-hover:opacity-100 group-hover:text-copy-on-dark',
-            current
-              ? 'text-highlight-yellow opacity-100 font-semibold'
-              : 'opacity-70'
+            current ? 'text-white opacity-100' : 'opacity-70'
           )}
+          emphasis={current}
         >
           {name}
         </Typography>
