@@ -8,7 +8,13 @@ import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
 import { HiOutlineSearch } from 'react-icons/hi';
-import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
+import {
+  getTagUrl,
+  PostTag,
+  SidebarTag,
+  Tag,
+  TagTab,
+} from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -225,6 +231,7 @@ export const Blog = ({
                   <PageController /* Pagination */
                     page={page}
                     count={filteredPosts.length / itemsPerPage}
+                    tag={currentTag.slug}
                   />
                 )}
               </div>
@@ -258,6 +265,7 @@ export const Blog = ({
                 <PageController
                   page={page}
                   count={filteredPosts.length / itemsPerPage}
+                  tag={currentTag.slug}
                 />
               )}
             </div>
@@ -273,7 +281,15 @@ export const Blog = ({
   );
 };
 
-function PageController({ page, count }: { page: number; count: number }) {
+function PageController({
+  page,
+  count,
+  tag,
+}: {
+  page: number;
+  count: number;
+  tag: string;
+}) {
   return (
     <div className="flex flex-row items-center self-center h-9">
       {page <= 1 ? (
@@ -286,7 +302,7 @@ function PageController({ page, count }: { page: number; count: number }) {
         </Typography>
       ) : (
         <Link
-          href={`?page=${page - 1 || 1}`}
+          href={`${tag}?page=${page - 1 || 1}`}
           className="grid h-full w-[94px] border border-current rounded-l-md place-items-center"
         >
           Previous
@@ -308,7 +324,7 @@ function PageController({ page, count }: { page: number; count: number }) {
         </Typography>
       ) : (
         <Link
-          href={`?page=${page + 1 || 1}`}
+          href={`${getTagUrl(tag)}?page=${page + 1 || 1}`}
           className="grid h-full w-[94px] border border-current rounded-r-md place-items-center"
         >
           Next
