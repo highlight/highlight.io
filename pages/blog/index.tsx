@@ -227,10 +227,12 @@ export const Blog = ({
                     }
                   />
                 </div>
-                <PageController /* Pagination */
-                  page={page}
-                  count={filteredPosts.length / itemsPerPage}
-                />
+                {!debouncedSearchQuery && (
+                  <PageController /* Pagination */
+                    page={page}
+                    count={filteredPosts.length / itemsPerPage}
+                  />
+                )}
               </div>
               {featuredPosts.length > 0 && (
                 <div /* Featured Posts */
@@ -250,10 +252,12 @@ export const Blog = ({
               {displayedPosts.map((post) => (
                 <PostItem post={post} key={post.slug} />
               ))}
-              <PageController
-                page={page}
-                count={filteredPosts.length / itemsPerPage}
-              />
+              {!debouncedSearchQuery && (
+                <PageController
+                  page={page}
+                  count={filteredPosts.length / itemsPerPage}
+                />
+              )}
             </div>
           </div>
         </div>
