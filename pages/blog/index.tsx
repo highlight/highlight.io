@@ -252,7 +252,15 @@ export const Blog = ({
               {displayedPosts.map((post) => (
                 <PostItem post={post} key={post.slug} />
               ))}
-              {!debouncedSearchQuery && (
+              {displayedPosts.length < 1 && (
+                <Typography
+                  type="copy2"
+                  className="my-10 text-center text-copy-on-light"
+                >
+                  No Posts Found
+                </Typography>
+              )}
+              {displayedPosts.length > 0 && !debouncedSearchQuery && (
                 <PageController
                   page={page}
                   count={filteredPosts.length / itemsPerPage}
