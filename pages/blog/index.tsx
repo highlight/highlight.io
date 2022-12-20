@@ -190,7 +190,9 @@ export const Blog = ({
                 The Highlight Blog
               </Typography>
               <h3>{currentTag.name}</h3>
-              <Typography type="copy1">{currentTag.description}</Typography>
+              <Typography type="copy1">
+                {currentTag.description || allTag.description}
+              </Typography>
             </div>
             <div /* Search and Posts */ className="flex flex-col gap-6">
               <div /* Mobile Tags Tabs */
