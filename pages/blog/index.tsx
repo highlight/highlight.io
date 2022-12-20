@@ -137,7 +137,7 @@ export const Blog = ({
   const itemsPerPage = 4;
 
   const shouldFeature =
-    !debouncedSearchQuery && currentTag.slug === allTag.slug;
+    !debouncedSearchQuery && currentTag.slug === allTag.slug && page <= 1;
 
   const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
   const unfeaturedPosts = posts.filter((p) =>
