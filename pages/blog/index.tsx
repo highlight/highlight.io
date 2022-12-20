@@ -168,7 +168,7 @@ export const Blog = ({
       <main>
         <div className="flex flex-row w-full gap-8 my-20 max-w-[1328px] mx-auto items-start px-6">
           <div /* Sidebar */
-            className="w-[296px] flex-shrink-0 hidden desktop:inline-block sticky top-[204px]"
+            className="w-[296px] flex-shrink-0 hidden desktop:inline-block"
           >
             <div className="flex flex-col w-full gap-2 p-2 border rounded-lg border-divider-on-dark">
               {shownTags.map((tag) => (
