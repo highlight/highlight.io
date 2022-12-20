@@ -282,7 +282,7 @@ function PageController({ page, count }: { page: number; count: number }) {
         </Typography>
       ) : (
         <Link
-          href={`?page=${page + 1 || 1}`}
+          href={`?page=${page - 1 || 1}`}
           className="grid h-full w-[94px] border border-current rounded-l-md place-items-center"
         >
           Previous
