@@ -8,13 +8,7 @@ import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
 import { HiOutlineSearch } from 'react-icons/hi';
-import {
-  getTagUrl,
-  PostTag,
-  SidebarTag,
-  Tag,
-  TagTab,
-} from '../../components/Blog/Tag';
+import { PostTag, SidebarTag, Tag, TagTab } from '../../components/Blog/Tag';
 import { GraphQLRequest } from '../../utils/graphql';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
