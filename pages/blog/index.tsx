@@ -166,19 +166,17 @@ export const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex flex-row w-full gap-8 my-20 max-w-[1328px] mx-auto items-start px-6">
+        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1624px] mx-auto items-start px-6">
           <div /* Sidebar */
-            className="w-[296px] flex-shrink-0 hidden desktop:inline-block"
+            className="w-[296px] flex-shrink-0 hidden desktop:flex  flex-col gap-2 p-2 border rounded-lg border-divider-on-dark"
           >
-            <div className="flex flex-col w-full gap-2 p-2 border rounded-lg border-divider-on-dark">
-              {shownTags.map((tag) => (
-                <SidebarTag
-                  {...tag}
-                  key={tag.slug}
-                  current={currentTag.slug === tag.slug}
-                />
-              ))}
-            </div>
+            {shownTags.map((tag) => (
+              <SidebarTag
+                {...tag}
+                key={tag.slug}
+                current={currentTag.slug === tag.slug}
+              />
+            ))}
           </div>
           <div /* Main Side */ className="flex flex-col flex-1 w-full gap-11">
             <div /* Category Description */
@@ -260,6 +258,9 @@ export const Blog = ({
               )}
             </div>
           </div>
+          <div /* Right Side Whitespace (for centering) */
+            className="w-[296px] flex-shrink hidden desktop:inline-block"
+          />
         </div>
         <FooterCallToAction />
       </main>
