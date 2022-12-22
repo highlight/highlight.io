@@ -715,7 +715,6 @@ const DocPage = ({
     .join(' ');
 
   useEffect(() => {
-    console.log('hello this is jay', relPath);
     setCurrentPageIndex(
       docOptionsWithContent?.findIndex(
         (d) => d?.metadata?.slug === metadata?.slug
