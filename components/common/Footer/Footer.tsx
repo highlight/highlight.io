@@ -98,6 +98,9 @@ const Footer = () => {
               <li>
                 <a href="mailto:sales@highlight.io">sales@highlight.io</a>
               </li>
+              <li>
+                <a href="mailto:sales@highlight.io">security@highlight.io</a>
+              </li>
             </ul>
           </Typography>
         </div>
