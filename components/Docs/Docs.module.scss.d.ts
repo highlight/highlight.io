@@ -49,6 +49,7 @@ export const sdkLeftColumn: string;
 export const sdkPageTitle: string;
 export const sdkRender: string;
 export const sdkRightColumn: string;
+export const sdkSocialItem: string;
 export const searchContainer: string;
 export const searchDiv: string;
 export const searchResultCard: string;

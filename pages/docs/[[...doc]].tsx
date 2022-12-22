@@ -447,7 +447,13 @@ const SdkTableOfContents = () => {
   );
 };
 
-const PageContents = ({ title }: { title: string }) => {
+const PageRightBar = ({
+  title,
+  relativePath,
+}: {
+  title: string;
+  relativePath: string;
+}) => {
   const { nestedHeadings } = useHeadingsData('h5');
   const router = useRouter();
   const [activeId, setActiveId] = useState<string>();
@@ -476,7 +482,7 @@ const PageContents = ({ title }: { title: string }) => {
         </Link>
         <Link
           className={styles.socialItem}
-          href="https://github.com/highlight-run/docs?search=1"
+          href={`https://github.com/highlight-run/docs/blob/main/${relativePath}`}
           target="_blank"
         >
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -709,12 +715,13 @@ const DocPage = ({
     .join(' ');
 
   useEffect(() => {
+    console.log('hello this is jay', relPath);
     setCurrentPageIndex(
       docOptionsWithContent?.findIndex(
         (d) => d?.metadata?.slug === metadata?.slug
       )
     );
-  }, [docOptionsWithContent, metadata?.slug]);
+  }, [docOptionsWithContent, metadata?.slug, relPath]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -761,6 +768,26 @@ const DocPage = ({
         </div>
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
+          {isSdkDocs && (
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+              <Link
+                className={styles.sdkSocialItem}
+                href={`https://github.com/highlight-run/docs/blob/main/${relPath}`}
+                target="_blank"
+              >
+                <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
+                <Typography type="copy4">Suggest Edits?</Typography>
+              </Link>
+              <Link
+                className={styles.sdkSocialItem}
+                href="https://discord.gg/yxaXEAqgwN"
+                target="_blank"
+              >
+                <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
+                <Typography type="copy4">Community / Support</Typography>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <main ref={blogBody} className={styles.mainWrapper}>
@@ -907,7 +934,10 @@ const DocPage = ({
           </div>
           {!isSdkDocs && (
             <div className={styles.rightSection}>
-              <PageContents title={metadata ? metadata.title : ''} />
+              <PageRightBar
+                title={metadata ? metadata.title : ''}
+                relativePath={relPath ? relPath : ''}
+              />
             </div>
           )}
         </div>

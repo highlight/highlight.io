@@ -26,6 +26,8 @@ import {
   SearchResult,
 } from '../../../pages/api/docs/search/[searchValue]';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Typography } from '../../common/Typography/Typography';
 
 const SEARCH_DEBOUNCE_MS = 200;
 
