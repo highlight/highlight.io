@@ -10,6 +10,8 @@ import Minus from '../../public/images/MinusIcon';
 import { Collapse } from 'react-collapse';
 
 import path from 'path';
+import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
+
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
 import PageIcon from '../../public/images/page.svg';
@@ -460,53 +462,75 @@ const PageContents = ({ title }: { title: string }) => {
     }
   }, [router.asPath]);
 
-  return nestedHeadings.length > 0 ? (
-    <div className={styles.pageContentTable}>
-      <div className={styles.pageContentTitle}>
-        <div className={styles.pageContentIcon}>
-          <Image src={PageIcon} alt="" />
+  return (
+    <div className={styles.rightBarWrap}>
+      <div className={styles.resourcesSideBar}>
+        <Link
+          className={styles.socialItem}
+          href="https://discord.gg/yxaXEAqgwN"
+          target="_blank"
+          style={{ borderBottom: '1px solid #30294E' }}
+        >
+          <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
+          <Typography type="copy3">Community / Support</Typography>
+        </Link>
+        <Link
+          className={styles.socialItem}
+          href="https://github.com/highlight-run/docs?search=1"
+          target="_blank"
+        >
+          <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
+          <Typography type="copy3">Suggest Edits?</Typography>
+        </Link>
+        <Link
+          style={{ borderTop: '1px solid #30294E' }}
+          className={styles.socialItem}
+          href="https://twitter.com/highlightio"
+          target="_blank"
+        >
+          <FaTwitter style={{ height: 20, width: 20 }}></FaTwitter>
+          <Typography type="copy3">Follow us!</Typography>
+        </Link>
+      </div>
+      {nestedHeadings.length > 0 && (
+        <div className={styles.pageContentTable}>
+          <div className={styles.pageContentList}>
+            <ul>
+              {nestedHeadings.map((heading: HTMLHeadingElement) => (
+                <li
+                  key={heading.id}
+                  className={heading.id === activeId ? styles.active : ''}
+                  style={{ padding: '2px 4px' }}
+                >
+                  <a
+                    href={`#${heading.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector(`#${heading.id}`)?.scrollIntoView({
+                        behavior: 'smooth',
+                      });
+                      const basePath = router.asPath.split('#')[0];
+                      const newUrl = `${basePath}#${heading.id}`;
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl
+                      );
+                    }}
+                  >
+                    <span>{heading.innerText}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <Typography type="copy3" emphasis>
-          {title}
-        </Typography>
-      </div>
-      <div className={styles.pageContentList}>
-        <ul>
-          {nestedHeadings.map((heading: HTMLHeadingElement) => (
-            <li
-              key={heading.id}
-              className={heading.id === activeId ? styles.active : ''}
-            >
-              <a
-                href={`#${heading.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector(`#${heading.id}`)?.scrollIntoView({
-                    behavior: 'smooth',
-                  });
-                  const basePath = router.asPath.split('#')[0];
-                  const newUrl = `${basePath}#${heading.id}`;
-                  window.history.replaceState(
-                    {
-                      ...window.history.state,
-                      as: newUrl,
-                      url: newUrl,
-                    },
-                    '',
-                    newUrl
-                  );
-                }}
-              >
-                <span className={styles.pageContentBullet}>-</span>
-                <span>{heading.innerText}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
     </div>
-  ) : (
-    <></>
   );
 };
 
@@ -730,7 +754,7 @@ const DocPage = ({
         }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
-      <Navbar title="Docs" hideBanner hideNavButtons fixed />
+      <Navbar title="Docs" hideBanner isDocsPage fixed />
       <div className={styles.contentInnerBar}>
         <div className={styles.leftInner}>
           <DocSelect />

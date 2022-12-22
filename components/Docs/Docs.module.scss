@@ -22,7 +22,7 @@
 }
 
 .active {
-  border-radius: var(--border-radius);
+  border-radius: 4px;
   background-color: var(--color-divider-on-dark);
 }
 
@@ -568,6 +568,26 @@ h5:hover .headingCopyIcon {
   color: var(--color-white);
 }
 
+.rightBarWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.socialItem {
+  padding: 8px 12px 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resourcesSideBar {
+  border: 1px solid var(--divider-on-dark);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+}
+
 .pageContentTable {
   display: flex;
   flex-direction: column;
@@ -622,7 +642,7 @@ h5:hover .headingCopyIcon {
 
 .pageContentList {
   width: 100%;
-  padding: var(--size-small) var(--size-xSmall);
+  padding: 0 var(--size-xSmall);
 
   ul {
     list-style-position: outside;
@@ -651,7 +671,6 @@ h5:hover .headingCopyIcon {
 
       a {
         color: var(--color-white);
-        font-weight: 600;
       }
     }
   }
