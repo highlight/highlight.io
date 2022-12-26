@@ -55,7 +55,7 @@
     "@svgr/webpack": "^6.5.1",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash.debounce": "^4.0.7",
-    "@types/node": "18.11.11",
+    "@types/node": "18.11.18",
     "@types/nprogress": "^0.2.0",
     "@types/react": "18.0.25",
     "@types/react-collapse": "^5.0.1",
