@@ -567,6 +567,10 @@ const TableOfContents = ({
       path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
       window.location.pathname;
     setIsCurrentPage(isCurrentPage);
+    const isParentOfCurrentPage = window.location.pathname.includes(
+      docPaths[toc.docPathId || 0]?.simple_path
+    );
+    setOpen(isParentOfCurrentPage);
   }, [docPaths, toc.docPathId]);
 
   return (
