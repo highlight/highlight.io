@@ -9,7 +9,7 @@ import {
 import RangeTuple from 'fuse.js';
 import removeMd from 'remove-markdown';
 
-export const SEARCH_RESULT_BLURB_LENGTH = 60;
+export const SEARCH_RESULT_BLURB_LENGTH = 100;
 
 const removeHtmlTags = (content: string) =>
   content.replace(/(<([^>]+)>)/gi, '');
