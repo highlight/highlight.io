@@ -11,6 +11,7 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
 import ResourceDropdown from './ResourceDropdown';
+import ProductDropdown from './ProductDropdown';
 
 const Navbar = ({
   hideFreeTrialText,
@@ -167,8 +168,13 @@ const Navbar = ({
                 styles.headerCenter
               )}
             >
-              <Link href="/pricing" className={styles.headerButton}>
-                <Typography type="copy2">Pricing</Typography>
+              <Link
+                href="/pricing"
+                className={styles.headerButton}
+              >
+                <Typography type="copy2">
+                  Pricing
+                </Typography>
               </Link>
               <Link href="/customers" className={styles.headerButton}>
                 <Typography type="copy2">Customers</Typography>
