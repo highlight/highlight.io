@@ -22,7 +22,7 @@
 }
 
 .active {
-  border-radius: var(--border-radius);
+  border-radius: 4px;
   background-color: var(--color-divider-on-dark);
 }
 
@@ -365,10 +365,12 @@ h5:hover .headingCopyIcon {
 }
 
 .centerInner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   padding: 0 var(--size-large);
   height: 100%;
   align-items: center;
-  display: flex;
   border-left: 1px solid var(--color-divider-on-dark);
 }
 
@@ -585,6 +587,35 @@ h5:hover .headingCopyIcon {
   color: var(--color-white);
 }
 
+.rightBarWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.socialItem {
+  padding: 8px 12px 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sdkSocialItem {
+  padding: 6px 12px 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #30294e;
+  border-radius: 8px;
+}
+
+.resourcesSideBar {
+  border: 1px solid var(--divider-on-dark);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+}
+
 .pageContentTable {
   display: flex;
   flex-direction: column;
@@ -639,7 +670,7 @@ h5:hover .headingCopyIcon {
 
 .pageContentList {
   width: 100%;
-  padding: var(--size-small) var(--size-xSmall);
+  padding: 0 var(--size-xSmall);
 
   ul {
     list-style-position: outside;
@@ -668,7 +699,6 @@ h5:hover .headingCopyIcon {
 
       a {
         color: var(--color-white);
-        font-weight: 600;
       }
     }
   }
@@ -1019,7 +1049,6 @@ h5:hover .headingCopyIcon {
 
     .centerInner {
       height: auto;
-      width: 100%;
       padding: 0;
       border: 0;
     }
