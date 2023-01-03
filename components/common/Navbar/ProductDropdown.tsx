@@ -62,7 +62,7 @@ const ProductDropdown = ({
                     </div>
                     <div className={styles.innerGridLeft}>
                       {frontendLinks.map((item, index) => (
-                        <Link key={index} href={"/products/" + item.slug} className={styles.link}>
+                        <Link key={index} href={"/for/" + item.slug} className={styles.link}>
                           <Typography type="copy3">
                             {item.title}
                           </Typography>
@@ -78,7 +78,7 @@ const ProductDropdown = ({
                     </div>
                     <div className={styles.innerGridRight}>
                       {backendLinks.map((item, index) => (
-                        <Link key={index} href={"/products/" + item.slug} className={styles.link}>
+                        <Link key={index} href={"/for/" + item.slug} className={styles.link}>
                           <Typography type="copy3">
                             {item.title}
                           </Typography>

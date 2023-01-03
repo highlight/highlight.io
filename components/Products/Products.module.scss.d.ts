@@ -13,6 +13,7 @@ export const divider: string;
 export const highlightedBadge: string;
 export const hollowButton: string;
 export const infoContainer: string;
+export const infoTitle: string;
 export const featureBox: string;
 export const featureBoxIcon: string;
 export const featureBoxText: string;

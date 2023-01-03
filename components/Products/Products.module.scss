@@ -10,7 +10,7 @@
 .subtleBadge {
   display: inline-block;
   color: white;
-  background-color: var(--color-divider-on-purple);
+  background-color: rgba(13, 2, 37, 0.47);
   padding: 2px var(--size-small);
   margin-bottom: var(--size-large);
   border-radius: 100px;
@@ -76,8 +76,11 @@
 }
 
 .hollowButton {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   text-align: center;
+  width: 220px;
+  max-width: 250px;
   border: 1px solid var(--brand-accent-light) !important;
   background-color: transparent !important;
   color: var(--brand-accent-light) !important;
@@ -94,8 +97,8 @@
   width: 100%;
   max-width: calc(var(--max-width) + (var(--size-large) * 2));
   margin: 0 auto;
-  margin-bottom: 200px;
-  padding: 50px var(--size-large);
+  margin-bottom: var(--size-xxxLarge);
+  padding: 50px var(--size-medium);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -103,8 +106,14 @@
   gap: var(--size-xxLarge);
 }
 
+@media screen and (max-width: 600px) {
+  .infoTitle {
+    line-height: 32px !important;
+  }
+}
+
 @media screen and (max-width: 720px) {
-  .anchorFeature{
+  .anchorFeature {
     margin-top: 120px;
   }
 

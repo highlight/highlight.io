@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import Navbar from '../../components/common/Navbar/Navbar';
 import FeatureBox from '../../components/Products/FeatureBox';
 import Image from 'next/image';
@@ -28,9 +28,12 @@ import ProductsGraph from '../../public/images/products-graph.svg';
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
 import Footer from '../../components/common/Footer/Footer';
+import { Review, REVIEWS } from '../../components/Home/Reviews';
+import { CustomerReview } from '..';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Banner from '../../components/common/Banner/Banner';
+import InfoRow from '../../components/Products/InfoRow';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -59,6 +62,61 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const Products = ({ product }: { product: iProduct }) => {
+  const reviewsRef = useRef<HTMLDivElement>(null);
+  const scrollYPosition = useRef<number>(0);
+  const [scrollReviews, setScrollReviews] = useState(false);
+
+  const scrollListener = useCallback(() => {
+
+    if (!scrollReviews) {
+      return;
+    }
+
+    if (reviewsRef.current) {
+      const { scrollY } = window;
+      const scrollingDown = scrollYPosition.current > scrollY;
+      // Adjust this value to control scroll speed
+      const scrollDistance = scrollingDown ? -3 : 3;
+      reviewsRef.current.scrollLeft += scrollDistance;
+      scrollYPosition.current = scrollY;
+    }
+  }, [scrollReviews]);
+
+  useEffect(() => {
+    window.removeEventListener('scroll', scrollListener);
+    window.addEventListener('scroll', scrollListener);
+    return () => window.removeEventListener('scroll', scrollListener);
+  }, [scrollListener]);
+
+  useEffect(() => {
+    const reviewsElement = reviewsRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setScrollReviews(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: '250px 0px',
+        threshold: 0,
+      }
+    );
+
+    if (reviewsElement) {
+      observer.observe(reviewsElement);
+
+      // Scroll to center on load
+      reviewsElement.scrollLeft =
+        (reviewsElement.scrollWidth - window.innerWidth) / 2;
+    }
+
+    return () => {
+      if (reviewsElement) {
+        observer.unobserve(reviewsElement);
+      }
+    };
+  }, [reviewsRef]);
+
   return (
     <div>
       <Banner>
@@ -103,17 +161,20 @@ const Products = ({ product }: { product: iProduct }) => {
                 deploying it? With session replay and error monitoring,
                 Highlight’s got you covered.
               </Typography>
-              <div
-                className={classNames(
-                  styles.buttonContainer,
-                  landingStyles.heroImage
-                )}
-              >
-                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                  <Typography type="copy2" emphasis={true}>
-                    Get started for free
-                  </Typography>
-                </PrimaryButton>
+              <div className="flex justify-center my-14">
+                <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
+                >
+                  <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                    <Typography type="copy2" emphasis={true}>
+                      Get started for free
+                    </Typography>
+                  </PrimaryButton>
+                  <PrimaryButton href={product.docsLink} className={styles.hollowButton}>
+                    <Typography type="copy2" emphasis={true}>
+                      Read our docs
+                    </Typography>
+                  </PrimaryButton>
+                </div>
               </div>
             </div>
           </div>
@@ -161,22 +222,20 @@ const Products = ({ product }: { product: iProduct }) => {
                 </Typography>
               </div>
 
-              <div
-                className={classNames(
-                  landingStyles.buttonContainer,
-                  landingStyles.heroImage
-                )}
-              >
-                <PrimaryButton href="https://app.highlight.run/?sign_up=1">
-                  <Typography type="copy2" emphasis={true}>
-                    Get started for free
-                  </Typography>
-                </PrimaryButton>
-                <PrimaryButton href="/docs" className={styles.hollowButton}>
-                  <Typography type="copy2" emphasis={true}>
-                    Read our docs
-                  </Typography>
-                </PrimaryButton>
+              <div className="flex justify-center my-14">
+                <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
+                >
+                  <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                    <Typography type="copy2" emphasis={true}>
+                      Get started for free
+                    </Typography>
+                  </PrimaryButton>
+                  <PrimaryButton href={product.docsLink} className={styles.hollowButton}>
+                    <Typography type="copy2" emphasis={true}>
+                      Read our docs
+                    </Typography>
+                  </PrimaryButton>
+                </div>
               </div>
             </div>
             <div className="w-4/5 mb-20 md:mb-40">
@@ -190,70 +249,66 @@ const Products = ({ product }: { product: iProduct }) => {
           </div>
         </div>
         <div className={styles.infoContainer}>
-          <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:mt-32 xl:gap-32">
-            <div className="flex justify-center lg:w-[570px]">
-              <Image src={ProductsReplay} alt="" />
-            </div>
-            <div className="lg:w-1/2 text-center lg:text-left">
-              <h3>
-                Reproduce issues with <br />
-                high-fidelity session <br />
-                replay.
-              </h3>
-              <Typography type="copy2" onDark>
-                <p className="text-color-darker-copy-on-dark">
-                  With our pixel-perfect replays in your {product.title} app,
-                  you&apos;ll get to the bottom of issues in no time and better
-                  understand how your app is being used.
-                </p>
-              </Typography>
-              <Link href="/docs">Go to Docs →</Link>
-            </div>
-          </div>
+          <InfoRow
+            title={`Reproduce issues with high-fidelity session replay.`}
+            desc={`With our pixel-perfect replays in your ${product.title} app,
+            you'll get to the bottom of issues in no time and better
+            understand how your app is being used.`}
+            link={product.docsLink}
+            imgSrc={ProductsReplay}
+          />
 
           <div className={styles.divider} />
 
-          <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:mt-32 xl:gap-32">
-            <div className="flex lg:hidden lg:w-[570px] ">
-              <Image src={ProductsErrors} alt="" />
-            </div>
-            <div className="lg:w-1/2 text-center lg:text-left">
-              <h3>Get a ping when exceptions or error logs are thrown.</h3>
-              <Typography type="copy2" onDark>
-                <p className="text-color-darker-copy-on-dark">
-                  Our alerting infrastructure can take abnormal metrics or
-                  errors raised in your {product.title} app and notify your
-                  engineering team over Slack, Discord, and more!
-                </p>
-              </Typography>
-              <Link href="/docs">Go to Docs →</Link>
-            </div>
-            <div className="hidden justify-center lg:flex">
-              <Image src={ProductsErrors} alt="" />
-            </div>
-          </div>
+          <InfoRow
+            title={`Get a ping when exceptions or error logs are thrown.`}
+            desc={`Our alerting infrastructure can take abnormal metrics or
+            errors raised in your ${product.title} app and notify your
+            engineering team over Slack, Discord, and more!`}
+            link={product.docsLink}
+            imgSrc={ProductsErrors}
+            invert={true}
+          />
 
           <div className={styles.divider} />
 
-          <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:mt-32 xl:gap-32">
-            <div className="flex justify-center lg:w-[570px]">
-              <Image src={ProductsGraph} alt="" />
-            </div>
-            <div className="lg:w-1/2 text-center lg:text-left">
-              <h3>Monitor the metrics that keep your customers around.</h3>
-              <Typography type="copy2" onDark>
-                <p className="text-color-darker-copy-on-dark">
-                  Track performance, request timings, and other custom metrics
-                  in the frontend or backend of your {product.title} app.
-                </p>
-              </Typography>
-              <Link href="/docs">Go to Docs →</Link>
-            </div>
-          </div>
+          <InfoRow
+            title={`Monitor the metrics that keep your customers around.`}
+            desc={`Track performance, request timings, and other custom metrics
+            in the frontend or backend of your ${product.title} app.`}
+            link={product.docsLink}
+            imgSrc={ProductsGraph}
+          />
+
         </div>
         <Section>
           <CompaniesReel />
         </Section>
+        <Section>
+          <div className={landingStyles.anchorFeature}>
+            <div className={landingStyles.anchorHead}>
+              <Typography type="copy2" onDark>
+                Don&apos;t take our word.{' '}
+                <Link href="/customers">
+                  Read our customer review section →
+                </Link>
+              </Typography>
+            </div>
+          </div>
+        </Section>
+        <div className={landingStyles.slider} ref={reviewsRef}>
+          <div className={landingStyles.slideTrack}>
+            {[...REVIEWS, ...REVIEWS].map((review, i) => (
+              <CustomerReview
+                key={i}
+                companyLogo={review.companyLogo}
+                text={review.text}
+                author={review.author}
+                scale={review.scale}
+              />
+            ))}
+          </div>
+        </div>
         <FooterCallToAction />
       </div>
       <Footer />

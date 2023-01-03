@@ -3,10 +3,11 @@
 
 export interface iProduct {
   isBackend: boolean;
+  docsLink: string;
   slug: string;
+  snippets: string[];
   title: string;
   types?: string[];
-  snippets: string[];
 }
 
 const defaultFrontendSnippet: string = `
@@ -30,24 +31,19 @@ ReactDOM.render(
 const expressSnippet: string =  `
 
 import { Highlight } from '@highlight-run/node'
-// or like this with commonjs
-const Highlight = require('@highlight-run/node')
 
 const app = express()
 
 // define any configurations needed
 // <https://docs.highlight.run/api/hinit#w0-highlightoptions>
 const highlightOptions = {}
-
-// initialize the handler
 const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions)
-
-// This should be before any other error middleware and after all controllers
 app.use(highlightHandler)
 
 app.use('/error', () => {
   throw new Error('a fake failure was thrown')
 })
+
 `
 
 const goSnippet: string = `
@@ -62,6 +58,10 @@ func main() {
   defer highlight.Stop()
   //...application logic...
 }
+
+
+
+
 `
 
 const nodeSnippet: string = `
@@ -72,6 +72,14 @@ const highlightOptions = {}
 if (!H.isInitialized()) {
   H.init(highlightOptions)
 }
+
+const onError = (request, error) => {
+	const parsed = H.parseHeaders(request.headers)
+	if (parsed !== undefined) {
+		H.consumeError(error, parsed.secureSessionId, parsed.requestId)
+	}
+}
+
 `
 
 const nextBackendSnippet: string = `
@@ -83,6 +91,13 @@ const handler = async (req, res) => {
 }
 
 export default withHighlight(handler)
+
+
+
+
+
+
+
 `
 
 const angularSnippet: string = `
@@ -192,6 +207,7 @@ const svelteSnippet: string = `
 export const PRODUCTS: { [k: string]: iProduct } = {
   'express': {
     isBackend: true, 
+    docsLink: "/docs/getting-started/backend-sdk/express",
     slug: 'express',
     title: "Express",
     types: ["Backend", "Frontend"],
@@ -200,6 +216,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'go': {
     isBackend: true, 
+    docsLink: "/docs/getting-started/backend-sdk/go",
     slug: 'go',
     title: "Golang",
     types: ["Backend", "Frontend"],
@@ -208,6 +225,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'node': {
     isBackend: true, 
+    docsLink: "/docs/getting-started/backend-sdk/nodejs",
     slug: 'node',
     title: "Node.js",
     types: ["Backend", "Frontend"],
@@ -216,6 +234,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'next-backend': {
     isBackend: true, 
+    docsLink: "/docs/getting-started/backend-sdk/nextjs",
     slug: 'next-backend',
     title: "Next.js",
     types: ["Backend", "Frontend"],
@@ -224,6 +243,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'angular': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/angular",
     slug: 'angular',
     title: "Angular",
     snippets: [angularSnippet],
@@ -231,6 +251,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'gatsby': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/gatsbyjs",
     slug: 'gatsby',
     title: "Gatsby.js",
     snippets: [angularSnippet],
@@ -238,6 +259,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'html': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/html",
     slug: 'html',
     title: "HTML",
     snippets: [htmlSnippet],
@@ -245,6 +267,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'next': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/nextjs",
     slug: 'next',
     title: "Next.js",
     types: ["Frontend", "Backend"],
@@ -253,6 +276,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'react': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/reactjs",
     slug: 'react',
     title: "React",
     snippets: [reactSnippet],
@@ -260,6 +284,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'svelte': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/sveltekit",
     slug: 'svelte',
     title: "Svelte.js",
     snippets: [svelteSnippet],
@@ -267,13 +292,11 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'vue': {
     isBackend: false, 
+    docsLink: "/docs/getting-started/client-sdk/vuejs",
     slug: 'vue',
     title: "Vue.js",
     snippets: [vueSnippet],
   }, 
-
-
-
 };
 
 

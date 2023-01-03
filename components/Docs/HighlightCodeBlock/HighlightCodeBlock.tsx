@@ -8,7 +8,7 @@ import CheckmarkIcon from '../../../public/images/checkmark_circle.svg';
 import { Typography } from '../../common/Typography/Typography';
 import classNames from 'classnames';
 import { Listbox, Transition } from '@headlessui/react'
-import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/20/solid'
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
   const [copied, setCopied] = useState(false);
@@ -20,7 +20,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
           {props.product.types && <div className="w-28 ml-6">
             <Listbox value={selected} onChange={setSelected}>
               <div className="relative">
-                <Listbox.Button className="relative w-full cursor-default rounded-lg bg-dark-background py-2 my-[10px] pl-3 pr-4 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-dark-background py-2 my-[10px] pl-3 pr-4 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                   <Typography type="copy4" emphasis>
                     <span className="block truncate">{props.product.types[selected]}</span>
                   </Typography>
@@ -42,7 +42,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
                       <Listbox.Option
                         key={index}
                         className={({ active }) =>
-                          `relative cursor-default select-none mx-1 py-1 pl-2 pr-4 rounded-md ${active ? 'bg-divider-on-dark text-white' : 'text-copy-on-dark'
+                          `relative cursor-pointer select-none mx-1 py-1 pl-2 pr-4 rounded-md ${active ? 'bg-divider-on-dark text-white' : 'text-copy-on-dark'
                           }`
                         }
                         value={index}
@@ -85,7 +85,7 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
         <Image src={CopyIcon} alt="Copy" />
       </div>
       {copied && (
-        <div className={classNames(styles.codeCopyIcon, styles.active)}>
+        <div className={classNames(styles.codeCopyIcon, styles.active, `${props.topbar ? "mt-1" : ""}`)}>
           <Image src={CheckmarkIcon} alt="Text Copied" />
         </div>
       )}

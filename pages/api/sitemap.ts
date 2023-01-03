@@ -63,7 +63,7 @@ async function handler(_: any, res: any) {
   const docsPages = Array.from(docs.keys()).map(
     (slug: string) => `docs/${slug}`
   );
-  const productPages = Object.values(PRODUCTS).map((product: any) => `products/${product.slug}`);
+  const productPages = Object.values(PRODUCTS).map((product: any) => `for/${product.slug}`);
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
   const staticPages = staticPagePaths.map((path) => {
