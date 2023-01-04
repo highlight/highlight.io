@@ -9,17 +9,17 @@ import {
 import RangeTuple from 'fuse.js';
 import removeMd from 'remove-markdown';
 
-export const SEARCH_RESULT_BLURB_LENGTH = 60;
+export const SEARCH_RESULT_BLURB_LENGTH = 100;
 
 const removeHtmlTags = (content: string) =>
   content.replace(/(<([^>]+)>)/gi, '');
 export interface SearchResult {
   title: string;
-  titleMatch?: ReadonlyArray<[number, number]>| undefined;
+  titleMatch?: Array<[number, number]>| undefined;
   path: string;
   indexPath: boolean;
   content: string;
-  contentMatch?: ReadonlyArray<[number, number]>| undefined;
+  contentMatch?: Array<[number, number]>| undefined;
 }
 
 export default async function handler(

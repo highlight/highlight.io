@@ -135,11 +135,12 @@ const DocSearchbar = (props: SearchbarProps) => {
       const d = await db.docs.toArray();
 
       const fuse = new Fuse(d, {
+        isCaseSensitive: false,
         includeScore: true,
         ignoreLocation: true,
         keys: [
-          { name: 'metadata.title', weight: 0.8 },
-          { name: 'content', weight: 0.2 },
+          { name: 'metadata.title', weight: 0.6 },
+          { name: 'content', weight: 0.4 },
         ],
         includeMatches: true,
         shouldSort: true,
@@ -148,41 +149,84 @@ const DocSearchbar = (props: SearchbarProps) => {
 
       if (docs?.length) {
         setSearchResults(
-          docs.map((d) => {
-            // console.log('mapping', d.item.metadata.title, d.matches);
-            const titleMatch = d.matches?.find(
-              (e) => e.key === 'metadata.title'
-            );
-            const contentMatch = d.matches?.find((e) => e.key === 'content');
-            var content = d.item.content;
-            if (contentMatch) {
-              var minContentIndex = Infinity;
-              for (var i of contentMatch.indices) {
-                minContentIndex = Math.min(i[0], minContentIndex);
+          docs
+            .filter((d) => d.item.content.length > 0)
+            .map((d) => {
+              const titleMatch = d.matches?.find(
+                (e) => e.key === 'metadata.title'
+              );
+              const contentMatch = d.matches?.find((e) => e.key === 'content');
+              var content = d.item.content;
+              var wantedContentMatch: [number, number] | undefined = undefined;
+              var adjustedIndices: Array<[number, number]> | undefined =
+                contentMatch?.indices.concat();
+              if (contentMatch) {
+                var minContentIndex = Infinity;
+                for (var i of contentMatch.indices) {
+                  minContentIndex = Math.min(i[0], minContentIndex);
+                  if (
+                    d.item.content
+                      .slice(i[0], i[1])
+                      .toLowerCase()
+                      .includes(e.toLowerCase()) &&
+                    wantedContentMatch === undefined
+                  ) {
+                    wantedContentMatch = i;
+                  }
+                }
+                if (wantedContentMatch) {
+                  content = content.slice(
+                    wantedContentMatch[0],
+                    Math.min(
+                      content.length,
+                      wantedContentMatch[0] + SEARCH_RESULT_BLURB_LENGTH
+                    )
+                  );
+                  adjustedIndices = adjustedIndices
+                    ?.map(
+                      (i) =>
+                        [
+                          i[0] -
+                            (wantedContentMatch ? wantedContentMatch[0] : 0),
+                          i[1] -
+                            (wantedContentMatch ? wantedContentMatch[0] : 0),
+                        ] as [number, number]
+                    )
+                    .filter((a, b) => a[0] >= 0);
+                } else {
+                  content = content.slice(
+                    minContentIndex,
+                    Math.min(
+                      content.length,
+                      minContentIndex + SEARCH_RESULT_BLURB_LENGTH
+                    )
+                  );
+                  adjustedIndices = adjustedIndices
+                    ?.map(
+                      (i) =>
+                        [i[0] - minContentIndex, i[1] - minContentIndex] as [
+                          number,
+                          number
+                        ]
+                    )
+                    .filter((a, b) => a[0] >= 0);
+                }
+              } else {
+                content = content.slice(
+                  0,
+                  Math.min(content.length, 0 + SEARCH_RESULT_BLURB_LENGTH)
+                );
               }
-              content = content.slice(
-                minContentIndex,
-                Math.min(
-                  content.length,
-                  minContentIndex + SEARCH_RESULT_BLURB_LENGTH
-                )
-              );
-            } else {
-              content = content.slice(
-                0,
-                Math.min(content.length, 0 + SEARCH_RESULT_BLURB_LENGTH)
-              );
-            }
 
-            return {
-              content,
-              contentMatch: contentMatch?.indices,
-              titleMatch: titleMatch?.indices,
-              title: d.item.metadata.title,
-              path: d.item.slug,
-              indexPath: false,
-            };
-          })
+              return {
+                content,
+                contentMatch: adjustedIndices,
+                titleMatch: titleMatch?.indices.concat(),
+                title: d.item.metadata.title,
+                path: d.item.slug,
+                indexPath: false,
+              };
+            })
         );
       }
       setIsSearchLoading(false);
@@ -209,43 +253,45 @@ const DocSearchbar = (props: SearchbarProps) => {
       activeClass={styles.active}
       aria-label="Search bar"
     >
-      {searchResults.map((result: SearchResult, i) => (
-        <Item key={i} textValue={result.title}>
-          <div className={classNames(styles.searchResultCard)}>
-            <div>
-              <Highlighter
-                findChunks={(options) => {
-                  return (
-                    result.titleMatch?.map((m) => {
-                      return { start: m[0], end: m[1] };
-                    }) || []
-                  );
-                }}
-                className={styles.resultTitle}
-                highlightClassName={styles.highlightedText}
-                searchWords={[searchValue]}
-                autoEscape={true}
-                textToHighlight={result.title}
-              />
+      {searchResults.map((result: SearchResult, i) => {
+        return (
+          <Item key={i} textValue={result.title}>
+            <div className={classNames(styles.searchResultCard)}>
+              <div>
+                <Highlighter
+                  findChunks={(options) => {
+                    return (
+                      result.titleMatch?.map((m) => {
+                        return { start: m[0], end: m[1] };
+                      }) || []
+                    );
+                  }}
+                  className={styles.resultTitle}
+                  highlightClassName={styles.highlightedText}
+                  searchWords={[searchValue]}
+                  autoEscape={true}
+                  textToHighlight={result.title}
+                />
+              </div>
+              <div className={styles.content}>
+                <Highlighter
+                  findChunks={(options) => {
+                    return (
+                      result.contentMatch?.map((m) => {
+                        return { start: m[0], end: m[1] };
+                      }) || []
+                    );
+                  }}
+                  highlightClassName={styles.highlightedText}
+                  searchWords={[searchValue]}
+                  autoEscape={true}
+                  textToHighlight={result.content}
+                />
+              </div>
             </div>
-            <div className={styles.content}>
-              <Highlighter
-                findChunks={(options) => {
-                  return (
-                    result.contentMatch?.map((m) => {
-                      return { start: m[0], end: m[1] };
-                    }) || []
-                  );
-                }}
-                highlightClassName={styles.highlightedText}
-                searchWords={[searchValue]}
-                autoEscape={true}
-                textToHighlight={result.content}
-              />
-            </div>
-          </div>
-        </Item>
-      ))}
+          </Item>
+        );
+      })}
     </DocSearchComboBox>
   );
 };
