@@ -11,16 +11,17 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
 import ResourceDropdown from './ResourceDropdown';
+import ProductDropdown from './ProductDropdown';
 
 const Navbar = ({
   hideFreeTrialText,
-  hideNavButtons,
+  isDocsPage,
   hideBanner,
   fixed,
   title,
 }: {
   hideFreeTrialText?: boolean;
-  hideNavButtons?: boolean;
+  isDocsPage?: boolean;
   hideBanner?: boolean;
   fixed?: boolean;
   title?: string;
@@ -159,7 +160,7 @@ const Navbar = ({
               </div>
             </div>
           )}
-          {!hideNavButtons && (
+          {!isDocsPage && (
             <div
               className={classNames(
                 styles.navContainer,
@@ -167,8 +168,13 @@ const Navbar = ({
                 styles.headerCenter
               )}
             >
-              <Link href="/pricing" className={styles.headerButton}>
-                <Typography type="copy2">Pricing</Typography>
+              <Link
+                href="/pricing"
+                className={styles.headerButton}
+              >
+                <Typography type="copy2">
+                  Pricing
+                </Typography>
               </Link>
               <Link href="/customers" className={styles.headerButton}>
                 <Typography type="copy2">Customers</Typography>
@@ -184,9 +190,27 @@ const Navbar = ({
               styles.headerRight
             )}
           >
-            <Link href="/docs" className={styles.headerButton}>
-              <Typography type="copy2">Docs</Typography>
-            </Link>
+            {isDocsPage && (
+              <>
+                <Link
+                  href="https://discord.gg/yxaXEAqgwN"
+                  className={styles.headerButton}
+                >
+                  <Typography type="copy2">Community</Typography>
+                </Link>
+                <Link
+                  href="https://github.com/highlight-run"
+                  className={styles.headerButton}
+                >
+                  <Typography type="copy2">Github</Typography>
+                </Link>
+              </>
+            )}
+            {!isDocsPage && (
+              <Link href="/docs" className={styles.headerButton}>
+                <Typography type="copy2">Docs</Typography>
+              </Link>
+            )}
             <a href="https://app.highlight.io/" className={styles.headerButton}>
               <Typography type="copy2">Sign in</Typography>
             </a>

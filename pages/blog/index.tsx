@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { gql } from 'graphql-request';
 import { GetStaticProps } from 'next';
-import { HiMagnifyingGlass } from 'react-icons/hi2';
+import { HiOutlineSearch } from 'react-icons/hi';
 import {
   getTagUrl,
   PostTag,
@@ -91,18 +91,6 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const searchBarBaseStyle = classNames(
-  'border-solid w-full text-copy-on-dark border-divider-on-dark items-center flex focus-within:border-copy-on-light transition-colors'
-);
-
-const searchBarInputBaseStyle = classNames(
-  'box-border h-full w-0 flex-1 font-sans leading-none bg-transparent border-none outline-none text-copy-on-dark'
-);
-
-const pageLinkStyle = classNames(
-  'w-56 bg-divider-on-dark font-sans text-copy-on-dark py-2.5 rounded-md text-center select-none hover:bg-copy-on-light transition-colors active:transition-none active:bg-purple-dark text-[18px] leading-[34px] cursor-pointer font-normal hover:text-copy-on-dark'
-);
-
 const allTag: Omit<Tag, 'posts'> = {
   name: 'All posts',
   slug: 'all',
@@ -149,7 +137,7 @@ export const Blog = ({
   const itemsPerPage = 4;
 
   const shouldFeature =
-    !debouncedSearchQuery && currentTag.slug === allTag.slug;
+    !debouncedSearchQuery && currentTag.slug === allTag.slug && page <= 1;
 
   const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
   const unfeaturedPosts = posts.filter((p) =>
@@ -174,145 +162,117 @@ export const Blog = ({
     ? filteredPosts
     : filteredPosts.slice(itemsPerPage * (page - 1), itemsPerPage * page);
 
-  const isLastPage = itemsPerPage * page >= filteredPosts.length;
-
   return (
     <>
       <Navbar />
       <main>
-        <div className="flex items-start desktop:mx-11 mt-[29px] mb-36 gap-3.5 max-w-max mx-auto">
-          <div className="sticky flex-shrink-0 w-[296px] hidden desktop:inline-block overflow-y-scroll top-[153px] box-border">
-            {/* sidebar */}
-            <div className="flex flex-col max-h-full border border-solid rounded-lg border-divider-on-dark">
-              <div
-                className={classNames(
-                  searchBarBaseStyle,
-                  'h-[34px] gap-1 flex-none px-2 border-b'
-                )}
+        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1624px] mx-auto items-start px-6">
+          <div /* Sidebar */
+            className="w-[296px] flex-shrink-0 hidden desktop:flex  flex-col gap-2 p-2 border rounded-lg border-divider-on-dark"
+          >
+            {shownTags.map((tag) => (
+              <SidebarTag
+                {...tag}
+                key={tag.slug}
+                current={currentTag.slug === tag.slug}
+              />
+            ))}
+          </div>
+          <div /* Main Side */ className="flex flex-col flex-1 w-full gap-11">
+            <div /* Category Description */
+              className="flex flex-col items-start gap-5 max-w-[808px]"
+            >
+              <Typography
+                type="copy4"
+                emphasis
+                className="py-0.5 px-3 bg-highlight-yellow rounded-full text-dark-background"
               >
-                <HiMagnifyingGlass />
-                <input
-                  type="text"
-                  placeholder="Search Posts..."
-                  value={searchQuery}
-                  onChange={(ev) => setSearchQuery(ev.currentTarget.value)}
-                  className={classNames(searchBarInputBaseStyle, 'text-sm')}
-                />
-              </div>
-              <div className="flex flex-col flex-1 max-h-full gap-2 p-2 overflow-y-scroll">
+                The Highlight Blog
+              </Typography>
+              <h3>{currentTag.name}</h3>
+              <Typography type="copy1">
+                {currentTag.description || allTag.description}
+              </Typography>
+            </div>
+            <div /* Search and Posts */ className="flex flex-col gap-6">
+              <div /* Mobile Tags Tabs */
+                className="flex gap-8 overflow-x-scroll desktop:hidden scrollbar-hidden"
+              >
                 {shownTags.map((tag) => (
-                  <SidebarTag
+                  <TagTab
                     {...tag}
                     key={tag.slug}
                     current={currentTag.slug === tag.slug}
                   />
                 ))}
               </div>
-            </div>
-          </div>
-          <div className="w-[988px] max-w-full px-[42px]">
-            <div className="flex flex-col w-full mb-[30px] desktop:mb-10">
-              <Typography
-                type="copy4"
-                emphasis
-                className="mb-2 text-highlight-yellow"
+              <div /* Search and Pagination */
+                className="flex flex-col justify-between w-full gap-4 mobile:flex-row"
               >
-                THE HIGHLIGHT BLOG
-              </Typography>
-
-              <h3 className="hidden mobile:inline">{currentTag.name}</h3>
-              <h1 className="inline mobile:hidden">{currentTag.name}</h1>
-              <Typography
-                type="copy2"
-                className="w-full mt-5 text-copy-on-dark"
-              >
-                {currentTag.description}
-              </Typography>
-            </div>
-
-            {/* tablet and mobile filters */}
-            <div className="flex desktop:hidden">
-              <div
-                className={classNames(
-                  searchBarBaseStyle,
-                  'h-14 gap-2.5 px-3.5 box-border rounded-md border'
-                )}
-              >
-                <HiMagnifyingGlass className="w-6 h-6" />
-                <input
-                  type="text"
-                  placeholder="Search Posts..."
-                  value={searchQuery}
-                  onChange={(ev) => setSearchQuery(ev.currentTarget.value)}
-                  className={classNames(searchBarInputBaseStyle, 'text-xl')}
-                />
-              </div>
-            </div>
-            <div className="flex max-w-full gap-8 overflow-x-scroll desktop:hidden mt-[30px] scrollbar-hidden">
-              {shownTags.map((tag) => (
-                <TagTab
-                  {...tag}
-                  key={tag.slug}
-                  current={currentTag.slug === tag.slug}
-                />
-              ))}
-            </div>
-
-            <div className="box-border flex flex-col items-center w-full max-w-[904px] gap-10 pt-10 border-0 border-t border-solid border-divider-on-dark">
-              {featuredPosts.length > 0 && (
-                <div className="w-full pb-6 border-0 border-b border-solid border-divider-on-dark">
-                  <h5 className="text-copy-on-light">Featured Post</h5>
-                  <div className="flex flex-col gap-6 mt-5">
-                    {featuredPosts.map((post) => (
-                      <>
-                        <PostItem
-                          post={post}
-                          key={post.slug + 'featured desktop'}
-                          feature
-                        />
-                      </>
-                    ))}
-                  </div>
+                <div /* Search */
+                  className="rounded-lg text-copy-on-dark border-divider-on-dark items-center flex flex-grow focus-within:border-copy-on-light transition-colors h-9 gap-1 mobile:max-w-[480px] px-2 border"
+                >
+                  <HiOutlineSearch className="w-5 h-5 text-copy-on-light" />
+                  <input
+                    type="text"
+                    placeholder={
+                      currentTag.slug === 'all'
+                        ? 'Search all posts...'
+                        : `Search all ${currentTag.name} posts...`
+                    }
+                    value={searchQuery}
+                    onChange={(ev) => setSearchQuery(ev.currentTarget.value)}
+                    className={
+                      'h-full flex-1 leading-none bg-transparent outline-none text-copy-on-dark text-[17px] w-0'
+                    }
+                  />
                 </div>
-              )}
+                {!debouncedSearchQuery && (
+                  <PageController /* Pagination */
+                    page={page}
+                    count={filteredPosts.length / itemsPerPage}
+                    tag={currentTag.slug}
+                  />
+                )}
+              </div>
               {featuredPosts.length > 0 && (
-                <div className="w-full -mb-4">
-                  <h5 className="text-copy-on-light">All Posts</h5>
+                <div /* Featured Posts */
+                  className="flex flex-col items-start gap-3 p-3 bg-divider-on-dark rounded-xl"
+                >
+                  <Typography
+                    type="copy4"
+                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark"
+                  >
+                    Featured Posts
+                  </Typography>
+                  {featuredPosts.map((post) => (
+                    <PostItem post={post} key={post.slug} />
+                  ))}
                 </div>
               )}
               {displayedPosts.map((post) => (
-                <PostItem post={post} key={post.slug + 'desktop'} />
+                <PostItem post={post} key={post.slug} />
               ))}
-              {displayedPosts.length === 0 && (
+              {displayedPosts.length < 1 && (
                 <Typography
                   type="copy2"
-                  className="w-[904px] text-center inline-block text-copy-on-light"
+                  className="my-10 text-center text-copy-on-light"
                 >
-                  No posts found
+                  No Posts Found
                 </Typography>
               )}
-              <div className="flex w-full gap-4 place-content-center">
-                {!debouncedSearchQuery && page > 1 && (
-                  <Link
-                    className={pageLinkStyle}
-                    href={getTagUrl(currentTagSlug) + `?page=${page - 1 || 1}`}
-                    scroll={false}
-                  >
-                    Previous Page
-                  </Link>
-                )}
-                {!debouncedSearchQuery && !isLastPage && (
-                  <Link
-                    className={pageLinkStyle}
-                    href={getTagUrl(currentTagSlug) + `?page=${page + 1}`}
-                    scroll={false}
-                  >
-                    Next Page
-                  </Link>
-                )}
-              </div>
+              {displayedPosts.length > 0 && !debouncedSearchQuery && (
+                <PageController
+                  page={page}
+                  count={filteredPosts.length / itemsPerPage}
+                  tag={currentTag.slug}
+                />
+              )}
             </div>
           </div>
+          <div /* Right Side Whitespace (for centering) */
+            className="w-[296px] flex-shrink hidden desktop:inline-block"
+          />
         </div>
         <FooterCallToAction />
       </main>
@@ -320,6 +280,59 @@ export const Blog = ({
     </>
   );
 };
+
+function PageController({
+  page,
+  count,
+  tag,
+}: {
+  page: number;
+  count: number;
+  tag: string;
+}) {
+  return (
+    <div className="flex flex-row items-center self-center h-9">
+      {page <= 1 ? (
+        <Typography
+          type="copy3"
+          emphasis
+          className="grid h-full w-[94px] border border-current rounded-l-md place-items-center text-copy-on-light select-none"
+        >
+          Previous
+        </Typography>
+      ) : (
+        <Link
+          href={`${getTagUrl(tag)}?page=${page - 1 || 1}`}
+          className="grid h-full w-[94px] border border-current rounded-l-md place-items-center"
+        >
+          Previous
+        </Link>
+      )}
+      <Typography
+        type="copy3"
+        className="grid h-full px-3 border-y text-copy-on-light border-divider-on-dark place-items-center"
+      >
+        {page} / {Math.ceil(count)}
+      </Typography>
+      {page >= Math.ceil(count) ? (
+        <Typography
+          type="copy3"
+          emphasis
+          className="grid h-full w-[94px] border border-current rounded-r-md place-items-center text-copy-on-light select-none"
+        >
+          Next
+        </Typography>
+      ) : (
+        <Link
+          href={`${getTagUrl(tag)}?page=${page + 1 || 1}`}
+          className="grid h-full w-[94px] border border-current rounded-r-md place-items-center"
+        >
+          Next
+        </Link>
+      )}
+    </div>
+  );
+}
 
 function getDateAndReadingTime(postedAt: string, readingMinutes: number) {
   const postedDate = new Date(postedAt).toLocaleDateString(undefined, {
@@ -332,7 +345,7 @@ function getDateAndReadingTime(postedAt: string, readingMinutes: number) {
 }
 
 const postItemStyle = classNames(
-  'relative w-full gap-3 transition-colors border border-solid rounded-lg p-7 hover:bg-divider-on-dark border-divider-on-dark hover:border-copy-on-light'
+  'relative w-full gap-3 transition-colors border border-solid rounded-lg bg-dark-background p-7 hover:bg-divider-on-dark border-divider-on-dark hover:border-copy-on-light'
 );
 
 const PostItem = ({

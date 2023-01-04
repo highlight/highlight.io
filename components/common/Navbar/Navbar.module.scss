@@ -299,7 +299,7 @@
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: start;
 
   p {
     margin: var(--size-xSmall) 0 !important;
@@ -386,6 +386,7 @@
     flex-direction: column;
     gap: var(--size-medium);
     height: calc(100vh - 60px);
+    z-index: 50;
     justify-content: flex-start;
     left: 0;
     padding: var(--size-medium) var(--size-medium) var(--size-xLarge)
