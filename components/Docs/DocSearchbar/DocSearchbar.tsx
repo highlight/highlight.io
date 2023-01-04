@@ -254,8 +254,6 @@ const DocSearchbar = (props: SearchbarProps) => {
       aria-label="Search bar"
     >
       {searchResults.map((result: SearchResult, i) => {
-        console.log(result?.title, result?.content);
-        console.log(result?.title, result?.contentMatch);
         return (
           <Item key={i} textValue={result.title}>
             <div className={classNames(styles.searchResultCard)}>
