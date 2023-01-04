@@ -33,7 +33,11 @@ export default async function handler(req: NextRequest) {
   const doc = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
     ?.pathname.groups.doc;
 
+  console.log("doc", doc)
   const d = await getGithubDoc(doc || 'index');
+  console.log("content", d?.content)
+  console.log("meta", d?.meta)
+  console.log("token", process.env.GITHUB_TOKEN)
 
   return new ImageResponse(
     (

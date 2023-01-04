@@ -166,6 +166,7 @@ export const getGithubDoc = async (
   } else if (!slug.endsWith('/index')) {
     return getGithubDoc(`${slug}/index`);
   } else {
+    console.error("error fetching from the github api", response);
     return null;
   }
 };
