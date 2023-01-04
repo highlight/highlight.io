@@ -30,14 +30,10 @@ export default async function handler(req: NextRequest) {
       return p + String.fromCharCode(c);
     }, '')
   );
-  const doc = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
+  const docPath = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
     ?.pathname.groups.doc;
 
-  console.log("doc", doc)
-  const d = await getGithubDoc(doc || 'index');
-  console.log("content", d?.content)
-  console.log("meta", d?.meta)
-  console.log("token", process.env.GITHUB_TOKEN)
+  const d = await getGithubDoc(docPath || 'index');
 
   return new ImageResponse(
     (
@@ -63,10 +59,10 @@ export default async function handler(req: NextRequest) {
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
           <div style={{ marginBottom: 20, fontSize: 45, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            Docs / {"Hello World"}
+            {docPath?.split("/").at(-1) ? "Docs / " + docPath?.split("/").at(-1) : "Documentation"}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            Grouping Errors
+            {d?.meta.title}
           </div>
 
         </div>
