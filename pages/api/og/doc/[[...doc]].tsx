@@ -54,8 +54,8 @@ export default async function handler(req: NextRequest) {
             marginTop: 40,
             marginBottom: 66,
           }}
-          width={150}
-          height={150}
+          width={180}
+          height={180}
           src={`data:image/png;base64,${logoBase64}`}
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
