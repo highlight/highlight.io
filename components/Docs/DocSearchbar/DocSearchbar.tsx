@@ -157,8 +157,9 @@ const DocSearchbar = (props: SearchbarProps) => {
               );
               const contentMatch = d.matches?.find((e) => e.key === 'content');
               var content = d.item.content;
-              var wantedContentMatch = undefined;
-              var adjustedIndices = contentMatch?.indices;
+              var wantedContentMatch: [number, number] | undefined = undefined;
+              var adjustedIndices: Array<[number, number]> | undefined =
+                contentMatch?.indices.concat();
               if (contentMatch) {
                 var minContentIndex = Infinity;
                 // var maxMatchLength = -1;
@@ -183,10 +184,15 @@ const DocSearchbar = (props: SearchbarProps) => {
                     )
                   );
                   adjustedIndices = adjustedIndices
-                    ?.map((i) => [
-                      i[0] - wantedContentMatch[0],
-                      i[1] - wantedContentMatch[0],
-                    ])
+                    ?.map(
+                      (i) =>
+                        [
+                          i[0] -
+                            (wantedContentMatch ? wantedContentMatch[0] : 0),
+                          i[1] -
+                            (wantedContentMatch ? wantedContentMatch[0] : 0),
+                        ] as [number, number]
+                    )
                     .filter((a, b) => a[0] >= 0);
                 } else {
                   content = content.slice(
@@ -197,10 +203,13 @@ const DocSearchbar = (props: SearchbarProps) => {
                     )
                   );
                   adjustedIndices = adjustedIndices
-                    ?.map((i) => [
-                      i[0] - minContentIndex,
-                      i[1] - minContentIndex,
-                    ])
+                    ?.map(
+                      (i) =>
+                        [i[0] - minContentIndex, i[1] - minContentIndex] as [
+                          number,
+                          number
+                        ]
+                    )
                     .filter((a, b) => a[0] >= 0);
                 }
               } else {
@@ -213,7 +222,7 @@ const DocSearchbar = (props: SearchbarProps) => {
               return {
                 content,
                 contentMatch: adjustedIndices,
-                titleMatch: titleMatch?.indices,
+                titleMatch: titleMatch?.indices.concat(),
                 title: d.item.metadata.title,
                 path: d.item.slug,
                 indexPath: false,
