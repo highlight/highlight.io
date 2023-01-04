@@ -59,7 +59,7 @@ export default async function handler(req: NextRequest) {
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
           <div style={{ marginBottom: 20, fontSize: 45, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            Highlight / {docPath?.includes("sdk") ? "SDK Docs" : "General Docs"}
+            {docPath?.split("/").reverse().slice(1).map(s => s.split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" ")).join(" / ")}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {JSON.stringify(d?.meta)}
