@@ -59,7 +59,7 @@ export default async function handler(req: NextRequest) {
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
           <div style={{ marginBottom: 20, fontSize: 45, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {docPath?.split("/").at(-1) ? "Docs / " + docPath?.split("/").at(-1) : "Documentation"}
+            {docPath?.split("/").at(-2) ? "Docs / " + docPath?.split("/").at(-1) : "Documentation"}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {d?.meta.title}
