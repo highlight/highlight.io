@@ -250,11 +250,11 @@ export const Blog = ({
               </div>
               {featuredPosts.length > 0 && (
                 <div /* Featured Posts */
-                  className="flex flex-col items-start gap-3 p-3 bg-divider-on-dark rounded-xl"
+                  className="flex flex-col gap-3 p-3 bg-divider-on-dark rounded-xl"
                 >
                   <Typography
                     type="copy4"
-                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark"
+                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark self-start"
                   >
                     Featured Posts
                   </Typography>
