@@ -433,14 +433,15 @@ const PostItem = ({
           'hidden mobile:block'
         )}
       >
+        <Link href={`/blog/${post.slug}`} className='absolute inset-0' >
+          <div />
+        </Link>
         <Typography type="copy4" className="text-copy-on-dark">
           {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
         </Typography>
 
-        <Link href={`/blog/${post.slug}`}>
-          <h5 className="mt-1">{post.title}</h5>
-        </Link>
-        <div className="mt-3">
+        <h5 className="mt-1">{post.title}</h5>
+        <div className="relative mt-3 pointer-events-none">
           {post.author && <PostAuthor {...post.author} />}
         </div>
         <div className="flex gap-2.5 absolute right-7 bottom-7">
@@ -456,14 +457,15 @@ const PostItem = ({
           'mobile:hidden block'
         )}
       >
-        {firstTag && <PostTag {...firstTag} />}
-        <Link href={`/blog/${post.slug}`}>
-          <h3 className="mt-3">{post.title}</h3>
+        <Link href={`/blog/${post.slug}`} className='absolute inset-0' >
+          <div />
         </Link>
+        {firstTag && <div className='relative'><PostTag {...firstTag} /></div>}
+        <h3 className="mt-3">{post.title}</h3>
         <Typography type="copy4" className="mt-1 text-copy-on-dark">
           {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
         </Typography>
-        <div className="mt-6">
+        <div className="relative mt-6 pointer-events-none">
           {post.author && <PostAuthor {...post.author} hidePhoto />}
         </div>
       </div>
