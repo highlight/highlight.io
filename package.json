@@ -24,7 +24,7 @@
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
     "gray-matter": "^4.0.3",
-    "highlight.run": "5.1.6",
+    "highlight.run": "5.1.8",
     "js-yaml": "^4.1.0",
     "lodash.debounce": "^4.0.8",
     "markdown-to-jsx": "^7.1.8",
