@@ -33,8 +33,6 @@ export default async function handler(req: NextRequest) {
   const docPath = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
     ?.pathname.groups.doc;
 
-  const d = await getGithubDoc(docPath || 'index');
-
   const readablePaths = docPath?.split("/").map(s => s.split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" "));
 
   return new ImageResponse(
