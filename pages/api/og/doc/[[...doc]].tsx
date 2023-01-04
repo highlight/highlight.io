@@ -35,6 +35,8 @@ export default async function handler(req: NextRequest) {
 
   const d = await getGithubDoc(docPath || 'index');
 
+  const readablePaths = docPath?.split("/").map(s => s.split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" "));
+
   return new ImageResponse(
     (
       <div
@@ -59,10 +61,10 @@ export default async function handler(req: NextRequest) {
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
           <div style={{ marginBottom: 20, fontSize: 45, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {docPath?.split("/").reverse().slice(1).map(s => s.split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" ")).join(" / ")}
+            {readablePaths?.slice(0, -1).join(" / ")}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {JSON.stringify(d?.meta)}
+            {readablePaths?.at(-1)}
           </div>
 
         </div>
