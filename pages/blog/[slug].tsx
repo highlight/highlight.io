@@ -333,7 +333,6 @@ const PostPage = ({
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
       <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
-        <Link href="/blog" className='absolute flex flex-row gap-2 place-items-center top-6 left-8'><ReturnIcon /> Back to blog</Link>
         <Section>
           <div className={homeStyles.anchorTitle}>
             <Typography type="copy2">
@@ -358,6 +357,7 @@ const PostPage = ({
             </div>
           </div>
         </Section>
+        <Link href="/blog" className='absolute flex flex-row gap-2 place-items-center top-6 left-8'><ReturnIcon /> Back to blog</Link>
         {post.image?.url && (
           <Section className={styles.headerSection}>
             {isStartupStack ?
