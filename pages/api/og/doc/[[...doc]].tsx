@@ -51,15 +51,15 @@ export default async function handler(req: NextRequest) {
         <img
           alt={'logo'}
           style={{
-            marginTop: 30,
-            marginBottom: 56,
+            marginTop: 40,
+            marginBottom: 66,
           }}
           width={150}
           height={150}
           src={`data:image/png;base64,${logoBase64}`}
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
-          <div style={{ marginBottom: 15, fontSize: 40, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ marginBottom: 15, fontSize: 35, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {readablePaths?.slice(-3, -1).join(" / ")}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
