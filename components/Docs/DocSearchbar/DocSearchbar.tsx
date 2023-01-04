@@ -162,7 +162,6 @@ const DocSearchbar = (props: SearchbarProps) => {
                 contentMatch?.indices.concat();
               if (contentMatch) {
                 var minContentIndex = Infinity;
-                // var maxMatchLength = -1;
                 for (var i of contentMatch.indices) {
                   minContentIndex = Math.min(i[0], minContentIndex);
                   if (
