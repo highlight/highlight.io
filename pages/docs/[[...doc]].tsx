@@ -559,18 +559,17 @@ const TableOfContents = ({
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
 
   useEffect(() => {
-    setOpen(isTopLevel && openTopLevel);
-  }, [isTopLevel, openTopLevel]);
-
-  useEffect(() => {
-    const isCurrentPage =
-      path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
-      window.location.pathname;
-    setIsCurrentPage(isCurrentPage);
     const isParentOfCurrentPage = window.location.pathname.includes(
       docPaths[toc.docPathId || 0]?.simple_path
     );
-    setOpen(isParentOfCurrentPage);
+    setOpen((isTopLevel && openTopLevel) || isParentOfCurrentPage);
+  }, [docPaths, isTopLevel, openTopLevel, toc.docPathId]);
+
+  useEffect(() => {
+    const isCurrentPageNow =
+      path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
+      window.location.pathname;
+    setIsCurrentPage(isCurrentPageNow);
   }, [docPaths, toc.docPathId]);
 
   return (
