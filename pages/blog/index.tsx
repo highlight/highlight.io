@@ -223,7 +223,7 @@ export const Blog = ({
                 className="flex flex-col justify-between w-full gap-4 mobile:flex-row"
               >
                 <div /* Search */
-                  className="rounded-lg text-copy-on-dark border-divider-on-dark items-center flex flex-grow focus-within:border-copy-on-light transition-colors h-9 gap-1 mobile:max-w-[480px] px-2 border"
+                  className="flex items-center flex-grow gap-1 px-2 transition-colors border rounded-lg text-copy-on-dark border-divider-on-dark focus-within:border-copy-on-light h-9"
                 >
                   <HiOutlineSearch className="w-5 h-5 text-copy-on-light" />
                   <input
