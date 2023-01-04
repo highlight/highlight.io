@@ -570,7 +570,7 @@ const TableOfContents = ({
   }, [docPaths, toc.docPathId]);
 
   return (
-    <div>
+    <div className='max-w-full'>
       {hasChildren ? (
         <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
           <ChevronDown
