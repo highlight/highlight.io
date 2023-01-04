@@ -145,6 +145,8 @@
   width: var(--size-large);
   align-items: center;
   justify-content: center;
+  flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
 }
 
