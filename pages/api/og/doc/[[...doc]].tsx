@@ -53,6 +53,7 @@ export default async function handler(req: NextRequest) {
         <img
           alt={'logo'}
           style={{
+            marginTop: 30,
             marginBottom: 56,
           }}
           width={150}
@@ -60,7 +61,7 @@ export default async function handler(req: NextRequest) {
           src={`data:image/png;base64,${logoBase64}`}
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
-          <div style={{ marginBottom: 20, fontSize: 45, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ marginBottom: 15, fontSize: 45, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {readablePaths?.slice(0, -1).join(" / ")}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
