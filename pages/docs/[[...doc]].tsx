@@ -755,9 +755,8 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
+          }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
