@@ -106,7 +106,9 @@ export default async function handler(req: NextRequest) {
             }}>
               Highlight Blog
             </span>
-            <span style={{ fontSize: 50, marginBottom: 80, lineHeight: 1.2 }}>{"A new way of doing things."}</span>
+            <span style={{ fontSize: 50, marginBottom: 60, lineHeight: 1.2 }}>
+              {post?.title || slug}
+            </span>
             <div tw={'flex flex-row items-center'}>
               <div tw={'flex flex-col'}>
                 <span style={{ fontSize: 24 }}>
