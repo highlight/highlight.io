@@ -159,6 +159,17 @@
   overflow: hidden;
 }
 
+.youtubeEmbed {
+  position: relative;
+  width: 100%;
+  height: auto;
+  align-items: stretch;
+  min-height: 400px;
+  border-radius: var(--border-radius);
+  border: 3px solid #30294e;
+  overflow: hidden;
+}
+
 .tagSortTitle {
   min-width: 256px;
 }

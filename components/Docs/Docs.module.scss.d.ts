@@ -46,7 +46,6 @@ export const rightBarWrap: string;
 export const rightSection: string;
 export const sdkCenterSection: string;
 export const sdkDocSection: string;
-export const sdkDocSection: string;
 export const sdkLeftColumn: string;
 export const sdkPageTitle: string;
 export const sdkRender: string;

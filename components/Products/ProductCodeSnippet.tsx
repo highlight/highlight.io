@@ -3,7 +3,7 @@ import { CodeBlock } from 'react-code-blocks';
 import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import CopyIcon from '../../public/images/copy.svg';
 import highlightCodeTheme from './../common/CodeBlock/highlight-code-theme';
-import styles from './Products.module.scss' 
+import homeStyles from '../../Home/Home.module.scss';
 
 const ProductCodeSnippet = ({
   content,
@@ -14,21 +14,21 @@ const ProductCodeSnippet = ({
   canCopy?: boolean;
 }) => {
   return (
-    <div className={styles.codeSnippetFrame}>
-      <div className={styles.codeSnippetTopbar}>
-        <div className={styles.codeSnippetButtons}>
-          <div className={styles.codeSnippetCircle}></div>
-          <div className={styles.codeSnippetCircle}></div>
-          <div className={styles.codeSnippetCircle}></div>
+    <div className={homeStyles.codeSnippetFrame}>
+      <div className={homeStyles.codeSnippetTopbar}>
+        <div className={homeStyles.codeSnippetButtons}>
+          <div className={homeStyles.codeSnippetCircle}></div>
+          <div className={homeStyles.codeSnippetCircle}></div>
+          <div className={homeStyles.codeSnippetCircle}></div>
         </div>
       </div>
-      <div className={styles.codeSnippetContent}>
+      <div className={homeStyles.codeSnippetContent}>
         {canCopy && (
           <div
-            className={styles.codeSnippetCopy}
+            className={homeStyles.codeSnippetCopy}
             onClick={() => navigator.clipboard.writeText(content)}
           >
-            <div className={styles.codeSnippetCopyIcon}>
+            <div className={homeStyles.codeSnippetCopyIcon}>
               <Image src={CopyIcon} alt="" />
             </div>
           </div>

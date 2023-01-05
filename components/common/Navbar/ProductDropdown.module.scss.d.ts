@@ -1,7 +1,6 @@
 export const copyOnDark: string;
 export const copyOnLight: string;
 export const gridContainer: string;
-export const gridItem: string;
 export const headerButton: string;
 export const innerContainer: string;
 export const innerGridLeft: string;

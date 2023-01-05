@@ -1,6 +1,8 @@
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Typography } from '../../components/common/Typography/Typography';
 import Navbar from '../../components/common/Navbar/Navbar';
+
+import Image from 'next/image';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Footer from '../../components/common/Footer/Footer';
 import { useEffect, useState } from 'react';
@@ -34,6 +36,9 @@ export async function loadPostsFromHygraph(tag?: string) {
             postedAt
             readingTime
             featured
+            image {
+              url
+            }
             author {
               firstName
               lastName
@@ -146,14 +151,14 @@ export const Blog = ({
 
   const filteredPosts = debouncedSearchQuery
     ? matchSorter(unfeaturedPosts, debouncedSearchQuery, {
-        keys: [
-          'title',
-          {
-            key: 'tags_relations.name',
-            maxRanking: matchSorter.rankings.CONTAINS,
-          },
-        ],
-      })
+      keys: [
+        'title',
+        {
+          key: 'tags_relations.name',
+          maxRanking: matchSorter.rankings.CONTAINS,
+        },
+      ],
+    })
     : unfeaturedPosts;
 
   page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
@@ -161,6 +166,8 @@ export const Blog = ({
   const displayedPosts = debouncedSearchQuery
     ? filteredPosts
     : filteredPosts.slice(itemsPerPage * (page - 1), itemsPerPage * page);
+
+  const isStartupStack = currentTag.slug.includes("stack")
 
   return (
     <>
@@ -187,12 +194,18 @@ export const Blog = ({
                 emphasis
                 className="py-0.5 px-3 bg-highlight-yellow rounded-full text-dark-background"
               >
-                The Highlight Blog
+                {isStartupStack ? "The Startup Stack" : "The Highlight Blog"}
               </Typography>
-              <h3>{currentTag.name}</h3>
-              <Typography type="copy1">
-                {currentTag.description || allTag.description}
-              </Typography>
+              <h3>
+                {isStartupStack ? "Welcome to the Startup Stack!" : currentTag.name}
+              </h3>
+              {isStartupStack ? <Typography type="copy1">
+                This is where we talk about the tools and tech you can use to build your next Startup! Read through our episodes below find us <Link href="https://www.youtube.com/channel/UCATzQs36Mo7Cezt5Ij9ayZQ">on YouTube</Link>.
+              </Typography> :
+                <Typography type="copy1">
+                  {currentTag.description || allTag.description}
+                </Typography>
+              }
             </div>
             <div /* Search and Posts */ className="flex flex-col gap-6">
               <div /* Mobile Tags Tabs */
@@ -250,9 +263,16 @@ export const Blog = ({
                   ))}
                 </div>
               )}
-              {displayedPosts.map((post) => (
-                <PostItem post={post} key={post.slug} />
-              ))}
+              {displayedPosts.map((post) => {
+                return (
+                  <>{
+                    isStartupStack ?
+                      <EpisodeItem post={post} key={post.slug} />
+                      : <PostItem post={post} key={post.slug} />
+                  }
+                  </>);
+              }
+              )}
               {displayedPosts.length < 1 && (
                 <Typography
                   type="copy2"
@@ -348,12 +368,65 @@ const postItemStyle = classNames(
   'relative w-full gap-3 transition-colors border border-solid rounded-lg bg-dark-background p-7 hover:bg-divider-on-dark border-divider-on-dark hover:border-copy-on-light'
 );
 
+const EpisodeItem = ({
+  post,
+}: { post: Post } & { feature?: boolean }) => {
+  const firstTag = post.tags_relations[0];
+  return (
+    <>
+      <div
+        className="hidden mobile:block"
+      >
+        <div
+          style={{ display: "flex", flexDirection: "row", border: "1px solid #30294E", padding: 24, borderRadius: 8, gap: 24 }}
+        >
+          {post?.image?.url && <Image style={{ borderRadius: 8, border: "2px solid #30294E", height: 100 * 1.5, width: 190 * 1.5 }} src={post.image?.url} alt={"podcast image"} height={100} width={190}></Image>}
+          <div>
+            <Typography type="copy4" className="text-copy-on-dark">
+              {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
+            </Typography>
+
+            <Link href={`/blog/${post.slug}`}>
+              <h5 className="mt-1">{post.title}</h5>
+            </Link>
+            <div className="mt-3">
+              {post.author ? <PostAuthor hideTitle hidePhoto {...post.author} /> : "Missing Post Author!"}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div
+        className={classNames(
+          'mobile:hidden block'
+        )}
+      >
+        <div
+          style={{ display: "flex", flexDirection: "column", border: "1px solid #30294E", padding: 24, borderRadius: 8, gap: 24 }}
+        >
+          <div>
+            {firstTag && <PostTag {...firstTag} />}
+            <Link href={`/blog/${post.slug}`}>
+              <h3 className="mt-3">{post.title}</h3>
+            </Link>
+            <Typography type="copy4" className="mt-1 text-copy-on-dark">
+              {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
+            </Typography>
+            <div className="mt-6">
+              {post.author && <PostAuthor {...post.author} hidePhoto />}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
 const PostItem = ({
   post,
   feature: featured = false,
 }: { post: Post } & { feature?: boolean }) => {
   const firstTag = post.tags_relations[0];
-
   return (
     <>
       <div
