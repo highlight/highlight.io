@@ -37,29 +37,11 @@ export default async function handler(req: NextRequest) {
     }, '')
   );
 
-  // const heroData = await hero;
-  // const heroBase64 = btoa(
-  //   new Uint8Array(heroData).reduce(function (p, c) {
-  //     return p + String.fromCharCode(c);
-  //   }, '')
-  // );
   const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await GraphQLRequest(QUERY, { slug }, false)).post as
     | Post
     | undefined;
-
-  let profilePic: string = '';
-  if (post?.author?.profilePhoto.url) {
-    const req = await fetch(post?.author?.profilePhoto.url);
-    if (
-      new Set<string>(['image/jpeg', 'image/png']).has(
-        req.headers.get('content-type') || ''
-      )
-    ) {
-      profilePic = post?.author?.profilePhoto.url;
-    }
-  }
 
   return new ImageResponse(
     (
