@@ -559,17 +559,21 @@ const TableOfContents = ({
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
 
   useEffect(() => {
-    const isParentOfCurrentPage = window.location.pathname.includes(
-      docPaths[toc.docPathId || 0]?.simple_path
-    );
-    setOpen((isTopLevel && openTopLevel) || isParentOfCurrentPage);
+    setOpen(isTopLevel && openTopLevel);
   }, [docPaths, isTopLevel, openTopLevel, toc.docPathId]);
 
   useEffect(() => {
-    const isCurrentPageNow =
-      path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
-      window.location.pathname;
-    setIsCurrentPage(isCurrentPageNow);
+    const currentPage = path.join(
+      '/docs',
+      docPaths[toc.docPathId || 0]?.simple_path || ''
+    );
+    setIsCurrentPage(currentPage === window.location.pathname);
+    const isParentOfCurrentPage = window.location.pathname.includes(
+      docPaths[toc.docPathId || 0]?.simple_path
+    );
+    if (isParentOfCurrentPage) {
+      setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage);
+    }
   }, [docPaths, toc.docPathId]);
 
   return (
@@ -758,9 +762,8 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
+          }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
