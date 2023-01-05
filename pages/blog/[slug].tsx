@@ -20,7 +20,7 @@ import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/Sugge
 import { ElementNode } from '@graphcms/rich-text-types';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
-import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import ReturnIcon from '../../public/images/ReturnIcon';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { GraphQLRequest } from '../../utils/graphql';
 import { PostTag } from '../../components/Blog/Tag';
@@ -332,7 +332,7 @@ const PostPage = ({
         canonical={`/blog/${post.slug}`}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} />
-      <main ref={blogBody} className={styles.mainBlogPadding}>
+      <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
         <Section>
           <div className={homeStyles.anchorTitle}>
             <Typography type="copy2">
@@ -357,6 +357,7 @@ const PostPage = ({
             </div>
           </div>
         </Section>
+        <Link href="/blog" className='absolute flex flex-row gap-2 place-items-center top-6 left-8'><ReturnIcon /> Back to blog</Link>
         {post.image?.url && (
           <Section className={styles.headerSection}>
             {isStartupStack ?

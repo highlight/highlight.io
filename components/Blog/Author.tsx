@@ -45,7 +45,7 @@ export function PostAuthor({
           <Typography type="copy3" emphasis>
             {firstName} {lastName}
           </Typography>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 pointer-events-auto">
             {personalWebsiteLink && (
               <SocialLink href={personalWebsiteLink} icon={<HiGlobeAlt />} />
             )}

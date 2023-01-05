@@ -173,7 +173,7 @@ export const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1624px] mx-auto items-start px-6">
+        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1328px] mx-auto items-start px-6">
           <div /* Sidebar */
             className="w-[296px] flex-shrink-0 hidden desktop:flex  flex-col gap-2 p-2 border rounded-lg border-divider-on-dark"
           >
@@ -223,7 +223,7 @@ export const Blog = ({
                 className="flex flex-col justify-between w-full gap-4 mobile:flex-row"
               >
                 <div /* Search */
-                  className="rounded-lg text-copy-on-dark border-divider-on-dark items-center flex flex-grow focus-within:border-copy-on-light transition-colors h-9 gap-1 mobile:max-w-[480px] px-2 border"
+                  className="flex items-center flex-grow gap-1 px-2 transition-colors border rounded-lg text-copy-on-dark border-divider-on-dark focus-within:border-copy-on-light h-9"
                 >
                   <HiOutlineSearch className="w-5 h-5 text-copy-on-light" />
                   <input
@@ -250,11 +250,11 @@ export const Blog = ({
               </div>
               {featuredPosts.length > 0 && (
                 <div /* Featured Posts */
-                  className="flex flex-col items-start gap-3 p-3 bg-divider-on-dark rounded-xl"
+                  className="flex flex-col gap-3 p-3 bg-divider-on-dark rounded-xl"
                 >
                   <Typography
                     type="copy4"
-                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark"
+                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark self-start"
                   >
                     Featured Posts
                   </Typography>
@@ -290,9 +290,6 @@ export const Blog = ({
               )}
             </div>
           </div>
-          <div /* Right Side Whitespace (for centering) */
-            className="w-[296px] flex-shrink hidden desktop:inline-block"
-          />
         </div>
         <FooterCallToAction />
       </main>
@@ -436,14 +433,15 @@ const PostItem = ({
           'hidden mobile:block'
         )}
       >
+        <Link href={`/blog/${post.slug}`} className='absolute inset-0' >
+          <div />
+        </Link>
         <Typography type="copy4" className="text-copy-on-dark">
           {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
         </Typography>
 
-        <Link href={`/blog/${post.slug}`}>
-          <h5 className="mt-1">{post.title}</h5>
-        </Link>
-        <div className="mt-3">
+        <h5 className="mt-1">{post.title}</h5>
+        <div className="relative mt-3 pointer-events-none">
           {post.author && <PostAuthor {...post.author} />}
         </div>
         <div className="flex gap-2.5 absolute right-7 bottom-7">
@@ -459,14 +457,15 @@ const PostItem = ({
           'mobile:hidden block'
         )}
       >
-        {firstTag && <PostTag {...firstTag} />}
-        <Link href={`/blog/${post.slug}`}>
-          <h3 className="mt-3">{post.title}</h3>
+        <Link href={`/blog/${post.slug}`} className='absolute inset-0' >
+          <div />
         </Link>
+        {firstTag && <div className='relative'><PostTag {...firstTag} /></div>}
+        <h3 className="mt-3">{post.title}</h3>
         <Typography type="copy4" className="mt-1 text-copy-on-dark">
           {getDateAndReadingTime(post.postedAt, post.readingTime ?? 0)}
         </Typography>
-        <div className="mt-6">
+        <div className="relative mt-6 pointer-events-none">
           {post.author && <PostAuthor {...post.author} hidePhoto />}
         </div>
       </div>
