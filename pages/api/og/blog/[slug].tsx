@@ -2,7 +2,7 @@ import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
 import { gql } from 'graphql-request';
 import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
-import { font, backdrop, fontLight, hero } from '../util';
+import { font, backdrop, fontLight } from '../util';
 import { GraphQLRequest } from '../../../../utils/graphql';
 import styles from '../../../../components/Products/Products.module.scss'
 
