@@ -27,3 +27,8 @@ export const bug2 = fetch(
   // @ts-ignore
   new URL('../../../public/images/bug2.png', import.meta.url)
 ).then((res) => res.arrayBuffer());
+
+export const backdrop = fetch(
+  // @ts-ignore
+  new URL('../../../public/images/backdrop.png', import.meta.url)
+).then((res) => res.arrayBuffer());

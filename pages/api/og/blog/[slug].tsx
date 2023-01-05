@@ -2,8 +2,9 @@ import { ImageResponse } from '@vercel/og';
 import { NextRequest, URLPattern } from 'next/server';
 import { gql } from 'graphql-request';
 import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
-import { font, fontLight, hero } from '../util';
+import { font, backdrop, fontLight, hero } from '../util';
 import { GraphQLRequest } from '../../../../utils/graphql';
+import styles from '../../../../components/Products/Products.module.scss'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -29,12 +30,19 @@ const QUERY = gql`
 export default async function handler(req: NextRequest) {
   const fontData = await font;
   const fontLightData = await fontLight;
-  const heroData = await hero;
-  const heroBase64 = btoa(
-    new Uint8Array(heroData).reduce(function (p, c) {
+  const backdropData = await backdrop;
+  const backDropBase64 = btoa(
+    new Uint8Array(backdropData).reduce(function (p, c) {
       return p + String.fromCharCode(c);
     }, '')
   );
+
+  // const heroData = await hero;
+  // const heroBase64 = btoa(
+  //   new Uint8Array(heroData).reduce(function (p, c) {
+  //     return p + String.fromCharCode(c);
+  //   }, '')
+  // );
   const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
     ?.pathname.groups.slug;
   const post = (await GraphQLRequest(QUERY, { slug }, false)).post as
@@ -66,9 +74,29 @@ export default async function handler(req: NextRequest) {
           backgroundColor: '#0D0225',
         }}
       >
-        <div tw="flex flex-col w-1/2 font-bold text-white text-left p-12">
+        <div style={{
+          display: "flex",
+          color: "white",
+          flexDirection: "column",
+          width: 600,
+          height: "100%",
+          justifyContent: "space-between",
+          paddingTop: 50,
+          paddingLeft: 50,
+          paddingBottom: 50
+        }}>
+          <img
+            alt={'backdrop'}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 550,
+            }}
+            width={650}
+            height={650}
+            src={`data:image/png;base64,${backDropBase64}`}
+          ></img>
           <svg
-            style={{ marginBottom: 153 }}
             width="68"
             height="68"
             viewBox="0 0 68 68"
@@ -83,60 +111,39 @@ export default async function handler(req: NextRequest) {
               fill="white"
             />
           </svg>
-          <span
-            style={{
-              color: '#EBFF5E',
-              fontSize: 18,
-              lineHeight: 4,
-              letterSpacing: 1,
-              textTransform: 'uppercase',
-            }}
-          >
-            Highlight Blog Post
-          </span>
-          <span tw="text-4xl mb-12">{post?.title || slug}</span>
-          <div tw={'flex flex-row items-center'}>
-            <div tw={'flex flex-col'}>
-              {profilePic && (
-                <span tw={'pr-4'}>
-                  <img
-                    src={profilePic}
-                    width={50}
-                    height={50}
-                    alt={'author profile picture'}
-                    tw={'rounded-3xl'}
-                  />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{
+              color: "#0D0225",
+              marginBottom: 20,
+              backgroundColor: "#ebff5e",
+              padding: "6px 18px 2px 18px",
+              borderRadius: 100,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
+              Highlight Blog
+            </span>
+            <span style={{ fontSize: 50, marginBottom: 80, lineHeight: 1.2 }}>{"A new way of doing things."}</span>
+            <div tw={'flex flex-row items-center'}>
+              <div tw={'flex flex-col'}>
+                <span style={{ fontSize: 24 }}>
+                  {post?.author?.firstName} {post?.author?.lastName}
                 </span>
-              )}
-            </div>
-            <div tw={'flex flex-col'}>
-              <span>
-                {post?.author?.firstName} {post?.author?.lastName}
-              </span>
-              <span
-                style={{
-                  color: '#DFDFDF',
-                  fontSize: 16,
-                  fontFamily: '"PoppinsLight"',
-                }}
-              >
-                {post?.author?.title}
-              </span>
+                <span
+                  style={{
+                    color: '#DFDFDF',
+                    fontSize: 24,
+                    fontFamily: '"PoppinsLight"',
+                  }}
+                >
+                  {post?.author?.title}
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        <img
-          alt={'highlight hero'}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 550,
-          }}
-          width={650}
-          height={650}
-          src={`data:image/png;base64,${heroBase64}`}
-        ></img>
-      </div>
+      </div >
     ),
     {
       width: 1200,
