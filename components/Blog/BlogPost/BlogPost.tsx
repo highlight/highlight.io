@@ -18,6 +18,7 @@ export interface Author {
 export interface Post {
   slug: string;
   description: string;
+  youtubeVideoId?: string;
   metaDescription?: string;
   image?: {
     url: string;
@@ -72,7 +73,7 @@ export const BlogPost = ({
               year: 'numeric',
               month: 'short',
             })} • ${readingTime ||
-              Math.floor(richcontent.markdown.split(' ').length / 200)
+            Math.floor(richcontent.markdown.split(' ').length / 200)
               } min. read`}</p>
           </div>
           <h3>{title}</h3>

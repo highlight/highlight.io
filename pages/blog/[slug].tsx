@@ -123,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         slug
         title
         metaTitle
+        youtubeVideoId
         image {
           url
         }
@@ -360,7 +361,7 @@ const PostPage = ({
           <Section className={styles.headerSection}>
             {isStartupStack ?
               <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle)}>
-                <YouTube videoId="qloRP8rVMtw" style={{ display: "flex", justifyContent: "center" }}></YouTube>
+                <YouTube videoId={post.youtubeVideoId || "dQw4w9WgXcQ"} style={{ display: "flex", justifyContent: "center" }}></YouTube>
               </div>
               :
               <div
