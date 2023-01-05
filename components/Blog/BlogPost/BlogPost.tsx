@@ -71,10 +71,9 @@ export const BlogPost = ({
               day: 'numeric',
               year: 'numeric',
               month: 'short',
-            })} • ${
-              readingTime ||
+            })} • ${readingTime ||
               Math.floor(richcontent.markdown.split(' ').length / 200)
-            } min. read`}</p>
+              } min. read`}</p>
           </div>
           <h3>{title}</h3>
           <div className={styles.tagDiv}>
