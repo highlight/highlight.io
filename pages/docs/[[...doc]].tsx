@@ -560,7 +560,7 @@ const TableOfContents = ({
 
   useEffect(() => {
     setOpen(isTopLevel && openTopLevel);
-  }, [docPaths, isTopLevel, openTopLevel, toc.docPathId]);
+  }, [isTopLevel, openTopLevel]);
 
   useEffect(() => {
     const currentPage = path.join(
@@ -571,9 +571,7 @@ const TableOfContents = ({
     const isParentOfCurrentPage = window.location.pathname.includes(
       docPaths[toc.docPathId || 0]?.simple_path
     );
-    if (isParentOfCurrentPage) {
-      setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage);
-    }
+    setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage);
   }, [docPaths, toc.docPathId]);
 
   return (
