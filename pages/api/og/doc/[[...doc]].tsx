@@ -33,7 +33,9 @@ export default async function handler(req: NextRequest) {
   const docPath = new URLPattern({ pathname: '/api/og/doc/:doc*' }).exec(req.url)
     ?.pathname.groups.doc;
 
-  const readablePaths = docPath?.split("/").map(s => s.split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" "));
+  const readablePaths = docPath?.split("/").map(s => s.substring(s.indexOf("_") + 1).split("-").map(string => string.charAt(0).toUpperCase() + string.slice(1)).join(" "));
+  const crumbs = readablePaths?.slice(-3, -1);
+  const title = readablePaths?.at(-1);
 
   return new ImageResponse(
     (
@@ -60,10 +62,10 @@ export default async function handler(req: NextRequest) {
         />
         <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
           <div style={{ marginBottom: 15, fontSize: 35, fontFamily: 'PoppinsLight', color: '#dfdfdf', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            Docs / {readablePaths?.slice(-3, -1).join(" / ")}
+            Docs / {crumbs?.length ? crumbs.join(" / ") : "General Docs"}
           </div>
           <div style={{ fontSize: 75, fontFamily: 'Poppins', color: 'white', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {readablePaths?.at(-1)}
+            {title || "Highlight Documentation"}
           </div>
 
         </div>
