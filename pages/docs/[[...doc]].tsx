@@ -767,13 +767,13 @@ const DocPage = ({
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
           {isSdkDocs && (
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
                 href={`https://github.com/highlight-run/docs/blob/main/${relPath}`}
                 target="_blank"
               >
-                <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
+                <FaGithub style={{ height: 20, width: 20, flexShrink: 0 }}></FaGithub>
                 <Typography type="copy4">Suggest Edits?</Typography>
               </Link>
               <Link
@@ -781,7 +781,7 @@ const DocPage = ({
                 href="https://discord.gg/yxaXEAqgwN"
                 target="_blank"
               >
-                <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
+                <FaDiscord style={{ height: 20, width: 20, flexShrink: 0 }}></FaDiscord>
                 <Typography type="copy4">Community / Support</Typography>
               </Link>
             </div>

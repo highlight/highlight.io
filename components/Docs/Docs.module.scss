@@ -350,10 +350,9 @@ h5:hover .headingCopyIcon {
   position: sticky;
   width: 100%;
   top: 0;
-  height: 54px;
   min-height: 54px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   border-bottom: 1px solid var(--color-divider-on-dark);
   border-top: 1px solid var(--color-divider-on-dark);
   background-color: var(--color-primary-background);
@@ -364,14 +363,17 @@ h5:hover .headingCopyIcon {
   position: relative;
   padding: 0 var(--size-medium);
   flex: 0 0 300px;
+  display: flex;
+  align-items: center;
 }
 
 .centerInner {
-  width: 100%;
+  flex-grow: 1;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 var(--size-large);
-  height: 100%;
+  gap: 8px;
+  padding: 8px var(--size-large);
   align-items: center;
   border-left: 1px solid var(--color-divider-on-dark);
 }
