@@ -57,7 +57,7 @@ const DocSearchComboBox = (props: any) => {
           ref={inputRef}
           type="text"
           placeholder="Find anything"
-          className='min-w-full'
+          className='min-w-0'
         />
       </div>
       {state.inputValue && (

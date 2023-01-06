@@ -369,6 +369,8 @@ h5:hover .headingCopyIcon {
 
 .centerInner {
   flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0 !important;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -434,7 +436,7 @@ h5:hover .headingCopyIcon {
   padding: var(--size-xxSmall) var(--size-small);
   display: flex;
   flex: 1 0 360px;
-  width: 360px;
+  width: 100%;
   gap: var(--size-xSmall);
   align-items: center;
 
@@ -994,10 +996,7 @@ h5:hover .headingCopyIcon {
   }
 
   .searchContainer {
-    width: 300px;
-    .docSearchbar {
-      width: 100%;
-    }
+    min-width: 0;
   }
 
   .sdkDocSection {
