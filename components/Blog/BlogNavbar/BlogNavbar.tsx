@@ -185,9 +185,8 @@ const BlogNavbar = ({
         <div
           className={styles.loadingBar}
           style={{
-            width: `${
-              (1 - Math.max(0, endPosition - prevY) / endPosition) * 100
-            }%`,
+            width: `${(1 - Math.max(0, endPosition - prevY) / endPosition) * 100
+              }%`,
           }}
         ></div>
       </header>
