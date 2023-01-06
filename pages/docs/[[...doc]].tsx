@@ -563,10 +563,15 @@ const TableOfContents = ({
   }, [isTopLevel, openTopLevel]);
 
   useEffect(() => {
-    const isCurrentPage =
-      path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
-      window.location.pathname;
-    setIsCurrentPage(isCurrentPage);
+    const currentPage = path.join(
+      '/docs',
+      docPaths[toc.docPathId || 0]?.simple_path || ''
+    );
+    setIsCurrentPage(currentPage === window.location.pathname);
+    const isParentOfCurrentPage = window.location.pathname.includes(
+      docPaths[toc.docPathId || 0]?.simple_path
+    );
+    setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage);
   }, [docPaths, toc.docPathId]);
 
   return (
@@ -755,9 +760,8 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
+          }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />

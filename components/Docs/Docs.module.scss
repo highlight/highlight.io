@@ -231,6 +231,14 @@
     color: var(--copy-on-dark);
   }
 
+  ul,
+  ol,
+  li {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px !important;
+  }
+
   img {
     width: 100%;
     border-radius: var(--border-radius);
@@ -843,6 +851,22 @@ h5:hover .headingCopyIcon {
 
   p {
     margin: var(--size-small) 0 var(--size-large) !important;
+  }
+
+  ul,
+  ol,
+  li {
+    color: var(--color-copy-on-dark);
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: var(--size-small);
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: var(--size-small);
   }
 }
 
