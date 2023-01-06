@@ -16,9 +16,11 @@ const SHOW_NAVBAR_OFFSET = 300;
 const BlogNavbar = ({
   title,
   endPosition,
+  attachUnder,
 }: {
   title: string;
   endPosition: number;
+  attachUnder?: React.ReactElement,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -189,6 +191,9 @@ const BlogNavbar = ({
               }%`,
           }}
         ></div>
+        <div className='absolute top-full'>
+          {attachUnder}
+        </div>
       </header>
     </>
   );

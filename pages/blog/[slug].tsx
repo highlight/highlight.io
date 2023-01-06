@@ -23,7 +23,7 @@ import { Meta } from '../../components/common/Head/Meta';
 import ReturnIcon from '../../public/images/ReturnIcon';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { GraphQLRequest } from '../../utils/graphql';
-import { PostTag } from '../../components/Blog/Tag';
+import { getTagUrl, PostTag } from '../../components/Blog/Tag';
 import { PostAuthor } from '../../components/Blog/Author';
 
 const NUM_SUGGESTED_POSTS = 3;
@@ -323,6 +323,8 @@ const PostPage = ({
 
   const isStartupStack = post.tags_relations.filter(t => t.name.toLocaleLowerCase().includes("stack")).length > 0;
 
+  const singleTag = post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
+
   return (
     <>
       <Meta
@@ -331,7 +333,7 @@ const PostPage = ({
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/blog/${post.slug}`}
         canonical={`/blog/${post.slug}`}
       />
-      <BlogNavbar title={post.title} endPosition={endPosition} />
+      <BlogNavbar title={post.title} endPosition={endPosition} attachUnder={<Link href={getTagUrl(singleTag?.slug ?? "all")} className='flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center'><ReturnIcon /> Back to {singleTag?.name ?? "blog"}</Link>} />
       <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
         <Section>
           <div className={homeStyles.anchorTitle}>
@@ -357,7 +359,6 @@ const PostPage = ({
             </div>
           </div>
         </Section>
-        <Link href="/blog" className='absolute flex flex-row gap-2 place-items-center top-6 left-8'><ReturnIcon /> Back to blog</Link>
         {post.image?.url && (
           <Section className={styles.headerSection}>
             {isStartupStack ?
