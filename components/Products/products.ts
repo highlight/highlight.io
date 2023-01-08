@@ -2,8 +2,7 @@
 //referenced in ProductDropdown
 
 export interface iProduct {
-  isBackend: boolean;
-  isFullStack?: boolean;
+  type: string;
   docsLink: string;
   slug: string;
   snippets: string[];
@@ -207,7 +206,7 @@ const svelteSnippet: string = `
 
 export const PRODUCTS: { [k: string]: iProduct } = {
   'express': {
-    isBackend: true, 
+    type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/express",
     slug: 'express',
     title: "Express",
@@ -216,7 +215,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   },
 
   'go': {
-    isBackend: true, 
+    type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/go",
     slug: 'go',
     title: "Golang",
@@ -225,7 +224,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   },
 
   'node': {
-    isBackend: true, 
+    type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/nodejs",
     slug: 'node',
     title: "Node.js",
@@ -233,18 +232,17 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [nodeSnippet, defaultFrontendSnippet],
   },
 
-  'next-backend': {
-    isBackend: true, 
-    isFullStack: true,
-    docsLink: "/docs/getting-started/backend-sdk/nextjs",
-    slug: 'next-backend',
-    title: "Next.js",
-    types: ["Backend", "Frontend"],
-    snippets: [nextBackendSnippet, nextSnippet],
-  }, 
+  // 'next-backend': {
+  //   type: "backend",
+  //   docsLink: "/docs/getting-started/backend-sdk/nextjs",
+  //   slug: 'next-backend',
+  //   title: "Next.js",
+  //   types: ["Backend", "Frontend"],
+  //   snippets: [nextBackendSnippet, nextSnippet],
+  // }, 
 
   'angular': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/angular",
     slug: 'angular',
     title: "Angular",
@@ -252,7 +250,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'gatsby': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/gatsbyjs",
     slug: 'gatsby',
     title: "Gatsby.js",
@@ -260,7 +258,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'html': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/html",
     slug: 'html',
     title: "HTML",
@@ -268,8 +266,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'next': {
-    isBackend: false, 
-    isFullStack: true,
+    type: "fullstack",
     docsLink: "/docs/getting-started/client-sdk/nextjs",
     slug: 'next',
     title: "Next.js",
@@ -278,7 +275,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'react': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/reactjs",
     slug: 'react',
     title: "React",
@@ -286,7 +283,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'svelte': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/sveltekit",
     slug: 'svelte',
     title: "Svelte.js",
@@ -294,7 +291,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'vue': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/vuejs",
     slug: 'vue',
     title: "Vue.js",

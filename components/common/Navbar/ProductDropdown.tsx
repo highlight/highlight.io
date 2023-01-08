@@ -2,7 +2,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { Typography } from '../Typography/Typography';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-import { iProduct, PRODUCTS } from '../../Products/products';
+import { PRODUCTS } from '../../Products/products';
 
 import styles from './ProductDropdown.module.scss';
 import classNames from 'classnames';
@@ -15,11 +15,14 @@ const ProductDropdown = ({
   isOpen?: boolean;
 }) => {
 
-  const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return !product.isBackend && !product.isFullStack })
-  const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.isBackend && !product.isFullStack })
-  const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.isFullStack })
+  const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "frontend" })
+  const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "backend" })
+  const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "fullstack" })
 
 
+  Object.values(PRODUCTS).forEach((product) => {
+    console.log(product);
+  })
 
   const [isShowing, setIsShowing] = useState(false)
   const [selected, setSelected] = useState("frontend");
