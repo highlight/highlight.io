@@ -19,11 +19,6 @@ const ProductDropdown = ({
   const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "backend" })
   const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "fullstack" })
 
-
-  Object.values(PRODUCTS).forEach((product) => {
-    console.log(product);
-  })
-
   const [isShowing, setIsShowing] = useState(false)
   const [selected, setSelected] = useState("frontend");
   const [selectedLinks, setSelectedLinks] = useState(frontendProductLinks);
