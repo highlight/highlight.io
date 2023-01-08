@@ -1,5 +1,5 @@
 //all products and snippets are defined below for the product page
-//referenced in ProductDropdown
+//referenced in ProductDropdown and sitemap
 
 export interface iProduct {
   type: string;
@@ -232,15 +232,6 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [nodeSnippet, defaultFrontendSnippet],
   },
 
-  // 'next-backend': {
-  //   type: "backend",
-  //   docsLink: "/docs/getting-started/backend-sdk/nextjs",
-  //   slug: 'next-backend',
-  //   title: "Next.js",
-  //   types: ["Backend", "Frontend"],
-  //   snippets: [nextBackendSnippet, nextSnippet],
-  // }, 
-
   'angular': {
     type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/angular",
@@ -298,3 +289,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [vueSnippet],
   }, 
 };
+
+export const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "frontend" })
+export const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "backend" })
+export const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "fullstack" })

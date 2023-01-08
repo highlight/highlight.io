@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { PRODUCTS } from '../../Products/products';
 
+import { frontendProductLinks, backendProductLinks, fullStackProductLinks } from '../../Products/products';
 import styles from './ProductDropdown.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -15,9 +16,7 @@ const ProductDropdown = ({
   isOpen?: boolean;
 }) => {
 
-  const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "frontend" })
-  const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "backend" })
-  const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "fullstack" })
+
 
   const [isShowing, setIsShowing] = useState(false)
   const [selected, setSelected] = useState("frontend");
@@ -25,24 +24,23 @@ const ProductDropdown = ({
 
   function handleCategorySelect(select: String) {
     switch (select) {
-      case "frontend":
-        setSelected("frontend");
+      case "Frontend":
+        setSelected("Frontend");
         setSelectedLinks(frontendProductLinks);
         break;
-      case "backend":
-        setSelected("backend");
+      case "Backend":
+        setSelected("Backend");
         setSelectedLinks(backendProductLinks);
         break;
-      case "fullstack":
-        setSelected("fullstack");
+      case "Fullstack":
+        setSelected("Fullstack");
         setSelectedLinks(fullStackProductLinks);
         break;
       default:
-        setSelected("frontend");
+        setSelected("Frontend");
         setSelectedLinks(frontendProductLinks);
     }
   }
-
 
   return (
     <Popover>
@@ -50,7 +48,7 @@ const ProductDropdown = ({
         <>
           <Popover.Button
             onMouseEnter={() => setIsShowing(true)}
-            onMouseLeave={() => setIsShowing(true)}
+            onMouseLeave={() => setIsShowing(false)}
             className={styles.popoverButton}
           >
             <a className={classNames(styles.headerButton, {
@@ -67,7 +65,7 @@ const ProductDropdown = ({
           <Transition
             show={isShowing}
             onMouseEnter={() => setIsShowing(true)}
-            onMouseLeave={() => setIsShowing(true)}
+            onMouseLeave={() => setIsShowing(false)}
             enter="transition ease-out duration-200"
             enterFrom="opacity-0 translate-y-1"
             enterTo="opacity-100 translate-y-0"
@@ -81,27 +79,27 @@ const ProductDropdown = ({
                   <div className={styles.innerContainer}>
                     <div className={styles.innerGridLeft}>
                       <div
-                        onClick={() => handleCategorySelect("frontend")}
+                        onClick={() => handleCategorySelect("Frontend")}
                         className={classNames(styles.categoryButton, {
-                          [styles.categoryButtonActive]: selected == "frontend",
+                          [styles.categoryButtonActive]: selected == "Frontend",
                         })}>
                         <Typography type="copy4" className="pl-2">
                           Frontend
                         </Typography>
                       </div>
                       <div
-                        onClick={() => handleCategorySelect("backend")}
+                        onClick={() => handleCategorySelect("Backend")}
                         className={classNames(styles.categoryButton, {
-                          [styles.categoryButtonActive]: selected == "backend",
+                          [styles.categoryButtonActive]: selected == "Backend",
                         })}>
                         <Typography type="copy4" className="pl-2">
                           Backend
                         </Typography>
                       </div>
                       <div
-                        onClick={() => handleCategorySelect("fullstack")}
+                        onClick={() => handleCategorySelect("Fullstack")}
                         className={classNames(styles.categoryButton, {
-                          [styles.categoryButtonActive]: selected == "fullstack",
+                          [styles.categoryButtonActive]: selected == "Fullstack",
                         })}>
                         <Typography type="copy4" className="pl-2">
                           Fullstack
@@ -112,7 +110,7 @@ const ProductDropdown = ({
                   <div className={styles.innerContainer}>
                     <div>
                       <Typography type="copy3" className="pl-2 text-color-copy-on-light">
-                        Backend
+                        For your {selected} app
                       </Typography>
                     </div>
                     <div className={styles.innerGridRight}>
