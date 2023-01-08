@@ -168,6 +168,7 @@ const Navbar = ({
                 styles.headerCenter
               )}
             >
+              <ProductDropdown isOpen={scrolled && !fixed} />
               <Link
                 href="/pricing"
                 className={styles.headerButton}

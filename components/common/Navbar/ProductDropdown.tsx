@@ -2,7 +2,6 @@ import { Popover, Transition } from '@headlessui/react'
 import { Typography } from '../Typography/Typography';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-
 import { iProduct, PRODUCTS } from '../../Products/products';
 
 import styles from './ProductDropdown.module.scss';
@@ -15,10 +14,37 @@ const ProductDropdown = ({
 }: {
   isOpen?: boolean;
 }) => {
-  const [isShowing, setIsShowing] = useState(false)
 
-  let frontendLinks = Object.values(PRODUCTS).filter((product) => { return !product.isBackend })
-  let backendLinks = Object.values(PRODUCTS).filter((product) => { return product.isBackend })
+  const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return !product.isBackend && !product.isFullStack })
+  const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.isBackend && !product.isFullStack })
+  const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.isFullStack })
+
+
+
+  const [isShowing, setIsShowing] = useState(false)
+  const [selected, setSelected] = useState("frontend");
+  const [selectedLinks, setSelectedLinks] = useState(frontendProductLinks);
+
+  function handleCategorySelect(select: String) {
+    switch (select) {
+      case "frontend":
+        setSelected("frontend");
+        setSelectedLinks(frontendProductLinks);
+        break;
+      case "backend":
+        setSelected("backend");
+        setSelectedLinks(backendProductLinks);
+        break;
+      case "fullstack":
+        setSelected("fullstack");
+        setSelectedLinks(fullStackProductLinks);
+        break;
+      default:
+        setSelected("frontend");
+        setSelectedLinks(frontendProductLinks);
+    }
+  }
+
 
   return (
     <Popover>
@@ -26,7 +52,7 @@ const ProductDropdown = ({
         <>
           <Popover.Button
             onMouseEnter={() => setIsShowing(true)}
-            onMouseLeave={() => setIsShowing(false)}
+            onMouseLeave={() => setIsShowing(true)}
             className={styles.popoverButton}
           >
             <a className={classNames(styles.headerButton, {
@@ -43,7 +69,7 @@ const ProductDropdown = ({
           <Transition
             show={isShowing}
             onMouseEnter={() => setIsShowing(true)}
-            onMouseLeave={() => setIsShowing(false)}
+            onMouseLeave={() => setIsShowing(true)}
             enter="transition ease-out duration-200"
             enterFrom="opacity-0 translate-y-1"
             enterTo="opacity-100 translate-y-0"
@@ -55,29 +81,44 @@ const ProductDropdown = ({
               <div className={styles.popoverPanel}>
                 <div className={styles.gridContainer}>
                   <div className={styles.innerContainer}>
-                    <div className="pb-1">
-                      <Typography type="copy4" className="pl-2 text-color-copy-on-light">
-                        Frontend
-                      </Typography>
-                    </div>
                     <div className={styles.innerGridLeft}>
-                      {frontendLinks.map((item, index) => (
-                        <Link key={index} href={"/for/" + item.slug} className={styles.link}>
-                          <Typography type="copy3">
-                            {item.title}
-                          </Typography>
-                        </Link>
-                      ))}
+                      <div
+                        onClick={() => handleCategorySelect("frontend")}
+                        className={classNames(styles.categoryButton, {
+                          [styles.categoryButtonActive]: selected == "frontend",
+                        })}>
+                        <Typography type="copy4" className="pl-2">
+                          Frontend
+                        </Typography>
+                      </div>
+                      <div
+                        onClick={() => handleCategorySelect("backend")}
+                        className={classNames(styles.categoryButton, {
+                          [styles.categoryButtonActive]: selected == "backend",
+                        })}>
+                        <Typography type="copy4" className="pl-2">
+                          Backend
+                        </Typography>
+                      </div>
+                      <div
+                        onClick={() => handleCategorySelect("fullstack")}
+                        className={classNames(styles.categoryButton, {
+                          [styles.categoryButtonActive]: selected == "fullstack",
+                        })}>
+                        <Typography type="copy4" className="pl-2">
+                          Fullstack
+                        </Typography>
+                      </div>
                     </div>
                   </div>
                   <div className={styles.innerContainer}>
-                    <div className="pb-1">
-                      <Typography type="copy4" className="pl-2 text-color-copy-on-light">
+                    <div>
+                      <Typography type="copy3" className="pl-2 text-color-copy-on-light">
                         Backend
                       </Typography>
                     </div>
                     <div className={styles.innerGridRight}>
-                      {backendLinks.map((item, index) => (
+                      {selectedLinks.map((item, index) => (
                         <Link key={index} href={"/for/" + item.slug} className={styles.link}>
                           <Typography type="copy3">
                             {item.title}

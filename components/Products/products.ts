@@ -3,6 +3,7 @@
 
 export interface iProduct {
   isBackend: boolean;
+  isFullStack?: boolean;
   docsLink: string;
   slug: string;
   snippets: string[];
@@ -234,6 +235,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'next-backend': {
     isBackend: true, 
+    isFullStack: true,
     docsLink: "/docs/getting-started/backend-sdk/nextjs",
     slug: 'next-backend',
     title: "Next.js",
@@ -267,6 +269,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   'next': {
     isBackend: false, 
+    isFullStack: true,
     docsLink: "/docs/getting-started/client-sdk/nextjs",
     slug: 'next',
     title: "Next.js",
@@ -298,5 +301,3 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [vueSnippet],
   }, 
 };
-
-
