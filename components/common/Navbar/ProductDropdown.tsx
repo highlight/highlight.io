@@ -3,8 +3,15 @@ import { Typography } from '../Typography/Typography';
 import { useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { PRODUCTS } from '../../Products/products';
+import Image from 'next/image';
 
 import { frontendProductLinks, backendProductLinks, fullStackProductLinks } from '../../Products/products';
+import LogoJS from '../../../public/images/jslogo.svg'
+import LogoJSActive from '../../../public/images/jslogoactive.svg'
+import LogoUbuntu from '../../../public/images/ubuntulogo.svg'
+import LogoUbuntuActive from '../../../public/images/ubuntulogoactive.svg'
+import LogoGraph from '../../../public/images/graphqllogo.svg'
+import LogoGraphActive from '../../../public/images/graphqllogoactive.svg'
 import styles from './ProductDropdown.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -16,10 +23,8 @@ const ProductDropdown = ({
   isOpen?: boolean;
 }) => {
 
-
-
   const [isShowing, setIsShowing] = useState(false)
-  const [selected, setSelected] = useState("frontend");
+  const [selected, setSelected] = useState("Frontend");
   const [selectedLinks, setSelectedLinks] = useState(frontendProductLinks);
 
   function handleCategorySelect(select: String) {
@@ -83,6 +88,7 @@ const ProductDropdown = ({
                         className={classNames(styles.categoryButton, {
                           [styles.categoryButtonActive]: selected == "Frontend",
                         })}>
+                        {selected == "Frontend" ? <Image src={LogoJSActive} alt="" /> : <Image src={LogoJS} alt="" />}
                         <Typography type="copy4" className="pl-2">
                           Frontend
                         </Typography>
@@ -92,6 +98,7 @@ const ProductDropdown = ({
                         className={classNames(styles.categoryButton, {
                           [styles.categoryButtonActive]: selected == "Backend",
                         })}>
+                        {selected == "Backend" ? <Image src={LogoUbuntuActive} alt="" /> : <Image src={LogoUbuntu} alt="" />}
                         <Typography type="copy4" className="pl-2">
                           Backend
                         </Typography>
@@ -101,6 +108,7 @@ const ProductDropdown = ({
                         className={classNames(styles.categoryButton, {
                           [styles.categoryButtonActive]: selected == "Fullstack",
                         })}>
+                        {selected == "Fullstack" ? <Image src={LogoGraphActive} alt="" /> : <Image src={LogoGraph} alt="" />}
                         <Typography type="copy4" className="pl-2">
                           Fullstack
                         </Typography>
