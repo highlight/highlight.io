@@ -34,7 +34,7 @@
     "markdown-to-jsx": "^7.1.8",
     "match-sorter": "^6.3.1",
     "next": "^13.0.4",
-    "next-axiom": "^0.15.0",
+    "next-axiom": "^0.16.0",
     "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-aria": "^3.20.0",
