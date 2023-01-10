@@ -14,12 +14,10 @@ import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
 
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
-import PageIcon from '../../public/images/page.svg';
 import { Typography } from '../../components/common/Typography/Typography';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Image from 'next/legacy/image';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import 'antd/lib/spin/style/index.css';
 import { Meta } from '../../components/common/Head/Meta';
@@ -266,7 +264,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 
@@ -454,7 +452,6 @@ const SdkTableOfContents = () => {
 };
 
 const PageRightBar = ({
-  title,
   relativePath,
 }: {
   title: string;
