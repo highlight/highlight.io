@@ -266,7 +266,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -351,15 +351,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
-  const absPath = path.join(currentDoc?.total_path || '');
+  if (!currentDoc) {
+    return {
+      notFound: true,
+    };
+  }
+  const absPath = path.join(currentDoc.total_path || '');
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
-      metadata: currentDoc?.metadata,
+      metadata: currentDoc.metadata,
       markdownText: content,
-      slug: currentDoc?.simple_path,
-      relPath: currentDoc?.rel_path,
+      slug: currentDoc.simple_path,
+      relPath: currentDoc.rel_path,
       docOptions: allPaths,
       toc,
     },
