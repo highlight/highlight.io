@@ -90,9 +90,8 @@
 .gridContainer {
   display: grid;
   place-items: left;
-  grid-template-columns: 160px 320px;
+  grid-template-columns: 140px 280px;
   column-gap: var(--size-medium);
-  padding-left: var(--size-xSmall);
   padding-right: var(--size-xSmall);
 }
 
@@ -100,8 +99,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--size-xxSmall);
-  padding: var(--size-xSmall) var(--size-small) var(--size-xSmall)
-    var(--size-small);
+  padding: var(--size-xSmall);
   text-align: left;
   margin: 0 !important;
 }
@@ -109,10 +107,9 @@
 .innerGridLeft {
   display: grid;
   place-items: left;
-  grid-template-columns: 140px;
+  grid-template-columns: 130px;
   row-gap: 10px;
   column-gap: var(--size-medium);
-  padding-left: var(--size-xSmall);
   padding-right: var(--size-xSmall);
 }
 
