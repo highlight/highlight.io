@@ -61,10 +61,8 @@
 .gridContainer {
   display: grid;
   place-items: left;
-  grid-template-columns: 200px 200px;
+  grid-template-columns: 180px 180px;
   row-gap: 6px;
-  padding-left: var(--size-xSmall);
-  padding-right: var(--size-xSmall);
 }
 
 .gridItem {
