@@ -173,12 +173,12 @@ export const getDocsPaths = async (
         fsp,
         path.join(total_path || '')
       );
-      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+      const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
       if (!hasRequiredMetadata) {
         throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
         );
       }
 
@@ -232,12 +232,12 @@ export const getSdkPaths = async (
         fsp,
         path.join(total_path || '')
       );
-      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+      const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
       if (!hasRequiredMetadata) {
         throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
         );
       }
 
