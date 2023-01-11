@@ -265,7 +265,7 @@ const Pricing: NextPage = () => {
         <Section className={styles.titleSection}>
           <div className={styles.pricingTitle}>
             <div className={styles.anchorHead}>
-              <div className={productStyles.subtleBadge}>
+              <div className={productStyles.highlightedBadge}>
                 <Typography type="copy4" emphasis>
                   Plans and Pricing
                 </Typography>
