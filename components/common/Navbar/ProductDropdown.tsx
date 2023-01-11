@@ -16,7 +16,6 @@ import styles from './ProductDropdown.module.scss';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-
 const ProductDropdown = ({
   isOpen
 }: {
@@ -88,7 +87,7 @@ const ProductDropdown = ({
                         className={classNames(styles.categoryButton, {
                           [styles.categoryButtonActive]: selected == "Frontend",
                         })}>
-                        {selected == "Frontend" ? <Image src={LogoJSActive} alt="" /> : <Image src={LogoJS} alt="" />}
+                        {selected == "Frontend" ? <Image src={LogoJSActive} alt="" priority={true} /> : <Image src={LogoJS} priority={true} alt="" />}
                         <Typography type="copy4" className="pl-2">
                           Frontend
                         </Typography>
@@ -98,7 +97,7 @@ const ProductDropdown = ({
                         className={classNames(styles.categoryButton, {
                           [styles.categoryButtonActive]: selected == "Backend",
                         })}>
-                        {selected == "Backend" ? <Image src={LogoUbuntuActive} alt="" /> : <Image src={LogoUbuntu} alt="" />}
+                        {selected == "Backend" ? <Image src={LogoUbuntuActive} alt="" priority={true} /> : <Image src={LogoUbuntu} alt="" priority={true} />}
                         <Typography type="copy4" className="pl-2">
                           Backend
                         </Typography>
@@ -108,7 +107,7 @@ const ProductDropdown = ({
                         className={classNames(styles.categoryButton, {
                           [styles.categoryButtonActive]: selected == "Fullstack",
                         })}>
-                        {selected == "Fullstack" ? <Image src={LogoGraphActive} alt="" /> : <Image src={LogoGraph} alt="" />}
+                        {selected == "Fullstack" ? <Image src={LogoGraphActive} alt="" priority={true} /> : <Image src={LogoGraph} alt="" priority={true} />}
                         <Typography type="copy4" className="pl-2">
                           Fullstack
                         </Typography>
