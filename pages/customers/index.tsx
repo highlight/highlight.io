@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import Image from "next/legacy/image";
 import styles from '../../components/Customers/CustomersList.module.scss';
+import productStyles from '../../components/Products/Products.module.scss';
 import Navbar from '../../components/common/Navbar/Navbar';
 import Footer from '../../components/common/Footer/Footer';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
@@ -95,9 +96,11 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
       <main>
         <div className={styles.caseListLayout}>
           <div className={styles.caseListTitle}>
-            <span className={styles.limeAccent}>
-              <Typography type="outline">Customer case studies</Typography>
-            </span>
+            <div className={productStyles.highlightedBadge}>
+              <Typography type="copy4" emphasis>
+                Customer Case Studies
+              </Typography>
+            </div>
             <h1>
               What <span className={styles.limeAccent}>our customers</span> have
               to say.
