@@ -14,12 +14,10 @@ import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
 
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
-import PageIcon from '../../public/images/page.svg';
 import { Typography } from '../../components/common/Typography/Typography';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Image from 'next/legacy/image';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import 'antd/lib/spin/style/index.css';
 import { Meta } from '../../components/common/Head/Meta';
@@ -175,12 +173,12 @@ export const getDocsPaths = async (
         fsp,
         path.join(total_path || '')
       );
-      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+      const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
       if (!hasRequiredMetadata) {
         throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
         );
       }
 
@@ -234,12 +232,12 @@ export const getSdkPaths = async (
         fsp,
         path.join(total_path || '')
       );
-      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+      const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
       if (!hasRequiredMetadata) {
         throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
         );
       }
 
@@ -266,7 +264,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
@@ -351,18 +349,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
-  const absPath = path.join(currentDoc?.total_path || '');
+  if (!currentDoc) {
+    return {
+      notFound: true,
+    };
+  }
+  const absPath = path.join(currentDoc.total_path || '');
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
-      metadata: currentDoc?.metadata,
+      metadata: currentDoc.metadata,
       markdownText: content,
-      slug: currentDoc?.simple_path,
-      relPath: currentDoc?.rel_path,
+      slug: currentDoc.simple_path,
+      relPath: currentDoc.rel_path,
       docOptions: allPaths,
       toc,
     },
+    revalidate: 60 * 30, // Cache response for 30 minutes
   };
 };
 
@@ -448,7 +452,6 @@ const SdkTableOfContents = () => {
 };
 
 const PageRightBar = ({
-  title,
   relativePath,
 }: {
   title: string;
@@ -760,8 +763,9 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
-          }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${
+          process.env.NEXT_PUBLIC_VERCEL_URL
+        }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
