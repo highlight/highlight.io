@@ -2,6 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 
 import styles from '../../Home/Home.module.scss';
+import productStyles from '../../Products/Products.module.scss'
+
 import { PrimaryButton } from '../Buttons/PrimaryButton';
 import { Typography } from '../Typography/Typography';
 import FooterLeftImage from '../../../public/images/safety-security-section.gif';
@@ -15,8 +17,10 @@ export const FooterCallToAction = () => {
         <div className={styles.footerImageRight}>
           <Image src={FooterRightImage} alt="" />
         </div>
-        <div className={styles.sectionSubtitle}>
-          <Typography type="outline">Try Highlight Today</Typography>
+        <div className={productStyles.subtleBadge}>
+          <Typography type="copy4" emphasis>
+            Try Highlight Today
+          </Typography>
         </div>
         <h2 className={styles.ctaTitle}>
           Get the <span className={styles.highlightedText}>visibility</span> you

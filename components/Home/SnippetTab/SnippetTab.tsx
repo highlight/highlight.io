@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+
 import { AiOutlineDown } from 'react-icons/ai';
 import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
 import { Section } from '../../common/Section/Section';
@@ -13,6 +14,7 @@ import NextjsImage from '../../../public/images/language/NextjsIcon';
 import GoImage from '../../../public/images/language/GoIcon';
 
 import styles from '../../Home/Home.module.scss';
+import productStyles from '../../Products/Products.module.scss';
 import { CodeSnippet } from '../CodeSnippet/CodeSnippet';
 
 export interface SnippetTabObject {
@@ -24,8 +26,12 @@ export interface SnippetTabObject {
 
 const SetupDescription = (
   <div className={classNames(styles.sectionText, styles.codeSection)}>
-    <div className={styles.sectionSubtitle}>
-      <Typography type="outline">effortless setup</Typography>
+    <div className="flex justify-center min-[1000px]:justify-start">
+      <div className={productStyles.highlightedBadge}>
+        <Typography type="copy4" emphasis>
+          Effortless Setup
+        </Typography>
+      </div>
     </div>
     <h2>
       Use Highlight{' '}
@@ -246,8 +252,8 @@ export const SnippetTab = () => {
                 tab.key === currentTabKey
                   ? '#EBFF5E'
                   : tab.key === currentHoverKey
-                  ? '#23B6E2'
-                  : '#72E4FC'
+                    ? '#23B6E2'
+                    : '#72E4FC'
               }
               secondaryColor={tab.key === currentTabKey ? '#0d0225' : undefined}
             />

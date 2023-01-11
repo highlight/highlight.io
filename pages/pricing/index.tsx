@@ -17,6 +17,7 @@ import Navbar from '../../components/common/Navbar/Navbar';
 import { Section } from '../../components/common/Section/Section';
 import Footer from '../../components/common/Footer/Footer';
 import styles from '../../components/Pricing/Pricing.module.scss';
+import productStyles from '../../components/Products/Products.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
@@ -243,15 +244,15 @@ const Pricing: NextPage = () => {
             "@type": "FAQPage",
             "mainEntity":
               ${JSON.stringify(
-                FAQS.map((faq) => ({
-                  '@type': 'Question',
-                  name: faq.question,
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: faq.answer,
-                  },
-                }))
-              )}
+            FAQS.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            }))
+          )}
           }`}
         </script>
       </Head>
@@ -264,8 +265,10 @@ const Pricing: NextPage = () => {
         <Section className={styles.titleSection}>
           <div className={styles.pricingTitle}>
             <div className={styles.anchorHead}>
-              <div className={styles.sectionSubtitle}>
-                <Typography type="outline">Plans and Pricing</Typography>
+              <div className={productStyles.subtleBadge}>
+                <Typography type="copy4" emphasis>
+                  Plans and Pricing
+                </Typography>
               </div>
               <h1>
                 Get the

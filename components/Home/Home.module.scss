@@ -228,7 +228,7 @@
   margin: var(--size-xLarge) 0;
 
   &.codeSection {
-    gap: var(--size-xLarge);
+    gap: var(--size-medium);
     grid-column: col-start 8 / -1;
 
     .sectionSubtitle {
