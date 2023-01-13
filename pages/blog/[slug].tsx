@@ -25,6 +25,7 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { GraphQLRequest } from '../../utils/graphql'
 import { getTagUrl, PostTag } from '../../components/Blog/Tag'
 import { PostAuthor } from '../../components/Blog/Author'
+import { Comments } from '../../components/Comments/Comments';
 
 const NUM_SUGGESTED_POSTS = 3
 
@@ -331,6 +332,7 @@ const PostPage = ({
                 month: 'short',
               })} • ${post.readingTime || Math.floor(post.richcontent.markdown.split(' ').length / 200)} min read`}</p>
             </Typography>
+            <Comments slug={post.slug} />
             <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags_relations.map((tag) => (
