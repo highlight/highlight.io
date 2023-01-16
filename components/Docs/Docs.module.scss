@@ -142,7 +142,8 @@
 }
 
 .tocChildrenLineWrapper {
-  width: var(--size-large);
+  margin-left: 11px;
+  width: 2px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -479,7 +480,7 @@ h5:hover .headingCopyIcon {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);;
+    background: rgba(255, 255, 255, 0.1);
     height: 65px;
     width: 100%;
   }
