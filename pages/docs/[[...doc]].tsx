@@ -45,7 +45,20 @@ export interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  isSdkDoc: boolean;
   content: string;
+}
+
+type DocData = {
+  markdownText?: string;
+  relPath?: string;
+  slug: string;
+  toc: TocEntry;
+  docOptions: DocPath[];
+  metadata?: { title: string; slug: string };
+  isSdkDoc?: boolean;
+  docIndex: number,
+  redirect?: string;
 }
 
 export interface Doc {
@@ -187,6 +200,7 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
+        isSdkDoc: false,
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
@@ -243,6 +257,7 @@ export const getSdkPaths = async (
 
       paths.push({
         simple_path: pp,
+        isSdkDoc: true,
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
@@ -275,7 +290,7 @@ interface TocEntry {
   children: TocEntry[];
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
   const sdkPaths = await getSdkPaths(fsp, undefined);
   let toc: TocEntry = {
@@ -349,12 +364,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
+  const currentDocIndex = allPaths.findIndex((d) => {
+    return (
+      JSON.stringify(d.array_path) ===
+      JSON.stringify(context?.params?.doc || [''])
+    );
+  });
   if (!currentDoc) {
     return {
       notFound: true,
     };
   }
   const absPath = path.join(currentDoc.total_path || '');
+
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
   return {
@@ -363,7 +385,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       markdownText: content,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
+      docIndex: currentDocIndex,
       docOptions: allPaths,
+      isSdkDoc: currentDoc.isSdkDoc,
       toc,
     },
     revalidate: 60 * 30, // Cache response for 30 minutes
@@ -664,15 +688,15 @@ const TableOfContents = ({
   );
 };
 
-const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
+const getBreadcrumbs = (metadata: any, docOptions: DocPath[], docIndex: number) => {
   const trail: { title: string; path: string; hasContent: boolean }[] = [
     { title: 'Docs', path: '/docs', hasContent: true },
   ];
   if (metadata && docOptions) {
-    const currentDocIndex = docOptions?.findIndex(
-      (d) => d?.metadata?.slug === metadata?.slug
-    );
-    const currentDoc = docOptions[currentDocIndex];
+    // const currentDocIndex = docOptions?.findIndex(
+    //   (d) => d?.metadata?.slug === metadata?.slug
+    // );
+    const currentDoc = docOptions[docIndex];
     const pathToSearch: string[] = [];
     currentDoc.array_path.forEach((section) => {
       pathToSearch.push(section);
@@ -695,40 +719,21 @@ const DocPage = ({
   relPath,
   slug,
   toc,
+  isSdkDoc,
+  docIndex,
   redirect,
   docOptions,
   metadata,
-}: {
-  markdownText?: string;
-  relPath?: string;
-  slug: string;
-  toc: TocEntry;
-  docOptions: DocPath[];
-  metadata?: { title: string; slug: string };
-  redirect?: string;
-}) => {
+}: DocData) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [currentPageIndex, setCurrentPageIndex] = useState(-1);
-
-  const docOptionsWithContent = useMemo(() => {
-    return docOptions?.filter((doc) => !doc.indexPath);
-  }, [docOptions]);
 
   const description = (markdownText || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
     .split('\n')
     .join(' ');
-
-  useEffect(() => {
-    setCurrentPageIndex(
-      docOptionsWithContent?.findIndex(
-        (d) => d?.metadata?.slug === metadata?.slug
-      )
-    );
-  }, [docOptionsWithContent, metadata?.slug, relPath]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -743,15 +748,6 @@ const DocPage = ({
     }
   }, [router]);
 
-  const isSdkDocs = useMemo(() => {
-    return (
-      currentPageIndex !== -1 &&
-      docOptionsWithContent &&
-      docOptionsWithContent[currentPageIndex] &&
-      docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
-    );
-  }, [currentPageIndex, docOptionsWithContent]);
-
   return (
     <>
       <Meta
@@ -763,9 +759,8 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
+          }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
@@ -775,7 +770,7 @@ const DocPage = ({
         </div>
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
-          {isSdkDocs && (
+          {isSdkDoc && (
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
@@ -800,7 +795,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.tocMenuLarge}>
-            {isSdkDocs ? (
+            {isSdkDoc ? (
               <SdkTableOfContents />
             ) : (
               toc?.children.map((t) => (
@@ -837,7 +832,7 @@ const DocPage = ({
           </div>
           <Collapse isOpened={open}>
             <div className={classNames(styles.tocContents, styles.tocMenu)}>
-              {isSdkDocs ? (
+              {isSdkDoc ? (
                 <SdkTableOfContents />
               ) : (
                 toc?.children.map((t) => (
@@ -856,12 +851,12 @@ const DocPage = ({
         <div className={styles.contentSection}>
           <div
             className={classNames(styles.centerSection, {
-              [styles.sdkCenterSection]: isSdkDocs,
+              [styles.sdkCenterSection]: isSdkDoc,
             })}
           >
             <div className={styles.breadcrumb}>
-              {!isSdkDocs &&
-                getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
+              {!isSdkDoc &&
+                getBreadcrumbs(metadata, docOptions, docIndex).map((breadcrumb, i) =>
                   i === 0 ? (
                     <Link href={breadcrumb.path} legacyBehavior>
                       {breadcrumb.title}
@@ -883,12 +878,12 @@ const DocPage = ({
             </div>
             <h3
               className={classNames(styles.pageTitle, {
-                [styles.sdkPageTitle]: isSdkDocs,
+                [styles.sdkPageTitle]: isSdkDoc,
               })}
             >
               {metadata ? metadata.title : ''}
             </h3>
-            {isSdkDocs ? (
+            {isSdkDoc ? (
               <DocSection content={markdownText || ''} />
             ) : (
               <ReactMarkdown
@@ -909,28 +904,28 @@ const DocPage = ({
               </ReactMarkdown>
             )}
             <div className={styles.pageNavigateRow}>
-              {currentPageIndex > 0 ? (
+              {docIndex > 0 ? (
                 <Link
-                  href={docOptionsWithContent[currentPageIndex - 1].simple_path}
+                  href={docOptions[docIndex - 1]?.simple_path ?? ""}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <BiChevronLeft />
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentPageIndex - 1].metadata.title}
+                    {docOptions[docIndex - 1]?.metadata.title}
                   </Typography>
                 </Link>
               ) : (
                 <div></div>
               )}
-              {currentPageIndex < docOptionsWithContent?.length - 1 ? (
+              {docIndex < docOptions?.length - 1 ? (
                 <Link
-                  href={docOptionsWithContent[currentPageIndex + 1].simple_path}
+                  href={docOptions[docIndex + 1]?.simple_path ?? ""}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentPageIndex + 1].metadata.title}
+                    {docOptions[docIndex + 1].metadata.title}
                   </Typography>
                   <BiChevronRight />
                 </Link>
@@ -939,7 +934,7 @@ const DocPage = ({
               )}
             </div>
           </div>
-          {!isSdkDocs && (
+          {!isSdkDoc && (
             <div className={styles.rightSection}>
               <PageRightBar
                 title={metadata ? metadata.title : ''}
