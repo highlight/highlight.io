@@ -57,7 +57,7 @@ type DocData = {
   docOptions: DocPath[];
   metadata?: { title: string; slug: string };
   isSdkDoc?: boolean;
-  currentDocIndex: number,
+  docIndex: number,
   redirect?: string;
 }
 
@@ -376,6 +376,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     };
   }
   const absPath = path.join(currentDoc.total_path || '');
+
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
   return {
@@ -687,15 +688,15 @@ const TableOfContents = ({
   );
 };
 
-const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
+const getBreadcrumbs = (metadata: any, docOptions: DocPath[], docIndex: number) => {
   const trail: { title: string; path: string; hasContent: boolean }[] = [
     { title: 'Docs', path: '/docs', hasContent: true },
   ];
   if (metadata && docOptions) {
-    const currentDocIndex = docOptions?.findIndex(
-      (d) => d?.metadata?.slug === metadata?.slug
-    );
-    const currentDoc = docOptions[currentDocIndex];
+    // const currentDocIndex = docOptions?.findIndex(
+    //   (d) => d?.metadata?.slug === metadata?.slug
+    // );
+    const currentDoc = docOptions[docIndex];
     const pathToSearch: string[] = [];
     currentDoc.array_path.forEach((section) => {
       pathToSearch.push(section);
@@ -719,7 +720,7 @@ const DocPage = ({
   slug,
   toc,
   isSdkDoc,
-  currentDocIndex,
+  docIndex,
   redirect,
   docOptions,
   metadata,
@@ -727,10 +728,6 @@ const DocPage = ({
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
-
-  const docOptionsWithContent = useMemo(() => {
-    return docOptions?.filter((doc) => !doc.indexPath);
-  }, [docOptions]);
 
   const description = (markdownText || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
@@ -859,7 +856,7 @@ const DocPage = ({
           >
             <div className={styles.breadcrumb}>
               {!isSdkDoc &&
-                getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
+                getBreadcrumbs(metadata, docOptions, docIndex).map((breadcrumb, i) =>
                   i === 0 ? (
                     <Link href={breadcrumb.path} legacyBehavior>
                       {breadcrumb.title}
@@ -907,28 +904,28 @@ const DocPage = ({
               </ReactMarkdown>
             )}
             <div className={styles.pageNavigateRow}>
-              {currentDocIndex > 0 ? (
+              {docIndex > 0 ? (
                 <Link
-                  href={docOptionsWithContent[currentDocIndex - 1].simple_path}
+                  href={docOptions[docIndex - 1]?.simple_path ?? ""}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <BiChevronLeft />
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentDocIndex - 1].metadata.title}
+                    {docOptions[docIndex - 1]?.metadata.title}
                   </Typography>
                 </Link>
               ) : (
                 <div></div>
               )}
-              {currentDocIndex < docOptionsWithContent?.length - 1 ? (
+              {docIndex < docOptions?.length - 1 ? (
                 <Link
-                  href={docOptionsWithContent[currentDocIndex + 1].simple_path}
+                  href={docOptions[docIndex + 1]?.simple_path ?? ""}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentDocIndex + 1].metadata.title}
+                    {docOptions[docIndex + 1].metadata.title}
                   </Typography>
                   <BiChevronRight />
                 </Link>
