@@ -45,7 +45,7 @@ export interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
-  is_sdk_doc: boolean;
+  isSdkDoc: boolean;
   content: string;
 }
 
@@ -56,7 +56,8 @@ type DocData = {
   toc: TocEntry;
   docOptions: DocPath[];
   metadata?: { title: string; slug: string };
-  isSdkDocs?: boolean;
+  isSdkDoc?: boolean;
+  currentDocIndex: number,
   redirect?: string;
 }
 
@@ -199,7 +200,7 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
-        is_sdk_doc: false,
+        isSdkDoc: false,
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
@@ -254,10 +255,9 @@ export const getSdkPaths = async (
         );
       }
 
-      console.log("array_path", pp)
       paths.push({
         simple_path: pp,
-        is_sdk_doc: true,
+        isSdkDoc: true,
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
@@ -364,6 +364,12 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
+  const currentDocIndex = allPaths.findIndex((d) => {
+    return (
+      JSON.stringify(d.array_path) ===
+      JSON.stringify(context?.params?.doc || [''])
+    );
+  });
   if (!currentDoc) {
     return {
       notFound: true,
@@ -378,8 +384,9 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       markdownText: content,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
+      docIndex: currentDocIndex,
       docOptions: allPaths,
-      isSdkDocs: currentDoc.is_sdk_doc,
+      isSdkDoc: currentDoc.isSdkDoc,
       toc,
     },
     revalidate: 60 * 30, // Cache response for 30 minutes
@@ -711,7 +718,8 @@ const DocPage = ({
   relPath,
   slug,
   toc,
-  isSdkDocs,
+  isSdkDoc,
+  currentDocIndex,
   redirect,
   docOptions,
   metadata,
@@ -719,7 +727,6 @@ const DocPage = ({
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [currentPageIndex, setCurrentPageIndex] = useState(-1);
 
   const docOptionsWithContent = useMemo(() => {
     return docOptions?.filter((doc) => !doc.indexPath);
@@ -730,15 +737,6 @@ const DocPage = ({
     .replaceAll(/#+/gi, '')
     .split('\n')
     .join(' ');
-
-  // sets the "current page index" by matching slug, but what are these params?
-  useEffect(() => {
-    setCurrentPageIndex(
-      docOptionsWithContent?.findIndex(
-        (d) => d?.metadata?.slug === metadata?.slug
-      )
-    );
-  }, [docOptionsWithContent, metadata?.slug, relPath]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -775,7 +773,7 @@ const DocPage = ({
         </div>
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
-          {isSdkDocs && (
+          {isSdkDoc && (
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
@@ -800,7 +798,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.tocMenuLarge}>
-            {isSdkDocs ? (
+            {isSdkDoc ? (
               <SdkTableOfContents />
             ) : (
               toc?.children.map((t) => (
@@ -837,7 +835,7 @@ const DocPage = ({
           </div>
           <Collapse isOpened={open}>
             <div className={classNames(styles.tocContents, styles.tocMenu)}>
-              {isSdkDocs ? (
+              {isSdkDoc ? (
                 <SdkTableOfContents />
               ) : (
                 toc?.children.map((t) => (
@@ -856,11 +854,11 @@ const DocPage = ({
         <div className={styles.contentSection}>
           <div
             className={classNames(styles.centerSection, {
-              [styles.sdkCenterSection]: isSdkDocs,
+              [styles.sdkCenterSection]: isSdkDoc,
             })}
           >
             <div className={styles.breadcrumb}>
-              {!isSdkDocs &&
+              {!isSdkDoc &&
                 getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
                   i === 0 ? (
                     <Link href={breadcrumb.path} legacyBehavior>
@@ -883,12 +881,12 @@ const DocPage = ({
             </div>
             <h3
               className={classNames(styles.pageTitle, {
-                [styles.sdkPageTitle]: isSdkDocs,
+                [styles.sdkPageTitle]: isSdkDoc,
               })}
             >
               {metadata ? metadata.title : ''}
             </h3>
-            {isSdkDocs ? (
+            {isSdkDoc ? (
               <DocSection content={markdownText || ''} />
             ) : (
               <ReactMarkdown
@@ -909,28 +907,28 @@ const DocPage = ({
               </ReactMarkdown>
             )}
             <div className={styles.pageNavigateRow}>
-              {currentPageIndex > 0 ? (
+              {currentDocIndex > 0 ? (
                 <Link
-                  href={docOptionsWithContent[currentPageIndex - 1].simple_path}
+                  href={docOptionsWithContent[currentDocIndex - 1].simple_path}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <BiChevronLeft />
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentPageIndex - 1].metadata.title}
+                    {docOptionsWithContent[currentDocIndex - 1].metadata.title}
                   </Typography>
                 </Link>
               ) : (
                 <div></div>
               )}
-              {currentPageIndex < docOptionsWithContent?.length - 1 ? (
+              {currentDocIndex < docOptionsWithContent?.length - 1 ? (
                 <Link
-                  href={docOptionsWithContent[currentPageIndex + 1].simple_path}
+                  href={docOptionsWithContent[currentDocIndex + 1].simple_path}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentPageIndex + 1].metadata.title}
+                    {docOptionsWithContent[currentDocIndex + 1].metadata.title}
                   </Typography>
                   <BiChevronRight />
                 </Link>
@@ -939,7 +937,7 @@ const DocPage = ({
               )}
             </div>
           </div>
-          {!isSdkDocs && (
+          {!isSdkDoc && (
             <div className={styles.rightSection}>
               <PageRightBar
                 title={metadata ? metadata.title : ''}

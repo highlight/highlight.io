@@ -13,7 +13,6 @@ const CLASSNAME_MAP: { [k: string]: string } = {
 };
 
 export const DocSection = ({ content }: { content: string }) => {
-  console.log("its a doc section");
   return (
     <Markdown
       options={{
