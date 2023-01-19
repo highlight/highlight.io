@@ -45,7 +45,19 @@ export interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  is_sdk_doc: boolean;
   content: string;
+}
+
+type DocData = {
+  markdownText?: string;
+  relPath?: string;
+  slug: string;
+  toc: TocEntry;
+  docOptions: DocPath[];
+  metadata?: { title: string; slug: string };
+  isSdkDocs?: boolean;
+  redirect?: string;
 }
 
 export interface Doc {
@@ -187,6 +199,7 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
+        is_sdk_doc: false,
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
@@ -241,8 +254,10 @@ export const getSdkPaths = async (
         );
       }
 
+      console.log("array_path", pp)
       paths.push({
         simple_path: pp,
+        is_sdk_doc: true,
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
@@ -275,7 +290,7 @@ interface TocEntry {
   children: TocEntry[];
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
   const sdkPaths = await getSdkPaths(fsp, undefined);
   let toc: TocEntry = {
@@ -364,6 +379,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docOptions: allPaths,
+      isSdkDocs: currentDoc.is_sdk_doc,
       toc,
     },
     revalidate: 60 * 30, // Cache response for 30 minutes
@@ -695,18 +711,11 @@ const DocPage = ({
   relPath,
   slug,
   toc,
+  isSdkDocs,
   redirect,
   docOptions,
   metadata,
-}: {
-  markdownText?: string;
-  relPath?: string;
-  slug: string;
-  toc: TocEntry;
-  docOptions: DocPath[];
-  metadata?: { title: string; slug: string };
-  redirect?: string;
-}) => {
+}: DocData) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -722,6 +731,7 @@ const DocPage = ({
     .split('\n')
     .join(' ');
 
+  // sets the "current page index" by matching slug, but what are these params?
   useEffect(() => {
     setCurrentPageIndex(
       docOptionsWithContent?.findIndex(
@@ -743,15 +753,6 @@ const DocPage = ({
     }
   }, [router]);
 
-  const isSdkDocs = useMemo(() => {
-    return (
-      currentPageIndex !== -1 &&
-      docOptionsWithContent &&
-      docOptionsWithContent[currentPageIndex] &&
-      docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
-    );
-  }, [currentPageIndex, docOptionsWithContent]);
-
   return (
     <>
       <Meta
@@ -763,9 +764,8 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
+          }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
