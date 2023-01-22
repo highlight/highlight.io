@@ -58,6 +58,7 @@
 }
 
 .popoverPanel {
+  min-height: 165px;
   border: 1px solid var(--color-divider-on-dark);
   background-color: var(--color-primary-500);
   border-radius: var(--size-xSmall);

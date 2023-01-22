@@ -10,6 +10,7 @@ export interface iProduct {
   types?: string[];
 }
 
+//whitespace ensures that the two code blocks (front-end and back-end) are the same height.
 const defaultFrontendSnippet: string = `
 
 import React from 'react'

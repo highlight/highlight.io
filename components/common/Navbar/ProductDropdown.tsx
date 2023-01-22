@@ -36,10 +36,6 @@ const ProductDropdown = ({
         setSelected("Backend");
         setSelectedLinks(backendProductLinks);
         break;
-      case "Fullstack":
-        setSelected("Fullstack");
-        setSelectedLinks(fullStackProductLinks);
-        break;
       default:
         setSelected("Frontend");
         setSelectedLinks(frontendProductLinks);
@@ -100,16 +96,6 @@ const ProductDropdown = ({
                         {selected == "Backend" ? <Image src={LogoUbuntuActive} alt="" priority={true} /> : <Image src={LogoUbuntu} alt="" priority={true} />}
                         <Typography type="copy4" className="pl-2">
                           Backend
-                        </Typography>
-                      </div>
-                      <div
-                        onClick={() => handleCategorySelect("Fullstack")}
-                        className={classNames(styles.categoryButton, {
-                          [styles.categoryButtonActive]: selected == "Fullstack",
-                        })}>
-                        {selected == "Fullstack" ? <Image src={LogoGraphActive} alt="" priority={true} /> : <Image src={LogoGraph} alt="" priority={true} />}
-                        <Typography type="copy4" className="pl-2">
-                          Fullstack
                         </Typography>
                       </div>
                     </div>
