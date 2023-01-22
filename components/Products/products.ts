@@ -129,21 +129,6 @@ module.exports = {
 }
 `
 
-const htmlSnippet: string = `
-
-<html>
-	<head>
-		<script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
-		<script>
-			window.H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.run/setup
-		</script>
-	</head>
-	<body>
-		<!-- Your Application -->
-	</body>
-</html>
-`
-
 const nextSnippet: string = `
 
 import type { AppProps } from 'next/app'
@@ -223,6 +208,15 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [goSnippet, defaultFrontendSnippet],
   },
 
+  'next-backend': {
+    type: "backend",
+    docsLink: "/docs/getting-started/client-sdk/nextjs",
+    slug: 'next-backend',
+    title: "Next.js",
+    types: ["Backend", "Frontend"],
+    snippets: [nextBackendSnippet, nextSnippet],
+  }, 
+
   'node': {
     type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/nodejs",
@@ -248,16 +242,8 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [angularSnippet],
   }, 
 
-  'html': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/html",
-    slug: 'html',
-    title: "HTML",
-    snippets: [htmlSnippet],
-  }, 
-
   'next': {
-    type: "fullstack",
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/nextjs",
     slug: 'next',
     title: "Next.js",

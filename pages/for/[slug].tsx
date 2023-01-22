@@ -18,7 +18,6 @@ import { Typography } from '../../components/common/Typography/Typography';
 import landingStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Products/Products.module.scss';
 import navStyles from '../../components/common/Navbar/Navbar.module.scss';
-import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import ProductsReplay from '../../public/images/products-replay.svg';
@@ -28,7 +27,7 @@ import ProductsGraph from '../../public/images/products-graph.svg';
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
 import Footer from '../../components/common/Footer/Footer';
-import { Review, REVIEWS } from '../../components/Home/Reviews';
+import { REVIEWS } from '../../components/Home/Reviews';
 import { CustomerReview } from '..';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
@@ -44,6 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+//Gets list of products from products.ts
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
 
@@ -251,7 +251,7 @@ const Products = ({ product }: { product: iProduct }) => {
         <div className={styles.infoContainer}>
           <InfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
-            desc={`With our pixel-perfect replays in your ${product.title} app,
+            desc={`With our pixel-perfect replays of your ${product.title} app,
             you'll get to the bottom of issues in no time and better
             understand how your app is being used.`}
             link={product.docsLink}
