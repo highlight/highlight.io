@@ -4887,10 +4887,10 @@ highlight.run@4.5.4:
   resolved "https://registry.npmjs.org/highlight.run/-/highlight.run-4.5.4.tgz"
   integrity sha512-3hyEM6jKTsRHKH+/yccQ4VgDlfft7jfjWzgi/7OHQ4jUNQcSwe6G3H3x3UerCFMBA2aA1jRJn59dKPpmiZ3jYg==
 
-highlight.run@5.1.8:
-  version "5.1.8"
-  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-5.1.8.tgz#13eb265906c0a1fcd8802d94cbb2e3286c011b65"
-  integrity sha512-64Ck00Ve3G8obAu0ir9GfVJ0sfcPkXhP2CgmvFqn0EcYGfIRdYaTcdKjBoS0b2dmwF+ml8z7vsPMGJkcxvVMHg==
+highlight.run@5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-5.2.1.tgz#fcb10cf2c357af21cb810523a6416972ab53e4ea"
+  integrity sha512-l2DJ8IvC9sAQT9Rh55ppUbyDHztRWzdy7ZcX/0+MyfGKtK6vBjjQCR91707wZ8M17xy64SWTie8ROSfDqak7uA==
 
 hoist-non-react-statics@^3.0.0:
   version "3.3.2"

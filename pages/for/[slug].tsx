@@ -121,7 +121,7 @@ const Products = ({ product }: { product: iProduct }) => {
     <div>
       <Banner>
         <div className={navStyles.bannerContainer}>
-          <p>Want 1 month of free Highlight? </p>
+          <p>Want 2 weeks of free Highlight? </p>
           <a
             href="http://app.highlight.run/"
             className={navStyles.callToAction}

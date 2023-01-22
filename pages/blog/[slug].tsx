@@ -236,7 +236,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!data.post.author?.profilePhoto?.url) {
     throw new Error(
-      `missing required detailed images for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
+      `missing required profile image for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
     );
   }
 

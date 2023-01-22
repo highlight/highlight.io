@@ -5,6 +5,7 @@ import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
+import productStyles from '../components/Products/Products.module.scss'
 
 import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugLeft from '../public/images/hero-bug-left.gif';
@@ -195,9 +196,9 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <div className={styles.sectionSubtitle}>
-                <Typography type="outline">
-                  Stop debugging in the dark
+              <div className={productStyles.highlightedBadge}>
+                <Typography type="copy4" emphasis>
+                  Stop Debugging in the Dark
                 </Typography>
               </div>
               <h1>{`Because a stack trace alone isn't enough`}</h1>
@@ -301,9 +302,9 @@ const Home: NextPage = () => {
               <div className={styles.featuresLeftColumn}>
                 <div ref={section1} className={styles.featuresSection}>
                   <div>
-                    <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">
-                        cross-team collaboration
+                    <div className={productStyles.subtleBadge}>
+                      <Typography type="copy4" emphasis>
+                        Cross-team Collaboration
                       </Typography>
                     </div>
                     <h3>
@@ -370,8 +371,10 @@ const Home: NextPage = () => {
                 </div>
                 <div ref={section2} className={styles.featuresSection}>
                   <div>
-                    <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">Powerful search</Typography>
+                    <div className={productStyles.subtleBadge}>
+                      <Typography type="copy4" emphasis>
+                        Powerful Search
+                      </Typography>
                     </div>
                     <h3>
                       <span className={styles.highlightedText}>
@@ -441,8 +444,10 @@ const Home: NextPage = () => {
                 </div>
                 <div ref={section3} className={styles.featuresSection}>
                   <div>
-                    <div className={styles.sectionSubtitle}>
-                      <Typography type="outline">security-compliant</Typography>
+                    <div className={productStyles.subtleBadge}>
+                      <Typography type="copy4" emphasis>
+                        Security-compliant
+                      </Typography>
                     </div>
                     <h3>
                       Highlight is built for{' '}
@@ -576,8 +581,12 @@ const Home: NextPage = () => {
             className={classNames(styles.mobileOnly, styles.mobileSpacing)}
           >
             <div className={styles.sectionText}>
-              <div className={styles.sectionSubtitle}>
-                <Typography type="outline">cross-team collaboration</Typography>
+              <div className="flex justify-center">
+                <div className={productStyles.subtleBadge}>
+                  <Typography type="copy4" emphasis>
+                    Cross-team Collaboration
+                  </Typography>
+                </div>
               </div>
               <h3>
                 <span className={styles.highlightedText}>Collaborate</span> on
@@ -655,8 +664,12 @@ const Home: NextPage = () => {
           </Section>
           <Section reverseMobile={true} className={styles.mobileOnly}>
             <div className={styles.sectionText}>
-              <div className={styles.sectionSubtitle}>
-                <Typography type="outline">Powerful search</Typography>
+              <div className="flex justify-center">
+                <div className={productStyles.subtleBadge}>
+                  <Typography type="copy4" emphasis>
+                    Powerful Search
+                  </Typography>
+                </div>
               </div>
               <h3>
                 <span className={styles.highlightedText}>Easily search</span>{' '}
@@ -733,8 +746,12 @@ const Home: NextPage = () => {
           </Section>
           <Section reverseMobile={true} className={styles.mobileOnly}>
             <div className={styles.sectionText}>
-              <div className={styles.sectionSubtitle}>
-                <Typography type="outline">security-compliant</Typography>
+              <div className="flex justify-center">
+                <div className={productStyles.subtleBadge}>
+                  <Typography type="copy4" emphasis>
+                    Security-compliant
+                  </Typography>
+                </div>
               </div>
               <h3>
                 Highlight is built for{' '}
