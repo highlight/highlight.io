@@ -35,6 +35,9 @@
   border-radius: var(--size-xSmall);
   left: 50%;
   padding-top: var(--size-medium);
+  padding-left: var(--size-xLarge);
+  padding-right: var(--size-xLarge);
+  padding-bottom: var(--size-xxLarge);
   transform: translate(-50%, 0);
 }
 
