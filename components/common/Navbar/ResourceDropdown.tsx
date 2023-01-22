@@ -46,12 +46,14 @@ const ResourceDropdown = ({
     {
       title: "Blog",
       icon: <Icons.HiCollection className={styles.copyOnLight} />,
-      link: "/blog"
+      link: "/blog",
+      sameTab: true,
     },
     {
       title: "Documentation",
       icon: <Icons.HiDocumentSearch className={styles.copyOnLight} />,
-      link: "/docs"
+      link: "/docs",
+      sameTab: true,
     },
   ]
 
@@ -90,7 +92,7 @@ const ResourceDropdown = ({
               <div className={styles.popoverPanel}>
                 <div className={styles.gridContainer}>
                   {otherLinks.map((item, index) => (
-                    <a key={index} href={item.link} target="_blank" rel="noreferrer" className={styles.gridItem}>
+                    <a key={index} href={item.link} target={item.sameTab ? "" : "_blank"} rel="noreferrer" className={styles.gridItem}>
                       {item.icon}
                       <Typography type="copy3" >
                         {item.title}
