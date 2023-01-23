@@ -31,7 +31,6 @@
 
 .popover {
   position: absolute;
-  background-color: var(--color-primary-500);
   border-radius: var(--size-xSmall);
   left: 50%;
   padding-top: var(--size-medium);
@@ -43,6 +42,7 @@
 
 .popoverPanel {
   border: 1px solid var(--color-divider-on-dark);
+  background-color: var(--color-primary-500);
   border-radius: var(--size-xSmall);
   box-shadow: 8px 8px 0px -2px var(--color-primary-200);
   transition: box-shadow 0.3s ease-in-out;
