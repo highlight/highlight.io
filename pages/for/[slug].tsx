@@ -215,11 +215,6 @@ const Products = ({ product }: { product: iProduct }) => {
                   {product.title} app <br />
                   today.
                 </h2>
-                <Typography type="copy1" onDark>
-                  Highlight&apos;s SDKs will integrate closely with your
-                  application. Rest assured that the seamless integration with{' '}
-                  {product.title} will help monitor the most for your app.
-                </Typography>
               </div>
 
               <div className="flex justify-center my-14">
@@ -261,7 +256,7 @@ const Products = ({ product }: { product: iProduct }) => {
           <div className={styles.divider} />
 
           <InfoRow
-            title={`Get a ping when exceptions or error logs are thrown.`}
+            title={`Get a ping when exceptions or errors are thrown.`}
             desc={`Our alerting infrastructure can take abnormal metrics or
             errors raised in your ${product.title} app and notify your
             engineering team over Slack, Discord, and more!`}
@@ -274,8 +269,8 @@ const Products = ({ product }: { product: iProduct }) => {
 
           <InfoRow
             title={`Monitor the metrics that keep your customers around.`}
-            desc={`Highlight allows you to track performance, request timings, and many other metrics
-            in the frontend or backend of your ${product.title} application.`}
+            desc={`Highlight allows you to track performance, request timings, and several other metrics
+            in your ${product.title} application.`}
             link={product.docsLink}
             imgSrc={ProductsGraph}
           />
@@ -290,7 +285,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <Typography type="copy2" onDark>
                 Don&apos;t take our word.{' '}
                 <Link href="/customers">
-                  Read our customer review section →
+                  What our customers have to say →
                 </Link>
               </Typography>
             </div>
