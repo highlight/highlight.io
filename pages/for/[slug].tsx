@@ -274,8 +274,8 @@ const Products = ({ product }: { product: iProduct }) => {
 
           <InfoRow
             title={`Monitor the metrics that keep your customers around.`}
-            desc={`Track performance, request timings, and other custom metrics
-            in the frontend or backend of your ${product.title} app.`}
+            desc={`Highlight allows you to track performance, request timings, and many other metrics
+            in the frontend or backend of your ${product.title} application.`}
             link={product.docsLink}
             imgSrc={ProductsGraph}
           />

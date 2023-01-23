@@ -93,6 +93,11 @@
   }
 }
 
+.docsButton {
+  width: 175px;
+  padding: var(--size-xSmall) var(--size-small);
+}
+
 .infoContainer {
   width: 100%;
   max-width: calc(var(--max-width) + (var(--size-large) * 2));

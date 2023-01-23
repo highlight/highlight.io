@@ -35,7 +35,7 @@ const InfoRow = ({
           </p>
         </Typography>
         <div className="flex justify-center lg:justify-start">
-          <PrimaryButton href={link} className={classNames(styles.hollowButton, "mt-5")}>
+          <PrimaryButton href={link} className={classNames(styles.hollowButton, styles.docsButton, "mt-5")}>
             <Typography type="copy2" emphasis={true}>
               Read our docs
             </Typography>
