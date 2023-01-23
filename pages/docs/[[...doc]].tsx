@@ -19,7 +19,6 @@ import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
-import 'antd/lib/spin/style/index.css';
 import { Meta } from '../../components/common/Head/Meta';
 import { DOCS_REDIRECTS } from '../../middleware';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
