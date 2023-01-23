@@ -1,6 +1,7 @@
 export const anchorFeature: string;
 export const buttonContainer: string;
 export const divider: string;
+export const docsButton: string;
 export const featureBox: string;
 export const featureBoxIcon: string;
 export const featureBoxText: string;

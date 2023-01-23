@@ -1,3 +1,5 @@
+export const categoryButton: string;
+export const categoryButtonActive: string;
 export const copyOnDark: string;
 export const copyOnLight: string;
 export const gridContainer: string;

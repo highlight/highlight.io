@@ -3,8 +3,6 @@ export const copyOnLight: string;
 export const gridContainer: string;
 export const gridItem: string;
 export const headerButton: string;
-export const innerGridContainer: string;
-export const innerPopoverPanel: string;
 export const popover: string;
 export const popoverButton: string;
 export const popoverPanel: string;
