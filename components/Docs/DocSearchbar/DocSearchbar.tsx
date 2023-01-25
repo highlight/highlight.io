@@ -57,6 +57,7 @@ const DocSearchComboBox = (props: any) => {
           ref={inputRef}
           type="text"
           placeholder="Find anything"
+          className='min-w-0'
         />
       </div>
       {state.inputValue && (
@@ -187,9 +188,9 @@ const DocSearchbar = (props: SearchbarProps) => {
                       (i) =>
                         [
                           i[0] -
-                            (wantedContentMatch ? wantedContentMatch[0] : 0),
+                          (wantedContentMatch ? wantedContentMatch[0] : 0),
                           i[1] -
-                            (wantedContentMatch ? wantedContentMatch[0] : 0),
+                          (wantedContentMatch ? wantedContentMatch[0] : 0),
                         ] as [number, number]
                     )
                     .filter((a, b) => a[0] >= 0);

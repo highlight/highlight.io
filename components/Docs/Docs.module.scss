@@ -146,6 +146,8 @@
   width: 2px;
   align-items: center;
   justify-content: center;
+  flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
 }
 
@@ -357,10 +359,9 @@ h5:hover .headingCopyIcon {
   position: sticky;
   width: 100%;
   top: 0;
-  height: 54px;
   min-height: 54px;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   border-bottom: 1px solid var(--color-divider-on-dark);
   border-top: 1px solid var(--color-divider-on-dark);
   background-color: var(--color-primary-background);
@@ -371,14 +372,19 @@ h5:hover .headingCopyIcon {
   position: relative;
   padding: 0 var(--size-medium);
   flex: 0 0 300px;
+  display: flex;
+  align-items: center;
 }
 
 .centerInner {
-  width: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 0 !important;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 var(--size-large);
-  height: 100%;
+  gap: 8px;
+  padding: 8px var(--size-large);
   align-items: center;
   border-left: 1px solid var(--color-divider-on-dark);
 }
@@ -439,7 +445,7 @@ h5:hover .headingCopyIcon {
   padding: var(--size-xxSmall) var(--size-small);
   display: flex;
   flex: 1 0 360px;
-  width: 360px;
+  width: 100%;
   gap: var(--size-xSmall);
   align-items: center;
 
@@ -623,6 +629,14 @@ h5:hover .headingCopyIcon {
   display: flex;
   flex-direction: column;
   border-radius: var(--border-radius);
+}
+
+.resourcesMobile {
+  display: none;
+  border: 1px solid var(--divider-on-dark);
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  max-width: 400px;
 }
 
 .pageContentTable {
@@ -946,6 +960,10 @@ h5:hover .headingCopyIcon {
 }
 
 @media screen and (max-width: 1000px) {
+  .resourcesMobile {
+    display: flex;
+  }
+
   .mainWrapper {
     flex-direction: column;
   }
@@ -1015,10 +1033,7 @@ h5:hover .headingCopyIcon {
   }
 
   .searchContainer {
-    width: 300px;
-    .docSearchbar {
-      width: 100%;
-    }
+    min-width: 0;
   }
 
   .sdkDocSection {
