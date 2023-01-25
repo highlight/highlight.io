@@ -1,40 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img width="2051" alt="Docs Thumbnail" src="https://user-images.githubusercontent.com/20292680/214512508-04cc1ca5-5c26-45c6-839e-7aa9b5280c90.png">
 
-## Getting Started
+# Highlight's landing page & docs: [highlight.io](https://highlight.io)
+Welcome to the repo we use to maintain our main landing page (https://highlight.io) and docs (https://highlight.io/docs). If you're looking to make contributions to Highlight's main repository, head over to https://github.com/highlight/highlight.
 
-First, run the development server:
+## Table of contents:
+-   [Editing the docs](#contributing-to-our-docs)
+-   [Running the site locally](#running-the-site-locally)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Contributing to our Docs
 
-This repo uses generated types for sass files, so remember to run the `styles` command while developing. 
+### Ordering Doc Items
 
-```bash
-npm run styles
-# or
-yarn styles
-```
+If you want to explicitly order items in the left panel (e.g. to make the `overview` section at the top of a subdirectory), rather than naming a file or directory in the format `{{content}}` you can use the syntax `{{number}}_{{content}}`. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- For example, for [`http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/metrics-overview`](http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/metrics-overview), the file path of the doc is `docs/general-docs/2_getting-started/fullstack-frameworks/next-js/metrics-overview.md`
+- Notice `2_getting-started` because we want it second in the list of subfiles.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### How are slugs defined?
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- For files in `general-docs`, the base path is `docs/` and for files in `sdk-docs`, the base path is `docs/sdk`.
+- The rest of the slug is defined based on the file name / directory structure of the file. For files/folders in the form `{{number}}_{{content}}`*, only the content is included in the slug.
+    - For example, for [`http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/metrics-overview`](http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/metrics-overview), the file path of the doc is `docs/general-docs/2_getting-started/fullstack-frameworks/next-js/metrics-overview.md`
+    
+## Running the site locally
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### How can I run them locally?
 
-## Learn More
+Run `yarn dev` (and optionally `yarn styles` if you’re making styling changes). 
 
-To learn more about Next.js, take a look at the following resources:
+### Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+When a doc change is merged, you should be able to view the doc that you added/changed after a deploy is succesfull in Vercel at https://highlight.io.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-
-## Contributing to our docs
-https://www.notion.so/runhighlight/Contributing-to-our-Docs-9aef80be272741cd94b785287a2129c6
