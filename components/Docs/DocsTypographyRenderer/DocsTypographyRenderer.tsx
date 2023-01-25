@@ -77,38 +77,38 @@ export const DocsMarkdownRenderer = (
               className: styles.contentRender,
               ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(renderType)
                 ? {
-                    id: getIdFromHTMLHeaderProps(props),
-                    onClick: () => {
-                      document
-                        .querySelector(`#${getIdFromHeaderProps(props)}`)
-                        ?.scrollIntoView({
-                          behavior: 'smooth',
-                        });
-                      const basePath = router.asPath.split('#')[0];
-                      const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
-                        props
-                      )}`;
-                      window.history.replaceState(
-                        {
-                          ...window.history.state,
-                          as: newUrl,
-                          url: newUrl,
-                        },
-                        '',
-                        newUrl
-                      );
-                    },
-                  }
+                  id: getIdFromHTMLHeaderProps(props),
+                  onClick: () => {
+                    document
+                      .querySelector(`#${getIdFromHeaderProps(props)}`)
+                      ?.scrollIntoView({
+                        behavior: 'smooth',
+                      });
+                    const basePath = router.asPath.split('#')[0];
+                    const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
+                      props
+                    )}`;
+                    window.history.replaceState(
+                      {
+                        ...window.history.state,
+                        as: newUrl,
+                        url: newUrl,
+                      },
+                      '',
+                      newUrl
+                    );
+                  },
+                }
                 : {}),
             },
             [
               ...props?.children.map((c: any, i: number) =>
                 c.props
                   ? createElement(
-                      'code',
-                      { key: i, className: styles.inlineCodeBlock },
-                      c?.props.children
-                    )
+                    'code',
+                    { key: i, className: styles.inlineCodeBlock },
+                    c?.props.children
+                  )
                   : c
               ),
               copyHeadingIcon(props?.children?.length ?? 0),
@@ -150,38 +150,38 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
               className: classNames(styles.contentRender),
               ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(renderType)
                 ? {
-                    id: getIdFromHTMLHeaderProps(props),
-                    onClick: () => {
-                      document
-                        .querySelector(`#${getIdFromHeaderProps(props)}`)
-                        ?.scrollIntoView({
-                          behavior: 'smooth',
-                        });
-                      const basePath = router.asPath.split('#')[0];
-                      const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
-                        props
-                      )}`;
-                      window.history.replaceState(
-                        {
-                          ...window.history.state,
-                          as: newUrl,
-                          url: newUrl,
-                        },
-                        '',
-                        newUrl
-                      );
-                    },
-                  }
+                  id: getIdFromHTMLHeaderProps(props),
+                  onClick: () => {
+                    document
+                      .querySelector(`#${getIdFromHeaderProps(props)}`)
+                      ?.scrollIntoView({
+                        behavior: 'smooth',
+                      });
+                    const basePath = router.asPath.split('#')[0];
+                    const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
+                      props
+                    )}`;
+                    window.history.replaceState(
+                      {
+                        ...window.history.state,
+                        as: newUrl,
+                        url: newUrl,
+                      },
+                      '',
+                      newUrl
+                    );
+                  },
+                }
                 : {}),
             },
             [
               ...props?.children.map((c: any, i: number) =>
                 c.props
                   ? createElement(
-                      'code',
-                      { key: i, className: styles.inlineCodeBlock },
-                      c?.props.children
-                    )
+                    'code',
+                    { key: i, className: styles.inlineCodeBlock },
+                    c?.props.children
+                  )
                   : c
               ),
               copyHeadingIcon(props?.children?.length ?? 0),
@@ -195,7 +195,7 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
   return DocsTypography;
 };
 
-export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
+export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a' | 'ul') => {
   function DocsTypography({ ...props }) {
     const router = useRouter();
     return (
@@ -239,40 +239,40 @@ export const getDocsTypographyRenderer = (type: 'h5' | 'code' | 'a' | 'ul') => {
             type,
             {
               className: styles.contentRender,
-              ...(['h4', 'h5'].includes(type)
+              ...(['h4', 'h5', 'h6'].includes(type)
                 ? {
-                    id: getIdFromHeaderProps(props),
-                    onClick: () => {
-                      document
-                        .querySelector(`#${getIdFromHeaderProps(props)}`)
-                        ?.scrollIntoView({
-                          behavior: 'smooth',
-                        });
-                      const basePath = router.asPath.split('#')[0];
-                      const newUrl = `${basePath}#${getIdFromHeaderProps(
-                        props
-                      )}`;
-                      window.history.replaceState(
-                        {
-                          ...window.history.state,
-                          as: newUrl,
-                          url: newUrl,
-                        },
-                        '',
-                        newUrl
-                      );
-                    },
-                  }
+                  id: getIdFromHeaderProps(props),
+                  onClick: () => {
+                    document
+                      .querySelector(`#${getIdFromHeaderProps(props)}`)
+                      ?.scrollIntoView({
+                        behavior: 'smooth',
+                      });
+                    const basePath = router.asPath.split('#')[0];
+                    const newUrl = `${basePath}#${getIdFromHeaderProps(
+                      props
+                    )}`;
+                    window.history.replaceState(
+                      {
+                        ...window.history.state,
+                        as: newUrl,
+                        url: newUrl,
+                      },
+                      '',
+                      newUrl
+                    );
+                  },
+                }
                 : {}),
             },
             [
               ...props?.node?.children.map((c: any, i: number) =>
                 c.tagName === 'code'
                   ? createElement(
-                      c.tagName,
-                      { key: i, className: styles.inlineCodeBlock },
-                      c?.children[0].value
-                    )
+                    c.tagName,
+                    { key: i, className: styles.inlineCodeBlock },
+                    c?.children[0].value
+                  )
                   : c.value
               ),
               copyHeadingIcon(props?.node?.children?.length ?? 0),
