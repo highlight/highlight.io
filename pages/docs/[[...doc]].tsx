@@ -850,6 +850,34 @@ const DocPage = ({
               [styles.sdkCenterSection]: isSdkDocs,
             })}
           >
+            <div className={styles.resourcesMobile}>
+              <Link
+                className={styles.socialItem}
+                href="https://discord.gg/yxaXEAqgwN"
+                target="_blank"
+                style={{ borderBottom: '1px solid #30294E' }}
+              >
+                <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
+                <Typography type="copy3">Community / Support</Typography>
+              </Link>
+              <Link
+                className={styles.socialItem}
+                href={`https://github.com/highlight-run/docs/blob/main/${relPath ?? ''}`}
+                target="_blank"
+              >
+                <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
+                <Typography type="copy3">Suggest Edits?</Typography>
+              </Link>
+              <Link
+                style={{ borderTop: '1px solid #30294E' }}
+                className={styles.socialItem}
+                href="https://twitter.com/highlightio"
+                target="_blank"
+              >
+                <FaTwitter style={{ height: 20, width: 20 }}></FaTwitter>
+                <Typography type="copy3">Follow us!</Typography>
+              </Link>
+            </div>
             <div className={styles.breadcrumb}>
               {!isSdkDocs &&
                 getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>

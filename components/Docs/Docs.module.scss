@@ -622,6 +622,14 @@ h5:hover .headingCopyIcon {
   border-radius: var(--border-radius);
 }
 
+.resourcesMobile {
+  display: none;
+  border: 1px solid var(--divider-on-dark);
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  max-width: 400px;
+}
+
 .pageContentTable {
   display: flex;
   flex-direction: column;
@@ -927,6 +935,10 @@ h5:hover .headingCopyIcon {
 }
 
 @media screen and (max-width: 1000px) {
+  .resourcesMobile {
+    display: flex;
+  }
+
   .mainWrapper {
     flex-direction: column;
   }
