@@ -57,9 +57,9 @@ type DocData = {
   docOptions: DocPath[];
   metadata?: { title: string; slug: string };
   isSdkDoc?: boolean;
-  docIndex: number,
+  docIndex: number;
   redirect?: string;
-}
+};
 
 export interface Doc {
   content: string;
@@ -509,7 +509,7 @@ const PageRightBar = ({
         </Link>
         <Link
           className={styles.socialItem}
-          href={`https://github.com/highlight-run/docs/blob/main/${relativePath}`}
+          href={`https://github.com/highlight/highlight.io/blob/main/docs/${relativePath}`}
           target="_blank"
         >
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -688,7 +688,11 @@ const TableOfContents = ({
   );
 };
 
-const getBreadcrumbs = (metadata: any, docOptions: DocPath[], docIndex: number) => {
+const getBreadcrumbs = (
+  metadata: any,
+  docOptions: DocPath[],
+  docIndex: number
+) => {
   const trail: { title: string; path: string; hasContent: boolean }[] = [
     { title: 'Docs', path: '/docs', hasContent: true },
   ];
@@ -775,7 +779,7 @@ const DocPage = ({
             <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
-                href={`https://github.com/highlight-run/docs/blob/main/${relPath}`}
+                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -857,24 +861,25 @@ const DocPage = ({
           >
             <div className={styles.breadcrumb}>
               {!isSdkDoc &&
-                getBreadcrumbs(metadata, docOptions, docIndex).map((breadcrumb, i) =>
-                  i === 0 ? (
-                    <Link href={breadcrumb.path} legacyBehavior>
-                      {breadcrumb.title}
-                    </Link>
-                  ) : breadcrumb.hasContent ? (
-                    <>
-                      {` / `}
+                getBreadcrumbs(metadata, docOptions, docIndex).map(
+                  (breadcrumb, i) =>
+                    i === 0 ? (
                       <Link href={breadcrumb.path} legacyBehavior>
                         {breadcrumb.title}
                       </Link>
-                    </>
-                  ) : (
-                    <>
-                      {` / `}
-                      {breadcrumb.title}
-                    </>
-                  )
+                    ) : breadcrumb.hasContent ? (
+                      <>
+                        {` / `}
+                        <Link href={breadcrumb.path} legacyBehavior>
+                          {breadcrumb.title}
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        {` / `}
+                        {breadcrumb.title}
+                      </>
+                    )
                 )}
             </div>
             <h3
@@ -907,7 +912,7 @@ const DocPage = ({
             <div className={styles.pageNavigateRow}>
               {docIndex > 0 ? (
                 <Link
-                  href={docOptions[docIndex - 1]?.simple_path ?? ""}
+                  href={docOptions[docIndex - 1]?.simple_path ?? ''}
                   passHref
                   className={styles.pageNavigate}
                 >
@@ -921,7 +926,7 @@ const DocPage = ({
               )}
               {docIndex < docOptions?.length - 1 ? (
                 <Link
-                  href={docOptions[docIndex + 1]?.simple_path ?? ""}
+                  href={docOptions[docIndex + 1]?.simple_path ?? ''}
                   passHref
                   className={styles.pageNavigate}
                 >
