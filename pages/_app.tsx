@@ -15,6 +15,7 @@ import { H } from 'highlight.run';
 import { useEffect } from 'react';
 import { rudderInitialize } from '../scripts/rudder-initialize';
 import { SSRProvider } from 'react-aria';
+import { setAttributionData } from '../utils/attribution';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -37,6 +38,8 @@ H.init('4d7k1xeo', {
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const initialize = async () => {
+      setAttributionData();
+
       await rudderInitialize();
       window.rudderanalytics?.page();
       window.rudderanalytics?.identify();
