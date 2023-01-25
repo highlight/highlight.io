@@ -850,7 +850,7 @@ const DocPage = ({
               [styles.sdkCenterSection]: isSdkDocs,
             })}
           >
-            <div className={styles.resourcesMobile}>
+            {!isSdkDocs && <div className={styles.resourcesMobile}>
               <Link
                 className={styles.socialItem}
                 href="https://discord.gg/yxaXEAqgwN"
@@ -877,7 +877,7 @@ const DocPage = ({
                 <FaTwitter style={{ height: 20, width: 20 }}></FaTwitter>
                 <Typography type="copy3">Follow us!</Typography>
               </Link>
-            </div>
+            </div>}
             <div className={styles.breadcrumb}>
               {!isSdkDocs &&
                 getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
