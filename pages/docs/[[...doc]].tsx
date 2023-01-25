@@ -891,12 +891,12 @@ const DocPage = ({
                 remarkPlugins={[remarkGfm]}
                 className={styles.contentRender}
                 components={{
-                  h1: getDocsTypographyRenderer('h5'),
+                  h1: getDocsTypographyRenderer('h4'),
                   h2: getDocsTypographyRenderer('h5'),
                   ul: getDocsTypographyRenderer('ul'),
-                  h3: getDocsTypographyRenderer('h5'),
-                  h4: getDocsTypographyRenderer('h5'),
-                  h5: getDocsTypographyRenderer('h5'),
+                  h3: getDocsTypographyRenderer('h6'),
+                  h4: getDocsTypographyRenderer('h6'),
+                  h5: getDocsTypographyRenderer('h6'),
                   code: getDocsTypographyRenderer('code'),
                   a: getDocsTypographyRenderer('a'),
                 }}
