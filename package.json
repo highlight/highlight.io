@@ -7,6 +7,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "preinstall": "git submodule update --init --recursive",
+    "prepare": "husky install",
     "start": "next start",
     "styles": "yarn typed-scss-modules ./ --watch --ignore '**/node_modules'"
   },
@@ -69,7 +70,9 @@
     "autoprefixer": "^10.4.13",
     "eslint": "8.28.0",
     "eslint-config-next": "^13.0.6",
+    "husky": "^8.0.3",
     "postcss": "^8.4.20",
+    "prettier": "^2.8.3",
     "tailwindcss": "^3.1.8",
     "typed-scss-modules": "^7.0.1",
     "typescript": "4.9.4"
