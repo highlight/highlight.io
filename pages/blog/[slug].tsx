@@ -1,4 +1,5 @@
 import Image from 'next/legacy/image';
+import PlayButton from '../../public/images/playButton.svg';
 import homeStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Blog/Blog.module.scss';
 import { Section } from '../../components/common/Section/Section';
@@ -8,6 +9,8 @@ import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
 import Link from 'next/link';
+import YouTube, { YouTubeProps } from 'react-youtube';
+
 import { RichText } from '@graphcms/rich-text-react-renderer';
 import { Typography } from '../../components/common/Typography/Typography';
 import { createElement, useEffect, useRef, useState } from 'react';
@@ -17,10 +20,10 @@ import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/Sugge
 import { ElementNode } from '@graphcms/rich-text-types';
 import { Post } from '../../components/Blog/BlogPost/BlogPost';
 import { Meta } from '../../components/common/Head/Meta';
-import { FaGithub, FaGlobe, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import ReturnIcon from '../../public/images/ReturnIcon';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import { GraphQLRequest } from '../../utils/graphql';
-import { PostTag } from '../../components/Blog/Tag';
+import { getTagUrl, PostTag } from '../../components/Blog/Tag';
 import { PostAuthor } from '../../components/Blog/Author';
 
 const NUM_SUGGESTED_POSTS = 3;
@@ -120,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         slug
         title
         metaTitle
+        youtubeVideoId
         image {
           url
         }
@@ -232,7 +236,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (!data.post.author?.profilePhoto?.url) {
     throw new Error(
-      `missing required detailed images for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
+      `missing required profile image for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
     );
   }
 
@@ -317,6 +321,10 @@ const PostPage = ({
     // because at that point the page height is finalized
   }, [postSections]);
 
+  const isStartupStack = post.tags_relations.filter(t => t.name.toLocaleLowerCase().includes("stack")).length > 0;
+
+  const singleTag = post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
+
   return (
     <>
       <Meta
@@ -325,8 +333,8 @@ const PostPage = ({
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/blog/${post.slug}`}
         canonical={`/blog/${post.slug}`}
       />
-      <BlogNavbar title={post.title} endPosition={endPosition} />
-      <main ref={blogBody} className={styles.mainBlogPadding}>
+      <BlogNavbar title={post.title} endPosition={endPosition} attachUnder={<Link href={getTagUrl(singleTag?.slug ?? "all")} className='flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center'><ReturnIcon /> Back to {singleTag?.name ?? "blog"}</Link>} />
+      <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
         <Section>
           <div className={homeStyles.anchorTitle}>
             <Typography type="copy2">
@@ -336,10 +344,9 @@ const PostPage = ({
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${
-                post.readingTime ||
-                Math.floor(post.richcontent.markdown.split(' ').length / 200)
-              } min read`}</p>
+              })} • ${post.readingTime ||
+              Math.floor(post.richcontent.markdown.split(' ').length / 200)
+                } min read`}</p>
             </Typography>
             <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
@@ -354,17 +361,23 @@ const PostPage = ({
         </Section>
         {post.image?.url && (
           <Section className={styles.headerSection}>
-            <div
-              className={classNames(styles.mainImage, homeStyles.anchorTitle)}
-            >
-              <Image
-                src={post.image.url || ''}
-                alt=""
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
+            {isStartupStack ?
+              <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle)}>
+                <YouTube videoId={post.youtubeVideoId || "dQw4w9WgXcQ"} style={{ display: "flex", justifyContent: "center" }}></YouTube>
+              </div>
+              :
+              <div
+                className={classNames(styles.mainImage, homeStyles.anchorTitle)}
+              >
+                <Image
+                  src={post.image.url || ''}
+                  alt=""
+                  layout="fill"
+                  objectFit="cover"
+                  priority
+                />
+              </div>
+            }
           </Section>
         )}
         <Section className={styles.headerSection}>

@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 import path from 'path';
 
-// ignored files from https://github.com/highlight-run/docs
+// ignored files from docs
 export const IGNORED_DOCS_PATHS = new Set<string>([
   '.git',
   '.github',
@@ -97,7 +97,7 @@ export const processDocPath = function (base: string, fileString: string) {
 
 export const getGithubDocsPaths = async (path: string = '') => {
   const response = await fetch(
-    `https://api.github.com/repos/highlight-run/docs/contents/${path}`,
+    `https://api.github.com/repos/highlight/highlight.io/contents/docs/${path}`,
     {
       headers: githubHeaders,
     }
@@ -146,7 +146,7 @@ export const getGithubDoc = async (
   content: string;
 } | null> => {
   const response = await fetch(
-    `https://api.github.com/repos/highlight-run/docs/contents/${slug}.md`,
+    `https://api.github.com/repos/highlight/highlight.io/contents/docs/${slug}.md`,
     {
       headers: githubHeaders,
     }
@@ -166,6 +166,7 @@ export const getGithubDoc = async (
   } else if (!slug.endsWith('/index')) {
     return getGithubDoc(`${slug}/index`);
   } else {
+    console.error('error fetching from the github api', response);
     return null;
   }
 };

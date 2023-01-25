@@ -25,8 +25,9 @@ export function PostAuthor({
   personalWebsiteLink,
   twitterLink,
   githubLink,
+  hideTitle,
   linkedInLink,
-}: Author & { hidePhoto?: boolean }) {
+}: Author & { hidePhoto?: boolean, hideTitle?: boolean }) {
   return (
     <div className="flex gap-3">
       {!hidePhoto && (
@@ -44,7 +45,7 @@ export function PostAuthor({
           <Typography type="copy3" emphasis>
             {firstName} {lastName}
           </Typography>
-          <div className="flex flex-wrap gap-2 mt-1">
+          <div className="flex flex-wrap gap-2 pointer-events-auto">
             {personalWebsiteLink && (
               <SocialLink href={personalWebsiteLink} icon={<HiGlobeAlt />} />
             )}
@@ -58,9 +59,9 @@ export function PostAuthor({
           </div>
         </div>
 
-        <Typography type="copy4" className="text-copy-on-dark">
+        {!hideTitle && <Typography type="copy4" className="text-copy-on-dark">
           {title}
-        </Typography>
+        </Typography>}
       </div>
     </div>
   );

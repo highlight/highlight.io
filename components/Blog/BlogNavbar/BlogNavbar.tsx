@@ -16,9 +16,11 @@ const SHOW_NAVBAR_OFFSET = 300;
 const BlogNavbar = ({
   title,
   endPosition,
+  attachUnder,
 }: {
   title: string;
   endPosition: number;
+  attachUnder?: React.ReactElement,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +45,7 @@ const BlogNavbar = ({
     <>
       <Banner>
         <div className={styles.bannerContainerBlog}>
-          <p>Want 1 month of free Highlight? </p>
+          <p>Want 2 weeks of free Highlight? </p>
           <a href="http://app.highlight.io/" className={styles.callToAction}>
             Register Here →
           </a>
@@ -185,11 +187,13 @@ const BlogNavbar = ({
         <div
           className={styles.loadingBar}
           style={{
-            width: `${
-              (1 - Math.max(0, endPosition - prevY) / endPosition) * 100
-            }%`,
+            width: `${(1 - Math.max(0, endPosition - prevY) / endPosition) * 100
+              }%`,
           }}
         ></div>
+        <div className='absolute top-full'>
+          {attachUnder}
+        </div>
       </header>
     </>
   );

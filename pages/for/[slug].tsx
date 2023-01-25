@@ -18,7 +18,6 @@ import { Typography } from '../../components/common/Typography/Typography';
 import landingStyles from '../../components/Home/Home.module.scss';
 import styles from '../../components/Products/Products.module.scss';
 import navStyles from '../../components/common/Navbar/Navbar.module.scss';
-import classNames from 'classnames';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 import ProductsReplay from '../../public/images/products-replay.svg';
@@ -28,7 +27,7 @@ import ProductsGraph from '../../public/images/products-graph.svg';
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
 import Footer from '../../components/common/Footer/Footer';
-import { Review, REVIEWS } from '../../components/Home/Reviews';
+import { REVIEWS } from '../../components/Home/Reviews';
 import { CustomerReview } from '..';
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
@@ -44,6 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+//Gets list of products from products.ts
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
 
@@ -121,7 +121,7 @@ const Products = ({ product }: { product: iProduct }) => {
     <div>
       <Banner>
         <div className={navStyles.bannerContainer}>
-          <p>Want 1 month of free Highlight? </p>
+          <p>Want 2 weeks of free Highlight? </p>
           <a
             href="http://app.highlight.run/"
             className={navStyles.callToAction}
@@ -215,11 +215,6 @@ const Products = ({ product }: { product: iProduct }) => {
                   {product.title} app <br />
                   today.
                 </h2>
-                <Typography type="copy1" onDark>
-                  Highlight&apos;s SDKs will integrate closely with your
-                  application. Rest assured that the seamless integration with{' '}
-                  {product.title} will help monitor the most for your app.
-                </Typography>
               </div>
 
               <div className="flex justify-center my-14">
@@ -251,7 +246,7 @@ const Products = ({ product }: { product: iProduct }) => {
         <div className={styles.infoContainer}>
           <InfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
-            desc={`With our pixel-perfect replays in your ${product.title} app,
+            desc={`With our pixel-perfect replays of your ${product.title} app,
             you'll get to the bottom of issues in no time and better
             understand how your app is being used.`}
             link={product.docsLink}
@@ -261,7 +256,7 @@ const Products = ({ product }: { product: iProduct }) => {
           <div className={styles.divider} />
 
           <InfoRow
-            title={`Get a ping when exceptions or error logs are thrown.`}
+            title={`Get a ping when exceptions or errors are thrown.`}
             desc={`Our alerting infrastructure can take abnormal metrics or
             errors raised in your ${product.title} app and notify your
             engineering team over Slack, Discord, and more!`}
@@ -274,8 +269,8 @@ const Products = ({ product }: { product: iProduct }) => {
 
           <InfoRow
             title={`Monitor the metrics that keep your customers around.`}
-            desc={`Track performance, request timings, and other custom metrics
-            in the frontend or backend of your ${product.title} app.`}
+            desc={`Highlight allows you to track performance, request timings, and several other metrics
+            in your ${product.title} application.`}
             link={product.docsLink}
             imgSrc={ProductsGraph}
           />
@@ -290,7 +285,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <Typography type="copy2" onDark>
                 Don&apos;t take our word.{' '}
                 <Link href="/customers">
-                  Read our customer review section →
+                  What our customers have to say →
                 </Link>
               </Typography>
             </div>

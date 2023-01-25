@@ -14,12 +14,10 @@ import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
 
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
-import PageIcon from '../../public/images/page.svg';
 import { Typography } from '../../components/common/Typography/Typography';
 import matter from 'gray-matter';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Image from 'next/legacy/image';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import 'antd/lib/spin/style/index.css';
 import { Meta } from '../../components/common/Head/Meta';
@@ -47,8 +45,21 @@ export interface DocPath {
   indexPath: boolean;
   // metadata stored at the top of each md file.
   metadata: any;
+  isSdkDoc: boolean;
   content: string;
 }
+
+type DocData = {
+  markdownText?: string;
+  relPath?: string;
+  slug: string;
+  toc: TocEntry;
+  docOptions: DocPath[];
+  metadata?: { title: string; slug: string };
+  isSdkDoc?: boolean;
+  docIndex: number;
+  redirect?: string;
+};
 
 export interface Doc {
   content: string;
@@ -175,12 +186,12 @@ export const getDocsPaths = async (
         fsp,
         path.join(total_path || '')
       );
-      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+      const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
       if (!hasRequiredMetadata) {
         throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
         );
       }
 
@@ -189,6 +200,7 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
+        isSdkDoc: false,
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
@@ -234,17 +246,18 @@ export const getSdkPaths = async (
         fsp,
         path.join(total_path || '')
       );
-      const hasRequiredMetadata = ['title', 'slug'].every((item) =>
+      const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
       if (!hasRequiredMetadata) {
         throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title", "slug" are required. `
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
         );
       }
 
       paths.push({
         simple_path: pp,
+        isSdkDoc: true,
         array_path: pp.split('/'),
         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
         total_path,
@@ -266,7 +279,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   });
   return {
     paths: staticPaths,
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
@@ -277,7 +290,7 @@ interface TocEntry {
   children: TocEntry[];
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
   const sdkPaths = await getSdkPaths(fsp, undefined);
   let toc: TocEntry = {
@@ -351,18 +364,33 @@ export const getStaticProps: GetStaticProps = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
-  const absPath = path.join(currentDoc?.total_path || '');
+  const currentDocIndex = allPaths.findIndex((d) => {
+    return (
+      JSON.stringify(d.array_path) ===
+      JSON.stringify(context?.params?.doc || [''])
+    );
+  });
+  if (!currentDoc) {
+    return {
+      notFound: true,
+    };
+  }
+  const absPath = path.join(currentDoc.total_path || '');
+
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
   return {
     props: {
-      metadata: currentDoc?.metadata,
+      metadata: currentDoc.metadata,
       markdownText: content,
-      slug: currentDoc?.simple_path,
-      relPath: currentDoc?.rel_path,
+      slug: currentDoc.simple_path,
+      relPath: currentDoc.rel_path,
+      docIndex: currentDocIndex,
       docOptions: allPaths,
+      isSdkDoc: currentDoc.isSdkDoc,
       toc,
     },
+    revalidate: 60 * 30, // Cache response for 30 minutes
   };
 };
 
@@ -448,7 +476,6 @@ const SdkTableOfContents = () => {
 };
 
 const PageRightBar = ({
-  title,
   relativePath,
 }: {
   title: string;
@@ -482,7 +509,7 @@ const PageRightBar = ({
         </Link>
         <Link
           className={styles.socialItem}
-          href={`https://github.com/highlight-run/docs/blob/main/${relativePath}`}
+          href={`https://github.com/highlight/highlight.io/blob/main/docs/${relativePath}`}
           target="_blank"
         >
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -563,10 +590,15 @@ const TableOfContents = ({
   }, [isTopLevel, openTopLevel]);
 
   useEffect(() => {
-    const isCurrentPage =
-      path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '') ===
-      window.location.pathname;
-    setIsCurrentPage(isCurrentPage);
+    const currentPage = path.join(
+      '/docs',
+      docPaths[toc.docPathId || 0]?.simple_path || ''
+    );
+    setIsCurrentPage(currentPage === window.location.pathname);
+    const isParentOfCurrentPage = window.location.pathname.includes(
+      docPaths[toc.docPathId || 0]?.simple_path
+    );
+    setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage);
   }, [docPaths, toc.docPathId]);
 
   return (
@@ -656,15 +688,19 @@ const TableOfContents = ({
   );
 };
 
-const getBreadcrumbs = (metadata: any, docOptions: DocPath[]) => {
+const getBreadcrumbs = (
+  metadata: any,
+  docOptions: DocPath[],
+  docIndex: number
+) => {
   const trail: { title: string; path: string; hasContent: boolean }[] = [
     { title: 'Docs', path: '/docs', hasContent: true },
   ];
   if (metadata && docOptions) {
-    const currentDocIndex = docOptions?.findIndex(
-      (d) => d?.metadata?.slug === metadata?.slug
-    );
-    const currentDoc = docOptions[currentDocIndex];
+    // const currentDocIndex = docOptions?.findIndex(
+    //   (d) => d?.metadata?.slug === metadata?.slug
+    // );
+    const currentDoc = docOptions[docIndex];
     const pathToSearch: string[] = [];
     currentDoc.array_path.forEach((section) => {
       pathToSearch.push(section);
@@ -687,40 +723,21 @@ const DocPage = ({
   relPath,
   slug,
   toc,
+  isSdkDoc,
+  docIndex,
   redirect,
   docOptions,
   metadata,
-}: {
-  markdownText?: string;
-  relPath?: string;
-  slug: string;
-  toc: TocEntry;
-  docOptions: DocPath[];
-  metadata?: { title: string; slug: string };
-  redirect?: string;
-}) => {
+}: DocData) => {
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [currentPageIndex, setCurrentPageIndex] = useState(-1);
-
-  const docOptionsWithContent = useMemo(() => {
-    return docOptions?.filter((doc) => !doc.indexPath);
-  }, [docOptions]);
 
   const description = (markdownText || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
     .split('\n')
     .join(' ');
-
-  useEffect(() => {
-    setCurrentPageIndex(
-      docOptionsWithContent?.findIndex(
-        (d) => d?.metadata?.slug === metadata?.slug
-      )
-    );
-  }, [docOptionsWithContent, metadata?.slug, relPath]);
 
   useEffect(() => {
     if (redirect != null) {
@@ -734,15 +751,6 @@ const DocPage = ({
       window.scrollTo(0, parseInt(storedScrollPosition));
     }
   }, [router]);
-
-  const isSdkDocs = useMemo(() => {
-    return (
-      currentPageIndex !== -1 &&
-      docOptionsWithContent &&
-      docOptionsWithContent[currentPageIndex] &&
-      docOptionsWithContent[currentPageIndex].array_path.includes('sdk')
-    );
-  }, [currentPageIndex, docOptionsWithContent]);
 
   return (
     <>
@@ -766,11 +774,11 @@ const DocPage = ({
         </div>
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
-          {isSdkDocs && (
+          {isSdkDoc && (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
-                href={`https://github.com/highlight-run/docs/blob/main/${relPath}`}
+                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20, flexShrink: 0 }}></FaGithub>
@@ -791,7 +799,7 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.tocMenuLarge}>
-            {isSdkDocs ? (
+            {isSdkDoc ? (
               <SdkTableOfContents />
             ) : (
               toc?.children.map((t) => (
@@ -828,7 +836,7 @@ const DocPage = ({
           </div>
           <Collapse isOpened={open}>
             <div className={classNames(styles.tocContents, styles.tocMenu)}>
-              {isSdkDocs ? (
+              {isSdkDoc ? (
                 <SdkTableOfContents />
               ) : (
                 toc?.children.map((t) => (
@@ -847,10 +855,10 @@ const DocPage = ({
         <div className={styles.contentSection}>
           <div
             className={classNames(styles.centerSection, {
-              [styles.sdkCenterSection]: isSdkDocs,
+              [styles.sdkCenterSection]: isSdkDoc,
             })}
           >
-            {!isSdkDocs && <div className={styles.resourcesMobile}>
+            {!isSdkDoc && <div className={styles.resourcesMobile}>
               <Link
                 className={styles.socialItem}
                 href="https://discord.gg/yxaXEAqgwN"
@@ -879,47 +887,48 @@ const DocPage = ({
               </Link>
             </div>}
             <div className={styles.breadcrumb}>
-              {!isSdkDocs &&
-                getBreadcrumbs(metadata, docOptions).map((breadcrumb, i) =>
-                  i === 0 ? (
-                    <Link href={breadcrumb.path} legacyBehavior>
-                      {breadcrumb.title}
-                    </Link>
-                  ) : breadcrumb.hasContent ? (
-                    <>
-                      {` / `}
+              {!isSdkDoc &&
+                getBreadcrumbs(metadata, docOptions, docIndex).map(
+                  (breadcrumb, i) =>
+                    i === 0 ? (
                       <Link href={breadcrumb.path} legacyBehavior>
                         {breadcrumb.title}
                       </Link>
-                    </>
-                  ) : (
-                    <>
-                      {` / `}
-                      {breadcrumb.title}
-                    </>
-                  )
+                    ) : breadcrumb.hasContent ? (
+                      <>
+                        {` / `}
+                        <Link href={breadcrumb.path} legacyBehavior>
+                          {breadcrumb.title}
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        {` / `}
+                        {breadcrumb.title}
+                      </>
+                    )
                 )}
             </div>
             <h3
               className={classNames(styles.pageTitle, {
-                [styles.sdkPageTitle]: isSdkDocs,
+                [styles.sdkPageTitle]: isSdkDoc,
               })}
             >
               {metadata ? metadata.title : ''}
             </h3>
-            {isSdkDocs ? (
+            {isSdkDoc ? (
               <DocSection content={markdownText || ''} />
             ) : (
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 className={styles.contentRender}
                 components={{
-                  h1: getDocsTypographyRenderer('h5'),
+                  h1: getDocsTypographyRenderer('h4'),
                   h2: getDocsTypographyRenderer('h5'),
                   ul: getDocsTypographyRenderer('ul'),
-                  h3: getDocsTypographyRenderer('h5'),
-                  h4: getDocsTypographyRenderer('h5'),
-                  h5: getDocsTypographyRenderer('h5'),
+                  h3: getDocsTypographyRenderer('h6'),
+                  h4: getDocsTypographyRenderer('h6'),
+                  h5: getDocsTypographyRenderer('h6'),
                   code: getDocsTypographyRenderer('code'),
                   a: getDocsTypographyRenderer('a'),
                 }}
@@ -928,28 +937,28 @@ const DocPage = ({
               </ReactMarkdown>
             )}
             <div className={styles.pageNavigateRow}>
-              {currentPageIndex > 0 ? (
+              {docIndex > 0 ? (
                 <Link
-                  href={docOptionsWithContent[currentPageIndex - 1].simple_path}
+                  href={docOptions[docIndex - 1]?.simple_path ?? ''}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <BiChevronLeft />
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentPageIndex - 1].metadata.title}
+                    {docOptions[docIndex - 1]?.metadata.title}
                   </Typography>
                 </Link>
               ) : (
                 <div></div>
               )}
-              {currentPageIndex < docOptionsWithContent?.length - 1 ? (
+              {docIndex < docOptions?.length - 1 ? (
                 <Link
-                  href={docOptionsWithContent[currentPageIndex + 1].simple_path}
+                  href={docOptions[docIndex + 1]?.simple_path ?? ''}
                   passHref
                   className={styles.pageNavigate}
                 >
                   <Typography type="copy2">
-                    {docOptionsWithContent[currentPageIndex + 1].metadata.title}
+                    {docOptions[docIndex + 1].metadata.title}
                   </Typography>
                   <BiChevronRight />
                 </Link>
@@ -958,7 +967,7 @@ const DocPage = ({
               )}
             </div>
           </div>
-          {!isSdkDocs && (
+          {!isSdkDoc && (
             <div className={styles.rightSection}>
               <PageRightBar
                 title={metadata ? metadata.title : ''}

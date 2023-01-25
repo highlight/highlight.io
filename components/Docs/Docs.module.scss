@@ -142,7 +142,8 @@
 }
 
 .tocChildrenLineWrapper {
-  width: var(--size-large);
+  margin-left: 11px;
+  width: 2px;
   align-items: center;
   justify-content: center;
   flex-grow: 0;
@@ -231,6 +232,14 @@
     line-height: 34px !important;
     margin: var(--size-medium) 0 !important;
     color: var(--copy-on-dark);
+  }
+
+  ul,
+  ol,
+  li {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px !important;
   }
 
   img {
@@ -857,6 +866,22 @@ h5:hover .headingCopyIcon {
 
   p {
     margin: var(--size-small) 0 var(--size-large) !important;
+  }
+
+  ul,
+  ol,
+  li {
+    color: var(--color-copy-on-dark);
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: var(--size-small);
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: var(--size-small);
   }
 }
 

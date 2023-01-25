@@ -7,6 +7,7 @@ const SUBDOMAIN_LANDING_PAGES = {
   monitor: '/blog/frontend-observability',
   nextjs: '/blog/feature-nextjs-integration',
   nodejs: '/blog/feature-nodejs-integration',
+  errors: '/blog/new-error-management-ui'
 };
 
 export const DOCS_REDIRECTS = {

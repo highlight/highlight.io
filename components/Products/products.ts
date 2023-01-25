@@ -1,8 +1,8 @@
 //all products and snippets are defined below for the product page
-//referenced in ProductDropdown
+//referenced in ProductDropdown and sitemap
 
 export interface iProduct {
-  isBackend: boolean;
+  type: string;
   docsLink: string;
   slug: string;
   snippets: string[];
@@ -10,6 +10,7 @@ export interface iProduct {
   types?: string[];
 }
 
+//whitespace ensures that the two code blocks (front-end and back-end) are the same height.
 const defaultFrontendSnippet: string = `
 
 import React from 'react'
@@ -129,21 +130,6 @@ module.exports = {
 }
 `
 
-const htmlSnippet: string = `
-
-<html>
-	<head>
-		<script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
-		<script>
-			window.H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.run/setup
-		</script>
-	</head>
-	<body>
-		<!-- Your Application -->
-	</body>
-</html>
-`
-
 const nextSnippet: string = `
 
 import type { AppProps } from 'next/app'
@@ -206,7 +192,7 @@ const svelteSnippet: string = `
 
 export const PRODUCTS: { [k: string]: iProduct } = {
   'express': {
-    isBackend: true, 
+    type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/express",
     slug: 'express',
     title: "Express",
@@ -215,7 +201,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   },
 
   'go': {
-    isBackend: true, 
+    type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/go",
     slug: 'go',
     title: "Golang",
@@ -223,8 +209,17 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [goSnippet, defaultFrontendSnippet],
   },
 
+  'next-backend': {
+    type: "backend",
+    docsLink: "/docs/getting-started/client-sdk/nextjs",
+    slug: 'next-backend',
+    title: "Next.js",
+    types: ["Backend", "Frontend"],
+    snippets: [nextBackendSnippet, nextSnippet],
+  }, 
+
   'node': {
-    isBackend: true, 
+    type: "backend",
     docsLink: "/docs/getting-started/backend-sdk/nodejs",
     slug: 'node',
     title: "Node.js",
@@ -232,17 +227,8 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [nodeSnippet, defaultFrontendSnippet],
   },
 
-  'next-backend': {
-    isBackend: true, 
-    docsLink: "/docs/getting-started/backend-sdk/nextjs",
-    slug: 'next-backend',
-    title: "Next.js",
-    types: ["Backend", "Frontend"],
-    snippets: [nextBackendSnippet, nextSnippet],
-  }, 
-
   'angular': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/angular",
     slug: 'angular',
     title: "Angular",
@@ -250,23 +236,15 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'gatsby': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/gatsbyjs",
     slug: 'gatsby',
     title: "Gatsby.js",
     snippets: [angularSnippet],
   }, 
 
-  'html': {
-    isBackend: false, 
-    docsLink: "/docs/getting-started/client-sdk/html",
-    slug: 'html',
-    title: "HTML",
-    snippets: [htmlSnippet],
-  }, 
-
   'next': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/nextjs",
     slug: 'next',
     title: "Next.js",
@@ -275,7 +253,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'react': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/reactjs",
     slug: 'react',
     title: "React",
@@ -283,7 +261,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'svelte': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/sveltekit",
     slug: 'svelte',
     title: "Svelte.js",
@@ -291,7 +269,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 
   'vue': {
-    isBackend: false, 
+    type: "frontend",
     docsLink: "/docs/getting-started/client-sdk/vuejs",
     slug: 'vue',
     title: "Vue.js",
@@ -299,4 +277,6 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   }, 
 };
 
-
+export const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "frontend" })
+export const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "backend" })
+export const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "fullstack" })
