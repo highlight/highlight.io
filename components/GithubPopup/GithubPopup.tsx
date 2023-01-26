@@ -22,7 +22,7 @@ const MobileGithubPopup = () => {
     return (<motion.div
         initial={{ bottom: -200 }}
         animate={{
-            bottom: -28,
+            bottom: -38,
         }}
         transition={{
             type: "spring",
