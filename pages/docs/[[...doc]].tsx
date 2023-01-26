@@ -602,7 +602,7 @@ const TableOfContents = ({
   }, [docPaths, toc.docPathId]);
 
   return (
-    <div>
+    <div className='max-w-full'>
       {hasChildren ? (
         <div className={styles.tocRow} onClick={() => setOpen((o) => !o)}>
           <ChevronDown
@@ -763,9 +763,8 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${
-          process.env.NEXT_PUBLIC_VERCEL_URL
-        }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
+          }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
@@ -776,13 +775,13 @@ const DocPage = ({
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
           {isSdkDoc && (
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
                 href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath}`}
                 target="_blank"
               >
-                <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
+                <FaGithub style={{ height: 20, width: 20, flexShrink: 0 }}></FaGithub>
                 <Typography type="copy4">Suggest Edits?</Typography>
               </Link>
               <Link
@@ -790,7 +789,7 @@ const DocPage = ({
                 href="https://discord.gg/yxaXEAqgwN"
                 target="_blank"
               >
-                <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
+                <FaDiscord style={{ height: 20, width: 20, flexShrink: 0 }}></FaDiscord>
                 <Typography type="copy4">Community / Support</Typography>
               </Link>
             </div>
@@ -859,6 +858,34 @@ const DocPage = ({
               [styles.sdkCenterSection]: isSdkDoc,
             })}
           >
+            {!isSdkDoc && <div className={styles.resourcesMobile}>
+              <Link
+                className={styles.socialItem}
+                href="https://discord.gg/yxaXEAqgwN"
+                target="_blank"
+                style={{ borderBottom: '1px solid #30294E' }}
+              >
+                <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
+                <Typography type="copy3">Community / Support</Typography>
+              </Link>
+              <Link
+                className={styles.socialItem}
+                href={`https://github.com/highlight-run/docs/blob/main/${relPath ?? ''}`}
+                target="_blank"
+              >
+                <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
+                <Typography type="copy3">Suggest Edits?</Typography>
+              </Link>
+              <Link
+                style={{ borderTop: '1px solid #30294E' }}
+                className={styles.socialItem}
+                href="https://twitter.com/highlightio"
+                target="_blank"
+              >
+                <FaTwitter style={{ height: 20, width: 20 }}></FaTwitter>
+                <Typography type="copy3">Follow us!</Typography>
+              </Link>
+            </div>}
             <div className={styles.breadcrumb}>
               {!isSdkDoc &&
                 getBreadcrumbs(metadata, docOptions, docIndex).map(
