@@ -38,6 +38,7 @@ import { Collapse } from 'antd';
 import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 import Link from 'next/link';
+import { GithubPopup } from '../components/GithubPopup/GithubPopup';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -196,11 +197,6 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
-              <div className={productStyles.highlightedBadge}>
-                <Typography type="copy4" emphasis>
-                  Stop Debugging in the Dark
-                </Typography>
-              </div>
               <h1>{`Because a stack trace alone isn't enough`}</h1>
               <Typography type="copy1" onDark>
                 Stop wasting effort trying to track down and reproduce bugs.
