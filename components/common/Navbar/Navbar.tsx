@@ -2,6 +2,7 @@ import {
   HighlightLogo,
   HighlightLogoWhite,
 } from '../HighlightLogo/HighlightLogo';
+import GitHubButton from 'react-github-btn'
 import styles from './Navbar.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
