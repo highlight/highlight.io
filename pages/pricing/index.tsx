@@ -41,6 +41,7 @@ import {
   StartupInfo,
 } from '../../components/Pricing/plan_info';
 import { Meta } from '../../components/common/Head/Meta';
+import { useMediaQuery } from '../../components/MediaQuery/MediaQuery';
 
 // Plans and info used for both mobile and desktop views.
 const planDetails: Array<PricingDetails> = [
@@ -436,31 +437,6 @@ const Question = ({
   );
 };
 
-const useMediaQuery = (width: number) => {
-  const [targetReached, setTargetReached] = useState(false);
-
-  const updateTarget = useCallback((e: any) => {
-    if (e.matches) {
-      setTargetReached(true);
-    } else {
-      setTargetReached(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const media = window.matchMedia(`(max-width: ${width}px)`);
-    media.addEventListener('change', (e) => updateTarget(e));
-
-    // Check on mount (callback is not called until a change occurs)
-    if (media.matches) {
-      setTargetReached(true);
-    }
-
-    return () => media.removeEventListener('change', (e) => updateTarget(e));
-  }, [width, updateTarget]);
-
-  return targetReached;
-};
 
 const BillingWidget = ({
   monthly,
