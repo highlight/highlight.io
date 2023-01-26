@@ -2,8 +2,6 @@ import { useState } from 'react';
 import GitHubButton from 'react-github-btn'
 import CrossIcon from '../../public/images/CrossIcon';
 import { motion } from "framer-motion";
-import { AutoComplete } from 'antd';
-import { isMobile } from 'react-device-detect';
 import styles from './GithubPopup.module.scss'
 import { useMediaQuery } from '../MediaQuery/MediaQuery';
 
