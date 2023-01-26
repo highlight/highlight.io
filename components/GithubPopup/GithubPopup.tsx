@@ -49,7 +49,7 @@ const MobileGithubPopup = () => {
                 overflow: "hidden",
                 whiteSpace: "nowrap",
             }}>
-                Star us on GitHub
+                Star on GitHub?
             </div>
             <GitHubButton
                 href="https://github.com/highlight/highlight"
