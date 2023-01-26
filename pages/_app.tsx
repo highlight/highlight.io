@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { rudderInitialize } from '../scripts/rudder-initialize';
 import { SSRProvider } from 'react-aria';
 import { setAttributionData } from '../utils/attribution';
+import { GithubPopup } from '../components/GithubPopup/GithubPopup';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -61,7 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Script>
       <Head>
         <title>
-          Highlight: The Ultimate Debugging Tool For Fast-Moving Teams
+          highlight.io: The open source monitoring platform.
         </title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
@@ -69,8 +70,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Meta
-        title="Highlight: The Ultimate Debugging Tool For Fast-Moving Teams"
-        description="Highlight removes the mystery of debugging through automatic session replay, error stack tracing, collaboration, and search. Never debug in the dark again."
+        title="highlight.io: The open source monitoring platform."
+        description="highlight.io is the open source monitoring platform that gives you the visibility you need."
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
       />
       <Component {...pageProps} />
