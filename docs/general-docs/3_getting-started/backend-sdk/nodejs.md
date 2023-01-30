@@ -63,4 +63,4 @@ const onError = (request, error) => {
 
 ### Verify
 
-To view and resolve the recorded error, log into [app.highlight.run/errors](app.highlight.run/errors) and open your project. Clicking on the error's title will open a page where you can see detailed information and mark it as resolved. You can also view frontend sessions where the error was thrown, and see the individual request which caused the error.
+To view and resolve the recorded error, log into [app.highlight.io/errors](app.highlight.io/errors) and open your project. Clicking on the error's title will open a page where you can see detailed information and mark it as resolved. You can also view frontend sessions where the error was thrown, and see the individual request which caused the error.

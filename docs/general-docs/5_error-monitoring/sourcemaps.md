@@ -38,7 +38,7 @@ find build -name '*.js.map' -type f -delete
 
 ### `apiKey`
 
-The API key for your project. You can find this in the [project settings](https://app.highlight.run/settings/errors#sourcemaps).
+The API key for your project. You can find this in the [project settings](https://app.highlight.io/settings/errors#sourcemaps).
 
 ## `path`
 

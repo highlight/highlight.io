@@ -17,7 +17,7 @@ Add the snippet to your `index.html`.
 	<head>
 		<script src="https://unpkg.com/highlight.run"></script>
 		<script>
-			window.H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.run/setup
+			window.H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.io/setup
 		</script>
 	</head>
 	<body>
@@ -28,7 +28,7 @@ Add the snippet to your `index.html`.
 
 ## Verify
 
-Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.run/sessions> a few seconds after recording has started.
+Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.io/sessions> a few seconds after recording has started.
 
 ## Next Steps
 

@@ -123,7 +123,7 @@ const Products = ({ product }: { product: iProduct }) => {
         <div className={navStyles.bannerContainer}>
           <p>Want 2 weeks of free Highlight? </p>
           <a
-            href="http://app.highlight.run/"
+            href="http://app.highlight.io/"
             className={navStyles.callToAction}
           >
             Register Here →
@@ -164,7 +164,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <div className="flex justify-center my-14">
                 <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
                 >
-                  <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>
                       Get started for free
                     </Typography>
@@ -220,7 +220,7 @@ const Products = ({ product }: { product: iProduct }) => {
               <div className="flex justify-center my-14">
                 <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
                 >
-                  <PrimaryButton href="https://app.highlight.run/?sign_up=1">
+                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>
                       Get started for free
                     </Typography>

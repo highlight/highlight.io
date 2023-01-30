@@ -7,7 +7,7 @@ updatedAt: 2022-06-06T16:45:25.000Z
 
 When you enable the Linear integration, Highlight will allow creating Issues from the session replay and errors viewer. Track bugs or enhancements for your app as you triage frontend and backend errors or watch your users' replays.
 
-To get started, go to the [integrations](https://app.highlight.run/integrations) and click the "Connect" button in the Linear section.
+To get started, go to the [integrations](https://app.highlight.io/integrations) and click the "Connect" button in the Linear section.
 
 ## Features
 

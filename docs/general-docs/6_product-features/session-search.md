@@ -18,7 +18,7 @@ When using Highlight, you might be interested in querying for sessions where a u
 2.  `clickTextContent `is the HTML Element's target's `textContent` property. Only the first 2000 characters are sent.
     1.  This property was added in `highlight.run@^4.2.3`.
 
-You can also visualize what Highlight is tracking by looking at your site's console logs when you click an element of interest. For example, clicking a particular `p` element in [https://app.highlight.run/](https://app.highlight.run/1/sessions?query=and) prints the following in the console logs.
+You can also visualize what Highlight is tracking by looking at your site's console logs when you click an element of interest. For example, clicking a particular `p` element in [https://app.highlight.io/](https://app.highlight.io/1/sessions?query=and) prints the following in the console logs.
 
 ![A sample console message on click.](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/yP5u4tqGinXhIyonAuXV1_image.png)
 
