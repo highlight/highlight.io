@@ -30,8 +30,9 @@ Alternatively, you can obfuscate specific HTML elements by adding the `highlight
 ```
 
 ## Ignoring Input
+
 ```hint
-The following CSS class only works for `<input>` elements. If you are interested in blocking the capture of other HTML elements, see the `highlight-block` class 
+The following CSS class only works for `<input>` elements. If you are interested in blocking the capture of other HTML elements, see the `highlight-block` class
 ```
 
 For sensitive input fields that your team would like to ignore user input for, you can add a CSS class `highlight-ignore` that will preserve the styling of the input element, but ignore all user input.

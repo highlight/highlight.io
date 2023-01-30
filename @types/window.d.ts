@@ -1,3 +1,3 @@
 interface Window {
-  rudderanalytics: any;
+	rudderanalytics: any
 }

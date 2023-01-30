@@ -23,11 +23,9 @@ H.init('<YOUR_PROJECT_ID>', {
 });
 ```
 
-
 The full guide for initializing Highlight in your client can be found [here](/getting-started/client-sdk/overview) and more information about setting up frontend/backend mapping for any stack can be found [here](/getting-started/frontend-backend-mapping).
 
 Lastly, see [H.init()](/sdk/client#Hinit) for a full sdk reference.
-
 
 ## Adding Highlight to your Backend
 

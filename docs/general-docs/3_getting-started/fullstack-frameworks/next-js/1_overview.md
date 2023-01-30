@@ -28,7 +28,6 @@ H.init('<YOUR_PROJECT_ID>', {
 });
 ```
 
-
 ### SDK Setup
 
 Import the `@highlight-run/next` Package

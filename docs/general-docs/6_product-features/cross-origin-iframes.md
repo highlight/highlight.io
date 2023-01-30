@@ -19,7 +19,7 @@ Ensure you are using [highlight.run](https://www.npmjs.com/package/highlight.run
 import { H } from 'highlight.run'
 
 H.init('<YOUR_ORGANIZATION_ID>', {
-    isCrossOriginIframe: true,
+	isCrossOriginIframe: true,
 })
 ```
 

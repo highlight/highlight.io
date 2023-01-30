@@ -9,15 +9,15 @@ Highlight groups errors together based on their error message and stack trace. W
 
 An error is matched if:
 
-- It has the same error message OR
+-   It has the same error message OR
 
-- It has the same top stack frame and 3 of the next 4 stack frames are the same (in any order)
+-   It has the same top stack frame and 3 of the next 4 stack frames are the same (in any order)
 
 A stack frame is matched if:
 
-- It has the same filename, function name, line number, and column number OR
+-   It has the same filename, function name, line number, and column number OR
 
-- It has the same source code and context (if sourcemaps are enabled)
+-   It has the same source code and context (if sourcemaps are enabled)
 
 If there is no match with an existing error, a new error group is created instead.
 

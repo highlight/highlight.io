@@ -6,9 +6,10 @@ updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
 Let's get you up and running with Highlight. You should be done and able to see a recorded session **within 2 minutes!**
+
 ## For your client / frontend:
 
-A session in Highlight starts in the client. 
+A session in Highlight starts in the client.
 
 Highlight supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Beyond that, to make integration even easier, we have official support for the following frameworks:
 
@@ -32,7 +33,7 @@ For in-depth instructions, follow the [Client SDK](/getting-started/client-sdk) 
 
 ## For your backend / server:
 
-Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application. 
+Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application.
 
 Learn more in [Backend SDK.](/getting-started/backend-sdk)
 

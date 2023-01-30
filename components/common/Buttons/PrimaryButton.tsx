@@ -1,8 +1,8 @@
-import React from 'react';
-import { ButtonProps } from 'antd';
-import classNames from 'classnames';
+import React from 'react'
+import { ButtonProps } from 'antd'
+import classNames from 'classnames'
 
-import styles from './Buttons.module.scss';
+import styles from './Buttons.module.scss'
 
 export const PrimaryButton = ({
   children,
@@ -13,7 +13,7 @@ export const PrimaryButton = ({
       {...props}
       onClick={(e) => {
         if (props.onClick) {
-          props.onClick(e);
+          props.onClick(e)
         }
       }}
       className={classNames(
@@ -24,5 +24,5 @@ export const PrimaryButton = ({
     >
       {children}
     </a>
-  );
-};
+  )
+}

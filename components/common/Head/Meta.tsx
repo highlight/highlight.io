@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import MetaImage from '../../../public/images/meta-image.jpg';
+import Head from 'next/head'
+import MetaImage from '../../../public/images/meta-image.jpg'
 
 export const Meta = ({
   title,
@@ -7,14 +7,14 @@ export const Meta = ({
   absoluteImageUrl,
   canonical,
 }: {
-  title: string;
-  description: string;
-  absoluteImageUrl?: string;
-  canonical?: string;
+  title: string
+  description: string
+  absoluteImageUrl?: string
+  canonical?: string
 }) => {
   const img =
     absoluteImageUrl ||
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`;
+    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`
   return (
     <Head>
       <title>{title}</title>
@@ -36,5 +36,5 @@ export const Meta = ({
         <link rel="canonical" href={`https://www.highlight.io${canonical}`} />
       )}
     </Head>
-  );
-};
+  )
+}

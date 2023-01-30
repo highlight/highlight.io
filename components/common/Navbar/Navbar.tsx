@@ -1,19 +1,19 @@
 import {
   HighlightLogo,
   HighlightLogoWhite,
-} from '../HighlightLogo/HighlightLogo';
+} from '../HighlightLogo/HighlightLogo'
 import GitHubButton from 'react-github-btn'
-import styles from './Navbar.module.scss';
-import classNames from 'classnames';
-import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useEffect, useState } from 'react';
-import Banner from '../Banner/Banner';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Typography } from '../Typography/Typography';
-import Link from 'next/link';
-import ResourceDropdown from './ResourceDropdown';
-import ProductDropdown from './ProductDropdown';
-import { GithubPopup } from '../../GithubPopup/GithubPopup';
+import styles from './Navbar.module.scss'
+import classNames from 'classnames'
+import { PrimaryButton } from '../Buttons/PrimaryButton'
+import { useEffect, useState } from 'react'
+import Banner from '../Banner/Banner'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import { Typography } from '../Typography/Typography'
+import Link from 'next/link'
+import ResourceDropdown from './ResourceDropdown'
+import ProductDropdown from './ProductDropdown'
+import { GithubPopup } from '../../GithubPopup/GithubPopup'
 
 const Navbar = ({
   hideFreeTrialText,
@@ -22,30 +22,30 @@ const Navbar = ({
   fixed,
   title,
 }: {
-  hideFreeTrialText?: boolean;
-  isDocsPage?: boolean;
-  hideBanner?: boolean;
-  fixed?: boolean;
-  title?: string;
+  hideFreeTrialText?: boolean
+  isDocsPage?: boolean
+  hideBanner?: boolean
+  fixed?: boolean
+  title?: string
 }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [prevY, setPrevY] = useState(0);
+  const [scrolled, setScrolled] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [prevY, setPrevY] = useState(0)
 
   const changeBackground = () => {
-    const currentScrollPos = window.pageYOffset;
+    const currentScrollPos = window.pageYOffset
     if (window.scrollY > 60 && prevY < currentScrollPos) {
-      setScrolled(true);
+      setScrolled(true)
     } else if (window.scrollY > 60 && prevY > currentScrollPos) {
-      setScrolled(false);
+      setScrolled(false)
     }
-    setPrevY(currentScrollPos);
-  };
+    setPrevY(currentScrollPos)
+  }
 
   useEffect(() => {
-    changeBackground();
-    window.addEventListener('scroll', changeBackground);
-  });
+    changeBackground()
+    window.addEventListener('scroll', changeBackground)
+  })
 
   return (
     <>
@@ -166,13 +166,8 @@ const Navbar = ({
                 )}
               >
                 <ProductDropdown isOpen={scrolled && !fixed} />
-                <Link
-                  href="/pricing"
-                  className={styles.headerButton}
-                >
-                  <Typography type="copy2">
-                    Pricing
-                  </Typography>
+                <Link href="/pricing" className={styles.headerButton}>
+                  <Typography type="copy2">Pricing</Typography>
                 </Link>
                 <Link href="/customers" className={styles.headerButton}>
                   <Typography type="copy2">Customers</Typography>
@@ -209,7 +204,10 @@ const Navbar = ({
                   <Typography type="copy2">Docs</Typography>
                 </Link>
               )}
-              <a href="https://app.highlight.io/" className={styles.headerButton}>
+              <a
+                href="https://app.highlight.io/"
+                className={styles.headerButton}
+              >
                 <Typography type="copy2">Sign in</Typography>
               </a>
               <PrimaryButton
@@ -225,7 +223,7 @@ const Navbar = ({
         </header>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

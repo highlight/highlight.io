@@ -1,58 +1,53 @@
-import { AiFillGithub } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai'
 import { Popover, Transition } from '@headlessui/react'
-import { Typography } from '../Typography/Typography';
-import { useState } from 'react';
+import { Typography } from '../Typography/Typography'
+import { useState } from 'react'
 
+import { FaChevronDown } from 'react-icons/fa'
+import * as Icons from 'react-icons/hi'
 
-import { FaChevronDown } from 'react-icons/fa';
-import * as Icons from "react-icons/hi";
+import styles from './ResourceDropdown.module.scss'
+import classNames from 'classnames'
 
-import styles from './ResourceDropdown.module.scss';
-import classNames from 'classnames';
-
-const ResourceDropdown = ({
-  isOpen
-}: {
-  isOpen?: boolean;
-}) => {
+const ResourceDropdown = ({ isOpen }: { isOpen?: boolean }) => {
   const [isShowing, setIsShowing] = useState(false)
 
   const otherLinks = [
     {
-      title: "Status Page",
+      title: 'Status Page',
       icon: <Icons.HiCloud className={styles.copyOnLight} />,
-      link: "https://highlight.hyperping.io/"
+      link: 'https://highlight.hyperping.io/',
     },
     {
-      title: "Community",
+      title: 'Community',
       icon: <Icons.HiUsers className={styles.copyOnLight} />,
-      link: "https://discord.gg/yxaXEAqgwN"
+      link: 'https://discord.gg/yxaXEAqgwN',
     },
     {
-      title: "Changelog",
+      title: 'Changelog',
       icon: <Icons.HiClipboardList className={styles.copyOnLight} />,
-      link: "https://feedback.highlight.run/changelog"
+      link: 'https://feedback.highlight.run/changelog',
     },
     {
-      title: "Feedback",
+      title: 'Feedback',
       icon: <Icons.HiChat className={styles.copyOnLight} />,
-      link: "https://feedback.highlight.run"
+      link: 'https://feedback.highlight.run',
     },
     {
-      title: "Github",
+      title: 'Github',
       icon: <AiFillGithub className={styles.copyOnLight} />,
-      link: "https://github.com/highlight-run"
+      link: 'https://github.com/highlight-run',
     },
     {
-      title: "Blog",
+      title: 'Blog',
       icon: <Icons.HiCollection className={styles.copyOnLight} />,
-      link: "/blog",
+      link: '/blog',
       sameTab: true,
     },
     {
-      title: "Documentation",
+      title: 'Documentation',
       icon: <Icons.HiDocumentSearch className={styles.copyOnLight} />,
-      link: "/docs",
+      link: '/docs',
       sameTab: true,
     },
   ]
@@ -66,13 +61,13 @@ const ResourceDropdown = ({
             onMouseLeave={() => setIsShowing(false)}
             className={styles.popoverButton}
           >
-            <a className={classNames(styles.headerButton, {
-              [styles.white]: isShowing,
-            })}>
+            <a
+              className={classNames(styles.headerButton, {
+                [styles.white]: isShowing,
+              })}
+            >
               <div className="flex gap-[6.5px] items-center">
-                <Typography type="copy2">
-                  Resources
-                </Typography>
+                <Typography type="copy2">Resources</Typography>
                 <FaChevronDown className="w-[10px]" />
               </div>
             </a>
@@ -88,25 +83,31 @@ const ResourceDropdown = ({
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            {!isOpen && <Popover.Panel className={styles.popover}>
-              <div className={styles.popoverPanel}>
-                <div className={styles.gridContainer}>
-                  {otherLinks.map((item, index) => (
-                    <a key={index} href={item.link} target={item.sameTab ? "" : "_blank"} rel="noreferrer" className={styles.gridItem}>
-                      {item.icon}
-                      <Typography type="copy3" >
-                        {item.title}
-                      </Typography>
-                    </a>
-                  ))}
+            {!isOpen && (
+              <Popover.Panel className={styles.popover}>
+                <div className={styles.popoverPanel}>
+                  <div className={styles.gridContainer}>
+                    {otherLinks.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.link}
+                        target={item.sameTab ? '' : '_blank'}
+                        rel="noreferrer"
+                        className={styles.gridItem}
+                      >
+                        {item.icon}
+                        <Typography type="copy3">{item.title}</Typography>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Popover.Panel>}
+              </Popover.Panel>
+            )}
           </Transition>
         </>
       )}
     </Popover>
-  );
-};
+  )
+}
 
-export default ResourceDropdown;
+export default ResourceDropdown

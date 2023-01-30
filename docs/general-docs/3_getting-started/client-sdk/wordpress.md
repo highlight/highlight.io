@@ -8,6 +8,7 @@ updatedAt: 2022-04-01T19:51:18.000Z
 ```hint
 Reference our [client-side sdk docs](/docs/sdk/client) for advanced functionality and our [fullstack mapping guide](/docs/getting-started/frontend-backend-mapping) on pairing backend errors with your replay.
 ```
+
 ## Adding the Snippet
 
 Add the snippet to your `index.html`.

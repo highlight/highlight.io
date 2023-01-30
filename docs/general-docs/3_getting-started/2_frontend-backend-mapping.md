@@ -42,13 +42,13 @@ Backend changes are dependent on the underlying language/framework used on the s
 
 Below are solutions for what we support today. If you'd like us to support a new framework, feel free to shoot us a message at [support@highlight.io](mailto:support@highlight.io) or drop us a note in our [discord](https://discord.gg/yxaXEAqgwN).
 
-- [Go Backend Integration](/getting-started/backend-sdk/go)
+-   [Go Backend Integration](/getting-started/backend-sdk/go)
 
-- [Next.js Backend Integration](/getting-started/backend-sdk/nextjs)
+-   [Next.js Backend Integration](/getting-started/backend-sdk/nextjs)
 
-- [Node.js Backend Integration](/getting-started/backend-sdk/nodejs)
+-   [Node.js Backend Integration](/getting-started/backend-sdk/nodejs)
 
-- [Express Backend Integration](/getting-started/backend-sdk/express)
+-   [Express Backend Integration](/getting-started/backend-sdk/express)
 
 ## Troubleshooting
 
@@ -58,4 +58,4 @@ Below are solutions for what we support today. If you'd like us to support a new
 
 3.  For debugging the backend sdk of your choice, in order to debug, we suggest enabling verbose logging. For example, in go, add `highlight.SetDebugMode(myLogger)`
 
-4. If all else fails, please send us an email at support@highlight.io or join the #support channel on our [discord](https://discord.gg/yxaXEAqgwN).
+4.  If all else fails, please send us an email at support@highlight.io or join the #support channel on our [discord](https://discord.gg/yxaXEAqgwN).

@@ -1,3 +1,3 @@
-import { Highlight } from '@highlight-run/next';
+import { Highlight } from '@highlight-run/next'
 
-export const withHighlight = Highlight({});
+export const withHighlight = Highlight({})

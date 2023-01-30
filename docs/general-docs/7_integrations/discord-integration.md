@@ -7,7 +7,7 @@ updatedAt: 2021-09-17T21:56:27.000Z
 
 By connecting Highlight with Discord, Highlight can send you and your team real-time messages based on different sessions, errors and more.
 
-To get started, go to <https://app.highlight.io/integrations> and click the toggle to turn on the discord integration. 
+To get started, go to <https://app.highlight.io/integrations> and click the toggle to turn on the discord integration.
 
 ![](/images/discord-integration-toggle.png)
 

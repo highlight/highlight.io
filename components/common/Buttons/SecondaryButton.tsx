@@ -1,8 +1,8 @@
-import React from 'react';
-import { ButtonProps } from 'antd';
-import classNames from 'classnames';
-import { BiRightArrowAlt } from 'react-icons/bi';
-import styles from './Buttons.module.scss';
+import React from 'react'
+import { ButtonProps } from 'antd'
+import classNames from 'classnames'
+import { BiRightArrowAlt } from 'react-icons/bi'
+import styles from './Buttons.module.scss'
 
 export const PrimaryLink = ({
   children,
@@ -13,7 +13,7 @@ export const PrimaryLink = ({
       {...props}
       onClick={(e) => {
         if (props.onClick) {
-          props.onClick(e);
+          props.onClick(e)
         }
       }}
       className={classNames(
@@ -25,5 +25,5 @@ export const PrimaryLink = ({
       {children}
       <span className={styles.arrow}>→</span>
     </a>
-  );
-};
+  )
+}

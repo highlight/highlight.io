@@ -8,6 +8,7 @@ updatedAt: 2022-05-26T18:55:03.000Z
 ```hint
 Reference our [client-side sdk docs](/docs/sdk/client) for advanced functionality and our [fullstack mapping guide](/docs/getting-started/frontend-backend-mapping) on pairing backend errors with your replay.
 ```
+
 ## Installing the SDK
 
 Install `highlight.run` using your package manager.
@@ -53,8 +54,8 @@ Integration with [Angular ErrorHandler](https://angular.io/api/core/ErrorHandler
 
 After installing Highlight for your frontend application, there are a few other things you should check out about our Session Replay product, namely:
 
-- [Privacy Controls](/docs/session-replay/privacy)
+-   [Privacy Controls](/docs/session-replay/privacy)
 
-- [Network Request Recording](/docs/session-replay/recording-network-requests-and-responses)
+-   [Network Request Recording](/docs/session-replay/recording-network-requests-and-responses)
 
-- [Backend Setup Guides](/docs/getting-started/backend-sdk/overview)
+-   [Backend Setup Guides](/docs/getting-started/backend-sdk/overview)

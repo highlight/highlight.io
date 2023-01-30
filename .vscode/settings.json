@@ -11,21 +11,14 @@
 	"less.validate": false,
 	"scss.validate": false,
 	"stylelint.enable": true,
-	"stylelint.validate": [
-		"css",
-		"less",
-		"postcss",
-		"scss"
-	],
+	"stylelint.validate": ["css", "less", "postcss", "scss"],
 	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.quickSuggestions": {
 			"strings": true
 		},
 		"editor.suggest.insertMode": "replace",
-		"gitlens.codeLens.scopes": [
-			"document"
-		],
+		"gitlens.codeLens.scopes": ["document"]
 	},
 	"[less]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -53,6 +46,6 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true,
 		"**/node_modules": true,
-		"**/.next": true,
+		"**/.next": true
 	}
 }

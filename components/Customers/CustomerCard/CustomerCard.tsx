@@ -1,11 +1,11 @@
-import styles from '../Customers.module.scss';
-import Image, { StaticImageData } from "next/legacy/image";
+import styles from '../Customers.module.scss'
+import Image, { StaticImageData } from 'next/legacy/image'
 
 export interface CustomerReview {
-  author: string;
-  avatar: StaticImageData;
-  logo: StaticImageData;
-  body: string;
+  author: string
+  avatar: StaticImageData
+  logo: StaticImageData
+  body: string
 }
 
 export const CustomerCard = (review: CustomerReview) => {
@@ -32,5 +32,5 @@ export const CustomerCard = (review: CustomerReview) => {
       </div>
       <p>{review.body}</p>
     </div>
-  );
-};
+  )
+}

@@ -1,9 +1,9 @@
-import { Author } from './BlogPost/BlogPost';
-import { Typography } from '../common/Typography/Typography';
-import Image from 'next/legacy/image';
-import { ReactElement } from 'react';
-import { HiGlobeAlt } from 'react-icons/hi';
-import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { Author } from './BlogPost/BlogPost'
+import { Typography } from '../common/Typography/Typography'
+import Image from 'next/legacy/image'
+import { ReactElement } from 'react'
+import { HiGlobeAlt } from 'react-icons/hi'
+import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa'
 
 const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
   <a
@@ -14,7 +14,7 @@ const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
   >
     {icon}
   </a>
-);
+)
 
 export function PostAuthor({
   profilePhoto,
@@ -27,7 +27,7 @@ export function PostAuthor({
   githubLink,
   hideTitle,
   linkedInLink,
-}: Author & { hidePhoto?: boolean, hideTitle?: boolean }) {
+}: Author & { hidePhoto?: boolean; hideTitle?: boolean }) {
   return (
     <div className="flex gap-3">
       {!hidePhoto && (
@@ -59,10 +59,12 @@ export function PostAuthor({
           </div>
         </div>
 
-        {!hideTitle && <Typography type="copy4" className="text-copy-on-dark">
-          {title}
-        </Typography>}
+        {!hideTitle && (
+          <Typography type="copy4" className="text-copy-on-dark">
+            {title}
+          </Typography>
+        )}
       </div>
     </div>
-  );
+  )
 }

@@ -28,7 +28,6 @@ First, you'll want to understand how Highlight is built to make changes. The bes
     -   Public graph worker `processPublicWorkerMessage`
 
     -   Async worker `Start`
-    
 
 ## Best first issues to take on.
 

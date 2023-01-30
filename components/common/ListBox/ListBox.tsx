@@ -1,11 +1,11 @@
-import classNames from 'classnames';
-import { useRef } from 'react';
-import { useListBox, useOption } from 'react-aria';
+import classNames from 'classnames'
+import { useRef } from 'react'
+import { useListBox, useOption } from 'react-aria'
 
 export default function ListBox(props: any) {
-  let ref = useRef();
-  let { listBoxRef = ref, state } = props;
-  let { listBoxProps } = useListBox(props, state, listBoxRef);
+  let ref = useRef()
+  let { listBoxRef = ref, state } = props
+  let { listBoxProps } = useListBox(props, state, listBoxRef)
 
   return (
     <ul
@@ -27,7 +27,7 @@ export default function ListBox(props: any) {
         />
       ))}
     </ul>
-  );
+  )
 }
 
 export function Option({
@@ -35,16 +35,16 @@ export function Option({
   state,
   activeClass,
 }: {
-  item: any;
-  state: any;
-  activeClass: string;
+  item: any
+  state: any
+  activeClass: string
 }) {
-  let ref = useRef<any>();
+  let ref = useRef<any>()
   let { optionProps, isSelected, isFocused } = useOption(
     { key: item.key },
     state,
     ref
-  );
+  )
 
   return (
     <li
@@ -54,5 +54,5 @@ export function Option({
     >
       {item.rendered}
     </li>
-  );
+  )
 }

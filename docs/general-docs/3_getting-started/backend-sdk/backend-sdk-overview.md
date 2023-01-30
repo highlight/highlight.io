@@ -9,11 +9,11 @@ updatedAt: 2022-04-01T20:40:53.000Z
 
 Highlight's Full-stack integration allows you to get visibility into errors and issues across your whole stack, not just your frontend. These errors are paired with outgoing requests on your frontend so that you can understand:
 
-- Exactly what happened when a user reports a bug
+-   Exactly what happened when a user reports a bug
 
-- Where specific errors are initiated and what caused them
+-   Where specific errors are initiated and what caused them
 
-- What backend issues could have caused corresponding frontend bugs.
+-   What backend issues could have caused corresponding frontend bugs.
 
 ## What does it look like?
 
@@ -25,7 +25,7 @@ Below is an example of a backend error (thrown in `go` ) ,mapped to an actual ne
 
 ### Enable proper flags in your client-side snippet:
 
-As a first step, you must enable the correct options in your client-side code snippet detailed in our [full stack mapping reference](/getting-started/frontend-backend-mapping). 
+As a first step, you must enable the correct options in your client-side code snippet detailed in our [full stack mapping reference](/getting-started/frontend-backend-mapping).
 
 ### Make the appropriate backend changes:
 
@@ -33,10 +33,10 @@ Backend changes are dependent on the underlying language/framework used on the s
 
 Below are solutions for what we support today. If you'd like us to support a new framework, feel free to shoot us a message at [support@highlight.io](mailto:support@highlight.io) or shoot us a note in our [discord](https://discord.gg/yxaXEAqgwN).
 
-- [Go Backend Integration](/getting-started/backend-sdk/go)
+-   [Go Backend Integration](/getting-started/backend-sdk/go)
 
-- [Next.js Backend Integration](/getting-started/backend-sdk/nextjs)
+-   [Next.js Backend Integration](/getting-started/backend-sdk/nextjs)
 
-- [Node.js Backend Integration](/getting-started/backend-sdk/nodejs)
+-   [Node.js Backend Integration](/getting-started/backend-sdk/nodejs)
 
-- [Express Backend Integration](/getting-started/backend-sdk/express)
+-   [Express Backend Integration](/getting-started/backend-sdk/express)

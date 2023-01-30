@@ -1,5 +1,5 @@
-import classNames from 'classnames';
-import Link from 'next/link';
+import classNames from 'classnames'
+import Link from 'next/link'
 import {
   HiChartPie,
   HiCog,
@@ -7,30 +7,30 @@ import {
   HiPlay,
   HiTag,
   HiTerminal,
-} from 'react-icons/hi';
-import { AiFillBug } from 'react-icons/ai';
-import { IoIosStopwatch } from 'react-icons/io';
+} from 'react-icons/hi'
+import { AiFillBug } from 'react-icons/ai'
+import { IoIosStopwatch } from 'react-icons/io'
 
-import { ReactElement } from 'react-markdown/lib/react-markdown';
-import { Typography } from '../common/Typography/Typography';
-import { Post } from './BlogPost/BlogPost';
+import { ReactElement } from 'react-markdown/lib/react-markdown'
+import { Typography } from '../common/Typography/Typography'
+import { Post } from './BlogPost/BlogPost'
 
 export type Tag = {
-  name: string;
-  slug: string;
-  description?: string;
-  posts: Post[];
-};
+  name: string
+  slug: string
+  description?: string
+  posts: Post[]
+}
 
 export const getTagUrl = (slug: string) =>
-  slug === 'all' || !slug ? `/blog` : `/blog/tag/${slug}`;
+  slug === 'all' || !slug ? `/blog` : `/blog/tag/${slug}`
 
 function TagIcon({
   slug,
   className,
 }: {
-  slug: Tag['slug'];
-  className?: string;
+  slug: Tag['slug']
+  className?: string
 }) {
   const iconMap: Record<Tag['slug'], ReactElement> = {
     all: <HiCollection className={className} />,
@@ -40,9 +40,9 @@ function TagIcon({
     'debugging-and-troubleshooting': <AiFillBug className={className} />,
     'performance-monitoring': <IoIosStopwatch className={className} />,
     'frontend-monitoring': <HiChartPie className={className} />,
-  };
+  }
 
-  return iconMap[slug] ?? <HiTag className={className} />;
+  return iconMap[slug] ?? <HiTag className={className} />
 }
 
 export function PostTag({ name, slug }: Pick<Tag, 'name' | 'slug'>) {
@@ -52,7 +52,7 @@ export function PostTag({ name, slug }: Pick<Tag, 'name' | 'slug'>) {
         <Typography type="copy4">{name}</Typography>
       </div>
     </Link>
-  );
+  )
 }
 
 export function SidebarTag({
@@ -60,9 +60,9 @@ export function SidebarTag({
   slug,
   current,
 }: {
-  name: Tag['name'];
-  slug: Tag['slug'];
-  current?: boolean;
+  name: Tag['name']
+  slug: Tag['slug']
+  current?: boolean
 }) {
   return (
     <Link href={getTagUrl(slug)}>
@@ -86,7 +86,7 @@ export function SidebarTag({
         </Typography>
       </div>
     </Link>
-  );
+  )
 }
 
 export function TagTab({
@@ -94,19 +94,19 @@ export function TagTab({
   slug,
   current,
 }: {
-  name: Tag['name'];
-  slug: Tag['slug'];
-  current?: boolean;
+  name: Tag['name']
+  slug: Tag['slug']
+  current?: boolean
 }) {
   const tabBaseStyle = classNames(
     'flex gap-2 flex-0 items-center h-[30px] select-none box-content cursor-pointer hover:opacity-100 transition-opacity active:opacity-50 active:transition-none leading-none px-1 pb-2 group border-b-2 border-0 border-solid'
-  );
+  )
 
   const tabColorStyle = classNames(
     current
       ? 'text-highlight-yellow border-highlight-yellow'
       : 'text-copy-on-dark border-transparent'
-  );
+  )
 
   return (
     <Link href={getTagUrl(slug)}>
@@ -127,5 +127,5 @@ export function TagTab({
         </Typography>
       </div>
     </Link>
-  );
+  )
 }

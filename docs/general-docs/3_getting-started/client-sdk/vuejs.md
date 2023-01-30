@@ -8,8 +8,8 @@ updatedAt: 2022-05-26T17:21:23.000Z
 ```hint
 Reference our [client-side sdk docs](/docs/sdk/client) for advanced functionality and our [fullstack mapping guide](/docs/getting-started/frontend-backend-mapping) on pairing backend errors with your replay.
 ```
-## Installing the SDK
 
+## Installing the SDK
 
 Install `highlight.run` using your package manager.
 
@@ -53,8 +53,8 @@ Start your app, go to it in the browser, then click around. Highlight will be re
 
 After installing Highlight for your frontend application, there are a few other things you should check out about our Session Replay product, namely:
 
-- [Privacy Controls](/docs/session-replay/privacy)
+-   [Privacy Controls](/docs/session-replay/privacy)
 
-- [Network Request Recording](/docs/session-replay/recording-network-requests-and-responses)
+-   [Network Request Recording](/docs/session-replay/recording-network-requests-and-responses)
 
-- [Backend Setup Guides](/docs/getting-started/backend-sdk/overview)
+-   [Backend Setup Guides](/docs/getting-started/backend-sdk/overview)
