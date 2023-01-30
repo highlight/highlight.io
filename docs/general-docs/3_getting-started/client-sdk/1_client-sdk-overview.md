@@ -47,7 +47,7 @@ Initialize Highlight where your application starts.
 import { H } from 'highlight.run'
 
 H.init(
-	'<YOUR_ORGANIZATION_ID>', // Get this from https://app.highlight.run/setup
+	'<YOUR_PROJECT_ID>', // Get this from https://app.highlight.run/setup
 )
 ```
 

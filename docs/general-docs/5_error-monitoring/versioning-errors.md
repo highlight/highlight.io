@@ -13,7 +13,7 @@ To tag your errors with a version, you can set the `version` field in the [`H.in
 import App from './App'
 import { H } from 'highlight.run'
 
-H.init('<YOUR_ORGANIZATION_ID>', {
+H.init('<YOUR_PROJECT_ID>', {
 	version: process.env.REACT_APP_VERSION,
 })
 

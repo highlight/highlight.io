@@ -18,7 +18,7 @@ Ensure you are using [highlight.run](https://www.npmjs.com/package/highlight.run
 ```typescript
 import { H } from 'highlight.run'
 
-H.init('<YOUR_ORGANIZATION_ID>', {
+H.init('<YOUR_PROJECT_ID>', {
     isCrossOriginIframe: true,
 })
 ```
