@@ -390,6 +390,7 @@ h5:hover .headingCopyIcon {
 }
 
 .searchContainer {
+  width: 360px;
   position: relative;
 }
 
@@ -1034,6 +1035,7 @@ h5:hover .headingCopyIcon {
 
   .searchContainer {
     min-width: 0;
+    width: 100%;
   }
 
   .sdkDocSection {
