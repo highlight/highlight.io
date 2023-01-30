@@ -23,6 +23,12 @@ const DOCS_TYPES = [
   },
   {
     id: 4,
+    name: 'Python SDK Documentation',
+    icon: <DocumentTextIcon />,
+    url: '/docs/sdk/python',
+  },
+  {
+    id: 5,
     name: 'Client SDK Documentation',
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/client',

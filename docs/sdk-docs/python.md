@@ -16,11 +16,6 @@ slug: python
   </div>
 </section>
 
-        :param project_id: a string that corresponds to the verbose id of your project from app.highlight.io/setup
-        :param integrations: a list of Integrations that allow connecting with your framework, like Flask or Django.
-        :param record_logs: set True if you would like python logging to be recorded as part of the session.
-
-
 <section className="section">
   <div className="left">
     <h3>highlight_io.H</h3>
