@@ -8,7 +8,7 @@ updatedAt: 2021-09-17T21:52:19.000Z
 We've made it easy to use Amplitude with Highlight. When you initialize Highlight, you can set your Amplitude API Key.
 
 ```typescript
-H.init('<YOUR_ORGANIZATION_ID>', {
+H.init('<YOUR_PROJECT_ID>', {
 	integrations: {
 		amplitude: {
 			apiKey: '<AMPLITUDE_API_KEY>',
@@ -53,4 +53,16 @@ amplitudeClient.setUserId('eliza@corp.com')
 amplitudeClient.identify(
 	new amplitude.Identify().set('planType', 'premium').set('verified', false),
 )
+```
+
+If you want to disable this behavior, you can set `enabled: false` for the integration:
+
+```typescript
+H.init("<YOUR_PROJECT_ID>", {
+	integrations: {
+		amplitude: {
+			enabled: false
+		}
+	}
+});
 ```
