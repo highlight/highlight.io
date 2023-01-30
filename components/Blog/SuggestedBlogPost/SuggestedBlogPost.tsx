@@ -1,10 +1,10 @@
-import styles from '../Blog.module.scss'
-import Image from 'next/legacy/image'
-import Link from 'next/link'
-import { Typography } from '../../common/Typography/Typography'
-import { Post } from '../BlogPost/BlogPost'
-import classNames from 'classnames'
-import { PostTag } from '../Tag'
+import styles from '../Blog.module.scss';
+import Image from 'next/legacy/image';
+import Link from 'next/link';
+import { Typography } from '../../common/Typography/Typography';
+import { Post } from '../BlogPost/BlogPost';
+import classNames from 'classnames';
+import { PostTag } from '../Tag';
 
 export const SuggestedBlogPost = ({
   slug,
@@ -58,5 +58,5 @@ export const SuggestedBlogPost = ({
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};

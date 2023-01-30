@@ -1,64 +1,64 @@
 export type PricingDetails = {
   features: {
-    name: 'Features'
+    name: 'Features';
     items: [
       {
-        name: 'Public session sharing'
-        value: boolean
+        name: 'Public session sharing';
+        value: boolean;
       },
       {
-        name: 'Custom data export'
-        value: boolean
+        name: 'Custom data export';
+        value: boolean;
       },
       {
-        name: 'Enhanced user properties'
-        value: boolean
+        name: 'Enhanced user properties';
+        value: boolean;
       },
       {
-        name: 'Session / error commenting'
-        value: boolean
+        name: 'Session / error commenting';
+        value: boolean;
       }
-    ]
-  }
+    ];
+  };
   teamManagement: {
-    name: 'Team Management'
+    name: 'Team Management';
     items: [
       {
-        name: 'Role-based access control'
-        value: boolean
+        name: 'Role-based access control';
+        value: boolean;
       },
       {
-        name: 'Single sign-on'
-        value: boolean
+        name: 'Single sign-on';
+        value: boolean;
       },
       {
-        name: 'Two-factor authentication'
-        value: boolean
+        name: 'Two-factor authentication';
+        value: boolean;
       }
-    ]
-  }
+    ];
+  };
   support: {
-    name: 'Support'
+    name: 'Support';
     items: [
       {
-        name: 'Email'
-        value: boolean
+        name: 'Email';
+        value: boolean;
       },
       {
-        name: 'Intercom'
-        value: boolean
+        name: 'Intercom';
+        value: boolean;
       },
       {
-        name: 'Slack Connect'
-        value: boolean
+        name: 'Slack Connect';
+        value: boolean;
       },
       {
-        name: '24x7 support with SLAs'
-        value: boolean
+        name: '24x7 support with SLAs';
+        value: boolean;
       }
-    ]
-  }
-}
+    ];
+  };
+};
 
 export const BasicDetails: PricingDetails = {
   features: {
@@ -120,7 +120,7 @@ export const BasicDetails: PricingDetails = {
       },
     ],
   },
-}
+};
 
 export const EssentialsDetails: PricingDetails = {
   features: {
@@ -182,7 +182,7 @@ export const EssentialsDetails: PricingDetails = {
       },
     ],
   },
-}
+};
 
 export const StartupDetails: PricingDetails = {
   features: {
@@ -244,7 +244,7 @@ export const StartupDetails: PricingDetails = {
       },
     ],
   },
-}
+};
 
 export const EnterpriseDetails: PricingDetails = {
   features: {
@@ -306,4 +306,4 @@ export const EnterpriseDetails: PricingDetails = {
       },
     ],
   },
-}
+};

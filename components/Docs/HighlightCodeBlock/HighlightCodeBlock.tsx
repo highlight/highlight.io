@@ -1,18 +1,18 @@
-import styles from '../Docs.module.scss'
-import { CodeBlock } from 'react-code-blocks'
-import { PropsWithChildren, useState, Fragment, Key } from 'react'
-import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme'
-import Image from 'next/legacy/image'
-import CopyIcon from '../../../public/images/document-duplicate.svg'
-import CheckmarkIcon from '../../../public/images/checkmark_circle.svg'
-import { Typography } from '../../common/Typography/Typography'
-import classNames from 'classnames'
-import { Listbox, Transition } from '@headlessui/react'
-import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
+import styles from '../Docs.module.scss';
+import { CodeBlock } from 'react-code-blocks';
+import { PropsWithChildren, useState, Fragment, Key } from 'react';
+import highlightCodeTheme from '../../../components/common/CodeBlock/highlight-code-theme';
+import Image from 'next/legacy/image';
+import CopyIcon from '../../../public/images/document-duplicate.svg';
+import CheckmarkIcon from '../../../public/images/checkmark_circle.svg';
+import { Typography } from '../../common/Typography/Typography';
+import classNames from 'classnames';
+import { Listbox, Transition } from '@headlessui/react';
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
 export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
-  const [copied, setCopied] = useState(false)
-  const [selected, setSelected] = useState(0)
+  const [copied, setCopied] = useState(false);
+  const [selected, setSelected] = useState(0);
   return (
     <div className={styles.codeBlock}>
       {props.topbar && (
@@ -88,9 +88,9 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
           `${props.topbar ? 'mt-1' : ''}`
         )}
         onClick={() => {
-          navigator.clipboard.writeText(props.text)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 1000)
+          navigator.clipboard.writeText(props.text);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1000);
         }}
       >
         <Image src={CopyIcon} alt="Copy" />
@@ -107,5 +107,5 @@ export const HighlightCodeBlock = (props: PropsWithChildren<any>) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};

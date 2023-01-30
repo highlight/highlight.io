@@ -1,1 +1,1 @@
-export const banner: string
+export const banner: string;

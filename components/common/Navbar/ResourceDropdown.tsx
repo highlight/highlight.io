@@ -1,16 +1,16 @@
-import { AiFillGithub } from 'react-icons/ai'
-import { Popover, Transition } from '@headlessui/react'
-import { Typography } from '../Typography/Typography'
-import { useState } from 'react'
+import { AiFillGithub } from 'react-icons/ai';
+import { Popover, Transition } from '@headlessui/react';
+import { Typography } from '../Typography/Typography';
+import { useState } from 'react';
 
-import { FaChevronDown } from 'react-icons/fa'
-import * as Icons from 'react-icons/hi'
+import { FaChevronDown } from 'react-icons/fa';
+import * as Icons from 'react-icons/hi';
 
-import styles from './ResourceDropdown.module.scss'
-import classNames from 'classnames'
+import styles from './ResourceDropdown.module.scss';
+import classNames from 'classnames';
 
 const ResourceDropdown = ({ isOpen }: { isOpen?: boolean }) => {
-  const [isShowing, setIsShowing] = useState(false)
+  const [isShowing, setIsShowing] = useState(false);
 
   const otherLinks = [
     {
@@ -50,7 +50,7 @@ const ResourceDropdown = ({ isOpen }: { isOpen?: boolean }) => {
       link: '/docs',
       sameTab: true,
     },
-  ]
+  ];
 
   return (
     <Popover>
@@ -107,7 +107,7 @@ const ResourceDropdown = ({ isOpen }: { isOpen?: boolean }) => {
         </>
       )}
     </Popover>
-  )
-}
+  );
+};
 
-export default ResourceDropdown
+export default ResourceDropdown;

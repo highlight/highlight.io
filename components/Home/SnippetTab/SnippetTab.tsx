@@ -1,27 +1,27 @@
-import classNames from 'classnames'
-import React, { useEffect, useState } from 'react'
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
 
-import { AiOutlineDown } from 'react-icons/ai'
-import { PrimaryLink } from '../../common/Buttons/SecondaryButton'
-import { Section } from '../../common/Section/Section'
-import { Typography } from '../../common/Typography/Typography'
-import ReactImage from '../../../public/images/language/ReactIcon'
-import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple'
-import htmlImage from '../../../public/images/language/htmlIcon'
-import VueImage from '../../../public/images/language/VueIcon'
-import NodeImage from '../../../public/images/language/NodeIcon'
-import NextjsImage from '../../../public/images/language/NextjsIcon'
-import GoImage from '../../../public/images/language/GoIcon'
+import { AiOutlineDown } from 'react-icons/ai';
+import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
+import { Section } from '../../common/Section/Section';
+import { Typography } from '../../common/Typography/Typography';
+import ReactImage from '../../../public/images/language/ReactIcon';
+import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple';
+import htmlImage from '../../../public/images/language/htmlIcon';
+import VueImage from '../../../public/images/language/VueIcon';
+import NodeImage from '../../../public/images/language/NodeIcon';
+import NextjsImage from '../../../public/images/language/NextjsIcon';
+import GoImage from '../../../public/images/language/GoIcon';
 
-import styles from '../../Home/Home.module.scss'
-import productStyles from '../../Products/Products.module.scss'
-import { CodeSnippet } from '../CodeSnippet/CodeSnippet'
+import styles from '../../Home/Home.module.scss';
+import productStyles from '../../Products/Products.module.scss';
+import { CodeSnippet } from '../CodeSnippet/CodeSnippet';
 
 export interface SnippetTabObject {
-  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element
-  key: string
-  content: JSX.Element
-  beta?: boolean
+  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+  key: string;
+  content: JSX.Element;
+  beta?: boolean;
 }
 
 const SetupDescription = (
@@ -46,7 +46,7 @@ const SetupDescription = (
       </PrimaryLink>
     </div>
   </div>
-)
+);
 
 const SNIPPET_TABS = [
   {
@@ -212,20 +212,20 @@ app.use(highlightHandler);`}
       </Section>
     ),
   },
-]
+];
 
 export const SnippetTab = () => {
-  const tabs = SNIPPET_TABS
-  const [currentTabKey, setCurrentTabKey] = useState(tabs[0]?.key)
-  const [currentHoverKey, setCurrentHoverKey] = useState<String>('')
-  const [currentTabElement, setCurrentTabElement] = useState(tabs[0])
-  const [showDropdown, setShowDropdown] = useState(false)
+  const tabs = SNIPPET_TABS;
+  const [currentTabKey, setCurrentTabKey] = useState(tabs[0]?.key);
+  const [currentHoverKey, setCurrentHoverKey] = useState<String>('');
+  const [currentTabElement, setCurrentTabElement] = useState(tabs[0]);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     setCurrentTabElement(
       tabs.find((tab) => tab.key === currentTabKey) || tabs[0]
-    )
-  }, [currentTabKey, setCurrentTabElement, tabs])
+    );
+  }, [currentTabKey, setCurrentTabElement, tabs]);
 
   return (
     <div>
@@ -280,8 +280,8 @@ export const SnippetTab = () => {
                 <div
                   key={tab.key}
                   onClick={() => {
-                    setShowDropdown(false)
-                    setCurrentTabKey(tab.key)
+                    setShowDropdown(false);
+                    setCurrentTabKey(tab.key);
                   }}
                 >
                   <tab.image color={'#72E4FC'} secondaryColor={'#0d0225'} />
@@ -301,5 +301,5 @@ export const SnippetTab = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};

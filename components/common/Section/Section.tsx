@@ -1,7 +1,7 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
+import React from 'react';
 
-import styles from './Section.module.scss'
+import styles from './Section.module.scss';
 
 export const Section = ({
   reverseMobile,
@@ -12,11 +12,11 @@ export const Section = ({
   grid,
   ...props
 }: React.PropsWithChildren<{
-  reverseMobile?: boolean
-  className?: string
-  noYTopPadding?: boolean
-  noYBottomPadding?: boolean
-  grid?: boolean
+  reverseMobile?: boolean;
+  className?: string;
+  noYTopPadding?: boolean;
+  noYBottomPadding?: boolean;
+  grid?: boolean;
 }>) => {
   return (
     <div
@@ -30,5 +30,5 @@ export const Section = ({
     >
       {children}
     </div>
-  )
-}
+  );
+};

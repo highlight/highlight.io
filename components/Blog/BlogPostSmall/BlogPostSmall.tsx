@@ -1,8 +1,8 @@
-import styles from '../Blog.module.scss'
-import Image from 'next/legacy/image'
-import Link from 'next/link'
-import { Post } from '../BlogPost/BlogPost'
-import { Typography } from '../../common/Typography/Typography'
+import styles from '../Blog.module.scss';
+import Image from 'next/legacy/image';
+import Link from 'next/link';
+import { Post } from '../BlogPost/BlogPost';
+import { Typography } from '../../common/Typography/Typography';
 
 export const BlogPostSmall = ({
   slug,
@@ -53,5 +53,5 @@ export const BlogPostSmall = ({
         </div>
       </Link>
     </div>
-  )
-}
+  );
+};

@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import GitHubButton from 'react-github-btn'
-import CrossIcon from '../../public/images/CrossIcon'
-import { motion } from 'framer-motion'
-import styles from './GithubPopup.module.scss'
-import { useMediaQuery } from '../MediaQuery/MediaQuery'
+import { useState } from 'react';
+import GitHubButton from 'react-github-btn';
+import CrossIcon from '../../public/images/CrossIcon';
+import { motion } from 'framer-motion';
+import styles from './GithubPopup.module.scss';
+import { useMediaQuery } from '../MediaQuery/MediaQuery';
 
 export const GithubPopup = () => {
-  const is400 = useMediaQuery(400)
-  return <>{is400 ? <MobileGithubPopup /> : <DesktopGithubPopup />}</>
-}
+  const is400 = useMediaQuery(400);
+  return <>{is400 ? <MobileGithubPopup /> : <DesktopGithubPopup />}</>;
+};
 
 const MobileGithubPopup = () => {
-  const [hide, setHide] = useState(false)
+  const [hide, setHide] = useState(false);
   return hide ? (
     <></>
   ) : (
@@ -61,11 +61,11 @@ const MobileGithubPopup = () => {
         </button>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 const DesktopGithubPopup = () => {
-  const [hide, setHide] = useState(false)
+  const [hide, setHide] = useState(false);
   return hide ? (
     <></>
   ) : (
@@ -115,5 +115,5 @@ const DesktopGithubPopup = () => {
         </button>
       </div>
     </motion.div>
-  )
-}
+  );
+};

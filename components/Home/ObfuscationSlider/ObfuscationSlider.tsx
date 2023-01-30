@@ -1,12 +1,12 @@
-import React from 'react'
-import Image from 'next/legacy/image'
-import ReactCompareImage from 'react-compare-image'
-import ObfuscatedText from '../../../public/images/obfuscatedText.svg'
-import RegularText from '../../../public/images/regularText.svg'
-import SecurityImage from '../../../public/images/safety-security-section.gif'
+import React from 'react';
+import Image from 'next/legacy/image';
+import ReactCompareImage from 'react-compare-image';
+import ObfuscatedText from '../../../public/images/obfuscatedText.svg';
+import RegularText from '../../../public/images/regularText.svg';
+import SecurityImage from '../../../public/images/safety-security-section.gif';
 
-import styles from '../../Home/Home.module.scss'
-import classNames from 'classnames'
+import styles from '../../Home/Home.module.scss';
+import classNames from 'classnames';
 
 export const ObfuscationSlider = () => {
   return (
@@ -27,5 +27,5 @@ export const ObfuscationSlider = () => {
         <Image src={SecurityImage} alt="" />
       </div>
     </div>
-  )
-}
+  );
+};

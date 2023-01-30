@@ -1,15 +1,15 @@
-import styles from './Products.module.scss'
-import { IconType } from 'react-icons'
-import { Typography } from '../common/Typography/Typography'
+import styles from './Products.module.scss';
+import { IconType } from 'react-icons';
+import { Typography } from '../common/Typography/Typography';
 
 const FeatureBox = ({
   title,
   desc,
   icon,
 }: {
-  title: string
-  desc: string
-  icon: JSX.Element
+  title: string;
+  desc: string;
+  icon: JSX.Element;
 }) => {
   return (
     <div className={styles.featureBox}>
@@ -23,7 +23,7 @@ const FeatureBox = ({
         </Typography>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FeatureBox
+export default FeatureBox;

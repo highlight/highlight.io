@@ -1,3 +1,3 @@
-export const currentPage: string
-export const pageNumber: string
-export const paginate: string
+export const currentPage: string;
+export const pageNumber: string;
+export const paginate: string;

@@ -1,10 +1,10 @@
-import React from 'react'
-import classNames from 'classnames'
+import React from 'react';
+import classNames from 'classnames';
 
-import styles from '../../Home/Home.module.scss'
-import productStyles from '../../Products/Products.module.scss'
-import { PrimaryButton } from '../Buttons/PrimaryButton'
-import { Typography } from '../Typography/Typography'
+import styles from '../../Home/Home.module.scss';
+import productStyles from '../../Products/Products.module.scss';
+import { PrimaryButton } from '../Buttons/PrimaryButton';
+import { Typography } from '../Typography/Typography';
 
 export const BlogCallToAction = () => {
   return (
@@ -41,5 +41,5 @@ export const BlogCallToAction = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

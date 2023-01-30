@@ -1,7 +1,7 @@
 interface Role {
-  title: string
-  content: string
-  slug: string
+  title: string;
+  content: string;
+  slug: string;
 }
 
 export const OPEN_ROLES: { [k: string]: Role } = {
@@ -10,4 +10,4 @@ export const OPEN_ROLES: { [k: string]: Role } = {
     content: `Content in markdown`,
     slug: 'marketing-lead',
   },
-}
+};

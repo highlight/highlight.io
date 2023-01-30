@@ -1,43 +1,43 @@
-import { Popover, Transition } from '@headlessui/react'
-import { Typography } from '../Typography/Typography'
-import { useState } from 'react'
-import { FaChevronDown } from 'react-icons/fa'
-import { PRODUCTS } from '../../Products/products'
-import Image from 'next/image'
+import { Popover, Transition } from '@headlessui/react';
+import { Typography } from '../Typography/Typography';
+import { useState } from 'react';
+import { FaChevronDown } from 'react-icons/fa';
+import { PRODUCTS } from '../../Products/products';
+import Image from 'next/image';
 
 import {
   frontendProductLinks,
   backendProductLinks,
   fullStackProductLinks,
-} from '../../Products/products'
-import LogoJS from '../../../public/images/jslogo.svg'
-import LogoJSActive from '../../../public/images/jslogoactive.svg'
-import LogoUbuntu from '../../../public/images/ubuntulogo.svg'
-import LogoUbuntuActive from '../../../public/images/ubuntulogoactive.svg'
-import LogoGraph from '../../../public/images/graphqllogo.svg'
-import LogoGraphActive from '../../../public/images/graphqllogoactive.svg'
-import styles from './ProductDropdown.module.scss'
-import classNames from 'classnames'
-import Link from 'next/link'
+} from '../../Products/products';
+import LogoJS from '../../../public/images/jslogo.svg';
+import LogoJSActive from '../../../public/images/jslogoactive.svg';
+import LogoUbuntu from '../../../public/images/ubuntulogo.svg';
+import LogoUbuntuActive from '../../../public/images/ubuntulogoactive.svg';
+import LogoGraph from '../../../public/images/graphqllogo.svg';
+import LogoGraphActive from '../../../public/images/graphqllogoactive.svg';
+import styles from './ProductDropdown.module.scss';
+import classNames from 'classnames';
+import Link from 'next/link';
 
 const ProductDropdown = ({ isOpen }: { isOpen?: boolean }) => {
-  const [isShowing, setIsShowing] = useState(false)
-  const [selected, setSelected] = useState('Frontend')
-  const [selectedLinks, setSelectedLinks] = useState(frontendProductLinks)
+  const [isShowing, setIsShowing] = useState(false);
+  const [selected, setSelected] = useState('Frontend');
+  const [selectedLinks, setSelectedLinks] = useState(frontendProductLinks);
 
   function handleCategorySelect(select: String) {
     switch (select) {
       case 'Frontend':
-        setSelected('Frontend')
-        setSelectedLinks(frontendProductLinks)
-        break
+        setSelected('Frontend');
+        setSelectedLinks(frontendProductLinks);
+        break;
       case 'Backend':
-        setSelected('Backend')
-        setSelectedLinks(backendProductLinks)
-        break
+        setSelected('Backend');
+        setSelectedLinks(backendProductLinks);
+        break;
       default:
-        setSelected('Frontend')
-        setSelectedLinks(frontendProductLinks)
+        setSelected('Frontend');
+        setSelectedLinks(frontendProductLinks);
     }
   }
 
@@ -145,7 +145,7 @@ const ProductDropdown = ({ isOpen }: { isOpen?: boolean }) => {
         </>
       )}
     </Popover>
-  )
-}
+  );
+};
 
-export default ProductDropdown
+export default ProductDropdown;

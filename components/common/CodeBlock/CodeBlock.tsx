@@ -1,20 +1,20 @@
-import { BiCopy } from 'react-icons/bi'
-import classNames from 'classnames'
-import React from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
-import { SyntaxHighlighterProps } from 'react-syntax-highlighter'
-import { CodeBlock as ReactCodeBlock } from 'react-code-blocks'
+import { BiCopy } from 'react-icons/bi';
+import classNames from 'classnames';
+import React from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import { CodeBlock as ReactCodeBlock } from 'react-code-blocks';
 
-import styles from './CodeBlock.module.scss'
+import styles from './CodeBlock.module.scss';
 
 type Props = SyntaxHighlighterProps & {
-  text: string
-  onCopy?: () => void
-  hideCopy?: boolean
-  language: string
-  numberOfLines?: number
-  lineNumber?: number
-}
+  text: string;
+  onCopy?: () => void;
+  hideCopy?: boolean;
+  language: string;
+  numberOfLines?: number;
+  lineNumber?: number;
+};
 
 export const CodeBlock = ({
   text,
@@ -72,7 +72,7 @@ export const CodeBlock = ({
             <CopyToClipboard
               text={text}
               onCopy={() => {
-                onCopy && onCopy()
+                onCopy && onCopy();
               }}
             >
               <span className={styles.copyDiv}>
@@ -89,5 +89,5 @@ export const CodeBlock = ({
         )}
       </span>
     </span>
-  )
-}
+  );
+};

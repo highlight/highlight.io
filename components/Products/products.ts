@@ -2,12 +2,12 @@
 //referenced in ProductDropdown and sitemap
 
 export interface iProduct {
-  type: string
-  docsLink: string
-  slug: string
-  snippets: string[]
-  title: string
-  types?: string[]
+  type: string;
+  docsLink: string;
+  slug: string;
+  snippets: string[];
+  title: string;
+  types?: string[];
 }
 
 //whitespace ensures that the two code blocks (front-end and back-end) are the same height.
@@ -27,7 +27,7 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById('root'),
 )
-`
+`;
 
 const expressSnippet: string = `
 
@@ -45,7 +45,7 @@ app.use('/error', () => {
   throw new Error('a fake failure was thrown')
 })
 
-`
+`;
 
 const goSnippet: string = `
 
@@ -63,7 +63,7 @@ func main() {
 
 
 
-`
+`;
 
 const nodeSnippet: string = `
 
@@ -81,7 +81,7 @@ const onError = (request, error) => {
 	}
 }
 
-`
+`;
 
 const nextBackendSnippet: string = `
 
@@ -99,7 +99,7 @@ export default withHighlight(handler)
 
 
 
-`
+`;
 
 const angularSnippet: string = `
 
@@ -114,7 +114,7 @@ H.init(
     },
     tracingOrigins: true // Optional configuration of Highlight features
 );
-`
+`;
 
 const gatsbySnippet: string = `
 
@@ -128,7 +128,7 @@ module.exports = {
 		},
 	],
 }
-`
+`;
 
 const nextSnippet: string = `
 
@@ -146,7 +146,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	)
 }
 export default MyApp
-`
+`;
 
 const reactSnippet: string = `
 
@@ -164,7 +164,7 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById('root'),
 )
-`
+`;
 
 const vueSnippet: string = `
 
@@ -175,7 +175,7 @@ import App from './App.vue'
 H.init('9me23yd2') // Get your project ID from https://app.highlight.run/setup
 
 createApp(App).mount('#app')
-`
+`;
 
 const svelteSnippet: string = `
 
@@ -187,7 +187,7 @@ const svelteSnippet: string = `
 </script>
 
 ...
-`
+`;
 
 export const PRODUCTS: { [k: string]: iProduct } = {
   express: {
@@ -274,18 +274,18 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     title: 'Vue.js',
     snippets: [vueSnippet],
   },
-}
+};
 
 export const frontendProductLinks = Object.values(PRODUCTS).filter(
   (product) => {
-    return product.type == 'frontend'
+    return product.type == 'frontend';
   }
-)
+);
 export const backendProductLinks = Object.values(PRODUCTS).filter((product) => {
-  return product.type == 'backend'
-})
+  return product.type == 'backend';
+});
 export const fullStackProductLinks = Object.values(PRODUCTS).filter(
   (product) => {
-    return product.type == 'fullstack'
+    return product.type == 'fullstack';
   }
-)
+);

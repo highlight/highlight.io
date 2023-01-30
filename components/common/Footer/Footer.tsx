@@ -1,8 +1,8 @@
-import { HighlightLogo } from '../HighlightLogo/HighlightLogo'
-import styles from './Footer.module.scss'
-import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
-import { Typography } from '../Typography/Typography'
-import Link from 'next/link'
+import { HighlightLogo } from '../HighlightLogo/HighlightLogo';
+import styles from './Footer.module.scss';
+import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
+import { Typography } from '../Typography/Typography';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -122,7 +122,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

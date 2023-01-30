@@ -1,9 +1,9 @@
-import { Author } from './BlogPost/BlogPost'
-import { Typography } from '../common/Typography/Typography'
-import Image from 'next/legacy/image'
-import { ReactElement } from 'react'
-import { HiGlobeAlt } from 'react-icons/hi'
-import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa'
+import { Author } from './BlogPost/BlogPost';
+import { Typography } from '../common/Typography/Typography';
+import Image from 'next/legacy/image';
+import { ReactElement } from 'react';
+import { HiGlobeAlt } from 'react-icons/hi';
+import { FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
   <a
@@ -14,7 +14,7 @@ const SocialLink = ({ href, icon }: { href: string; icon: ReactElement }) => (
   >
     {icon}
   </a>
-)
+);
 
 export function PostAuthor({
   profilePhoto,
@@ -66,5 +66,5 @@ export function PostAuthor({
         )}
       </div>
     </div>
-  )
+  );
 }

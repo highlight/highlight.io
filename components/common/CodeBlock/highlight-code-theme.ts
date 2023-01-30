@@ -35,6 +35,6 @@ const highlightCodeTheme = {
   metaColor: `#FF9457`,
   functionColor: `#FF9457`,
   numberColor: `#bd93f9`,
-}
+};
 
-export default highlightCodeTheme
+export default highlightCodeTheme;

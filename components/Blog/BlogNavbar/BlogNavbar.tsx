@@ -1,45 +1,45 @@
 import {
   HighlightLogo,
   HighlightLogoWhite,
-} from '../../common/HighlightLogo/HighlightLogo'
-import styles from '../../common/Navbar/Navbar.module.scss'
-import classNames from 'classnames'
-import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
-import { useEffect, useState } from 'react'
-import Banner from '../../common/Banner/Banner'
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
-import Link from 'next/link'
-import { Typography } from '../../common/Typography/Typography'
+} from '../../common/HighlightLogo/HighlightLogo';
+import styles from '../../common/Navbar/Navbar.module.scss';
+import classNames from 'classnames';
+import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
+import { useEffect, useState } from 'react';
+import Banner from '../../common/Banner/Banner';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import Link from 'next/link';
+import { Typography } from '../../common/Typography/Typography';
 
-const SHOW_NAVBAR_OFFSET = 300
+const SHOW_NAVBAR_OFFSET = 300;
 
 const BlogNavbar = ({
   title,
   endPosition,
   attachUnder,
 }: {
-  title: string
-  endPosition: number
-  attachUnder?: React.ReactElement
+  title: string;
+  endPosition: number;
+  attachUnder?: React.ReactElement;
 }) => {
-  const [scrolled, setScrolled] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [prevY, setPrevY] = useState(0)
+  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [prevY, setPrevY] = useState(0);
 
   const changeBackground = () => {
-    const currentScrollPos = window.pageYOffset
+    const currentScrollPos = window.pageYOffset;
     if (window.scrollY > SHOW_NAVBAR_OFFSET) {
-      setScrolled(true)
+      setScrolled(true);
     } else if (window.scrollY <= SHOW_NAVBAR_OFFSET) {
-      setScrolled(false)
+      setScrolled(false);
     }
-    setPrevY(currentScrollPos * 1.3)
-  }
+    setPrevY(currentScrollPos * 1.3);
+  };
 
   useEffect(() => {
-    changeBackground()
-    window.addEventListener('scroll', changeBackground)
-  })
+    changeBackground();
+    window.addEventListener('scroll', changeBackground);
+  });
 
   return (
     <>
@@ -195,7 +195,7 @@ const BlogNavbar = ({
         <div className="absolute top-full">{attachUnder}</div>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default BlogNavbar
+export default BlogNavbar;

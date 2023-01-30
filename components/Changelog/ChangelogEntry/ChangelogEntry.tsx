@@ -1,11 +1,11 @@
-import styles from '../../Blog/Blog.module.scss'
-import Link from 'next/link'
+import styles from '../../Blog/Blog.module.scss';
+import Link from 'next/link';
 
 export interface Entry {
-  slug: string
-  title: string
-  createdAt: string
-  content: string
+  slug: string;
+  title: string;
+  createdAt: string;
+  content: string;
 }
 
 export const ChangelogEntry = ({ slug, content, title, createdAt }: Entry) => {
@@ -22,5 +22,5 @@ export const ChangelogEntry = ({ slug, content, title, createdAt }: Entry) => {
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
