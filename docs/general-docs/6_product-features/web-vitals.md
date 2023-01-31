@@ -25,7 +25,7 @@ Performance is a continuous challenge. For your app, you may see months of metri
 
 ## Dashboards
 
-Seeing how your web vital metrics perform over time is important to make sure you're consistently deliverying a great experience for your users. We've made this easy by providing a dashboard with all your web vitals. [Check out your dashboard](https://app.highlight.run/dashboards/1) to see how your apps are doing!
+Seeing how your web vital metrics perform over time is important to make sure you're consistently deliverying a great experience for your users. We've made this easy by providing a dashboard with all your web vitals. [Check out your dashboard](https://app.highlight.io/dashboards/1) to see how your apps are doing!
 
 ## Metric Monitors
 

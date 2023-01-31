@@ -1,7 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { withHighlight } from '../../highlight.config';
 import { H } from '@highlight-run/next';
-import { PRODUCTS, iProduct } from '../../components/Products/products';
+import { PRODUCTS } from '../../components/Products/products';
 import { getGithubDocsPaths } from './docs/github';
 
 async function handler(_: any, res: any) {
@@ -60,9 +60,7 @@ async function handler(_: any, res: any) {
   const changelogPages = changelogs.map(
     (changelog: { slug: string }) => `changelog/${changelog.slug}`
   );
-  const docsPages = Array.from(docs.keys()).map(
-    (slug: string) => `docs/${slug}`
-  );
+  const docsPages = Array.from(docs.keys());
   const productPages = Object.values(PRODUCTS).map((product: any) => `for/${product.slug}`);
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];

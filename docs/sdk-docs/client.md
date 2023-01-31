@@ -24,7 +24,7 @@ slug: client
     <h6>Method Parameters</h6>
     <aside className="parameter">
       <h5>projectId<code>String</code> <code>optional</code></h5>
-      <p>The projectId tells Highlight where to send data to. You can find your projectId on https://app.highlight.run/setup. If projectId is not set, then Highlight will not send any data. You can use this as a mechanism to control which environments Highlight gets initialized in if the projectId is passed as an environment variable.</p>
+      <p>The projectId tells Highlight where to send data to. You can find your projectId on https://app.highlight.io/setup. If projectId is not set, then Highlight will not send any data. You can use this as a mechanism to control which environments Highlight gets initialized in if the projectId is passed as an environment variable.</p>
     </aside>
     <aside className="parameter">
       <h5>options <code>HighlightOptions</code> <code>optional</code></h5>

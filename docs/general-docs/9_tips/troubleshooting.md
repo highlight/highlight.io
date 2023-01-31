@@ -15,4 +15,4 @@ updatedAt: 2022-01-20T23:42:57.000Z
 
 ## Why are the correct fonts not being used?
 
-•   During a replay, Highlight will make a request for the font file on your server. In the case where the request fails, Highlight will use your fallback font. The most common reason for failing is because your have a restrictive CORS policy for `Access-Control-Origin`. To allow Highlight to access the font files, you'll need to add `app.highlight.run`.
+•   During a replay, Highlight will make a request for the font file on your server. In the case where the request fails, Highlight will use your fallback font. The most common reason for failing is because your have a restrictive CORS policy for `Access-Control-Origin`. To allow Highlight to access the font files, you'll need to add `app.highlight.io`.

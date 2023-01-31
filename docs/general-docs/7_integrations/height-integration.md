@@ -7,7 +7,7 @@ updatedAt: 2023-01-10:45:25.000Z
 
 When you enable the Height integration, Highlight will allow creating Tasks from the session replay and errors viewer. Track bugs or enhancements for your app as you triage frontend and backend errors or watch your users' replays.
 
-To get started, go to the [integrations](https://app.highlight.run/integrations) and click the "Connect" button in the Height section.
+To get started, go to the [integrations](https://app.highlight.io/integrations) and click the "Connect" button in the Height section.
 
 ## Features
 

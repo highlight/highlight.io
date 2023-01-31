@@ -53,4 +53,4 @@ to `/error`. You should be able to view your
 frontend session making the request and find the error
 traceback in the errors page.
 
-To view and resolve the recorded error, log into [app.highlight.run](http://app.highlight.run/) and open your project. Clicking on the error's title will open a page where you can see detailed information and mark it as resolved.
+To view and resolve the recorded error, log into [app.highlight.io](http://app.highlight.io/) and open your project. Clicking on the error's title will open a page where you can see detailed information and mark it as resolved.

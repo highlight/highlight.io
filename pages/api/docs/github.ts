@@ -95,9 +95,10 @@ export const processDocPath = function (base: string, fileString: string) {
   return removeOrderingPrefix(pp);
 };
 
-export const getGithubDocsPaths = async (path: string = '') => {
+export const getGithubDocsPaths = async (path: string = 'docs/') => {
+  const url = `https://api.github.com/repos/highlight/highlight.io/contents/${path}`
   const response = await fetch(
-    `https://api.github.com/repos/highlight/highlight.io/contents/docs/${path}`,
+    url,
     {
       headers: githubHeaders,
     }
