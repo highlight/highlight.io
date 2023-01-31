@@ -7,7 +7,7 @@ slug: python
   <div className="left">
     <h3>Python SDK</h3>
     <p>
-      Highlight's Python SDK makes it easy to monitor errors and logs on your Python backend.
+      Highlight's [Python SDK](https://pypi.org/project/highlight-io/) makes it easy to monitor errors and logs on your Python backend.
     </p>
   </div>
   <div className="right">
