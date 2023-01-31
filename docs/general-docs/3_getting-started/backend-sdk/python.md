@@ -18,17 +18,17 @@ If you'd like to follow an example, check out our repo for one of a [Flask app](
 First, import the package
 
 ```bash
-poetry add highlight_io
+poetry add highlight-io
 # or with pip
-pip install highlight_io
+pip install highlight-io
 ```
 
 If you are uswing a Flask app, you'll need the Flask integration.
 
 ```bash
-poetry add highlight_io[Flask]
+poetry add highlight-io[Flask]
 # or with pip
-pip install highlight_io[Flask]
+pip install highlight-io[Flask]
 ```
 
 ### Adding Highlight to Flask
