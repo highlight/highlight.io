@@ -1,6 +1,6 @@
 import Image from "next/legacy/image";
-import HighlightLogoFull from '../../../public/images/highlight-logo.png';
-import HighlightLogoWhiteFull from '../../../public/images/highlight-logo-white.png';
+import HighlightLogoFull from '../../../public/images/logo-and-text-on-dark.svg';
+import HighlightLogoWhiteFull from '../../../public/images/logo-and-text-on-purple.svg';
 import styles from './HighlightLogo.module.scss';
 
 export const HighlightLogo = () => {
