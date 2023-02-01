@@ -57,14 +57,18 @@
 
 .heroBugLeft {
   position: absolute;
-  left: -90px;
+  left: -120px;
   top: 220px;
   width: 250px;
+
+  @media screen and (max-width: 1288px) {
+    display: none;
+  }
 }
 
 .heroBugRight {
   position: absolute;
-  right: -35px;
+  right: -95px;
   top: 30px;
   width: 280px;
 
@@ -370,6 +374,11 @@
 
 .anchorHead {
   max-width: 840px;
+}
+
+.landingAnchorHead {
+  max-width: 980px;
+  line-height: 88px !important;
 }
 
 .anchorTitle {
