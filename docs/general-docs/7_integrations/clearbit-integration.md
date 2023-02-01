@@ -11,4 +11,4 @@ Highlight can enhance user session recordings with additional metadata from Clea
 
 The enhanced information will link you to the users' socials using information provided by Clearbit. Check out the [Clearbit demo](https://dashboard.clearbit.com/lookup) to learn more!
 
-To add Clearbit session enhancement to your Highlight workspace, visit the [integrations page](https://app.highlight.run/integrations) and enable Clearbit.
+To add Clearbit session enhancement to your Highlight workspace, visit the [integrations page](https://app.highlight.io/integrations) and enable Clearbit.

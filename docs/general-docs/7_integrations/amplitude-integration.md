@@ -34,7 +34,7 @@ amplitudeClient.logEvent('signup_button_clicked', {
 	firstTime: true,
 	impressions: 10,
 	// This property is added by Highlight. This shows you the session where this event happened.
-	highlightSessionURL: 'https://app.highlight.run/sessions/123',
+	highlightSessionURL: 'https://app.highlight.io/sessions/123',
 })
 ```
 

@@ -28,7 +28,7 @@ Initialize Highlight where your application starts.
 import { H } from 'highlight.run'
 
 H.init(
-	'<YOUR_PROJECT_ID>', // Get your project ID from https://app.highlight.run/setup
+	'<YOUR_PROJECT_ID>', // Get your project ID from https://app.highlight.io/setup
 )
 ```
 
@@ -39,7 +39,7 @@ import type { AppProps } from 'next/app'
 import { H } from 'highlight.run'
 import { ErrorBoundary } from '@highlight-run/react'
 
-H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.run/setup
+H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.io/setup
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -53,7 +53,7 @@ export default MyApp
 
 ## Verify
 
-Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.run/sessions> a few seconds after recording has started.
+Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.io/sessions> a few seconds after recording has started.
 
 ## Next Steps
 

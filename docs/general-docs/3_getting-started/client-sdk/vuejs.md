@@ -29,7 +29,7 @@ Initialize Highlight where your application starts.
 import { H } from 'highlight.run'
 
 H.init(
-	'<YOUR_PROJECT_ID>', // Get your project ID from https://app.highlight.run/setup
+	'<YOUR_PROJECT_ID>', // Get your project ID from https://app.highlight.io/setup
 )
 ```
 
@@ -40,14 +40,14 @@ import { H } from 'highlight.run'
 import { createApp } from 'vue'
 import App from './App.vue'
 
-H.init('9me23yd2') // Get your project ID from https://app.highlight.run/setup
+H.init('9me23yd2') // Get your project ID from https://app.highlight.io/setup
 
 createApp(App).mount('#app')
 ```
 
 ## Verify Installation
 
-Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.run/sessions> a few seconds after recording has started.
+Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.io/sessions> a few seconds after recording has started.
 
 ## Next Steps
 

@@ -15,7 +15,7 @@ By default, we consider user activity as rage clicks when there exists a 2 secon
 
 ## Customizing rage click sensitivity
 
-You'll find fine-grained control over your project's rage click settings in [your project settings page](https://app.highlight.run/settings).
+You'll find fine-grained control over your project's rage click settings in [your project settings page](https://app.highlight.io/settings).
 
 -   Elapsed Time (seconds): the maximum time interval during which clicks count toward a rage click.
 
@@ -27,6 +27,6 @@ You'll find fine-grained control over your project's rage click settings in [you
 
 ## Alerting for rage clicks
 
-Create a rage click alert [within your project's alerts page](https://app.highlight.run/alerts) to be notified on Slack or via email about a user rage clicking in your app!
+Create a rage click alert [within your project's alerts page](https://app.highlight.io/alerts) to be notified on Slack or via email about a user rage clicking in your app!
 
 ![creating a rage click alert](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/XxyLN8kFXtefRgFf1BBUI_image.png)
