@@ -21,9 +21,9 @@ First, you'll want to understand how Highlight is built to make changes. The bes
     -   Public graph worker `processPublicWorkerMessage`
     -   Async worker `Start`
 
-## Best first issues to take on.
+## Best first issues to take on
 
-It's best to start with [issues](https://github.com/highlight/highlight/issues) that are well-defined and easily testable. If you're interested in a larger project, adding support for a new programming language via a new SDK is always greatly appreciated. If there is a feature you're missing in Highlight, reach out on our [discussions](https://github.com/highlight/highlight/discussions) to get a conversation started about the best implementation.
+It's best to start with issues marked as ["good first issue"](https://github.com/highlight/highlight/issues). We mark these issues based on how well-defined and testable they are. If you're interested in a larger project, adding support for new programming languages via a new SDK would always greatly appreciated. If there is a feature you're missing in Highlight, reach out on our [discussions](https://github.com/highlight/highlight/discussions) or on our [discord](highlight.io/discord) to get a conversation started about the best implementation.
 
 ## How do I get started?
 
