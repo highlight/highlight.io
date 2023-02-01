@@ -5,16 +5,28 @@ createdAt: 2021-09-13T23:57:09.000Z
 updatedAt: 2021-12-03T23:56:06.000Z
 ---
 
-We've made it easy to use Mixpanel with Highlight. When you initialize Highlight, you can set your Mixpanel Project Token.
+We've made it easy to use Mixpanel with Highlight. If you don't already have Mixpanel initialized in your app, you can have Highlight initialize it for you by specifying your Mixpanel Project Token in the config.
 
 ```typescript
-H.init('<YOUR_ORGANIZATION_ID>', {
+H.init('<YOUR_PROJECT_ID>', {
 	integrations: {
 		mixpanel: {
 			projectToken: '<MIXPANEL_PROJECT_TOKEN>',
 		},
 	},
 })
+```
+
+Whenever you call [`H.track()`](/sdk/client#Htrack) or [`H.identify()`](/sdk/client#Hidentify) it will forward that data to Mixpanel's `track` and `identify` calls. If you want to disable this behavior, you can set `enabled: false` for the integration:
+
+```typescript
+H.init("<YOUR_PROJECT_ID>", {
+	integrations: {
+		mixpanel: {
+			enabled: false
+		}
+	}
+});
 ```
 
 ## API
