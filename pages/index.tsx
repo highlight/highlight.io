@@ -39,6 +39,7 @@ import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/Obfuscat
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 import Link from 'next/link';
 import { GithubPopup } from '../components/GithubPopup/GithubPopup';
+import { FeatureCarousel } from '../components/Home/FeatureCarousel/FeatureCarousel';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -213,7 +214,8 @@ const Home: NextPage = () => {
                 </Typography>
               </PrimaryButton>
             </div>
-            <HeroVideo />
+            {/* <HeroVideo /> */}
+            <FeatureCarousel />
           </div>
         </Section>
         <Section>
