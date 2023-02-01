@@ -17,7 +17,7 @@ H.init('<YOUR_PROJECT_ID>', {
 })
 ```
 
-Whenever you call [`H.track()`](/sdk/client#Htrack) or [`H.identify()`](/sdk/client#Hidentify) it will forward that data to Mixpanels `track` and `identify` calls. If you want to disable this behavior, you can set `enabled: false` for the integration:
+Whenever you call [`H.track()`](/sdk/client#Htrack) or [`H.identify()`](/sdk/client#Hidentify) it will forward that data to Mixpanel's `track` and `identify` calls. If you want to disable this behavior, you can set `enabled: false` for the integration:
 
 ```typescript
 H.init("<YOUR_PROJECT_ID>", {
