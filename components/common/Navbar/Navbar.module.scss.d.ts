@@ -12,6 +12,7 @@ export const gridItem: string;
 export const header: string;
 export const headerBorder: string;
 export const headerButton: string;
+export const headerButtonRight: string;
 export const headerCenter: string;
 export const headerInner: string;
 export const headerLeft: string;

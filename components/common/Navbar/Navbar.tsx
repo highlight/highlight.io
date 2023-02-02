@@ -206,7 +206,7 @@ const Navbar = ({
                 </>
               )}
               {!isDocsPage && (
-                <Link href="/docs" className={styles.headerButton}>
+                <Link href="/docs" className={classNames(styles.headerButton, styles.headerButtonRight)}>
                   <Typography type="copy2">Docs</Typography>
                 </Link>
               )}
