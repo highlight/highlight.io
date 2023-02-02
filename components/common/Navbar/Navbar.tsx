@@ -222,7 +222,7 @@ const Navbar = ({
                 </Typography>
               </PrimaryButton>
               <div className={styles.socialButtonContainer}>
-                <Link href="https://github.com/highlight/" target="_blank" rel='noreferrer' className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperLeft)}>
+                <Link href="https://github.com/highlight/highlight" target="_blank" rel='noreferrer' className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperLeft)}>
                   <AiFillGithub className={classNames(styles.socialButton)} />
                 </Link>
                 <div className={styles.socialButtonDivider}>
