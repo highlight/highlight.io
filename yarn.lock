@@ -1218,13 +1218,13 @@
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.13.tgz#9b1cc54ff77d6625c9565efdce0054a4bcd9074c"
   integrity sha512-iSN5XwmagrnirWlYEWNPdCDj9aRYVD/lnK3JlsC9/+fqGF80k8C7rl+1HCvBX0dBoagKqOFBs6fMhJJ1hOg1EQ==
 
-"@highlight-run/next@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@highlight-run/next/-/next-2.0.0.tgz#047c35d8f77714d1be3f412c47fdc74394037b24"
-  integrity sha512-kuHktFbPHJ0hddR6yhK62CGvoTWtbFroDTUb5B1AkJDaau3rArYDa6k/iNXMmduNjuIHrahZgGaBt52XsMSIxg==
+"@highlight-run/next@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@highlight-run/next/-/next-2.0.1.tgz#694b08605beaf7378f99dd89369093792bb7cd1e"
+  integrity sha512-8aDuV5gQ7w3SZ62DQEutCpVLhb5anrtbExdSGrnxuNXsdqzAFFSFGG720rdOgmAA3aPnkS6efICFgvkMKMwi1w==
   dependencies:
     "@highlight-run/node" "2.0.0"
-    "@highlight-run/sourcemap-uploader" "0.4.1"
+    "@highlight-run/sourcemap-uploader" "0.4.2"
     next "^12.2.6"
     npm-run-all "4.1.5"
 
@@ -1241,10 +1241,10 @@
     lru-cache "^7.14.0"
     npm-run-all "4.1.5"
 
-"@highlight-run/sourcemap-uploader@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@highlight-run/sourcemap-uploader/-/sourcemap-uploader-0.4.1.tgz#0b52a9f8e8b0e527e8cce875f305dca70ada2fd0"
-  integrity sha512-DQZscA2TuKUC9no4HSR814RUOQfheAru5BeS4g0/mo3xgAXcGT/PTxC6ziUSo9wYNZN+O8L6wtxVZBQaB80P6A==
+"@highlight-run/sourcemap-uploader@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@highlight-run/sourcemap-uploader/-/sourcemap-uploader-0.4.2.tgz#19930b7631bf7c86fdab8a30d367ced53cd1c52c"
+  integrity sha512-YCi9KpMkk1qf/xrICd5VJAa1Vo6JqjisbfNMIOLkMnVzasycvrwN0MhrA4Nb/yLjFHzVAeqimZoG7/LMnv9/BQ==
   dependencies:
     aws-sdk "^2.1295.0"
     commander "^9.5.0"
@@ -5018,10 +5018,15 @@ highlight.js@~9.15.0, highlight.js@~9.15.1:
   resolved "https://registry.npmjs.org/highlight.js/-/highlight.js-9.15.10.tgz"
   integrity sha512-RoV7OkQm0T3os3Dd2VHLNMoaoDVx77Wygln3n9l5YV172XonWG6rgQD3XnF/BuFFZw9A0TJgmMSO8FEWQgvcXw==
 
-highlight.run@5.2.5, highlight.run@^5.2.5:
+highlight.run@5.2.5:
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-5.2.5.tgz#f21f784e5dc9ac550fcc82714868ae969ed355ab"
   integrity sha512-bCXRynn+nTjkGqHvuhzjSEO56TUsEzi6XqUFxoxEvYDpAcvifRLmPDMoBluywQGAxWwos0y1a8JTeW/4zIUlGw==
+
+highlight.run@^5.2.6:
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-5.2.6.tgz#e79d3b001c51299c0be6261230d27cbdc482adfa"
+  integrity sha512-L44ZRdHyYGMPIZVtQrcEOCYE6z/rkA7S5R9geButlbeKgXklHVMn5ZzcdNqoo0vTxswYPDDG4r4R5hqSSi1Daw==
 
 hoist-non-react-statics@^3.0.0:
   version "3.3.2"
