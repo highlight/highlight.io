@@ -192,26 +192,25 @@ const Home: NextPage = () => {
           <div className={styles.heroBugLeft}>
             <Image src={HeroBugLeft} alt="bug left" />
           </div>
-          <div className={styles.heroBugRight}>
-            <Image src={HeroBugRight} alt="bug right" />
-          </div>
           <div className={styles.anchorFeature}>
+            <h1 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform</span></h1>
             <div className={styles.anchorHead}>
-              <h1>{`Because a stack trace alone isn't enough`}</h1>
-              <Typography type="copy1" onDark>
-                Stop wasting effort trying to track down and reproduce bugs.
-                Through session replay, Highlight shows you exactly how and when
-                your bugs happen. Highlight removes the mystery of debugging.
-              </Typography>
+              <Typography type="copy1" onDark>A powerful, open source, and cohesive toolset for monitoring your full-stack web application.</Typography>
             </div>
-            <div
-              className={classNames(styles.buttonContainer, styles.heroImage)}
-            >
-              <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                <Typography type="copy2" emphasis={true}>
-                  Get started for free
-                </Typography>
-              </PrimaryButton>
+            <div className="flex justify-center mt-8 mb-32">
+              <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
+              >
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>
+                    Get started for free
+                  </Typography>
+                </PrimaryButton>
+                <PrimaryButton href="./docs" className={productStyles.hollowButton}>
+                  <Typography type="copy2" emphasis={true}>
+                    Read our docs
+                  </Typography>
+                </PrimaryButton>
+              </div>
             </div>
             <HeroVideo />
           </div>

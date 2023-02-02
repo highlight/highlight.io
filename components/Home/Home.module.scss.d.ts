@@ -56,6 +56,7 @@ export const hideVideo: string;
 export const highlightedText: string;
 export const imageInner: string;
 export const jayImage: string;
+export const landingAnchorHead: string;
 export const mobile: string;
 export const mobileOnly: string;
 export const mobileSpacing: string;

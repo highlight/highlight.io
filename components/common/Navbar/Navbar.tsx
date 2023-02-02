@@ -2,7 +2,6 @@ import {
   HighlightLogo,
   HighlightLogoWhite,
 } from '../HighlightLogo/HighlightLogo';
-import GitHubButton from 'react-github-btn'
 import styles from './Navbar.module.scss';
 import classNames from 'classnames';
 import { PrimaryButton } from '../Buttons/PrimaryButton';
@@ -14,6 +13,8 @@ import Link from 'next/link';
 import ResourceDropdown from './ResourceDropdown';
 import ProductDropdown from './ProductDropdown';
 import { GithubPopup } from '../../GithubPopup/GithubPopup';
+import { AiFillGithub } from 'react-icons/ai';
+import { FaDiscord } from 'react-icons/fa';
 
 const Navbar = ({
   hideFreeTrialText,
@@ -205,7 +206,7 @@ const Navbar = ({
                 </>
               )}
               {!isDocsPage && (
-                <Link href="/docs" className={styles.headerButton}>
+                <Link href="/docs" className={classNames(styles.headerButton, styles.headerButtonRight)}>
                   <Typography type="copy2">Docs</Typography>
                 </Link>
               )}
@@ -220,12 +221,24 @@ const Navbar = ({
                   Sign up
                 </Typography>
               </PrimaryButton>
+              <div className={styles.socialButtonContainer}>
+                <Link href="https://github.com/highlight/highlight" target="_blank" rel='noreferrer' className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperLeft)}>
+                  <AiFillGithub className={classNames(styles.socialButton)} />
+                </Link>
+                <div className={styles.socialButtonDivider}>
+                </div>
+                <Link href="https://discord.gg/yxaXEAqgwN" target="_blank" rel='noreferrer' className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperRight)}>
+                  <FaDiscord className={classNames(styles.socialButton)} />
+                </Link>
+              </div>
             </div>
           </div>
         </header>
-      </div>
+      </div >
     </>
   );
 };
+
+
 
 export default Navbar;

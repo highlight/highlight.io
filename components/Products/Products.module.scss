@@ -87,7 +87,7 @@
   border-radius: var(--size-xSmall);
 
   &:hover {
-    border-color: var(--color-secondary-300) !important;
+    // border-color: var(--color-secondary-300) !important;
     background-color: var(--color-secondary-300) !important;
     color: var(--color-primary-background) !important;
   }
