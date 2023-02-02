@@ -23,6 +23,13 @@ yarn add @highlight-run/node
 
 Pass configurations into the errorHandler and Highlight is ready to go!
 
+
+```hint
+Where you place the `app.use(highlightErrorHandler)` definition is important. It must be set
+after route handler definitions (`app.get(...)`, etc) and before other error middleware. 
+```
+
+
 ```typescript
 import * as Highlight from '@highlight-run/node'
 // or like this with commonjs
@@ -48,11 +55,6 @@ app.use(highlightErrorHandler)
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-```
-
-```hint
-Where you place the `app.use(highlightErrorHandler)` definition is important. It must be set
-after route handler definitions (`app.get(...)`, etc) and before other error middleware. 
 ```
 
 ### Verify
