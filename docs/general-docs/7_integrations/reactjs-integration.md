@@ -5,7 +5,7 @@ createdAt: 2021-09-14T02:03:51.000Z
 updatedAt: 2022-09-08T21:45:54.000Z
 ---
 
-Highlight ships [`@highlight-run/react`](https://github.com/highlight-run/react) which can be installed alongside `highlight.run` for additional functionality for React applications.
+Highlight ships [`@highlight-run/react`](https://github.com/highlight/react) which can be installed alongside `highlight.run` for additional functionality for React applications.
 
 # Error Boundary
 

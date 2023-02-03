@@ -198,7 +198,7 @@ const Navbar = ({
                     <Typography type="copy2">Community</Typography>
                   </Link>
                   <Link
-                    href="https://github.com/highlight-run"
+                    href="https://github.com/highlight/highlight"
                     className={styles.headerButton}
                   >
                     <Typography type="copy2">Github</Typography>
