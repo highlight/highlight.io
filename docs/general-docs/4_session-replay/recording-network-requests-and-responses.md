@@ -40,7 +40,7 @@ H.init('<YOUR_PROJECT_ID>', {
 You may have APIs that you know will always return secrets in the headers, body, or both. In this case, you can choose URLs to redact from. If a URL matches one of the URLs you specify, the header and body will not be recorded.
 
 ```typescript
-H.init('<YOUR_ORGANIZATION_ID>', {
+H.init('<YOUR_PROJECT_ID>', {
 	networkRecording: true,
 	urlBlocklist: [
 		'https://salted-passwords.com',

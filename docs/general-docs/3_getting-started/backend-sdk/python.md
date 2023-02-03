@@ -1,6 +1,6 @@
 ---
-title: Express Backend
-slug: express-backend
+title: Python Backend
+slug: python-backend
 createdAt: 2022-04-01T20:28:14.000Z
 updatedAt: 2022-04-15T02:07:22.000Z
 ---
@@ -63,7 +63,7 @@ from highlight_io.integrations.flask import FlaskIntegration
 
 app = Flask(__name__)
 H = highlight_io.H(
-    "TODO-PROJECT-ID", integrations=[FlaskIntegration()], record_logs=True
+    "YOUR_PROJECT_ID", integrations=[FlaskIntegration()], record_logs=True
 )
 
 

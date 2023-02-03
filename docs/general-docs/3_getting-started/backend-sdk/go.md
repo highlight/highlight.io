@@ -15,20 +15,21 @@ Highlight supports several server frameworks written in Go.
 First, install and import the go package in your entrypoint.
 
 ```shell
-go get -u github.com/highlight-run/highlight-go
+go get -u github.com/highlight/highlight/sdk/highlight-go
 ```
 
 Add the following lines to your application's main (`func main`) function:
 
 ```go
 import (
-	"github.com/highlight-run/highlight-go"
+	"github.com/highlight/highlight/sdk/highlight-go"
 )
 
 func main() {
 	//...application logic...
 	highlight.Start()
 	defer highlight.Stop()
+	highlight.SetProjectID("YOUR_PROJECT_ID")
 	//...application logic...
 }
 
@@ -43,7 +44,7 @@ Add the following middleware to your router:
 ```go
 // with chi
 import (
-	highlightChi "github.com/highlight-run/highlight-go/middleware/chi"
+	highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
 )
 
 func main() {
@@ -55,7 +56,7 @@ func main() {
 
 // with gin
 import (
-	highlightGin "github.com/highlight-run/highlight-go/middleware/gin"
+	highlightGin "github.com/highlight/highlight/sdk/highlight-go/middleware/gin"
 )
 
 func main() {
@@ -79,17 +80,18 @@ package main
 import (
 	"errors"
 	"github.com/go-chi/cors"
-	"github.com/highlight-run/highlight-go"
+	"github.com/highlight/highlight/sdk/highlight-go"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	highlightChi "github.com/highlight-run/highlight-go/middleware/chi"
+	highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
 )
 
 func main() {
 	highlight.Start()
 	defer highlight.Stop()
+	highlight.SetProjectID("YOUR_PROJECT_ID")
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
@@ -119,13 +121,14 @@ import (
 	"errors"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/highlight-run/highlight-go"
-	highlightGin "github.com/highlight-run/highlight-go/middleware/gin"
+	"github.com/highlight/highlight/sdk/highlight-go"
+	highlightGin "github.com/highlight/highlight/sdk/highlight-go/middleware/gin"
 )
 
 func main() {
 	highlight.Start()
 	defer highlight.Stop()
+	highlight.SetProjectID("YOUR_PROJECT_ID")
 
 	r := gin.Default()
 	r.Use(highlightGin.Middleware())

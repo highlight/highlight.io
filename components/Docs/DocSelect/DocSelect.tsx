@@ -29,6 +29,12 @@ const DOCS_TYPES = [
   },
   {
     id: 5,
+    name: 'Golang SDK Documentation',
+    icon: <DocumentTextIcon />,
+    url: '/docs/sdk/go',
+  },
+  {
+    id: 6,
     name: 'Client SDK Documentation',
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/client',

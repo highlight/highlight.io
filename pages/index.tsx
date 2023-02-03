@@ -192,9 +192,6 @@ const Home: NextPage = () => {
           <div className={styles.heroBugLeft}>
             <Image src={HeroBugLeft} alt="bug left" />
           </div>
-          <div className={styles.heroBugRight}>
-            <Image src={HeroBugRight} alt="bug right" />
-          </div>
           <div className={styles.anchorFeature}>
             <h1 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform</span></h1>
             <div className={styles.anchorHead}>
@@ -206,11 +203,6 @@ const Home: NextPage = () => {
                 <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                   <Typography type="copy2" emphasis={true}>
                     Get started for free
-                  </Typography>
-                </PrimaryButton>
-                <PrimaryButton href="./docs" className={productStyles.hollowButton}>
-                  <Typography type="copy2" emphasis={true}>
-                    Read our docs
                   </Typography>
                 </PrimaryButton>
               </div>
