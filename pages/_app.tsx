@@ -12,11 +12,12 @@ import Head from 'next/head';
 import { Meta } from '../components/common/Head/Meta';
 export { reportWebVitals } from 'next-axiom';
 import { H } from 'highlight.run';
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { rudderInitialize } from '../scripts/rudder-initialize';
 import { SSRProvider } from 'react-aria';
 import { setAttributionData } from '../utils/attribution';
 import { GithubPopup } from '../components/GithubPopup/GithubPopup';
+import { NextPage } from 'next';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -36,7 +37,7 @@ H.init('4d7k1xeo', {
   tracingOrigins: true,
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps, router }: AppProps) {
   useEffect(() => {
     const initialize = async () => {
       setAttributionData();
@@ -48,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     initialize();
   }, []);
+
 
   return (
     <SSRProvider>
@@ -74,9 +76,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         description="highlight.io is the open source monitoring platform that gives you the visibility you need."
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`}
       />
-      <Component {...pageProps} />
+      {router.pathname.startsWith('/docs2') ?
+        <div>
+          good evening, this is a docs page
+          <Component {...pageProps} />
+        </div>
+        :
+        <Component {...pageProps} />
+      }
     </SSRProvider>
   );
 }
 
-export default MyApp;
