@@ -869,7 +869,7 @@ const DocPage = ({
               </Link>
               <Link
                 className={styles.socialItem}
-                href={`https://github.com/highlight-run/docs/blob/main/${relPath ?? ''}`}
+                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath ?? ''}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20 }}></FaGithub>

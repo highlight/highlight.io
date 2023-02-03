@@ -192,6 +192,9 @@ const Home: NextPage = () => {
           <div className={styles.heroBugLeft}>
             <Image src={HeroBugLeft} alt="bug left" />
           </div>
+          <div className={styles.heroBugRight}>
+            <Image src={HeroBugRight} alt="bug right" />
+          </div>
           <div className={styles.anchorFeature}>
             <h1 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform</span></h1>
             <div className={styles.anchorHead}>
