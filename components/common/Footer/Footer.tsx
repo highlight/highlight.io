@@ -19,7 +19,7 @@ const Footer = () => {
             <a href="https://www.linkedin.com/company/highlightrun">
               <FaLinkedinIn className={styles.socialIcon} />
             </a>
-            <a href="https://github.com/highlight-run">
+            <a href="https://github.com/highlight">
               <FaGithub className={styles.socialIcon} />
             </a>
           </div>
