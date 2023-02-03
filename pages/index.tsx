@@ -205,11 +205,6 @@ const Home: NextPage = () => {
                     Get started for free
                   </Typography>
                 </PrimaryButton>
-                <PrimaryButton href="./docs" className={productStyles.hollowButton}>
-                  <Typography type="copy2" emphasis={true}>
-                    Read our docs
-                  </Typography>
-                </PrimaryButton>
               </div>
             </div>
             <HeroVideo />
