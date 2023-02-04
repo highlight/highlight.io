@@ -10,7 +10,7 @@ import classNames from 'classnames';
 export const OSSCallToAction = () => {
   return (
     <div className={"flex justify-center mx-5 md:mx-[10vw] mt-32 mb-40"}>
-      <div className={classNames(styles.ossCard, "w-full border-[1px] border-divider-on-dark rounded-3xl py-10")}>
+      <div className={classNames(styles.ossCard, "w-full max-w-[1250px] border-[1px] border-divider-on-dark rounded-3xl py-10")}>
         <h3 className="text-center">
           Join our <span className={styles.highlightedText}>Open-Source</span> Community.
         </h3>
