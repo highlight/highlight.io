@@ -1,3 +1,5 @@
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { promises as fsp } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -58,6 +60,7 @@ type DocData = {
   isSdkDoc?: boolean;
   docIndex: number;
   redirect?: string;
+  mdxText: MDXRemoteSerializeResult;
 };
 
 export interface Doc {
@@ -378,10 +381,12 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
+  const mdxTest = 'Some **mdx** text, with a component <Heading />';
   return {
     props: {
       metadata: currentDoc.metadata,
       markdownText: content,
+      mdxText: await serialize(mdxTest),
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
@@ -717,8 +722,13 @@ const getBreadcrumbs = (
   return trail;
 };
 
+const Heading = () => {
+  return <div>hello sir</div>;
+}
+
 const DocPage = ({
   markdownText,
+  mdxText,
   relPath,
   slug,
   toc,
@@ -771,6 +781,7 @@ const DocPage = ({
         <div className={styles.leftInner}>
           <DocSelect />
         </div>
+        <MDXRemote {...mdxText} components={{ Heading }} />
         <div className={styles.centerInner}>
           <DocSearchbar docPaths={docOptions} />
           {isSdkDoc && (

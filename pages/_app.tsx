@@ -16,8 +16,6 @@ import { ReactElement, useEffect } from 'react';
 import { rudderInitialize } from '../scripts/rudder-initialize';
 import { SSRProvider } from 'react-aria';
 import { setAttributionData } from '../utils/attribution';
-import { GithubPopup } from '../components/GithubPopup/GithubPopup';
-import { NextPage } from 'next';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
