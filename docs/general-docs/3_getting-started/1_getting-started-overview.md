@@ -40,10 +40,10 @@ For your server, Highlight supports a few frameworks out of the box, and given t
 
 -   [Express](/getting-started/backend-sdk/express)
 
--   [Go](/getting-started/backend-sdk/express)
+-   [Go](/getting-started/backend-sdk/go)
 
--   [Next.js](/getting-started/backend-sdk/express)
+-   [Next.js](/getting-started/backend-sdk/nextjs)
 
--   [Node.js](/getting-started/client-sdk/nextjs)
+-   [Node.js](/getting-started/client-sdk/nodejs)
 
 -   For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
