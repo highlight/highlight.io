@@ -194,12 +194,12 @@ const Home: NextPage = () => {
             <Image src={HeroBugRight} alt="bug right" />
           </div>
           <div className={styles.anchorFeature}>
-            <h1 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform</span></h1>
+            <h1 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform.</span></h1>
             <div className={styles.anchorHead}>
-              <Typography type="copy1" onDark>A powerful, open source, and cohesive toolset for monitoring your full-stack web application.</Typography>
+              <Typography type="copyHeader" onDark>A cohesive, open source toolset for monitoring your full-stack web application.</Typography>
             </div>
             <div className="flex justify-center mt-8 mb-32">
-              <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
+              <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8 w-screen px-5 sm:w-auto"
               >
                 <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                   <Typography type="copy2" emphasis={true}>

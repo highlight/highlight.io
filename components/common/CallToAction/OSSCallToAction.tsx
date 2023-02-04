@@ -10,9 +10,9 @@ import classNames from 'classnames';
 export const OSSCallToAction = () => {
   return (
     <div className={"flex justify-center mx-5 md:mx-[10vw] my-10 md:my-40"}>
-      <div className={classNames(styles.ossCard, "w-full max-w-[1250px] border-[1px] border-divider-on-dark rounded-3xl py-10")}>
+      <div className={classNames(styles.ossCard, "w-full max-w-[1250px] border-[1px] border-divider-on-dark rounded-3xl py-10 px-2")}>
         <h3 className="text-center leading-normal">
-          Join our <span className={styles.highlightedText}>open source</span> Community.
+          Join our <span className={styles.highlightedText}>open source</span> community.
         </h3>
         <div className="text-center px-2 md:px-16 mt-6">
           <Typography type="copy1" className="leading-relaxed">
@@ -21,9 +21,9 @@ export const OSSCallToAction = () => {
           </Typography>
         </div>
         <div className="flex justify-center mt-16">
-          <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-4"
+          <div className="flex flex-col lg:flex-row justify-center gap-4 w-full px-5 sm:w-auto"
           >
-            <PrimaryButton href="https://github.com/highlight/">
+            <PrimaryButton href="https://github.com/highlight/highlight">
               <div className="flex justify-center items-center gap-3">
                 <AiFillGithub className="w-5 h-5 mb-[2px]" />
                 <Typography type="copy2" emphasis={true}>
