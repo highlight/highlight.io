@@ -40,7 +40,7 @@ const ResourceDropdown = ({
     {
       title: "Github",
       icon: <AiFillGithub className={styles.copyOnLight} />,
-      link: "https://github.com/highlight"
+      link: "https://github.com/highlight/highlight"
     },
     {
       title: "Blog",

@@ -50,7 +50,7 @@ app.use('/error', () => {
 const goSnippet: string = `
 
 import (
-  "github.com/highlight-run/highlight-go"
+  "github.com/highlight/highlight/sdk/highlight-go"
 )
 
 func main() {

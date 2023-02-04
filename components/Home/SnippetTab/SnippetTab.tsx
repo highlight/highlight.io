@@ -168,8 +168,8 @@ export default MyApp`}
             canCopy={true}
             language="go"
             content={`import (
-  "github.com/highlight-run/highlight-go"
-  highlightChi "github.com/highlight-run/highlight-go/middleware/chi"
+  "github.com/highlight/highlight/sdk/highlight-go"
+  highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
 )
 
 func main() {
