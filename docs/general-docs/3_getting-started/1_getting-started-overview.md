@@ -32,18 +32,21 @@ For in-depth instructions, follow the [Client SDK](/getting-started/client-sdk) 
 
 ## For your backend / server:
 
-Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application. 
-
-Learn more in [Backend SDK.](/getting-started/backend-sdk)
-
-For your server, Highlight supports a few frameworks out of the box, and given that our setup is quite extn
+Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application. Support frameworks / tech below:
 
 -   [Express](/getting-started/backend-sdk/express)
 
--   [Go](/getting-started/backend-sdk/express)
+-   [Firebase](/getting-started/backend-sdk/firebase)
 
--   [Next.js](/getting-started/backend-sdk/express)
+-   [Go](/getting-started/backend-sdk/go)
 
--   [Node.js](/getting-started/client-sdk/nextjs)
+-   [Next.js](/getting-started/backend-sdk/nextjs)
 
--   For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
+-   [Node.js](/getting-started/backend-sdk/nodejs)
+
+-   [Python](/getting-started/backend-sdk/python)
+
+-   [TRPC](/getting-started/backend-sdk/trpc)
+
+
+For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
