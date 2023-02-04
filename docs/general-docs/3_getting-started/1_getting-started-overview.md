@@ -44,8 +44,9 @@ Highlight also supports reporting errors from your backend and mapping these to 
 
 -   [Node.js](/getting-started/backend-sdk/nodejs)
 
--   [Node.js](/getting-started/backend-sdk/python)
+-   [Python](/getting-started/backend-sdk/python)
 
--   [Node.js](/getting-started/backend-sdk/trpc)
+-   [TRPC](/getting-started/backend-sdk/trpc)
 
--   For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
+
+For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
