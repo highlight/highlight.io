@@ -79,8 +79,6 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 220px;
-  max-width: 250px;
   border: 1px solid var(--brand-accent-light) !important;
   background-color: transparent !important;
   color: var(--brand-accent-light) !important;
@@ -94,8 +92,7 @@
 }
 
 .docsButton {
-  width: 175px;
-  padding: var(--size-xSmall) var(--size-small);
+  padding: var(--size-xSmall) var(--size-large);
 }
 
 .infoContainer {

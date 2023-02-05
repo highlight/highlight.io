@@ -11,32 +11,19 @@ import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugLeft from '../public/images/hero-bug-left.gif';
 import HeroBugRight from '../public/images/hero-bug-right.gif';
 import ProductsReplay from '../public/images/products-replay.svg';
-
-import MultipleIcon from '../public/images/multiple.svg';
-import PuzzleIcon from '../public/images/puzzle.svg';
-import ChartbarIcon from '../public/images/chart-bar.svg';
-import MagnifierIcon from '../public/images/magnifier.svg';
-import VerifiedIcon from '../public/images/verified.svg';
-import PlugIcon from '../public/images/plug.svg';
-import InfoRow from '../components/Products/InfoRow';
-
-import CollaborateImage from '../public/images/collaborate.png';
-import SearchImage from '../public/images/search.svg';
-import TwoHighlightersImage from '../public/images/two-highlighters.gif';
-import Tablet1 from '../public/images/tablet1.svg';
+import ProductsErrors from '../public/images/products-errors.svg';
 
 import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
 import { Review, REVIEWS } from '../components/Home/Reviews';
-import { SnippetTab } from '../components/Home/SnippetTab/SnippetTab';
 import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
-import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 import Link from 'next/link';
 import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToAction';
+import LandingInfoRow from '../components/Home/LandingInfoRow';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -99,30 +86,11 @@ export const CustomerReview = ({
 };
 
 const Home: NextPage = () => {
-  const section1 = useRef<HTMLDivElement>(null);
-  const section2 = useRef<HTMLDivElement>(null);
-  const section3 = useRef<HTMLDivElement>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollYPosition = useRef<number>(0);
-  const [offsetPosition, setOffsetPosition] = useState(0);
   const [scrollReviews, setScrollReviews] = useState(false);
-  const [featureImageIndex, setFeatureImageIndex] = useState(0);
-  const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
-  const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
-  const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
 
   const scrollListener = useCallback(() => {
-    if (
-      (section3?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
-    ) {
-      setFeatureImageIndex(2);
-    } else if (
-      (section2?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
-    ) {
-      setFeatureImageIndex(1);
-    } else {
-      setFeatureImageIndex(0);
-    }
 
     if (!scrollReviews) {
       return;
@@ -143,10 +111,6 @@ const Home: NextPage = () => {
     window.addEventListener('scroll', scrollListener);
     return () => window.removeEventListener('scroll', scrollListener);
   }, [scrollListener]);
-
-  useEffect(() => {
-    setOffsetPosition(section1.current?.offsetHeight || 0);
-  }, [section1]);
 
   useEffect(() => {
     // invoke the sitemap api to validate next metrics integration
@@ -222,29 +186,29 @@ const Home: NextPage = () => {
           </div>
 
         </Section>
-        <div className={productStyles.infoContainer}>
-          <InfoRow
+        <div className={styles.infoContainer}>
+          <LandingInfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
             desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
             link={"https://app.highlight.io/?sign_up=1"}
+            linkText={"Get started for free"}
             imgSrc={ProductsReplay}
           />
-          <div className={productStyles.divider} />
-          <InfoRow
+          <LandingInfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
             desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
-            link={"https://app.highlight.io/?sign_up=1"}
-            imgSrc={ProductsReplay}
+            link={"/docs"}
+            linkText={"Read the docs"}
+            imgSrc={ProductsErrors}
             invert
           />
-          <div className={productStyles.divider} />
-          <InfoRow
+          <LandingInfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
             desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
             link={"https://app.highlight.io/?sign_up=1"}
+            linkText={"Get started for free"}
             imgSrc={ProductsReplay}
           />
-          <div className={productStyles.divider} />
         </div>
         <div className={classNames(styles.bigHero, styles.hideMobile)}>
           <div className={classNames(styles.hero)}>

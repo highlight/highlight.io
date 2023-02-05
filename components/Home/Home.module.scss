@@ -789,6 +789,29 @@
   margin: auto;
 }
 
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: calc(var(--max-width) + (var(--size-large) * 2));
+  margin: 0 auto;
+  margin-bottom: var(--size-xxxLarge);
+  padding: 50px var(--size-medium);
+  gap: var(--size-xLarge);
+  margin-bottom: var(--size-xxxLarge);
+}
+
+.landingInfoRow {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  gap: 96px;
+  padding: var(--size-xLarge) 0;
+  border-radius: var(--size-xSmall);
+}
+
 .companies {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -900,7 +923,7 @@
   width: 200px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
   .hideMobile {
     display: none;
   }
@@ -996,6 +1019,19 @@
   .featuresRightColumn {
     grid-column: col-start 7 / -1;
   }
+
+  .infoContainer {
+    flex-direction: row;
+    overflow-x: scroll;
+  }
+
+  .landingInfoRow {
+    border: 1px solid var(--color-divider-on-dark);
+    border-radius: 20px;
+    width: 80vw;
+    gap: var(--size-xLarge);
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -1042,6 +1078,13 @@
 
   .bodyLarge {
     font-size: var(--size-medium);
+  }
+
+  .infoContainer {
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-medium);
   }
 
   .hero {
