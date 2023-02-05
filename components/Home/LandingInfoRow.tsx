@@ -25,19 +25,21 @@ const LandingInfoRow = ({
 }) => {
   return (
     <div className={styles.landingInfoRow}>
-      <div className={`${invert ? "lg:hidden" : ""} flex justify-center px-5 h-[200px] lg:h-auto lg:w-[570px]`}>
+      <div className={`${invert ? "lg:hidden" : ""} flex justify-center px-5 h-[200px] sm:h-[300px] lg:h-auto lg:w-[570px]`}>
         <Image src={imgSrc} alt="" />
       </div>
       <div className="flex md:hidden w-full h-[1px] bg-divider-on-dark"> </div>
-      <div className="lg:w-1/2 px-5 text-left lg:text-left">
-        <h3 className={productStyles.infoTitle}>
-          {title}
-        </h3>
-        <Typography type="copy2" onDark>
-          <p className="text-color-darker-copy-on-dark">
-            {desc}
-          </p>
-        </Typography>
+      <div className="flex flex-col justify-between h-full lg:w-1/2 px-5 text-left lg:text-left">
+        <div>
+          <h3 className={productStyles.infoTitle}>
+            {title}
+          </h3>
+          <Typography type="copy2" onDark>
+            <p className="text-color-darker-copy-on-dark">
+              {desc}
+            </p>
+          </Typography>
+        </div>
         <div className="flex justify-start">
           <PrimaryButton href={link} className={classNames(productStyles.hollowButton, productStyles.docsButton, "mt-5")}>
             <Typography type="copy2" emphasis={true}>{linkText}</Typography>

@@ -196,7 +196,8 @@ const Home: NextPage = () => {
           />
           <LandingInfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
-            desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
+            desc={`Monitor and set alerts for important performance metrics in your product
+                    like Web Vitals, Request latency, and much more!`}
             link={"/docs"}
             linkText={"Read the docs"}
             imgSrc={ProductsErrors}
@@ -204,7 +205,10 @@ const Home: NextPage = () => {
           />
           <LandingInfoRow
             title={`Reproduce issues with high-fidelity session replay.`}
-            desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
+            desc="Investigate hard-to-crack bugs by playing through issues in a youtube-like UI.
+            random text that doesn't matter.
+            random text that doesn't matter.
+            random text that doesn't matter."
             link={"https://app.highlight.io/?sign_up=1"}
             linkText={"Get started for free"}
             imgSrc={ProductsReplay}

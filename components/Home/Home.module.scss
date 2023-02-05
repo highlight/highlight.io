@@ -805,7 +805,6 @@
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
-  justify-content: center;
   align-items: center;
   gap: 96px;
   padding: var(--size-xLarge) 0;
@@ -1021,8 +1020,10 @@
   }
 
   .infoContainer {
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     overflow-x: scroll;
+    margin-bottom: 96px;
   }
 
   .landingInfoRow {
@@ -1034,7 +1035,7 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 640px) {
   .snippetContent {
     padding: 0;
   }
