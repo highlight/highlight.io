@@ -321,18 +321,11 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   });
 
 
-<<<<<<< HEAD
   const serialized = await serialize(newContent);
   return {
     props: {
       metadata: currentDoc.metadata,
       markdownText: serialized,
-=======
-  return {
-    props: {
-      metadata: currentDoc.metadata,
-      markdownText: newContent,
->>>>>>> main
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
@@ -703,11 +696,7 @@ const DocPage = ({
     }
   }, [router]);
 
-<<<<<<< HEAD
-  const currentToc = toc.children.find(c => c.tocSlug === "general")
-=======
   const currentToc = toc?.children.find(c => c.tocSlug === "general")
->>>>>>> main
 
   return (
     <>
