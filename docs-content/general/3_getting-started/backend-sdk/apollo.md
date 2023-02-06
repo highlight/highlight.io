@@ -10,7 +10,7 @@ The plugin will trace graphql resolver errors and report them to Highlight.
 
 ## Usage
 
-The usage of the Apollo plugin requires the [Node.js integration](/getting-started/backend-sdk/nodejs) to be configured.
+The usage of the Apollo plugin requires the [Node.js integration](../../../sdk/nodejs.md) to be configured.
 Ensure that `@highlight-run/node` updated to version 2.2.0 or greater. Then, add `ApolloServerHighlightPlugin` to
 your `ApolloServer` plugins definition.
 
