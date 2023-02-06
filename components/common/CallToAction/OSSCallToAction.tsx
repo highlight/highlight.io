@@ -25,7 +25,7 @@ export const OSSCallToAction = () => {
           >
             <PrimaryButton href="https://github.com/highlight/highlight">
               <div className="flex justify-center items-center gap-3">
-                <AiFillGithub className="w-5 h-5 mb-[2px]" />
+                <AiFillGithub className="w-6 h-6 mb-[1px]" />
                 <Typography type="copy2" emphasis={true}>
                   Github Repo
                 </Typography>
@@ -33,7 +33,7 @@ export const OSSCallToAction = () => {
             </PrimaryButton>
             <PrimaryButton href="https://discord.gg/yxaXEAqgwN" className={styles.hollowButton}>
               <div className="flex items-center gap-3">
-                <FaDiscord className="w-5 h-5" />
+                <FaDiscord className="w-6 h-6" />
                 <Typography type="copy2" emphasis={true}>
                   Discord Community
                 </Typography>

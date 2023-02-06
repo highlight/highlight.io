@@ -10,8 +10,6 @@ import productStyles from '../components/Products/Products.module.scss'
 import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugLeft from '../public/images/hero-bug-left.gif';
 import HeroBugRight from '../public/images/hero-bug-right.gif';
-import ProductsReplay from '../public/images/products-replay.svg';
-import ProductsErrors from '../public/images/products-errors.svg';
 import LandingInfoRow1 from '../public/images/landingInfoRow1.svg';
 import LandingInfoRow2 from '../public/images/landingInfoRow2.svg';
 import LandingInfoRow3 from '../public/images/landingInfoRow3.svg';
