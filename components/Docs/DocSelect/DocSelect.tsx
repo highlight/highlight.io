@@ -8,36 +8,36 @@ import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 
 const DOCS_TYPES = [
-  { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs' },
+  { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs/general' },
   {
     id: 2,
     name: 'Node.js SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk/nodejs',
+    url: '/docs/sdk-docs/nodejs',
   },
   {
     id: 3,
     name: 'Next.js SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk/nextjs',
+    url: '/docs/sdk-docs/nextjs',
   },
   {
     id: 4,
     name: 'Python SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk/python',
+    url: '/docs/sdk-docs/python',
   },
   {
     id: 5,
     name: 'Golang SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk/go',
+    url: '/docs/sdk-docs/go',
   },
   {
     id: 6,
     name: 'Client SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk/client',
+    url: '/docs/sdk-docs/client',
   },
 ];
 
@@ -53,18 +53,18 @@ function DocSelect() {
   const router = useRouter();
   const [selectedDocs, setSelectedDocs] = useState(
     DOCS_TYPES[
-      findSelectedDocByArrayPath(
-        Array.isArray(router.query.doc) ? router.query.doc : []
-      )
+    findSelectedDocByArrayPath(
+      Array.isArray(router.query.doc) ? router.query.doc : []
+    )
     ]
   );
 
   useEffect(() => {
     setSelectedDocs(
       DOCS_TYPES[
-        findSelectedDocByArrayPath(
-          Array.isArray(router.query.doc) ? router.query.doc : []
-        )
+      findSelectedDocByArrayPath(
+        Array.isArray(router.query.doc) ? router.query.doc : []
+      )
       ]
     );
   }, [router.query.doc]);

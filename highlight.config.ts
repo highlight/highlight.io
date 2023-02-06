@@ -1,6 +1,6 @@
-import { Highlight } from '@highlight-run/next';
+import { Highlight } from '@highlight-run/next'
 
 export const withHighlight = Highlight({
-    projectID: '4d7k1xeo',
-    debug: true
-});
+	projectID: '4d7k1xeo',
+	// debug: true
+})
