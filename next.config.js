@@ -26,8 +26,8 @@ const nextConfig = {
 	async redirects() {
 		return [
 			{
-				source: '/sdk-docs/:slug*',
-				destination: '/docs/sdk/:slug*',
+				source: '/docs',
+				destination: '/docs/general',
 				permanent: false,
 			},
 			{
