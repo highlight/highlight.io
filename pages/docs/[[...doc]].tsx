@@ -8,6 +8,8 @@ import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
 import Minus from '../../public/images/MinusIcon';
 import { Collapse } from 'react-collapse';
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import path from 'path';
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
@@ -50,7 +52,7 @@ export interface DocPath {
 }
 
 type DocData = {
-  markdownText?: string;
+  markdownText: MDXRemoteSerializeResult;
   relPath?: string;
   slug: string;
   toc: TocEntry;
@@ -319,10 +321,11 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   });
 
 
+  const serialized = await serialize(newContent);
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: newContent,
+      markdownText: serialized,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
@@ -674,11 +677,11 @@ const DocPage = ({
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const description = (markdownText || '')
-    .replaceAll(/[`[(]+.+[`\])]+/gi, '')
-    .replaceAll(/#+/gi, '')
-    .split('\n')
-    .join(' ');
+  // const description = (markdownText || '')
+  //   .replaceAll(/[`[(]+.+[`\])]+/gi, '')
+  //   .replaceAll(/#+/gi, '')
+  //   .split('\n')
+  //   .join(' ');
 
   useEffect(() => {
     if (redirect != null) {
@@ -705,7 +708,7 @@ const DocPage = ({
               : metadata?.title
             : ''
         }
-        description={description}
+        description={"good evening"}
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
           }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
@@ -860,24 +863,26 @@ const DocPage = ({
               {metadata ? metadata.title : ''}
             </h3>
             {isSdkDoc ? (
-              <DocSection content={markdownText || ''} />
+              // <DocSection content={markdownText || ''} />
+              <></>
             ) : (
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className={styles.contentRender}
-                components={{
-                  h1: getDocsTypographyRenderer('h4'),
-                  h2: getDocsTypographyRenderer('h5'),
-                  ul: getDocsTypographyRenderer('ul'),
-                  h3: getDocsTypographyRenderer('h6'),
-                  h4: getDocsTypographyRenderer('h6'),
-                  h5: getDocsTypographyRenderer('h6'),
-                  code: getDocsTypographyRenderer('code'),
-                  a: getDocsTypographyRenderer('a'),
-                }}
-              >
-                {markdownText || ''}
-              </ReactMarkdown>
+              // <ReactMarkdown
+              //   remarkPlugins={[remarkGfm]}
+              //   className={styles.contentRender}
+              //   components={{
+              //     h1: getDocsTypographyRenderer('h4'),
+              //     h2: getDocsTypographyRenderer('h5'),
+              //     ul: getDocsTypographyRenderer('ul'),
+              //     h3: getDocsTypographyRenderer('h6'),
+              //     h4: getDocsTypographyRenderer('h6'),
+              //     h5: getDocsTypographyRenderer('h6'),
+              //     code: getDocsTypographyRenderer('code'),
+              //     a: getDocsTypographyRenderer('a'),
+              //   }}
+              // >
+              //   {markdownText || ''}
+              // </ReactMarkdown>
+              <MDXRemote components={{ a: getDocsTypographyRenderer('a') }} {...markdownText} />
             )}
             <div className={styles.pageNavigateRow}>
               {docIndex > 0 ? (
