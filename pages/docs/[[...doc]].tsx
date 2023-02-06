@@ -638,17 +638,12 @@ const TableOfContents = ({
   openTopLevel?: boolean;
   docPaths: DocPath[];
 }) => {
-  const router = useRouter();
-  const [open, setOpen] = useState(openTopLevel || openParent);
   const hasChildren = !!toc?.children.length;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const isTopLevel =
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
-
-  useEffect(() => {
-    setOpen(isTopLevel && openTopLevel);
-  }, [isTopLevel, openTopLevel]);
+  const [open, setOpen] = useState(isTopLevel || openTopLevel);
 
   useEffect(() => {
     const currentPage = path.join(
@@ -867,13 +862,13 @@ const DocPage = ({
               <SdkTableOfContents />
               :
               currentToc?.children.map((t) => {
-                return (<TableOfContents
-                  key={t.docPathId}
-                  toc={t}
-                  docPaths={docOptions}
-                  openParent={false}
-                  openTopLevel={true}
-                />);
+                return (
+                  <TableOfContents
+                    openTopLevel={true}
+                    key={t.docPathId}
+                    toc={t}
+                    docPaths={docOptions}
+                  />);
               })}
           </div>
           <div
