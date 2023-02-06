@@ -65,8 +65,7 @@ export const removeOrderingPrefix = (path: string) => {
 		const prefixLocation = p.indexOf('_')
 		return prefixLocation === -1 ? p : p.slice(prefixLocation + 1)
 	})
-	const urlPath = ['docs', ...cleanPath.slice(1)]
-	return urlPath.join('/')
+	return cleanPath.join('/')
 }
 
 export const processDocPath = function (
