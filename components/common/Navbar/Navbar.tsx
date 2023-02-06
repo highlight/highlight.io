@@ -15,16 +15,20 @@ import ProductDropdown from './ProductDropdown';
 import { GithubPopup } from '../../GithubPopup/GithubPopup';
 import { AiFillGithub } from 'react-icons/ai';
 import { FaDiscord } from 'react-icons/fa';
+import DocSearchbar from '../../Docs/DocSearchbar/DocSearchbar';
+import { DocPath } from '../../../pages/docs/[[...doc]]';
 
 const Navbar = ({
   hideFreeTrialText,
   isDocsPage,
   hideBanner,
   fixed,
+  docPaths,
   title,
 }: {
   hideFreeTrialText?: boolean;
   isDocsPage?: boolean;
+  docPaths?: Array<DocPath>;
   hideBanner?: boolean;
   fixed?: boolean;
   title?: string;
@@ -90,6 +94,7 @@ const Navbar = ({
                 {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
               </Link>
 
+
               <Typography type="copy3" emphasis={true}>
                 <p
                   className={classNames(styles.navTitle, {
@@ -100,6 +105,11 @@ const Navbar = ({
                   {title}
                 </p>
               </Typography>
+              {isDocsPage &&
+                <div style={{ marginLeft: "24px" }}>
+                  <DocSearchbar docPaths={docPaths ?? []} />
+                </div>
+              }
             </div>
             <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (

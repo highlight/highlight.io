@@ -20,8 +20,6 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Meta } from '../../components/common/Head/Meta';
-import { DOCS_REDIRECTS } from '../../middleware';
-import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
 import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github';
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
 import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
@@ -710,37 +708,15 @@ const DocPage = ({
           }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
-      <Navbar title="Docs" hideBanner isDocsPage fixed />
-      <div className={styles.contentInnerBar}>
-        <div className={styles.leftInner}>
-          <DocSelect />
-        </div>
-        <div className={styles.centerInner}>
-          <DocSearchbar docPaths={docOptions} />
-          {isSdkDoc && (
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", gap: 8 }}>
-              <Link
-                className={styles.sdkSocialItem}
-                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath}`}
-                target="_blank"
-              >
-                <FaGithub style={{ height: 20, width: 20, flexShrink: 0 }}></FaGithub>
-                <Typography type="copy4">Suggest Edits?</Typography>
-              </Link>
-              <Link
-                className={styles.sdkSocialItem}
-                href="https://discord.gg/yxaXEAqgwN"
-                target="_blank"
-              >
-                <FaDiscord style={{ height: 20, width: 20, flexShrink: 0 }}></FaDiscord>
-                <Typography type="copy4">Community / Support</Typography>
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
+      <Navbar title="Docs" hideBanner isDocsPage fixed docPaths={docOptions} />
+      <div className={styles.divider}></div>
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
+          <div className={styles.contentInnerBar}>
+            <div className={styles.leftInner}>
+              <DocSelect />
+            </div>
+          </div>
           <div className={styles.tocMenuLarge}>
             {isSdkDoc ?
               <SdkTableOfContents />
