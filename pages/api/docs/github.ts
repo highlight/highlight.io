@@ -81,20 +81,7 @@ export const processDocPath = function (
 		// strip out any notion of ".md"
 		pp = simple_path.replace('.md', '')
 		const pp_array = pp.split('/')
-		if (pp_array.length > 1) {
-			const parentDirectory = pp_array[pp_array.length - 2]
-			if (
-				removeOrderingPrefix(pp_array[pp_array.length - 1]) ===
-				`${removeOrderingPrefix(parentDirectory)}-overview`
-			) {
-				pp = [...pp_array.slice(0, -1), 'overview'].join('/')
-			}
-		}
 	}
-	// pp = pp.replaceAll('sdk-docs/', 'sdk/');
-	// pp = pp.replaceAll('sdk-docs', 'sdk');
-	// pp = pp.replaceAll('general-docs/', '');
-	// pp = pp.replaceAll('general-docs', '');
 	return removeOrderingPrefix(pp)
 }
 

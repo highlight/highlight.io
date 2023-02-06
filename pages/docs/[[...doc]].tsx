@@ -308,7 +308,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   // will require traversing up to all parents
   const linkingErrors: Array<string> = [];
   for (const d of docPaths) {
-    // linkLookup.set(`/${d.simple_path}`, d.embedded_links);
     for (const l of d.embedded_links) {
       const baseLink = l.split("#")[0];
       if (baseLink.startsWith("http") || baseLink.startsWith("mailto")) {
@@ -316,8 +315,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       }
       const fullPath = path.join(DOCS_CONTENT_PATH, d.rel_path);
       const linkedDocPath = path.resolve(fullPath, "..", baseLink)
-      // const fileContents = await fsp.readFile(path.join(fullPath));
-      // console.log(fileContents.toString());
       var result;
       try {
         result = await fsp.stat(linkedDocPath)
@@ -363,40 +360,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       JSON.stringify(context?.params?.doc || [''])
     );
   });
-  // validate that any relative links referenced in md files actually exist.
-  // for (const [simplePath, embeddedLinks] of linkLookup.entries()) {
-  //   for (const link of embeddedLinks) {
-  //     const baseLink = link.split('#')[0];
-  //     if ((baseLink.startsWith('http') || baseLink.startsWith('mailto'))) {
-  //       continue;
-  //     }
-  //     // check if rel_path is a valid link in the current working directory
-  //     if (simplePath.includes('webgl')) {
-  //       console.log("----------")
-  //       console.log("title", simplePath);
-  //       console.log("link", baseLink);
-  //     }
-  //     // if (!linkLookup.has(link.split('#')[0])) {
-  //     //   throw new Error(
-  //     //     `Link ${link} used in ${simplePath} is not a valid relative link.`
-  //     //   );
-  //     // }
-  //   }
-  // }
 
-  // validate that any archbee redirect URLs are valid.
-  // for (const [oldLink, newLink] of Object.entries(DOCS_REDIRECTS)) {
-  //   if (newLink.startsWith('/docs/')) {
-  //     const doc = (newLink.split('/docs').pop() || '').split('#')[0];
-  //     if (!linkLookup.has(doc)) {
-  //       throw new Error(
-  //         `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
-  //       );
-  //     }
-  //   }
-  // }
-
-  // const allPaths = [...docPaths, ...sdkPaths];
   const currentDocIndex = docPaths.findIndex((d) => {
     return (
       JSON.stringify(d.array_path) ===
@@ -417,15 +381,17 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   var newContent = "";
   // write the regex pattern to return all indices of the strings in the form [text](link)
   const regex = /\[(.*?)\]\((.*?)\)/g;
-  // replace all of the links in the markdown file with "foo"
+  // replace all of the links in the markdown file
   newContent = content.replaceAll(regex, (_, text, link) => {
+    if (link.startsWith("http") || link.startsWith("mailto")) {
+      return `[${text}](${link})`;
+    }
     var absolutePath = path.resolve(currentDoc.rel_path, "..", link).replace(".md", "");
     absolutePath = removeOrderingPrefix(absolutePath);
-    return `[${text}](${absolutePath})`;
+    const withDocs = path.join("/docs", absolutePath);
+    return `[${text}](${withDocs})`;
   });
 
-
-  console.log(docPaths);
 
   return {
     props: {
@@ -810,6 +776,8 @@ const DocPage = ({
   }, [router]);
 
   const currentToc = toc.children.find(c => c.tocSlug === "general")
+
+  console.log(markdownText);
 
   return (
     <>

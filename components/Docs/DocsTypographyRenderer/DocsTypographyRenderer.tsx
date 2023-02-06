@@ -38,13 +38,6 @@ const copyHeadingIcon = (index: number) => {
   );
 };
 
-const resolveLink = (href: string): string => {
-  if (href.startsWith('/')) {
-    return `/docs${href}`;
-  }
-  return href;
-};
-
 export const DocsMarkdownRenderer = (
   renderType: 'h4' | 'h5' | 'h6' | 'code' | 'a' | 'div'
 ) => {
@@ -66,7 +59,7 @@ export const DocsMarkdownRenderer = (
           )
         ) : renderType === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
+            <Link href={props.href} legacyBehavior>
               {props.children[0]}
             </Link>
           )
@@ -139,7 +132,7 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
           )
         ) : renderType === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
+            <Link href={props.href} legacyBehavior>
               {props.children[0]}
             </Link>
           )
@@ -230,7 +223,7 @@ export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a
           </ul>
         ) : type === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
+            <Link href={props.href} legacyBehavior>
               {props.children[0]}
             </Link>
           )
