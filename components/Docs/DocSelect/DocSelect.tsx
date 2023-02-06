@@ -13,31 +13,31 @@ const DOCS_TYPES = [
     id: 2,
     name: 'Node.js SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk-docs/nodejs',
+    url: '/docs/sdk/nodejs',
   },
   {
     id: 3,
     name: 'Next.js SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk-docs/nextjs',
+    url: '/docs/sdk/nextjs',
   },
   {
     id: 4,
     name: 'Python SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk-docs/python',
+    url: '/docs/sdk/python',
   },
   {
     id: 5,
     name: 'Golang SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk-docs/go',
+    url: '/docs/sdk/go',
   },
   {
     id: 6,
     name: 'Client SDK Documentation',
     icon: <DocumentTextIcon />,
-    url: '/docs/sdk-docs/client',
+    url: '/docs/sdk/client',
   },
 ];
 

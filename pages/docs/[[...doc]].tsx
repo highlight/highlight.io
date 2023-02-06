@@ -195,8 +195,7 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         embedded_links: Array.from(links),
         total_path,
-        // TODO gotta fix this.
-        isSdkDoc: pp.includes('sdk-docs'),
+        isSdkDoc: pp.startsWith('sdk/'),
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
@@ -243,9 +242,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   // will require traversing up to all parents
   const linkingErrors: Array<string> = [];
   for (const d of docPaths) {
-    if (d.simple_path.includes('svelte')) {
-      // console.log("embeds", d.embedded_links);
-    }
     for (const l of d.embedded_links) {
       const baseLink = l.split("#")[0];
       if (baseLink.startsWith("http") || baseLink.startsWith("mailto")) {
@@ -253,9 +249,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       }
       const fullPath = path.join(DOCS_CONTENT_PATH, d.rel_path);
       const linkedDocPath = path.resolve(fullPath, "..", baseLink)
-      if (d.simple_path.includes('svelte')) {
-        // console.log("linkedPath", linkedDocPath);
-      }
       var result;
       try {
         result = await fsp.stat(linkedDocPath)
@@ -311,7 +304,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     };
   }
   const absPath = path.join(currentDoc.total_path || '');
-  // "/docs/6_product-features/5_error-monitoring/index.md"
 
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
@@ -763,6 +755,7 @@ const DocPage = ({
                     openTopLevel={true}
                     key={t.docPathId}
                     toc={t}
+                    openParent={true}
                     docPaths={docOptions}
                   />);
               })}
