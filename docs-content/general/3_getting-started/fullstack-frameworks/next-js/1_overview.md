@@ -7,17 +7,17 @@ updatedAt: 2022-10-18T22:40:13.000Z
 
 The Highlight Next.js SDK adds additional features to Highlight, including:
 
--   server-side error monitoring and linking to Highlight sessions: [Highlight()](../../../../sdk-docs/nextjs.md#Highlight)
+-   server-side error monitoring and linking to Highlight sessions: [Highlight()](../../../../sdk/nextjs.md#Highlight)
 
--   automatic configuration of source map uploads: [withHighlightConfig()](../../../../sdk-docs/nextjs.md#withHighlightConfig)
+-   automatic configuration of source map uploads: [withHighlightConfig()](../../../../sdk/nextjs.md#withHighlightConfig)
 
--   automatic proxying for Highlight requests using Next.js rewrites: [withHighlightConfig()](../../../../sdk-docs/nextjs.md#withHighlightConfig)
+-   automatic proxying for Highlight requests using Next.js rewrites: [withHighlightConfig()](../../../../sdk/nextjs.md#withHighlightConfig)
 
 ## Getting Started
 
 The features in this SDK require the Highlight client SDK to be installed, so please follow the [Next.js](../../client-sdk/nextjs.md) instructions if you have not yet done so.
 
-For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should set `backendUrl`. See [H.init()](../../../../sdk-docs/client.md#Hinit) for more details.
+For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should set `backendUrl`. See [H.init()](../../../../sdk/client.md#Hinit) for more details.
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
@@ -47,7 +47,7 @@ yarn add @highlight-run/next
 In order for Highlight to be aware of your project during build time, you need the `HIGHLIGHT_SOURCEMAP_UPLOAD_API_KEY` variable in your build environment. Refer to our [environment variables doc](../next-js/env-variables.md) to get this set up in your cloud provider of choice.
 ```
 
-If you want to configure source map uploads during your production builds and enable the Next.js Highlight proxy rewrite, you can wrap your Next.js config with `withHighlightConfig`. See [withHighlightConfig()](../../../../sdk-docs/index.md#withHighlightConfig) for more details.
+If you want to configure source map uploads during your production builds and enable the Next.js Highlight proxy rewrite, you can wrap your Next.js config with `withHighlightConfig`. See [withHighlightConfig()](../../../../sdk/index.md#withHighlightConfig) for more details.
 
 ```javascript
 import { withHighlightConfig } from '@highlight-run/next'
@@ -58,7 +58,7 @@ export default withHighlightConfig({
 
 ### Next.js Custom Metrics
 
-If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase. See [Highlight()](../../../../sdk-docs/nextjs.md#Highlight) for more details.
+If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase. See [Highlight()](../../../../sdk/nextjs.md#Highlight) for more details.
 
 ```typescript
 import { Highlight } from '@highlight-run/next'

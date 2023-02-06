@@ -6,7 +6,7 @@ updatedAt: 2022-05-26T18:53:53.000Z
 ---
 
 ```hint
-For a more comprehensive tour of our client sdk, visit our [client reference page](../../../sdk-docs/client.md).
+For a more comprehensive tour of our client sdk, visit our [client reference page](../../../sdk/client.md).
 ```
 
 ## Frameworks

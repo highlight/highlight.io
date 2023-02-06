@@ -17,7 +17,7 @@ With the introduction of Frontend Observability in Highlight, Highlight users ca
 
 To start recording your application's Web Vitals, there's nothing extra you need to do! We'll be recording metrics for you to view on the [Web Vitals dashboard](https://app.highlight.io/dashboards/web-vitals) automatically!
 
-To record metrics about your Frontend Network Requests, you'll need to configure your backend domains of interest. You can do this by [visiting your Project Setting page](https://app.highlight.io/settings) or by adding an extra configuration setting to your [H.init()](../../sdk-docs/client.md#Hinit) call, like so:
+To record metrics about your Frontend Network Requests, you'll need to configure your backend domains of interest. You can do this by [visiting your Project Setting page](https://app.highlight.io/settings) or by adding an extra configuration setting to your [H.init()](../../sdk/client.md#Hinit) call, like so:
 
 ```javascript
 // Only network requests to the domains listed will have their metrics recorded

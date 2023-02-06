@@ -5,7 +5,7 @@ createdAt: 2021-09-13T23:00:44.000Z
 updatedAt: 2022-04-01T19:51:13.000Z
 ---
 ```hint
-Reference our [client-side sdk docs](../../../sdk-docs/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
+Reference our [client-side sdk docs](../../../sdk/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
 ```
 
 ## Initialize and Start Highlight

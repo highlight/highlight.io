@@ -7,7 +7,7 @@ updatedAt: 2022-03-21T18:23:57.000Z
 
 ## Disable Highlight
 
-Highlight will not run if [`H.init()`](../../sdk-docs/client.md#Hinit) is not called or `projectId` is `undefined`. For most people, you don't want to record sessions from `localhost`
+Highlight will not run if [`H.init()`](../../sdk/client.md#Hinit) is not called or `projectId` is `undefined`. For most people, you don't want to record sessions from `localhost`
 
 Here's an example of disabling Highlight while developing locally with H.init():
 

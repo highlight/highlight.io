@@ -177,8 +177,6 @@ export const getDocsPaths = async (
       );
     } else {
       const pp = processDocPath(base, file_string)
-      //   .replaceAll('general-docs/', '')
-      //   .replaceAll('general-docs', '');
       const { data, links, content } = await readMarkdown(
         fsp,
         path.join(total_path || '')
@@ -197,6 +195,7 @@ export const getDocsPaths = async (
         array_path: pp.split('/'),
         embedded_links: Array.from(links),
         total_path,
+        // TODO gotta fix this.
         isSdkDoc: pp.includes('sdk-docs'),
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
@@ -208,72 +207,8 @@ export const getDocsPaths = async (
   return paths;
 };
 
-// export const getSdkPaths = async (
-//   fs_api: any,
-//   base: string | undefined
-// ): Promise<DocPath[]> => {
-//   if (!base) {
-//     base = 'sdk-docs';
-//   }
-//   const full_path = path.join(DOCS_CONTENT_PATH, base);
-//   const read = await fs_api.readdir(full_path);
-//   if (!isValidDirectory(read)) {
-//     throw new Error(
-//       `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
-//     );
-//   }
-//   read.sort(sortByFilePrefix);
-//   let paths: DocPath[] = [];
-//   for (var i = 0; i < read.length; i++) {
-//     const file_string = read[i];
-//     if (IGNORED_DOCS_PATHS.has(file_string)) {
-//       continue;
-//     }
-//     let total_path = path.join(full_path, file_string);
-//     const file_path = await fs_api.stat(total_path);
-//     if (file_path.isDirectory()) {
-//       paths = paths.concat(
-//         await getDocsPaths(fs_api, path.join(base, file_string))
-//       );
-//     } else {
-//       const pp = processDocPath(base, file_string)
-//         .replaceAll('sdk-docs/', 'sdk/')
-//         .replaceAll('sdk-docs', 'sdk');
-//       const { data, links, content } = await readMarkdown(
-//         fsp,
-//         path.join(total_path || '')
-//       );
-//       const hasRequiredMetadata = ['title'].every((item) =>
-//         data.hasOwnProperty(item)
-//       );
-//       if (!hasRequiredMetadata) {
-//         throw new Error(
-//           `${total_path} does not contain all required metadata fields. Fields "title" are required. `
-//         );
-//       }
-
-//       paths.push({
-//         simple_path: pp,
-//         isSdkDoc: true,
-//         array_path: pp.split('/'),
-//         relative_links: Array.from(links).filter((l) => l.startsWith('/')),
-//         total_path,
-//         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
-//         indexPath: file_string.includes('index.md'),
-//         metadata: data,
-//         content: content,
-//       });
-//     }
-//   }
-//   return paths;
-// };
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const docPaths = await getDocsPaths(fsp, undefined);
-  // const sdkPaths = await getSdkPaths(fsp, undefined);
-  // const staticPaths = [...docPaths, ...sdkPaths].map((p) => {
-  //   return path.join('/docs', p.simple_path);
-  // });
   const staticPaths = [...docPaths].map((p) => {
     const joined = path.join("/docs", p.simple_path);
     return joined
@@ -308,6 +243,9 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   // will require traversing up to all parents
   const linkingErrors: Array<string> = [];
   for (const d of docPaths) {
+    if (d.simple_path.includes('svelte')) {
+      // console.log("embeds", d.embedded_links);
+    }
     for (const l of d.embedded_links) {
       const baseLink = l.split("#")[0];
       if (baseLink.startsWith("http") || baseLink.startsWith("mailto")) {
@@ -315,6 +253,9 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       }
       const fullPath = path.join(DOCS_CONTENT_PATH, d.rel_path);
       const linkedDocPath = path.resolve(fullPath, "..", baseLink)
+      if (d.simple_path.includes('svelte')) {
+        // console.log("linkedPath", linkedDocPath);
+      }
       var result;
       try {
         result = await fsp.stat(linkedDocPath)
@@ -350,9 +291,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   if (linkingErrors.length > 0) {
     throw (`the following docs had ${linkingErrors.length} broken links: \n\n${linkingErrors.join("\n ---------- \n")}`)
   }
-  // for (const d of sdkPaths) {
-  //   docRelLinks.set(`/${d.simple_path}`, d.relative_links);
-  // }
 
   const currentDoc = docPaths.find((d) => {
     return (
@@ -420,20 +358,12 @@ export const parseMarkdown = (fileContents: string): { content: string; data: { 
       yaml: (s: any) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as Object,
     },
   });
-  // const links = new Set<string>(
-  //   [...content.matchAll(/\[\S+]\(([\w/-]+)\)/gi)].map((m) => m[1])
-  // );
-
   const regex = /(.)\[(.*?)\]\((.*?)\)/g;
-  // replace all of the links in the markdown file with "foo"
   const links = new Set<string>(
-    [...content.matchAll(regex)].filter(m => m[0] === "!").map((m) => {
+    [...content.matchAll(regex)].filter(m => m[0] !== "!").map((m) => {
       return m[3];
     })
   );
-
-
-  // console.log("size", newLinks.size - links.size);
 
   return {
     content,
@@ -776,8 +706,6 @@ const DocPage = ({
   }, [router]);
 
   const currentToc = toc.children.find(c => c.tocSlug === "general")
-
-  console.log(markdownText);
 
   return (
     <>

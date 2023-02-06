@@ -17,7 +17,7 @@ H.init('<YOUR_PROJECT_ID>', {
 })
 ```
 
-Whenever you call [`H.track()`](../../sdk-docs/client.md#Htrack) or [`H.identify()`](../../sdk-docs/client.md#Hinit) it will forward that data to Mixpanel's `track` and `identify` calls. If you want to disable this behavior, you can set `enabled: false` for the integration:
+Whenever you call [`H.track()`](../../sdk/client.md#Htrack) or [`H.identify()`](../../sdk/client.md#Hinit) it will forward that data to Mixpanel's `track` and `identify` calls. If you want to disable this behavior, you can set `enabled: false` for the integration:
 
 ```typescript
 H.init("<YOUR_PROJECT_ID>", {
@@ -33,8 +33,8 @@ H.init("<YOUR_PROJECT_ID>", {
 
 ### `track()`
 
-Calling [`H.track()`](../../sdk-docs/client.md#Htrack) will forward the data to Mixpanel's `track()`. Highlight will also add a Mixpanel property called `highlightSessionURL` which contains the URL to the Highlight session where the track event happened.
+Calling [`H.track()`](../../sdk/client.md#Htrack) will forward the data to Mixpanel's `track()`. Highlight will also add a Mixpanel property called `highlightSessionURL` which contains the URL to the Highlight session where the track event happened.
 
 ### `identify()`
 
-Calling [`H.identify()`](../../sdk-docs/client.md#Hidentify) will forward the data to Mixpanel's `identify()`.
+Calling [`H.identify()`](../../sdk/client.md#Hidentify) will forward the data to Mixpanel's `identify()`.

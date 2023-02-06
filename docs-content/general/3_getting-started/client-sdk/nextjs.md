@@ -6,7 +6,7 @@ updatedAt: 2022-10-18T23:54:07.000Z
 ---
 
 ```hint
-Reference our [client-side sdk docs](../../../sdk-docs/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
+Reference our [client-side sdk docs](../../../sdk/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
 ```
 ## Installing the SDK
 

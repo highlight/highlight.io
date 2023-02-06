@@ -27,7 +27,7 @@ Whenever a user sends you a message on Intercom, Highlight will add a [custom us
 
 ### `trackEvent`
 
-Calling [`H.track`](../../sdk-docs/client.md#Hinit) will forward the data to Intercom's [`Intercom('trackEvent')`](https://developers.intercom.com/installing-intercom/docs/intercom-javascript#section-intercomtrackevent).
+Calling [`H.track`](../../sdk/client.md#Hinit) will forward the data to Intercom's [`Intercom('trackEvent')`](https://developers.intercom.com/installing-intercom/docs/intercom-javascript#section-intercomtrackevent).
 
 ```typescript
 H.track('signup_button_clicked', {

@@ -6,7 +6,7 @@ updatedAt: 2022-06-13T22:00:02.000Z
 ---
 
 ```hint
-Reference our [client-side sdk docs](../../../sdk-docs/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
+Reference our [client-side sdk docs](../../../sdk/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
 ```
 ## Adding the Snippet
 

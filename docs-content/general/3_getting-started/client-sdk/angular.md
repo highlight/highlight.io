@@ -6,7 +6,7 @@ updatedAt: 2022-05-26T18:55:03.000Z
 ---
 
 ```hint
-Reference our [client-side sdk docs](../../../sdk-docs/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
+Reference our [client-side sdk docs](../../../sdk/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
 ```
 ## Installing the SDK
 
@@ -37,7 +37,7 @@ H.init(
 );
 ```
 
-Check out [H.init()](../../../sdk-docs/client.md#Hinit) docs for more details about the options to configure.
+Check out [H.init()](../../../sdk/client.md#Hinit) docs for more details about the options to configure.
 
 If you prefer a full-fledged example, you can also reference our sample [Angular Repo with Highlight Configured](https://github.com/highlight/example-angular).
 
