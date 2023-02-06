@@ -26,6 +26,11 @@ const nextConfig = {
 	async redirects() {
 		return [
 			{
+				source: '/docs',
+				destination: '/docs/general',
+				permanent: false,
+			},
+			{
 				source: '/careers/:slug*',
 				destination: 'https://careers.highlight.io',
 				permanent: false,

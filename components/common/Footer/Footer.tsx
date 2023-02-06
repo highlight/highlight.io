@@ -3,6 +3,8 @@ import styles from './Footer.module.scss';
 import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { Typography } from '../Typography/Typography';
 import Link from 'next/link';
+import { PRODUCTS } from '../../Products/products';
+import { docLink } from '../../Docs/Docs.module.scss';
 
 const Footer = () => {
   return (
@@ -70,7 +72,25 @@ const Footer = () => {
         <div>
           <div className={styles.footerTitle}>
             <Typography type="copy2" emphasis={true}>
-              Legal
+              Frameworks
+            </Typography>
+          </div>
+          <Typography type="copy3">
+            <ul className={styles.footerList}>
+              {Object.entries(PRODUCTS).map(([key, value]) => {
+                return (
+                  <li key={value.docsLink}>
+                    <Link href={`for/${value.slug}`}>{value.title}</Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </Typography>
+        </div>
+        <div>
+          <div className={styles.footerTitle}>
+            <Typography type="copy2" emphasis={true}>
+              Contact & Legal
             </Typography>
           </div>
           <Typography type="copy3">
@@ -81,17 +101,6 @@ const Footer = () => {
               <li>
                 <Link href="/privacy">Privacy Policy</Link>
               </li>
-            </ul>
-          </Typography>
-        </div>
-        <div>
-          <div className={styles.footerTitle}>
-            <Typography type="copy2" emphasis={true}>
-              Contact
-            </Typography>
-          </div>
-          <Typography type="copy3">
-            <ul className={styles.footerList}>
               <li>
                 <a href="https://careers.highlight.run/">Careers</a>
               </li>

@@ -2,7 +2,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 import { withHighlight } from '../../highlight.config';
 import { H } from '@highlight-run/next';
 import { PRODUCTS } from '../../components/Products/products';
-import { getGithubDocsPaths } from './docs/github';
+import {getGithubDocsPaths, processDocPath} from './docs/github';
 
 async function handler(_: any, res: any) {
   res.statusCode = 200;
@@ -60,7 +60,7 @@ async function handler(_: any, res: any) {
   const changelogPages = changelogs.map(
     (changelog: { slug: string }) => `changelog/${changelog.slug}`
   );
-  const docsPages = Array.from(docs.keys());
+  const docsPages = Array.from(docs.keys()).map((d) => `docs/${d.split('docs-content/').pop()}`);
   const productPages = Object.values(PRODUCTS).map((product: any) => `for/${product.slug}`);
 
   const staticPagePaths = process.env.staticPages?.split(', ') || [];
