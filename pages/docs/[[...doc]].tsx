@@ -22,12 +22,13 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Meta } from '../../components/common/Head/Meta';
 import { DOCS_REDIRECTS } from '../../middleware';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
-import { IGNORED_DOCS_PATHS, processDocPath } from '../api/docs/github';
+import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github';
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
 import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
+import { Tab } from '@headlessui/react';
 
-const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs');
+const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
 
 export interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
@@ -35,7 +36,7 @@ export interface DocPath {
   // e.g. 'tips/sessions-search-deep-linking.md'
   simple_path: string;
   // e.g. '[/tips, /getting-started/client-sdk]'
-  relative_links: string[];
+  embedded_links: string[];
   // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
   total_path: string;
   // e.g. 'tips/sessions-search-deep-linking.md'
@@ -60,11 +61,7 @@ type DocData = {
   redirect?: string;
 };
 
-export interface Doc {
-  content: string;
-  data: { [key: string]: any };
-  links: Set<string>;
-}
+
 
 const useHeadingsData = (headingTag: string) => {
   const router = useRouter();
@@ -154,9 +151,10 @@ export const getDocsPaths = async (
   // each path can either be:
   // - parent w/o content
   // - parent w/ content
-  if (!base) {
-    base = 'general-docs';
-  }
+  // if (!base) {
+  //   base = 'general-docs';
+  // }
+  base = base ?? '';
   const full_path = path.join(DOCS_CONTENT_PATH, base);
   const read = await fs_api.readdir(full_path);
   if (!isValidDirectory(read)) {
@@ -179,8 +177,6 @@ export const getDocsPaths = async (
       );
     } else {
       const pp = processDocPath(base, file_string)
-        .replaceAll('general-docs/', '')
-        .replaceAll('general-docs', '');
       const { data, links, content } = await readMarkdown(
         fsp,
         path.join(total_path || '')
@@ -197,69 +193,9 @@ export const getDocsPaths = async (
       paths.push({
         simple_path: pp,
         array_path: pp.split('/'),
-        relative_links: Array.from(links).filter((l) => l.startsWith('/')),
+        embedded_links: Array.from(links),
         total_path,
-        isSdkDoc: false,
-        rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
-        indexPath: file_string.includes('index.md'),
-        metadata: data,
-        content: content,
-      });
-    }
-  }
-  return paths;
-};
-
-export const getSdkPaths = async (
-  fs_api: any,
-  base: string | undefined
-): Promise<DocPath[]> => {
-  if (!base) {
-    base = 'sdk-docs';
-  }
-  const full_path = path.join(DOCS_CONTENT_PATH, base);
-  const read = await fs_api.readdir(full_path);
-  if (!isValidDirectory(read)) {
-    throw new Error(
-      `${full_path} does not contain an index.md file. An index.md file is required for all documentation directories. `
-    );
-  }
-  read.sort(sortByFilePrefix);
-  let paths: DocPath[] = [];
-  for (var i = 0; i < read.length; i++) {
-    const file_string = read[i];
-    if (IGNORED_DOCS_PATHS.has(file_string)) {
-      continue;
-    }
-    let total_path = path.join(full_path, file_string);
-    const file_path = await fs_api.stat(total_path);
-    if (file_path.isDirectory()) {
-      paths = paths.concat(
-        await getDocsPaths(fs_api, path.join(base, file_string))
-      );
-    } else {
-      const pp = processDocPath(base, file_string)
-        .replaceAll('sdk-docs/', 'sdk/')
-        .replaceAll('sdk-docs', 'sdk');
-      const { data, links, content } = await readMarkdown(
-        fsp,
-        path.join(total_path || '')
-      );
-      const hasRequiredMetadata = ['title'].every((item) =>
-        data.hasOwnProperty(item)
-      );
-      if (!hasRequiredMetadata) {
-        throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
-        );
-      }
-
-      paths.push({
-        simple_path: pp,
-        isSdkDoc: true,
-        array_path: pp.split('/'),
-        relative_links: Array.from(links).filter((l) => l.startsWith('/')),
-        total_path,
+        isSdkDoc: pp.startsWith('sdk/'),
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
         indexPath: file_string.includes('index.md'),
         metadata: data,
@@ -272,9 +208,9 @@ export const getSdkPaths = async (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const docPaths = await getDocsPaths(fsp, undefined);
-  const sdkPaths = await getSdkPaths(fsp, undefined);
-  const staticPaths = [...docPaths, ...sdkPaths].map((p) => {
-    return path.join('/docs', p.simple_path);
+  const staticPaths = [...docPaths].map((p) => {
+    const joined = path.join("/docs", p.simple_path);
+    return joined
   });
   return {
     paths: staticPaths,
@@ -291,7 +227,7 @@ interface TocEntry {
 
 export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   const docPaths = await getDocsPaths(fsp, undefined);
-  const sdkPaths = await getSdkPaths(fsp, undefined);
+  // const sdkPaths = await getSdkPaths(fsp, undefined);
   let toc: TocEntry = {
     tocHeading: 'Home',
     tocSlug: 'home',
@@ -300,13 +236,24 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   };
 
   let docid = 0;
-  // for each document path, contains relative links used by that document
-  const docRelLinks = new Map<string, Array<string>>();
-  // TODO(jaykhatri) - gotta pass the open state to child doc paths below;
-  // will require traversing up to all parents
+  const linkingErrors: Array<string> = [];
   for (const d of docPaths) {
-    docRelLinks.set(`/${d.simple_path}`, d.relative_links);
+    for (const l of d.embedded_links) {
+      const baseLink = l.split("#")[0];
+      if (baseLink.startsWith("http") || baseLink.startsWith("mailto")) {
+        continue;
+      }
+      const fullPath = path.join(DOCS_CONTENT_PATH, d.rel_path);
+      const linkedDocPath = path.resolve(fullPath, "..", baseLink)
+      var result;
+      try {
+        result = await fsp.stat(linkedDocPath)
+      } catch (e) {
+        linkingErrors.push(`doc: ${d.rel_path}\nlink: ${linkedDocPath}`)
+      }
+    }
     let currentEntry = toc;
+    // build a tree of TOC entries.
     for (const a of d.array_path) {
       // for each of the array parts:
       // 1. in the current TOC entry, check if a child exists that matches the current docpath
@@ -329,41 +276,19 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     }
     docid++;
   }
-  for (const d of sdkPaths) {
-    docRelLinks.set(`/${d.simple_path}`, d.relative_links);
+
+  if (linkingErrors.length > 0) {
+    throw (`the following docs had ${linkingErrors.length} broken links: \n\n${linkingErrors.join("\n ---------- \n")}`)
   }
 
-  // validate that any relative links referenced in md files actually exist.
-  for (const [simplePath, relativeLinks] of docRelLinks.entries()) {
-    for (const link of relativeLinks) {
-      if (!docRelLinks.has(link.split('#')[0])) {
-        throw new Error(
-          `Link ${link} used in ${simplePath} is not a valid relative link.`
-        );
-      }
-    }
-  }
-
-  // validate that any archbee redirect URLs are valid.
-  for (const [oldLink, newLink] of Object.entries(DOCS_REDIRECTS)) {
-    if (newLink.startsWith('/docs/')) {
-      const doc = (newLink.split('/docs').pop() || '').split('#')[0];
-      if (!docRelLinks.has(doc)) {
-        throw new Error(
-          `Redirect link ${doc} in middleware.ts from ${oldLink} is not valid.`
-        );
-      }
-    }
-  }
-
-  const allPaths = [...docPaths, ...sdkPaths];
-  const currentDoc = allPaths.find((d) => {
+  const currentDoc = docPaths.find((d) => {
     return (
       JSON.stringify(d.array_path) ===
       JSON.stringify(context?.params?.doc || [''])
     );
   });
-  const currentDocIndex = allPaths.findIndex((d) => {
+
+  const currentDocIndex = docPaths.findIndex((d) => {
     return (
       JSON.stringify(d.array_path) ===
       JSON.stringify(context?.params?.doc || [''])
@@ -378,14 +303,30 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
+
+  var newContent = "";
+  // write the regex pattern to return all indices of the strings in the form [text](link)
+  const regex = /\[(.*?)\]\((.*?)\)/g;
+  // replace all of the links in the markdown file
+  newContent = content.replaceAll(regex, (_, text, link) => {
+    if (link.startsWith("http") || link.startsWith("mailto")) {
+      return `[${text}](${link})`;
+    }
+    var absolutePath = path.resolve(currentDoc.rel_path, "..", link).replace(".md", "");
+    absolutePath = removeOrderingPrefix(absolutePath);
+    const withDocs = path.join("/docs", absolutePath);
+    return `[${text}](${withDocs})`;
+  });
+
+
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: content,
+      markdownText: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
-      docOptions: allPaths,
+      docOptions: docPaths,
       isSdkDoc: currentDoc.isSdkDoc,
       toc,
     },
@@ -398,16 +339,20 @@ export const readMarkdown = async (fs_api: any, filePath: string) => {
   return parseMarkdown(fileContents);
 };
 
-export const parseMarkdown = (fileContents: string): Doc => {
+export const parseMarkdown = (fileContents: string): { content: string; data: { [key: string]: any }, links: Set<string> } => {
   const { content, data } = matter(fileContents, {
     delimiters: ['---', '---'],
     engines: {
       yaml: (s: any) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as Object,
     },
   });
+  const regex = /(.)\[(.*?)\]\((.*?)\)/g;
   const links = new Set<string>(
-    [...content.matchAll(/\[\S+]\(([\w/-]+)\)/gi)].map((m) => m[1])
+    [...content.matchAll(regex)].filter(m => m[1] !== "!").map((m) => {
+      return m[3];
+    })
   );
+
   return {
     content,
     data,
@@ -577,16 +522,12 @@ const TableOfContents = ({
   openTopLevel?: boolean;
   docPaths: DocPath[];
 }) => {
-  const [open, setOpen] = useState(openTopLevel || openParent);
   const hasChildren = !!toc?.children.length;
 
   const [isCurrentPage, setIsCurrentPage] = useState(false);
   const isTopLevel =
     toc.tocSlug === docPaths[toc.docPathId || 0]?.array_path[0];
-
-  useEffect(() => {
-    setOpen(isTopLevel && openTopLevel);
-  }, [isTopLevel, openTopLevel]);
+  const [open, setOpen] = useState(isTopLevel || openTopLevel);
 
   useEffect(() => {
     const currentPage = path.join(
@@ -728,6 +669,7 @@ const DocPage = ({
   docOptions,
   metadata,
 }: DocData) => {
+
   const blogBody = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -750,6 +692,8 @@ const DocPage = ({
       window.scrollTo(0, parseInt(storedScrollPosition));
     }
   }, [router]);
+
+  const currentToc = toc?.children.find(c => c.tocSlug === "general")
 
   return (
     <>
@@ -798,19 +742,19 @@ const DocPage = ({
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
           <div className={styles.tocMenuLarge}>
-            {isSdkDoc ? (
+            {isSdkDoc ?
               <SdkTableOfContents />
-            ) : (
-              toc?.children.map((t) => (
-                <TableOfContents
-                  key={t.docPathId}
-                  toc={t}
-                  docPaths={docOptions}
-                  openParent={false}
-                  openTopLevel={true}
-                />
-              ))
-            )}
+              :
+              currentToc?.children.map((t) => {
+                return (
+                  <TableOfContents
+                    openTopLevel={true}
+                    key={t.docPathId}
+                    toc={t}
+                    openParent={true}
+                    docPaths={docOptions}
+                  />);
+              })}
           </div>
           <div
             className={classNames(styles.tocRow, styles.tocMenu)}

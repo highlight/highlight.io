@@ -8,7 +8,7 @@ import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 
 const DOCS_TYPES = [
-  { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs' },
+  { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs/general' },
   {
     id: 2,
     name: 'Node.js SDK Documentation',
@@ -53,18 +53,18 @@ function DocSelect() {
   const router = useRouter();
   const [selectedDocs, setSelectedDocs] = useState(
     DOCS_TYPES[
-      findSelectedDocByArrayPath(
-        Array.isArray(router.query.doc) ? router.query.doc : []
-      )
+    findSelectedDocByArrayPath(
+      Array.isArray(router.query.doc) ? router.query.doc : []
+    )
     ]
   );
 
   useEffect(() => {
     setSelectedDocs(
       DOCS_TYPES[
-        findSelectedDocByArrayPath(
-          Array.isArray(router.query.doc) ? router.query.doc : []
-        )
+      findSelectedDocByArrayPath(
+        Array.isArray(router.query.doc) ? router.query.doc : []
+      )
       ]
     );
   }, [router.query.doc]);
