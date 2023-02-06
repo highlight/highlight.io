@@ -106,7 +106,16 @@ const Navbar = ({
                 </p>
               </Typography>
               {isDocsPage &&
-                <div style={{ marginLeft: "24px" }}>
+                <div style={{
+                  width: "100vw",
+                  left: 0,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "absolute",
+                  height: "88.5px",
+                  top: 0,
+                }}>
                   <DocSearchbar docPaths={docPaths ?? []} />
                 </div>
               }
@@ -201,22 +210,6 @@ const Navbar = ({
                 styles.headerRight
               )}
             >
-              {isDocsPage && (
-                <>
-                  <Link
-                    href="https://discord.gg/yxaXEAqgwN"
-                    className={styles.headerButton}
-                  >
-                    <Typography type="copy2">Community</Typography>
-                  </Link>
-                  <Link
-                    href="https://github.com/highlight/highlight"
-                    className={styles.headerButton}
-                  >
-                    <Typography type="copy2">Github</Typography>
-                  </Link>
-                </>
-              )}
               {!isDocsPage && (
                 <Link href="/docs" className={classNames(styles.headerButton, styles.headerButtonRight)}>
                   <Typography type="copy2">Docs</Typography>

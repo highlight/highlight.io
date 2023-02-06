@@ -56,7 +56,8 @@ const DocSearchComboBox = (props: any) => {
           {...inputProps}
           ref={inputRef}
           type="text"
-          placeholder="Find anything"
+          onFocus={props.onFocus}
+          placeholder="Find anything..."
           className='min-w-0'
         />
       </div>
@@ -100,6 +101,9 @@ const DocSearchbar = (props: SearchbarProps) => {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [isSearchLoading, setIsSearchLoading] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
+
+  console.log(isFocused);
 
   const storeDocs = useCallback(async () => {
     await db.docs.clear();
@@ -248,8 +252,9 @@ const DocSearchbar = (props: SearchbarProps) => {
         setIsSearchLoading(true);
         debouncedResults(e);
       }}
+      onFocus={() => setIsFocused(true)}
       onSelectionChange={onSelectionChange}
-      hasSearchResults={searchResults.length > 0}
+      hasSearchResults={searchResults.length > 0 || isFocused}
       isSearchLoading={isSearchLoading}
       activeClass={styles.active}
       aria-label="Search bar"
