@@ -14,6 +14,9 @@ cd docker
 docker compose up -d --build
 ```
 
+After a brief frontend load time, the app should be accessible at https://localhost:3000
+
+For deploying on Linux with Docker, we recommend having at least 16 CPU cores, 32GB RAM, 256GB disk.
 Reach out to our [community](https://community.highlight.io/) with any questions!
 
 # Limitations

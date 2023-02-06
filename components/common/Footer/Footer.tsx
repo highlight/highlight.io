@@ -80,7 +80,7 @@ const Footer = () => {
               {Object.entries(PRODUCTS).map(([key, value]) => {
                 return (
                   <li key={value.docsLink}>
-                    <Link href={value.docsLink}>{value.title}</Link>
+                    <Link href={`for/${value.slug}`}>{value.title}</Link>
                   </li>
                 )
               })}
