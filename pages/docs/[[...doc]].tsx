@@ -360,7 +360,7 @@ export const parseMarkdown = (fileContents: string): { content: string; data: { 
   });
   const regex = /(.)\[(.*?)\]\((.*?)\)/g;
   const links = new Set<string>(
-    [...content.matchAll(regex)].filter(m => m[0] !== "!").map((m) => {
+    [...content.matchAll(regex)].filter(m => m[1] !== "!").map((m) => {
       return m[3];
     })
   );
