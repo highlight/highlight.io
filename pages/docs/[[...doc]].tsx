@@ -236,10 +236,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   };
 
   let docid = 0;
-  // for each document path, contains relative links used by that document
-  // const linkLookup = new Map<string, Array<string>>();
-  // TODO(jaykhatri) - gotta pass the open state to child doc paths below;
-  // will require traversing up to all parents
   const linkingErrors: Array<string> = [];
   for (const d of docPaths) {
     for (const l of d.embedded_links) {
