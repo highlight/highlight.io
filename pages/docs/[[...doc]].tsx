@@ -693,7 +693,7 @@ const DocPage = ({
     }
   }, [router]);
 
-  const currentToc = toc.children.find(c => c.tocSlug === "general")
+  const currentToc = toc?.children.find(c => c.tocSlug === "general")
 
   return (
     <>
