@@ -12,6 +12,9 @@ import HeroBugLeft from '../public/images/hero-bug-left.gif';
 import HeroBugRight from '../public/images/hero-bug-right.gif';
 import ProductsReplay from '../public/images/products-replay.svg';
 import ProductsErrors from '../public/images/products-errors.svg';
+import LandingInfoRow1 from '../public/images/landingInfoRow1.svg';
+import LandingInfoRow2 from '../public/images/landingInfoRow2.svg';
+import LandingInfoRow3 from '../public/images/landingInfoRow3.svg';
 
 import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
@@ -188,30 +191,31 @@ const Home: NextPage = () => {
         </Section>
         <div className={styles.infoContainer}>
           <LandingInfoRow
-            title={`Reproduce issues with high-fidelity session replay.`}
+            title={`A cohesive view of your entire stack.`}
             desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
             link={"https://app.highlight.io/?sign_up=1"}
             linkText={"Get started for free"}
-            imgSrc={ProductsReplay}
+            imgSrc={LandingInfoRow1}
+            invert
           />
           <LandingInfoRow
-            title={`Reproduce issues with high-fidelity session replay.`}
+            title={`Support for all the modern frameworks.`}
             desc={`Monitor and set alerts for important performance metrics in your product
                     like Web Vitals, Request latency, and much more!`}
             link={"/docs"}
             linkText={"Read the docs"}
-            imgSrc={ProductsErrors}
-            invert
+            imgSrc={LandingInfoRow2}
           />
           <LandingInfoRow
-            title={`Reproduce issues with high-fidelity session replay.`}
+            title={`Integrations with your favorite tools.`}
             desc="Investigate hard-to-crack bugs by playing through issues in a youtube-like UI.
             random text that doesn't matter.
             random text that doesn't matter.
             random text that doesn't matter."
-            link={"https://app.highlight.io/?sign_up=1"}
-            linkText={"Get started for free"}
-            imgSrc={ProductsReplay}
+            link={"/docs"}
+            linkText={"Read the docs"}
+            imgSrc={LandingInfoRow3}
+            invert
           />
         </div>
         <div className={classNames(styles.bigHero, styles.hideMobile)}>
