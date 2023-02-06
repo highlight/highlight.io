@@ -3,7 +3,7 @@
 	max-width: var(--max-width);
 	margin: 0 auto;
 	display: grid;
-	grid-template-columns: 300px repeat(5, 1fr);
+	grid-template-columns: 300px repeat(4, 1fr);
 	justify-content: space-between;
 
 	& > * {
