@@ -32,10 +32,10 @@ For in-depth instructions, follow the [Client SDK](./client-sdk/1_client-sdk-ove
 
 ## For your backend / server:
 
-Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application. 
+Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application. Support frameworks / tech below:
 
 
-For your server, Highlight supports a few frameworks out of the box, and given that our setup is quite extn
+-   [Firebase](/getting-started/backend-sdk/firebase)
 
 -   [Express](./backend-sdk/express.md)
 
