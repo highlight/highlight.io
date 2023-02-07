@@ -680,11 +680,11 @@ const DocPage = ({
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  // const description = (markdownText || '')
-  //   .replaceAll(/[`[(]+.+[`\])]+/gi, '')
-  //   .replaceAll(/#+/gi, '')
-  //   .split('\n')
-  //   .join(' ');
+  const description = (markdownTextOG || '')
+    .replaceAll(/[`[(]+.+[`\])]+/gi, '')
+    .replaceAll(/#+/gi, '')
+    .split('\n')
+    .join(' ');
 
   useEffect(() => {
     if (redirect != null) {
@@ -711,7 +711,7 @@ const DocPage = ({
               : metadata?.title
             : ''
         }
-        description={"Welcome to highlight.io, the open source, fullstack monitoring platform."}
+        description={description}
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
           }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
