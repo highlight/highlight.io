@@ -887,7 +887,7 @@ const DocPage = ({
                           return (<>
                             {
                               Array.isArray(props.children) &&
-                              props?.children?.map((c, i) => {
+                              props?.children?.map((c: any, i: number) => {
                                 return (
                                   c.props && c.props.children &&
                                   <li className={styles.listItem} key={i}>
