@@ -187,11 +187,11 @@ export const getDocsPaths = async (
       const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
-      // if (!hasRequiredMetadata) {
-      //   throw new Error(
-      //     `${total_path} does not contain all required metadata fields. Fields "title" are required. `
-      //   );
-      // }
+      if (!hasRequiredMetadata) {
+        throw new Error(
+          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
+        );
+      }
 
       paths.push({
         simple_path: pp,
