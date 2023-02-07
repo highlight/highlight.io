@@ -52,8 +52,8 @@ export interface DocPath {
 }
 
 type DocData = {
-  markdownText: MDXRemoteSerializeResult;
-  markdownTextOG: string;
+  markdownText?: MDXRemoteSerializeResult;
+  markdownTextOG?: string;
   relPath?: string;
   slug: string;
   toc: TocEntry;
@@ -711,7 +711,7 @@ const DocPage = ({
               : metadata?.title
             : ''
         }
-        description={"good evening"}
+        description={"Welcome to highlight.io, the open source, fullstack monitoring platform."}
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
           }/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
@@ -866,64 +866,49 @@ const DocPage = ({
               {metadata ? metadata.title : ''}
             </h3>
             {isSdkDoc ? (
-              // <DocSection content={markdownText || ''} />
-              <></>
+              <DocSection content={markdownTextOG || ''} />
             ) : (
               <>
-                {/* <ReactMarkdown
-                  remarkPlugins={[remarkGfm]}
-                  className={styles.contentRender}
-                  components={{
-                    h1: getDocsTypographyRenderer('h4'),
-                    h2: getDocsTypographyRenderer('h5'),
-                    ul: getDocsTypographyRenderer('ul'),
-                    h3: getDocsTypographyRenderer('h6'),
-                    h4: getDocsTypographyRenderer('h6'),
-                    h5: getDocsTypographyRenderer('h6'),
-                    code: getDocsTypographyRenderer('code'),
-                    a: getDocsTypographyRenderer('a'),
-                  }}
-                >
-                  {markdownTextOG}
-                </ReactMarkdown> */}
                 <div className={styles.contentRender}>
-                  <MDXRemote
-                    components={{
-                      h1: (props) => <h3 {...props} />,
-                      h2: (props) => <h4 {...props} />,
-                      h3: (props) => <h6 {...props} />,
-                      h4: (props) => <h6 {...props} />,
-                      h5: (props) => <h6 {...props} />,
-                      code: (props) => {
-                        // check if props.children is a string
-                        if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
-                          return (<HighlightCodeBlock
-                            language={'js'}
-                            text={props.children}
-                            showLineNumbers={false}
-                          />);
-                        }
-                        return <code className={styles.inlineCodeBlock}>{props.children}</code>;
-                      },
-                      ul: (props) => {
-                        // check if the type of props.children is an array.
-                        return (<>
-                          {
-                            Array.isArray(props.children) &&
-                            props?.children?.map((c, i) => {
-                              return (
-                                c.props &&
-                                <li className={styles.listItem} key={i}>
-                                  {c.props.children.map((e: any) => e)}
-                                </li>
-                              );
-                            })
+                  {markdownText &&
+                    <MDXRemote
+                      components={{
+                        h1: (props) => <h3 {...props} />,
+                        h2: (props) => <h4 {...props} />,
+                        h3: (props) => <h6 {...props} />,
+                        h4: (props) => <h6 {...props} />,
+                        h5: (props) => <h6 {...props} />,
+                        code: (props) => {
+                          // check if props.children is a string
+                          if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
+                            return (<HighlightCodeBlock
+                              language={'js'}
+                              text={props.children}
+                              showLineNumbers={false}
+                            />);
                           }
-                        </>);
-                      },
-                    }}
-                    {...markdownText}
-                  />
+                          return <code className={styles.inlineCodeBlock}>{props.children}</code>;
+                        },
+                        ul: (props) => {
+                          // check if the type of props.children is an array.
+                          return (<>
+                            {
+                              Array.isArray(props.children) &&
+                              props?.children?.map((c, i) => {
+                                return (
+                                  c.props &&
+                                  <li className={styles.listItem} key={i}>
+                                    {c.props.children.map((e: any) => e)}
+                                  </li>
+                                );
+                              })
+                            }
+                          </>);
+                        },
+                      }}
+                      {...markdownText}
+                    />
+                  }
                 </div>
               </>
             )}
