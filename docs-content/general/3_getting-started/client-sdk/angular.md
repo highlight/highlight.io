@@ -43,7 +43,7 @@ If you prefer a full-fledged example, you can also reference our sample [Angular
 
 ## Verify
 
-Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.io/sessions> a few seconds after recording has started.
+Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on [app.highlight.io/sessions](https://app.highlight/sessions) a few seconds after recording has started.
 
 ## Configuration
 

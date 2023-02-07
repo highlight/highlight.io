@@ -1,16 +1,17 @@
 ---
-title: Welcome to Highlight
+title: Welcome to highlight.io
 slug: welcome-to-highlight
 createdAt: 2021-09-10T17:54:08.000Z
 updatedAt: 2022-08-18T22:36:12.000Z
 ---
 
-## What's Highlight?
+[highlight.io](https://highlight.io) is monitoring software for the next generation of developers. Our goal is to build a cohesive monitoring solution for today's developer, something we wished WE had. And it's all [opensource](https://github.com/highlight/highlight) :).
 
-Highlight is a tool that helps teams reproduce end-to-end user sessions to better understand their application.
-
-With Highlight, **engineering teams** can replay errors with high precision, which includes a complete session replay, outgoing network requests, dense stack traces and insight into the app's state management system (redux, apollo's cache, etc.). At the same time, **product teams** can analyze user activity, collaborate with engineering teams and find the reason for user drop offs to gain insight into UX.
-
-```welcomevideo
-
-```
+<DocsCardGroup>
+    <DocsCard title="Our company." href="/docs/general/company/values">
+        {"Details about our company, our values, and opensource."}
+    </DocsCard>
+    <DocsCard title="Getting started." href="/docs/general/getting-started/getting-started-overview">
+        {"Our mission and values at highlight.io."}
+    </DocsCard>
+</DocsCardGroup>
