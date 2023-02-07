@@ -7,7 +7,7 @@ updatedAt: 2021-12-07T22:42:14.000Z
 
 Building the best product experience is a team sport. We strongly beleive that you'll get the most value out of Highlight if you have your entire team on Highlight. This includes engineering, product, testing, design, etc. At the end of the day, we're solving problems for our users. Solutions are a result of cross-function input.
 
-We've made it super easy to onboard new members to Highlight. All you need to do is go onto <https://app.highlight.io/team> then:
+We've made it super easy to onboard new members to Highlight. All you need to do is go onto [https://app.highlight.io/team](https://app.highlight.io/team) then:
 
 1.  Type in your teammate's email
 

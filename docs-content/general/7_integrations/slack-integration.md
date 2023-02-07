@@ -7,7 +7,7 @@ updatedAt: 2021-09-17T21:56:27.000Z
 
 By connecting Highlight with Slack, Highlight can send you and your team real-time messages based on different events that happen on your app and Highlight. You can learn more about this on [Slack Integration](../7_integrations/slack-integration.md).
 
-To get started, go to <https://app.highlight.io/alerts> and click the "Sync with Slack" button.
+To get started, go to [https://app.highlight.io/alerts](https://app.highlight.io/alerts) and click the "Sync with Slack" button.
 
 ## Features
 

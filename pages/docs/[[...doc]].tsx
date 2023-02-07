@@ -1,6 +1,6 @@
 import { promises as fsp } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import remarkGfm from 'remark-gfm';
@@ -28,7 +28,7 @@ import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
 import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
-import { Tab } from '@headlessui/react';
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
 
@@ -53,6 +53,7 @@ export interface DocPath {
 
 type DocData = {
   markdownText: MDXRemoteSerializeResult;
+  markdownTextOG: string;
   relPath?: string;
   slug: string;
   toc: TocEntry;
@@ -326,6 +327,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     props: {
       metadata: currentDoc.metadata,
       markdownText: serialized,
+      markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
@@ -663,6 +665,7 @@ const getBreadcrumbs = (
 
 const DocPage = ({
   markdownText,
+  markdownTextOG,
   relPath,
   slug,
   toc,
@@ -866,23 +869,63 @@ const DocPage = ({
               // <DocSection content={markdownText || ''} />
               <></>
             ) : (
-              // <ReactMarkdown
-              //   remarkPlugins={[remarkGfm]}
-              //   className={styles.contentRender}
-              //   components={{
-              //     h1: getDocsTypographyRenderer('h4'),
-              //     h2: getDocsTypographyRenderer('h5'),
-              //     ul: getDocsTypographyRenderer('ul'),
-              //     h3: getDocsTypographyRenderer('h6'),
-              //     h4: getDocsTypographyRenderer('h6'),
-              //     h5: getDocsTypographyRenderer('h6'),
-              //     code: getDocsTypographyRenderer('code'),
-              //     a: getDocsTypographyRenderer('a'),
-              //   }}
-              // >
-              //   {markdownText || ''}
-              // </ReactMarkdown>
-              <MDXRemote components={{ a: getDocsTypographyRenderer('a') }} {...markdownText} />
+              <>
+                {/* <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  className={styles.contentRender}
+                  components={{
+                    h1: getDocsTypographyRenderer('h4'),
+                    h2: getDocsTypographyRenderer('h5'),
+                    ul: getDocsTypographyRenderer('ul'),
+                    h3: getDocsTypographyRenderer('h6'),
+                    h4: getDocsTypographyRenderer('h6'),
+                    h5: getDocsTypographyRenderer('h6'),
+                    code: getDocsTypographyRenderer('code'),
+                    a: getDocsTypographyRenderer('a'),
+                  }}
+                >
+                  {markdownTextOG}
+                </ReactMarkdown> */}
+                <div className={styles.contentRender}>
+                  <MDXRemote
+                    components={{
+                      h1: (props) => <h3 {...props} />,
+                      h2: (props) => <h4 {...props} />,
+                      h3: (props) => <h6 {...props} />,
+                      h4: (props) => <h6 {...props} />,
+                      h5: (props) => <h6 {...props} />,
+                      code: (props) => {
+                        // check if props.children is a string
+                        if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
+                          return (<HighlightCodeBlock
+                            language={'js'}
+                            text={props.children}
+                            showLineNumbers={false}
+                          />);
+                        }
+                        return <code className={styles.inlineCodeBlock}>{props.children}</code>;
+                      },
+                      ul: (props) => {
+                        // check if the type of props.children is an array.
+                        return (<>
+                          {
+                            Array.isArray(props.children) &&
+                            props?.children?.map((c, i) => {
+                              return (
+                                c.props &&
+                                <li className={styles.listItem} key={i}>
+                                  {c.props.children.map((e: any) => e)}
+                                </li>
+                              );
+                            })
+                          }
+                        </>);
+                      },
+                    }}
+                    {...markdownText}
+                  />
+                </div>
+              </>
             )}
             <div className={styles.pageNavigateRow}>
               {docIndex > 0 ? (

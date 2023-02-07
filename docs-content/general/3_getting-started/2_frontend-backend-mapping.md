@@ -16,6 +16,9 @@ Required Highlight `highlight.run` version: `>=2.8.1`
 ### Turn on `tracingOrigins`
 
 Set the `tracingOrigins` option to an array of patterns matching the location of your backend. You may also simply specify `true`, which will default `tracingOrigins` to all subdomains/domains of the url for your frontend app.
+```
+good evening sir.
+```
 
 ```javascript
 H.init("<YOUR_PROJECT_ID>", {
