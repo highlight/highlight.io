@@ -18,7 +18,7 @@ const getIdFromHTMLHeaderProps = (props: any) => {
     .join('-');
 };
 
-const getIdFromHeaderProps = (props: any) => {
+export const getIdFromHeaderProps = (props: any) => {
   return props?.node?.children
     .map((child: any) =>
       child.tagName === 'code' ? child?.children[0].value : child.value
@@ -29,6 +29,13 @@ const getIdFromHeaderProps = (props: any) => {
     .split(' ')
     .join('-');
 };
+
+export const generateIdString = (str: string) => {
+  return str.replace(/[^a-zA-Z ]/g, '')
+    .trim()
+    .split(' ')
+    .join('-');
+}
 
 const copyHeadingIcon = (index: number) => {
   return (

@@ -1,6 +1,6 @@
 import { promises as fsp } from 'fs';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../../components/Docs/Docs.module.scss';
 import remarkGfm from 'remark-gfm';
@@ -8,6 +8,8 @@ import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
 import Minus from '../../public/images/MinusIcon';
 import { Collapse } from 'react-collapse';
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import path from 'path';
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
@@ -24,12 +26,12 @@ import { DOCS_REDIRECTS } from '../../middleware';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
 import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github';
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
-import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
+import { generateIdString, getDocsTypographyRenderer, getIdFromHeaderProps } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
-import { Tab } from '@headlessui/react';
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
-
+const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`;
 export interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
   array_path: string[];
@@ -50,7 +52,8 @@ export interface DocPath {
 }
 
 type DocData = {
-  markdownText?: string;
+  markdownText: MDXRemoteSerializeResult | null;
+  markdownTextOG?: string;
   relPath?: string;
   slug: string;
   toc: TocEntry;
@@ -303,26 +306,13 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
-
-  var newContent = "";
-  // write the regex pattern to return all indices of the strings in the form [text](link)
-  const regex = /\[(.*?)\]\((.*?)\)/g;
-  // replace all of the links in the markdown file
-  newContent = content.replaceAll(regex, (_, text, link) => {
-    if (link.startsWith("http") || link.startsWith("mailto")) {
-      return `[${text}](${link})`;
-    }
-    var absolutePath = path.resolve(currentDoc.rel_path, "..", link).replace(".md", "");
-    absolutePath = removeOrderingPrefix(absolutePath);
-    const withDocs = path.join("/docs", absolutePath);
-    return `[${text}](${withDocs})`;
-  });
-
+  const newContent = resolveEmbeddedLinksFromMarkdown(content, currentDoc.rel_path);
 
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: newContent,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent) : null,
+      markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
@@ -453,7 +443,7 @@ const PageRightBar = ({
         </Link>
         <Link
           className={styles.socialItem}
-          href={`https://github.com/highlight/highlight.io/blob/main/docs/${relativePath}`}
+          href={`${DOCS_GITUB_LINK}${relativePath}`}
           target="_blank"
         >
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -660,6 +650,7 @@ const getBreadcrumbs = (
 
 const DocPage = ({
   markdownText,
+  markdownTextOG,
   relPath,
   slug,
   toc,
@@ -674,7 +665,7 @@ const DocPage = ({
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const description = (markdownText || '')
+  const description = (markdownTextOG || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
     .split('\n')
@@ -721,7 +712,7 @@ const DocPage = ({
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
-                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath}`}
+                href={`${DOCS_GITUB_LINK}${relPath}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20, flexShrink: 0 }}></FaGithub>
@@ -813,7 +804,7 @@ const DocPage = ({
               </Link>
               <Link
                 className={styles.socialItem}
-                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath ?? ''}`}
+                href={`${DOCS_GITUB_LINK}${relPath ?? ''}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -860,24 +851,59 @@ const DocPage = ({
               {metadata ? metadata.title : ''}
             </h3>
             {isSdkDoc ? (
-              <DocSection content={markdownText || ''} />
+              <DocSection content={markdownTextOG || ''} />
             ) : (
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                className={styles.contentRender}
-                components={{
-                  h1: getDocsTypographyRenderer('h4'),
-                  h2: getDocsTypographyRenderer('h5'),
-                  ul: getDocsTypographyRenderer('ul'),
-                  h3: getDocsTypographyRenderer('h6'),
-                  h4: getDocsTypographyRenderer('h6'),
-                  h5: getDocsTypographyRenderer('h6'),
-                  code: getDocsTypographyRenderer('code'),
-                  a: getDocsTypographyRenderer('a'),
-                }}
-              >
-                {markdownText || ''}
-              </ReactMarkdown>
+              <>
+                <div className={styles.contentRender}>
+                  {markdownText &&
+                    <MDXRemote
+                      components={{
+                        DocsCard,
+                        DocsCardGroup,
+                        h1: (props) => <h4 {...props} />,
+                        h2: (props) => {
+                          if (props.children && typeof props.children === 'string') {
+                            return <h5 id={generateIdString(props.children as string)} {...props} />;
+                          }
+                          return <></>;
+                        },
+                        h3: (props) => <h6 {...props} />,
+                        h4: (props) => <h6 {...props} />,
+                        h5: (props) => <h6 {...props} />,
+                        code: (props) => {
+                          // check if props.children is a string
+                          if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
+                            return (<HighlightCodeBlock
+                              language={'js'}
+                              text={props.children}
+                              showLineNumbers={false}
+                            />);
+                          }
+                          return <code className={styles.inlineCodeBlock}>{props.children}</code>;
+                        },
+                        ul: (props) => {
+                          // check if the type of props.children is an array.
+                          return (<>
+                            {
+                              Array.isArray(props.children) &&
+                              props?.children?.map((c: any, i: number) => {
+                                return (
+                                  c.props && c.props.children && c.props.children.map &&
+                                  < li className={styles.listItem} key={i} >
+                                    {c?.props?.children?.map((e: any) => e)
+                                    }
+                                  </li>
+                                );
+                              })
+                            }
+                          </>);
+                        },
+                      }}
+                      {...markdownText}
+                    />
+                  }
+                </div>
+              </>
             )}
             <div className={styles.pageNavigateRow}>
               {docIndex > 0 ? (
@@ -923,5 +949,45 @@ const DocPage = ({
     </>
   );
 };
+
+// function that takes a markdown string, and replaces all of the relative links with links in the form "/docs..."
+// relativePath is the relative path of the doc that this link lives in.
+const resolveEmbeddedLinksFromMarkdown = (markdownContent: string, relativePath: string): string => {
+  const regex = /\[(.*?)\]\((.*?)\)/g;
+  // replace all of the links in the markdown file
+  const newContent = markdownContent.replaceAll(regex, (_, text, link) => {
+    if (link.startsWith("http") || link.startsWith("mailto")) {
+      return `[${text}](${link})`;
+    }
+    return `[${text}](${resolveEmbeddedLink(link, relativePath)})`;
+  });
+
+  return newContent;
+}
+
+const resolveEmbeddedLink = (linkString: string, relativePath: string): string => {
+  var absolutePath = path.resolve(relativePath, "..", linkString).replace(".md", "");
+  absolutePath = removeOrderingPrefix(absolutePath);
+  const withDocs = path.join("/docs", absolutePath);
+  return withDocs;
+}
+
+// component with children
+const DocsCardGroup = ({ children }: React.PropsWithChildren) => {
+  return (
+    <div className={styles.docsCardGroup}>
+      {children}
+    </div>
+  );
+}
+
+const DocsCard = ({ children, title, href }: React.PropsWithChildren<{ title: string, href: string }>) => {
+  return (
+    <Link href={href} className={styles.docsCard}>
+      <Typography type='copy2' emphasis>{title}</Typography>
+      <Typography type='copy2' >{children}</Typography>
+    </Link>
+  );
+}
 
 export default DocPage;

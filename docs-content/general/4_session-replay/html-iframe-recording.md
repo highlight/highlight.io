@@ -13,4 +13,4 @@ updatedAt: 2022-04-19T18:48:07.000Z
 -   If your
     `iframe ` source becomes invalid after some time or will not render content when inserted in a different domain or website, the recording will not show the correct content that the user saw.
 
-![<iframe> rendering in a session replay](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/UP4LVunHyPBCzRukQwoh4_image.png)
+![rendering in a session replay](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/UP4LVunHyPBCzRukQwoh4_image.png)
