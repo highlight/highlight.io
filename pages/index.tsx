@@ -13,6 +13,7 @@ import HeroBugRight from '../public/images/hero-bug-right.gif';
 import LandingInfoRow1 from '../public/images/landingInfoRow1.svg';
 import LandingInfoRow2 from '../public/images/landingInfoRow2.svg';
 import LandingInfoRow3 from '../public/images/landingInfoRow3.svg';
+import LandingInfoRowSecurity from '../public/images/landingInfoRowSecurity.svg';
 
 import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
@@ -25,6 +26,7 @@ import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 import Link from 'next/link';
 import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToAction';
 import LandingInfoRow from '../components/Home/LandingInfoRow';
+import InfoRow from '../components/Products/InfoRow';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -190,7 +192,7 @@ const Home: NextPage = () => {
         <div className={styles.infoContainer}>
           <LandingInfoRow
             title={`A cohesive view of your entire stack.`}
-            desc={"Get an organic link between your errors & session replay to understand the “what”, “why” and “how” of your application."}
+            desc={'A natural pairing between your errors, session replay, logs and more. Understand the “what”, “why” and “how” of your full-stack web application.'}
             link={"https://app.highlight.io/?sign_up=1"}
             linkText={"Get started for free"}
             imgSrc={LandingInfoRow1}
@@ -198,22 +200,26 @@ const Home: NextPage = () => {
           />
           <LandingInfoRow
             title={`Support for all the modern frameworks.`}
-            desc={`Monitor and set alerts for important performance metrics in your product
-                    like Web Vitals, Request latency, and much more!`}
-            link={"/docs"}
+            desc={`We support all the fancy new frameworks and our platform is powered by open source, scalable technologies.`}
+            link={"/docs/general/company/open-source/contributing"}
             linkText={"Read the docs"}
             imgSrc={LandingInfoRow2}
           />
           <LandingInfoRow
             title={`Integrations with your favorite tools.`}
-            desc="Investigate hard-to-crack bugs by playing through issues in a youtube-like UI.
-            random text that doesn't matter.
-            random text that doesn't matter.
-            random text that doesn't matter."
-            link={"/docs"}
+            desc="Connect your favorite issue tracker, support tool, or even analytics software and we’ll give you a way to push and pull data in the right places."
+            link={"/docs/general/integrations"}
             linkText={"Read the docs"}
             imgSrc={LandingInfoRow3}
             invert
+          />
+        </div>
+        <div className={styles.infoContainer}>
+          <InfoRow
+            title={`Built with compliance and security.`}
+            desc="Whether its soc2, hippaa or iso, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
+            link={"/docs/general/session-replay/privacy"}
+            imgSrc={LandingInfoRowSecurity}
           />
         </div>
         <div className={classNames(styles.bigHero, styles.hideMobile)}>
