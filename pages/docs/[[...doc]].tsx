@@ -29,6 +29,7 @@ import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
 import { generateIdString, getDocsTypographyRenderer, getIdFromHeaderProps } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import { DocsCard, DocsCardGroup } from './DocsCard';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
 
@@ -946,24 +947,6 @@ const DocPage = ({
     </>
   );
 };
-
-// component with children
-const DocsCardGroup = ({ children }: React.PropsWithChildren) => {
-  return (
-    <div className={styles.docsCardGroup}>
-      {children}
-    </div>
-  );
-}
-
-const DocsCard = ({ children, title, href }: React.PropsWithChildren<{ title: string, href: string }>) => {
-  return (
-    <Link href={href} className={styles.docsCard}>
-      <Typography type='copy2' emphasis>{title}</Typography>
-      <Typography type='copy2' >{children}</Typography>
-    </Link>
-  );
-}
 
 // function that takes a markdown string, and replaces all of the relative links with links in the form "/docs..."
 // relativePath is the relative path of the doc that this link lives in.
