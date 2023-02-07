@@ -863,7 +863,10 @@ const DocPage = ({
                         DocsCardGroup,
                         h1: (props) => <h4 {...props} />,
                         h2: (props) => {
-                          return <h5 id={generateIdString(props.children as string)} {...props} />;
+                          if (props.children && typeof props.children === 'string') {
+                            return <h5 id={generateIdString(props.children as string)} {...props} />;
+                          }
+                          return <></>;
                         },
                         h3: (props) => <h6 {...props} />,
                         h4: (props) => <h6 {...props} />,
