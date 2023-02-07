@@ -31,7 +31,7 @@ import DocSelect from '../../components/Docs/DocSelect/DocSelect';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
-
+const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`;
 export interface DocPath {
   // e.g. '[tips, sessions-search-deep-linking.md]'
   array_path: string[];
@@ -443,7 +443,7 @@ const PageRightBar = ({
         </Link>
         <Link
           className={styles.socialItem}
-          href={`https://github.com/highlight/highlight.io/blob/main/docs/${relativePath}`}
+          href={`${DOCS_GITUB_LINK}${relativePath}`}
           target="_blank"
         >
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
@@ -712,7 +712,7 @@ const DocPage = ({
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", gap: 8 }}>
               <Link
                 className={styles.sdkSocialItem}
-                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath}`}
+                href={`${DOCS_GITUB_LINK}${relPath}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20, flexShrink: 0 }}></FaGithub>
@@ -804,7 +804,7 @@ const DocPage = ({
               </Link>
               <Link
                 className={styles.socialItem}
-                href={`https://github.com/highlight/highlight.io/blob/main/docs/${relPath ?? ''}`}
+                href={`${DOCS_GITUB_LINK}${relPath ?? ''}`}
                 target="_blank"
               >
                 <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
