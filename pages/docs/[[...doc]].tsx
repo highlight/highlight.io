@@ -26,7 +26,7 @@ import { DOCS_REDIRECTS } from '../../middleware';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
 import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github';
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
-import { getDocsTypographyRenderer } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
+import { generateIdString, getDocsTypographyRenderer, getIdFromHeaderProps } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
 
@@ -306,21 +306,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath);
-
-  var newContent = "";
-  // write the regex pattern to return all indices of the strings in the form [text](link)
-  const regex = /\[(.*?)\]\((.*?)\)/g;
-  // replace all of the links in the markdown file
-  newContent = content.replaceAll(regex, (_, text, link) => {
-    if (link.startsWith("http") || link.startsWith("mailto")) {
-      return `[${text}](${link})`;
-    }
-    var absolutePath = path.resolve(currentDoc.rel_path, "..", link).replace(".md", "");
-    absolutePath = removeOrderingPrefix(absolutePath);
-    const withDocs = path.join("/docs", absolutePath);
-    return `[${text}](${withDocs})`;
-  });
-
+  const newContent = resolveEmbeddedLinksFromMarkdown(content, currentDoc.rel_path);
 
   const serialized = await serialize(newContent);
   return {
@@ -875,8 +861,10 @@ const DocPage = ({
                       components={{
                         DocsCard,
                         DocsCardGroup,
-                        h1: (props) => <h3 {...props} />,
-                        h2: (props) => <h4 {...props} />,
+                        h1: (props) => <h4 {...props} />,
+                        h2: (props) => {
+                          return <h5 id={generateIdString(props.children as string)} {...props} />;
+                        },
                         h3: (props) => <h6 {...props} />,
                         h4: (props) => <h6 {...props} />,
                         h5: (props) => <h6 {...props} />,
@@ -977,5 +965,26 @@ const DocsCard = ({ children, title, href }: React.PropsWithChildren<{ title: st
   );
 }
 
+// function that takes a markdown string, and replaces all of the relative links with links in the form "/docs..."
+// relativePath is the relative path of the doc that this link lives in.
+const resolveEmbeddedLinksFromMarkdown = (markdownContent: string, relativePath: string): string => {
+  const regex = /\[(.*?)\]\((.*?)\)/g;
+  // replace all of the links in the markdown file
+  const newContent = markdownContent.replaceAll(regex, (_, text, link) => {
+    if (link.startsWith("http") || link.startsWith("mailto")) {
+      return `[${text}](${link})`;
+    }
+    return `[${text}](${resolveEmbeddedLink(link, relativePath)})`;
+  });
+
+  return newContent;
+}
+
+const resolveEmbeddedLink = (linkString: string, relativePath: string): string => {
+  var absolutePath = path.resolve(relativePath, "..", linkString).replace(".md", "");
+  absolutePath = removeOrderingPrefix(absolutePath);
+  const withDocs = path.join("/docs", absolutePath);
+  return withDocs;
+}
 
 export default DocPage;
