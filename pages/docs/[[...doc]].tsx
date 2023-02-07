@@ -1,34 +1,32 @@
-import { promises as fsp } from 'fs';
-import { GetStaticPaths, GetStaticProps } from 'next/types';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import {promises as fsp} from 'fs';
+import {GetStaticPaths, GetStaticProps} from 'next/types';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from '../../components/Docs/Docs.module.scss';
-import remarkGfm from 'remark-gfm';
 import yaml from 'js-yaml';
 import ChevronDown from '../../public/images/ChevronDownIcon';
 import Minus from '../../public/images/MinusIcon';
-import { Collapse } from 'react-collapse';
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import {Collapse} from 'react-collapse';
+import {serialize} from 'next-mdx-remote/serialize'
+import {MDXRemote, MDXRemoteSerializeResult} from 'next-mdx-remote'
 
 import path from 'path';
-import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa';
+import {FaDiscord, FaGithub, FaTwitter} from 'react-icons/fa';
 
 import Navbar from '../../components/common/Navbar/Navbar';
 import Link from 'next/link';
-import { Typography } from '../../components/common/Typography/Typography';
+import {Typography} from '../../components/common/Typography/Typography';
 import matter from 'gray-matter';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
-import { Meta } from '../../components/common/Head/Meta';
-import { DOCS_REDIRECTS } from '../../middleware';
+import {useRouter} from 'next/router';
+import {BiChevronLeft, BiChevronRight} from 'react-icons/bi';
+import {Meta} from '../../components/common/Head/Meta';
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar';
-import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github';
-import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
-import { generateIdString, getDocsTypographyRenderer, getIdFromHeaderProps } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
+import {IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix} from '../api/docs/github';
+import {DocSection} from '../../components/Docs/DocLayout/DocLayout';
+import {generateIdString} from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import {HighlightCodeBlock} from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
+import {Callout} from "../../components/Docs/Callout/Callout";
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
 const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`;
@@ -872,7 +870,9 @@ const DocPage = ({
                         h5: (props) => <h6 {...props} />,
                         code: (props) => {
                           // check if props.children is a string
-                          if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
+                          if (props.children && props.className === 'language-hint') {
+                            return <Callout content={props.children as string} />
+                          } else if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
                             return (<HighlightCodeBlock
                               language={'js'}
                               text={props.children}
