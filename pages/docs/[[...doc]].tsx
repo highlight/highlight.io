@@ -29,7 +29,6 @@ import { DocSection } from '../../components/Docs/DocLayout/DocLayout';
 import { generateIdString, getDocsTypographyRenderer, getIdFromHeaderProps } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer';
 import DocSelect from '../../components/Docs/DocSelect/DocSelect';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
-import { DocsCard, DocsCardGroup } from './DocsCard';
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content');
 
@@ -968,6 +967,24 @@ const resolveEmbeddedLink = (linkString: string, relativePath: string): string =
   absolutePath = removeOrderingPrefix(absolutePath);
   const withDocs = path.join("/docs", absolutePath);
   return withDocs;
+}
+
+// component with children
+const DocsCardGroup = ({ children }: React.PropsWithChildren) => {
+  return (
+    <div className={styles.docsCardGroup}>
+      {children}
+    </div>
+  );
+}
+
+const DocsCard = ({ children, title, href }: React.PropsWithChildren<{ title: string, href: string }>) => {
+  return (
+    <Link href={href} className={styles.docsCard}>
+      <Typography type='copy2' emphasis>{title}</Typography>
+      <Typography type='copy2' >{children}</Typography>
+    </Link>
+  );
 }
 
 export default DocPage;
