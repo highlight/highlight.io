@@ -888,7 +888,7 @@ const DocPage = ({
                                 return (
                                   c.props &&
                                   <li className={styles.listItem} key={i}>
-                                    {c.props.children.map((e: any) => e)}
+                                    {c?.props?.children?.map((e: any) => e)}
                                   </li>
                                 );
                               })
