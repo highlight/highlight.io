@@ -187,11 +187,11 @@ export const getDocsPaths = async (
       const hasRequiredMetadata = ['title'].every((item) =>
         data.hasOwnProperty(item)
       );
-      if (!hasRequiredMetadata) {
-        throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title" are required. `
-        );
-      }
+      // if (!hasRequiredMetadata) {
+      //   throw new Error(
+      //     `${total_path} does not contain all required metadata fields. Fields "title" are required. `
+      //   );
+      // }
 
       paths.push({
         simple_path: pp,
@@ -873,6 +873,8 @@ const DocPage = ({
                   {markdownText &&
                     <MDXRemote
                       components={{
+                        DocsCard,
+                        DocsCardGroup,
                         h1: (props) => <h3 {...props} />,
                         h2: (props) => <h4 {...props} />,
                         h3: (props) => <h6 {...props} />,
@@ -956,5 +958,24 @@ const DocPage = ({
     </>
   );
 };
+
+// component with children
+const DocsCardGroup = ({ children }: React.PropsWithChildren) => {
+  return (
+    <div className={styles.docsCardGroup}>
+      {children}
+    </div>
+  );
+}
+
+const DocsCard = ({ children, title, href }: React.PropsWithChildren<{ title: string, href: string }>) => {
+  return (
+    <Link href={href} className={styles.docsCard}>
+      <Typography type='copy2' emphasis>{title}</Typography>
+      <Typography type='copy2' >{children}</Typography>
+    </Link>
+  );
+}
+
 
 export default DocPage;
