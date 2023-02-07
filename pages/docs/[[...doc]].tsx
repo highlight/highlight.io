@@ -52,7 +52,7 @@ export interface DocPath {
 }
 
 type DocData = {
-  markdownText?: MDXRemoteSerializeResult;
+  markdownText: MDXRemoteSerializeResult | null;
   markdownTextOG?: string;
   relPath?: string;
   slug: string;
@@ -308,11 +308,10 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   const { content } = await readMarkdown(fsp, absPath);
   const newContent = resolveEmbeddedLinksFromMarkdown(content, currentDoc.rel_path);
 
-  const serialized = await serialize(newContent);
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: serialized,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent) : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
