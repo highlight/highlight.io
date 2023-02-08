@@ -1,6 +1,6 @@
 ---
-title: React.js Integration
-slug: reactjs-integration
+title: React.js Error Boundary
+slug: reactjs-error-boundary
 createdAt: 2021-09-14T02:03:51.000Z
 updatedAt: 2022-09-08T21:45:54.000Z
 ---
@@ -11,7 +11,7 @@ Highlight ships [`@highlight-run/react`](https://github.com/highlight/react) whi
 
 Highlight provides an `ErrorBoundary` to help you provide a better experience for your users when your application crashes. Using an `ErrorBoundary` gives your application an opportunity to recover from a bad state.
 
-Highlight also allows you to show a crash report powered by [User Feedback](../6_product-features/user-feedback.md). A crash report is shown in the session when the crash happens, giving you the context for the user feedback.
+Highlight also allows you to show a crash report powered by [User Feedback](../../../6_product-features/user-feedback.md). A crash report is shown in the session when the crash happens, giving you the context for the user feedback.
 
 ```typescript
 import { ErrorBoundary } from '@highlight-run/react'
@@ -86,7 +86,7 @@ The strings used for the Highlight crash report.
 
 `user`
 
-Allows you to attach additional user information to the feedback report. If you've called [`H.identify()`](../../sdk/client.md#Hidentify) in your application before, you won't have to set this, Highlight will infer the user's identity.
+Allows you to attach additional user information to the feedback report. If you've called [`H.identify()`](../../../../sdk/client.md) in your application before, you won't have to set this, Highlight will infer the user's identity.
 
 `title`
 
