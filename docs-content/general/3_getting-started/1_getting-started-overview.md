@@ -12,7 +12,7 @@ A session in Highlight starts in the client.
 
 Highlight supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Beyond that, to make integration even easier, we have official support for the following frameworks:
 
--   [React.js](./client-sdk/reactjs.md)
+-   [React.js](./client-sdk/react-js/overview.md)
 
 -   [Next.js](./client-sdk/nextjs.md)
 

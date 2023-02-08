@@ -226,7 +226,7 @@ slug: client
 <section className="section">
   <div className="left">
     <h3>H.getSessionDetails</h3> 
-    <p>This method is used to get the Highlight session URL. This method provides the same URL as H.getSessionUrl() but this also gives you a URL for the exact time (relative to the session recording) the method is called. For example, an error is thrown in your app and you want to save the Highlight session URL to another app (Mixpanel, Sentry, Amplitude, etc.). If you just want a URL to the session, you can save url. If you want a URL that sets the player to the time of when the error is called, you can save urlWithTimestamp. See [Sentry Integration](../general/7_integrations/sentry-integration.md) for one example use case.</p>
+    <p>This method is used to get the Highlight session URL. This method provides the same URL as H.getSessionUrl() but this also gives you a URL for the exact time (relative to the session recording) the method is called. For example, an error is thrown in your app and you want to save the Highlight session URL to another app (Mixpanel, Sentry, Amplitude, etc.). If you just want a URL to the session, you can save url. If you want a URL that sets the player to the time of when the error is called, you can save urlWithTimestamp.</p>
     <aside className="parameter">
       <h5>Returns <code>Promise&lt;{url: string, urlWithTimestamp: string}&gt;</code></h5>
       <article className="innerParameterContainer">
@@ -253,7 +253,7 @@ slug: client
 <section className="section">
   <div className="left">
     <h3>H.getSessionURL</h3> 
-    <p>This method is used to get the Highlight session URL for the current recording session. This is useful to use if you'd like to send the session URL to another application. See H.getSessionDetails() if you want to get the URL with the current time. See [Sentry Integration](../general/7_integrations/sentry-integration.md) for one example use case.</p>
+    <p>This method is used to get the Highlight session URL for the current recording session. This is useful to use if you'd like to send the session URL to another application. See H.getSessionDetails() if you want to get the URL with the current time.</p>
     <aside className="parameter">
       <h5>Returns<code>string<string></code></h5>
     </aside>
