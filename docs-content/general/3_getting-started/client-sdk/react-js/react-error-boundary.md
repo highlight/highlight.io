@@ -26,6 +26,7 @@ const App = () => (
 ## Examples
 
 ### Showing the feedback modal when a crash happens
+
 ![](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/2VUVTR1ot591xUfJZSc3m_2022-01-1213-17.png)
 
 ```typescript
