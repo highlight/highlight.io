@@ -312,10 +312,17 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     currentDoc.rel_path,
   )
 
+  const newerContent = resolveEmbeddedLinksFromHref(
+    content,
+    currentDoc.rel_path,
+  )
+
+  console.log('ewn', newerContent);
+
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent, { scope: { path: currentDoc.rel_path } }) : null,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(newerContent, { scope: { path: currentDoc.rel_path } }) : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
@@ -1025,6 +1032,24 @@ const resolveEmbeddedLinksFromMarkdown = (
   return newContent
 }
 
+
+const resolveEmbeddedLinksFromHref = (
+  markdownContent: string,
+  relativePath: string,
+): string => {
+  // regex for matching text in the form href="..."
+  const hrefRegex = /href="(.*)"/g
+  // replace all of the links in the markdown file
+  const newContent = markdownContent.replaceAll(hrefRegex, (_, text) => {
+    if (text.startsWith('http') || text.startsWith('mailto') || text.startsWith('/images')) {
+      return `href="${text}"`
+    }
+    return `href="${resolveEmbeddedLink(text, relativePath)}"`
+  })
+
+  return newContent
+}
+
 const resolveEmbeddedLink = (
   linkString: string,
   relativePath: string,
@@ -1049,7 +1074,7 @@ const DocsCard = ({
   href,
 }: React.PropsWithChildren<{ title: string; href: string; path: string; }>) => {
   return (
-    <Link href={resolveEmbeddedLink(href, path)} className={styles.docsCard}>
+    <Link href={href} className={styles.docsCard}>
       <Typography type="copy2" emphasis>
         {title}
       </Typography>
