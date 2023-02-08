@@ -1,9 +1,6 @@
 import { promises as fsp } from 'fs'
-import Image from "next/image";
-
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React, { useEffect, useRef, useState } from 'react'
-
 import styles from '../../components/Docs/Docs.module.scss'
 import yaml from 'js-yaml'
 import ChevronDown from '../../public/images/ChevronDownIcon'
