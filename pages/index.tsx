@@ -201,14 +201,14 @@ const Home: NextPage = () => {
           <LandingInfoRow
             title={`Support for all the modern frameworks.`}
             desc={`We support all the fancy new frameworks and our platform is powered by open source, scalable technologies.`}
-            link={"/docs/general/company/open-source/contributing"}
+            link={"/docs/general/getting-started/getting-started-overview"}
             linkText={"Read the docs"}
             imgSrc={LandingInfoRow2}
           />
           <LandingInfoRow
             title={`Integrations with your favorite tools.`}
             desc="Connect your favorite issue tracker, support tool, or even analytics software and we’ll give you a way to push and pull data in the right places."
-            link={"/docs/general/integrations"}
+            link={"/docs/general/integrations/overview"}
             linkText={"Read the docs"}
             imgSrc={LandingInfoRow3}
             invert
@@ -218,7 +218,7 @@ const Home: NextPage = () => {
           <InfoRow
             title={`Built with compliance and security.`}
             desc="Whether its SOC 2, HIPAA, or ISO, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
-            link={"/docs/general/session-replay/privacy"}
+            link={"/docs/general/company/compliance-and-security"}
             imgSrc={LandingInfoRowSecurity}
           />
         </div>
