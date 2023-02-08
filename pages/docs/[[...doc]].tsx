@@ -1,6 +1,10 @@
 import { promises as fsp } from 'fs'
+import Image from "next/image";
+
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React, { useEffect, useRef, useState } from 'react'
+import imageSize from "rehype-img-size";
+
 import styles from '../../components/Docs/Docs.module.scss'
 import yaml from 'js-yaml'
 import ChevronDown from '../../public/images/ChevronDownIcon'
@@ -315,7 +319,9 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent) : null,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(
+        newContent, { mdxOptions: { rehypePlugins: [[imageSize, { dir: "public" }]] } }
+      ) : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
@@ -881,6 +887,7 @@ const DocPage = ({
             >
               {metadata ? metadata.title : ''}
             </h3>
+            {/* {console.log(markdownTextOG)} */}
             {isSdkDoc ? (
               <DocSection content={markdownTextOG || ''} />
             ) : (
@@ -889,6 +896,10 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
+                        image: (props) => {
+                          console.log("image props", props);
+                          return null;
+                        },
                         DocsCard,
                         DocsCardGroup,
                         h1: (props) => <h4 {...props} />,
@@ -1016,7 +1027,7 @@ const resolveEmbeddedLinksFromMarkdown = (
   const regex = /\[(.*?)\]\((.*?)\)/g
   // replace all of the links in the markdown file
   const newContent = markdownContent.replaceAll(regex, (_, text, link) => {
-    if (link.startsWith('http') || link.startsWith('mailto')) {
+    if (link.startsWith('http') || link.startsWith('mailto') || link.startsWith('/images')) {
       return `[${text}](${link})`
     }
     return `[${text}](${resolveEmbeddedLink(link, relativePath)})`
