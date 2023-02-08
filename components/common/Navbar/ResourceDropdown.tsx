@@ -3,7 +3,6 @@ import { Popover, Transition } from '@headlessui/react'
 import { Typography } from '../Typography/Typography';
 import { useState } from 'react';
 
-
 import { FaChevronDown } from 'react-icons/fa';
 import * as Icons from "react-icons/hi";
 

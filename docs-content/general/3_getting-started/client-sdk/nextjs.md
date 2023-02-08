@@ -34,6 +34,10 @@ H.init(
 
 ### Example
 
+```hint
+Using the new `/app` directory in Next.js 13? Refer to [this guide](../fullstack-frameworks/next-js/next-13-considerations.md) to ensure you're using a client component.
+```
+
 ```typescript
 import type { AppProps } from 'next/app'
 import { H } from 'highlight.run'
@@ -53,7 +57,7 @@ export default MyApp
 
 ## Verify
 
-Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.io/sessions> a few seconds after recording has started.
+Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on [app.highlight.io/sessions](https://app.highlight/sessions) a few seconds after recording has started.
 
 ## Next Steps
 

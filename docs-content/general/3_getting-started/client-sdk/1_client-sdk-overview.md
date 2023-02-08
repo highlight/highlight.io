@@ -13,7 +13,7 @@ For a more comprehensive tour of our client sdk, visit our [client reference pag
 
 Get started with one of these guides if you're using a listed framework:
 
--   [React.js](./reactjs.md)
+-   [React.js](./react-js/overview.md)
 
 -   [Next.js](./nextjs.md)
 
@@ -69,7 +69,7 @@ ReactDOM.render(
 
 ## Verify
 
-Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on <https://app.highlight.io/sessions> a few seconds after recording has started.
+Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on [app.highlight.io/sessions](https://app.highlight/sessions) a few seconds after recording has started.
 
 ## Next Steps
 

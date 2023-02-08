@@ -2,6 +2,42 @@
 	display: flex;
 }
 
+.docsCard {
+  border: 1px solid var(--color-divider-on-dark);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 !important;
+  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  transition: border 0.2s ease;
+  color: var(--copy-on-dark);
+  &:hover {
+    border: 1px solid var(--color-yellow-300);
+    color: var(--copy-on-dark);
+  }
+}
+
+.docsCardGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+  flex-wrap: wrap;
+  margin: 34px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .docsCardGroup {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docsCardPara {
+  p {
+    margin: 0 !important;
+  }
+}
+
 .leftSection {
 	display: flex;
 	flex-direction: column;
