@@ -52,7 +52,7 @@ ReactDOM.render(
 ```
 
 ```hint
-For more details about our error boundary api, take a look [here](./react-error-boundary.md)
+For more details about our error boundary api, including a short API reference, take a look [here](./react-error-boundary.md).
 ```
 
 ## Verify
