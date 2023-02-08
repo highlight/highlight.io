@@ -3,7 +3,6 @@ import Image from "next/image";
 
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React, { useEffect, useRef, useState } from 'react'
-import imageSize from "rehype-img-size";
 
 import styles from '../../components/Docs/Docs.module.scss'
 import yaml from 'js-yaml'
@@ -319,9 +318,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: !currentDoc.isSdkDoc ? await serialize(
-        newContent, { mdxOptions: { rehypePlugins: [[imageSize, { dir: "public" }]] } }
-      ) : null,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent) : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
@@ -896,10 +893,6 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
-                        image: (props) => {
-                          console.log("image props", props);
-                          return null;
-                        },
                         DocsCard,
                         DocsCardGroup,
                         h1: (props) => <h4 {...props} />,

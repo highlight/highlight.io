@@ -6264,13 +6264,6 @@ image-size@^0.9.3:
   dependencies:
     queue "6.0.2"
 
-image-size@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/image-size/-/image-size-1.0.2.tgz#d778b6d0ab75b2737c1556dd631652eb963bc486"
-  integrity sha512-xfOoWjceHntRb3qFCrh5ZFORYH8XCdYpASltMhZ/Q0KZiOwjdE/Yl2QCiWdwD+lygV5bMCvauzgu5PxBX/Yerg==
-  dependencies:
-    queue "6.0.2"
-
 immutable@^4.0.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/immutable/-/immutable-4.1.0.tgz"
@@ -8860,14 +8853,6 @@ rehype-image-size@^1.0.0:
     image-size "^0.9.3"
     unist-util-visit "^2.0.3"
 
-rehype-img-size@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/rehype-img-size/-/rehype-img-size-1.0.1.tgz#13488d1500b778df1d98f32025fece2c1fa77b9c"
-  integrity sha512-+rLkxF2H3mQULAg3iA2Z2spJQlBcCpApG8sHC47bc0p33ol+ddz+O3gyUcTgk5xX5jGaj1oQOBs/cBy8nIIhoQ==
-  dependencies:
-    image-size "^1.0.0"
-    unist-util-visit "^4.1.0"
-
 remark-gfm@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/remark-gfm/-/remark-gfm-3.0.1.tgz"
@@ -9715,15 +9700,6 @@ unist-util-visit@^4.0.0:
   version "4.1.1"
   resolved "https://registry.npmjs.org/unist-util-visit/-/unist-util-visit-4.1.1.tgz"
   integrity sha512-n9KN3WV9k4h1DxYR1LoajgN93wpEi/7ZplVe02IoB4gH5ctI1AaF2670BLHQYbwj+pY83gFtyeySFiyMHJklrg==
-  dependencies:
-    "@types/unist" "^2.0.0"
-    unist-util-is "^5.0.0"
-    unist-util-visit-parents "^5.1.1"
-
-unist-util-visit@^4.1.0:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-4.1.2.tgz#125a42d1eb876283715a3cb5cceaa531828c72e2"
-  integrity sha512-MSd8OUGISqHdVvfY9TPhyK2VdUrPgxkUtWSuMHF6XAAFuL4LokseigBnZtPnJMu+FbynTkFNnFlyjxpVKujMRg==
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-is "^5.0.0"
