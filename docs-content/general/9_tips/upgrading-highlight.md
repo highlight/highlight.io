@@ -21,7 +21,7 @@ yarn upgrade highlight.run@latest
 
 ## HTML/CDN
 
-Replace the Highlight snippet in your `index.html` with the one on <https://app.highlight.io/setup>.
+Replace the Highlight snippet in your `index.html` with the one on [https://app.highlight.io/setup](https://app.highlight.io/setup).
 
 ## Changelog
 

@@ -15,6 +15,9 @@ export const contentRender: string
 export const contentSection: string
 export const customComponent: string
 export const docLink: string
+export const docsCard: string
+export const docsCardGroup: string
+export const docsCardPara: string
 export const docSearchbar: string
 export const docSelect: string
 export const docSelectList: string

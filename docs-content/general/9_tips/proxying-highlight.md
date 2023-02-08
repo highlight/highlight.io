@@ -17,7 +17,7 @@ One way we can avoid this is by setting up proxy from your domain to Highlight. 
 
 ## Setting up the proxy
 
-1.  Upgrade to the Startup Tier (<https://www.highlight.run/pricing>)
+1.  Upgrade to the Startup Tier [https://www.highlight.run/pricing](https://www.highlight.run/pricing)
 
 2.  On your domain, add a `CNAME` record that points `highlight.<YOUR_DOMAIN>` to `pub.highlight.run`
 
