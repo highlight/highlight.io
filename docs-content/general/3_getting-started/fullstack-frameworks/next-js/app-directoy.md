@@ -13,8 +13,6 @@ In order to do this, we recommend creating a client component within your Next.j
 
 Take a look at the example below, or for a full project, refer to this [sample github app](https://github.com/highlight/nextjs-13-sample).
 
-In the `layout.tsx` file below, keep the imported component within the `<body></body>` component so that client-side hydration works correctly.
-
 ```typescript
 // app/highlight.tsx
 'use client';
@@ -31,6 +29,8 @@ const Highlight = () => {
 
 export default Highlight;
 ```
+
+In the `layout.tsx` file below, keep the imported component within the `<body></body>` component so that client-side hydration works correctly.
 
 ```typescript
 // app/layout.tsx
