@@ -28,7 +28,12 @@ export const CompaniesReel = () => {
       </div>
       <div className={styles.customerReel}>
         <div className={styles.companies}>
-          <Image src={Pipe} alt="Pipe" className={styles.scaleHeight} style={{ transform: 'scale(0.9)' }} />
+          <Image
+            src={Pipe}
+            alt="Pipe"
+            className={styles.scaleHeight}
+            style={{ transform: 'scale(0.9)' }}
+          />
           <Image src={Portal} alt="Portal" className={styles.scaleHeight} />
           <Image src={Dripos} alt="Dripos" className={styles.scaleHeight} />
           <Image src={Knock} alt="Knock" className={styles.scaleHeight} />

@@ -25,7 +25,7 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { GraphQLRequest } from '../../utils/graphql'
 import { getTagUrl, PostTag } from '../../components/Blog/Tag'
 import { PostAuthor } from '../../components/Blog/Author'
-import { Comments } from '../../components/Comments/Comments';
+import { Comments } from '../../components/Comments/Comments'
 
 const NUM_SUGGESTED_POSTS = 3
 
@@ -191,7 +191,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const suggestedPosts = []
   // suggest N random posts that are not the current post
   for (let i = 0; i < Math.min(NUM_SUGGESTED_POSTS, posts.length - 1); i++) {
-    suggestedPosts.push(otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0])
+    suggestedPosts.push(
+      otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0],
+    )
   }
 
   const postSections: PostSection[] = []
@@ -309,9 +311,13 @@ const PostPage = ({
     // because at that point the page height is finalized
   }, [postSections])
 
-  const isStartupStack = post.tags_relations.filter((t) => t.name.toLocaleLowerCase().includes('stack')).length > 0
+  const isStartupStack =
+    post.tags_relations.filter((t) =>
+      t.name.toLocaleLowerCase().includes('stack'),
+    ).length > 0
 
-  const singleTag = post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
+  const singleTag =
+    post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
 
   return (
     <>
@@ -326,11 +332,16 @@ const PostPage = ({
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.blogSection)}>
             <Typography type="copy2">
-              <p className={styles.dateDiv}>{`${new Date(post.publishedAt).toLocaleDateString('en-US', {
+              <p className={styles.dateDiv}>{`${new Date(
+                post.publishedAt,
+              ).toLocaleDateString('en-US', {
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${post.readingTime || Math.floor(post.richcontent.markdown.split(' ').length / 200)} min read`}</p>
+              })} • ${
+                post.readingTime ||
+                Math.floor(post.richcontent.markdown.split(' ').length / 200)
+              } min read`}</p>
             </Typography>
             <Comments slug={post.slug} />
             <h1 className={styles.blogText}>{post.title}</h1>
