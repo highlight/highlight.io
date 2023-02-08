@@ -1,6 +1,6 @@
 ---
-title: Front Plugin
-slug: front-plugin
+title: Front Integration
+slug: front-integration
 createdAt: 2022-09-08T23:51:48.000Z
 updatedAt: 2022-10-12T16:58:46.000Z
 ---

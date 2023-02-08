@@ -1,12 +1,12 @@
 ---
-title: React.js
-slug: reactjs
+title: React.js Overview
+slug: reactjs-overview
 createdAt: 2021-09-13T22:48:34.000Z
 updatedAt: 2022-05-26T17:21:00.000Z
 ---
 
 ```hint
-Reference our [client-side sdk docs](../../../sdk/client.md) for advanced functionality and our [fullstack mapping guide](../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
+Reference our [client-side sdk docs](../../../../sdk/client.md) for advanced functionality and our [fullstack mapping guide](../../2_frontend-backend-mapping.md) on pairing backend errors with your replay.
 ```
 ## Installing the SDK
 
@@ -51,6 +51,10 @@ ReactDOM.render(
 )
 ```
 
+```hint
+For more details about our error boundary api, including a short API reference, take a look [here](./react-error-boundary.md).
+```
+
 ## Verify
 
 Start your app, go to it in the browser, then click around. Highlight will be recording your session and it will show up on [app.highlight.io/sessions](https://app.highlight/sessions) a few seconds after recording has started.
@@ -59,8 +63,8 @@ Start your app, go to it in the browser, then click around. Highlight will be re
 
 After installing Highlight for your frontend application, there are a few other things you should check out about our Session Replay product, namely:
 
-- [Privacy Controls](../../4_session-replay/privacy.md)
+- [Privacy Controls](../../../4_session-replay/privacy.md)
 
-- [Network Request Recording](../../4_session-replay/recording-network-requests-and-responses.md)
+- [Network Request Recording](../../../4_session-replay/recording-network-requests-and-responses.md)
 
-- [Backend Setup Guides](../backend-sdk/backend-sdk-overview.md)
+- [Backend Setup Guides](../../backend-sdk/backend-sdk-overview.md)
