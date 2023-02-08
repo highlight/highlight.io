@@ -1016,7 +1016,7 @@ const resolveEmbeddedLinksFromMarkdown = (
   const regex = /\[(.*?)\]\((.*?)\)/g
   // replace all of the links in the markdown file
   const newContent = markdownContent.replaceAll(regex, (_, text, link) => {
-    if (link.startsWith('http') || link.startsWith('mailto')) {
+    if (link.startsWith('http') || link.startsWith('mailto') || link.startsWith('/images')) {
       return `[${text}](${link})`
     }
     return `[${text}](${resolveEmbeddedLink(link, relativePath)})`
