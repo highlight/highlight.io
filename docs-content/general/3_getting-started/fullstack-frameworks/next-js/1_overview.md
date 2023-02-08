@@ -19,6 +19,10 @@ The features in this SDK require the Highlight client SDK to be installed, so pl
 
 For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should set `backendUrl`. See [H.init()](../../../../sdk/client.md#Hinit) for more details.
 
+```hint
+Using the new `/app` directory in Next.js 13? Refer to [this guide](../fullstack-frameworks/next-js/app-directoy.md) to ensure you're using a client component.
+```
+
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
     ...
