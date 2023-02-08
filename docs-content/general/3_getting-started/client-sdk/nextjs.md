@@ -35,7 +35,7 @@ H.init(
 ### Example
 
 ```hint
-Using the new `/app` directory in Next.js 13? Refer to [this guide](../fullstack-frameworks/next-js/app-directoy.md) to ensure you're using a client component.
+Using the new `/app` directory in Next.js 13? Refer to [this guide](../fullstack-frameworks/next-js/next-13-considerations.md) to ensure you're using a client component.
 ```
 
 ```typescript
