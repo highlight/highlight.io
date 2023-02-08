@@ -16,7 +16,7 @@ Take a look at the example below, or for a full project, refer to this [sample g
 'use client';
 
 import {H} from 'highlight.run';
-H.init('odzq93dp', {
+H.init('<YOUR_PROJECT_ID>', {
   environment: 'production',
   enableStrictPrivacy: false,
 });
