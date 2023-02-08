@@ -21,7 +21,7 @@ const InfoRow = ({
   imgSrc: any;
 }) => {
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-center gap-16 lg:mt-32 xl:gap-32">
+    <div className="flex flex-col lg:flex-row justify-center items-center gap-16 xl:gap-32">
       <div className={`${invert ? "lg:hidden " : ""} flex justify-center lg:w-[570px]`}>
         <Image src={imgSrc} alt="" />
       </div>
@@ -30,7 +30,7 @@ const InfoRow = ({
           {title}
         </h3>
         <Typography type="copy2" onDark>
-          <p className="text-color-copy-on-dark text-2xl">
+          <p className="text-color-copy-on-dark ">
             {desc}
           </p>
         </Typography>

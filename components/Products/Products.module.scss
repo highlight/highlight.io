@@ -105,7 +105,8 @@
 	flex-direction: column;
 	align-items: stretch;
 	position: relative;
-	gap: var(--size-xxLarge);
+	gap: 96px;
+	margin-top: var(--size-xxxLarge);
 }
 
 @media screen and (max-width: 600px) {

@@ -25,7 +25,7 @@ const LandingInfoRow = ({
 }) => {
   return (
     <div className={styles.landingInfoRow}>
-      <div className={`${invert ? "lg:hidden" : ""} flex justify-center px-5 min-h-[200px] sm:h-[300px] lg:h-auto lg:w-[570px]`}>
+      <div className={`${invert ? "lg:hidden" : ""} flex justify-center px-5 mt-5 min-h-[200px] sm:h-[300px] lg:h-auto lg:w-[570px]`}>
         <Image className="" src={imgSrc} alt="" />
       </div>
       <div className="flex md:hidden w-full h-[1px] bg-divider-on-dark"> </div>
@@ -35,13 +35,13 @@ const LandingInfoRow = ({
             {title}
           </h3>
           <Typography type="copy2" onDark>
-            <p className="text-color-copy-on-dark text-2xl">
+            <p className="text-color-copy-on-dark md:text-xl">
               {desc}
             </p>
           </Typography>
         </div>
         <div className="flex justify-start">
-          <PrimaryButton href={link} className={classNames(productStyles.hollowButton, productStyles.docsButton, "mt-5")}>
+          <PrimaryButton href={link} className={classNames(productStyles.hollowButton, productStyles.docsButton, "lg:mt-5")}>
             <Typography type="copy2" emphasis={true}>{linkText}</Typography>
           </PrimaryButton>
         </div>
