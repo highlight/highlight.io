@@ -884,7 +884,6 @@ const DocPage = ({
             >
               {metadata ? metadata.title : ''}
             </h3>
-            {/* {console.log(markdownTextOG)} */}
             {isSdkDoc ? (
               <DocSection content={markdownTextOG || ''} />
             ) : (
