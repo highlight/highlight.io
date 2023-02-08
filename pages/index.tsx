@@ -182,8 +182,8 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature} id="features">
             <div className={styles.anchorTitle}>
               <h2>
-                The monitoring platform for{' '}
-                <span className={styles.highlightedText}>fast-moving teams.</span>{' '}
+                Web application monitoring for {' '}
+                <span className={styles.highlightedText}>today&#39;s developer.</span>{' '}
               </h2>
             </div>
           </div>
@@ -217,7 +217,7 @@ const Home: NextPage = () => {
         <div className={styles.infoContainer}>
           <InfoRow
             title={`Built with compliance and security.`}
-            desc="Whether its soc2, hippaa or iso, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
+            desc="Whether its SOC 2, HIPAA, or ISO, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
             link={"/docs/general/session-replay/privacy"}
             imgSrc={LandingInfoRowSecurity}
           />

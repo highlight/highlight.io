@@ -334,12 +334,14 @@
 }
 
 .anchorTitle {
+	padding-top: 100px;
 	max-width: 840px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 	margin: auto;
+	margin-bottom: 0px;
 }
 
 .anchorFeature {
@@ -798,8 +800,8 @@
 	margin: 0 auto;
 	margin-bottom: var(--size-xxxLarge);
 	padding: 25px var(--size-medium);
+	padding-top: 0px;
 	gap: var(--size-xLarge);
-	margin-bottom: var(--size-xxxLarge);
 }
 
 .landingInfoRow {
@@ -808,7 +810,7 @@
 	flex-shrink: 0;
 	align-items: center;
 	gap: 96px;
-	padding: var(--size-xLarge) 0;
+	padding-bottom: var(--size-xLarge);
 	border-radius: var(--size-xSmall);
 }
 
@@ -1034,6 +1036,7 @@
 		width: 80vw;
 		gap: var(--size-xLarge);
 		flex-direction: column;
+		padding-top: var(--size-xLarge);
 	}
 }
 
