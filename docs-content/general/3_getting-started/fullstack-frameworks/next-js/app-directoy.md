@@ -1,17 +1,19 @@
 ---
-title: Next.JS
+title: Next.JS 13 Considerations
 slug: nextjs-sdk
 createdAt: 2022-04-01T20:28:06.000Z
 updatedAt: 2022-10-18T22:40:13.000Z
 ---
 
-## Integrating highlight.io with the new app/ directory.
+## highlight.io with the new `app/` directory.
 
-Given that Next.js 13 supports the new app directory and defaults to using server components, when installing `highlight.io`, its important to make sure that highlight.io is being initialized on the client. 
+Given that Next.js 13 supports the new app directory and defaults to using server components, its important to make sure that highlight.io is being initialized on the client. 
 
 In order to do this, we recommend creating a client component within your Next.js `/app` directory, and then importing this component in your layout file of choice.
 
-Take a look at the example below, or refer to this [sample app]( https://github.com/highlight/nextjs-13-sample).
+Take a look at the example below, or for a full project, refer to this [sample github app](https://github.com/highlight/nextjs-13-sample).
+
+In the `layout.tsx` file below, keep the imported component within the `<body></body>` component so that client-side hydration works correctly.
 
 ```typescript
 // app/highlight.tsx
