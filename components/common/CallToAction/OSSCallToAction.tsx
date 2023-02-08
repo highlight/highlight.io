@@ -27,7 +27,7 @@ export const OSSCallToAction = () => {
               <div className="flex justify-center items-center gap-3">
                 <AiFillGithub className="w-6 h-6 mb-[1px]" />
                 <Typography type="copy2" emphasis={true}>
-                  Github Repo
+                  {window.innerWidth < 640 ? "Github" : "Github Repo"}
                 </Typography>
               </div>
             </PrimaryButton>
@@ -35,7 +35,7 @@ export const OSSCallToAction = () => {
               <div className="flex items-center gap-3">
                 <FaDiscord className="w-6 h-6" />
                 <Typography type="copy2" emphasis={true}>
-                  Discord Community
+                  {window.outerWidth < 640 ? "Discord" : "Discord Community"}
                 </Typography>
               </div>
             </PrimaryButton>

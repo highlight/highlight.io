@@ -30,7 +30,7 @@ const InfoRow = ({
           {title}
         </h3>
         <Typography type="copy2" onDark>
-          <p className="text-color-copy-on-dark ">
+          <p className="text-color-copy-on-dark md:text-xl">
             {desc}
           </p>
         </Typography>
