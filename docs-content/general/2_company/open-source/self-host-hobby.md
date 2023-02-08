@@ -7,6 +7,8 @@ updatedAt: 2022-04-15T02:07:22.000Z
 
 # Running Highlight
 
+To run our app locally, head to our [github repo](https://github.com/highlight/highlight) and clone the repository. Then follow the steps below.
+
 ## Docker Compose
 
 ```shell

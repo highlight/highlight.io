@@ -315,7 +315,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent) : null,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent, { scope: { path: currentDoc.rel_path } }) : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
@@ -1045,10 +1045,11 @@ const DocsCardGroup = ({ children }: React.PropsWithChildren) => {
 const DocsCard = ({
   children,
   title,
+  path,
   href,
-}: React.PropsWithChildren<{ title: string; href: string }>) => {
+}: React.PropsWithChildren<{ title: string; href: string; path: string; }>) => {
   return (
-    <Link href={href} className={styles.docsCard}>
+    <Link href={resolveEmbeddedLink(href, path)} className={styles.docsCard}>
       <Typography type="copy2" emphasis>
         {title}
       </Typography>
