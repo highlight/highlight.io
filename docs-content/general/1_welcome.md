@@ -22,21 +22,3 @@ updatedAt: 2022-08-18T22:36:12.000Z
         {"Open source, self hosting highlight, and contributing."}
     </DocsCard>
 </DocsCardGroup>
-
-### Features.
-
-### Getting started.
-<DocsCardGroup>
-    <DocsCard title="Mission & Values."  href="./2_company/1_values.md">
-        {"Details about our company, our values, and opensource."}
-    </DocsCard>
-    <DocsCard title="Compliance & Security."  href="./2_company/compliance-and-security.md">
-        {"Our security certificates, and contact details."}
-    </DocsCard>
-    <DocsCard title="Contributing to highlight.io"  href="./2_company/open-source/contributing.md">
-        {"Open source, self hosting highlight, and contributing."}
-    </DocsCard>
-    <DocsCard title="Self hosting highlight.io"  href="./2_company/open-source/self-host-hobby.md">
-        {"Open source, self hosting highlight, and contributing."}
-    </DocsCard>
-</DocsCardGroup>

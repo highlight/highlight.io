@@ -313,7 +313,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   )
 
   const newerContent = resolveEmbeddedLinksFromHref(
-    content,
+    newContent,
     currentDoc.rel_path,
   )
 
