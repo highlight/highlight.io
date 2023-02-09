@@ -1659,13 +1659,13 @@ __metadata:
   linkType: hard
 
 "@babel/types@npm:^7.8.3":
-  version: 7.21.0
-  resolution: "@babel/types@npm:7.21.0"
+  version: 7.20.7
+  resolution: "@babel/types@npm:7.20.7"
   dependencies:
     "@babel/helper-string-parser": ^7.19.4
     "@babel/helper-validator-identifier": ^7.19.1
     to-fast-properties: ^2.0.0
-  checksum: dbcdda202b3a2bfd59e4de880ce38652f1f8957893a9751be069ac86e47ad751222070fe6cd92220214d77973f1474e4e1111c16dc48199dfca1489c0ee8c0c5
+  checksum: b39af241f0b72bba67fd6d0d23914f6faec8c0eba8015c181cbd5ea92e59fc91a52a1ab490d3520c7dbd19ddb9ebb76c476308f6388764f16d8201e37fae6811
   languageName: node
   linkType: hard
 
@@ -4965,63 +4965,63 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/functions-js@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@supabase/functions-js@npm:2.1.0"
+"@supabase/functions-js@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@supabase/functions-js@npm:2.0.0"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: 231addfa49c1b109ddcc219dd8ed6b83e87cf2516cf7cf2742330176baa794d99a78694ff7f748fffa920f37a8078352822611d84ff43c8bc293c4d4486134fd
+  checksum: 023d1bf17a7e58d40822ef09ea0d751a807dc9028ba5f47b93177f2d3c13bcebe1db109dc1c507e4b5d8efdedb8f1b13d2e1bfef34adf1e81126b6d970027cce
   languageName: node
   linkType: hard
 
-"@supabase/gotrue-js@npm:^2.12.0":
-  version: 2.14.0
-  resolution: "@supabase/gotrue-js@npm:2.14.0"
+"@supabase/gotrue-js@npm:^2.10.2":
+  version: 2.11.0
+  resolution: "@supabase/gotrue-js@npm:2.11.0"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: c313cc381b2b1f77baa9cdc814f9d79e986f6223a96b89d1b143e67d25d65600cbb14f0d7f07aebef371d492a00437b0ec15abb2da5c1c0bf91766aeb7ada309
+  checksum: 7adf38317b1b3c9b1036abe2139ceaee89ea00abaef06d8ff701552ff2fd0c578b38189c3592db8095c9ee5be13e4c3e1360e4e1d02b59b57b0fb099da403fea
   languageName: node
   linkType: hard
 
 "@supabase/postgrest-js@npm:^1.1.1":
-  version: 1.4.1
-  resolution: "@supabase/postgrest-js@npm:1.4.1"
+  version: 1.4.0
+  resolution: "@supabase/postgrest-js@npm:1.4.0"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: 0a4ad721a5985b92bd7d3703dc6a97c9c57200ff7bdc13c75134d235f7d795e700a421c7bdb1298190ec0b24fb6923c182d5ec7d34d091e9c179813ed8091546
+  checksum: bd5cc0c239f6617f26aa2dc105fdac1c87817bb104419b75799993c8b857452d5882d8a780464481c9038690abfd0a6e46dcc2b45e6ca969f0992d217e81bcb0
   languageName: node
   linkType: hard
 
-"@supabase/realtime-js@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "@supabase/realtime-js@npm:2.7.0"
+"@supabase/realtime-js@npm:^2.4.0":
+  version: 2.6.0
+  resolution: "@supabase/realtime-js@npm:2.6.0"
   dependencies:
     "@types/phoenix": ^1.5.4
     websocket: ^1.0.34
-  checksum: 24af97482e2a2a6861d3297c9a4122f96cc3114469af4acb45336632996e6984bfd157c969967f57c2585cbd0ab3828d069ae744009a9625fb22a36b17759251
+  checksum: 3a3b696a0203fcc78c9be301f169315a131c8fd5efb88d470d2f48be24cacf2f8a4f37081a85b853b78c46e008b94875a6e8a3473fceb6a191965016e50c9e24
   languageName: node
   linkType: hard
 
-"@supabase/storage-js@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "@supabase/storage-js@npm:2.3.1"
+"@supabase/storage-js@npm:^2.1.0":
+  version: 2.3.0
+  resolution: "@supabase/storage-js@npm:2.3.0"
   dependencies:
     cross-fetch: ^3.1.5
-  checksum: b502bc0735f06df091b40839e37f7a795563c1a6be918bbd7a2dab45299d625bde825dd24e396c8dca08eaa3bf247c5159dd5018277cc9fb90310c62cc88148c
+  checksum: 1b2b01f8334ae180f2895208d35f9ef266f83c8bea2e9b192f84e92b53647d08271e857c09a5fd6a0c4110fe40cb6a1c25954072efc6e6879f9eb8227db21aee
   languageName: node
   linkType: hard
 
 "@supabase/supabase-js@npm:^2.7.1":
-  version: 2.11.0
-  resolution: "@supabase/supabase-js@npm:2.11.0"
+  version: 2.7.1
+  resolution: "@supabase/supabase-js@npm:2.7.1"
   dependencies:
-    "@supabase/functions-js": ^2.1.0
-    "@supabase/gotrue-js": ^2.12.0
+    "@supabase/functions-js": ^2.0.0
+    "@supabase/gotrue-js": ^2.10.2
     "@supabase/postgrest-js": ^1.1.1
-    "@supabase/realtime-js": ^2.7.0
-    "@supabase/storage-js": ^2.3.1
+    "@supabase/realtime-js": ^2.4.0
+    "@supabase/storage-js": ^2.1.0
     cross-fetch: ^3.1.5
-  checksum: c610e35dcf3df36b5a1a271d590b131c5e62a861943a61d165842f3f57e93a2a9522353677d7bdfa5863504943d1f20047d44384c9f54f7a376129082a2256b9
+  checksum: 4e1ddcb5325201f6324247c436808e36f6e943ccb8d85a6bfc86575e94eddc69d95f0bd99964d3a3ecd90e6f020e574249ac15221ab0a12cad4c032396085695
   languageName: node
   linkType: hard
 
@@ -5644,9 +5644,9 @@ __metadata:
   linkType: hard
 
 "@types/phoenix@npm:^1.5.4":
-  version: 1.5.5
-  resolution: "@types/phoenix@npm:1.5.5"
-  checksum: 2dfb59c51c3f4b79ba9422f4f778695adc45a5ed55450b59e882da86835d4489483b3cb5a372bab1506b98a46c7830b1dda4bbdbb83c6787b619065d7eb99816
+  version: 1.5.4
+  resolution: "@types/phoenix@npm:1.5.4"
+  checksum: be6635e3dd63b9ae80e375c3918075cb1d63264f46039665c62390d2a5249335c32c7f0d154da27724a7859c0eaef1476fb61f7fa40541b4013e0bc1d5a47fd5
   languageName: node
   linkType: hard
 
@@ -10229,9 +10229,9 @@ __metadata:
   linkType: hard
 
 "lru-cache@npm:^7.7.1":
-  version: 7.16.1
-  resolution: "lru-cache@npm:7.16.1"
-  checksum: 64618e3ed4fd1203afedd9bbf5247921b1419f8e3100f20e58e5f04e741f8287bd7d04fefaad332411bb53b3a73445714b235de750cf5d310cba1fa23bd82795
+  version: 7.14.1
+  resolution: "lru-cache@npm:7.14.1"
+  checksum: d72c6713c6a6d86836a7a6523b3f1ac6764768cca47ec99341c3e76db06aacd4764620e5e2cda719a36848785a52a70e531822dc2b33fb071fa709683746c104
   languageName: node
   linkType: hard
 
@@ -11371,20 +11371,20 @@ __metadata:
   linkType: hard
 
 "node-abi@npm:^3.3.0":
-  version: 3.33.0
-  resolution: "node-abi@npm:3.33.0"
+  version: 3.31.0
+  resolution: "node-abi@npm:3.31.0"
   dependencies:
     semver: ^7.3.5
-  checksum: 59e5e00d9a15225087b6dd55b7d4f99686a6d64a8bdbe2c9aa98f4f74554873a7225d3dc975fa32718e7695eed8abcfeaae58b03db118a01392f6d25b0469b52
+  checksum: 38fa63c689ef50b4b8f576d5f843107e2d25bd7e7d4ed56dc0adb9db7eda945fc433a7a432beca4b9decf62ff05395f0e84f46e7ab7f275f85e5fde213353950
   languageName: node
   linkType: hard
 
 "node-addon-api@npm:^5.0.0":
-  version: 5.1.0
-  resolution: "node-addon-api@npm:5.1.0"
+  version: 5.0.0
+  resolution: "node-addon-api@npm:5.0.0"
   dependencies:
     node-gyp: latest
-  checksum: 2508bd2d2981945406243a7bd31362fc7af8b70b8b4d65f869c61731800058fb818cc2fd36c8eac714ddd0e568cc85becf5e165cebbdf7b5024d5151bbc75ea1
+  checksum: 7c5e2043ac37f6108784d94ed73a44ae6d3e68eb968de60680922fc6bc3d17fa69448c0feb4e0c9d3f4c74a0324822e566a8340a56916d9d6f23cb3e85620334
   languageName: node
   linkType: hard
 
@@ -13249,18 +13249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0":
-  version: 3.6.2
-  resolution: "readable-stream@npm:3.6.2"
-  dependencies:
-    inherits: ^2.0.3
-    string_decoder: ^1.1.1
-    util-deprecate: ^1.0.1
-  checksum: bdcbe6c22e846b6af075e32cf8f4751c2576238c5043169a1c221c92ee2878458a816a4ea33f4c67623c0b6827c8a400409bfb3cf0bf3381392d0b1dfb52ac8d
-  languageName: node
-  linkType: hard
-
-"readable-stream@npm:^3.6.0":
+"readable-stream@npm:^3.1.1, readable-stream@npm:^3.4.0, readable-stream@npm:^3.6.0":
   version: 3.6.0
   resolution: "readable-stream@npm:3.6.0"
   dependencies:

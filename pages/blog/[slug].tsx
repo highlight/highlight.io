@@ -1,5 +1,4 @@
 import Image from 'next/legacy/image'
-import PlayButton from '../../public/images/playButton.svg'
 import homeStyles from '../../components/Home/Home.module.scss'
 import styles from '../../components/Blog/Blog.module.scss'
 import { Section } from '../../components/common/Section/Section'
@@ -9,7 +8,7 @@ import classNames from 'classnames'
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
 import Link from 'next/link'
-import YouTube, { YouTubeProps } from 'react-youtube'
+import YouTube from 'react-youtube'
 
 import { RichText } from '@graphcms/rich-text-react-renderer'
 import { Typography } from '../../components/common/Typography/Typography'
@@ -25,7 +24,6 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { GraphQLRequest } from '../../utils/graphql'
 import { getTagUrl, PostTag } from '../../components/Blog/Tag'
 import { PostAuthor } from '../../components/Blog/Author'
-import { Comments } from '../../components/Comments/Comments'
 
 const NUM_SUGGESTED_POSTS = 3
 
@@ -343,7 +341,6 @@ const PostPage = ({
                 Math.floor(post.richcontent.markdown.split(' ').length / 200)
               } min read`}</p>
             </Typography>
-            <Comments slug={post.slug} />
             <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
               {post.tags_relations.map((tag) => (
