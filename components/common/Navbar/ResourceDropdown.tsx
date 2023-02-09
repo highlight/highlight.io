@@ -3,7 +3,6 @@ import { Popover, Transition } from '@headlessui/react'
 import { Typography } from '../Typography/Typography';
 import { useState } from 'react';
 
-
 import { FaChevronDown } from 'react-icons/fa';
 import * as Icons from "react-icons/hi";
 
@@ -41,7 +40,7 @@ const ResourceDropdown = ({
     {
       title: "Github",
       icon: <AiFillGithub className={styles.copyOnLight} />,
-      link: "https://github.com/highlight-run"
+      link: "https://github.com/highlight/highlight"
     },
     {
       title: "Blog",

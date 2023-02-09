@@ -18,7 +18,7 @@ const getIdFromHTMLHeaderProps = (props: any) => {
     .join('-');
 };
 
-const getIdFromHeaderProps = (props: any) => {
+export const getIdFromHeaderProps = (props: any) => {
   return props?.node?.children
     .map((child: any) =>
       child.tagName === 'code' ? child?.children[0].value : child.value
@@ -30,19 +30,19 @@ const getIdFromHeaderProps = (props: any) => {
     .join('-');
 };
 
+export const generateIdString = (str: string) => {
+  return str.replace(/[^a-zA-Z ]/g, '')
+    .trim()
+    .split(' ')
+    .join('-');
+}
+
 const copyHeadingIcon = (index: number) => {
   return (
     <span className={styles.headingCopyIcon} key={index}>
       <BiLink />
     </span>
   );
-};
-
-const resolveLink = (href: string): string => {
-  if (href.startsWith('/')) {
-    return `/docs${href}`;
-  }
-  return href;
 };
 
 export const DocsMarkdownRenderer = (
@@ -66,7 +66,7 @@ export const DocsMarkdownRenderer = (
           )
         ) : renderType === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
+            <Link href={props.href} legacyBehavior>
               {props.children[0]}
             </Link>
           )
@@ -139,7 +139,7 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
           )
         ) : renderType === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
+            <Link href={props.href} legacyBehavior>
               {props.children[0]}
             </Link>
           )
@@ -230,7 +230,7 @@ export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a
           </ul>
         ) : type === 'a' ? (
           props.children?.length && (
-            <Link href={resolveLink(props.href)} legacyBehavior>
+            <Link href={props.href} legacyBehavior>
               {props.children[0]}
             </Link>
           )

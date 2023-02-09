@@ -10,36 +10,25 @@ import productStyles from '../components/Products/Products.module.scss'
 import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugLeft from '../public/images/hero-bug-left.gif';
 import HeroBugRight from '../public/images/hero-bug-right.gif';
-import PlaybackIcon from '../public/images/pc-play-media.svg';
-import ConsoleIcon from '../public/images/window-code.svg';
-import TimingIcon from '../public/images/stopwatch.svg';
-import StacktraceIcon from '../public/images/check-list.svg';
-
-import MultipleIcon from '../public/images/multiple.svg';
-import PuzzleIcon from '../public/images/puzzle.svg';
-import ChartbarIcon from '../public/images/chart-bar.svg';
-import MagnifierIcon from '../public/images/magnifier.svg';
-import VerifiedIcon from '../public/images/verified.svg';
-import PlugIcon from '../public/images/plug.svg';
-
-import CollaborateImage from '../public/images/collaborate.png';
-import SearchImage from '../public/images/search.svg';
-import TwoHighlightersImage from '../public/images/two-highlighters.gif';
-import Tablet1 from '../public/images/tablet1.svg';
+import LandingInfoRow1 from '../public/images/landingInfoRow1.svg';
+import LandingInfoRow2 from '../public/images/landingInfoRow2.svg';
+import LandingInfoRow3 from '../public/images/landingInfoRow3.svg';
+import LandingInfoRowSecurity from '../public/images/landingInfoRowSecurity.svg';
 
 import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
 import { Review, REVIEWS } from '../components/Home/Reviews';
-import { SnippetTab } from '../components/Home/SnippetTab/SnippetTab';
 import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
-import { ObfuscationSlider } from '../components/Home/ObfuscationSlider/ObfuscationSlider';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
 import Link from 'next/link';
 import { GithubPopup } from '../components/GithubPopup/GithubPopup';
 import { FeatureCarousel } from '../components/Home/FeatureCarousel/FeatureCarousel';
+import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToAction';
+import LandingInfoRow from '../components/Home/LandingInfoRow';
+import InfoRow from '../components/Products/InfoRow';
 
 const IMAGE_SHOW_OFFSET = 450;
 
@@ -102,30 +91,11 @@ export const CustomerReview = ({
 };
 
 const Home: NextPage = () => {
-  const section1 = useRef<HTMLDivElement>(null);
-  const section2 = useRef<HTMLDivElement>(null);
-  const section3 = useRef<HTMLDivElement>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollYPosition = useRef<number>(0);
-  const [offsetPosition, setOffsetPosition] = useState(0);
   const [scrollReviews, setScrollReviews] = useState(false);
-  const [featureImageIndex, setFeatureImageIndex] = useState(0);
-  const [firstCollapseIndex, setFirstCollapseIndex] = useState('1');
-  const [secondCollapseIndex, setSecondCollapseIndex] = useState('1');
-  const [thirdCollapseIndex, setThirdCollapseIndex] = useState('1');
 
   const scrollListener = useCallback(() => {
-    if (
-      (section3?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
-    ) {
-      setFeatureImageIndex(2);
-    } else if (
-      (section2?.current?.getBoundingClientRect().y || 0) < IMAGE_SHOW_OFFSET
-    ) {
-      setFeatureImageIndex(1);
-    } else {
-      setFeatureImageIndex(0);
-    }
 
     if (!scrollReviews) {
       return;
@@ -146,10 +116,6 @@ const Home: NextPage = () => {
     window.addEventListener('scroll', scrollListener);
     return () => window.removeEventListener('scroll', scrollListener);
   }, [scrollListener]);
-
-  useEffect(() => {
-    setOffsetPosition(section1.current?.offsetHeight || 0);
-  }, [section1]);
 
   useEffect(() => {
     // invoke the sitemap api to validate next metrics integration
@@ -197,77 +163,68 @@ const Home: NextPage = () => {
             <Image src={HeroBugRight} alt="bug right" />
           </div>
           <div className={styles.anchorFeature}>
+            <h1 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform.</span></h1>
             <div className={styles.anchorHead}>
-              <h1>{`Because a stack trace alone isn't enough`}</h1>
-              <Typography type="copy1" onDark>
-                Stop wasting effort trying to track down and reproduce bugs.
-                Through session replay, Highlight shows you exactly how and when
-                your bugs happen. Highlight removes the mystery of debugging.
-              </Typography>
+              <Typography type="copyHeader" onDark>A cohesive, open source toolset for monitoring your web application.</Typography>
             </div>
-            <div
-              className={classNames(styles.buttonContainer, styles.heroImage)}
-            >
-              <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                <Typography type="copy2" emphasis={true}>
-                  Get started for free
-                </Typography>
-              </PrimaryButton>
+            <div className="flex justify-center mt-8 mb-32">
+              <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8 w-screen px-5 sm:w-auto"
+              >
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>
+                    Get started for free
+                  </Typography>
+                </PrimaryButton>
+              </div>
             </div>
             {/* <HeroVideo /> */}
             <FeatureCarousel />
           </div>
         </Section>
         <Section>
-
           <div className={styles.anchorFeature} id="features">
             <div className={styles.anchorTitle}>
               <h2>
-                Highlight{' '}
-                <span className={styles.highlightedText}>supercharges</span>{' '}
-                your team.
+                Web application monitoring for {' '}
+                <span className={styles.highlightedText}>today&#39;s developer.</span>{' '}
               </h2>
             </div>
-            <div className={styles.featureContainer}>
-              <FeatureItem>
-                <Image src={PlaybackIcon} alt="" />
-                <Typography type="copy1" emphasis={true}>
-                  Playback of your app
-                </Typography>
-                <Typography type="copy2" onDark>
-                  See exactly how users are impacted by errors.
-                </Typography>
-              </FeatureItem>
-              <FeatureItem>
-                <Image src={StacktraceIcon} alt="" />
-                <Typography type="copy1" emphasis={true}>
-                  Error stack traces
-                </Typography>
-                <Typography type="copy2" onDark>
-                  Access full, language-specific stack traces on your web app.
-                </Typography>
-              </FeatureItem>
-              <FeatureItem>
-                <Image src={ConsoleIcon} alt="" />
-                <Typography type="copy1" emphasis={true}>
-                  {`Console & network tabs`}
-                </Typography>
-                <Typography type="copy2" onDark>
-                  Debug with everything you get in the dev-tools console.
-                </Typography>
-              </FeatureItem>
-              <FeatureItem>
-                <Image src={TimingIcon} alt="" />
-                <Typography type="copy1" emphasis={true}>
-                  Precise timing
-                </Typography>
-                <Typography type="copy2" onDark>
-                  Understand when bugs happen and everything that leads to it.
-                </Typography>
-              </FeatureItem>
-            </div>
           </div>
+
         </Section>
+        <div className={styles.infoContainer}>
+          <LandingInfoRow
+            title={`A cohesive view of your entire stack.`}
+            desc={'A natural pairing between your errors, session replay, logs and more. Understand the “what”, “why” and “how” of your full-stack web application.'}
+            link={"https://app.highlight.io/?sign_up=1"}
+            linkText={"Get started for free"}
+            imgSrc={LandingInfoRow1}
+            invert
+          />
+          <LandingInfoRow
+            title={`Support for all the modern frameworks.`}
+            desc={`We support all the fancy new frameworks and our platform is powered by open source, scalable technologies.`}
+            link={"/docs/general/getting-started/getting-started-overview"}
+            linkText={"Read the docs"}
+            imgSrc={LandingInfoRow2}
+          />
+          <LandingInfoRow
+            title={`Integrations with your favorite tools.`}
+            desc="Connect your favorite issue tracker, support tool, or even analytics software and we’ll give you a way to push and pull data in the right places."
+            link={"/docs/general/integrations/overview"}
+            linkText={"Read the docs"}
+            imgSrc={LandingInfoRow3}
+            invert
+          />
+        </div>
+        <div className={styles.infoContainer}>
+          <InfoRow
+            title={`Built with compliance and security.`}
+            desc="Whether its SOC 2, HIPAA, or ISO, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
+            link={"/docs/general/company/compliance-and-security"}
+            imgSrc={LandingInfoRowSecurity}
+          />
+        </div>
         <div className={classNames(styles.bigHero, styles.hideMobile)}>
           <div className={classNames(styles.hero)}>
             <video playsInline autoPlay muted loop id="big-hero-video">
@@ -278,549 +235,7 @@ const Home: NextPage = () => {
         <div className={classNames(styles.hero, styles.mobile)}>
           <Image src={MobileHeroSection} alt="hero" />
         </div>
-        <div className={styles.secondaryBackground}>
-          <Section>
-            <div className={styles.anchorFeature}>
-              <div
-                className={classNames(
-                  styles.anchorTitle,
-                  styles.secondaryAnchor
-                )}
-              >
-                <h2>
-                  Highlight is the{' '}
-                  <span className={styles.highlightedText}>ultimate</span>{' '}
-                  debugging solution.
-                </h2>
-              </div>
-            </div>
-          </Section>
-          <Section className={styles.hidePhone} noYBottomPadding>
-            <div className={styles.featuresColumnContainer}>
-              <div className={styles.featuresLeftColumn}>
-                <div ref={section1} className={styles.featuresSection}>
-                  <div>
-                    <div className={productStyles.subtleBadge}>
-                      <Typography type="copy4" emphasis>
-                        Cross-team Collaboration
-                      </Typography>
-                    </div>
-                    <h3>
-                      <span className={styles.highlightedText}>
-                        Collaborate
-                      </span>{' '}
-                      on bugs, everyone is kept in the loop.
-                    </h3>
-                    <Collapse
-                      accordion
-                      destroyInactivePanel={true}
-                      activeKey={firstCollapseIndex}
-                      className={styles.sectionCollapse}
-                    >
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setFirstCollapseIndex('1')}
-                          >
-                            <Image src={MultipleIcon} alt="" />
-                            <Typography
-                              type="copy1"
-                              emphasis={true}
-                            >{`There's never one stakeholder on a bug.`}</Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="1"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            When something breaks on your web app, there are
-                            many teams that could get the first message about
-                            it. Highlight makes it easy to communicate and
-                            re-assign issues to make decisions on errors faster.
-                          </Typography>
-                        </div>
-                      </Panel>
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setFirstCollapseIndex('2')}
-                          >
-                            <Image src={PuzzleIcon} alt="" />
-                            <Typography
-                              type="copy1"
-                              emphasis={true}
-                            >{`Integrate with your favorite tools.`}</Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="2"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">{`We understand that Highlight isn't your issue tracking tool or your customer data platform. That's why we integrate with tools like Slack, Clickup and Zapier to keep everyone in the loop.`}</Typography>
-                        </div>
-                      </Panel>
-                    </Collapse>
-                  </div>
-                </div>
-                <div ref={section2} className={styles.featuresSection}>
-                  <div>
-                    <div className={productStyles.subtleBadge}>
-                      <Typography type="copy4" emphasis>
-                        Powerful Search
-                      </Typography>
-                    </div>
-                    <h3>
-                      <span className={styles.highlightedText}>
-                        Easily search
-                      </span>{' '}
-                      for a bug by session or specific property.
-                    </h3>
-                    <Collapse
-                      accordion
-                      destroyInactivePanel={true}
-                      activeKey={secondCollapseIndex}
-                      className={styles.sectionCollapse}
-                    >
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setSecondCollapseIndex('1')}
-                          >
-                            <Image src={MagnifierIcon} alt="" />
-                            <Typography
-                              type="copy1"
-                              emphasis={true}
-                            >{`Get to the correct session instantly.`}</Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="1"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            What if you step in the shoes of your users and
-                            debug from their perspective? With our search
-                            console, you can instantly find the right session
-                            and debug with confidence.
-                          </Typography>
-                        </div>
-                      </Panel>
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setSecondCollapseIndex('2')}
-                          >
-                            <Image src={ChartbarIcon} alt="" />
-                            <Typography type="copy1" emphasis={true}>{`
-                    What is slowing down your users?`}</Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="2"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            Are users not using a new feature? Or is there a
-                            known drop off in a specific user flow? Our search
-                            console gives you the ability to search based on
-                            URL, number of errors, user properties and much
-                            more!
-                          </Typography>
-                        </div>
-                      </Panel>
-                    </Collapse>
-                  </div>
-                </div>
-                <div ref={section3} className={styles.featuresSection}>
-                  <div>
-                    <div className={productStyles.subtleBadge}>
-                      <Typography type="copy4" emphasis>
-                        Security-compliant
-                      </Typography>
-                    </div>
-                    <h3>
-                      Highlight is built for{' '}
-                      <span className={styles.highlightedText}>
-                        privacy and security.
-                      </span>
-                    </h3>
-                    <Collapse
-                      accordion
-                      destroyInactivePanel={true}
-                      activeKey={thirdCollapseIndex}
-                      className={styles.sectionCollapse}
-                    >
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setThirdCollapseIndex('1')}
-                          >
-                            <Image src={PlugIcon} alt="" />
-                            <Typography type="copy1" emphasis={true}>
-                              Leverage our privacy-first API.
-                            </Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="1"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            Highlight supports data redaction, obfuscation,
-                            masking and much more. The library also supports a
-                            Strict Privacy Mode which obfuscates all text nodes
-                            for very strict PII rules.
-                          </Typography>
-                        </div>
-                      </Panel>
-                      <Panel
-                        header={
-                          <div
-                            className={styles.collapseHeader}
-                            onMouseEnter={() => setThirdCollapseIndex('2')}
-                          >
-                            <Image src={VerifiedIcon} alt="" />
-                            <Typography type="copy1" emphasis={true}>
-                              {`We put compliance & trust at the forefront.`}
-                            </Typography>
-                          </div>
-                        }
-                        className={styles.sectionInfo}
-                        key="2"
-                        showArrow={false}
-                      >
-                        <div className={styles.sectionBody}>
-                          <Typography type="copy2">
-                            Highlight supports several wellknown compliance
-                            frameworks including GDPR, CCPA, and SOC2.
-                          </Typography>
-                        </div>
-                      </Panel>
-                    </Collapse>
-                  </div>
-                </div>
-              </div>
-              <div
-                className={styles.featuresRightColumn}
-                style={{
-                  marginTop: `calc(-1 * ${offsetPosition * 0.2}px)`,
-                }}
-              >
-                <div
-                  className={classNames({
-                    [styles.hideImage]: featureImageIndex !== 0,
-                  })}
-                >
-                  <div
-                    className={classNames(styles.imageInner, styles.hideMobile)}
-                  >
-                    <Image src={CollaborateImage} alt="" />
-                  </div>
-                  <div
-                    className={classNames(
-                      styles.imageInner,
-                      styles.tabletGraphic
-                    )}
-                  >
-                    <Image src={Tablet1} alt="" />
-                  </div>
-                </div>
-                <div
-                  className={classNames({
-                    [styles.hideImage]: featureImageIndex !== 1,
-                  })}
-                >
-                  <div
-                    className={classNames(
-                      styles.imageInner,
-                      styles.hideMobile,
-                      styles.search
-                    )}
-                  >
-                    <Image src={SearchImage} alt="" />
-                    <div className={styles.searchTwoHighlighters}>
-                      <Image src={TwoHighlightersImage} alt="" />
-                    </div>
-                  </div>
-                  <div
-                    className={classNames(
-                      styles.imageInner,
-                      styles.tabletGraphic
-                    )}
-                  >
-                    <Image src={TwoHighlightersImage} alt="" />
-                  </div>
-                </div>
-                <div
-                  className={classNames({
-                    [styles.hideImage]: featureImageIndex !== 2,
-                  })}
-                >
-                  <div className={styles.imageInner} style={{ height: 300 }}>
-                    <ObfuscationSlider />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Section>
-          <Section
-            reverseMobile={true}
-            className={classNames(styles.mobileOnly, styles.mobileSpacing)}
-          >
-            <div className={styles.sectionText}>
-              <div className="flex justify-center">
-                <div className={productStyles.subtleBadge}>
-                  <Typography type="copy4" emphasis>
-                    Cross-team Collaboration
-                  </Typography>
-                </div>
-              </div>
-              <h3>
-                <span className={styles.highlightedText}>Collaborate</span> on
-                bugs, everyone is kept in the loop.
-              </h3>
-              <Collapse
-                accordion
-                destroyInactivePanel={true}
-                activeKey={firstCollapseIndex}
-                className={styles.sectionCollapse}
-              >
-                <Panel
-                  header={
-                    <div
-                      className={styles.collapseHeader}
-                      onMouseEnter={() => setFirstCollapseIndex('1')}
-                    >
-                      <Image src={MultipleIcon} alt="" />
-                      <Typography
-                        type="copy1"
-                        emphasis={true}
-                      >{`There's never one stakeholder on a bug.`}</Typography>
-                    </div>
-                  }
-                  className={styles.sectionInfo}
-                  key="1"
-                  showArrow={false}
-                >
-                  <div className={styles.sectionBody}>
-                    <Typography type="copy2">
-                      When something breaks on your web app, there are many
-                      teams that could get the first message about it. Highlight
-                      makes it easy to communicate and re-assign issues to make
-                      decisions on errors faster.
-                    </Typography>
-                  </div>
-                </Panel>
-                <Panel
-                  header={
-                    <div
-                      className={styles.collapseHeader}
-                      onMouseEnter={() => setFirstCollapseIndex('2')}
-                    >
-                      <Image src={PuzzleIcon} alt="" />
-                      <Typography
-                        type="copy1"
-                        emphasis={true}
-                      >{`Integrate with your favorite tools.`}</Typography>
-                    </div>
-                  }
-                  className={styles.sectionInfo}
-                  key="2"
-                  showArrow={false}
-                >
-                  <div className={styles.sectionBody}>
-                    <Typography type="copy2">{`We understand that Highlight isn't your issue tracking tool or your customer data platform. That's why we integrate with tools like Slack, Clickup and Zapier to keep everyone in the loop.`}</Typography>
-                  </div>
-                </Panel>
-              </Collapse>
-            </div>
-            <div className={styles.sectionImageRight}>
-              <div className={classNames(styles.imageInner, styles.hideMobile)}>
-                <Image src={CollaborateImage} alt="" />
-              </div>
-              <div
-                className={classNames(
-                  styles.imageInner,
-                  styles.tabletGraphic,
-                  styles.collaborationGraphic
-                )}
-              >
-                <Image src={Tablet1} alt="" />
-              </div>
-            </div>
-          </Section>
-          <Section reverseMobile={true} className={styles.mobileOnly}>
-            <div className={styles.sectionText}>
-              <div className="flex justify-center">
-                <div className={productStyles.subtleBadge}>
-                  <Typography type="copy4" emphasis>
-                    Powerful Search
-                  </Typography>
-                </div>
-              </div>
-              <h3>
-                <span className={styles.highlightedText}>Easily search</span>{' '}
-                for a bug by session or specific property.
-              </h3>
-              <Collapse
-                accordion
-                destroyInactivePanel={true}
-                activeKey={secondCollapseIndex}
-                className={styles.sectionCollapse}
-              >
-                <Panel
-                  header={
-                    <div
-                      className={styles.collapseHeader}
-                      onMouseEnter={() => setSecondCollapseIndex('1')}
-                    >
-                      <Image src={MagnifierIcon} alt="" />
-                      <Typography
-                        type="copy1"
-                        emphasis={true}
-                      >{`Get to the correct session instantly.`}</Typography>
-                    </div>
-                  }
-                  className={styles.sectionInfo}
-                  key="1"
-                  showArrow={false}
-                >
-                  <div className={styles.sectionBody}>
-                    <Typography type="copy2">
-                      What if you step in the shoes of your users and debug from
-                      their perspective? With our search console, you can
-                      instantly find the right session and debug with
-                      confidence.
-                    </Typography>
-                  </div>
-                </Panel>
-                <Panel
-                  header={
-                    <div
-                      className={styles.collapseHeader}
-                      onMouseEnter={() => setSecondCollapseIndex('2')}
-                    >
-                      <Image src={ChartbarIcon} alt="" />
-                      <Typography type="copy1" emphasis={true}>{`
-                    What is slowing down your users?`}</Typography>
-                    </div>
-                  }
-                  className={styles.sectionInfo}
-                  key="2"
-                  showArrow={false}
-                >
-                  <div className={styles.sectionBody}>
-                    <Typography type="copy2">
-                      Are users not using a new feature? Or is there a known
-                      drop off in a specific user flow? Our search console gives
-                      you the ability to search based on URL, number of errors,
-                      user properties and much more!
-                    </Typography>
-                  </div>
-                </Panel>
-              </Collapse>
-            </div>
-            <div className={styles.sectionImageRight}>
-              <div className={classNames(styles.imageInner, styles.hideMobile)}>
-                <Image src={SearchImage} alt="" />
-              </div>
-              <div
-                className={classNames(styles.imageInner, styles.tabletGraphic)}
-              >
-                <Image src={TwoHighlightersImage} alt="" />
-              </div>
-            </div>
-          </Section>
-          <Section reverseMobile={true} className={styles.mobileOnly}>
-            <div className={styles.sectionText}>
-              <div className="flex justify-center">
-                <div className={productStyles.subtleBadge}>
-                  <Typography type="copy4" emphasis>
-                    Security-compliant
-                  </Typography>
-                </div>
-              </div>
-              <h3>
-                Highlight is built for{' '}
-                <span className={styles.highlightedText}>
-                  privacy and security.
-                </span>
-              </h3>
-              <Collapse
-                accordion
-                destroyInactivePanel={true}
-                activeKey={thirdCollapseIndex}
-                className={styles.sectionCollapse}
-              >
-                <Panel
-                  header={
-                    <div
-                      className={styles.collapseHeader}
-                      onMouseEnter={() => setThirdCollapseIndex('1')}
-                    >
-                      <Image src={PlugIcon} alt="" />
-                      <Typography type="copy1" emphasis={true}>
-                        Leverage our privacy-first API.
-                      </Typography>
-                    </div>
-                  }
-                  className={styles.sectionInfo}
-                  key="1"
-                  showArrow={false}
-                >
-                  <div className={styles.sectionBody}>
-                    <Typography type="copy2">
-                      Highlight supports data redaction, obfuscation, masking
-                      and much more. The library also supports a Strict Privacy
-                      Mode which obfuscates all text nodes for very strict PII
-                      rules.
-                    </Typography>
-                  </div>
-                </Panel>
-                <Panel
-                  header={
-                    <div
-                      className={styles.collapseHeader}
-                      onMouseEnter={() => setThirdCollapseIndex('2')}
-                    >
-                      <Image src={VerifiedIcon} alt="" />
-                      <Typography type="copy1" emphasis={true}>
-                        {`We put compliance & trust at the forefront.`}
-                      </Typography>
-                    </div>
-                  }
-                  className={styles.sectionInfo}
-                  key="2"
-                  showArrow={false}
-                >
-                  <div className={styles.sectionBody}>
-                    <Typography type="copy2">
-                      Highlight supports several wellknown compliance frameworks
-                      including GDPR, CCPA, and SOC2.
-                    </Typography>
-                  </div>
-                </Panel>
-              </Collapse>
-            </div>
-            <div className={styles.sectionImageRight}>
-              <div className={styles.imageInner}>
-                <ObfuscationSlider />
-              </div>
-            </div>
-          </Section>
-        </div>
-        <SnippetTab />
+        <OSSCallToAction />
         <Section>
           <CompaniesReel />
         </Section>

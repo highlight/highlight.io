@@ -30,5 +30,5 @@ Run `yarn dev` (and optionally `yarn styles` if you’re making styling changes)
 
 ### Deployment
 
-When a doc change is merged, you should be able to view the doc that you added/changed after a deploy is succesfull in Vercel at https://highlight.io.
+When a doc change is merged, you should be able to view the doc that you added/changed after a deploy is successful in Vercel at https://highlight.io.
 

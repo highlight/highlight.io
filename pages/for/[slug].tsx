@@ -162,7 +162,7 @@ const Products = ({ product }: { product: iProduct }) => {
                 Highlight’s got you covered.
               </Typography>
               <div className="flex justify-center my-14">
-                <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
+                <div className="flex flex-col lg:flex-row justify-center gap-4 w-screen sm:w-auto px-5"
                 >
                   <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>
@@ -218,7 +218,7 @@ const Products = ({ product }: { product: iProduct }) => {
               </div>
 
               <div className="flex justify-center my-14">
-                <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8"
+                <div className="flex flex-col lg:flex-row justify-center gap-4"
                 >
                   <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>

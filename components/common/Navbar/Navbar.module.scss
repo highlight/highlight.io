@@ -125,6 +125,10 @@
   }
 }
 
+.headerButtonRight {
+  padding: 0 var(--size-xxSmall);
+}
+
 .popoverButton {
   background-color: transparent;
   border: none;
@@ -210,19 +214,16 @@
   }
 }
 
-.innerGridItem {
-}
-
 .signUpButton {
   padding: var(--size-xSmall) var(--size-medium) !important;
-  margin-left: var(--size-large) !important;
+  margin-left: var(--size-xxSmall) !important;
   border: 1px solid var(--brand-accent-light) !important;
   background-color: transparent !important;
   color: var(--brand-accent-light) !important;
   border-radius: var(--size-xSmall);
 
   &:hover {
-    border-color: var(--color-secondary-300) !important;
+    // border-color: var(--color-secondary-300) !important;
     background-color: var(--color-secondary-300) !important;
     color: var(--color-primary-background) !important;
   }
@@ -244,14 +245,67 @@
 
 .headerCenter {
   justify-content: center;
-  width: 33.33%;
   width: calc(100% / 3);
 }
 
 .headerRight {
   justify-content: flex-end;
-  width: 33.33%;
   width: calc(100% / 3);
+}
+
+.socialButtonContainer {
+  display: flex;
+  margin-left: var(--size-medium);
+
+  @media screen and (max-width: 1275px) {
+    display: none;
+  }
+}
+
+.socialButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 52px;
+  padding-left: var(--size-small);
+  padding-right: var(--size-small);
+  transition: all 0.2s ease, color 0.2s ease;
+  border: 1px solid var(--color-secondary-200);
+  cursor: pointer;
+
+  &:hover {
+    // border-color: var(--color-secondary-300) !important;
+    background-color: var(--color-secondary-300) !important;
+    color: var(--color-primary-background) !important;
+  }
+}
+
+.socialButton {
+  color: var(--color-secondary-200);
+  width: 24px;
+  height: 24px;
+
+  :hover > & {
+    color: var(--color-primary-background) !important;
+  }
+}
+
+.socialButtonWrapperLeft {
+  border-top-left-radius: 6px;
+  border-right: none;
+  border-bottom-left-radius: 6px;
+}
+
+.socialButtonWrapperRight {
+  border-top-right-radius: var(--size-xSmall);
+  border-left: none;
+  border-bottom-right-radius: var(--size-xSmall);
+}
+
+.socialButtonDivider {
+  width: 1px;
+  background-color: var(--color-secondary-200);
 }
 
 .urlStyle {
@@ -299,7 +353,7 @@
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 
   p {
     margin: var(--size-xSmall) 0 !important;
