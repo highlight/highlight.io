@@ -1,10 +1,11 @@
 ---
-title: Canvas
+title: Canvas & WebGL
 slug: canvas
 createdAt: 2021-10-13T22:55:19.000Z
 updatedAt: 2022-09-29T18:01:58.000Z
 ---
 
+## Canvas Recording
 ```hint
 We are actively working on improving recording of canvas elements. If you have any questions or suggestions please reach out to us at support@highlight.run
 ```
@@ -34,6 +35,12 @@ Snapshotting at full resolution and high FPS can produce too much data for our c
 
 Even though this feature is experimental, it should not have any impact on your application. We've recently changed our uploading client to use browser web-workers to ensure that data serialization cannot block the rendering of your application. If you run into any issues please let us know!
 
+
+## WebGL Recording
+
+In the same vain, Highlight is able to record websites that use WebGL. Recording WebGL is disabled by default. To enable WebGL recording, enable canvas recording by following the instructions for [Canvas](../1_session-replay/canvas.md) recording.
+
+
 ## Caveats
 
--   [Privacy](../1_session-replay/privacy.md) controls do not apply to canvas recording right now
+For both WebGL and canvas recording, [Privacy](../1_session-replay/privacy.md) controls do not apply to canvas recording right now.

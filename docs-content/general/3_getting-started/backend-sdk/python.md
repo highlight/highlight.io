@@ -84,4 +84,4 @@ if __name__ == "__main__":
 
 creates a `/error` route that will randomly throw an error.
 
-To view and resolve the recorded error, log into [app.highlight.io/errors](http://app.highlight.io/errors). Clicking on the error's title will open a page where you can see detailed information and mark it as resolved. Check out the [error monitoring](../../6_product-features/2_error-monitoring/error-sharing.md) docs for more info!
+To view and resolve the recorded error, log into [app.highlight.io/errors](http://app.highlight.io/errors). Clicking on the error's title will open a page where you can see detailed information and mark it as resolved.

@@ -7,6 +7,7 @@ updatedAt: 2022-08-18T22:36:12.000Z
 
 [highlight.io](https://highlight.io) is monitoring software for the next generation of developers. Our goal is to build a cohesive monitoring solution for today's developer, something we wished WE had. And it's all [opensource](https://github.com/highlight/highlight) :).
 
+
 ### About us.
 <DocsCardGroup>
     <DocsCard title="Mission & Values." href="./2_company/1_values.md">
@@ -20,5 +21,18 @@ updatedAt: 2022-08-18T22:36:12.000Z
     </DocsCard>
     <DocsCard title="Self hosting highlight.io"  href="./2_company/open-source/self-host-hobby.md">
         {"Open source, self hosting highlight, and contributing."}
+    </DocsCard>
+</DocsCardGroup>
+
+### Features
+<DocsCardGroup>
+    <DocsCard title="Sesion Replay." href="./6_product-features/1_session-replay/1_overview.md">
+        {"Session replay features, how to get started, etc.."}
+    </DocsCard>
+    <DocsCard title="Error Monitoring."  href="./6_product-features/2_error-monitoring/1_overview.md">
+        {"Error monitoring features, how to get started, etc.."}
+    </DocsCard>
+    <DocsCard title="Logging."  href="./6_product-features/4_logging/1_overview.md">
+        {"Logging features, how to get started, etc.."}
     </DocsCard>
 </DocsCardGroup>
