@@ -8,24 +8,24 @@ import featureImg from '../../../public/images/featureImg1.svg';
 
 
 export const FeatureCarousel = () => {
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(3)
 
   return (
     <div className="">
       <div className="flex gap-4 w-[75vw]">
-        <div className={`${selected == 0 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} flex flex-col text-left gap-1  p-5 rounded-lg`}>
+        <div className={`${selected == 0 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} w-1/4 flex flex-col flex-grow-0 text-left gap-1 p-5 rounded-lg`}>
+          <Typography type="copy3" emphasis={true}>Session Replay</Typography>
+          <Typography type="copy4">See how your product is used, understand why people drop off</Typography>
+        </div>
+        <div className={`${selected == 1 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} w-1/4 flex flex-col flex-grow-0 text-left gap-1  p-5 rounded-lg`}>
           <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
-        <div className={`${selected == 1 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} flex flex-col text-left gap-1  p-5 rounded-lg`}>
-          <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
+        <div className={`${selected == 2 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} w-1/4 flex flex-col flex-grow-0 text-left gap-1  p-5 rounded-lg`}>
+          <Typography type="copy3" emphasis={true}>Logging & Log Alerts</Typography>
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
-        <div className={`${selected == 2 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} flex flex-col text-left gap-1  p-5 rounded-lg`}>
-          <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
-          <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
-        </div>
-        <div className={`${selected == 3 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} flex flex-col text-left gap-1  p-5 rounded-lg`}>
+        <div className={`${selected == 3 ? "bg-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark"} w-1/4 flex flex-col flex-grow-0 text-left gap-1  p-5 rounded-lg`}>
           <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
