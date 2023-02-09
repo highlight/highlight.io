@@ -46,7 +46,7 @@ The path that Highlight will use to send `.map` files. The default value is `./b
 
 ## `appVersion`
 
-The version of your current deployment. Please provide the same version value as the value you provide for `version` in [H.init()](../../sdk/client.md#Hinit). This ensures that we're always using the same set of sourcemaps for your current bundle. If omitted, sourcemaps are uploaded as `unversioned` (make sure [H.init()](../../sdk/client.md#Hinit) does not have a `version` option provided).
+The version of your current deployment. Please provide the same version value as the value you provide for `version` in [H.init()](../../../sdk/client.md#Hinit). This ensures that we're always using the same set of sourcemaps for your current bundle. If omitted, sourcemaps are uploaded as `unversioned` (make sure [H.init()](../../../sdk/client.md#Hinit) does not have a `version` option provided).
 
 ## Generating Sourcemaps
 

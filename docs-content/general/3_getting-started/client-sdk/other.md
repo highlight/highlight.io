@@ -34,8 +34,8 @@ Start your app, go to it in the browser, then click around. Highlight will be re
 
 After installing Highlight for your frontend application, there are a few other things you should check out about our Session Replay product, namely:
 
-- [Privacy Controls](../../4_session-replay/privacy.md)
+- [Privacy Controls](../../6_product-features/1_session-replay/privacy.md)
 
-- [Network Request Recording](../../4_session-replay/recording-network-requests-and-responses.md)
+- [Network Request Recording](../../6_product-features/1_session-replay/recording-network-requests-and-responses.md)
 
 - [Backend Setup Guides](../backend-sdk/backend-sdk-overview.md)
