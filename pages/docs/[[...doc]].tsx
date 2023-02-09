@@ -60,7 +60,7 @@ type DocData = {
   slug: string
   toc: TocEntry
   docOptions: DocPath[]
-  metadata?: { title: string; slug: string }
+  metadata?: { title: string; slug: string; heading: string; }
   isSdkDoc?: boolean
   docIndex: number
   redirect?: string
@@ -884,7 +884,7 @@ const DocPage = ({
                 [styles.sdkPageTitle]: isSdkDoc,
               })}
             >
-              {metadata ? metadata.title : ''}
+              {metadata?.heading ? metadata.heading : metadata?.title ? metadata.title : ''}
             </h3>
             {isSdkDoc ? (
               <DocSection content={markdownTextOG || ''} />
