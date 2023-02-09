@@ -5,7 +5,6 @@ createdAt: 2022-04-01T20:28:14.000Z
 updatedAt: 2022-04-15T02:07:22.000Z
 ---
 
-# Our Mission & Values
 Our mission is to support developers (like you) to ship with confidence. We do this by giving you the tools you need to **uncover, resolve, and prevent** issues in your web app.
 
 ## We build in public.
