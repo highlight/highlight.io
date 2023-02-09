@@ -317,8 +317,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     currentDoc.rel_path,
   )
 
-  console.log('ewn', newerContent);
-
   return {
     props: {
       metadata: currentDoc.metadata,

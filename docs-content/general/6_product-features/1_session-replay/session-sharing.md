@@ -5,7 +5,7 @@ createdAt: 2021-09-14T01:47:59.000Z
 updatedAt: 2022-01-07T23:15:15.000Z
 ---
 
-By default, only members in your Highlight workspace will be able to view sessions (see [Team Management](../6_product-features/team-management.md)). If you'd like to share one-off sessions and don't want to invite folks to your workspace, then you can share individual sessions.
+By default, only members in your Highlight workspace will be able to view sessions (see [Team Management](../3_general-features/team-management.md)). If you'd like to share one-off sessions and don't want to invite folks to your workspace, then you can share individual sessions.
 
 To share a session, click the share button then toggle "Allow anyone with the link to access this session.".
 

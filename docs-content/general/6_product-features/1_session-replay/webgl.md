@@ -13,8 +13,8 @@ Highlight's WebGL recording is currently in beta. We are actively working on mak
 
 ## Getting Started
 
-Recording WebGL is disabled by default. To enable WebGL recording, enable canvas recording by following the instructions for [Canvas](https://goodmorning.com) recording.
+Recording WebGL is disabled by default. To enable WebGL recording, enable canvas recording by following the instructions for [Canvas](../1_session-replay/canvas.md) recording.
 
 ## Caveats
 
--   [Privacy](../4_session-replay/privacy.md) controls do not apply to WebGL right now
+-   [Privacy](../1_session-replay/privacy.md) controls do not apply to WebGL right now

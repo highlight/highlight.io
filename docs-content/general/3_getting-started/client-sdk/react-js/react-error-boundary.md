@@ -11,8 +11,6 @@ Highlight ships [`@highlight-run/react`](https://github.com/highlight/react) whi
 
 Highlight provides an `ErrorBoundary` to help you provide a better experience for your users when your application crashes. Using an `ErrorBoundary` gives your application an opportunity to recover from a bad state.
 
-Highlight also allows you to show a crash report powered by [User Feedback](../../../6_product-features/user-feedback.md). A crash report is shown in the session when the crash happens, giving you the context for the user feedback.
-
 ```typescript
 import { ErrorBoundary } from '@highlight-run/react'
 

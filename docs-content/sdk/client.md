@@ -53,19 +53,19 @@ slug: client
         </aside>
         <aside className="parameter">
           <h5>environment <code>string</code> <code>optional</code></h5>
-          <p>Specifies the environment your application is running in. See [Environments](../general/6_product-features/environments.md) to see how setting the environment can help you move faster. The default value is production.</p>
+          <p>Specifies the environment your application is running in. See [Environments](../general/6_product-features/3_general-features/environments.md) to see how setting the environment can help you move faster. The default value is production.</p>
         </aside>
         <aside className="parameter">
           <h5>networkRecording <code>NetworkRecordingOptions</code> <code>optional</code></h5>
-          <p>Specifies how and what network requests and responses Highlight records. See [Recording Network Requests and Responses](../general/4_session-replay/recording-network-requests-and-responses.md) for more information.</p>
+          <p>Specifies how and what network requests and responses Highlight records. See [Recording Network Requests and Responses](../general/6_product-features/1_session-replay/recording-network-requests-and-responses.md) for more information.</p>
         </aside>
         <aside className="parameter">
           <h5>version <code>string</code> <code>optional</code></h5>
-          <p>Specifies the version of your application. See [Versioning Sessions](../general/4_session-replay/versioning-sessions.md) and [Versioning Errors](../general/5_error-monitoring/versioning-errors.md) to see how setting the version can help you move faster.</p>
+          <p>Specifies the version of your application. See [Versioning Sessions](../general/6_product-features/1_session-replay/versioning-sessions.md) and [Versioning Errors](../general/6_product-features/2_error-monitoring/versioning-errors.md) to see how setting the version can help you move faster.</p>
         </aside>
         <aside className="parameter">
           <h5>enableStrictPrivacy <code>boolean</code> <code>optional</code></h5>
-          <p>Specifies whether Highlight should redact all text and image data during recording. This is useful to make sure you are not recording any personally identifiable information without having to manually add annotations to elements you don't want to be recorded. See [Privacy](../general/4_session-replay/privacy.md) to learn more about the privacy options. The default value is false.</p>
+          <p>Specifies whether Highlight should redact all text and image data during recording. This is useful to make sure you are not recording any personally identifiable information without having to manually add annotations to elements you don't want to be recorded. See [Privacy](../general/6_product-features/1_session-replay/privacy.md) to learn more about the privacy options. The default value is false.</p>
         </aside>
         <aside className="parameter">
           <h5>integrations <code>IntegrationOptions</code> <code>optional</code></h5>
@@ -73,15 +73,11 @@ slug: client
         </aside>
         <aside className="parameter">
           <h5>enableCanvasRecording <code>boolean</code> <code>optional</code></h5>
-          <p>Specifies whether Highlight will record the contents of &lt;canvas&gt; elements. See [Canvas](../general/6_product-features/canvas.md) for more information. The default value is false.</p>
+          <p>Specifies whether Highlight will record the contents of &lt;canvas&gt; elements. See [Canvas](../general/6_product-features/1_session-replay/canvas.md) for more information. The default value is false.</p>
         </aside>
         <aside className="parameter">
           <h5>enablePerformanceRecording <code>boolean</code> <code>optional</code></h5>
-          <p>Specifies whether Highlight will record performance metrics (e.g. FPS, device memory). See [Performance Data](../general/6_product-features/performance-data.md) for more information. The default value is true.</p>
-        </aside>
-        <aside className="parameter">
-          <h5>sessionShortcut <code>boolean | string</code> <code>optional</code></h5>
-          <p>Specifies the keyboard shortcut to open the current session in Highlight. We support the same syntax as [hotkeys](https://github.com/jaywcjlove/hotkeys) for configuring the keyboard shortcut. The default value is false. See [Session Shortcut](../general/4_session-replay/session-shortcut.md) for more information.</p>
+          <p>Specifies whether Highlight will record performance metrics (e.g. FPS, device memory).</p>
         </aside>
         <aside className="parameter">
           <h5>feedbackWidget <code>FeedbackWidgetOptions</code> <code>optional</code></h5>
@@ -93,7 +89,7 @@ slug: client
         </aside>
         <aside className="parameter">
           <h5>isCrossOriginIframe <code>boolean</code> <code>optional</code></h5>
-          <p>Specifies that the current app is a cross origin iframe in an app where Highlight is also enabled. This flag should only be set in the iframe, not in the parent application hosting the iframe. This allows the iframe to forward its recording to the parent to be included as part of the session. See [cross-origin iframe recording](../general/6_product-features/cross-origin-iframes.md) for more details.</p>
+          <p>Specifies that the current app is a cross origin iframe in an app where Highlight is also enabled. This flag should only be set in the iframe, not in the parent application hosting the iframe. This allows the iframe to forward its recording to the parent to be included as part of the session. See [cross-origin iframe recording](../general/6_product-features/1_session-replay/cross-origin-iframes.md) for more details.</p>
         </aside>
       </article>
     </aside>
@@ -110,7 +106,7 @@ slug: client
 <section className="section">
   <div className="left">
     <h3>H.identify</h3> 
-    <p>This method is used to add an identity to a user for the session. You can learn more in [Identifying Users](../general/4_session-replay/identifying-sessions.md).</p>
+    <p>This method is used to add an identity to a user for the session. You can learn more in [Identifying Users](../general/6_product-features/1_session-replay/identifying-sessions.md).</p>
     <h6>Method Parameters</h6>
     <aside className="parameter">
       <h5>identifier<code>String</code> <code>required</code></h5>
@@ -135,7 +131,7 @@ slug: client
 <section className="section">
   <div className="left">
     <h3>H.track</h3> 
-    <p>This method is used to track events that happen during the session. You can learn more in [Tracking Events](../general/4_session-replay/tracking-events.md).</p>
+    <p>This method is used to track events that happen during the session. You can learn more in [Tracking Events](../general/6_product-features/1_session-replay/tracking-events.md).</p>
     <h6>Method Parameters</h6>
     <aside className="parameter">
       <h5>eventName<code>String</code> <code>required</code></h5>
@@ -186,7 +182,7 @@ slug: client
 <section className="section">
   <div className="left">
     <h3>H.metrics</h3> 
-    <p>This method is used to submit custom metrics. You can learn more about [Frontend Observability](../general/6_product-features/frontend-observability.md).</p>
+    <p>This method is used to submit custom metrics. </p>
     <h6>Method Parameters</h6>
     <aside className="parameter">
       <h5>metrics<code>Metrics[]</code> <code>required</code></h5>
@@ -311,52 +307,6 @@ slug: client
  
       // Elsewhere in your app
       H.stop();
-    </code>
-  </div>
-</section>
-
-<section className="section">
-  <div className="left">
-    <h3>H.addSessionFeedback</h3> 
-    <p>This method is used to add session feedback for the session. You can learn more in [User Feedback](../general/6_product-features/user-feedback.md). If you don't want to implement your own UI to collect feedback, you can use the UI that Highlight provides.</p>
-    <h6>Method Parameters</h6>
-    <aside className="parameter">
-      <h5>feedbackOptions<code>SessionFeedbackOptions</code> <code>required</code></h5>
-      <p>The feedback details to collect.</p>
-      <article className="innerParameterContainer">
-        <aside className="innerParameterHeading">feedbackOptions properties</aside>
-        <aside className="parameter">
-          <h5>verbatim <code>string</code> <code>required</code></h5>
-          <p>The feedback string that a user has inputted into your app.</p>
-        </aside>
-        <aside className="parameter">
-          <h5>userName <code>string</code> <code>optional</code></h5>
-          <p>The user's name. This is only required if you have not called H.identify().</p>
-        </aside>
-        <aside className="parameter">
-          <h5>userEmail <code>string</code> <code>optional</code></h5>
-          <p>The user's email. This is only required if you have not called H.identify().</p>
-        </aside>
-      </article>
-    </aside>
-  </div>
-  <div className="right">
-    <code>
-      H.addSessionFeedback({
-        verbatim: 'I L O V E the new feature that shows me cat gifs. Please keep shipping features like this!'
-      })
-    </code>
-  </div>
-</section>
-
-<section className="section">
-  <div className="left">
-    <h3>H.toggleSessionFeedbackModal</h3> 
-    <p>Calling this will toggle the visibility of the feedback modal. You can learn more in [User Feedback](../general/6_product-features/user-feedback.md).</p>
-  </div>
-  <div className="right">
-    <code>
-      H.toggleSessionFeedbackModal()
     </code>
   </div>
 </section>
