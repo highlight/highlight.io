@@ -17,4 +17,4 @@ People may think that we're building multiple products (session replay, error mo
 If you're building software in today’s, you want to focus on building software. We challenge ourselves to build developer tooling that’s simple, straightforward but powerful when you need it to be. highlight.io is built for developers that want to **develop**. Leave the monitoring stuff to us 👍.
 
 ## We execute quickly and fail fast.
-Given that most of the things we build are zero to one, there's often no better way to learn than to build. It's hard to predict how something will scale or be interacted w/ without building something and just shipping it. The only caveat here are processes/work that could affect our customers' software (e.g. building & testing client sdks), which should be done with a certain level of caution.
+Given that most of the things we build are zero to one, there's often no better way to learn than to build. It's hard to predict how something will scale or be interacted w/ without building something and just shipping it. The only caveat here are processes/work that could affect our customers' software (e.g. building & testing client sdks).
