@@ -9,7 +9,7 @@ updatedAt: 2022-08-18T22:36:12.000Z
 
 ### About us.
 <DocsCardGroup>
-    <DocsCard title="Mission & Values."  href="./2_company/1_values.md">
+    <DocsCard title="Mission & Values." href="./2_company/1_values.md">
         {"Details about our company, our values, and opensource."}
     </DocsCard>
     <DocsCard title="Compliance & Security."  href="./2_company/compliance-and-security.md">

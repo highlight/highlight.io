@@ -17,4 +17,4 @@ Highlight out of the box shows you the console messages that were logged during 
 Console messages are not recorded on `localhost` because Highlight emits debug messages which could cause an infinite loop in some situations.
 ```
 
-See [H.init()](../../sdk/client.md#Hinit) for more information.
+See [H.init()](../../../sdk/client.md#Hinit) for more information.

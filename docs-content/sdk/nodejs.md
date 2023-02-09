@@ -106,7 +106,7 @@ slug: nodejs
 <section className="section">
   <div className="left">
     <h3>H.recordMetric</h3> 
-    <p>H.recordMetric() reports a metric to Highlight. Backend metrics can be used just like frontend metrics for creating custom dashboards. See [Frontend Observability](../general/6_product-features/frontend-observability.md) for more details.</p>
+    <p>H.recordMetric() reports a metric to Highlight. Backend metrics can be used just like frontend metrics for creating custom dashboards. </p>
     <h6>Method Parameters</h6>
     <aside className="parameter">
       <h5>secureSessionId<code>string</code> <code>required</code></h5>
