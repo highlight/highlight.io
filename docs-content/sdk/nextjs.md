@@ -41,7 +41,7 @@ slug: nextjs
     <code>
       import { Highlight } from "@highlight-run/next";
  
-      export const withHighlight = Highlight();
+      export const withHighlight = Highlight({projectID: 'YOUR_PROJECT_ID'});
     </code>
     <code>
       import { withHighlight } from "../highlight.config";
