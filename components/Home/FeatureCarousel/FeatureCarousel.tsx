@@ -1,4 +1,5 @@
 import styles from '../Home.module.scss';
+import classNames from 'classnames';
 import { Typography } from '../../../components/common/Typography/Typography';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -13,19 +14,19 @@ export const FeatureCarousel = () => {
   return (
     <div className="hidden xl:flex flex-col max-w-[1250px]">
       <div className="flex gap-4">
-        <div onClick={() => setSelected(0)} className={`${selected == 0 ? "bg-divider-on-dark  border-[1px] border-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark hover:border-color-selected-light"} w-1/4 flex flex-col flex-grow-0 text-left gap-1 p-5 rounded-lg cursor-pointer transition-all`}>
+        <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, selected == 0 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
           <Typography type="copy3" emphasis={true}>Session Replay</Typography>
           <Typography type="copy4">See how your product is used, understand why people drop off</Typography>
         </div>
-        <div onClick={() => setSelected(1)} className={`${selected == 1 ? "bg-divider-on-dark  border-[1px] border-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark hover:border-color-selected-light"} w-1/4 flex flex-col flex-grow-0 text-left gap-1 p-5 rounded-lg cursor-pointer transition-all`}>
+        <div onClick={() => setSelected(1)} className={classNames(styles.carouselButton, selected == 1 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
           <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
-        <div onClick={() => setSelected(2)} className={`${selected == 2 ? "bg-divider-on-dark  border-[1px] border-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark hover:border-color-selected-light"} w-1/4 flex flex-col flex-grow-0 text-left gap-1 p-5 rounded-lg cursor-pointer transition-all`}>
+        <div onClick={() => setSelected(2)} className={classNames(styles.carouselButton, selected == 2 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
           <Typography type="copy3" emphasis={true}>Logging & Log Alerts</Typography>
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
-        <div onClick={() => setSelected(3)} className={`${selected == 3 ? "bg-divider-on-dark  border-[1px] border-divider-on-dark" : "bg-primary-200 border-[1px] border-divider-on-dark hover:border-color-selected-light"} w-1/4 flex flex-col flex-grow-0 text-left gap-1 p-5 rounded-lg cursor-pointer transition-all`}>
+        <div onClick={() => setSelected(3)} className={classNames(styles.carouselButton, selected == 3 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
           <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
