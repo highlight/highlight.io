@@ -333,7 +333,7 @@ const PostPage = ({
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/blog/${post.slug}`}
         canonical={`/blog/${post.slug}`}
       />
-      <BlogNavbar title={post.title} endPosition={endPosition} attachUnder={<Link href={getTagUrl(singleTag?.slug ?? "all")} className='flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center'><ReturnIcon /> Back to {singleTag?.name ?? "blog"}</Link>} />
+      <BlogNavbar title={post.title} endPosition={endPosition} singleTag={singleTag} />
       <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
         <Section>
           <div className={homeStyles.anchorTitle}>
@@ -362,12 +362,12 @@ const PostPage = ({
         {post.image?.url && (
           <Section className={styles.headerSection}>
             {isStartupStack ?
-              <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle)}>
+              <div className={classNames(styles.youtubeEmbed, styles.blogBody)}>
                 <YouTube videoId={post.youtubeVideoId || "dQw4w9WgXcQ"} style={{ display: "flex", justifyContent: "center" }}></YouTube>
               </div>
               :
               <div
-                className={classNames(styles.mainImage, homeStyles.anchorTitle)}
+                className={classNames(styles.mainImage, styles.blogBody)}
               >
                 <Image
                   src={post.image.url || ''}
@@ -383,7 +383,7 @@ const PostPage = ({
         <Section className={styles.headerSection}>
           <div
             className={classNames(
-              homeStyles.anchorTitle,
+              styles.blogBody,
               styles.postBody,
               styles.postBodyTop
             )}

@@ -2,6 +2,7 @@ export const authorDescription: string
 export const authorDetails: string
 export const authorDiv: string
 export const avatar: string
+export const blogBody: string
 export const blogContainer: string
 export const blogImage: string
 export const blogImageContainer: string

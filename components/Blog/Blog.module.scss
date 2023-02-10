@@ -13,6 +13,16 @@
   }
 }
 
+.blogBody {
+  max-width: 840px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 0px;
+}
+
 .tagContainer {
   margin: calc(20 * var(--space-unit)) auto calc(4 * var(--space-unit));
   max-width: var(--max-width);
