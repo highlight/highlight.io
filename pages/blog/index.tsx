@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { matchSorter } from 'match-sorter';
 import { PostAuthor } from '../../components/Blog/Author';
+import { styles } from '../../components/Blog/Blog.module.scss';
 
 export async function loadPostsFromHygraph(tag?: string) {
   const QUERY = gql`
@@ -176,7 +177,7 @@ export const Blog = ({
               <h3>
                 {isStartupStack ? "Welcome to the Startup Stack!" : currentTag.name}
               </h3>
-              {isStartupStack ? <Typography type="copy1">
+              {isStartupStack ? <Typography className={styles.copyOnDark} type="copy1">
                 This is where we talk about the tools and tech you can use to build your next Startup! Read through our episodes below or find us <Link href="https://www.youtube.com/channel/UCATzQs36Mo7Cezt5Ij9ayZQ">on YouTube</Link>.
               </Typography> :
                 <Typography type="copy1" className={styles.copyOnDark}>
