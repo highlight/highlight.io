@@ -336,7 +336,7 @@ const PostPage = ({
       <BlogNavbar title={post.title} endPosition={endPosition} singleTag={singleTag} />
       <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
         <Section>
-          <div className={homeStyles.anchorTitle}>
+          <div className={classNames(homeStyles.anchorTitle, styles.blogSection)}>
             <Typography type="copy2">
               <p className={styles.dateDiv}>{`${new Date(
                 post.publishedAt
@@ -362,12 +362,12 @@ const PostPage = ({
         {post.image?.url && (
           <Section className={styles.headerSection}>
             {isStartupStack ?
-              <div className={classNames(styles.youtubeEmbed, styles.blogBody)}>
+              <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle, styles.blogSection)}>
                 <YouTube videoId={post.youtubeVideoId || "dQw4w9WgXcQ"} style={{ display: "flex", justifyContent: "center" }}></YouTube>
               </div>
               :
               <div
-                className={classNames(styles.mainImage, styles.blogBody)}
+                className={classNames(styles.mainImage, homeStyles.anchorTitle, styles.blogSection)}
               >
                 <Image
                   src={post.image.url || ''}
@@ -383,9 +383,10 @@ const PostPage = ({
         <Section className={styles.headerSection}>
           <div
             className={classNames(
-              styles.blogBody,
+              homeStyles.anchorTitle,
               styles.postBody,
-              styles.postBodyTop
+              styles.postBodyTop,
+              styles.blogSection
             )}
           >
             {postSections?.map((p, idx) => (

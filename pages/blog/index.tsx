@@ -144,10 +144,11 @@ export const Blog = ({
   const shouldFeature =
     !debouncedSearchQuery && currentTag.slug === allTag.slug && page <= 1;
 
-  const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
-  const unfeaturedPosts = posts.filter((p) =>
-    shouldFeature ? !p.featured : true
-  );
+  // const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
+  // const unfeaturedPosts = posts.filter((p) =>
+  //   shouldFeature ? !p.featured : true
+  // );
+  const unfeaturedPosts = posts;
 
   const filteredPosts = debouncedSearchQuery
     ? matchSorter(unfeaturedPosts, debouncedSearchQuery, {
@@ -173,8 +174,8 @@ export const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1328px] mx-auto items-start px-6">
-          <div /* Sidebar */
+        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1100px] mx-auto items-start px-6">
+          {/* <div
             className="w-[296px] flex-shrink-0 hidden desktop:flex  flex-col gap-2 p-2 border rounded-lg border-divider-on-dark"
           >
             {shownTags.map((tag) => (
@@ -184,32 +185,25 @@ export const Blog = ({
                 current={currentTag.slug === tag.slug}
               />
             ))}
-          </div>
+          </div> */}
           <div /* Main Side */ className="flex flex-col flex-1 w-full gap-11">
             <div /* Category Description */
-              className="flex flex-col items-start gap-5 max-w-[808px]"
+              className="flex flex-col items-start gap-5"
             >
-              <Typography
-                type="copy4"
-                emphasis
-                className="py-0.5 px-3 bg-highlight-yellow rounded-full text-dark-background"
-              >
-                {isStartupStack ? "The Startup Stack" : "The Highlight Blog"}
-              </Typography>
               <h3>
                 {isStartupStack ? "Welcome to the Startup Stack!" : currentTag.name}
               </h3>
               {isStartupStack ? <Typography type="copy1">
                 This is where we talk about the tools and tech you can use to build your next Startup! Read through our episodes below or find us <Link href="https://www.youtube.com/channel/UCATzQs36Mo7Cezt5Ij9ayZQ">on YouTube</Link>.
               </Typography> :
-                <Typography type="copy1">
+                <Typography type="copy1" style={{ color: "#dfdfdf" }}>
                   {currentTag.description || allTag.description}
                 </Typography>
               }
             </div>
             <div /* Search and Posts */ className="flex flex-col gap-6">
-              <div /* Mobile Tags Tabs */
-                className="flex gap-8 overflow-x-scroll desktop:hidden scrollbar-hidden"
+              <div /* Tags Tabs */
+                className="flex gap-8 overflow-x-scroll scrollbar-hidden"
               >
                 {shownTags.map((tag) => (
                   <TagTab
@@ -241,15 +235,15 @@ export const Blog = ({
                   />
                 </div>
                 {!debouncedSearchQuery && (
-                  <PageController /* Pagination */
+                  <PageController
                     page={page}
                     count={filteredPosts.length / itemsPerPage}
                     tag={currentTag.slug}
                   />
                 )}
               </div>
-              {featuredPosts.length > 0 && (
-                <div /* Featured Posts */
+              {/* {featuredPosts.length > 0 && (
+                <div 
                   className="flex flex-col gap-3 p-3 bg-divider-on-dark rounded-xl"
                 >
                   <Typography
@@ -262,7 +256,7 @@ export const Blog = ({
                     <PostItem post={post} key={post.slug} />
                   ))}
                 </div>
-              )}
+              )} */}
               {displayedPosts.map((post) => {
                 return (
                   <>{

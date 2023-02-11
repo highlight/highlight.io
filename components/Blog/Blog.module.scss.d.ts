@@ -2,12 +2,12 @@ export const authorDescription: string
 export const authorDetails: string
 export const authorDiv: string
 export const avatar: string
-export const blogBody: string
 export const blogContainer: string
 export const blogImage: string
 export const blogImageContainer: string
 export const blogPost: string
 export const blogPostSmall: string
+export const blogSection: string
 export const blogText: string
 export const bodyText: string
 export const cardImage: string
@@ -17,6 +17,7 @@ export const codeInline: string
 export const dateDiv: string
 export const headerSection: string
 export const mainBlogPadding: string
+export const mainBlogViewPage: string
 export const mainImage: string
 export const otherArticlesHeader: string
 export const postBody: string
