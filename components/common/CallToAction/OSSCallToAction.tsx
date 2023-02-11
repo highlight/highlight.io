@@ -27,10 +27,7 @@ export const OSSCallToAction = () => {
             <PrimaryButton href="https://github.com/highlight/highlight">
               <div className="flex justify-center items-center gap-3">
                 <AiFillGithub className="w-6 h-6 mb-[1px]" />
-                <Typography type="copy2" emphasis={true} className="hidden sm:flex">
-                  Github Repo
-                </Typography>
-                <Typography type="copy2" emphasis={true} className="sm:hidden">
+                <Typography type="copy2" emphasis={true}>
                   Github
                 </Typography>
               </div>

@@ -12,6 +12,8 @@ To run our app locally, head to our [github repo](https://github.com/highlight/h
 ## Docker Compose
 
 ```shell
+# ensure git submodules are cloned
+git submodule update --init --recursive
 cd docker
 docker compose up -d --build
 ```
