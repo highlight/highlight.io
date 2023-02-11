@@ -169,17 +169,6 @@ export const Blog = ({
       <Navbar />
       <main>
         <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1100px] mx-auto items-start px-6">
-          {/* <div
-            className="w-[296px] flex-shrink-0 hidden desktop:flex  flex-col gap-2 p-2 border rounded-lg border-divider-on-dark"
-          >
-            {shownTags.map((tag) => (
-              <SidebarTag
-                {...tag}
-                key={tag.slug}
-                current={currentTag.slug === tag.slug}
-              />
-            ))}
-          </div> */}
           <div /* Main Side */ className="flex flex-col flex-1 w-full gap-11">
             <div /* Category Description */
               className="flex flex-col items-start gap-5"
