@@ -333,10 +333,10 @@ const PostPage = ({
         absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/blog/${post.slug}`}
         canonical={`/blog/${post.slug}`}
       />
-      <BlogNavbar title={post.title} endPosition={endPosition} attachUnder={<Link href={getTagUrl(singleTag?.slug ?? "all")} className='flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center'><ReturnIcon /> Back to {singleTag?.name ?? "blog"}</Link>} />
+      <BlogNavbar title={post.title} endPosition={endPosition} singleTag={singleTag} />
       <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
         <Section>
-          <div className={homeStyles.anchorTitle}>
+          <div className={classNames(homeStyles.anchorTitle, styles.blogSection)}>
             <Typography type="copy2">
               <p className={styles.dateDiv}>{`${new Date(
                 post.publishedAt
@@ -362,12 +362,12 @@ const PostPage = ({
         {post.image?.url && (
           <Section className={styles.headerSection}>
             {isStartupStack ?
-              <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle)}>
+              <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle, styles.blogSection)}>
                 <YouTube videoId={post.youtubeVideoId || "dQw4w9WgXcQ"} style={{ display: "flex", justifyContent: "center" }}></YouTube>
               </div>
               :
               <div
-                className={classNames(styles.mainImage, homeStyles.anchorTitle)}
+                className={classNames(styles.mainImage, homeStyles.anchorTitle, styles.blogSection)}
               >
                 <Image
                   src={post.image.url || ''}
@@ -385,7 +385,8 @@ const PostPage = ({
             className={classNames(
               homeStyles.anchorTitle,
               styles.postBody,
-              styles.postBodyTop
+              styles.postBodyTop,
+              styles.blogSection
             )}
           >
             {postSections?.map((p, idx) => (

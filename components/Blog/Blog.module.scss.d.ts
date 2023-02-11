@@ -7,12 +7,14 @@ export const blogImage: string
 export const blogImageContainer: string
 export const blogPost: string
 export const blogPostSmall: string
+export const blogSection: string
 export const blogText: string
 export const bodyText: string
 export const cardImage: string
 export const cardSection: string
 export const codeBlock: string
 export const codeInline: string
+export const copyOnDark: string
 export const dateDiv: string
 export const headerSection: string
 export const mainBlogPadding: string

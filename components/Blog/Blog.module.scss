@@ -13,10 +13,18 @@
   }
 }
 
+.blogSection {
+  padding-top: 0px !important;
+}
+
 .tagContainer {
   margin: calc(20 * var(--space-unit)) auto calc(4 * var(--space-unit));
   max-width: var(--max-width);
   padding: 0 var(--size-medium);
+}
+
+.copyOnDark {
+  color: #dfdfdf;
 }
 
 .tagHeader {
