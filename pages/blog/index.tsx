@@ -144,14 +144,8 @@ export const Blog = ({
   const shouldFeature =
     !debouncedSearchQuery && currentTag.slug === allTag.slug && page <= 1;
 
-  // const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
-  // const unfeaturedPosts = posts.filter((p) =>
-  //   shouldFeature ? !p.featured : true
-  // );
-  const unfeaturedPosts = posts;
-
   const filteredPosts = debouncedSearchQuery
-    ? matchSorter(unfeaturedPosts, debouncedSearchQuery, {
+    ? matchSorter(posts, debouncedSearchQuery, {
       keys: [
         'title',
         {
@@ -160,7 +154,7 @@ export const Blog = ({
         },
       ],
     })
-    : unfeaturedPosts;
+    : posts;
 
   page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
 
@@ -242,21 +236,6 @@ export const Blog = ({
                   />
                 )}
               </div>
-              {/* {featuredPosts.length > 0 && (
-                <div 
-                  className="flex flex-col gap-3 p-3 bg-divider-on-dark rounded-xl"
-                >
-                  <Typography
-                    type="copy4"
-                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark self-start"
-                  >
-                    Featured Posts
-                  </Typography>
-                  {featuredPosts.map((post) => (
-                    <PostItem post={post} key={post.slug} />
-                  ))}
-                </div>
-              )} */}
               {displayedPosts.map((post) => {
                 return (
                   <>{

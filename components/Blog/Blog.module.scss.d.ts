@@ -17,7 +17,6 @@ export const codeInline: string
 export const dateDiv: string
 export const headerSection: string
 export const mainBlogPadding: string
-export const mainBlogViewPage: string
 export const mainImage: string
 export const otherArticlesHeader: string
 export const postBody: string
