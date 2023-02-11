@@ -179,7 +179,7 @@ export const Blog = ({
               {isStartupStack ? <Typography type="copy1">
                 This is where we talk about the tools and tech you can use to build your next Startup! Read through our episodes below or find us <Link href="https://www.youtube.com/channel/UCATzQs36Mo7Cezt5Ij9ayZQ">on YouTube</Link>.
               </Typography> :
-                <Typography type="copy1" style={{ color: "#dfdfdf" }}>
+                <Typography type="copy1" className={styles.copyOnDark}>
                   {currentTag.description || allTag.description}
                 </Typography>
               }
