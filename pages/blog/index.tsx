@@ -22,7 +22,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { matchSorter } from 'match-sorter';
 import { PostAuthor } from '../../components/Blog/Author';
-import { styles } from '../../components/Blog/Blog.module.scss';
+import styles from '../../components/Blog/Blog.module.scss';
 
 export async function loadPostsFromHygraph(tag?: string) {
   const QUERY = gql`
@@ -201,7 +201,7 @@ export const Blog = ({
                 className="flex flex-col justify-between w-full gap-4 mobile:flex-row"
               >
                 <div /* Search */
-                  className="flex items-center flex-grow gap-1 px-2 transition-colors border rounded-lg text-copy-on-dark border-divider-on-dark focus-within:border-copy-on-light h-9"
+                  className="flex items-center flex-grow gap-1 px-2 transition-colors border rounded-lg text-copy-on-dark border-divider-on-dark focus-within:border-copy-on-light h-11"
                 >
                   <HiOutlineSearch className="w-5 h-5 text-copy-on-light" />
                   <input
@@ -218,13 +218,6 @@ export const Blog = ({
                     }
                   />
                 </div>
-                {!debouncedSearchQuery && (
-                  <PageController
-                    page={page}
-                    count={filteredPosts.length / itemsPerPage}
-                    tag={currentTag.slug}
-                  />
-                )}
               </div>
               {displayedPosts.map((post) => {
                 return (
