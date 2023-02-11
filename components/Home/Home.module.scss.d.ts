@@ -17,6 +17,7 @@ export const buttonArrow: string;
 export const buttonContainer: string;
 export const callToActionBackground: string;
 export const carouselButton: string;
+export const carouselContainer: string;
 export const codeSection: string;
 export const codeSnippetButtons: string;
 export const codeSnippetCircle: string;

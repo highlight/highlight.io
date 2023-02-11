@@ -177,8 +177,12 @@ const Home: NextPage = () => {
                 </PrimaryButton>
               </div>
             </div>
-            {/* <HeroVideo /> */}
-            <FeatureCarousel />
+            <div className="flex xl:hidden">
+              <HeroVideo />
+            </div>
+            <div className="hidden xl:flex">
+              <FeatureCarousel />
+            </div>
           </div>
         </Section>
         <Section>

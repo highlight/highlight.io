@@ -1,18 +1,35 @@
 import styles from '../Home.module.scss';
+import productStyles from '../../Products/Products.module.scss'
 import classNames from 'classnames';
 import { Typography } from '../../../components/common/Typography/Typography';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
 import FooterLeftImage from '../../../public/images/safety-security-section.gif';
 import featureImg1 from '../../../public/images/featureCarousel1.png';
+import landingCarousel1 from '../../../public/images/landingCarousel1.png';
+import { Carousel } from 'antd';
+import useEmblaCarousel from 'embla-carousel-react'
+import { HiTerminal } from 'react-icons/hi';
 
 
 export const FeatureCarousel = () => {
-  const [selected, setSelected] = useState(3)
+  const [selected, setSelected] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.scrollTo(selected)
+      emblaApi.on('select', () => {
+        setSelected(emblaApi.selectedScrollSnap())
+      })
+    }
+  }, [emblaApi, selected])
+
 
   return (
-    <div className="hidden xl:flex flex-col max-w-[1250px]">
+    <div className="flex flex-col overflow-x-hidden">
       <div className="flex gap-4">
         <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, selected == 0 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
           <Typography type="copy3" emphasis={true}>Session Replay</Typography>
@@ -31,33 +48,128 @@ export const FeatureCarousel = () => {
           <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
         </div>
       </div>
-      <div className="flex overflow-x-auto mt-4 gap-4 snap-x snap-mandatory scrollbar-hide">
-        <div className="relative flex justify-between pl-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
-          <div className="flex flex-col gap-3 justify-center text-left w-2/5">
-            <h5>Error Monitoring</h5>
-            <Typography type="copy3">Understand the errors and exceptions happening in your  web application.</Typography>
-            <div className="flex flex-col gap-4 py-4 my-3 bg-color-divider-on-dark rounded-lg px-8">
-              <div className="">
-                <Typography type="copy3" emphasis>Console and Network Recording</Typography>
+      <div className="w-full max-w-[1250px]" ref={emblaRef}>
+        <div className={classNames(styles.carouselContainer)}>
+
+          <div className="relative flex justify-end px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+            <div className="absolute bottom-0 left-0 rounded-lg">
+              <Image className="object-contain w-auto h-[450px] rounded-lg" src={landingCarousel1} alt="Feature Spotlight" />
+            </div>
+            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
+              <h5>Session Replay</h5>
+              <Typography type="copy3">Understand the real reason why bugs are happening in your web application.</Typography>
+              <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Customizable Log Alerts and Monitors</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Live Session Recording</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Powerful Privacy Controls</Typography>
+                </div>
               </div>
-              <div className="">
-                <Typography type="copy3" emphasis>Live Session Recording</Typography>
-              </div>
-              <div className="">
-                <Typography type="copy3" emphasis>Powerful Privacy Controls</Typography>
+              <div className="flex justify-start">
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                </PrimaryButton>
               </div>
             </div>
-            <Typography type="copy3" onDark>
-              <Link href="/customers">
-                Learn More→
-              </Link>
-            </Typography>
           </div>
-          <div className="absolute bottom-0 right-0 ">
-            <Image className="object-contain w-auto h-[500px]" src={featureImg1} alt="Feature Spotlight" />
+
+          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
+              <h5>Fullstack Logging</h5>
+              <Typography type="copy3">Understand and drill down on all the logs being written throughout your stack.</Typography>
+              <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Customizable Log Alerts and Monitors</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Live Session Recording</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Powerful Privacy Controls</Typography>
+                </div>
+              </div>
+              <div className="flex justify-start">
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                </PrimaryButton>
+              </div>
+            </div>
+            <div className="absolute bottom-0 right-0 rounded-lg">
+              <Image className="object-contain w-auto h-[500px] rounded-lg" src={featureImg1} alt="Feature Spotlight" />
+            </div>
           </div>
+
+          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
+              <h5>Error Monitoring</h5>
+              <Typography type="copy3">Understand the errors and exceptions happening in your web application.</Typography>
+              <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Customizable Log Alerts and Monitors</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Live Session Recording</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Powerful Privacy Controls</Typography>
+                </div>
+              </div>
+              <div className="flex justify-start">
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                </PrimaryButton>
+              </div>
+            </div>
+            <div className="absolute bottom-0 right-0 rounded-lg">
+              <Image className="object-contain w-auto h-[500px] rounded-lg" src={featureImg1} alt="Feature Spotlight" />
+            </div>
+          </div>
+
+          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
+              <h5>Error Monitoring</h5>
+              <Typography type="copy3">Understand the errors and exceptions happening in your web application.</Typography>
+              <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Customizable Log Alerts and Monitors</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Live Session Recording</Typography>
+                </div>
+                <div className="flex items-center gap-2">
+                  <HiTerminal className="w-[20px] h-[20px]" />
+                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Powerful Privacy Controls</Typography>
+                </div>
+              </div>
+              <div className="flex justify-start">
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                </PrimaryButton>
+              </div>
+            </div>
+            <div className="absolute bottom-0 right-0 rounded-lg">
+              <Image className="object-contain w-auto h-[500px] rounded-lg" src={featureImg1} alt="Feature Spotlight" />
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>
-  );
+  )
 };
