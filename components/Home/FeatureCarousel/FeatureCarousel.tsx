@@ -1,15 +1,11 @@
 import styles from '../Home.module.scss';
-import productStyles from '../../Products/Products.module.scss'
 import classNames from 'classnames';
 import { Typography } from '../../../components/common/Typography/Typography';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
-import FooterLeftImage from '../../../public/images/safety-security-section.gif';
 import featureImg1 from '../../../public/images/featureCarousel1.png';
 import landingCarousel1 from '../../../public/images/landingCarousel1.png';
-import { Carousel } from 'antd';
 import useEmblaCarousel from 'embla-carousel-react'
 import { HiTerminal } from 'react-icons/hi';
 
@@ -29,29 +25,39 @@ export const FeatureCarousel = () => {
 
 
   return (
-    <div className="flex flex-col overflow-x-hidden">
-      <div className="flex gap-4">
-        <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, selected == 0 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
-          <Typography type="copy3" emphasis={true}>Session Replay</Typography>
-          <Typography type="copy4">See how your product is used, understand why people drop off</Typography>
+    <div className="flex flex-col overflow-x-hidden rounded-lg max-w-[1100px]">
+      <div className="grid grid-cols-4">
+        <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, selected == 0 ? "" : "bg-primary-200 hover:border-color-selected-light", "rounded-tl-lg")}>
+          <div className={`${selected == 0 ? "bg-divider-on-dark" : ""} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" emphasis={true}>Session Replay</Typography>
+            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+          </div>
         </div>
-        <div onClick={() => setSelected(1)} className={classNames(styles.carouselButton, selected == 1 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
-          <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
-          <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+        <div onClick={() => setSelected(1)} className={classNames(styles.carouselButton, selected == 1 ? "" : "bg-primary-200 hover:border-color-selected-light")}>
+          <div className={`${selected == 1 ? "bg-divider-on-dark" : ""} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
+            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+          </div>
         </div>
-        <div onClick={() => setSelected(2)} className={classNames(styles.carouselButton, selected == 2 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
-          <Typography type="copy3" emphasis={true}>Logging & Log Alerts</Typography>
-          <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+        <div onClick={() => setSelected(2)} className={classNames(styles.carouselButton, selected == 2 ? "" : "bg-primary-200 hover:border-color-selected-light")}>
+          <div className={`${selected == 2 ? "bg-divider-on-dark" : ""} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" emphasis={true}>Logging & Log Alerts</Typography>
+            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+
+          </div>
         </div>
-        <div onClick={() => setSelected(3)} className={classNames(styles.carouselButton, selected == 3 ? "bg-divider-on-dark" : "bg-primary-200 hover:border-color-selected-light")}>
-          <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
-          <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+        <div onClick={() => setSelected(3)} className={classNames(styles.carouselButton, selected == 3 ? "" : "bg-primary-200 hover:border-color-selected-light", "rounded-tr-lg")}>
+          <div className={`${selected == 3 ? "bg-divider-on-dark" : ""} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
+            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+          </div>
         </div>
       </div>
-      <div className="w-full max-w-[1250px]" ref={emblaRef}>
+      <div className="w-full max-w-[1100px]" ref={emblaRef}>
         <div className={classNames(styles.carouselContainer)}>
 
-          <div className="relative flex justify-end px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-end px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
+
             <div className="absolute bottom-0 left-0 rounded-lg">
               <Image className="object-contain w-auto h-[450px] rounded-lg" src={landingCarousel1} alt="Feature Spotlight" />
             </div>
@@ -80,7 +86,7 @@ export const FeatureCarousel = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
             <div className="flex flex-col gap-4 justify-center text-left w-2/5">
               <h5>Fullstack Logging</h5>
               <Typography type="copy3">Understand and drill down on all the logs being written throughout your stack.</Typography>
@@ -109,7 +115,7 @@ export const FeatureCarousel = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
             <div className="flex flex-col gap-4 justify-center text-left w-2/5">
               <h5>Error Monitoring</h5>
               <Typography type="copy3">Understand the errors and exceptions happening in your web application.</Typography>
@@ -138,7 +144,7 @@ export const FeatureCarousel = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
             <div className="flex flex-col gap-4 justify-center text-left w-2/5">
               <h5>Error Monitoring</h5>
               <Typography type="copy3">Understand the errors and exceptions happening in your web application.</Typography>
@@ -170,6 +176,6 @@ export const FeatureCarousel = () => {
 
         </div>
       </div>
-    </div>
+    </div >
   )
 };
