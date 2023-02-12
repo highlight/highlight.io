@@ -60,7 +60,7 @@ type DocData = {
   slug: string
   toc: TocEntry
   docOptions: DocPath[]
-  metadata?: { title: string; slug: string }
+  metadata?: { title: string; slug: string; heading: string; }
   isSdkDoc?: boolean
   docIndex: number
   redirect?: string
@@ -312,10 +312,15 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     currentDoc.rel_path,
   )
 
+  const newerContent = resolveEmbeddedLinksFromHref(
+    newContent,
+    currentDoc.rel_path,
+  )
+
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: !currentDoc.isSdkDoc ? await serialize(newContent) : null,
+      markdownText: !currentDoc.isSdkDoc ? await serialize(newerContent, { scope: { path: currentDoc.rel_path } }) : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
@@ -879,7 +884,7 @@ const DocPage = ({
                 [styles.sdkPageTitle]: isSdkDoc,
               })}
             >
-              {metadata ? metadata.title : ''}
+              {metadata?.heading ? metadata.heading : metadata?.title ? metadata.title : ''}
             </h3>
             {isSdkDoc ? (
               <DocSection content={markdownTextOG || ''} />
@@ -1016,10 +1021,28 @@ const resolveEmbeddedLinksFromMarkdown = (
   const regex = /\[(.*?)\]\((.*?)\)/g
   // replace all of the links in the markdown file
   const newContent = markdownContent.replaceAll(regex, (_, text, link) => {
-    if (link.startsWith('http') || link.startsWith('mailto')) {
+    if (link.startsWith('http') || link.startsWith('mailto') || link.startsWith('/images')) {
       return `[${text}](${link})`
     }
     return `[${text}](${resolveEmbeddedLink(link, relativePath)})`
+  })
+
+  return newContent
+}
+
+
+const resolveEmbeddedLinksFromHref = (
+  markdownContent: string,
+  relativePath: string,
+): string => {
+  // regex for matching text in the form href="..."
+  const hrefRegex = /href="(.*)"/g
+  // replace all of the links in the markdown file
+  const newContent = markdownContent.replaceAll(hrefRegex, (_, text) => {
+    if (text.startsWith('http') || text.startsWith('mailto') || text.startsWith('/images')) {
+      return `href="${text}"`
+    }
+    return `href="${resolveEmbeddedLink(text, relativePath)}"`
   })
 
   return newContent
@@ -1045,8 +1068,9 @@ const DocsCardGroup = ({ children }: React.PropsWithChildren) => {
 const DocsCard = ({
   children,
   title,
+  path,
   href,
-}: React.PropsWithChildren<{ title: string; href: string }>) => {
+}: React.PropsWithChildren<{ title: string; href: string; path: string; }>) => {
   return (
     <Link href={href} className={styles.docsCard}>
       <Typography type="copy2" emphasis>

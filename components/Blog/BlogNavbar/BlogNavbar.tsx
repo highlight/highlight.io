@@ -10,6 +10,8 @@ import Banner from '../../common/Banner/Banner';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
 import { Typography } from '../../common/Typography/Typography';
+import ReturnIcon from '../../../public/images/ReturnIcon';
+import { getTagUrl, Tag } from '../Tag';
 
 const SHOW_NAVBAR_OFFSET = 300;
 
@@ -17,7 +19,9 @@ const BlogNavbar = ({
   title,
   endPosition,
   attachUnder,
+  singleTag,
 }: {
+  singleTag?: Tag;
   title: string;
   endPosition: number;
   attachUnder?: React.ReactElement,
@@ -192,7 +196,7 @@ const BlogNavbar = ({
           }}
         ></div>
         <div className='absolute top-full'>
-          {attachUnder}
+          <Link href={getTagUrl(singleTag?.slug ?? "all")} className='flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center'><ReturnIcon /> Back</Link>
         </div>
       </header>
     </>

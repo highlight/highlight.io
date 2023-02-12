@@ -23,7 +23,8 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
   flex-wrap: wrap;
-  margin: 34px 0;
+  margin-top: 14px;
+  margin-bottom: 34px;
 }
 
 @media screen and (max-width: 600px) {

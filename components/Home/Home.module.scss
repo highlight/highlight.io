@@ -806,6 +806,26 @@
   }
 }
 
+.ossCard {
+  border-radius: var(--size-xSmall);
+  box-shadow: 8px 8px 0px -2px var(--color-primary-200);
+}
+
+.hollowButton {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid var(--brand-accent-light) !important;
+  background-color: transparent !important;
+  color: var(--brand-accent-light) !important;
+  border-radius: var(--size-xSmall);
+
+  &:hover {
+    background-color: var(--color-secondary-300) !important;
+    color: var(--color-primary-background) !important;
+  }
+}
+
 .customerReel {
   display: flex;
   flex-direction: column;
@@ -816,6 +836,28 @@
   gap: var(--size-xLarge);
   max-width: var(--max-width);
   margin: auto;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: calc(var(--max-width) + (var(--size-large) * 2));
+  margin: 0 auto;
+  margin-bottom: var(--size-xxxLarge);
+  padding: 25px var(--size-medium);
+  padding-top: 0px;
+  gap: 96px;
+}
+
+.landingInfoRow {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 96px;
+  padding-bottom: var(--size-xLarge);
+  border-radius: var(--size-xSmall);
 }
 
 .infoContainer {
