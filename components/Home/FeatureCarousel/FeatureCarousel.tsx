@@ -25,42 +25,43 @@ export const FeatureCarousel = () => {
 
 
   return (
-    <div className="flex flex-col overflow-x-hidden rounded-lg max-w-[1100px]">
+    <div className="flex flex-col overflow-x-hidden lg:rounded-lg xl:max-w-[1100px]">
       <div className="grid grid-cols-4">
-        <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, "group rounded-tl-lg")}>
-          <div className={`${selected == 0 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
-            <Typography type="copy3" emphasis={true}>Session Replay</Typography>
-            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+        <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, "group lg:rounded-tl-lg")}>
+          <div className={`${selected == 0 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Session Replay</Typography>
+            <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
         <div onClick={() => setSelected(1)} className={classNames(styles.carouselButton, "group")}>
-          <div className={`${selected == 1 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
-            <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
-            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+          <div className={`${selected == 1 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Fullstack Error Monitoring</Typography>
+            <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
         <div onClick={() => setSelected(2)} className={classNames(styles.carouselButton, "group")}>
-          <div className={`${selected == 2 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
-            <Typography type="copy3" emphasis={true}>Logging & Log Alerts</Typography>
-            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+          <div className={`${selected == 2 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Session Replay</Typography>
+            <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
-        <div onClick={() => setSelected(3)} className={classNames(styles.carouselButton, "group rounded-tr-lg")}>
-          <div className={`${selected == 3 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} flex flex-col gap-1 px-3 py-2 rounded-lg`}>
-            <Typography type="copy3" emphasis={true}>Fullstack Error Monitoring</Typography>
-            <Typography type="copy4">Error Monitoring for frontend & backend.</Typography>
+        <div onClick={() => setSelected(3)} className={classNames(styles.carouselButton, "group lg:rounded-tr-lg")}>
+          <div className={`${selected == 3 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+            <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Session Replay</Typography>
+            <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
       </div>
-      <div className="w-full max-w-[1100px]" ref={emblaRef}>
-        <div className={classNames(styles.carouselContainer)}>
+      <div className="w-screen lg:w-full" ref={emblaRef}>
+        <div className={classNames(styles.carouselContainer, "lg:gap-4")}>
 
-          <div className="relative flex justify-end px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
-
-            <div className="absolute bottom-0 left-0 rounded-lg">
-              <Image className="object-contain w-auto h-[450px] rounded-lg" src={landingCarousel1} alt="Feature Spotlight" />
+          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+            <div className="w-1/2">
+              <div className="absolute bottom-0 left-0">
+                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+              </div>
             </div>
-            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
+            <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
               <h5>Session Replay</h5>
               <Typography type="copy3">Understand the real reason why bugs are happening in your web application.</Typography>
               <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
@@ -78,17 +79,22 @@ export const FeatureCarousel = () => {
                 </div>
               </div>
               <div className="flex justify-start">
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1" className='py-[6px] px-12'>
+                  <Typography type="copy3" emphasis={true}>Learn More</Typography>
                 </PrimaryButton>
               </div>
             </div>
           </div>
 
-          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
-            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
-              <h5>Fullstack Logging</h5>
-              <Typography type="copy3">Understand and drill down on all the logs being written throughout your stack.</Typography>
+          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+            <div className="w-1/2">
+              <div className="absolute bottom-0 left-0">
+                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
+              <h5>Session Replay</h5>
+              <Typography type="copy3">Understand the real reason why bugs are happening in your web application.</Typography>
               <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
                 <div className="flex items-center gap-2">
                   <HiTerminal className="w-[20px] h-[20px]" />
@@ -104,20 +110,22 @@ export const FeatureCarousel = () => {
                 </div>
               </div>
               <div className="flex justify-start">
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1" className='py-[6px] px-12'>
+                  <Typography type="copy3" emphasis={true}>Learn More</Typography>
                 </PrimaryButton>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 rounded-lg">
-              <Image className="object-contain w-auto h-[500px] rounded-lg" src={featureImg1} alt="Feature Spotlight" />
-            </div>
           </div>
 
-          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
-            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
-              <h5>Error Monitoring</h5>
-              <Typography type="copy3">Understand the errors and exceptions happening in your web application.</Typography>
+          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+            <div className="w-1/2">
+              <div className="absolute bottom-0 left-0">
+                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
+              <h5>Session Replay</h5>
+              <Typography type="copy3">Understand the real reason why bugs are happening in your web application.</Typography>
               <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
                 <div className="flex items-center gap-2">
                   <HiTerminal className="w-[20px] h-[20px]" />
@@ -133,20 +141,22 @@ export const FeatureCarousel = () => {
                 </div>
               </div>
               <div className="flex justify-start">
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1" className='py-[6px] px-12'>
+                  <Typography type="copy3" emphasis={true}>Learn More</Typography>
                 </PrimaryButton>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 rounded-lg">
-              <Image className="object-contain w-auto h-[500px] rounded-lg" src={featureImg1} alt="Feature Spotlight" />
-            </div>
           </div>
 
-          <div className="relative flex justify-between px-16 w-full h-[575px] border-[1px] border-divider-on-dark rounded-bl-lg rounded-br-lg flex-shrink-0 snap-always snap-center">
-            <div className="flex flex-col gap-4 justify-center text-left w-2/5">
-              <h5>Error Monitoring</h5>
-              <Typography type="copy3">Understand the errors and exceptions happening in your web application.</Typography>
+          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+            <div className="w-1/2">
+              <div className="absolute bottom-0 left-0">
+                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
+              <h5>Session Replay</h5>
+              <Typography type="copy3">Understand the real reason why bugs are happening in your web application.</Typography>
               <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
                 <div className="flex items-center gap-2">
                   <HiTerminal className="w-[20px] h-[20px]" />
@@ -162,16 +172,12 @@ export const FeatureCarousel = () => {
                 </div>
               </div>
               <div className="flex justify-start">
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                  <Typography type="copy2" emphasis={true}>Learn More</Typography>
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1" className='py-[6px] px-12'>
+                  <Typography type="copy3" emphasis={true}>Learn More</Typography>
                 </PrimaryButton>
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 rounded-lg">
-              <Image className="object-contain w-auto h-[500px] rounded-lg" src={featureImg1} alt="Feature Spotlight" />
-            </div>
           </div>
-
 
         </div>
       </div>
