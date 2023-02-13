@@ -148,11 +148,7 @@ export const FeatureCarousel = () => {
         <select onChange={() => handleDropdown()} id="dropdown" className={"w-full sm:w-[220px] px-5 bg-color-primary-500 border-[1px] border-color-copy-on-dark h-full text-center rounded-lg appearance-none"}>
           {features.map((feature, index) =>
             <option key={index} value={index}>
-              <div>
-                <Typography type="copy2" className="text-center text-color-copy-on-dark " emphasis={true}>
-                  {feature.title}
-                </Typography>
-              </div>
+              {feature.title}
             </option>
           )}
         </select>
