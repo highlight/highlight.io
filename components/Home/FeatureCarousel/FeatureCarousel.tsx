@@ -55,10 +55,10 @@ export const FeatureCarousel = () => {
       <div className="w-screen lg:w-full" ref={emblaRef}>
         <div className={classNames(styles.carouselContainer, "lg:gap-4")}>
 
-          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-end px-4 lg:px-16 w-full h-[450px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
             <div className="w-1/2">
               <div className="absolute bottom-0 left-0">
-                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+                <Image className="object-contain md:w-[450px] xl:w-[550px]" src={landingCarousel1} alt="Feature Spotlight" />
               </div>
             </div>
             <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
@@ -86,10 +86,10 @@ export const FeatureCarousel = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-end px-4 lg:px-16 w-full h-[450px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
             <div className="w-1/2">
               <div className="absolute bottom-0 left-0">
-                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+                <Image className="object-contain md:w-[450px] xl:w-[550px]" src={landingCarousel1} alt="Feature Spotlight" />
               </div>
             </div>
             <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
@@ -117,10 +117,10 @@ export const FeatureCarousel = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+          <div className="relative flex justify-end px-4 lg:px-16 w-full h-[450px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
             <div className="w-1/2">
               <div className="absolute bottom-0 left-0">
-                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
+                <Image className="object-contain md:w-[450px] xl:w-[550px]" src={landingCarousel1} alt="Feature Spotlight" />
               </div>
             </div>
             <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
@@ -148,36 +148,8 @@ export const FeatureCarousel = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-end px-4 xl:px-16 w-full h-[475px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
-            <div className="w-1/2">
-              <div className="absolute bottom-0 left-0">
-                <Image className="object-contain w-1/2" src={landingCarousel1} alt="Feature Spotlight" />
-              </div>
-            </div>
-            <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
-              <h5>Session Replay</h5>
-              <Typography type="copy3">Understand the real reason why bugs are happening in your web application.</Typography>
-              <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
-                <div className="flex items-center gap-2">
-                  <HiTerminal className="w-[20px] h-[20px]" />
-                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Customizable Log Alerts and Monitors</Typography>
-                </div>
-                <div className="flex items-center gap-2">
-                  <HiTerminal className="w-[20px] h-[20px]" />
-                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Live Session Recording</Typography>
-                </div>
-                <div className="flex items-center gap-2">
-                  <HiTerminal className="w-[20px] h-[20px]" />
-                  <Typography type="copy3" className="text-color-copy-on-dark" emphasis>Powerful Privacy Controls</Typography>
-                </div>
-              </div>
-              <div className="flex justify-start">
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1" className='py-[6px] px-12'>
-                  <Typography type="copy3" emphasis={true}>Learn More</Typography>
-                </PrimaryButton>
-              </div>
-            </div>
-          </div>
+
+
 
         </div>
       </div>
