@@ -17,7 +17,7 @@ const ShowcasePage: NextPage = () => {
 		<Navbar />
 		<main>
 			<div className="h-[762px] relative overflow-hidden pt-28 box-content">
-				<div className="h-[613px] aspect-video border border-red-500 rounded rotate-6 left-[65%] absolute top-24" />
+				<div className="h-[613px] aspect-video bg-white rounded rotate-6 left-[65%] absolute top-24" />
 				<div className="absolute w-full px-10 mx-auto mt-10 lg:px-24">
 					<div className="flex flex-col max-w-4xl gap-8">
 						<h1 className="text-white">Session Replay & UX Monitoring</h1>
