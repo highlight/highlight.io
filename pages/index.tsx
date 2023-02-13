@@ -1,13 +1,12 @@
 import type { NextPage } from 'next';
 import Image from 'next/legacy/image';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { PrimaryButton } from '../components/common/Buttons/PrimaryButton';
 import Navbar from '../components/common/Navbar/Navbar';
 import { Section } from '../components/common/Section/Section';
 import styles from '../components/Home/Home.module.scss';
 import productStyles from '../components/Products/Products.module.scss'
 
-import MobileHeroSection from '../public/images/mobile-insects.png';
 import HeroBugLeft from '../public/images/hero-bug-left.gif';
 import HeroBugRight from '../public/images/hero-bug-right.gif';
 import LandingInfoRow1 from '../public/images/landingInfoRow1.png';
@@ -19,7 +18,7 @@ import Footer from '../components/common/Footer/Footer';
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction';
 import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel';
 import classNames from 'classnames';
-import { Review, REVIEWS } from '../components/Home/Reviews';
+import { Review } from '../components/Home/Reviews';
 import { Typography } from '../components/common/Typography/Typography';
 import { Collapse } from 'antd';
 import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo';
