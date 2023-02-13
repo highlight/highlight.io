@@ -11,6 +11,7 @@ import { DesktopCard } from './DesktopCard';
 import { HiChevronDown } from 'react-icons/hi';
 import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
 import { AiFillGithub } from 'react-icons/ai';
+import Select from 'react-select'
 
 export type Feature = {
   title: string
@@ -106,6 +107,12 @@ export const FeatureCarousel = () => {
   const [selected, setSelected] = useState(0)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
   useEffect(() => {
     if (emblaApi) {
       emblaApi.scrollTo(selected)
@@ -113,7 +120,13 @@ export const FeatureCarousel = () => {
         setSelected(emblaApi.selectedScrollSnap())
       })
     }
+    (document.getElementById("dropdown") as HTMLSelectElement).value = selected.toString()
   }, [emblaApi, selected])
+
+  const handleDropdown = () => {
+    let dropdownValue = parseInt((document.getElementById("dropdown") as HTMLSelectElement).value)
+    setSelected(dropdownValue)
+  }
 
 
   return (
@@ -133,9 +146,9 @@ export const FeatureCarousel = () => {
         )}
       </div>
       <div className="flex md:hidden justify-center mx-5 h-[50px] rounded-lg">
-        <select value={features[selected].title} className={"w-full sm:w-[220px] px-5 bg-color-primary-500 border-[1px] border-color-copy-on-dark h-full text-center rounded-lg appearance-none"}>
+        <select onChange={() => handleDropdown()} id="dropdown" className={"w-full sm:w-[220px] px-5 bg-color-primary-500 border-[1px] border-color-copy-on-dark h-full text-center rounded-lg appearance-none"}>
           {features.map((feature, index) =>
-            <option key="index" value={index}>
+            <option key={index} value={index}>
               <div>
                 <Typography type="copy2" className="text-center text-color-copy-on-dark " emphasis={true}>
                   {feature.title}
@@ -144,8 +157,8 @@ export const FeatureCarousel = () => {
             </option>
           )}
         </select>
-        <div className="flex flex-col h-full justify-center">
-          <HiChevronDown className="absolute text-color-copy-on-dark h-[20px] w-[20px] right-10" />
+        <div className="relative flex flex-col h-full justify-center">
+          <HiChevronDown className="absolute text-color-copy-on-dark h-[20px] w-[20px] right-5" />
         </div>
       </div>
       <div className="w-screen lg:w-full" ref={emblaRef}>
