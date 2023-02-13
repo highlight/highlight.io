@@ -28,25 +28,25 @@ export const FeatureCarousel = () => {
     <div className="flex flex-col overflow-x-hidden lg:rounded-lg max-w-[100vw] xl:max-w-[1100px]">
       <div className="grid grid-cols-4">
         <div onClick={() => setSelected(0)} className={classNames(styles.carouselButton, "group lg:rounded-tl-lg")}>
-          <div className={`${selected == 0 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+          <div className={`${selected == 0 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg transition-all`}>
             <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Session Replay</Typography>
             <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
         <div onClick={() => setSelected(1)} className={classNames(styles.carouselButton, "group")}>
-          <div className={`${selected == 1 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+          <div className={`${selected == 1 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg transition-all`}>
             <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Fullstack Error Monitoring</Typography>
             <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
         <div onClick={() => setSelected(2)} className={classNames(styles.carouselButton, "group")}>
-          <div className={`${selected == 2 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+          <div className={`${selected == 2 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg transition-all`}>
             <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Session Replay</Typography>
             <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
         </div>
         <div onClick={() => setSelected(3)} className={classNames(styles.carouselButton, "group lg:rounded-tr-lg")}>
-          <div className={`${selected == 3 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg`}>
+          <div className={`${selected == 3 ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex flex-col justify-center lg:justify-start gap-1 px-3 py-2 rounded-lg transition-all`}>
             <Typography type="copy3" className="text-center lg:text-start" emphasis={true}>Session Replay</Typography>
             <Typography type="copy4" className="hidden lg:flex">Error Monitoring for frontend & backend.</Typography>
           </div>
