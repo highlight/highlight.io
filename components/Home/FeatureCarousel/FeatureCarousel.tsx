@@ -2,13 +2,15 @@ import styles from '../Home.module.scss';
 import classNames from 'classnames';
 import { Typography } from '../../../components/common/Typography/Typography';
 import { useEffect, useState } from 'react';
-import Image, { StaticImageData } from 'next/image';
-import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
+import { StaticImageData } from 'next/image';
 import featureImg1 from '../../../public/images/featureCarousel1.png';
 import landingCarousel1 from '../../../public/images/landingCarousel1.png';
 import useEmblaCarousel from 'embla-carousel-react'
-import { HiTerminal, HiFilm } from 'react-icons/hi';
+import { HiTerminal, HiFilm, HiLightningBolt, HiCloudDownload } from 'react-icons/hi';
 import { DesktopCard } from './DesktopCard';
+import { HiChevronDown } from 'react-icons/hi';
+import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
+import { AiFillGithub } from 'react-icons/ai';
 
 export type Feature = {
   title: string
@@ -25,11 +27,13 @@ export type Feature = {
   link: string
 }
 
+//feature images need classname "h-[20px] w-[20px]"
+//thumbnail needs classname "h-[40px] w-[40px]"
 const features: Feature[] = [
   {
-    title: "Session Replay",
+    title: "Error Monitoring",
     description: "Error Monitoring for frontend & backend.",
-    thumbnail: <HiFilm className="h-[40px] w-[40px]" />,
+    thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
     mobileImage: featureImg1,
     feature1: "Console and Network Recording",
@@ -43,7 +47,7 @@ const features: Feature[] = [
   {
     title: "Session Replay",
     description: "Error Monitoring for frontend & backend.",
-    thumbnail: <HiFilm className="h-[40px] w-[40px]" />,
+    thumbnail: <HiFilm className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
     mobileImage: featureImg1,
     feature1: "Console and Network Recording",
@@ -55,9 +59,9 @@ const features: Feature[] = [
     link: "/docs/general/product-features/session-replay/overview",
   },
   {
-    title: "Session Replay",
+    title: "Logging",
     description: "Error Monitoring for frontend & backend.",
-    thumbnail: <HiFilm className="h-[40px] w-[40px]" />,
+    thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
     mobileImage: featureImg1,
     feature1: "Console and Network Recording",
@@ -69,9 +73,9 @@ const features: Feature[] = [
     link: "/docs/general/product-features/session-replay/overview",
   },
   {
-    title: "Session Replay",
+    title: "Selfhost",
     description: "Error Monitoring for frontend & backend.",
-    thumbnail: <HiFilm className="h-[40px] w-[40px]" />,
+    thumbnail: <HiCloudDownload className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
     mobileImage: featureImg1,
     feature1: "Console and Network Recording",
@@ -83,9 +87,9 @@ const features: Feature[] = [
     link: "/docs/general/product-features/session-replay/overview",
   },
   {
-    title: "Session Replay",
+    title: "Open Source",
     description: "Error Monitoring for frontend & backend.",
-    thumbnail: <HiFilm className="h-[40px] w-[40px]" />,
+    thumbnail: <AiFillGithub className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
     mobileImage: featureImg1,
     feature1: "Console and Network Recording",
@@ -114,23 +118,38 @@ export const FeatureCarousel = () => {
 
   return (
     <div className="flex flex-col overflow-x-hidden lg:rounded-lg max-w-[100vw] xl:max-w-[1100px]">
-      <div className={`grid grid-cols-${features.length}`}>
+      <div className={`hidden md:grid grid-cols-${features.length}`}>
         {features.map((feature, index) =>
           <div key={index} onClick={() => setSelected(index)} className={classNames(styles.carouselButton, "group xlg:rounded-tl-lg")}>
             <div className={`${selected == index ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex justify-center gap-1 px-3 py-2 rounded-lg transition-all`}>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-1">
                 <div className="flex justify-center text-color-copy-on-dark">
                   {feature.thumbnail}
                 </div>
-                <Typography type="copy3" className="text-center" emphasis={true}>Session Replay</Typography>
+                <Typography type="copy3" className="text-center" emphasis={true}>{feature.title}</Typography>
               </div>
             </div>
           </div>
         )}
       </div>
-
+      <div className="flex md:hidden justify-center mx-5 h-[50px] rounded-lg">
+        <select value={features[selected].title} className={"w-full sm:w-[220px] px-5 bg-color-primary-500 border-[1px] border-color-copy-on-dark h-full text-center rounded-lg appearance-none"}>
+          {features.map((feature, index) =>
+            <option key="index" value={index}>
+              <div>
+                <Typography type="copy2" className="text-center text-color-copy-on-dark " emphasis={true}>
+                  {feature.title}
+                </Typography>
+              </div>
+            </option>
+          )}
+        </select>
+        <div className="flex flex-col h-full justify-center">
+          <HiChevronDown className="absolute text-color-copy-on-dark h-[20px] w-[20px] right-10" />
+        </div>
+      </div>
       <div className="w-screen lg:w-full" ref={emblaRef}>
-        <div className={classNames(styles.carouselContainer, "lg:gap-4")}>
+        <div className="flex scrollbar-hide lg:gap-4">
           {features.map((feature, index) =>
             <DesktopCard key={index} feature={feature} index={index} />
           )}
