@@ -11,7 +11,6 @@ import { DesktopCard } from './DesktopCard';
 import { HiChevronDown } from 'react-icons/hi';
 import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
 import { AiFillGithub } from 'react-icons/ai';
-import Select from 'react-select'
 
 export type Feature = {
   title: string
