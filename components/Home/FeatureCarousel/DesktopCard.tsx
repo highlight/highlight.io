@@ -6,14 +6,15 @@ import { Typography } from "../../common/Typography/Typography";
 
 export const DesktopCard = (props: { feature: Feature, index: number }) => {
   return (
-    <div key={props.index} className="relative flex justify-end px-4 lg:px-16 w-full h-[450px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
-      <div className="w-1/2">
+    <div key={props.index} className="relative flex justify-end px-5 lg:px-16 w-full  lg:h-[450px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+      <div className="hidden sm:flex w-1/2">
         <div className="absolute bottom-0 left-0">
-          <Image className="object-contain md:w-[450px] xl:w-[550px]" src={props.feature.desktopImage} alt="Feature Spotlight" />
+          <Image className="object-contain sm:w-[350px] md:w-[450px] xl:w-[550px]" src={props.feature.desktopImage} alt="Feature Spotlight" />
         </div>
       </div>
-      <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-2/5">
-        <h5>{props.feature.title}</h5>
+      <div className="flex flex-col gap-4 justify-start pt-8 xl:justify-center text-left w-full sm:w-2/5">
+        <h5 className="hidden sm:flex">{props.feature.title}</h5>
+        <h4 className="sm:hidden">{props.feature.title}</h4>
         <Typography type="copy3">{props.feature.description}</Typography>
         <div className="flex flex-col gap-5 py-4 my-3 bg-color-divider-on-dark rounded-lg px-4">
           <div className="flex items-center gap-2">
@@ -29,10 +30,13 @@ export const DesktopCard = (props: { feature: Feature, index: number }) => {
             <Typography type="copy3" className="text-color-copy-on-dark" emphasis>{props.feature.feature3}</Typography>
           </div>
         </div>
-        <div className="flex justify-start">
-          <PrimaryButton href={props.feature.link} className='py-[6px] px-12'>
+        <div className="flex justify-start mb-4">
+          <PrimaryButton href={props.feature.link} className='py-[6px] text-center w-full sm:w-auto'>
             <Typography type="copy3" emphasis={true}>Learn More</Typography>
           </PrimaryButton>
+        </div>
+        <div className="flex sm:hidden justify-center w-full ">
+          <Image className="object-cover" src={props.feature.mobileImage} alt="Feature Spotlight" />
         </div>
       </div>
     </div>

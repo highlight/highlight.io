@@ -106,3 +106,4 @@ export const tabSelected: string;
 export const thumbnail: string;
 export const tryButtonContainer: string;
 export const videoModal: string;
+export const whiteButton: string;

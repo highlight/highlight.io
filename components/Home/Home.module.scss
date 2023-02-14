@@ -821,6 +821,16 @@
   }
 }
 
+.whiteButton {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid var(--copy-on-dark) !important;
+  background-color: transparent !important;
+  color: var(--copy-on-dark) !important;
+  border-radius: var(--size-xSmall);
+}
+
 .customerReel {
   display: flex;
   flex-direction: column;

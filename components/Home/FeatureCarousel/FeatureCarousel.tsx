@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { StaticImageData } from 'next/image';
 import featureImg1 from '../../../public/images/featureCarousel1.png';
 import landingCarousel1 from '../../../public/images/landingCarousel1.png';
+import tempCarouselImage from '../../../public/images/tempCarouselImage.png';
 import useEmblaCarousel from 'embla-carousel-react'
 import { HiTerminal, HiFilm, HiLightningBolt, HiCloudDownload } from 'react-icons/hi';
 import { DesktopCard } from './DesktopCard';
@@ -35,7 +36,7 @@ const features: Feature[] = [
     description: "Error Monitoring for frontend & backend.",
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
-    mobileImage: featureImg1,
+    mobileImage: tempCarouselImage,
     feature1: "Console and Network Recording",
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
     feature2: "Live Session Recording",
@@ -49,7 +50,7 @@ const features: Feature[] = [
     description: "Error Monitoring for frontend & backend.",
     thumbnail: <HiFilm className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
-    mobileImage: featureImg1,
+    mobileImage: tempCarouselImage,
     feature1: "Console and Network Recording",
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
     feature2: "Live Session Recording",
@@ -63,7 +64,7 @@ const features: Feature[] = [
     description: "Error Monitoring for frontend & backend.",
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
-    mobileImage: featureImg1,
+    mobileImage: tempCarouselImage,
     feature1: "Console and Network Recording",
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
     feature2: "Live Session Recording",
@@ -77,7 +78,7 @@ const features: Feature[] = [
     description: "Error Monitoring for frontend & backend.",
     thumbnail: <HiCloudDownload className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
-    mobileImage: featureImg1,
+    mobileImage: tempCarouselImage,
     feature1: "Console and Network Recording",
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
     feature2: "Live Session Recording",
@@ -91,7 +92,7 @@ const features: Feature[] = [
     description: "Error Monitoring for frontend & backend.",
     thumbnail: <AiFillGithub className="h-[35px] w-[35px]" />,
     desktopImage: landingCarousel1,
-    mobileImage: featureImg1,
+    mobileImage: tempCarouselImage,
     feature1: "Console and Network Recording",
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
     feature2: "Live Session Recording",
@@ -106,12 +107,6 @@ export const FeatureCarousel = () => {
   const [selected, setSelected] = useState(0)
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-
   useEffect(() => {
     if (emblaApi) {
       emblaApi.scrollTo(selected)
@@ -121,6 +116,8 @@ export const FeatureCarousel = () => {
     }
     (document.getElementById("dropdown") as HTMLSelectElement).value = selected.toString()
   }, [emblaApi, selected])
+
+
 
   const handleDropdown = () => {
     let dropdownValue = parseInt((document.getElementById("dropdown") as HTMLSelectElement).value)
@@ -144,17 +141,19 @@ export const FeatureCarousel = () => {
           </div>
         )}
       </div>
-      <div className="flex md:hidden justify-center mx-5 h-[50px] rounded-lg">
-        <select onChange={() => handleDropdown()} id="dropdown" className={"w-full sm:w-[220px] px-5 bg-color-primary-500 border-[1px] border-color-copy-on-dark h-full text-center rounded-lg appearance-none"}>
-          {features.map((feature, index) =>
-            <option key={index} value={index}>
-              {feature.title}
-            </option>
-          )}
-        </select>
-        <div className="relative flex flex-col h-full justify-center">
-          <HiChevronDown className="absolute text-color-copy-on-dark h-[20px] w-[20px] right-5" />
-        </div>
+      <div className="relative flex md:hidden justify-center mx-5 mb-8 rounded-lg">
+        <PrimaryButton className={classNames(styles.whiteButton, "w-full border-copy-on-dark py-0 px-0 h-[54px]")}>
+          <Typography type="copy2" className="w-full h-full bg-color-primary-500 rounded-lg" emphasis={true}>
+            <select onChange={() => handleDropdown()} id="dropdown" className={"w-full bg-color-primary-500 h-full text-center rounded-lg appearance-none"}>
+              {features.map((feature, index) =>
+                <option key={index} value={index}>
+                  {feature.title}
+                </option>
+              )}
+            </select>
+          </Typography>
+        </PrimaryButton>
+        <HiChevronDown className="absolute text-color-copy-on-dark h-[20px] w-[20px] top-4 right-5" />
       </div>
       <div className="w-screen lg:w-full" ref={emblaRef}>
         <div className="flex scrollbar-hide lg:gap-4">
