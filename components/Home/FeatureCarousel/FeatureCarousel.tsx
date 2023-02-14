@@ -117,13 +117,10 @@ export const FeatureCarousel = () => {
     (document.getElementById("dropdown") as HTMLSelectElement).value = selected.toString()
   }, [emblaApi, selected])
 
-
-
   const handleDropdown = () => {
     let dropdownValue = parseInt((document.getElementById("dropdown") as HTMLSelectElement).value)
     setSelected(dropdownValue)
   }
-
 
   return (
     <div className="flex flex-col overflow-x-hidden lg:rounded-lg max-w-[100vw] xl:max-w-[1100px]">
@@ -143,7 +140,7 @@ export const FeatureCarousel = () => {
       </div>
       <div className="relative flex md:hidden justify-center mx-5 mb-8 rounded-lg">
         <PrimaryButton className={classNames(styles.whiteButton, "w-full border-copy-on-dark py-0 px-0 h-[54px]")}>
-          <Typography type="copy2" className="w-full h-full bg-color-primary-500 rounded-lg" emphasis={true}>
+          <Typography type="copy2" className="bg-color-primary-500 rounded-lg" emphasis={true}>
             <select onChange={() => handleDropdown()} id="dropdown" className={"w-full bg-color-primary-500 h-full text-center rounded-lg appearance-none"}>
               {features.map((feature, index) =>
                 <option key={index} value={index}>
