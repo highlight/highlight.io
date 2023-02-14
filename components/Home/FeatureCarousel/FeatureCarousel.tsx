@@ -123,10 +123,10 @@ export const FeatureCarousel = () => {
   }
 
   return (
-    <div className="flex flex-col overflow-x-hidden lg:rounded-lg max-w-[100vw] xl:max-w-[1100px]">
+    <div className="flex flex-col overflow-x-hidden lg:rounded-lg max-w-[100vw] xl:max-w-[1000px] lg:rounded-tr-lg lg:rounded-tl-lg">
       <div className={`hidden md:grid grid-cols-5`}>
         {features.map((feature, index) =>
-          <div key={index} onClick={() => setSelected(index)} className={classNames(styles.carouselButton, "group xlg:rounded-tl-lg")}>
+          <div key={index} onClick={() => setSelected(index)} className={classNames(styles.carouselButton, "group", index == 0 ? "lg:rounded-tl-lg" : "", index == features.length - 1 ? "lg:rounded-tr-lg" : "")}>
             <div className={`${selected == index ? "bg-divider-on-dark" : "group-hover:bg-divider-on-dark group-hover:bg-opacity-75"} h-full flex justify-center gap-1 px-3 py-2 rounded-lg transition-all`}>
               <div className="flex flex-col gap-1">
                 <div className="flex justify-center text-color-copy-on-dark">
