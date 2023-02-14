@@ -140,8 +140,8 @@ export const FeatureCarousel = () => {
       </div>
       <div className="relative flex md:hidden justify-center mx-5 mb-8 rounded-lg">
         <PrimaryButton className={classNames(styles.whiteButton, "w-full border-copy-on-dark py-0 px-0 h-[54px]")}>
-          <Typography type="copy2" className="relative bg-color-primary-500 rounded-lg w-full" emphasis={true}>
-            <select onChange={() => handleDropdown()} id="dropdown" className="absolute -translate-x-1/2 w-full bg-color-primary-500 h-full text-center rounded-lg appearance-none">
+          <Typography type="copy2" className="bg-color-primary-500 rounded-lg w-full" emphasis={true}>
+            <select onChange={() => handleDropdown()} id="dropdown" className="w-full px-4 bg-color-primary-500 h-full text-center rounded-lg appearance-none">
               {features.map((feature, index) =>
                 <option key={index} value={index}>
                   {feature.title}
