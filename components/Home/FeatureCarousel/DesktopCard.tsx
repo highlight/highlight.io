@@ -6,7 +6,7 @@ import { Typography } from "../../common/Typography/Typography";
 
 export const DesktopCard = (props: { feature: Feature, index: number }) => {
   return (
-    <div key={props.index} className="relative flex justify-end px-5 lg:px-16 w-full  lg:h-[450px] xl:h-[525px] border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
+    <div key={props.index} className="relative flex justify-end px-5 lg:px-16 w-full  lg:h-[450px] xl:h-[525px] md:border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center">
       <div className="hidden sm:flex w-1/2">
         <div className="absolute bottom-0 left-0">
           <Image className="object-contain sm:w-[350px] md:w-[450px] xl:w-[550px]" src={props.feature.desktopImage} alt="Feature Spotlight" />

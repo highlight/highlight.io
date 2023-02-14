@@ -256,6 +256,14 @@ a {
   }
 }
 
+select {
+  text-indent: 50px hanging;
+}
+
+select:focus {
+  outline: none;
+}
+
 .embla {
   position: relative;
 }

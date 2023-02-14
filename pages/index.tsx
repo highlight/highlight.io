@@ -153,7 +153,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar hideBanner />
       <main>
         <Section className={styles.heroVideoWrapper}>
           <div className={styles.heroBugLeft}>
@@ -164,9 +164,6 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.anchorFeature}>
             <h2 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform.</span></h2>
-            <div className={styles.anchorHead}>
-              <Typography type="copyHeader" onDark>A open source toolset for monitoring your web application.</Typography>
-            </div>
             <div className="flex justify-center mt-8 mb-16">
               <div className="flex flex-col lg:flex-row justify-center gap-3 lg:gap-8 w-screen px-5 sm:w-auto"
               >
