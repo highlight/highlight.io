@@ -4,7 +4,12 @@ import { FooterCallToAction } from "../../components/common/CallToAction/FooterC
 import Footer from "../../components/common/Footer/Footer";
 import Navbar from "../../components/common/Navbar/Navbar";
 import { Typography } from "../../components/common/Typography/Typography";
-import homeStyles from "../../components/Home/Home.module.scss"
+import homeStyles from "../../components/Home/Home.module.scss";
+
+import { RadioGroup } from "@headlessui/react";
+import { useState } from "react";
+import classNames from "classnames";
+
 
 const PricingPage: NextPage = () => {
 	return <div >
@@ -71,24 +76,24 @@ const PricingPage: NextPage = () => {
 	</div>
 }
 
-const PricingRadioFilter = ({ title, options }: { title: string, options: string[], activeOptionIndex?: number }) => {
+const PricingRadioFilter = <T extends string>({ title, options, activeOption }: { title: string, options: readonly T[], activeOption?: T }) => {
+	const [active, setActive] = useState<T | undefined>(activeOption)
 
-
-	return <div className="border rounded-lg border-divider-on-dark">
-		<div className="px-3 py-1 border-b border-divider-on-dark">
-			<Typography type="copy4" emphasis className="block text-center">{title}</Typography>
-		</div>
+	return <RadioGroup value={active} onChange={setActive} className="border rounded-lg border-divider-on-dark">
+		<RadioGroup.Label className="block px-3 py-1 text-center border-b border-divider-on-dark">
+			<Typography type="copy4" emphasis>{title}</Typography>
+		</RadioGroup.Label>
 		<div className="divide-y divide-divider-on-dark">
-			{options.map((opt, i) => {
-				const optionId = `${title}-${opt}-${Math.random()}`
-
-				return (<label htmlFor={optionId} className="flex items-center h-10 px-3 gap-2.5" key={i} >
-					<input type="radio" name={`${title}-${Math.random()}`} value={opt} id={optionId} />
-					<Typography type="copy3" emphasis onDark>{opt}</Typography>
-				</label>)
-			})}
+			{options.map((option) =>
+				<RadioGroup.Option value={option} key={option}>
+					{({ checked }) => <div className="flex items-center h-10 px-3 gap-2.5 cursor-pointer group">
+						<div className={classNames("border-2 rounded-full border-divider-on-dark group-hover:border-darker-copy-on-dark w-4 h-4 transition-colors", checked && "bg-copy-on-dark")} />
+						<Typography type="copy3" className={classNames("group-hover:text-copy-on-dark transition-colors", checked ? "text-copy-on-dark" : "text-darker-copy-on-dark")} emphasis>{option}</Typography>
+					</div>}
+				</RadioGroup.Option>
+			)}
 		</div>
-	</div>
+	</RadioGroup>
 }
 
 const PriceItem = ({ title, pricePerMonth, children }: { title: string, pricePerMonth: string, children: React.ReactNode[] }) => {
