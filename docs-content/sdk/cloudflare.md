@@ -1,6 +1,6 @@
 ---
 title: Cloudflare Worker SDK API Reference
-slug: cloudflare-workers
+slug: cloudflare
 ---
 
 <section className="section">
@@ -42,7 +42,6 @@ with no impact on performance..
   <div className="right">
     <code>
       import { H } from "@highlight-run/cloudflare";
-
       export default {
           async fetch(request: Request, env: {}, ctx: ExecutionContext) {
               try {
@@ -83,7 +82,6 @@ with no impact on performance..
   <div className="right">
     <code>
       import { H } from "@highlight-run/cloudflare";
-
       export default {
           async fetch(request: Request, env: {}, ctx: ExecutionContext) {
               const response = return new Response('hello!')

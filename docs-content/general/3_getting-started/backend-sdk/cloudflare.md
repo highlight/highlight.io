@@ -1,6 +1,6 @@
 ---
 title: Cloudflare Worker Backend
-slug: cloudflare-workers
+slug: cloudflare
 createdAt: 2022-10-24T20:36:04.000Z
 updatedAt: 2022-10-25T19:42:49.000Z
 ---
