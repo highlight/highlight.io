@@ -142,8 +142,7 @@ export const DOCS_REDIRECTS = {
   'api/hrecordmetric': '/docs/sdk/nodejs#Hrecord-metric',
   'api/hstart': '/docs/sdk/client#Hstart',
   'api/hstop': '/docs/sdk/client#Hstop',
-  'api/htogglesessionfeedbackmodal':
-    '/docs/sdk/client#Htoggle-session-feedback-modal',
+  'api/htogglesessionfeedbackmodal': '/docs/sdk/client#Htoggle-session-feedback-modal',
   'api/htrack': '/docs/sdk/client#Htrack',
   'api/ljQK-hconsumeerror': '/docs/sdk/client#Hconsume-error',
   'api/metrics': '/docs/sdk/client#Hmetrics',
@@ -155,51 +154,18 @@ export const DOCS_REDIRECTS = {
   'client-sdk': '/docs/getting-started/client-sdk',
   'console-messages': '/docs/session-replay/console-messages',
   'content-security-policy': '/docs/tips/content-security-policy',
-  'docs/product-features/canvas':
-    '/docs/general/product-features/session-replay/canvas',
-  'docs/product-features/console-messages':
-    '/docs/general/product-features/session-replay/console-messages',
-  'docs/product-features/cross-origin-iframes':
-    '/docs/general/product-features/session-replay/cross-origin-iframes',
-  'docs/product-features/html-iframe-recording':
-    '/docs/general/product-features/session-replay/html-iframe-recording',
-  'docs/product-features/live-mode':
-    '/docs/general/product-features/session-replay/live-mode',
-  'docs/product-features/session-search':
-    '/docs/general/product-features/session-replay/session-search',
-  'docs/product-features/versioning-sessions':
-    '/docs/general/product-features/session-replay/versioning-sessions',
-  'docs/product-features/web-vitals': '/docs/general/tips/performance-impact',
-  'docs/session-replay/privacy':
-    '/docs/general/product-features/session-replay/privacy',
-  'docs/session-replay/tracking-events':
-    '/docs/general/product-features/session-replay/tracking-events',
-  'docs/error-monitoring/sourcemaps':
-    '/docs/general/product-features/error-monitoring/sourcemaps',
-  'docs/session-replay/rage-clicks':
-    '/docs/general/product-features/session-replay/rage-clicks',
-  'docs/product-features/frontend-observability':
-    '/docs/general/product-features/session-replay/overview',
-  'docs/integrations/reactjs-integration':
-    '/docs/general/getting-started/client-sdk/react-js/overview',
-  'docs/getting-started/client-sdk/reactjs':
-    '/docs/general/getting-started/client-sdk/react-js/overview',
-  'docs/integrations/sentry-integration':
-    '/docs/general/product-features/error-monitoring/overview',
-  'docs/session-replay/identifying-sessions':
-    '/docs/general/product-features/session-replay/identifying-sessions',
-  'docs/product-features/user-feedback':
-    '/docs/general/product-features/session-replay/overview',
-  'docs/session-replay/recording-network-requests-and-responses':
-    '/docs/general/product-features/session-replay/recording-network-requests-and-responses',
   'electron-integration': '/docs/integrations/electron-integration',
+  'error-monitoring/sourcemaps': '/docs/general/product-features/error-monitoring/sourcemaps',
   'express-backend': '/docs/getting-started/backend-sdk/nextjs',
   'front-plugin': '/docs/integrations/front-plugin',
   'frontend-observability': '/docs/product-features/frontend-observability',
+  'getting-started/client-sdk/reactjs': '/docs/general/getting-started/client-sdk/react-js/overview',
   'go-backend': '/docs/getting-started/backend-sdk/go',
   'grouping-errors': '/docs/error-monitoring/grouping-errors',
   'html-iframe-recording': '/docs/session-replay/html-iframe-recording',
   'identifying-users': '/docs/session-replay/identifying-sessions',
+  'integrations/reactjs-integration': '/docs/general/getting-started/client-sdk/react-js/overview',
+  'integrations/sentry-integration': '/docs/general/product-features/error-monitoring/overview',
   'intercom-integration': '/docs/integrations/intercom-integration',
   'keyboard-shortcuts': '/docs/product-features/keyboard-shortcuts',
   'linear-integration': '/docs/integrations/linear-integration',
@@ -213,13 +179,28 @@ export const DOCS_REDIRECTS = {
   'nodejs-backend': '/docs/getting-started/backend-sdk/nodejs',
   'performance-data': '/docs/product-features/performance-data',
   'performance-impact': '/docs/tips/performance-impact',
+  'product-features/canvas': '/docs/general/product-features/session-replay/canvas',
+  'product-features/console-messages': '/docs/general/product-features/session-replay/console-messages',
+  'product-features/cross-origin-iframes': '/docs/general/product-features/session-replay/cross-origin-iframes',
+  'product-features/frontend-observability': '/docs/general/product-features/session-replay/overview',
+  'product-features/html-iframe-recording': '/docs/general/product-features/session-replay/html-iframe-recording',
+  'product-features/live-mode': '/docs/general/product-features/session-replay/live-mode',
+  'product-features/session-search': '/docs/general/product-features/session-replay/session-search',
+  'product-features/user-feedback': '/docs/general/product-features/session-replay/overview',
+  'product-features/versioning-sessions': '/docs/general/product-features/session-replay/versioning-sessions',
+  'product-features/web-vitals': '/docs/general/tips/performance-impact',
   'proxying-highlight': '/docs/tips/proxying-highlight',
   'rage-clicks': '/docs/session-replay/rage-clicks',
   'reactjs-integration': '/docs/integrations/reactjs-integration',
-  'recording-network-requests-and-responses':
-    '/docs/session-replay/recording-network-requests-and-responses',
+  'recording-network-requests-and-responses': '/docs/session-replay/recording-network-requests-and-responses',
   'segment-integration': '/docs/integrations/segment-integration',
   'sentry-integration': '/docs/integrations/sentry-integration',
+  'session-replay/identifying-sessions': '/docs/general/product-features/session-replay/identifying-sessions',
+  'session-replay/privacy': '/docs/general/product-features/session-replay/privacy',
+  'session-replay/rage-clicks': '/docs/general/product-features/session-replay/rage-clicks',
+  'session-replay/recording-network-requests-and-responses':
+    '/docs/general/product-features/session-replay/recording-network-requests-and-responses',
+  'session-replay/tracking-events': '/docs/general/product-features/session-replay/tracking-events',
   'session-search': '/docs/product-features/session-search',
   'session-search-deep-linking': '/docs/tips/sessions-search-deep-linking',
   'session-sharing': '/docs/session-replay/session-sharing',
@@ -242,8 +223,7 @@ export const DOCS_REDIRECTS = {
   environments: '/docs/product-features/environments',
   gatsbyjs: '/docs/getting-started/client-sdk/gatsbyjs',
   html: '/docs/getting-started/client-sdk/html',
-  metrics:
-    '/docs/getting-started/fullstack-frameworks/next-js/metrics-overview',
+  metrics: '/docs/getting-started/fullstack-frameworks/next-js/metrics-overview',
   nextjs: '/docs/getting-started/client-sdk/nextjs',
   other: '/docs/getting-started/client-sdk/other',
   privacy: '/docs/session-replay/privacy',
