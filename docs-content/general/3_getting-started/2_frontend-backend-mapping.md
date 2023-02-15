@@ -7,7 +7,7 @@ updatedAt: 2022-04-01T20:40:53.000Z
 
 ## What's this?
 
-In order to make the most out of highlight.io's, we suggest instrumenting your frontend & backend so that you can attribute frontend requests with backend errors. On the session replay screen below, we embed an error in the UI, allowing you to see the full context around it.
+In order to make the most out of highlight.io's, we suggest instrumenting your frontend & backend so that you can attribute frontend requests with backend errors. See an example below, where you can view an errors alongside session replay, allowing you to see the full context around it.
 
 ![](/images/fullstack-mapping.png)
 
