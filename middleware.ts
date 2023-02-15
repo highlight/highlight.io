@@ -155,43 +155,42 @@ export const DOCS_REDIRECTS = {
   'client-sdk': '/docs/getting-started/client-sdk',
   'console-messages': '/docs/session-replay/console-messages',
   'content-security-policy': '/docs/tips/content-security-policy',
-  'docs/general/product-features/canvas':
+  'docs/product-features/canvas':
     '/docs/general/product-features/session-replay/canvas',
-  'docs/general/product-features/console-messages':
+  'docs/product-features/console-messages':
     '/docs/general/product-features/session-replay/console-messages',
-  'docs/general/product-features/cross-origin-iframes':
+  'docs/product-features/cross-origin-iframes':
     '/docs/general/product-features/session-replay/cross-origin-iframes',
-  'docs/general/product-features/html-iframe-recording':
+  'docs/product-features/html-iframe-recording':
     '/docs/general/product-features/session-replay/html-iframe-recording',
-  'docs/general/product-features/live-mode':
+  'docs/product-features/live-mode':
     '/docs/general/product-features/session-replay/live-mode',
-  'docs/general/product-features/session-search':
+  'docs/product-features/session-search':
     '/docs/general/product-features/session-replay/session-search',
-  'docs/general/product-features/versioning-sessions':
+  'docs/product-features/versioning-sessions':
     '/docs/general/product-features/session-replay/versioning-sessions',
-  'docs/general/product-features/web-vitals':
-    '/docs/general/tips/performance-impact',
-  'docs/general/session-replay/privacy':
+  'docs/product-features/web-vitals': '/docs/general/tips/performance-impact',
+  'docs/session-replay/privacy':
     '/docs/general/product-features/session-replay/privacy',
-  'docs/general/session-replay/tracking-events':
+  'docs/session-replay/tracking-events':
     '/docs/general/product-features/session-replay/tracking-events',
-  'docs/general/error-monitoring/sourcemaps':
+  'docs/error-monitoring/sourcemaps':
     '/docs/general/product-features/error-monitoring/sourcemaps',
-  'docs/general/session-replay/rage-clicks':
+  'docs/session-replay/rage-clicks':
     '/docs/general/product-features/session-replay/rage-clicks',
-  'docs/general/product-features/frontend-observability':
+  'docs/product-features/frontend-observability':
     '/docs/general/product-features/session-replay/overview',
-  'docs/general/integrations/reactjs-integration':
+  'docs/integrations/reactjs-integration':
     '/docs/general/getting-started/client-sdk/react-js/overview',
-  'docs/general/getting-started/client-sdk/reactjs':
+  'docs/getting-started/client-sdk/reactjs':
     '/docs/general/getting-started/client-sdk/react-js/overview',
-  'docs/general/integrations/sentry-integration':
+  'docs/integrations/sentry-integration':
     '/docs/general/product-features/error-monitoring/overview',
   'docs/session-replay/identifying-sessions':
     '/docs/general/product-features/session-replay/identifying-sessions',
-  'docs/general/product-features/user-feedback':
+  'docs/product-features/user-feedback':
     '/docs/general/product-features/session-replay/overview',
-  'docs/general/session-replay/recording-network-requests-and-responses':
+  'docs/session-replay/recording-network-requests-and-responses':
     '/docs/general/product-features/session-replay/recording-network-requests-and-responses',
   'electron-integration': '/docs/integrations/electron-integration',
   'express-backend': '/docs/getting-started/backend-sdk/nextjs',
