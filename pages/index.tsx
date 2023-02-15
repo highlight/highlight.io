@@ -165,14 +165,14 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature}>
             <h2 className={styles.landingAnchorHead}>The open source, fullstack <br /><span className="text-highlight-yellow">Monitoring Platform.</span></h2>
             <div className="flex justify-center mt-8 mb-16">
-              <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5"
-              >
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
+                <PrimaryButton className={classNames(styles.solidButton, "min-w-[180px]")} href="https://app.highlight.io/?sign_up=1">
                   <Typography type="copy2" emphasis={true}>
                     Get started
                   </Typography>
                 </PrimaryButton>
-                <PrimaryButton href={"/docs"} className={styles.hollowButton}>
+
+                <PrimaryButton href={"/docs"} className={classNames(styles.hollowButton)}>
                   <Typography type="copy2" emphasis={true}>
                     Read our docs
                   </Typography>

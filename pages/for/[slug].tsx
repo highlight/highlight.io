@@ -3,6 +3,7 @@ import Navbar from '../../components/common/Navbar/Navbar';
 import FeatureBox from '../../components/Products/FeatureBox';
 import Image from 'next/image';
 import Link from 'next/link';
+import classNames from 'classnames';
 
 import {
   BsPlayCircleFill,
@@ -162,14 +163,14 @@ const Products = ({ product }: { product: iProduct }) => {
                 Highlight’s got you covered.
               </Typography>
               <div className="flex justify-center my-14">
-                <div className="flex flex-col lg:flex-row justify-center gap-4 w-screen sm:w-auto px-5"
-                >
-                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
+                  <PrimaryButton className={classNames(landingStyles.solidButton, "min-w-[180px]")} href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>
                       Get started
                     </Typography>
                   </PrimaryButton>
-                  <PrimaryButton href={product.docsLink} className={styles.hollowButton}>
+
+                  <PrimaryButton href={"/docs"} className={classNames(styles.hollowButton)}>
                     <Typography type="copy2" emphasis={true}>
                       Read our docs
                     </Typography>

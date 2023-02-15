@@ -101,6 +101,7 @@ export const snippetDropdownList: string;
 export const snippetDropdownValue: string;
 export const snippetTab: string;
 export const snippetTabs: string;
+export const solidButton: string;
 export const tabletGraphic: string;
 export const tabSelected: string;
 export const thumbnail: string;
