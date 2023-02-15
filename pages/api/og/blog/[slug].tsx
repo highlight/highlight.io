@@ -110,7 +110,7 @@ export default async function handler(req: NextRequest) {
               fontSize: 50,
               marginBottom: 60,
               lineHeight: "1.2em",
-              maxHeight: "4.0em",
+              maxHeight: "4.2em",
               textOverflow: "ellipsis",
               overflow: "hidden",
             }}>
