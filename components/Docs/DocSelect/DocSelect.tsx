@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import styles from '../Docs.module.scss';
-import { Listbox } from '@headlessui/react';
-import { Typography } from '../../common/Typography/Typography';
-import classNames from 'classnames';
-import SvgChevronDownIcon from '../../../public/images/ChevronDownIcon';
-import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react'
+import styles from '../Docs.module.scss'
+import { Listbox } from '@headlessui/react'
+import { Typography } from '../../common/Typography/Typography'
+import classNames from 'classnames'
+import SvgChevronDownIcon from '../../../public/images/ChevronDownIcon'
+import { DocumentIcon, DocumentTextIcon } from '@heroicons/react/20/solid'
+import { useRouter } from 'next/router'
 
 const DOCS_TYPES = [
   { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs/general' },
@@ -23,51 +23,57 @@ const DOCS_TYPES = [
   },
   {
     id: 4,
+    name: 'Cloudflare Worker SDK Documentation',
+    icon: <DocumentTextIcon />,
+    url: '/docs/sdk/cloudflare',
+  },
+  {
+    id: 5,
     name: 'Python SDK Documentation',
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/python',
   },
   {
-    id: 5,
+    id: 6,
     name: 'Golang SDK Documentation',
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/go',
   },
   {
-    id: 6,
+    id: 7,
     name: 'Client SDK Documentation',
     icon: <DocumentTextIcon />,
     url: '/docs/sdk/client',
   },
-];
+]
 
 const findSelectedDocByArrayPath = (arrayPath: string[]) => {
   const index = DOCS_TYPES.findIndex((doc) => {
-    const arrayPathToMatch = doc.url.replace('/docs/', '');
-    return arrayPath.join('/') === arrayPathToMatch;
-  });
-  return index === -1 ? 0 : index;
-};
+    const arrayPathToMatch = doc.url.replace('/docs/', '')
+    return arrayPath.join('/') === arrayPathToMatch
+  })
+  return index === -1 ? 0 : index
+}
 
 function DocSelect() {
-  const router = useRouter();
+  const router = useRouter()
   const [selectedDocs, setSelectedDocs] = useState(
     DOCS_TYPES[
-    findSelectedDocByArrayPath(
-      Array.isArray(router.query.doc) ? router.query.doc : []
-    )
-    ]
-  );
+      findSelectedDocByArrayPath(
+        Array.isArray(router.query.doc) ? router.query.doc : [],
+      )
+    ],
+  )
 
   useEffect(() => {
     setSelectedDocs(
       DOCS_TYPES[
-      findSelectedDocByArrayPath(
-        Array.isArray(router.query.doc) ? router.query.doc : []
-      )
-      ]
-    );
-  }, [router.query.doc]);
+        findSelectedDocByArrayPath(
+          Array.isArray(router.query.doc) ? router.query.doc : [],
+        )
+      ],
+    )
+  }, [router.query.doc])
 
   return (
     <Listbox value={selectedDocs} onChange={setSelectedDocs}>
@@ -89,8 +95,8 @@ function DocSelect() {
             value={doc}
             className={classNames(styles.tocRow)}
             onClick={() => {
-              setSelectedDocs(doc);
-              router.push(doc.url);
+              setSelectedDocs(doc)
+              router.push(doc.url)
             }}
           >
             <div className={styles.tocChild}>
@@ -101,7 +107,7 @@ function DocSelect() {
         ))}
       </Listbox.Options>
     </Listbox>
-  );
+  )
 }
 
-export default DocSelect;
+export default DocSelect
