@@ -7,7 +7,11 @@ updatedAt: 2022-04-01T20:40:53.000Z
 
 ## What's this?
 
-In order to make the most out of Highlight's full-stack integration, we suggest instrumenting your frontend so that you can attribute frontend requests with backend errors. Below, we detail the requirements to get this working as well how to troubleshoot.
+In order to make the most out of highlight.io's, we suggest instrumenting your frontend & backend so that you can attribute frontend requests with backend errors. On the session replay screen below, we embed an error in the UI, allowing you to see the full context around it.
+
+![](/images/fullstack-mapping.png)
+
+Below, we detail the requirements to get this working as well how to troubleshoot.
 
 ## How can I start using this?
 
