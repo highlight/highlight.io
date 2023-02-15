@@ -166,7 +166,7 @@ const Products = ({ product }: { product: iProduct }) => {
                 >
                   <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>
-                      Get started for free
+                      Get started
                     </Typography>
                   </PrimaryButton>
                   <PrimaryButton href={product.docsLink} className={styles.hollowButton}>
