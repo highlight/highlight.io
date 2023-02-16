@@ -1,13 +1,12 @@
 import React from 'react'
 import { Feature } from './FeatureCarousel'
 import Image from 'next/image'
-import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
 import { Typography } from '../../common/Typography/Typography'
 import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
 import { Code } from 'react-code-blocks'
 import styles from '../../Docs/Docs.module.scss'
-import { FaGithub } from 'react-icons/fa'
 import Link from 'next/link'
+import { ArrowRightIcon } from '@heroicons/react/20/solid'
 
 const DesktopImage = ({ feature }: { feature: Feature }) => {
   return (
@@ -76,13 +75,11 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
         </div>
       )}
       <div className="flex justify-start mb-4">
-        <Link
-          className={styles.socialItem}
-          href={`${feature.link}`}
-          target="_blank"
-        >
+        <Link href={`${feature.link}`} target="_blank">
           <Typography type="copy3" emphasis={true}>
-            Learn More
+            <div className="flex align-middle justify-center gap-2">
+              Learn More <ArrowRightIcon height={28} width={28} />
+            </div>
           </Typography>
         </Link>
       </div>

@@ -55,23 +55,7 @@
   }
 }
 
-.heroBugLeft {
-  position: absolute;
-  left: -120px;
-  top: 125px;
-  width: 250px;
-
-  @media screen and (max-width: 1288px) {
-    display: none;
-  }
-}
-
-.heroBugRight {
-  position: absolute;
-  right: -95px;
-  top: 30px;
-  width: 280px;
-
+.heroBug {
   @media screen and (max-width: 1288px) {
     display: none;
   }

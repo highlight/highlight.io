@@ -31,7 +31,7 @@ export const AnimateBugLeft = ({
   children,
 }: React.PropsWithChildren<{ loaded: boolean }>) => {
   const orig = { left: -300, top: 0, opacity: 0 }
-  const final = { left: -120, top: 125, opacity: 1 }
+  const final = { left: 25, top: 85, opacity: 1 }
   return (
     <motion.div
       initial={orig}
@@ -57,7 +57,7 @@ export const AnimateBugRight = ({
   children,
 }: React.PropsWithChildren<{ loaded: boolean }>) => {
   const orig = { right: -275, top: -95, opacity: 0 }
-  const final = { right: -95, top: 30, opacity: 1 }
+  const final = { right: -15, top: 30, opacity: 1 }
   return (
     <motion.div
       initial={orig}

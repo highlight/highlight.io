@@ -156,14 +156,16 @@ const Home: NextPage = () => {
       <main>
         <Section className={styles.heroVideoWrapper}>
           <AnimateBugLeft loaded={leftBugLoaded && rightBugLoaded}>
-            <Image
-              src={HeroBugLeft}
-              alt="bug left"
-              onLoadingComplete={() => setLeftBugLoaded(true)}
-            />
+            <div className={styles.heroBug}>
+              <Image
+                src={HeroBugLeft}
+                alt="bug left"
+                onLoadingComplete={() => setLeftBugLoaded(true)}
+              />
+            </div>
           </AnimateBugLeft>
           <AnimateBugRight loaded={leftBugLoaded && rightBugLoaded}>
-            <div className={styles.heroBugRight}>
+            <div className={styles.heroBug}>
               <Image
                 src={HeroBugRight}
                 alt="bug right"
