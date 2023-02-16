@@ -1,6 +1,6 @@
 // pages/_document.js
 
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class HighlightDocument extends Document {
   render() {
@@ -18,7 +18,7 @@ class HighlightDocument extends Document {
             rel="stylesheet"
           ></link>
         </Head>
-        <body>
+        <body style={{ overflowX: 'hidden' }}>
           <Main />
           <NextScript />
           <noscript
@@ -28,8 +28,8 @@ class HighlightDocument extends Document {
           />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default HighlightDocument;
+export default HighlightDocument

@@ -22,23 +22,20 @@ export const OSSCallToAction = () => {
           </Typography>
         </div>
         <div className="flex justify-center mt-16">
-          <div className="flex flex-col lg:flex-row justify-center gap-4 w-full px-5 sm:w-auto"
+          <div className="flex flex-col lg:flex-row justify-center gap-4 w-full px-5 md:w-auto"
           >
-            <PrimaryButton href="https://github.com/highlight/highlight">
+            <PrimaryButton href="https://github.com/highlight/highlight" className="md:max-w-[145px]">
               <div className="flex justify-center items-center gap-3">
                 <AiFillGithub className="w-6 h-6 mb-[1px]" />
                 <Typography type="copy2" emphasis={true}>
-                  Github
+                  GitHub
                 </Typography>
               </div>
             </PrimaryButton>
-            <PrimaryButton href="https://discord.gg/yxaXEAqgwN" className={styles.hollowButton}>
-              <div className="flex items-center gap-3">
+            <PrimaryButton href="https://discord.gg/yxaXEAqgwN" className={classNames(styles.hollowButton, "md:max-w-[145px]")}>
+              <div className="flex items-center gap-3 ">
                 <FaDiscord className="w-6 h-6" />
-                <Typography type="copy2" emphasis={true} className="hidden sm:flex">
-                  Discord Community
-                </Typography>
-                <Typography type="copy2" emphasis={true} className="sm:hidden">
+                <Typography type="copy2" emphasis={true} className="">
                   Discord
                 </Typography>
               </div>
