@@ -5,7 +5,6 @@ import { PrimaryButton } from '../components/common/Buttons/PrimaryButton'
 import Navbar from '../components/common/Navbar/Navbar'
 import { Section } from '../components/common/Section/Section'
 import styles from '../components/Home/Home.module.scss'
-import productStyles from '../components/Products/Products.module.scss'
 
 import MobileHeroSection from '../public/images/mobile-insects.png'
 import HeroBugLeft from '../public/images/hero-bug-left.gif'
@@ -22,20 +21,12 @@ import classNames from 'classnames'
 import { Review, REVIEWS } from '../components/Home/Reviews'
 import { Typography } from '../components/common/Typography/Typography'
 import { Collapse } from 'antd'
-import { HeroVideo } from '../components/Home/HeroVideo/HeroVideo'
 import Link from 'next/link'
-import { GithubPopup } from '../components/GithubPopup/GithubPopup'
 import { FeatureCarousel } from '../components/Home/FeatureCarousel/FeatureCarousel'
 import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToAction'
 import LandingInfoRow from '../components/Home/LandingInfoRow'
 import InfoRow from '../components/Products/InfoRow'
-import { motion } from 'framer-motion'
-import {
-  AnimateBug,
-  AnimateBugLeft,
-  AnimateBugRight,
-  AnimateIn,
-} from '../components/Animate'
+import { AnimateBugLeft, AnimateBugRight } from '../components/Animate'
 
 const IMAGE_SHOW_OFFSET = 450
 
