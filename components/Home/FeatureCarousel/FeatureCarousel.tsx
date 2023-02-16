@@ -6,7 +6,7 @@ import { StaticImageData } from 'next/image'
 import sessionReplay from '../../../public/images/session-replay.png'
 import errorMonitoring from '../../../public/images/error-monitoring.png'
 import fullstackLogging from '../../../public/images/fullstack-logging.png'
-import selfHosting from '../../../public/images/self-hosting.png'
+import selfHosting from '../../../public/images/docker.png'
 import openSource from '../../../public/images/open-source.png'
 import tempCarouselImage from '../../../public/images/tempCarouselImage.png'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -37,6 +37,7 @@ export type Feature = {
   thumbnail: JSX.Element
   desktopImage: StaticImageData
   mobileImage: StaticImageData
+  right?: boolean
   code?: string[]
   feature1?: string
   featureImage1?: JSX.Element
@@ -57,6 +58,7 @@ const features: Feature[] = [
     thumbnail: <HiTerminal className="h-[35px] w-[35px]" />,
     desktopImage: errorMonitoring,
     mobileImage: tempCarouselImage,
+    right: true,
     feature1: 'Custom Error Grouping',
     featureImage1: <HiUserGroup className="h-[20px] w-[20px]" />,
     feature2: 'Customizable Alerting Rules',
@@ -72,6 +74,7 @@ const features: Feature[] = [
     thumbnail: <HiFilm className="h-[35px] w-[35px]" />,
     desktopImage: sessionReplay,
     mobileImage: tempCarouselImage,
+    right: true,
     feature1: 'Console and Network Recording',
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
     feature2: 'Comprehensive Session Search',
@@ -86,6 +89,7 @@ const features: Feature[] = [
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: fullstackLogging,
     mobileImage: tempCarouselImage,
+    right: true,
     feature1: 'Customizable Log Alerts',
     featureImage1: <HiBell className="h-[20px] w-[20px]" />,
     feature2: 'Widespread SDK Support',
@@ -101,6 +105,7 @@ const features: Feature[] = [
     thumbnail: <HiCloudDownload className="h-[35px] w-[35px]" />,
     desktopImage: selfHosting,
     mobileImage: tempCarouselImage,
+    right: true,
     code: [
       `git clone --recurse-submodules https://github.com/highlight/highlight;`,
       `cd docker;`,
@@ -115,6 +120,7 @@ const features: Feature[] = [
     thumbnail: <AiFillGithub className="h-[35px] w-[35px]" />,
     desktopImage: openSource,
     mobileImage: tempCarouselImage,
+    right: true,
     feature1: 'Join the Community',
     featureImage1: <HiPresentationChartLine className="h-[20px] w-[20px]" />,
     feature2: 'Find us on GitHub',
