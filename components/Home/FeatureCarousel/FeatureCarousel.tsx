@@ -95,7 +95,7 @@ const features: Feature[] = [
     link: '/docs/general/product-features/session-replay/overview',
   },
   {
-    title: 'Self-hosting Support',
+    title: 'Self-Hosting',
     description:
       'Interested in self-hosting highlight? Spin up highlight.io in docker with just a few commands.',
     thumbnail: <HiCloudDownload className="h-[35px] w-[35px]" />,
