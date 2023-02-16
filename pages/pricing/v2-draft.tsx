@@ -5,6 +5,7 @@ import Footer from "../../components/common/Footer/Footer";
 import Navbar from "../../components/common/Navbar/Navbar";
 import { Typography } from "../../components/common/Typography/Typography";
 import homeStyles from "../../components/Home/Home.module.scss";
+import { InformationCircleIcon } from "@heroicons/react/20/solid"
 
 import { RadioGroup } from "@headlessui/react";
 import { useState } from "react";
@@ -145,8 +146,8 @@ const PriceItem = ({ title, pricePerMonth, children }: { title: string, pricePer
 			</div>
 		</div>
 		<div className="p-5 flex flex-col gap-2.5 flex-grow">
-			<div>
-				<Typography type="copy3" emphasis>Included 🛈</Typography> {/* placeholder icon */}
+			<div className="flex items-center gap-1">
+				<Typography type="copy3" emphasis>Included</Typography> <InformationCircleIcon className="inline w-5 h-5" />
 			</div>
 			{children}
 		</div>
