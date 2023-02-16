@@ -59,12 +59,27 @@ const PricingPage: NextPage = () => {
 				<h2>Pay <span className="text-highlight-yellow">as you go.</span></h2>
 				<Typography type="copy1" onDark className="max-w-4xl">Each of our plans comes with a pre-defined usage quota, and if you exceed that quota, we charge an additional fee. For custom plans, <a href="#">reach out to us</a>.</Typography>
 			</div>
-			<div className="flex gap-10"> {/* Price calculator */}
+			<div className="flex gap-10 mx-auto mt-12"> {/* Price calculator */}
 				<div className="flex flex-col w-48 gap-11">
 					<PricingRadioFilter title="Billing Period" options={["Monthly", "Annual"]} />
 					<PricingRadioFilter title="Pricing Tier" options={["Free", "Basic", "Essentials", "Startup"]} />
 					<PricingRadioFilter title="Retention" options={["3 Months", "6 Months", "12 Months", "2 years"]} />
 				</div>
+				<div className="w-[1100px] flex flex-col items-end">
+					<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
+						<div className="flex h-12">
+							<div className="flex items-center flex-1 border-r border-divider-on-dark px-7"><Typography type="copy2" emphasis>Product</Typography></div>
+							<div className="flex items-center justify-center w-[343px] px-7"><Typography type="copy2" emphasis>Cost breakdown</Typography></div>
+						</div>
+						<CalculatorRowDesktop title="Error Monitoring Usage." description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors." />
+						<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " />
+						<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." />
+					</div>
+					<div className="border border-t-0 rounded-b-lg h-52 border-divider-on-dark">
+						<CalculatorCostDisplay heading="Total" cost={1555} />
+					</div>
+				</div>
+				<div className="flex-shrink w-48" />
 			</div>
 		</div>
 		{/* Customers grid */}
@@ -73,6 +88,31 @@ const PricingPage: NextPage = () => {
 		<Footer />
 	</div>
 }
+
+const CalculatorRowDesktop = ({ title, description }: { title: string, description: string }) => {
+	const costPlaceholder = 150
+
+	return <div className="flex flex-row">
+		<div className="flex flex-col py-5 px-7">
+			<Typography type="copy1" emphasis>{title}</Typography>
+			<Typography type="copy3" className="mt-2.5">{description}</Typography>
+			<input className="mt-4" type="range" />
+		</div>
+		<div className="border-l border-divider-on-dark">
+			<CalculatorCostDisplay heading="Base + Usage" cost={costPlaceholder} />
+		</div>
+	</div>
+}
+
+const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: string }) =>
+	<div className="grid flex-shrink-0 place-content-center place-items-center w-[343px] h-full">
+		<Typography type="copy3" emphasis onDark>{heading}</Typography>
+		<span className="text-4xl font-semibold">
+			+ ${cost.toFixed(2)}
+		</span>
+	</div>
+
+
 
 const PricingRadioFilter = <T extends string>({ title, options, activeOption }: { title: string, options: readonly T[], activeOption?: T }) => {
 	const [active, setActive] = useState<T | undefined>(activeOption)
