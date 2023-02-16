@@ -5,6 +5,9 @@ import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
 import { Typography } from '../../common/Typography/Typography'
 import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
 import { Code } from 'react-code-blocks'
+import styles from '../../Docs/Docs.module.scss'
+import { FaGithub } from 'react-icons/fa'
+import Link from 'next/link'
 
 const DesktopImage = ({ feature }: { feature: Feature }) => {
   return (
@@ -73,14 +76,15 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
         </div>
       )}
       <div className="flex justify-start mb-4">
-        <PrimaryButton
-          href={feature.link}
-          className="py-[6px] text-center w-full sm:w-auto"
+        <Link
+          className={styles.socialItem}
+          href={`${feature.link}`}
+          target="_blank"
         >
           <Typography type="copy3" emphasis={true}>
             Learn More
           </Typography>
-        </PrimaryButton>
+        </Link>
       </div>
       <div className="flex sm:hidden justify-center w-full ">
         <Image
