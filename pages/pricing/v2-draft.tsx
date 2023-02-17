@@ -41,8 +41,6 @@ const PricingPage: NextPage = () => {
 const billingPeriodOptions = ["Monthly", "Annual"] as const
 type BillingPeriod = typeof billingPeriodOptions[number]
 
-/* const retentionOptions = ["3 Months", "6 Months", "12 Months", "2 years"] as const
-type Retention = typeof retentionOptions[number] */
 
 const tierNames = ["Free", "Basic", "Essentials", "Startup"] as const
 type TierName = typeof tierNames[number]
@@ -66,7 +64,6 @@ const priceTiers: Record<TierName, PricingTier> = {
 
 const PlanTable = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>(billingPeriodOptions[0])
-	/* const [retention, setRetention] = useState<Retention>(retentionOptions[0]) */
 
 	return <div className="flex flex-col items-center max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
 		<div className="flex flex-col flex-shrink-0 w-48 gap-11">
@@ -76,7 +73,7 @@ const PlanTable = () => {
 		<div className="flex flex-col">
 			<div className="flex justify-between w-[1100px]">
 				{Object.entries(priceTiers).map(([name, tier]) =>
-					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} /* retention={retention} */ key={name} />
+					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} />
 				)}
 			</div>
 			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#">usage rate</a> kicks in.</Typography>
@@ -93,7 +90,6 @@ const PriceCalculator = () => {
 		<div className="flex flex-col w-48 gap-11">
 			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
 			<PricingRadioFilter title="Pricing Tier" options={["Free", "Basic", "Essentials", "Startup"]} />
-			{/* <PricingRadioFilter title="Retention" options={["3 Months", "6 Months", "12 Months", "2 years"]} /> */}
 		</div>
 		<div className="w-[1100px] flex flex-col items-end">
 			<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
@@ -156,8 +152,8 @@ const PricingRadioFilter = <T extends string>({ title, options, value, onChange 
 	</RadioGroup>
 }
 
-const PriceItem = ({ name, tier, billingPeriod = "Monthly", /* retention = "3 Months" */ }: { name: string, tier: PricingTier, billingPeriod?: BillingPeriod, /* retention?: Retention */ }) => {
-	const { price, sessions, errors } = tier.getPriceAndRates(billingPeriod/* , retention */)
+const PriceItem = ({ name, tier, billingPeriod = "Monthly" }: { name: string, tier: PricingTier, billingPeriod?: BillingPeriod }) => {
+	const { price, sessions, errors } = tier.getPriceAndRates(billingPeriod)
 	const periodShort = billingPeriod === "Annual" ? "yr" : "mo"
 
 
