@@ -12,7 +12,10 @@ highlight.io is open source at https://github.com/highlight/highlight (would app
 We're now using `optimisticResponses` in apollo to update the state of an error. When you change the status, this now happens instantly in the UI 🤯.
 
 ## Changes to frontend routing logic
-We upgraded react router this week, which has made some significant performance improvements to the app, so that switching between errors/sessions is silky smooth.
+We upgraded react router this week, which has made some significant performance improvements to the app; switching between errors/sessions is now silky smooth.
+https://github.com/highlight/highlight/pull/4203
 
 ## New SDKs!!
 We now support several more Python SDKs: Flask, Django, Python Azure Functions.
+https://www.highlight.io/docs/general/getting-started/backend-sdk/python
+https://www.highlight.io/docs/general/getting-started/backend-sdk/cloudflare
