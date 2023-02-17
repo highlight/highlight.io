@@ -29,28 +29,7 @@ const PricingPage: NextPage = () => {
 				<h2>Pay <span className="text-highlight-yellow">as you go.</span></h2>
 				<Typography type="copy1" onDark className="max-w-4xl">Each of our plans comes with a pre-defined usage quota, and if you exceed that quota, we charge an additional fee. For custom plans, <a href="#">reach out to us</a>.</Typography>
 			</div>
-			<div className="flex gap-10 mx-auto mt-12"> {/* Price calculator */}
-				<div className="flex flex-col w-48 gap-11">
-					<PricingRadioFilter title="Billing Period" options={["Monthly", "Annual"]} />
-					<PricingRadioFilter title="Pricing Tier" options={["Free", "Basic", "Essentials", "Startup"]} />
-					<PricingRadioFilter title="Retention" options={["3 Months", "6 Months", "12 Months", "2 years"]} />
-				</div>
-				<div className="w-[1100px] flex flex-col items-end">
-					<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
-						<div className="flex h-12">
-							<div className="flex items-center flex-1 border-r border-divider-on-dark px-7"><Typography type="copy2" emphasis>Product</Typography></div>
-							<div className="flex items-center justify-center w-[343px] px-7"><Typography type="copy2" emphasis>Cost breakdown</Typography></div>
-						</div>
-						<CalculatorRowDesktop title="Error Monitoring Usage." description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors." />
-						<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " />
-						<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." />
-					</div>
-					<div className="border border-t-0 rounded-b-lg h-52 border-divider-on-dark">
-						<CalculatorCostDisplay heading="Total" cost={1555} />
-					</div>
-				</div>
-				<div className="flex-shrink w-48" />
-			</div>
+			<PriceCalculator />
 		</div>
 		{/* Customers grid */}
 		{/* Customers review carousel */}
@@ -65,8 +44,10 @@ type BillingPeriod = typeof billingPeriodOptions[number]
 /* const retentionOptions = ["3 Months", "6 Months", "12 Months", "2 years"] as const
 type Retention = typeof retentionOptions[number] */
 
+const tierNames = ["Free", "Basic", "Essentials", "Startup"] as const
+type TierName = typeof tierNames[number]
+
 type PricingTier = {
-	name: string,
 	includes: string[],
 	getPriceAndRates(period: BillingPeriod): {
 		price: number,
@@ -75,29 +56,58 @@ type PricingTier = {
 	}
 }
 
-const priceTiers: readonly PricingTier[] = [
-	{ name: "Free", includes: [], getPriceAndRates: (period) => ({ price: 0, sessions: 500, errors: 1000 }) },
-	{ name: "Basic", includes: [], getPriceAndRates: (period) => ({ price: 50, sessions: 500, errors: 1000 }) },
-	{ name: "Startup", includes: [], getPriceAndRates: (period) => ({ price: 150, sessions: 500, errors: 1000 }) },
-	{ name: "Startup", includes: [], getPriceAndRates: (period) => ({ price: 400, sessions: 500, errors: 1000 }) },
-]
+
+const priceTiers: Record<TierName, PricingTier> = {
+	"Free": { includes: [], getPriceAndRates: (period) => ({ price: 0, sessions: 500, errors: 1000 }) },
+	"Basic": { includes: [], getPriceAndRates: (period) => ({ price: 50, sessions: 500, errors: 1000 }) },
+	"Essentials": { includes: [], getPriceAndRates: (period) => ({ price: 150, sessions: 500, errors: 1000 }) },
+	"Startup": { includes: [], getPriceAndRates: (period) => ({ price: 400, sessions: 500, errors: 1000 }) },
+}
 
 const PlanTable = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>(billingPeriodOptions[0])
 	/* const [retention, setRetention] = useState<Retention>(retentionOptions[0]) */
 
-	return <div className="flex max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
+	return <div className="flex flex-col items-center max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
 		<div className="flex flex-col flex-shrink-0 w-48 gap-11">
 			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
 			{/* <PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} /> */}
 		</div>
 		<div className="flex flex-col">
 			<div className="flex justify-between w-[1100px]">
-				{priceTiers.map((tier) =>
-					<PriceItem tier={tier} billingPeriod={billingPeriod} /* retention={retention} */ key={tier.name} />
+				{Object.entries(priceTiers).map(([name, tier]) =>
+					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} /* retention={retention} */ key={name} />
 				)}
 			</div>
 			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#">usage rate</a> kicks in.</Typography>
+		</div>
+		<div className="flex-shrink w-48" />
+	</div>
+}
+
+const PriceCalculator = () => {
+	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>(billingPeriodOptions[0])
+	const [pricingTier, setPricingTier] = useState<TierName>("Basic")
+
+	return <div className="flex gap-10 mx-auto mt-12"> {/* Price calculator */}
+		<div className="flex flex-col w-48 gap-11">
+			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
+			<PricingRadioFilter title="Pricing Tier" options={["Free", "Basic", "Essentials", "Startup"]} />
+			{/* <PricingRadioFilter title="Retention" options={["3 Months", "6 Months", "12 Months", "2 years"]} /> */}
+		</div>
+		<div className="w-[1100px] flex flex-col items-end">
+			<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
+				<div className="flex h-12">
+					<div className="flex items-center flex-1 border-r border-divider-on-dark px-7"><Typography type="copy2" emphasis>Product</Typography></div>
+					<div className="flex items-center justify-center w-[343px] px-7"><Typography type="copy2" emphasis>Cost breakdown</Typography></div>
+				</div>
+				<CalculatorRowDesktop title="Error Monitoring Usage." description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors." />
+				<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " />
+				<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." />
+			</div>
+			<div className="border border-t-0 rounded-b-lg h-52 border-divider-on-dark">
+				<CalculatorCostDisplay heading="Total" cost={1555} />
+			</div>
 		</div>
 		<div className="flex-shrink w-48" />
 	</div>
@@ -146,14 +156,14 @@ const PricingRadioFilter = <T extends string>({ title, options, value, onChange 
 	</RadioGroup>
 }
 
-const PriceItem = ({ tier, billingPeriod = "Monthly", /* retention = "3 Months" */ }: { tier: PricingTier, billingPeriod?: BillingPeriod, /* retention?: Retention */ }) => {
+const PriceItem = ({ name, tier, billingPeriod = "Monthly", /* retention = "3 Months" */ }: { name: string, tier: PricingTier, billingPeriod?: BillingPeriod, /* retention?: Retention */ }) => {
 	const { price, sessions, errors } = tier.getPriceAndRates(billingPeriod/* , retention */)
 	const periodShort = billingPeriod === "Annual" ? "yr" : "mo"
 
 
 	return <div className="flex flex-col w-64 border rounded-md border-divider-on-dark">
 		<div className="p-5 border-b border-divider-on-dark">
-			<Typography type="copy1" emphasis>{tier.name}</Typography>
+			<Typography type="copy1" emphasis>{name}</Typography>
 			<div className="flex items-end mt-2">
 				<Typography type="copy3" emphasis className="self-start align-super">$</Typography>
 				<span className="mx-1 text-5xl font-semibold">{price}</span>
