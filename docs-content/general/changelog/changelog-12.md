@@ -10,6 +10,7 @@ highlight.io is open source at https://github.com/highlight/highlight (would app
 
 ## Changing the status of an error is now instant!
 We're now using `optimisticResponses` in apollo to update the state of an error. When you change the status, this now happens instantly in the UI 🤯.
+https://github.com/highlight/highlight/pull/4246
 
 ## Changes to frontend routing logic
 We upgraded react router this week, which has made some significant performance improvements to the app; switching between errors/sessions is now silky smooth.
