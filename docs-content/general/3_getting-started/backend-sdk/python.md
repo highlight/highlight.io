@@ -11,7 +11,7 @@ Highlight ships the [highlight_io](https://pypi.org/project/highlight-io/) pypi 
 
 The usage of this Backend SDK requires one of our [Client SDK](../client-sdk/1_client-sdk-overview.md)s to be installed, so please follow the instructions there if you have not done so.
 
-### The `highlight_io` Python Module
+## The `highlight_io` Python Module
 
 If you'd like to follow an example, check out our repo for one of a [Flask app](https://github.com/highlight/highlight/blob/main/sdk/highlight-py/examples/app.py) and one of a [backend script](https://github.com/highlight/highlight/blob/main/sdk/highlight-py/examples/script.py).
 
@@ -31,7 +31,7 @@ poetry add highlight-io[Flask]
 pip install highlight-io[Flask]
 ```
 
-### Adding Highlight to Flask
+## Adding Highlight to Flask
 
 Import the Flask integration and setup Highlight with Flask!
 
@@ -47,7 +47,7 @@ H = highlight_io.H(
 )
 ```
 
-### Adding Highlight to Django
+## Adding Highlight to Django
 
 Import the Django integration in your `settings.py` file.
 
@@ -58,7 +58,27 @@ from highlight_io.integrations.django import DjangoIntegration
 H = highlight_io.H("YOUR-PROJECT-ID", integrations=[DjangoIntegration()], record_logs=True)
 ```
 
-### Verify
+## Adding Highlight to Azure Functions
+
+Just add the `@observe_handler` decorator to your functions!
+
+```python
+import logging
+import azure.functions as func
+
+import highlight_io
+from highlight_io.integrations.azure import observe_handler
+
+H = highlight_io.H("YOUR-PROJECT-ID", record_logs=True)
+
+
+@observe_handler
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("Python HTTP trigger function processed a request.")
+    return func.HttpResponse("Hello, world.")
+```
+
+## Verify
 
 To validate your Highlight backend setup, you can setup up a testing route handler that throws an error. For example:
 
