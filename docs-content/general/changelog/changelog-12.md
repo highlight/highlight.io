@@ -1,5 +1,5 @@
 ---
-title: Changelog #12 (02/17)
+title: Changelog 12 (02/17)
 slug: changelog-12
 createdAt: 2021-09-10T17:54:08.000Z
 updatedAt: 2022-08-18T22:36:12.000Z
