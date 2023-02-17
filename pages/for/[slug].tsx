@@ -27,6 +27,7 @@ import ProductsGraph from '../../public/images/products-graph.svg';
 
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
+import { AnimateBugLeft, AnimateBugRight } from '../../components/Animate'
 import Footer from '../../components/common/Footer/Footer';
 import { REVIEWS } from '../../components/Home/Reviews';
 import { CustomerReview } from '..';
@@ -66,6 +67,8 @@ const Products = ({ product }: { product: iProduct }) => {
   const reviewsRef = useRef<HTMLDivElement>(null);
   const scrollYPosition = useRef<number>(0);
   const [scrollReviews, setScrollReviews] = useState(false);
+  const [leftBugLoaded, setLeftBugLoaded] = useState(false)
+  const [rightBugLoaded, setRightBugLoaded] = useState(false)
 
   const scrollListener = useCallback(() => {
 
@@ -134,12 +137,24 @@ const Products = ({ product }: { product: iProduct }) => {
       <Navbar hideBanner />
       <div>
         <Section className={landingStyles.heroVideoWrapper}>
-          <div className={landingStyles.heroBugLeft}>
-            <Image src={HeroBugLeft} alt="bug left" />
-          </div>
-          <div className={landingStyles.heroBugRight}>
-            <Image src={HeroBugRight} alt="bug right" />
-          </div>
+          <AnimateBugLeft loaded={leftBugLoaded && rightBugLoaded}>
+            <div className={landingStyles.heroBug}>
+              <Image
+                src={HeroBugLeft}
+                alt="bug left"
+                onLoadingComplete={() => setLeftBugLoaded(true)}
+              />
+            </div>
+          </AnimateBugLeft>
+          <AnimateBugRight loaded={leftBugLoaded && rightBugLoaded}>
+            <div className={landingStyles.heroBug}>
+              <Image
+                src={HeroBugRight}
+                alt="bug right"
+                onLoadingComplete={() => setRightBugLoaded(true)}
+              />
+            </div>
+          </AnimateBugRight>
           <div className={landingStyles.anchorFeature}>
             <div className={landingStyles.anchorHead}>
               <div className={styles.highlightedBadge}>
@@ -147,7 +162,7 @@ const Products = ({ product }: { product: iProduct }) => {
                   Highlight for {product.title}
                 </Typography>
               </div>
-              <h1>
+              <h1 >
                 The{' '}
                 <span className={landingStyles.highlightedText}>
                   {product.title}
@@ -157,11 +172,13 @@ const Products = ({ product }: { product: iProduct }) => {
                 you&apos;ve been waiting <br className="hidden sm:flex" />
                 for.
               </h1>
-              <Typography type="copy1" onDark>
-                What if monitoring your {product.title} app was as easy as
-                deploying it? With session replay and error monitoring,
-                Highlight’s got you covered.
-              </Typography>
+              <div className="mt-4 sm:mt-8 px-4 max-w-[840px]">
+                <Typography type="copy1" onDark>
+                  What if monitoring your {product.title} app was as easy as
+                  deploying it? With session replay and error monitoring,
+                  Highlight&apos;s got you covered.
+                </Typography>
+              </div>
               <div className="flex justify-center my-14">
                 <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
                   <PrimaryButton className={classNames(landingStyles.solidButton, "min-w-[180px]")} href="https://app.highlight.io/?sign_up=1">
