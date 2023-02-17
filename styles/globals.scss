@@ -87,7 +87,7 @@
   --color-editor-secondary-text: #4078f2;
 
   --copy-on-dark: #dfdfdf;
-  --darker-copy-on-dark: #9D97AA;
+  --darker-copy-on-dark: #9d97aa;
   --copy-on-light: #645d74;
   --divider-on-dark: var(--color-purple-800);
 
@@ -117,7 +117,7 @@
   --color-primary-400: #120532;
   --color-primary-500: #0d0225;
   --color-copy-on-dark: #dfdfdf;
-  --color-darker-copy-on-dark: #9D97AA;
+  --color-darker-copy-on-dark: #9d97aa;
   --color-copy-on-light: #645d74;
   --color-divider-on-dark: #30294e;
   --color-divider-on-purple: rgba(255, 255, 255, 0.32);
@@ -256,6 +256,14 @@ a {
   }
 }
 
+select {
+  text-indent: 50px hanging;
+}
+
+select:focus {
+  outline: none;
+}
+
 .embla {
   position: relative;
 }
@@ -342,48 +350,48 @@ a {
   right: 27px;
 }
 
-.slick-slider {
-  display: flex !important;
-  flex-direction: column;
-}
+// .slick-slider {
+//   display: flex !important;
+//   flex-direction: column;
+// }
 
-.slick-dots {
-  bottom: 0px !important;
-  padding: 0px !important;
-  margin: 0px !important;
-  margin-top: 24px !important;
-  position: relative !important;
-}
+// .slick-dots {
+//   bottom: 0px !important;
+//   padding: 0px !important;
+//   margin: 0px !important;
+//   margin-top: 24px !important;
+//   position: relative !important;
+// }
 
-.slick-list {
-  margin-bottom: 10px;
-}
+// .slick-list {
+//   margin-bottom: 10px;
+// }
 
-.slick-dots li button:before {
-  height: 12px !important;
-  opacity: 1 !important;
-  width: 12px !important;
-  border-radius: 100px;
-  border: #ebff5e 1px solid;
-  color: transparent !important;
-}
+// .slick-dots li button:before {
+//   height: 12px !important;
+//   opacity: 1 !important;
+//   width: 12px !important;
+//   border-radius: 100px;
+//   border: #ebff5e 1px solid;
+//   color: transparent !important;
+// }
 
-.slick-initialized .slick-slide {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
+// .slick-initialized .slick-slide {
+//   display: flex !important;
+//   align-items: center !important;
+//   justify-content: center !important;
+// }
 
-.slick-dots li.slick-active button:before {
-  background-color: #ebff5e;
-}
-
-.slick-dots button:before {
-}
 // .slick-dots li.slick-active button:before {
 //   background-color: #ebff5e;
-//   height: ;
 // }
+
+// .slick-dots button:before {
+// }
+// // .slick-dots li.slick-active button:before {
+// //   background-color: #ebff5e;
+// //   height: ;
+// // }
 
 @media screen and (max-width: 600px) {
   h1 {

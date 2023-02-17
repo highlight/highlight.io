@@ -33,6 +33,7 @@ slug: python
         <aside className="parameter">
           <h5><code>highlight_io.integrations.Integration</code> <code>optional</code></h5>
           <p>Use FlaskIntegration() for [Flask](https://flask.palletsprojects.com/en/2.2.x/) apps.</p>
+          <p>Use DjangoIntegration() for [Django](https://www.djangoproject.com/) apps.</p>
         </aside>
       </article>
     </aside>
@@ -42,11 +43,18 @@ slug: python
     </aside>
   </div>
   <div className="right">
+    In Flask, you'll add Highlight in your main app.py entrypoint.
     <code>
         import highlight_io
         from highlight_io.integrations.flask import FlaskIntegration
         app = Flask('test-app')
         H = highlight_io.H("YOUR-PROJECT-ID", integrations=[FlaskIntegration()], record_logs=True)
+    </code>
+    In Django, you'll add Highlight to your settings.py file:
+    <code>
+        import highlight_io
+        from highlight_io.integrations.django import DjangoIntegration
+        H = highlight_io.H("YOUR-PROJECT-ID", integrations=[DjangoIntegration()], record_logs=True)
     </code>
   </div>
 </section>

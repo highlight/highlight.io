@@ -47,6 +47,17 @@ H = highlight_io.H(
 )
 ```
 
+### Adding Highlight to Django
+
+Import the Django integration in your `settings.py` file.
+
+```python
+import highlight_io
+from highlight_io.integrations.django import DjangoIntegration
+
+H = highlight_io.H("YOUR-PROJECT-ID", integrations=[DjangoIntegration()], record_logs=True)
+```
+
 ### Verify
 
 To validate your Highlight backend setup, you can setup up a testing route handler that throws an error. For example:
