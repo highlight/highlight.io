@@ -13,7 +13,7 @@ import classNames from "classnames";
 
 
 const PricingPage: NextPage = () => {
-	return <div >
+	return <div>
 		<Navbar />
 		<div className="flex flex-col w-full px-10 mx-auto mt-24">
 			<div className="flex flex-col items-center text-center gap-9"> {/* Title, tagline and CTA */}
