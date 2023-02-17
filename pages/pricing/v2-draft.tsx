@@ -24,38 +24,7 @@ const PricingPage: NextPage = () => {
 					<PrimaryButton href="#" className={homeStyles.hollowButton}>Chat with us</PrimaryButton>
 				</div>
 			</div>
-			<div className="flex max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
-				<div className="flex flex-col flex-shrink-0 w-48 gap-11">
-					<PricingRadioFilter title="Billing Period" options={["Monthly", "Annual"]} />
-					<PricingRadioFilter title="Retention" options={["3 Months", "6 Months", "12 Months", "2 years"]} />
-				</div>
-				<div className="flex flex-col">
-					<div className="flex justify-between w-[1100px]">
-						<PriceItem title="Free" pricePerMonth="0" >
-							<span>500 monthly sessions</span>
-							<span>1000 monthly errors</span>
-							<span>Unlimited seats</span>
-						</PriceItem>
-						<PriceItem title="Basic" pricePerMonth="50" >
-							<span>500 monthly sessions</span>
-							<span>1000 monthly errors</span>
-							<span>Unlimited seats</span>
-						</PriceItem>
-						<PriceItem title="Essentials" pricePerMonth="150" >
-							<span>500 monthly sessions</span>
-							<span>Unlimited seats</span>
-						</PriceItem>
-						<PriceItem title="Startup" pricePerMonth="400" >
-							<span>500 monthly sessions</span>
-							<span>1000 monthly errors</span>
-							<span>Placeholder item</span>
-							<span>Unlimited seats</span>
-						</PriceItem>
-					</div>
-					<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#">usage rate</a> kicks in.</Typography>
-				</div>
-				<div className="flex-shrink w-48" />
-			</div>
+			<PlanTable />
 			<div className="flex flex-col items-center mt-32 text-center gap-9"> {/* Pay as you go */}
 				<h2>Pay <span className="text-highlight-yellow">as you go.</span></h2>
 				<Typography type="copy1" onDark className="max-w-4xl">Each of our plans comes with a pre-defined usage quota, and if you exceed that quota, we charge an additional fee. For custom plans, <a href="#">reach out to us</a>.</Typography>
@@ -90,6 +59,50 @@ const PricingPage: NextPage = () => {
 	</div>
 }
 
+const billingPeriodOptions = ["Monthly", "Annual"] as const
+type BillingPeriod = typeof billingPeriodOptions[number]
+
+/* const retentionOptions = ["3 Months", "6 Months", "12 Months", "2 years"] as const
+type Retention = typeof retentionOptions[number] */
+
+type PricingTier = {
+	name: string,
+	includes: string[],
+	getPriceAndRates(period: BillingPeriod): {
+		price: number,
+		sessions: number,
+		errors: number
+	}
+}
+
+const priceTiers: readonly PricingTier[] = [
+	{ name: "Free", includes: [], getPriceAndRates: (period) => ({ price: 0, sessions: 500, errors: 1000 }) },
+	{ name: "Basic", includes: [], getPriceAndRates: (period) => ({ price: 50, sessions: 500, errors: 1000 }) },
+	{ name: "Startup", includes: [], getPriceAndRates: (period) => ({ price: 150, sessions: 500, errors: 1000 }) },
+	{ name: "Startup", includes: [], getPriceAndRates: (period) => ({ price: 400, sessions: 500, errors: 1000 }) },
+]
+
+const PlanTable = () => {
+	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>(billingPeriodOptions[0])
+	/* const [retention, setRetention] = useState<Retention>(retentionOptions[0]) */
+
+	return <div className="flex max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
+		<div className="flex flex-col flex-shrink-0 w-48 gap-11">
+			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
+			{/* <PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} /> */}
+		</div>
+		<div className="flex flex-col">
+			<div className="flex justify-between w-[1100px]">
+				{priceTiers.map((tier) =>
+					<PriceItem tier={tier} billingPeriod={billingPeriod} /* retention={retention} */ key={tier.name} />
+				)}
+			</div>
+			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#">usage rate</a> kicks in.</Typography>
+		</div>
+		<div className="flex-shrink w-48" />
+	</div>
+}
+
 const CalculatorRowDesktop = ({ title, description }: { title: string, description: string }) => {
 	const costPlaceholder = 150
 
@@ -115,10 +128,8 @@ const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: strin
 
 
 
-const PricingRadioFilter = <T extends string>({ title, options, activeOption }: { title: string, options: readonly T[], activeOption?: T }) => {
-	const [active, setActive] = useState<T | undefined>(activeOption)
-
-	return <RadioGroup value={active} onChange={setActive} className="border rounded-lg border-divider-on-dark">
+const PricingRadioFilter = <T extends string>({ title, options, value, onChange }: { title: string, options: readonly T[], value?: T, onChange?: (value: T) => void }) => {
+	return <RadioGroup value={value} onChange={onChange} className="border rounded-lg border-divider-on-dark">
 		<RadioGroup.Label className="block px-3 py-1 text-center border-b border-divider-on-dark">
 			<Typography type="copy4" emphasis>{title}</Typography>
 		</RadioGroup.Label>
@@ -135,21 +146,27 @@ const PricingRadioFilter = <T extends string>({ title, options, activeOption }: 
 	</RadioGroup>
 }
 
-const PriceItem = ({ title, pricePerMonth, children }: { title: string, pricePerMonth: string, children: React.ReactNode[] }) => {
+const PriceItem = ({ tier, billingPeriod = "Monthly", /* retention = "3 Months" */ }: { tier: PricingTier, billingPeriod?: BillingPeriod, /* retention?: Retention */ }) => {
+	const { price, sessions, errors } = tier.getPriceAndRates(billingPeriod/* , retention */)
+	const periodShort = billingPeriod === "Annual" ? "yr" : "mo"
+
+
 	return <div className="flex flex-col w-64 border rounded-md border-divider-on-dark">
 		<div className="p-5 border-b border-divider-on-dark">
-			<Typography type="copy1" emphasis>{title}</Typography>
+			<Typography type="copy1" emphasis>{tier.name}</Typography>
 			<div className="flex items-end mt-2">
 				<Typography type="copy3" emphasis className="self-start align-super">$</Typography>
-				<span className="mx-1 text-5xl font-semibold">{pricePerMonth}</span>
-				<Typography type="copy3">/ mo</Typography>
+				<span className="mx-1 text-5xl font-semibold">{price}</span>
+				<Typography type="copy3">/ {periodShort}</Typography>
 			</div>
 		</div>
 		<div className="p-5 flex flex-col gap-2.5 flex-grow">
 			<div className="flex items-center gap-1">
 				<Typography type="copy3" emphasis>Included</Typography> <InformationCircleIcon className="inline w-5 h-5" />
 			</div>
-			{children}
+			<Typography type="copy3">{sessions} monthly sessions</Typography>
+			<Typography type="copy3">{errors} monthly errors</Typography>
+			<Typography type="copy3">Unlimited seats</Typography>
 		</div>
 		<div className="p-5">
 			<PrimaryButton href="#" className={homeStyles.hollowButton}>Start free trial</PrimaryButton>
