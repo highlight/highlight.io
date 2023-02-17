@@ -21,9 +21,9 @@ import styles from '../../components/Products/Products.module.scss';
 import navStyles from '../../components/common/Navbar/Navbar.module.scss';
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
-import ProductsReplay from '../../public/images/products-replay.svg';
-import ProductsErrors from '../../public/images/products-errors.svg';
-import ProductsGraph from '../../public/images/products-graph.svg';
+import ProductsReplay from '../../public/images/products-replay.png';
+import ProductsErrors from '../../public/images/products-errors.png';
+import ProductsGraph from '../../public/images/products-graph.png';
 
 import HeroBugLeft from '../../public/images/hero-bug-left.gif';
 import HeroBugRight from '../../public/images/hero-bug-right.gif';
