@@ -198,6 +198,15 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     snippets: [reactSnippet],
   },
 
+  next: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/nextjs',
+    slug: 'next',
+    title: 'Next.js',
+    types: ['Frontend', 'Backend'],
+    snippets: [nextSnippet, nextBackendSnippet],
+  },
+
   angular: {
     type: 'frontend',
     docsLink: '/docs/getting-started/client-sdk/angular',
@@ -212,15 +221,6 @@ export const PRODUCTS: { [k: string]: iProduct } = {
     slug: 'gatsby',
     title: 'Gatsby.js',
     snippets: [angularSnippet],
-  },
-
-  next: {
-    type: 'frontend',
-    docsLink: '/docs/getting-started/client-sdk/nextjs',
-    slug: 'next',
-    title: 'Next.js',
-    types: ['Frontend', 'Backend'],
-    snippets: [nextSnippet, nextBackendSnippet],
   },
 
   svelte: {
