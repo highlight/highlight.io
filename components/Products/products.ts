@@ -2,12 +2,12 @@
 //referenced in ProductDropdown and sitemap
 
 export interface iProduct {
-  type: string;
-  docsLink: string;
-  slug: string;
-  snippets: string[];
-  title: string;
-  types?: string[];
+  type: string
+  docsLink: string
+  slug: string
+  snippets: string[]
+  title: string
+  types?: string[]
 }
 
 //whitespace ensures that the two code blocks (front-end and back-end) are the same height.
@@ -29,7 +29,7 @@ ReactDOM.render(
 )
 `
 
-const expressSnippet: string =  `
+const expressSnippet: string = `
 
 import { Highlight } from '@highlight-run/node'
 
@@ -189,94 +189,102 @@ const svelteSnippet: string = `
 ...
 `
 
-
 export const PRODUCTS: { [k: string]: iProduct } = {
-  'express': {
-    type: "backend",
-    docsLink: "/docs/getting-started/backend-sdk/express",
+  react: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/reactjs',
+    slug: 'react',
+    title: 'React',
+    snippets: [reactSnippet],
+  },
+
+  angular: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/angular',
+    slug: 'angular',
+    title: 'Angular',
+    snippets: [angularSnippet],
+  },
+
+  gatsby: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/gatsbyjs',
+    slug: 'gatsby',
+    title: 'Gatsby.js',
+    snippets: [angularSnippet],
+  },
+
+  next: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/nextjs',
+    slug: 'next',
+    title: 'Next.js',
+    types: ['Frontend', 'Backend'],
+    snippets: [nextSnippet, nextBackendSnippet],
+  },
+
+  svelte: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/sveltekit',
+    slug: 'svelte',
+    title: 'Svelte.js',
+    snippets: [svelteSnippet],
+  },
+
+  vue: {
+    type: 'frontend',
+    docsLink: '/docs/getting-started/client-sdk/vuejs',
+    slug: 'vue',
+    title: 'Vue.js',
+    snippets: [vueSnippet],
+  },
+  express: {
+    type: 'backend',
+    docsLink: '/docs/getting-started/backend-sdk/express',
     slug: 'express',
-    title: "Express",
-    types: ["Backend", "Frontend"],
+    title: 'Express',
+    types: ['Backend', 'Frontend'],
     snippets: [expressSnippet, defaultFrontendSnippet],
   },
 
-  'go': {
-    type: "backend",
-    docsLink: "/docs/getting-started/backend-sdk/go",
+  go: {
+    type: 'backend',
+    docsLink: '/docs/getting-started/backend-sdk/go',
     slug: 'go',
-    title: "Golang",
-    types: ["Backend", "Frontend"],
+    title: 'Golang',
+    types: ['Backend', 'Frontend'],
     snippets: [goSnippet, defaultFrontendSnippet],
   },
 
   'next-backend': {
-    type: "backend",
-    docsLink: "/docs/getting-started/client-sdk/nextjs",
+    type: 'backend',
+    docsLink: '/docs/getting-started/client-sdk/nextjs',
     slug: 'next-backend',
-    title: "Next.js",
-    types: ["Backend", "Frontend"],
+    title: 'Next.js',
+    types: ['Backend', 'Frontend'],
     snippets: [nextBackendSnippet, nextSnippet],
-  }, 
-
-  'node': {
-    type: "backend",
-    docsLink: "/docs/getting-started/backend-sdk/nodejs",
-    slug: 'node',
-    title: "Node.js",
-    types: ["Backend", "Frontend"],
-    snippets: [nodeSnippet, defaultFrontendSnippet],
   },
 
-  'angular': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/angular",
-    slug: 'angular',
-    title: "Angular",
-    snippets: [angularSnippet],
-  }, 
+  node: {
+    type: 'backend',
+    docsLink: '/docs/getting-started/backend-sdk/nodejs',
+    slug: 'node',
+    title: 'Node.js',
+    types: ['Backend', 'Frontend'],
+    snippets: [nodeSnippet, defaultFrontendSnippet],
+  },
+}
 
-  'gatsby': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/gatsbyjs",
-    slug: 'gatsby',
-    title: "Gatsby.js",
-    snippets: [angularSnippet],
-  }, 
-
-  'next': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/nextjs",
-    slug: 'next',
-    title: "Next.js",
-    types: ["Frontend", "Backend"],
-    snippets: [nextSnippet, nextBackendSnippet],
-  }, 
-
-  'react': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/reactjs",
-    slug: 'react',
-    title: "React",
-    snippets: [reactSnippet],
-  }, 
-
-  'svelte': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/sveltekit",
-    slug: 'svelte',
-    title: "Svelte.js",
-    snippets: [svelteSnippet],
-  }, 
-
-  'vue': {
-    type: "frontend",
-    docsLink: "/docs/getting-started/client-sdk/vuejs",
-    slug: 'vue',
-    title: "Vue.js",
-    snippets: [vueSnippet],
-  }, 
-};
-
-export const frontendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "frontend" })
-export const backendProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "backend" })
-export const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => { return product.type == "fullstack" })
+export const frontendProductLinks = Object.values(PRODUCTS).filter(
+  (product) => {
+    return product.type == 'frontend'
+  },
+)
+export const backendProductLinks = Object.values(PRODUCTS).filter((product) => {
+  return product.type == 'backend'
+})
+export const fullStackProductLinks = Object.values(PRODUCTS).filter(
+  (product) => {
+    return product.type == 'fullstack'
+  },
+)
