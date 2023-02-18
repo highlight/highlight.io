@@ -60,7 +60,7 @@ export default withHighlightConfig({
 })
 ```
 
-### Next.js Custom Metrics
+### Next.js Backend Errors
 
 If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase. See [Highlight()](../../../../sdk/nextjs.md#Highlight) for more details.
 
@@ -81,7 +81,3 @@ const handler = async (req, res) => {
 
 export default withHighlight(handler)
 ```
-
-### Wrapping your API routes
-
-Refer to the [next.js metrics docs](./metrics-overview.md) in order to report custom metrics from your Next.js application.
