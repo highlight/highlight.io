@@ -12,7 +12,7 @@ import HeroBugRight from '../public/images/hero-bug-right.gif'
 import LandingInfoRow1 from '../public/images/landingInfoRow1.png'
 import LandingInfoRow2 from '../public/images/landingInfoRow2.png'
 import LandingInfoRow3 from '../public/images/landingInfoRow3.png'
-import LandingInfoRowSecurity from '../public/images/landingInfoRowSecurity.svg'
+import LandingInfoRowSecurity from '../public/images/landingInfoRowSecurity.png'
 
 import Footer from '../components/common/Footer/Footer'
 import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction'
