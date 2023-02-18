@@ -24,6 +24,7 @@ import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/Hig
 import { GraphQLRequest } from '../../utils/graphql'
 import { getTagUrl, PostTag } from '../../components/Blog/Tag'
 import { PostAuthor } from '../../components/Blog/Author'
+import { CommentsBox } from '../../components/Comments/CommentsBox'
 
 const NUM_SUGGESTED_POSTS = 3
 
@@ -336,10 +337,9 @@ const PostPage = ({
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${
-                post.readingTime ||
-                Math.floor(post.richcontent.markdown.split(' ').length / 200)
-              } min read`}</p>
+              })} • ${post.readingTime ||
+              Math.floor(post.richcontent.markdown.split(' ').length / 200)
+                } min read`}</p>
             </Typography>
             <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
@@ -375,6 +375,9 @@ const PostPage = ({
         </Section>
         <Section>
           <div className={styles.postBodyDivider}></div>
+        </Section>
+        <Section>
+          <CommentsBox />
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
