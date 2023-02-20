@@ -9,7 +9,7 @@ Highlight ships the [highlight_io](https://pypi.org/project/highlight-io/) pypi 
 
 ## Usage
 
-The usage of this Backend SDK requires one of our [Client SDK](../3_client-sdk/1_client-sdk-overview.md)s to be installed, so please follow the instructions there if you have not done so.
+The usage of this Backend SDK requires one of our [Client SDK](../1_overview.md#for-your-frontend)s to be installed, so please follow the instructions there if you have not done so.
 
 ## The `highlight_io` Python Module
 

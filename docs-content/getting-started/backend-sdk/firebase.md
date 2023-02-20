@@ -7,7 +7,7 @@ Highlight's `@highlight-run/node` package includes wrappers for Firebase Cloud F
 
 ## Getting Started
 
-This backend SDK requires one of our [Client SDK](../3_client-sdk/1_client-sdk-overview.md)s to be installed, so please follow the instructions there if you have not done so.
+This backend SDK requires one of our [Client SDK](../1_overview.md#for-your-frontend)s to be installed, so please follow the instructions there if you have not done so.
 
 For server-side linking to Highlight sessions, your client-side call to `H.init` should include the `tracingOrigins` setting. See [H.init()](../../sdk/nodejs.md#Hinit) for more details.
 

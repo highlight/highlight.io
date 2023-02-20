@@ -2,6 +2,7 @@ import { AngularContent } from "./frontend/angular";
 import { GatsbyContent } from "./frontend/gatsby";
 import { NextContent } from "./frontend/next";
 import { ReactContent } from "./frontend/react";
+import { VueContent } from "./frontend/vue";
 
 export type QuickStartContent = {
     subtitle: string;
@@ -22,7 +23,6 @@ export enum QuickStartType {
     Angular = "angular",
     React = "react",
     Next = "next",
-    Svelte = "svelte",
     Vue = "vue",
     Gatsby = "gatsby",
     Other = "other",
@@ -32,8 +32,7 @@ export const quickStartContent: { [type in QuickStartType]: QuickStartContent } 
     [QuickStartType.Angular]: AngularContent,
     [QuickStartType.React]: ReactContent,
     [QuickStartType.Next]: NextContent,
-    [QuickStartType.Svelte]: ReactContent,
-    [QuickStartType.Vue]: ReactContent,
+    [QuickStartType.Vue]: VueContent,
     [QuickStartType.Gatsby]: GatsbyContent,
     [QuickStartType.Other]: ReactContent,
 }

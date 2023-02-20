@@ -27,9 +27,6 @@ highlight.io supports any framework that uses the [dom](https://www.w3schools.co
     <DocsCard title="NextJS"  href="./client-sdk/nextjs.md">
         {"Get started in your NextJS app"}
     </DocsCard>
-    <DocsCard title="SvelteKit"  href="./client-sdk/sveltekit.md">
-        {"Get started in your SvelteKit app"}
-    </DocsCard>
     <DocsCard title="VueJS"  href="./client-sdk/vuejs.md">
         {"Get started in your VueJS app"}
     </DocsCard>
