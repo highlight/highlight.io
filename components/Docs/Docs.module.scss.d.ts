@@ -43,6 +43,8 @@ export const pageContentTitle: string
 export const pageNavigate: string
 export const pageNavigateRow: string
 export const pageTitle: string
+export const quickStartCenterSection: string
+export const quickStartSubtext: string
 export const resourcesMobile: string
 export const resourcesSideBar: string
 export const resultTitle: string

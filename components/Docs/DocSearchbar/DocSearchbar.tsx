@@ -103,15 +103,15 @@ const DocSearchbar = (props: SearchbarProps) => {
 
   const storeDocs = useCallback(async () => {
     await db.docs.clear();
-    await db.docs.bulkPut(
-      props.docPaths.map((d) => {
-        return {
-          slug: d.simple_path,
-          content: d.content,
-          metadata: d.metadata,
-        };
-      })
-    );
+    // await db.docs.bulkPut(
+    //   props.docPaths.map((d) => {
+    //     return {
+    //       slug: d.simple_path,
+    //       content: d.content,
+    //       metadata: d.metadata,
+    //     };
+    //   })
+    // );
   }, [props.docPaths]);
 
   useEffect(() => {

@@ -8,6 +8,12 @@ updatedAt: 2022-08-18T22:36:12.000Z
 [highlight.io](https://highlight.io) is monitoring software for the next generation of developers. And it's all [opensource](https://github.com/highlight/highlight) :).
 
 
+<DocsCardGroup>
+    <DocsCard title="Get Started" href="../getting-started/1_overview.md">
+        {"Get started in your frontend & backend right now!"}
+    </DocsCard>
+</DocsCardGroup>
+
 ### About us.
 <DocsCardGroup>
     <DocsCard title="Mission & Values." href="./2_company/1_values.md">

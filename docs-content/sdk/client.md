@@ -13,7 +13,7 @@ slug: client
   </div>
   <div className="right">
     <h6>Just getting started?</h6>
-    <p>Check out our [getting started guide](../general/3_getting-started/client-sdk/1_client-sdk-overview.md) to get up and running quickly.</p>
+    <p>Check out our [getting started guide](https://google.com) to get up and running quickly.</p>
   </div>
 </section>
 
