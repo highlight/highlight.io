@@ -1,6 +1,7 @@
 import { AngularContent } from "./frontend/angular";
 import { GatsbyContent } from "./frontend/gatsby";
 import { NextContent } from "./frontend/next";
+import { OtherContext } from "./frontend/other";
 import { ReactContent } from "./frontend/react";
 import { VueContent } from "./frontend/vue";
 
@@ -34,5 +35,5 @@ export const quickStartContent: { [type in QuickStartType]: QuickStartContent } 
     [QuickStartType.Next]: NextContent,
     [QuickStartType.Vue]: VueContent,
     [QuickStartType.Gatsby]: GatsbyContent,
-    [QuickStartType.Other]: ReactContent,
+    [QuickStartType.Other]: OtherContext,
 }

@@ -199,7 +199,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const joined = path.join('/docs', p.simple_path)
     return joined
   })
-  console.log("paths", staticPaths);
   return {
     paths: staticPaths,
     fallback: 'blocking',

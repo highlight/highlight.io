@@ -1,42 +1,53 @@
 import { QuickStartContent } from "../quickstart-content";
-import { identifySnippet, initializeSnippet, setupBackendSnippet, verifySnippet } from "./shared-snippets";
+import { identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
-export const ReactContent: QuickStartContent = {
-    subtitle: "Learn how to set up highlight.io with any application that gives you access to an `index.html` file.",
+export const OtherContext: QuickStartContent = {
+    subtitle: "Learn how to set up highlight.io with any browser-based framework.",
     entries: [
         {
             title: "Import the script in your index html file.",
-            content: "Add the following script tag to your `index.html` file.",
+            content: "Add the following script tag to the head section of your `index.html` file.",
             code: {
                 text: `<html>
-	<head>
-		<script src="https://unpkg.com/highlight.run"></script>
-	</head>
-	<body>
-		<!-- Your Application -->
-	</body>
+<head>
+    <script src="https://unpkg.com/highlight.run"></script>
+</head>
+<body>
+    <!-- Your Application -->
+</body>
 </html>
 `,
-                language: "bash",
+                language: "html",
             }
         },
         {
             title: "Initialize the SDK.",
-            content: "Call the `init()` method in a script tag just below the initialize script tag",
+            content: `Grab your project ID from [app.highlight.io/ setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\`. Call the \`init()\` method just below the initialize script tag in the \`head\` section of your \`index.html\` file.  
+                    To get started, we recommend setting \`environment\`, \`appVersion\`, and \`networkRecording\`. Refer to our docs on [SDK configuration](${sessionReplayFeaturesLink}) to read more about these options. `,
             code: {
                 text: `<html>
-	<head>
-		<script src="https://unpkg.com/highlight.run"></script>
-        <script>
-            window.H.init('<YOUR_PROJECT_ID>') // Get your project ID from https://app.highlight.io/setup
-        </script>
-	</head>
-	<body>
-		<!-- Your Application -->
-	</body>
+<head>
+    <script src="https://unpkg.com/highlight.run"></script>
+    <script>
+        H.init('<YOUR_PROJECT_ID>', { // Get your project ID from https://app.highlight.io/setup
+            environment: 'production',
+            appVersion: 'commit:abcdefg12345',
+            networkRecording: {
+                enabled: true,
+                recordHeadersAndBody: true,
+                urlBlocklist: [
+                    // insert urls you don't want to record here
+                ],
+            },
+        });
+    </script>
+</head>
+<body>
+    <!-- Your Application -->
+</body>
 </html>
 `,
-                language: "bash",
+                language: "html",
             }
         },
         identifySnippet,

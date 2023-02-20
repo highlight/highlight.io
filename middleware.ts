@@ -17,7 +17,6 @@ const old_links = [
   'docs/company/open-source/self-host-enterprise',
   'docs/company/open-source/self-host-hobby',
   'docs/company/values',
-  'docs/getting-started/overview',
   'docs/getting-started/frontend-backend-mapping',
   'docs/getting-started/backend-sdk/overview',
   'docs/getting-started/backend-sdk/express',

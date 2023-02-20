@@ -1,5 +1,5 @@
 import { QuickStartContent } from "../quickstart-content"
-import { identifySnippet, initializeSnippet, packageInstallSnippet, setupBackendSnippet, verifySnippet } from "./shared-snippets"
+import { identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets"
 
 const angularInitCodeSnippet = `// app.module.ts
     import { NgModule } from '@angular/core';
@@ -32,8 +32,8 @@ export const AngularContent: QuickStartContent = {
         { ...initializeSnippet, code: { ...initializeSnippet.code, text: angularInitCodeSnippet, language: initializeSnippet.code?.language ?? "js" } },
         {
             title: "Initialize the SDK in your frontend.",
-            content: `Grab your project ID from [app.highlight.io / setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\`.  
-                        To get started, we recommend setting \`environment\`, \`appVersion\`, and \`networkReco: inrding\`. Refer to our docs on [SDK configuration]() to read more about these options. `,
+            content: `Grab your project ID from [app.highlight.io/setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\`.  
+                        To get started, we recommend setting \`environment\`, \`appVersion\`, and \`networkReco: inrding\`. Refer to our docs on [SDK configuration](${sessionReplayFeaturesLink}) to read more about these options. `,
             code: {
                 text: angularInitCodeSnippet,
                 language: "js"

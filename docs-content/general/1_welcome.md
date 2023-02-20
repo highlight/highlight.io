@@ -5,8 +5,7 @@ createdAt: 2021-09-10T17:54:08.000Z
 updatedAt: 2022-08-18T22:36:12.000Z
 ---
 
-[highlight.io](https://highlight.io) is monitoring software for the next generation of developers. And it's all [opensource](https://github.com/highlight/highlight) :).
-
+[highlight.io](https://highlight.io) is monitoring software for the next generation of developers. And it's all [opensource](https://github.com/highlight/highlight) :). highlight.io gives you **fullstack** visibility into your application with session replay, error monitoring, and logging, by allowing you to tie frontend issues with backend logs and performance issues. The first step to get highlight.io running is to install it in your frontend application. Read more below.
 
 <DocsCardGroup>
     <DocsCard title="Get Started" href="../getting-started/1_overview.md">

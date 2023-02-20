@@ -7,9 +7,6 @@ updatedAt: 2022-04-01T19:52:59.000Z
 
 Let's get you up and running with [highlight.io](https://highlight.io).
 
-## How does highlight.io work?
-highlight.io gives you **fullstack** visibility into your application, allowing you to tie frontend issues with backend logs and performance issues. The first step to get highlight.io running is to install it in your frontend application. Read more below.
-
 ## For your frontend:
 
 highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. See our guides for the following frameworks:
@@ -33,7 +30,7 @@ highlight.io supports any framework that uses the [dom](https://www.w3schools.co
 </DocsCardGroup>
 
 
-Don't see your framework? Shoot us a [message](https://highlight.io/community) or see our guide on [other](3_client-sdk/other.md) frameworks. 
+Don't see your framework? Shoot us a [message](https://highlight.io/community) import highlight.io via a [script tag](./3_client-sdk/other.md).
 
 ## For your backend:
 
