@@ -54,7 +54,7 @@ const features: Feature[] = [
   {
     title: 'Session Replay',
     description:
-      'Get to the real reasons that bugs are happening your web application.',
+      'Understand the real reason why bugs are happening in your web application.',
     thumbnail: <HiFilm className="h-[35px] w-[35px]" />,
     desktopImage: sessionReplay,
     mobileImage: tempCarouselImage,
@@ -70,7 +70,7 @@ const features: Feature[] = [
   {
     title: 'Error Monitoring',
     description:
-      'Understand the errors and exceptions happening in your web application.',
+      'Get notified of the exceptions across your app before they become problematic.',
     thumbnail: <HiTerminal className="h-[35px] w-[35px]" />,
     desktopImage: errorMonitoring,
     mobileImage: tempCarouselImage,
@@ -84,8 +84,8 @@ const features: Feature[] = [
     link: '/docs/general/product-features/error-monitoring/overview',
   },
   {
-    title: 'Fullstack',
-    description: 'Drill down on all the logs emitted throughout your stack.',
+    title: 'Logging',
+    description: 'Drill down on all the logs being written throughout your stack to uncover issues.',
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: fullstackLogging,
     mobileImage: tempCarouselImage,
