@@ -20,6 +20,7 @@ export const PrimaryButton = ({
           }
           var callback = function () {
             if (typeof (props.href) != 'undefined') {
+              // @ts-ignore 
               window.location = props.href;
             }
           };
