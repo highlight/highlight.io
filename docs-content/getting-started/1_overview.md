@@ -5,11 +5,9 @@ createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
-Let's get you up and running with [highlight.io](https://highlight.io).
-
 ## For your frontend:
 
-highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. See our guides for the following frameworks:
+highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Take a look at our guides for the following frameworks:
 
 <DocsCardGroup>
     <DocsCard title="React" href="./client-sdk/reactjs.md">
@@ -30,11 +28,11 @@ highlight.io supports any framework that uses the [dom](https://www.w3schools.co
 </DocsCardGroup>
 
 
-Don't see your framework? Shoot us a [message](https://highlight.io/community) import highlight.io via a [script tag](./3_client-sdk/other.md).
+Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](./3_client-sdk/other.md).
 
 ## For your backend:
 
-Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application. Support frameworks / tech below:
+Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 
 
 -   [Firebase](./backend-sdk/firebase.md)
