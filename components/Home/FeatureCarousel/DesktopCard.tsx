@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Typography } from '../../common/Typography/Typography'
 import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
 import { Code } from 'react-code-blocks'
-import styles from '../../Docs/Docs.module.scss'
 import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 
@@ -26,7 +25,7 @@ const DesktopImage = ({ feature }: { feature: Feature }) => {
 
 const DesktopFeatures = ({ feature }: { feature: Feature }) => {
   return (
-    <div className="flex flex-col gap-4 justify-start md:pt-8 xl:justify-center text-left w-full sm:w-1/2 px-5 lg:px-16">
+    <div className="flex flex-col gap-4 justify-start md:pt-8 xl:pt-16 text-left w-full sm:w-1/2 px-5 lg:px-16">
       <div className="flex flex-col md:gap-2">
         <h5 className="hidden sm:flex">{feature.title}</h5>
         <h4 className="sm:hidden">{feature.title}</h4>
@@ -98,7 +97,7 @@ export const DesktopCard = (props: { feature: Feature; index: number }) => {
   return (
     <div
       key={props.index}
-      className="relative flex w-full lg:h-[450px] xl:h-[525px] md:border-[1px] border-divider-on-dark lg:rounded-br-lg lg:rounded-bl-lg flex-shrink-0 snap-always snap-center"
+      className="relative flex w-full lg:h-[450px] xl:h-[525px] md:border-[1px] border-divider-on-dark xl:rounded-br-lg xl:rounded-bl-lg flex-shrink-0 snap-always snap-center"
     >
       {props.feature.right ? (
         <>

@@ -49,7 +49,7 @@ export type Feature = {
 }
 
 //feature images need classname "h-[20px] w-[20px]"
-//thumbnail needs classname "h-[40px] w-[40px]"
+//thumbnail needs classname "h-[35px] w-[35px]"
 const features: Feature[] = [
   {
     title: 'Session Replay',
@@ -154,7 +154,7 @@ export const FeatureCarousel = () => {
   }
 
   return (
-    <div className="flex flex-col overflow-x-hidden lg:rounded-lg max-w-[100vw] xl:max-w-[1000px] lg:rounded-tr-lg lg:rounded-tl-lg">
+    <div className="flex flex-col overflow-x-hidden xl:rounded-lg max-w-[100vw] xl:max-w-[1000px] xl:rounded-tr-lg xl:rounded-tl-lg">
       <div className={`hidden md:grid grid-cols-5`}>
         {features.map((feature, index) => (
           <div
@@ -163,8 +163,8 @@ export const FeatureCarousel = () => {
             className={classNames(
               styles.carouselButton,
               'group',
-              index == 0 ? 'lg:rounded-tl-lg' : '',
-              index == features.length - 1 ? 'lg:rounded-tr-lg' : '',
+              index == 0 ? 'xl:rounded-tl-lg' : '',
+              index == features.length - 1 ? 'xl:rounded-tr-lg' : '',
             )}
           >
             <div
