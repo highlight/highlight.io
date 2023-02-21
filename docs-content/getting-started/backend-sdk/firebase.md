@@ -41,7 +41,7 @@ exports.exampleCallable = functions.https.onCall(
 	highlightNode.Handlers.firebaseCallableFunctionHandler((data, context) => {
 		// ... your handler code here
 		return { result: 'useful result!' }
-	}),
+	}, {projectID: "YOUR-PROJECT-ID"}),
 )
 ```
 
@@ -53,7 +53,7 @@ exports.exampleHttp = functions.https.onRequest(
 	highlightNode.Handlers.firebaseHttpFunctionHandler((req, res) => {
 		// ... your handler code here
 		res.json({ result: 'useful result!' })
-	}),
+	}, {projectID: "YOUR-PROJECT-ID"}),
 )
 ```
 

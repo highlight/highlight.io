@@ -1,3 +1,4 @@
 interface Window {
-  rudderanalytics: any;
+  rudderanalytics: any
+  gtag: any
 }
