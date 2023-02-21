@@ -16,7 +16,7 @@ const supabase = createClient(
   },
 )
 
-interface Comment {
+export interface Comment {
   id: string
   created_at: Date
   blog_id: string
