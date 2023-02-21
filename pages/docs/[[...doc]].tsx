@@ -638,7 +638,6 @@ const DocPage = ({
     }
   }, [router])
 
-  // const currentToc = toc?.children.find((c) => c.tocSlug === 'general')
   const currentToc = toc?.children.find((c) => c.tocSlug === relPath?.split("/").filter(r => r)[0])
 
   return (

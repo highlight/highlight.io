@@ -4,10 +4,10 @@ export const packageInstallSnippet: QuickStartStep = {
     title: "Install the npm package & SDK.",
     content: "Install the npm package `highlight.run` in your terminal.",
     code: {
-        text: `// with npm 
+        text: `# with npm 
 npm install highlight.run 
 
-// with yarn
+# with yarn
 yarn add highlight.run`,
         language: "bash",
     }

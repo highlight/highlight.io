@@ -17,10 +17,10 @@ export const ReactContent: QuickStartContent = {
             title: "Install the npm package & SDK.",
             content: "Install the npm package `highlight.run` in your terminal.",
             code: {
-                text: `// with npm 
+                text: `# with npm 
 npm install highlight.run @highlight-run/react
 
-// with yarn
+# with yarn
 yarn add highlight.run @highlight-run/react`,
                 language: "bash",
             }
