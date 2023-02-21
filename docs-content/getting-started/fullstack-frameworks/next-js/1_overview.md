@@ -7,17 +7,17 @@ updatedAt: 2022-10-18T22:40:13.000Z
 
 The Highlight Next.js SDK adds additional features to Highlight, including:
 
--   server-side error monitoring and linking to Highlight sessions: [Highlight()](https://google.com)
+-   server-side error monitoring and linking to Highlight sessions
 
--   automatic configuration of source map uploads: [withHighlightConfig()](https://google.com)
+-   automatic configuration of source map uploads
 
--   automatic proxying for Highlight requests using Next.js rewrites: [withHighlightConfig()](https://google.com)
+-   automatic proxying for Highlight requests using Next.js rewrites
 
 ## Getting Started
 
-The features in this SDK require the Highlight client SDK to be installed, so please follow the [Next.js](../../3_client-sdk/nextjs.md) instructions if you have not yet done so.
+The features in this SDK require the Highlight client SDK to be installed, so please follow the [Next.js](../../3_client-sdk/nextjs.md) frontend instructions if you have not yet done so.
 
-For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should set `backendUrl`. See [H.init()](https://google.com) for more details.
+For server-side linking to Highlight sessions, your call to `H.init` should include the `tracingOrigins` setting. If you're going to use `withHighlightConfig` and proxy your Highlight requests with a rewrite, you should also set `backendUrl`. See [H.init()](../../../sdk/client.md) for more details.
 
 ```hint
 Using the new `/app` directory in Next.js 13? Refer to [this guide](./next-13-considerations.md) to ensure you're using a client component.
@@ -48,10 +48,10 @@ yarn add @highlight-run/next
 ### Wrapping your next.config.js
 
 ```hint
-In order for Highlight to be aware of your project during build time, you need the `HIGHLIGHT_SOURCEMAP_UPLOAD_API_KEY` variable in your build environment. Refer to our [environment variables doc](../next-js/env-variables.md) to get this set up in your cloud provider of choice.
+In order for Highlight to be aware of your project during build time, you need the `HIGHLIGHT_SOURCEMAP_UPLOAD_API_KEY` variable in your build environment. Refer to our [environment variables doc](./env-variables.md) to get this set up in your cloud provider of choice.
 ```
 
-If you want to configure source map uploads during your production builds and enable the Next.js Highlight proxy rewrite, you can wrap your Next.js config with `withHighlightConfig`. See [withHighlightConfig()](https://google.com) for more details.
+If you want to configure source map uploads during your production builds and enable the Next.js Highlight proxy rewrite, you can wrap your Next.js config with `withHighlightConfig`.
 
 ```javascript
 import { withHighlightConfig } from '@highlight-run/next'
@@ -62,7 +62,7 @@ export default withHighlightConfig({
 
 ### Next.js Backend Errors
 
-If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase. See [Highlight()](https://google.com) for more details.
+If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase. 
 
 ```typescript
 import { Highlight } from '@highlight-run/next'
