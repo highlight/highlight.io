@@ -20,6 +20,9 @@ class HighlightDocument extends Document {
               __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            gtag('set', 'linker', {
+              'domains': ['app.highlight.io']
+            });
             gtag('js', new Date());
 
             gtag('config', 'G-P2T64QS94S');
