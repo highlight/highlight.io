@@ -96,13 +96,27 @@ const PlanTable = () => {
 
 const PriceCalculator = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
-	const [tier, setTier] = useState<TierName>("Free")
+	const [tierName, setTierName] = useState<TierName>("Free")
 	const [retention, setRetention] = useState<Retention>("3 months")
+
+	const [errorUsage, setErrorUsage] = useState(1000)
+	const [sessionUsage, setSessionUsage] = useState(1000)
+	const [loggingUsage, setLoggingUsage] = useState(1000)
+
+	const tier = priceTiers[tierName]
+	const basePrice = getBasePrice(tier, billingPeriod, retention)
+
+	const getUsagePrice = (useage: number, price: number, size: number) =>
+		(Math.max(useage, 0) * price / size * retentionMultipliers[retention])
+
+	const sessionsCost = getUsagePrice(sessionUsage - tier.sessions, 5.00, 1_000)
+	const errorsCost = getUsagePrice(errorUsage - tier.errors, 0.20, 1_000)
+	const loggingCost = getUsagePrice(loggingUsage, 1.50, 1_000_000)
 
 	return <div className="flex gap-10 mx-auto mt-12"> {/* Price calculator */}
 		<div className="flex flex-col w-48 gap-11">
 			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
-			<PricingRadioFilter title="Pricing Tier" options={tierOptions} value={tier} onChange={setTier} />
+			<PricingRadioFilter title="Pricing Tier" options={tierOptions} value={tierName} onChange={setTierName} />
 			<PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
 		<div className="w-[1100px] flex flex-col items-end">
@@ -111,29 +125,28 @@ const PriceCalculator = () => {
 					<div className="flex items-center flex-1 border-r border-divider-on-dark px-7"><Typography type="copy2" emphasis>Product</Typography></div>
 					<div className="flex items-center justify-center w-[343px] px-7"><Typography type="copy2" emphasis>Cost breakdown</Typography></div>
 				</div>
-				<CalculatorRowDesktop title="Error Monitoring Usage." description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors." />
-				<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " />
-				<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." />
+				<CalculatorRowDesktop title="Error Monitoring Usage." description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors." value={errorUsage} onChange={setErrorUsage} cost={errorsCost + basePrice} />
+				<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " value={sessionUsage} onChange={setSessionUsage} cost={sessionsCost + basePrice} />
+				<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." value={loggingUsage} onChange={setLoggingUsage} cost={loggingCost + basePrice} />
 			</div>
 			<div className="border border-t-0 rounded-b-lg h-52 border-divider-on-dark">
-				<CalculatorCostDisplay heading="Total" cost={1555} />
+				<CalculatorCostDisplay heading="Total" cost={basePrice + sessionsCost + errorsCost + loggingCost} />
 			</div>
 		</div>
 		<div className="flex-shrink w-48" />
 	</div>
 }
 
-const CalculatorRowDesktop = ({ title, description }: { title: string, description: string }) => {
-	const costPlaceholder = 150
-
+const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { title: string, description: string, value: number, onChange: (value: number) => void, cost: number }) => {
 	return <div className="flex flex-row">
 		<div className="flex flex-col py-5 px-7">
 			<Typography type="copy1" emphasis>{title}</Typography>
 			<Typography type="copy3" className="mt-2.5">{description}</Typography>
-			<input className="mt-4" type="range" />
+			<input className="mt-4" type="range" step={1000} min={1000} max={10000} value={value} onChange={(ev) => onChange(parseInt(ev.target.value))} />
+			{value}
 		</div>
 		<div className="border-l border-divider-on-dark">
-			<CalculatorCostDisplay heading="Base + Usage" cost={costPlaceholder} />
+			<CalculatorCostDisplay heading="Base + Usage" cost={cost} />
 		</div>
 	</div>
 }
