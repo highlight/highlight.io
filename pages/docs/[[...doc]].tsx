@@ -23,10 +23,13 @@ import { Meta } from '../../components/common/Head/Meta'
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar'
 import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github'
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
-import { generateIdString } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
+import { DocsMarkdownRenderer, generateIdString } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
 import DocSelect from '../../components/Docs/DocSelect/DocSelect'
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import { Callout } from '../../components/Docs/Callout/Callout'
+import { CodeBlock } from '../../components/common/CodeBlock/CodeBlock'
+import { quickStartContent, QuickStartContent, QuickStartStep, QuickStartType } from '../../components/QuickstartContent/QuickstartContent'
+import Markdown from 'markdown-to-jsx'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')
 const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`
@@ -37,7 +40,7 @@ export interface DocPath {
   simple_path: string
   // e.g. '[/tips, /getting-started/client-sdk]'
   embedded_links: string[]
-  // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
+  // e.g. /Users/jaykhatri/projects/highlight-landing/s/tips/sessions-search-deep-linking.md
   total_path: string
   // e.g. 'tips/sessions-search-deep-linking.md'
   rel_path: string
@@ -53,6 +56,7 @@ type DocData = {
   markdownText: MDXRemoteSerializeResult | null
   markdownTextOG?: string
   relPath?: string
+  quickstartContent?: QuickStartContent;
   slug: string
   toc: TocEntry
   docOptions: DocPath[]
@@ -173,7 +177,6 @@ export const getDocsPaths = async (fs_api: any, base: string | undefined): Promi
       if (!hasRequiredMetadata) {
         throw new Error(`${total_path} does not contain all required metadata fields. Fields "title" are required. `)
       }
-
       paths.push({
         simple_path: pp,
         array_path: pp.split('/'),
@@ -289,7 +292,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     props: {
       metadata: currentDoc.metadata,
       markdownText: !currentDoc.isSdkDoc
-        ? await serialize(newerContent, { scope: { path: currentDoc.rel_path } })
+        ? await serialize(newerContent, { scope: { path: currentDoc.rel_path, quickStartContent } })
         : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
@@ -614,6 +617,8 @@ const DocPage = ({
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
+  const isQuickstart = metadata && 'quickstart' in metadata;
+
   const description = (markdownTextOG || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
@@ -633,7 +638,7 @@ const DocPage = ({
     }
   }, [router])
 
-  const currentToc = toc?.children.find((c) => c.tocSlug === 'general')
+  const currentToc = toc?.children.find((c) => c.tocSlug === relPath?.split("/").filter(r => r)[0])
 
   return (
     <>
@@ -748,9 +753,10 @@ const DocPage = ({
           <div
             className={classNames(styles.centerSection, {
               [styles.sdkCenterSection]: isSdkDoc,
+              [styles.quickStartCenterSection]: isQuickstart,
             })}
           >
-            {!isSdkDoc && (
+            {!isSdkDoc && !isQuickstart && (
               <div className={styles.resourcesMobile}>
                 <Link
                   className={styles.socialItem}
@@ -815,6 +821,7 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
+                        QuickStart,
                         DocsCard,
                         DocsCardGroup,
                         h1: (props) => <h4 {...props} />,
@@ -834,7 +841,7 @@ const DocPage = ({
                           } else if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
                             return (
                               <HighlightCodeBlock
-                                language={props.className ? props.className.split('language-').pop() : 'js'}
+                                language={props.className ? (props.className.split('language-').pop() ?? 'js') : 'js'}
                                 text={props.children}
                                 showLineNumbers={false}
                               />
@@ -887,7 +894,7 @@ const DocPage = ({
               )}
             </div>
           </div>
-          {!isSdkDoc && (
+          {!isSdkDoc && !isQuickstart && (
             <div className={styles.rightSection}>
               <PageRightBar title={metadata ? metadata.title : ''} relativePath={relPath ? relPath : ''} />
             </div>
@@ -953,6 +960,69 @@ const DocsCard = ({
       <Typography type="copy2">{children}</Typography>
     </Link>
   )
+}
+
+const QuickStart = (content: { content: QuickStartContent }) => {
+  const { content: c } = content;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+      <Typography onDark type='copy1'>{c.subtitle}</Typography>
+      <div style={{ borderTop: "1px solid #EBFF5E", width: 200 }} />
+      <div style={{ display: "flex", flexDirection: "column", marginTop: 10 }}>
+        {
+          c.entries.map((step: QuickStartStep, i: number) => (
+            <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
+              <div style={{ display: "flex", width: 40, flexDirection: "column" }}>
+                <div style={{
+                  width: 32,
+                  minHeight: 32,
+                  backgroundColor: "#30294E",
+                  borderRadius: 100,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}>{i + 1}</div>
+                <div style={{ width: 16, height: "100%", borderRight: "2px solid #30294E" }}></div>
+              </div>
+              <div style={{ width: "100%", display: "flex", gap: 20, marginBottom: 42 }}>
+                <div style={{ width: "50%", display: "flex", flexDirection: "column", gap: 8 }} className={styles.quickStartSubtext}>
+                  <Typography type='copy2' emphasis>{step.title}</Typography>
+                  <Markdown
+                    options={{
+                      forceBlock: true,
+                      overrides: {
+                        code: (props) => {
+                          return <code className={styles.inlineCodeBlock}>{props.children}</code>
+                        },
+                        ul: (props) => {
+                          return <div>hellooooo</div>
+                        },
+
+
+                      }
+                    }}
+                  >
+                    {step.content}
+                  </Markdown>
+                </div>
+                <div style={{ width: "50%" }}>
+                  {step.code &&
+                    <HighlightCodeBlock
+                      style={{ position: "sticky", top: "80px" }}
+                      language={step.code.language}
+                      text={step.code.text}
+                      showLineNumbers={false}
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+          ))
+        }
+
+      </div>
+    </div>
+  );
 }
 
 export default DocPage

@@ -36,7 +36,7 @@ It's best to start with issues marked as ["good first issue"](https://github.com
 
 ## How do I get started?
 
-You'll want to spin up Highlight locally to get to developing. The best way to do this is by using docker. Check out [the self-hosting instructions](../../2_company/open-source/self-host-hobby.md) for more info.
+You'll want to spin up Highlight locally to get to developing. The best way to do this is by using docker. Check out [the self-hosting instructions](self-host-hobby.md) for more info.
 
 # Code Style
 

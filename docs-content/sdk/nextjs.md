@@ -1,6 +1,7 @@
 ---
 title: Next.JS SDK API Reference
 slug: nextjs
+quickstart: true
 ---
 
 <section className="section">
@@ -12,7 +13,7 @@ slug: nextjs
   </div>
   <div className="right">
     <h6>Just getting started?</h6>
-    <p>Check out our [getting started guide](../general/3_getting-started/backend-sdk/nextjs.md) to get up and running quickly.</p>
+    <p>Check out our [getting started guide](https://google.com) to get up and running quickly.</p>
   </div>
 </section>
 
