@@ -73,10 +73,10 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
           </div>
         </div>
       )}
-      <div className="flex justify-start mb-4">
+      <div className="flex justify-center mb-4">
         <Link href={`${feature.link}`} target="_blank">
           <Typography type="copy3" emphasis={true}>
-            <div className="flex align-middle justify-center gap-2">
+            <div className="flex align-center justify-center gap-2">
               Learn More <ArrowRightIcon height={28} width={28} />
             </div>
           </Typography>
