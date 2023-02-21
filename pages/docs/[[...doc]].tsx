@@ -28,7 +28,7 @@ import DocSelect from '../../components/Docs/DocSelect/DocSelect'
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import { Callout } from '../../components/Docs/Callout/Callout'
 import { CodeBlock } from '../../components/common/CodeBlock/CodeBlock'
-import { quickStartContent, QuickStartContent, QuickStartStep, QuickStartType } from './quickstart-content'
+import { quickStartContent, QuickStartContent, QuickStartStep, QuickStartType } from '../../components/QuickstartContent/QuickstartContent'
 import Markdown from 'markdown-to-jsx'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')

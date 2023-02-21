@@ -12,7 +12,7 @@ import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 export const HighlightCodeBlock = (props: {
   language: string;
-  text: string;
+  text?: string;
   topbar?: boolean;
   showLineNumbers?: boolean;
   product?: any;
@@ -84,7 +84,7 @@ export const HighlightCodeBlock = (props: {
       <div
         className={classNames(styles.codeCopyIcon, `${props.topbar ? "mt-1" : ""}`)}
         onClick={() => {
-          navigator.clipboard.writeText(props.text);
+          navigator.clipboard.writeText(props.text ?? '');
           setCopied(true);
           setTimeout(() => setCopied(false), 1000);
         }}

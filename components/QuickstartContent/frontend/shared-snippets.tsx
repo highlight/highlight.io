@@ -1,4 +1,4 @@
-import { QuickStartStep } from "../quickstart-content"
+import { QuickStartStep } from "../QuickstartContent"
 
 export const packageInstallSnippet: QuickStartStep = {
     title: "Install the npm package & SDK.",

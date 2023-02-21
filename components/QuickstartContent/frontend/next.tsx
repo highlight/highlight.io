@@ -1,5 +1,5 @@
-import { QuickStartContent } from "../quickstart-content";
-import { identifySnippet, initializeSnippet, setupBackendSnippet, verifySnippet } from "./shared-snippets";
+import { QuickStartContent, QuickStartStep } from "../QuickstartContent";
+import { backendInstrumentationLink, identifySnippet, initializeSnippet, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 const ErrorBoundaryCodeSnippet = `import { ErrorBoundary } from '@highlight-run/react';
 
@@ -10,8 +10,8 @@ ReactDOM.render(
     document.getElementById('root')
 );`
 
-export const ReactContent: QuickStartContent = {
-    subtitle: "Learn how to set up highlight.io with your React application.",
+export const NextContent: QuickStartContent = {
+    subtitle: "Learn how to set up highlight.io with your Next (frontend) application.",
     entries: [
         {
             title: "Install the npm package & SDK.",

@@ -1,4 +1,4 @@
-import { QuickStartContent, QuickStartStep } from "../quickstart-content";
+import { QuickStartContent, QuickStartStep } from "../QuickstartContent";
 import { identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 const vueInitSnippet: QuickStartStep = {

@@ -1,4 +1,4 @@
-import { QuickStartContent } from "../quickstart-content";
+import { QuickStartContent } from "../QuickstartContent";
 import { identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 export const OtherContext: QuickStartContent = {

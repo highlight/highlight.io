@@ -1,4 +1,4 @@
-import { QuickStartContent } from "../quickstart-content"
+import { QuickStartContent } from "../QuickstartContent"
 import { identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets"
 
 const angularInitCodeSnippet = `// app.module.ts

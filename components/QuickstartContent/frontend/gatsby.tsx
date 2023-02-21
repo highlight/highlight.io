@@ -1,4 +1,4 @@
-import { QuickStartContent, QuickStartStep } from "../quickstart-content";
+import { QuickStartContent, QuickStartStep } from "../QuickstartContent";
 import { identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 export const initializePluginSnippet: QuickStartStep = {
