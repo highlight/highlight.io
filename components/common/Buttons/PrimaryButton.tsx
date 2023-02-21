@@ -13,7 +13,7 @@ export const PrimaryButton = ({
     <a
       {...props}
       onClick={(e) => {
-        if (props.href?.includes("app.highlight.io/?sign_up=1")) {
+        if (window.gtag && props.href?.includes("app.highlight.io/?sign_up=1")) {
           e.preventDefault();
           if (props.onClick) {
             props.onClick(e);
