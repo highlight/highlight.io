@@ -4,9 +4,6 @@ import classNames from 'classnames';
 
 import styles from './Buttons.module.scss';
 
-function gtag_report_conversion(url) {
-}
-
 export const PrimaryButton = ({
   children,
   ...props
