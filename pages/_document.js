@@ -27,6 +27,7 @@ class HighlightDocument extends Document {
                         });
                         gtag('js', new Date());
                         gtag('config', 'AW-10833687189');
+                        window.gtag = gtag
                     }}/>
                 </Head>
                 <body style={{overflowX: 'hidden'}}>
