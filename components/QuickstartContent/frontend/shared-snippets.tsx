@@ -38,7 +38,7 @@ H.init('<YOUR_PROJECT_ID>', {
 });
 
 ... 
-// rednering code.
+// rendering code.
 
                 `,
         language: "js"

@@ -258,14 +258,4 @@ export default function middleware(req: NextRequest) {
       }
     }
   }
-  // for (var link of old_links) {
-  //   if (pathname.endsWith(link)) {
-  //     link = link.replace(' ', '')
-  //     let split = link.split('/')
-  //     let v = [split[0]].concat(['general'], split.slice(1)).join('/')
-  //     let url = req.nextUrl.origin || 'https://highlight.io/'
-  //     url = url.replace(/\/+$/, '')
-  //     return NextResponse.redirect(`${url}/${v}`, { status: 302 })
-  //   }
-  // }
 }
