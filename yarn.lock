@@ -7005,10 +7005,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dexie@npm:^3.2.2":
-  version: 3.2.2
-  resolution: "dexie@npm:3.2.2"
-  checksum: 7a21079f7ab139ebd724a009917f9293f2b01c341e2a3cd51d2455dda4d4e78b9ca7de0373e963108395cf1921ce7f6556cac967c1e957005a3c7c11794ceccf
+"dexie@npm:^3.2.3":
+  version: 3.2.3
+  resolution: "dexie@npm:3.2.3"
+  checksum: 54fd7bc94364ed601dc2d53f8b488e49ac61d4ec532f001a68fde9ffccb4bf3c6a8af310b41d8f52c94c1a99c0e165437d7b223b655df582ceda90b9bfcd60e7
   languageName: node
   linkType: hard
 
@@ -8682,7 +8682,7 @@ __metadata:
     antd: ^4.24.7
     autoprefixer: ^10.4.13
     classnames: ^2.3.1
-    dexie: ^3.2.2
+    dexie: ^3.2.3
     embla-carousel-react: ^7.0.5
     eslint: 8.28.0
     eslint-config-next: ^13.1.6
