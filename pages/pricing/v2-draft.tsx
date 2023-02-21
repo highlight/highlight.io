@@ -50,8 +50,8 @@ const retentionMultipliers: Record<Retention, number> = {
 	"2 years": 2.5
 } as const
 
-const tierNames = ["Free", "Basic", "Essentials", "Startup"] as const
-type TierName = typeof tierNames[number]
+const tierOptions = ["Free", "Basic", "Essentials", "Startup"] as const
+type TierName = typeof tierOptions[number]
 
 type PricingTier = {
 	basePrice: number,
@@ -95,13 +95,15 @@ const PlanTable = () => {
 }
 
 const PriceCalculator = () => {
-	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>(billingPeriodOptions[0])
-	const [pricingTier, setPricingTier] = useState<TierName>("Basic")
+	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
+	const [tier, setTier] = useState<TierName>("Free")
+	const [retention, setRetention] = useState<Retention>("3 months")
 
 	return <div className="flex gap-10 mx-auto mt-12"> {/* Price calculator */}
 		<div className="flex flex-col w-48 gap-11">
 			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
-			<PricingRadioFilter title="Pricing Tier" options={["Free", "Basic", "Essentials", "Startup"]} />
+			<PricingRadioFilter title="Pricing Tier" options={tierOptions} value={tier} onChange={setTier} />
+			<PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
 		<div className="w-[1100px] flex flex-col items-end">
 			<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
