@@ -52,22 +52,6 @@ export type Feature = {
 //thumbnail needs classname "h-[40px] w-[40px]"
 const features: Feature[] = [
   {
-    title: 'Error Monitoring',
-    description:
-      'Understand the errors and exceptions happening in your web application.',
-    thumbnail: <HiTerminal className="h-[35px] w-[35px]" />,
-    desktopImage: errorMonitoring,
-    mobileImage: tempCarouselImage,
-    right: true,
-    feature1: 'Custom Error Grouping',
-    featureImage1: <HiUserGroup className="h-[20px] w-[20px]" />,
-    feature2: 'Customizable Alerting Rules',
-    featureImage2: <HiViewBoards className="h-[20px] w-[20px]" />,
-    feature3: 'Powered by Open Telemetry',
-    featureImage3: <ExclamationCircleFilled className="h-[20px] w-[20px]" />,
-    link: '/docs/general/product-features/error-monitoring/overview',
-  },
-  {
     title: 'Session Replay',
     description:
       'Get to the real reasons that bugs are happening your web application.',
@@ -84,7 +68,23 @@ const features: Feature[] = [
     link: '/docs/general/product-features/session-replay/overview',
   },
   {
-    title: 'Fullstack Logging',
+    title: 'Error Monitoring',
+    description:
+      'Understand the errors and exceptions happening in your web application.',
+    thumbnail: <HiTerminal className="h-[35px] w-[35px]" />,
+    desktopImage: errorMonitoring,
+    mobileImage: tempCarouselImage,
+    right: true,
+    feature1: 'Custom Error Grouping',
+    featureImage1: <HiUserGroup className="h-[20px] w-[20px]" />,
+    feature2: 'Customizable Alerting Rules',
+    featureImage2: <HiViewBoards className="h-[20px] w-[20px]" />,
+    feature3: 'Powered by Open Telemetry',
+    featureImage3: <ExclamationCircleFilled className="h-[20px] w-[20px]" />,
+    link: '/docs/general/product-features/error-monitoring/overview',
+  },
+  {
+    title: 'Fullstack',
     description: 'Drill down on all the logs emitted throughout your stack.',
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: fullstackLogging,
@@ -142,7 +142,7 @@ export const FeatureCarousel = () => {
         setSelected(emblaApi.selectedScrollSnap())
       })
     }
-    ;(document.getElementById('dropdown') as HTMLSelectElement).value =
+    ; (document.getElementById('dropdown') as HTMLSelectElement).value =
       selected.toString()
   }, [emblaApi, selected])
 
@@ -168,11 +168,10 @@ export const FeatureCarousel = () => {
             )}
           >
             <div
-              className={`${
-                selected == index
-                  ? 'bg-divider-on-dark'
-                  : 'group-hover:bg-divider-on-dark group-hover:bg-opacity-75'
-              } h-full flex justify-center gap-1 px-3 py-2 rounded-lg transition-all`}
+              className={`${selected == index
+                ? 'bg-divider-on-dark'
+                : 'group-hover:bg-divider-on-dark group-hover:bg-opacity-75'
+                } h-full flex justify-center gap-1 px-3 py-2 rounded-lg transition-all`}
             >
               <div className="flex flex-col gap-1">
                 <div className="flex justify-center text-color-copy-on-dark">
