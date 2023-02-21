@@ -24,7 +24,7 @@ export const PrimaryButton = ({
               window.location = props.href;
             }
           };
-          gtag('event', 'conversion', {
+          window.gtag('event', 'conversion', {
             'send_to': 'AW-10833687189/q81TCPDrq40DEJXl860o',
             'event_callback': callback
           });
