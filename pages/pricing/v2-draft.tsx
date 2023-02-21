@@ -41,39 +41,51 @@ const PricingPage: NextPage = () => {
 const billingPeriodOptions = ["Monthly", "Annual"] as const
 type BillingPeriod = typeof billingPeriodOptions[number]
 
+const retentionOptions = ["3 months", "6 months", "12 months", "2 years",] as const
+type Retention = typeof retentionOptions[number]
+const retentionMultipliers: Record<Retention, number> = {
+	"3 months": 1,
+	"6 months": 1.5,
+	"12 months": 2,
+	"2 years": 2.5
+} as const
 
 const tierNames = ["Free", "Basic", "Essentials", "Startup"] as const
 type TierName = typeof tierNames[number]
 
 type PricingTier = {
-	includes: string[],
-	getPriceAndRates(period: BillingPeriod): {
-		price: number,
-		sessions: number,
-		errors: number
-	}
+	basePrice: number,
+	sessions: number,
+	errors: number
 }
 
-
 const priceTiers: Record<TierName, PricingTier> = {
-	"Free": { includes: [], getPriceAndRates: (period) => ({ price: 0, sessions: 500, errors: 1000 }) },
-	"Basic": { includes: [], getPriceAndRates: (period) => ({ price: 50, sessions: 500, errors: 1000 }) },
-	"Essentials": { includes: [], getPriceAndRates: (period) => ({ price: 150, sessions: 500, errors: 1000 }) },
-	"Startup": { includes: [], getPriceAndRates: (period) => ({ price: 400, sessions: 500, errors: 1000 }) },
+	"Free": { basePrice: 0, sessions: 500, errors: 1000 },
+	"Basic": { basePrice: 50, sessions: 2000, errors: 4000 },
+	"Essentials": { basePrice: 150, sessions: 10000, errors: 20000 },
+	"Startup": { basePrice: 400, sessions: 80000, errors: 160000 },
+}
+
+function getBasePrice({ basePrice }: PricingTier, billing: BillingPeriod, retention: Retention) {
+	const billingMultiplier = billing === "Annual" ? 0.8 : 1
+	const retentionMultiplier = retentionMultipliers[retention]
+
+	return basePrice * billingMultiplier * retentionMultiplier
 }
 
 const PlanTable = () => {
-	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>(billingPeriodOptions[0])
+	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
+	const [retentionPeriod, setRetentionPeriod] = useState<Retention>("3 months")
 
-	return <div className="flex flex-col items-center max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
+	return <div className="flex max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
 		<div className="flex flex-col flex-shrink-0 w-48 gap-11">
 			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
-			{/* <PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} /> */}
+			<PricingRadioFilter title="Retention" options={retentionOptions} value={retentionPeriod} onChange={setRetentionPeriod} />
 		</div>
 		<div className="flex flex-col">
 			<div className="flex justify-between w-[1100px]">
 				{Object.entries(priceTiers).map(([name, tier]) =>
-					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} />
+					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retentionPeriod} />
 				)}
 			</div>
 			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#">usage rate</a> kicks in.</Typography>
@@ -132,8 +144,6 @@ const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: strin
 		</span>
 	</div>
 
-
-
 const PricingRadioFilter = <T extends string>({ title, options, value, onChange }: { title: string, options: readonly T[], value?: T, onChange?: (value: T) => void }) => {
 	return <RadioGroup value={value} onChange={onChange} className="border rounded-lg border-divider-on-dark">
 		<RadioGroup.Label className="block px-3 py-1 text-center border-b border-divider-on-dark">
@@ -152,18 +162,16 @@ const PricingRadioFilter = <T extends string>({ title, options, value, onChange 
 	</RadioGroup>
 }
 
-const PriceItem = ({ name, tier, billingPeriod = "Monthly" }: { name: string, tier: PricingTier, billingPeriod?: BillingPeriod }) => {
-	const { price, sessions, errors } = tier.getPriceAndRates(billingPeriod)
-	const periodShort = billingPeriod === "Annual" ? "yr" : "mo"
-
+const PriceItem = ({ name, tier, billingPeriod, retention }: { name: string, tier: PricingTier, billingPeriod: BillingPeriod, retention: Retention }) => {
+	const { basePrice, sessions, errors } = tier
 
 	return <div className="flex flex-col w-64 border rounded-md border-divider-on-dark">
 		<div className="p-5 border-b border-divider-on-dark">
 			<Typography type="copy1" emphasis>{name}</Typography>
 			<div className="flex items-end mt-2">
 				<Typography type="copy3" emphasis className="self-start align-super">$</Typography>
-				<span className="mx-1 text-5xl font-semibold">{price}</span>
-				<Typography type="copy3">/ {periodShort}</Typography>
+				<span className="mx-1 text-5xl font-semibold">{getBasePrice(tier, billingPeriod, retention)}</span>
+				<Typography type="copy3">/ mo</Typography>
 			</div>
 		</div>
 		<div className="p-5 flex flex-col gap-2.5 flex-grow">
