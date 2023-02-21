@@ -842,7 +842,7 @@ const DocPage = ({
                           } else if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
                             return (
                               <HighlightCodeBlock
-                                language={props.className ? props.className.split('language-').pop() : 'js'}
+                                language={props.className ? (props.className.split('language-').pop() ?? 'js') : 'js'}
                                 text={props.children}
                                 showLineNumbers={false}
                               />

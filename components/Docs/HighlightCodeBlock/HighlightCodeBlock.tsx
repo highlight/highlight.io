@@ -10,14 +10,14 @@ import classNames from 'classnames';
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
-export const HighlightCodeBlock = (props: PropsWithChildren<{
+export const HighlightCodeBlock = (props: {
   language: string;
   text: string;
   topbar?: boolean;
   showLineNumbers?: boolean;
   product?: any;
   style?: CSSProperties;
-}>) => {
+}) => {
   const [copied, setCopied] = useState(false);
   const [selected, setSelected] = useState(0);
   return (
