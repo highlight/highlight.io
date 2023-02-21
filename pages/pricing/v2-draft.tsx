@@ -25,7 +25,7 @@ const PricingPage: NextPage = () => {
 				</div>
 			</div>
 			<PlanTable />
-			<div className="flex flex-col items-center mt-32 text-center gap-9"> {/* Pay as you go */}
+			<div className="flex flex-col items-center mt-32 text-center gap-9" id="overage"> {/* Pay as you go */}
 				<h2>Pay <span className="text-highlight-yellow">as you go.</span></h2>
 				<Typography type="copy1" onDark className="max-w-4xl">Each of our plans comes with a pre-defined usage quota, and if you exceed that quota, we charge an additional fee. For custom plans, <a href="#">reach out to us</a>.</Typography>
 			</div>
@@ -88,7 +88,7 @@ const PlanTable = () => {
 					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retentionPeriod} />
 				)}
 			</div>
-			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#">usage rate</a> kicks in.</Typography>
+			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#overage">usage rate</a> kicks in.</Typography>
 		</div>
 		<div className="flex-shrink w-48" />
 	</div>
