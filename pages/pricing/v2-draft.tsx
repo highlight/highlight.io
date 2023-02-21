@@ -75,17 +75,17 @@ function getBasePrice({ basePrice }: PricingTier, billing: BillingPeriod, retent
 
 const PlanTable = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
-	const [retentionPeriod, setRetentionPeriod] = useState<Retention>("3 months")
+	const [retention, setRetention] = useState<Retention>("3 months")
 
 	return <div className="flex max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
 		<div className="flex flex-col flex-shrink-0 w-48 gap-11">
 			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
-			<PricingRadioFilter title="Retention" options={retentionOptions} value={retentionPeriod} onChange={setRetentionPeriod} />
+			<PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
 		<div className="flex flex-col">
 			<div className="flex justify-between w-[1100px]">
 				{Object.entries(priceTiers).map(([name, tier]) =>
-					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retentionPeriod} />
+					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retention} />
 				)}
 			</div>
 			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#overage">usage rate</a> kicks in.</Typography>
