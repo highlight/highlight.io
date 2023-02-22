@@ -13,21 +13,21 @@ yarn add highlight.run`,
     }
 }
 
-export const sessionReplayFeaturesLink = "/docs/general/product-features/session-replay/overview"
-export const identifyingUsersLink = "/docs/general/product-features/session-replay/identifying-sessions"
+export const sessionReplayFeaturesLink = "/docs/getting-started/client-sdk/replay-configuration/overview"
+export const identifyingUsersLink = "/docs/getting-started/client-sdk/replay-configuration/identifying-sessions"
 export const backendInstrumentationLink = "/docs/getting-started/overview#For-your-backend"
+export const fullstackMappingLink = "/docs/getting-started/frontend-backend-mapping"
 
 export const initializeSnippet: QuickStartStep = {
     title: "Initialize the SDK in your frontend.",
     content: `Grab your project ID from [app.highlight.io/setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\`.  
-                    To get started, we recommend setting \`environment\`, \`appVersion\`, and \`networkRecording\`. Refer to our docs on [SDK configuration](${sessionReplayFeaturesLink}) to read more about these options. `,
+                    To get started, we recommend setting \`tracingOrigins\` and \`networkRecording\` so that highlight.io can pass a header to pair frontend/backend errors . Refer to our docs on [SDK configuration](${sessionReplayFeaturesLink}) and [Fullstack Mapping](${fullstackMappingLink}) to read more about these options.`,
     code: {
         text: `...
 import { H } from 'highlight.run';
 
 H.init('<YOUR_PROJECT_ID>', {
-    environment: 'production',
-    appVersion: 'commit:abcdefg12345',
+    tracingOrigins: true,
 	networkRecording: {
 		enabled: true,
 		recordHeadersAndBody: true,

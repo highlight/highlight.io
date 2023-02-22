@@ -1,0 +1,78 @@
+import { QuickStartContent } from "../QuickstartContent"
+import { identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "../frontend/shared-snippets"
+import language from "react-syntax-highlighter/dist/esm/languages/hljs/1c"
+
+const angularInitCodeSnippet = `// app.module.ts
+    import { NgModule } from '@angular/core';
+...
+
+import { H } from 'highlight.run';
+
+H.init('<YOUR_PROJECT_ID>', {
+    environment: 'production',
+    appVersion: 'commit:abcdefg12345',
+	networkRecording: {
+		enabled: true,
+		recordHeadersAndBody: true,
+        urlBlocklist: [
+            // insert urls you don't want to record here
+        ],
+	},
+});
+
+@NgModule({
+    ...
+})
+export class AppModule { }
+`
+
+export const SelfHostContent: QuickStartContent = {
+    subtitle: "Learn how to set up highlight.io with your Angular application.",
+    entries: [
+        {
+            title: "Prerequisites",
+            content: "Before we get started, you should have the latest version of [docker](https://docs.docker.com/engine/install/) (19.03.0+) and [git](https://git-scm.com/downloads) (2.13+) installed. For a local deploy, we suggest [configuring docker](https://docs.docker.com/desktop/settings/mac/#resources) to use at least 16GB of memory and 4 CPUs.",
+        },
+        {
+            title: "Clone the repository.",
+            content: "Clone the [highlight.io](https://github.com/highlight/highlight) repository and make sure to checkout the submodules with the `--recurse-submodules` flag.",
+            code: {
+                text: `git clone --recurse-submodules https://github.com/highlight/highlight`,
+                language: "bash",
+            },
+        },
+        {
+            title: "Enter the `highlight/docker` directory.",
+            content: "Navigate into the `highlight/docker` directory of the repo.",
+            code: {
+                text: `cd highlight/docker`,
+                language: "bash",
+            },
+        },
+        {
+            title: "Start the docker comose containers.",
+            content: "In the `highlight/docker` directory, run `docker compose up --build -d` to start the docker containers.",
+            code: {
+                text: `docker compose up --build -d`,
+                language: "bash",
+            },
+        },
+        {
+            title: "Visit the dashboard.",
+            content: "Visit https://localhost:3000 to view the dashboard; there are no login credentials required.",
+        },
+        {
+            title: "Setup the snippet.",
+            content: "In your frontend application, you should setup highlight.io as usual (see [our guides](https://highlight.io/docs/getting-started/overview#For-your-frontend)), with the exeption of adding the `backendUrl` flag to your `init()` method. See the example in react to the right. ",
+            code: {
+                text: `import { H } from 'highlight.run';
+
+H.init('<YOUR_PROJECT_ID>', {
+    backendUrl: 'https://localhost:3000',
+    ...
+});`,
+                language: "javascript",
+            },
+        }
+    ]
+}

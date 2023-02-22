@@ -11,4 +11,4 @@ Interested in deploying Highlight to your own VPC at a larger scale than the [ho
 
 ## Pricing
 
-Pricing for our self-hosted deployment starts at $3k / month. Contact us at sales@highlight.io, or message us [on discord](https://community.highlight.io) to get in touch.
+Pricing for our self-hosted enterprise deployment starts at $3k / month. Contact us at jay@highlight.io, or message us [on discord](https://community.highlight.io) to get in touch.
