@@ -11,7 +11,7 @@ updatedAt: 2022-08-18T22:36:12.000Z
 
 <DocsCardGroup>
     <DocsCard title="Get Started" href="../getting-started/1_overview.md">
-        {"Get started with highlight.io. Instrument you frontend & backend."}
+        {"Get started with highlight.io. Instrument your frontend & backend."}
     </DocsCard>
 </DocsCardGroup>
 
