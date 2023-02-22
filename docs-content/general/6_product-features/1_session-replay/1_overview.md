@@ -11,6 +11,12 @@ Session replay gives your team visibility into how people use your web app and i
 Read more about the feature we support in Session Replay below:
 
 <DocsCardGroup>
+    <DocsCard title="Shadow DOM & Web Components."  href="./shadow-dom-web-components.md">
+        {"Support for Shadow DOM & Web Components"}
+    </DocsCard>
+    <DocsCard title="Proxying through your domain."  href="./canvas-iframe.md">
+        {"Support for proxying highlight.io requests through your domain."}
+    </DocsCard>
     <DocsCard title="Canvas & Iframe Recording."  href="./canvas-iframe.md">
         {"Support for Canvas & Iframe Recording"}
     </DocsCard>
