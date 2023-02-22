@@ -84,7 +84,7 @@ const features: Feature[] = [
     link: '/docs/general/product-features/error-monitoring/overview',
   },
   {
-    title: 'Fullstack Logging',
+    title: 'Logging',
     description: 'Drill down on all the logs emitted throughout your stack.',
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: fullstackLogging,
