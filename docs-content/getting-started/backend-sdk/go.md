@@ -7,6 +7,7 @@ updatedAt: 2022-04-06T20:22:54.000Z
 
 Highlight supports several server frameworks written in Go.
 
+`99designs/gqlgen`
 `gin-gonic/gin`
 `go-chi/chi`
 `gofiber/fiber`
@@ -134,15 +135,38 @@ func main() {
 }
 ```
 
-## Instrumenting Handlers
+## 99designs gqlgen
 
-Great! Now we've configured the highlight client and can track sessions from the frontend to the backend. All we need to do now is instrument our backend code to transmit events or errors where relevant.
+```go
+package main
+
+import (
+	ghandler "github.com/99designs/gqlgen/graphql/handler"
+	H "github.com/highlight/highlight/sdk/highlight-go"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+	
+	server := ghandler.New(...)
+	server.Use(H.NewGraphqlTracer(string(util.PrivateGraph)))	
+}
+```
+
+## Verifying
+
+Great! Now that you've set up the Middleware, verify that the backend error handling works by consuming an error from your handler.
+If you are using `99designs/gqlgen`, this is as easy as having a resolver return an error.
+If you are using `gofiber`, this is as easy as having a route handler return an error.
+With simpler HTTP frameworks, you'll need to manually `highlight.ConsumeError`, as in the following example for `chi`.
 
 ```go
 
 package main
 
-// with chi
+// go chi example
 import (
 	"errors"
 	"github.com/go-chi/cors"
@@ -180,43 +204,5 @@ func PingHandler(w http.ResponseWriter, r *http.Request) {
 		highlight.ConsumeError(r.Context(), errors.New("a health check failure occured!"))
 	}
 	w.Write([]byte("welcome"))
-}
-
-// with gin
-import (
-	"errors"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
-	"github.com/highlight/highlight/sdk/highlight-go"
-	highlightGin "github.com/highlight/highlight/sdk/highlight-go/middleware/gin"
-)
-
-func main() {
-	highlight.Start()
-	defer highlight.Stop()
-	highlight.SetProjectID("YOUR_PROJECT_ID")
-
-	r := gin.Default()
-	r.Use(highlightGin.Middleware())
-	// setup cors if necessary for your frontend
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:3001"},
-		AllowHeaders: []string{"X-Highlight-Request"},
-	}))
-
-	r.GET("/ping", PingHandler)
-	r.Run("0.0.0.0:8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-}
-
-var appHealthy = false
-
-func PingHandler(c *gin.Context) {
-	// we can instrument our handlers directly to record events or error
-	if !appHealthy {
-		highlight.ConsumeError(c, errors.New("a health check failure occured!"))
-	}
-	c.JSON(200, gin.H{
-		"message": "Hello, World!",
-	})
 }
 ```
