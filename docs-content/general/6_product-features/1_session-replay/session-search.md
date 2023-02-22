@@ -7,7 +7,7 @@ updatedAt: 2022-09-12T16:18:46.000Z
 
 # Searching by Identifier
 
-In [highlight.io](https://highlight.io), you can search for a session by any of the data you send us (via the SDK) throughout a session. The data you send us can be in the form of [track](../../../getting-started/3_client-sdk/replay-configuration/tracking-events.md) or [identify](../../../getting-started/3_client-sdk/replay-configuration/identifying-sessions.md) calls.
+In [highlight.io](https://highlight.io), you can search for a session by any of the data you send us (via the SDK) throughout a session. The data you send us can be in the form of [track](../../../getting-started/3_client-sdk/2_replay-configuration/tracking-events.md) or [identify](../../../getting-started/3_client-sdk/2_replay-configuration/identifying-sessions.md) calls.
 
 # Searching by User Clicks
 
