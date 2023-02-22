@@ -7,7 +7,7 @@ updatedAt: 2022-07-19T21:02:40.000Z
 
 To tag sessions with user-specific identifiers (name, email, etc.), you can call the [`H.identify()`](../../../sdk/client.md#Hinit)method in your app. This will automatically index your sessions so that they can be filtered by these attributes.
 
-```none
+```typescript
 H.identify(
   "eliza@corp.com",
   { id: "ajdf837dj", phone: "867-5309" }
