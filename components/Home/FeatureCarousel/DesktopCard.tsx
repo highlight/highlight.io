@@ -25,7 +25,7 @@ const DesktopImage = ({ feature }: { feature: Feature }) => {
 
 const DesktopFeatures = ({ feature }: { feature: Feature }) => {
   return (
-    <div className="flex flex-col justify-between h-full sm:w-1/2 md:w-2/3 px-5">
+    <div className={`${feature.code ? "md:w-1/2" : "md:w-2/3"} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
       <div className="flex flex-col gap-4 justify-start md:pt-8 text-left">
         <div className="flex flex-col gap-2">
           <h5 className="hidden sm:flex">{feature.title}</h5>
