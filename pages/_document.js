@@ -20,10 +20,8 @@ class HighlightDocument extends Document {
                     />
                     <Script id="google-analytics" strategy="afterInteractive">
                     {`
-                        window.dataLayer = window.dataLayer || [];
-
                         function gtag() {
-                            dataLayer.push(arguments);
+                            (window.dataLayer || []).push(arguments);
                         }
 
                         gtag('set', 'linker', {
