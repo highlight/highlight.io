@@ -17,7 +17,6 @@ const old_links = [
   'docs/company/open-source/self-host-enterprise',
   'docs/company/open-source/self-host-hobby',
   'docs/company/values',
-  'docs/getting-started/overview',
   'docs/getting-started/frontend-backend-mapping',
   'docs/getting-started/backend-sdk/overview',
   'docs/getting-started/backend-sdk/express',
@@ -159,7 +158,6 @@ export const DOCS_REDIRECTS = {
   'express-backend': '/docs/getting-started/backend-sdk/nextjs',
   'front-plugin': '/docs/integrations/front-plugin',
   'frontend-observability': '/docs/product-features/frontend-observability',
-  'getting-started/client-sdk/reactjs': '/docs/general/getting-started/client-sdk/react-js/overview',
   'go-backend': '/docs/getting-started/backend-sdk/go',
   'grouping-errors': '/docs/error-monitoring/grouping-errors',
   'html-iframe-recording': '/docs/session-replay/html-iframe-recording',
@@ -227,7 +225,6 @@ export const DOCS_REDIRECTS = {
   nextjs: '/docs/getting-started/client-sdk/nextjs',
   other: '/docs/getting-started/client-sdk/other',
   privacy: '/docs/session-replay/privacy',
-  reactjs: '/docs/getting-started/client-sdk/reactjs',
   segments: '/docs/product-features/segments',
   shopify: '/docs/getting-started/client-sdk/shopify',
   sourcemaps: '/docs/error-monitoring/sourcemaps',
@@ -257,18 +254,8 @@ export default function middleware(req: NextRequest) {
       if (pathname === `/docs/${k}`) {
         let url = req.nextUrl.origin || 'https://highlight.io/'
         url = url.replace(/\/+$/, '')
-        return NextResponse.redirect(`${url}${v}`, { status: 301 })
+        return NextResponse.redirect(`${url}${v}`, { status: 302 })
       }
-    }
-  }
-  for (var link of old_links) {
-    if (pathname.endsWith(link)) {
-      link = link.replace(' ', '')
-      let split = link.split('/')
-      let v = [split[0]].concat(['general'], split.slice(1)).join('/')
-      let url = req.nextUrl.origin || 'https://highlight.io/'
-      url = url.replace(/\/+$/, '')
-      return NextResponse.redirect(`${url}/${v}`, { status: 302 })
     }
   }
 }

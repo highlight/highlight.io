@@ -13,7 +13,7 @@ with no impact on performance..
   </div>
   <div className="right">
     <h6>Just getting started?</h6>
-    <p>Check out our [getting started guide](../general/3_getting-started/backend-sdk/cloudflare.md) to get up and running quickly.</p>
+    <p>Check out our [getting started guide](../getting-started/backend-sdk/cloudflare.md) to get up and running quickly.</p>
   </div>
 </section>
 

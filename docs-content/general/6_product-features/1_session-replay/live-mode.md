@@ -5,9 +5,7 @@ createdAt: 2022-03-21T18:28:39.000Z
 updatedAt: 2022-03-21T23:31:09.000Z
 ---
 
-When you use Highlight's Live Mode, the Session Viewer shows the latest data from users' sessions. It is enabled by default on sessions currently 'live' - eg. when a user is still on the page and sending session data.
-
-![Playback controls for a live session](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/rkMGsKiU5WGQ-uVhEW9Wo_screenshot-from-2022-03-21-16-29-23.png)
+[highlight.io](https://highlight.io) supports tracking users in real-time as they user your web application. When you use highlight.io's Live Mode, the session viewer shows the latest data from users' sessions. It is enabled by default on sessions currently 'live' - eg. when a user is still on the page and sending session data.
 
 While you can view how a session looks to a user in real time, note that some events haven't been processed and will not be visible. Errors, console logs, and network traffic will only be visible when Live Mode is disabled, up to what's most recently processed. In Live Mode, time-scrubbing is disabled since you're always seeing the latest session view.
 

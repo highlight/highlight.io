@@ -5,9 +5,9 @@ createdAt: 2022-05-06T23:05:46.000Z
 updatedAt: 2022-09-12T16:18:46.000Z
 ---
 
-Highlight records [Tracking Events](../1_session-replay/tracking-events.md) and other metadata about sessions to make them easy to search and filter. Start with the `Quick Search` that will find the best matches depending on what you're looking for and customize your query further in the panel above the sessions feed.
+# Searching by Identifier
 
-![Quick Search Input.](https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/l6Fxtyklubv4aEFnGY6-b_image.png)
+In [highlight.io](https://highlight.io), you can search for a session by any of the data you send us (via the SDK) throughout a session. The data you send us can be in the form of [track](../../../getting-started/3_client-sdk/7_replay-configuration/tracking-events.md) or [identify](../../../getting-started/3_client-sdk/7_replay-configuration/identifying-sessions.md) calls.
 
 # Searching by User Clicks
 

@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import GitHubButton from 'react-github-btn'
 import CrossIcon from '../../public/images/CrossIcon'
 import { motion } from 'framer-motion'
 import styles from './GithubPopup.module.scss'
 import { useMediaQuery } from '../MediaQuery/MediaQuery'
+
 import { AnimateIn } from '../Animate'
 
 export const GithubPopup = () => {
