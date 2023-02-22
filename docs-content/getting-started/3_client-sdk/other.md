@@ -1,6 +1,6 @@
 ---
 title: Other
-heading: Using highlight.io in any framework
+heading: Using highlight.io in any frontend framework
 slug: other
 quickstart: true
 ---
