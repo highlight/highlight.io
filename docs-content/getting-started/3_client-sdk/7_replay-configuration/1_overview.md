@@ -3,7 +3,7 @@ title: Overview
 slug: welcome-to-highlight
 ---
 
-Our javascript SDK does a lot of things. Here's some docs on what the SDK supports.
+The [highlight.io](https://highlight.io) Javascript SDK does a lot of things. Here's some docs on how to configure it to do what you want.
 
 <DocsCardGroup>
     <DocsCard title="Canvas Recording." href="./canvas.md">
@@ -28,6 +28,9 @@ Our javascript SDK does a lot of things. Here's some docs on what the SDK suppor
         {"How to redact and strip out sensitive data in a highlight.io session."}
     </DocsCard>
     <DocsCard title="Proxying requests."  href="./proxying-highlight.md">
+        {"How to proxy requests through your backend for security purposes."}
+    </DocsCard>
+    <DocsCard title="React Error Boundary"  href="">
         {"How to proxy requests through your backend for security purposes."}
     </DocsCard>
 </DocsCardGroup>
