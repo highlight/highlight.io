@@ -8,7 +8,11 @@ import errorMonitoring from '../../../public/images/error-monitoring.png'
 import fullstackLogging from '../../../public/images/fullstack-logging.png'
 import selfHosting from '../../../public/images/docker.png'
 import openSource from '../../../public/images/open-source.png'
-import tempCarouselImage from '../../../public/images/tempCarouselImage.png'
+import githubscreenshot from '../../../public/images/githubscreenshot.png'
+import dockerscreenshot from '../../../public/images/dockerscreenshot.png'
+import loggingscreenshot from '../../../public/images/loggingscreenshot.png'
+import monitoringscreenshot from '../../../public/images/monitoringscreenshot.png'
+import sessionscreenshot from '../../../public/images/sessionscreenshot.png'
 import useEmblaCarousel from 'embla-carousel-react'
 import {
   HiTerminal,
@@ -32,6 +36,7 @@ import { AiFillGithub } from 'react-icons/ai'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 
 export type Feature = {
+  name: string
   title: string
   description: string
   thumbnail: JSX.Element
@@ -52,12 +57,13 @@ export type Feature = {
 //thumbnail needs classname "h-[35px] w-[35px]"
 const features: Feature[] = [
   {
+    name: 'Session Replay',
     title: 'Session Replay',
     description:
       'Understand the real reason why bugs are happening in your web application.',
     thumbnail: <HiFilm className="h-[35px] w-[35px]" />,
     desktopImage: sessionReplay,
-    mobileImage: tempCarouselImage,
+    mobileImage: sessionscreenshot,
     right: true,
     feature1: 'Console and Network Recording',
     featureImage1: <HiTerminal className="h-[20px] w-[20px]" />,
@@ -68,12 +74,13 @@ const features: Feature[] = [
     link: '/docs/general/product-features/session-replay/overview',
   },
   {
+    name: 'Error Monitoring',
     title: 'Error Monitoring',
     description:
       'Get notified of the exceptions across your app before they become problematic.',
     thumbnail: <HiTerminal className="h-[35px] w-[35px]" />,
     desktopImage: errorMonitoring,
-    mobileImage: tempCarouselImage,
+    mobileImage: monitoringscreenshot,
     right: true,
     feature1: 'Custom Error Grouping',
     featureImage1: <HiUserGroup className="h-[20px] w-[20px]" />,
@@ -84,11 +91,12 @@ const features: Feature[] = [
     link: '/docs/general/product-features/error-monitoring/overview',
   },
   {
+    name: 'Logging',
     title: 'Logging',
     description: 'Drill down on all the logs being written throughout your stack to uncover issues.',
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: fullstackLogging,
-    mobileImage: tempCarouselImage,
+    mobileImage: loggingscreenshot,
     right: true,
     feature1: 'Customizable Log Alerts',
     featureImage1: <HiBell className="h-[20px] w-[20px]" />,
@@ -96,15 +104,16 @@ const features: Feature[] = [
     featureImage2: <HiCode className="h-[20px] w-[20px]" />,
     feature3: 'Powered by Clickhouse',
     featureImage3: <HiDatabase className="h-[20px] w-[20px]" />,
-    link: '/docs/general/product-features/session-replay/overview',
+    link: '/docs/general/product-features/logging/overview',
   },
   {
-    title: 'Self-Hosting',
+    name: 'Self-Hosting',
+    title: 'Self-Hosting highlight.io',
     description:
       'Interested in self-hosting highlight? Spin up highlight.io in docker with just a few commands.',
     thumbnail: <HiCloudDownload className="h-[35px] w-[35px]" />,
     desktopImage: selfHosting,
-    mobileImage: tempCarouselImage,
+    mobileImage: dockerscreenshot,
     right: true,
     code: [
       `git clone --recurse-submodules https://github.com/highlight/highlight;`,
@@ -114,12 +123,13 @@ const features: Feature[] = [
     link: '/docs/general/company/open-source/self-host-hobby',
   },
   {
-    title: 'Open Source',
+    name: 'Open Source',
+    title: "We're Open Source!",
     description:
       'highlight.io is an open source tool for debugging your web application.',
     thumbnail: <AiFillGithub className="h-[35px] w-[35px]" />,
     desktopImage: openSource,
-    mobileImage: tempCarouselImage,
+    mobileImage: githubscreenshot,
     right: true,
     feature1: 'Join the Community',
     featureImage1: <HiPresentationChartLine className="h-[20px] w-[20px]" />,
@@ -182,7 +192,7 @@ export const FeatureCarousel = () => {
                   className="text-center"
                   emphasis={true}
                 >
-                  {feature.title}
+                  {feature.name}
                 </Typography>
               </div>
             </div>
@@ -209,7 +219,7 @@ export const FeatureCarousel = () => {
             >
               {features.map((feature, index) => (
                 <option key={index} value={index}>
-                  {feature.title}
+                  {feature.name}
                 </option>
               ))}
             </select>
