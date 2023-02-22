@@ -18,3 +18,6 @@ If you're building software in today’s, you want to focus on building software
 
 ## We execute quickly and fail fast.
 Given that most of the things we build are zero to one, there's often no better way to learn than to build. It's hard to predict how something will scale or be interacted w/ without building something and just shipping it. The only caveat here are processes/work that could affect our customers' software (e.g. building & testing client sdks).
+
+## ABC: Always be chilling....
+![](/images/ohyeah.gif)
