@@ -7,8 +7,10 @@ updatedAt: 2022-04-06T20:22:54.000Z
 
 Highlight supports several server frameworks written in Go.
 
-`go-chi/chi`
 `gin-gonic/gin`
+`go-chi/chi`
+`gofiber/fiber`
+`gorilla/mux`
 
 # Usage
 
@@ -41,31 +43,84 @@ This configures highlight to transmit any relevant events or errors as they may 
 
 Add the following middleware to your router:
 
+##### Go Gin
+
 ```go
-// with chi
-import (
-	highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
-)
+package main
 
-func main() {
-	//...
-	r := chi.NewRouter()
-	r.Use(highlightChi.Middleware)
-	//...
-}
-
-// with gin
 import (
+	H "github.com/highlight/highlight/sdk/highlight-go"
 	highlightGin "github.com/highlight/highlight/sdk/highlight-go/middleware/gin"
 )
 
 func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
 	//...
 	r := gin.Default()
 	r.Use(highlightGin.Middleware())
 	//...
 }
 
+```
+
+##### Go Chi
+
+```go
+package main
+
+import (
+	H "github.com/highlight/highlight/sdk/highlight-go"
+	highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+	//...
+	r := chi.NewRouter()
+	r.Use(highlightChi.Middleware)
+	//...
+}
+```
+
+##### Go Fiber
+
+```go
+package main
+
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	H "github.com/highlight/highlight/sdk/highlight-go"
+	highlightFiber "github.com/highlight/highlight/sdk/highlight-go/middleware/fiber"
+	"log"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+
+	app := fiber.New()
+	app.Use(logger.New())
+	app.Use(highlightFiber.Middleware())
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
+
+	log.Fatal(app.Listen(":3456"))
+}
+
+```
+
+##### Gorilla Mux
+
+```go
+// TODO(vkorolik)
 ```
 
 ## Instrumenting Handlers

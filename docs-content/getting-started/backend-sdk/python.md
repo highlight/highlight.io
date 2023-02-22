@@ -43,7 +43,7 @@ from highlight_io.integrations.flask import FlaskIntegration
 
 app = Flask(__name__)
 H = highlight_io.H(
-    "YOUR-PROJECT-ID", integrations=[FlaskIntegration()], record_logs=True
+    "YOUR_PROJECT_ID", integrations=[FlaskIntegration()], record_logs=True
 )
 ```
 
@@ -55,7 +55,7 @@ Import the Django integration in your `settings.py` file.
 import highlight_io
 from highlight_io.integrations.django import DjangoIntegration
 
-H = highlight_io.H("YOUR-PROJECT-ID", integrations=[DjangoIntegration()], record_logs=True)
+H = highlight_io.H("YOUR_PROJECT_ID", integrations=[DjangoIntegration()], record_logs=True)
 ```
 
 ## Adding Highlight to Azure Functions
@@ -69,7 +69,7 @@ import azure.functions as func
 import highlight_io
 from highlight_io.integrations.azure import observe_handler
 
-H = highlight_io.H("YOUR-PROJECT-ID", record_logs=True)
+H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 
 
 @observe_handler
