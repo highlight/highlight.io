@@ -5,23 +5,13 @@ createdAt: 2022-04-01T20:28:14.000Z
 updatedAt: 2022-04-15T02:07:22.000Z
 ---
 
-# Running Highlight
+## Our Hobby Self-hosted Deployment
 
-To run our app locally, head to our [github repo](https://github.com/highlight/highlight) and clone the repository. Then follow the steps below.
+Interested in deploying highlight.io on your local machine or on a small remote instance? You're in the right place. Here's a [walkthrough](../../../getting-started/self-host/self-hosted-hobby-guide.md) on getting this set up
 
-## Docker Compose
+## Pricing
 
-```shell
-# ensure git submodules are cloned
-git submodule update --init --recursive
-cd docker
-docker compose up -d --build
-```
-
-After a brief frontend load time, the app should be accessible at https://localhost:3000
-
-For deploying on Linux with Docker, we recommend having at least 16 CPU cores, 32GB RAM, 256GB disk.
-Reach out to our [community](https://community.highlight.io/) with any questions!
+Pricing for our self-hosted enterprise deployment starts at $3k / month. Contact us at jay@highlight.io, or message us [on discord](https://community.highlight.io) to get in touch.
 
 # Limitations
 
