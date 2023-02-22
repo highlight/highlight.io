@@ -14,7 +14,7 @@ const DesktopImage = ({ feature }: { feature: Feature }) => {
         className={`absolute bottom-0 ${feature.right ? 'right-0' : 'left-0'}`}
       >
         <Image
-          className="object-contain sm:w-[330px] md:w-[350px] lg:w-[395px] xl:w-[450px] "
+          className="object-contain sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px] "
           src={feature.desktopImage}
           alt="Feature Spotlight"
         />
@@ -26,7 +26,7 @@ const DesktopImage = ({ feature }: { feature: Feature }) => {
 const DesktopFeatures = ({ feature }: { feature: Feature }) => {
   return (
     <div className="flex flex-col gap-4 justify-start md:pt-8 xl:pt-16 text-left w-full sm:w-1/2 px-5 lg:px-16">
-      <div className="flex flex-col md:gap-2">
+      <div className="flex flex-col gap-2">
         <h5 className="hidden sm:flex">{feature.title}</h5>
         <h4 className="sm:hidden">{feature.title}</h4>
         <Typography type="copy3">{feature.description}</Typography>
@@ -73,7 +73,7 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
           </div>
         </div>
       )}
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center sm:justify-start mb-4">
         <Link href={`${feature.link}`} target="_blank">
           <Typography type="copy3" emphasis={true}>
             <div className="flex align-center justify-center gap-2">
@@ -97,19 +97,21 @@ export const DesktopCard = (props: { feature: Feature; index: number }) => {
   return (
     <div
       key={props.index}
-      className="relative flex w-full lg:h-[450px] xl:h-[525px] md:border-[1px] border-divider-on-dark xl:rounded-br-lg xl:rounded-bl-lg flex-shrink-0 snap-always snap-center"
+      className="relative flex w-full md:h-[425px] lg:h-[525px] md:border-[1px] border-divider-on-dark flex-shrink-0 snap-always snap-center xl:rounded-br-lg xl:rounded-bl-lg"
     >
-      {props.feature.right ? (
-        <>
-          <DesktopFeatures feature={props.feature} />
-          <DesktopImage feature={props.feature} />
-        </>
-      ) : (
-        <>
-          <DesktopImage feature={props.feature} />
-          <DesktopFeatures feature={props.feature} />
-        </>
-      )}
+      <div className="mx-5 py-8 border-[1px] sm:border-none border-divider-on-dark rounded-lg">
+        {props.feature.right ? (
+          <>
+            <DesktopFeatures feature={props.feature} />
+            <DesktopImage feature={props.feature} />
+          </>
+        ) : (
+          <>
+            <DesktopImage feature={props.feature} />
+            <DesktopFeatures feature={props.feature} />
+          </>
+        )}
+      </div>
     </div>
   )
 }

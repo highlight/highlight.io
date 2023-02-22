@@ -162,11 +162,7 @@
 }
 
 .gradientText {
-  background: -webkit-linear-gradient(
-    135deg,
-    var(--color-yellow-300),
-    var(--color-yellow-600)
-  );
+  background: -webkit-linear-gradient(135deg, var(--color-yellow-300), var(--color-yellow-600));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -1256,5 +1252,13 @@
     .ctaContainer {
       padding: 0 !important;
     }
+  }
+
+  .landingAnchorHead {
+    width: 100vw;
+    margin-left: var(--size-medium);
+    margin-right: var(--size-medium);
+    font-size: 44px;
+    line-height: 48px !important;
   }
 }

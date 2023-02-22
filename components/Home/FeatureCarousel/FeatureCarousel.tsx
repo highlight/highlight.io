@@ -189,6 +189,7 @@ export const FeatureCarousel = () => {
           </div>
         ))}
       </div>
+      <Typography type="copy4" className="md:hidden mb-3 text-copy-on-light">Explore Our Features</Typography>
       <div className="relative flex md:hidden justify-center mx-5 mb-8 rounded-lg">
         <PrimaryButton
           className={classNames(
@@ -216,8 +217,8 @@ export const FeatureCarousel = () => {
         </PrimaryButton>
         <HiChevronDown className="absolute text-color-copy-on-dark h-[20px] w-[20px] top-4 right-5" />
       </div>
-      <div className="w-screen lg:w-full" ref={emblaRef}>
-        <div className="flex scrollbar-hide lg:gap-4">
+      <div className="w-full" ref={emblaRef}>
+        <div className="flex scrollbar-hide md:gap-4">
           {features.map((feature, index) => (
             <DesktopCard key={index} feature={feature} index={index} />
           ))}

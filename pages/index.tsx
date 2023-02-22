@@ -174,7 +174,7 @@ const Home: NextPage = () => {
             </div>
           </AnimateBugRight>
           <div className={styles.anchorFeature}>
-            <h2 className={styles.landingAnchorHead}>
+            <h2 className={classNames(styles.landingAnchorHead)}>
               The open source, fullstack <br />
               <span className="text-highlight-yellow">
                 Monitoring Platform.
