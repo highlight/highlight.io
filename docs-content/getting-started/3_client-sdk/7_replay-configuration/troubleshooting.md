@@ -11,7 +11,7 @@ updatedAt: 2022-01-20T23:42:57.000Z
 
 •   For iFrames, Highlight will recreate an iframe with the same `src`. The iFrame will not load if the `src`'s origin has a restrictive `X-Frame-Options` header.
 
-•   For canvas/WebGL, see [WebGL](../6_product-features/1_session-replay/canvas.md) to enable recording
+•   For canvas/WebGL, see [WebGL](./canvas.md) to enable recording
 
 ## Why are the correct fonts not being used?
 

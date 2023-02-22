@@ -5,7 +5,7 @@ createdAt: 2021-10-13T01:46:13.000Z
 updatedAt: 2022-08-09T21:26:43.000Z
 ---
 
-Rage clicks are the equivalent of spamming a close elevator button when you just want to get up to your apartment. But, instead of a close elevator button, it's a space on your application. And instead of getting to your apartment, users usually _rage click_ when a button isn't working as fast as it should or at all.
+Rage clicks are the equivalent of spamming a close elevator button when you just want to get up to your apartment. But, instead of a close elevator button, it's a space on your application. And instead of getting to your apartment, users usually _rage click_ when a button isn't working as it should.
 
 ## How do we identify rage clicks?
 

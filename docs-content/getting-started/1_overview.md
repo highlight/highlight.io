@@ -1,10 +1,12 @@
 ---
-title: Overview
+heading: Getting Started - highlight.io
+title: Get Started
 slug: getting-started
 createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
+We've written up several guides on getting started with highlight.io in your framework of choice. If there's a guide missing for your framework, feel free to [create an issue](https://github.com/highlight/highlight/issues/new?assignees=&labels=external+bug+%2F+request&template=feature_request.md&title=) or message us on [discord](https://highlight.io/community).
 ## For your frontend:
 
 highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Take a look at our guides for the following frameworks:
@@ -28,7 +30,7 @@ highlight.io supports any framework that uses the [dom](https://www.w3schools.co
 </DocsCardGroup>
 
 
-Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](./3_client-sdk/other.md).
+Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](3_client-sdk/6_other.md).
 
 ## For your backend:
 
