@@ -48,13 +48,13 @@ slug: python
         import highlight_io
         from highlight_io.integrations.flask import FlaskIntegration
         app = Flask('test-app')
-        H = highlight_io.H("YOUR-PROJECT-ID", integrations=[FlaskIntegration()], record_logs=True)
+        H = highlight_io.H("YOUR_PROJECT_ID", integrations=[FlaskIntegration()], record_logs=True)
     </code>
     In Django, you'll add Highlight to your settings.py file:
     <code>
         import highlight_io
         from highlight_io.integrations.django import DjangoIntegration
-        H = highlight_io.H("YOUR-PROJECT-ID", integrations=[DjangoIntegration()], record_logs=True)
+        H = highlight_io.H("YOUR_PROJECT_ID", integrations=[DjangoIntegration()], record_logs=True)
     </code>
   </div>
 </section>

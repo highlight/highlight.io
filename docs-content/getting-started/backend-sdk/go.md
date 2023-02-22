@@ -7,10 +7,11 @@ updatedAt: 2022-04-06T20:22:54.000Z
 
 Highlight supports several server frameworks written in Go.
 
-`go-chi/chi`
+`99designs/gqlgen`
 `gin-gonic/gin`
-
-# Usage
+`go-chi/chi`
+`gofiber/fiber`
+`gorilla/mux`
 
 First, install and import the go package in your entrypoint.
 
@@ -37,29 +38,22 @@ func main() {
 
 This configures highlight to transmit any relevant events or errors as they may happen. You can also customize highlight by using the public highlight methods before calling `Start()`. However, we still need to associate your users' sessions with potential backend errors. We provide middleware packages that help set this up:
 
-### Middleware
-
 Add the following middleware to your router:
 
+## Go Gin
+
 ```go
-// with chi
-import (
-	highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
-)
+package main
 
-func main() {
-	//...
-	r := chi.NewRouter()
-	r.Use(highlightChi.Middleware)
-	//...
-}
-
-// with gin
 import (
+	H "github.com/highlight/highlight/sdk/highlight-go"
 	highlightGin "github.com/highlight/highlight/sdk/highlight-go/middleware/gin"
 )
 
 func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
 	//...
 	r := gin.Default()
 	r.Use(highlightGin.Middleware())
@@ -68,15 +62,111 @@ func main() {
 
 ```
 
-## Instrumenting Handlers
+## Go Chi
 
-Great! Now we've configured the highlight client and can track sessions from the frontend to the backend. All we need to do now is instrument our backend code to transmit events or errors where relevant.
+```go
+package main
+
+import (
+	H "github.com/highlight/highlight/sdk/highlight-go"
+	highlightChi "github.com/highlight/highlight/sdk/highlight-go/middleware/chi"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+	//...
+	r := chi.NewRouter()
+	r.Use(highlightChi.Middleware)
+	//...
+}
+```
+
+## Go Fiber
+
+```go
+package main
+
+import (
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	H "github.com/highlight/highlight/sdk/highlight-go"
+	highlightFiber "github.com/highlight/highlight/sdk/highlight-go/middleware/fiber"
+	"log"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+
+	app := fiber.New()
+	app.Use(logger.New())
+	app.Use(highlightFiber.Middleware())
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
+
+	log.Fatal(app.Listen(":3456"))
+}
+
+```
+
+## Gorilla Mux
+
+```go
+package main
+
+import (
+	H "github.com/highlight/highlight/sdk/highlight-go"
+	highlightgorilla "github.com/highlight/highlight/sdk/highlight-go/middleware/gorillamux"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+	//...
+	r := mux.NewRouter()
+	r.Use(highlightgorilla.Middleware)
+	//...
+}
+```
+
+## 99designs gqlgen
+
+```go
+package main
+
+import (
+	ghandler "github.com/99designs/gqlgen/graphql/handler"
+	H "github.com/highlight/highlight/sdk/highlight-go"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+	
+	server := ghandler.New(...)
+	server.Use(H.NewGraphqlTracer(string(util.PrivateGraph)))	
+}
+```
+
+## Verifying
+
+Great! Now that you've set up the Middleware, verify that the backend error handling works by consuming an error from your handler.
+If you are using `99designs/gqlgen`, this is as easy as having a resolver return an error.
+If you are using `gofiber`, this is as easy as having a route handler return an error.
+With simpler HTTP frameworks, you'll need to manually `highlight.ConsumeError`, as in the following example for `chi`.
 
 ```go
 
 package main
 
-// with chi
+// go chi example
 import (
 	"errors"
 	"github.com/go-chi/cors"
@@ -114,43 +204,5 @@ func PingHandler(w http.ResponseWriter, r *http.Request) {
 		highlight.ConsumeError(r.Context(), errors.New("a health check failure occured!"))
 	}
 	w.Write([]byte("welcome"))
-}
-
-// with gin
-import (
-	"errors"
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
-	"github.com/highlight/highlight/sdk/highlight-go"
-	highlightGin "github.com/highlight/highlight/sdk/highlight-go/middleware/gin"
-)
-
-func main() {
-	highlight.Start()
-	defer highlight.Stop()
-	highlight.SetProjectID("YOUR_PROJECT_ID")
-
-	r := gin.Default()
-	r.Use(highlightGin.Middleware())
-	// setup cors if necessary for your frontend
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:3001"},
-		AllowHeaders: []string{"X-Highlight-Request"},
-	}))
-
-	r.GET("/ping", PingHandler)
-	r.Run("0.0.0.0:8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-}
-
-var appHealthy = false
-
-func PingHandler(c *gin.Context) {
-	// we can instrument our handlers directly to record events or error
-	if !appHealthy {
-		highlight.ConsumeError(c, errors.New("a health check failure occured!"))
-	}
-	c.JSON(200, gin.H{
-		"message": "Hello, World!",
-	})
 }
 ```
