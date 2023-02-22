@@ -30,7 +30,7 @@ highlight.io supports any framework that uses the [dom](https://www.w3schools.co
 </DocsCardGroup>
 
 
-Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](./3_client-sdk/other.md).
+Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](3_client-sdk/6_other.md).
 
 ## For your backend:
 
