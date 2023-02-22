@@ -12,8 +12,6 @@ Highlight supports several server frameworks written in Go.
 `gofiber/fiber`
 `gorilla/mux`
 
-# Usage
-
 First, install and import the go package in your entrypoint.
 
 ```shell
@@ -39,11 +37,9 @@ func main() {
 
 This configures highlight to transmit any relevant events or errors as they may happen. You can also customize highlight by using the public highlight methods before calling `Start()`. However, we still need to associate your users' sessions with potential backend errors. We provide middleware packages that help set this up:
 
-### Middleware
-
 Add the following middleware to your router:
 
-##### Go Gin
+## Go Gin
 
 ```go
 package main
@@ -65,7 +61,7 @@ func main() {
 
 ```
 
-##### Go Chi
+## Go Chi
 
 ```go
 package main
@@ -86,7 +82,7 @@ func main() {
 }
 ```
 
-##### Go Fiber
+## Go Fiber
 
 ```go
 package main
@@ -117,10 +113,25 @@ func main() {
 
 ```
 
-##### Gorilla Mux
+## Gorilla Mux
 
 ```go
-// TODO(vkorolik)
+package main
+
+import (
+	H "github.com/highlight/highlight/sdk/highlight-go"
+	highlightgorilla "github.com/highlight/highlight/sdk/highlight-go/middleware/gorillamux"
+)
+
+func main() {
+	H.SetProjectID("YOUR_PROJECT_ID")
+	H.Start()
+	defer H.Stop()
+	//...
+	r := mux.NewRouter()
+	r.Use(highlightgorilla.Middleware)
+	//...
+}
 ```
 
 ## Instrumenting Handlers
