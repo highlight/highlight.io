@@ -17,6 +17,20 @@ export const sessionReplayFeaturesLink = "/docs/getting-started/client-sdk/repla
 export const identifyingUsersLink = "/docs/getting-started/client-sdk/replay-configuration/identifying-sessions"
 export const backendInstrumentationLink = "/docs/getting-started/overview#For-your-backend"
 export const fullstackMappingLink = "/docs/getting-started/frontend-backend-mapping"
+export const sourceMapDetailsLink = "/docs/getting-started/client-sdk/replay-configuration/sourcemaps"
+
+export const configureSourcemapsCI: QuickStartStep = {
+    title: "Configure sourcemaps in CI. (optional)",
+    content: `To get properly enhanced stacktraces of your javascript app, we recommend instrumenting sourcemaps. If you deploy public sourcemaps, you can skip this step. Refer to our docs on [sourcemaps](${sourceMapDetailsLink}) to read more about this option.`,
+    code: {
+        text: `# Upload sourcemaps to Highlight
+...
+npx --yes @highlight-run/sourcemap-uploader upload --apiKey $\{YOUR_ORG_API_KEY\} --path ./build
+...
+        `,
+        language: "bash",
+    }
+}
 
 export const initializeSnippet: QuickStartStep = {
     title: "Initialize the SDK in your frontend.",

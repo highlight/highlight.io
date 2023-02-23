@@ -1,5 +1,5 @@
 import { QuickStartContent } from "../QuickstartContent";
-import { identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
+import { configureSourcemapsCI, identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 export const OtherContext: QuickStartContent = {
     subtitle: "Learn how to set up highlight.io with any browser-based framework.",
@@ -52,6 +52,7 @@ export const OtherContext: QuickStartContent = {
         },
         identifySnippet,
         verifySnippet,
+        configureSourcemapsCI,
         setupBackendSnippet,
     ]
 }

@@ -1,5 +1,5 @@
 import { QuickStartContent, QuickStartStep } from "../QuickstartContent";
-import { identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
+import { configureSourcemapsCI, identifySnippet, initializeSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 export const initializePluginSnippet: QuickStartStep = {
     title: "Initialize the plugin in your gatsby configuration.",
@@ -42,6 +42,7 @@ yarn add @highlight-run/gatsby-plugin-highlight
         initializePluginSnippet,
         identifySnippet,
         verifySnippet,
+        configureSourcemapsCI,
         setupBackendSnippet,
     ]
 }
