@@ -30,6 +30,7 @@ import { Callout } from '../../components/Docs/Callout/Callout'
 import { CodeBlock } from '../../components/common/CodeBlock/CodeBlock'
 import { quickStartContent, QuickStartContent, QuickStartStep, QuickStartType } from '../../components/QuickstartContent/QuickstartContent'
 import Markdown from 'markdown-to-jsx'
+import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')
 const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`
@@ -355,7 +356,7 @@ const SdkTableOfContents = () => {
     <>
       {nestedHeadings.map((heading: HTMLHeadingElement, i: number) => (
         <Link href={`#${heading.id}`} key={i} legacyBehavior>
-          <div
+          <a
             className={styles.tocRow}
             onClick={(e) => {
               e.preventDefault()
@@ -388,7 +389,7 @@ const SdkTableOfContents = () => {
             >
               {heading.innerText || 'nope'}
             </Typography>
-          </div>
+          </a>
         </Link>
       ))}
     </>
@@ -528,7 +529,7 @@ const TableOfContents = ({
         </div>
       ) : (
         <Link href={path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '')} legacyBehavior>
-          <div
+          <a
             className={styles.tocRow}
             onClick={() => {
               setOpen((o) => !o)
@@ -557,7 +558,7 @@ const TableOfContents = ({
             >
               {toc?.tocHeading || 'nope'}
             </Typography>
-          </div>
+          </a>
         </Link>
       )}
       <Collapse isOpened={open}>
@@ -640,6 +641,8 @@ const DocPage = ({
 
   const currentToc = toc?.children.find((c) => c.tocSlug === relPath?.split("/").filter(r => r)[0])
 
+  const is400 = useMediaQuery(400);
+
   return (
     <>
       <Meta
@@ -655,47 +658,11 @@ const DocPage = ({
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
-      <div className={styles.contentInnerBar}>
-        <div className={styles.leftInner}>
-          <DocSelect />
-        </div>
-        <div className={styles.centerInner}>
-          <DocSearchbar docPaths={docOptions} />
-          {isSdkDoc && (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                gap: 8,
-              }}
-            >
-              <Link className={styles.sdkSocialItem} href={`${DOCS_GITUB_LINK}${relPath}`} target="_blank">
-                <FaGithub
-                  style={{
-                    height: 20,
-                    width: 20,
-                    flexShrink: 0,
-                  }}
-                ></FaGithub>
-                <Typography type="copy4">Suggest Edits?</Typography>
-              </Link>
-              <Link className={styles.sdkSocialItem} href="https://discord.gg/yxaXEAqgwN" target="_blank">
-                <FaDiscord
-                  style={{
-                    height: 20,
-                    width: 20,
-                    flexShrink: 0,
-                  }}
-                ></FaDiscord>
-                <Typography type="copy4">Community / Support</Typography>
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
+          <div className={styles.leftInner}>
+            <DocSelect />
+          </div>
           <div className={styles.tocMenuLarge}>
             {isSdkDoc ? (
               <SdkTableOfContents />
@@ -751,39 +718,11 @@ const DocPage = ({
         </div>
         <div className={styles.contentSection}>
           <div
-            className={classNames(styles.centerSection, {
+            className={classNames("DocSearch-content", styles.centerSection, {
               [styles.sdkCenterSection]: isSdkDoc,
               [styles.quickStartCenterSection]: isQuickstart,
             })}
           >
-            {!isSdkDoc && !isQuickstart && (
-              <div className={styles.resourcesMobile}>
-                <Link
-                  className={styles.socialItem}
-                  href="https://discord.gg/yxaXEAqgwN"
-                  target="_blank"
-                  style={{
-                    borderBottom: '1px solid #30294E',
-                  }}
-                >
-                  <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
-                  <Typography type="copy3">Community / Support</Typography>
-                </Link>
-                <Link className={styles.socialItem} href={`${DOCS_GITUB_LINK}${relPath ?? ''}`} target="_blank">
-                  <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
-                  <Typography type="copy3">Suggest Edits?</Typography>
-                </Link>
-                <Link
-                  style={{ borderTop: '1px solid #30294E' }}
-                  className={styles.socialItem}
-                  href="https://twitter.com/highlightio"
-                  target="_blank"
-                >
-                  <FaTwitter style={{ height: 20, width: 20 }}></FaTwitter>
-                  <Typography type="copy3">Follow us!</Typography>
-                </Link>
-              </div>
-            )}
             <div className={styles.breadcrumb}>
               {!isSdkDoc &&
                 getBreadcrumbs(metadata, docOptions, docIndex).map((breadcrumb, i) =>
