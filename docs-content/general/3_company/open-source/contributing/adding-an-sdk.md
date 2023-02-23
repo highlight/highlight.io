@@ -23,9 +23,14 @@ The SDK provides common methods for recording exceptions or logging, but this ma
 
 Data we send over the OpenTelemetry specification is as a [Trace](https://opentelemetry.io/docs/reference/specification/trace/) with attributes set per the [semantic conventions](https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/).
 When we create a Trace, we set three additional SpanAttributes to carry the Highlight context:
-- highlight_project_id - The Highlight Project ID provided to the SDK.
-- highlight_session_id - The Highlight Session ID provided as part of the X-Highlight-Request header on the network request.
-- highlight_trace_id - The Highlight Request ID provided as part of the X-Highlight-Request header on the network request
+
+
+- highlight.project_id - Highlight Project ID provided to the SDK
+
+- highlight.session_id - Session ID provided as part of the `X-Highlight-Request` header on the network request
+ 
+- highlight.trace_id - Request ID provided as part of the `X-Highlight-Request` header on the network request
+
 
 ### Reporting an Error as an OTEL Trace
 
@@ -40,6 +45,16 @@ If a language's OpenTelemetry SDK does not support sending logs natively, we cho
 - Event name - `log`
 - `log.severity` event attribute - the log severity level string
 - `log.message` event attribute - the log message payload.
+
+To associate the highlight context with a log, we use the [LogRecord](https://opentelemetry.io/docs/reference/specification/logs/data-model/#log-and-event-record-definition) [Attributes](https://opentelemetry.io/docs/reference/specification/logs/semantic_conventions/) with the following convention:
+
+
+- highlight.project_id - Highlight Project ID provided to the SDK
+
+- highlight.session_id - Session ID provided as part of the `X-Highlight-Request` header on the network request
+
+- highlight.trace_id - Request ID provided as part of the `X-Highlight-Request` header on the network request
+
 
 ## Recording a Log
 
