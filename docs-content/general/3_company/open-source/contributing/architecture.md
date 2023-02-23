@@ -17,9 +17,9 @@ Here's the high level structure of the code that you'll want to start tinkering 
 
     -   highlight-node / other SDKs
 
--   Public Graph `backend/public-graph/graph/schema.resolvers.go`
+-   Public Graph `backend/public-graph/graph/schema.resolvers.go` SDK data ingest graphql endpoint, hosted locally at https://localhost:8082/public
 
--   Private Graph `backend/private-graph/graph/schema.resolvers.go`
+-   Private Graph `backend/private-graph/graph/schema.resolvers.go` Graphql endpoint for frontend, hosted locally at https://localhost:8082/private
 
 -   Workers `backend/worker.go`
 

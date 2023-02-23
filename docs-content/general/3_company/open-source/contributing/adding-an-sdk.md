@@ -21,11 +21,25 @@ The SDK provides common methods for recording exceptions or logging, but this ma
 
 ## Recording an Error
 
-Data we send over the OpenTelemetry specification is sent per the [semantic conventions](https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/).
+Data we send over the OpenTelemetry specification is as a [Trace](https://opentelemetry.io/docs/reference/specification/trace/) with attributes set per the [semantic conventions](https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/).
+When we create a Trace, we set three additional SpanAttributes to carry the Highlight context:
+- highlight_project_id - The Highlight Project ID provided to the SDK.
+- highlight_session_id - The Highlight Session ID provided as part of the X-Highlight-Request header on the network request.
+- highlight_trace_id - The Highlight Request ID provided as part of the X-Highlight-Request header on the network request
 
 ### Reporting an Error as an OTEL Trace
 
+An exception is represented in OpenTelemetry as a Trace Event, per the [semantic convention for exceptions](https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/exceptions/).
+
+Many OpenTelemetry SDK implementations offer a `span.record_exception(exc)` method that automatically populates the semantic convention attributes with the correct values.
+
 ### Reporting a Log as an OTEL Trace
+
+If a language's OpenTelemetry SDK does not support sending logs natively, we choose to send the message data as a Trace [Event](https://opentelemetry.io/docs/concepts/signals/traces/#span-events).
+
+- Event name - `log`
+- `log.severity` event attribute - the log severity level string
+- `log.message` event attribute - the log message payload.
 
 ## Recording a Log
 
