@@ -1,5 +1,5 @@
 import { QuickStartContent, QuickStartStep } from "../QuickstartContent";
-import { identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
+import { configureSourcemapsCI, identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 const vueInitSnippet: QuickStartStep = {
     title: "Initialize the SDK in your frontend.",
@@ -39,6 +39,7 @@ export const VueContent: QuickStartContent = {
         vueInitSnippet,
         identifySnippet,
         verifySnippet,
+        configureSourcemapsCI,
         setupBackendSnippet,
     ]
 }

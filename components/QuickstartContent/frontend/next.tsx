@@ -1,5 +1,5 @@
 import { QuickStartContent, QuickStartStep } from "../QuickstartContent";
-import { backendInstrumentationLink, identifySnippet, initializeSnippet, setupBackendSnippet, verifySnippet } from "./shared-snippets";
+import { backendInstrumentationLink, configureSourcemapsCI, identifySnippet, initializeSnippet, setupBackendSnippet, verifySnippet } from "./shared-snippets";
 
 const ErrorBoundaryCodeSnippet = `import { ErrorBoundary } from '@highlight-run/react';
 
@@ -36,6 +36,7 @@ yarn add highlight.run @highlight-run/react`,
         },
         identifySnippet,
         verifySnippet,
+        configureSourcemapsCI,
         setupBackendSnippet,
     ]
 }

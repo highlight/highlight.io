@@ -1,5 +1,5 @@
 import { QuickStartContent } from "../QuickstartContent"
-import { identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets"
+import { configureSourcemapsCI, identifySnippet, initializeSnippet, packageInstallSnippet, sessionReplayFeaturesLink, setupBackendSnippet, verifySnippet } from "./shared-snippets"
 
 const angularInitCodeSnippet = `// app.module.ts
     import { NgModule } from '@angular/core';
@@ -41,6 +41,7 @@ export const AngularContent: QuickStartContent = {
         },
         identifySnippet,
         verifySnippet,
+        configureSourcemapsCI,
         setupBackendSnippet
     ]
 }
