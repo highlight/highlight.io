@@ -34,6 +34,7 @@ slug: python
           <h5><code>highlight_io.integrations.Integration</code> <code>optional</code></h5>
           <p>Use FlaskIntegration() for [Flask](https://flask.palletsprojects.com/en/2.2.x/) apps.</p>
           <p>Use DjangoIntegration() for [Django](https://www.djangoproject.com/) apps.</p>
+          <p>Use FastAPIMiddleware for [FastAPI](https://fastapi.tiangolo.com/) apps.</p>
         </aside>
       </article>
     </aside>
@@ -55,6 +56,14 @@ slug: python
         import highlight_io
         from highlight_io.integrations.django import DjangoIntegration
         H = highlight_io.H("YOUR_PROJECT_ID", integrations=[DjangoIntegration()], record_logs=True)
+    </code>
+    In FastAPI, you'll add Highlight as a middleware:
+    <code>
+        import highlight_io
+        from highlight_io.integrations.fastapi import FastAPIMiddleware
+        H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
+        app = FastAPI()
+        app.add_middleware(FastAPIMiddleware)
     </code>
   </div>
 </section>

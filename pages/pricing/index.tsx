@@ -266,11 +266,6 @@ const Pricing: NextPage = () => {
         <Section className={styles.titleSection}>
           <div className={styles.pricingTitle}>
             <div className={styles.anchorHead}>
-              <div className={productStyles.highlightedBadge}>
-                <Typography type="copy4" emphasis>
-                  Plans and Pricing
-                </Typography>
-              </div>
               <h1>
                 Get the
                 <span className={styles.yellowText}>{` visibility `}</span>
