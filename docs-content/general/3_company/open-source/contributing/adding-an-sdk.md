@@ -38,6 +38,23 @@ An exception is represented in OpenTelemetry as a Trace Event, per the [semantic
 
 Many OpenTelemetry SDK implementations offer a `span.record_exception(exc)` method that automatically populates the semantic convention attributes with the correct values.
 
+```python
+
+# create a trace for the current invocation
+with self.tracer.start_as_current_span("highlight-ctx") as span:
+    span.set_attributes({"highlight.project_id": _project_id})
+    span.set_attributes({"highlight.session_id": session_id})
+    span.set_attributes({"highlight.trace_id": request_id})
+    try:
+        # contextmanager yields execution to the code using the contextmanager
+        yield
+    except Exception as e:
+        # if an exception is raised, record it on the current span
+        span.record_exception(e)
+        raise
+
+```
+
 ### Reporting a Log as an OTEL Trace
 
 If a language's OpenTelemetry SDK does not support sending logs natively, we choose to send the message data as a Trace [Event](https://opentelemetry.io/docs/concepts/signals/traces/#span-events).
@@ -55,6 +72,25 @@ To associate the highlight context with a log, we use the [LogRecord](https://op
 
 - highlight.trace_id - Request ID provided as part of the `X-Highlight-Request` header on the network request
 
+
+```go
+
+package main
+
+import "github.com/highlight/highlight/sdk/highlight-go"
+
+func RecordLog(log string) {
+	span, _ := highlight.StartTrace(context.TODO(), "highlight-go/logrus")
+	defer highlight.EndTrace(span)
+
+	attrs := []attribute.KeyValue{
+		LogSeverityKey.String("ERROR"),
+		LogMessageKey.String(entry.Message),
+	}
+	span.AddEvent(highlight.LogEvent, trace.WithAttributes(attrs...))
+}
+
+```
 
 ## Recording a Log
 
