@@ -23,15 +23,37 @@ The SDK provides common methods for recording exceptions or logging, but this ma
 
 Data we send over the OpenTelemetry specification is as a [Trace](https://opentelemetry.io/docs/reference/specification/trace/) with attributes set per the [semantic conventions](https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/).
 When we create a Trace, we set three additional SpanAttributes to carry the Highlight context:
-- highlight_project_id - The Highlight Project ID provided to the SDK.
-- highlight_session_id - The Highlight Session ID provided as part of the X-Highlight-Request header on the network request.
-- highlight_trace_id - The Highlight Request ID provided as part of the X-Highlight-Request header on the network request
+
+
+- highlight.project_id - Highlight Project ID provided to the SDK
+
+- highlight.session_id - Session ID provided as part of the `X-Highlight-Request` header on the network request
+ 
+- highlight.trace_id - Request ID provided as part of the `X-Highlight-Request` header on the network request
+
 
 ### Reporting an Error as an OTEL Trace
 
 An exception is represented in OpenTelemetry as a Trace Event, per the [semantic convention for exceptions](https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/exceptions/).
 
 Many OpenTelemetry SDK implementations offer a `span.record_exception(exc)` method that automatically populates the semantic convention attributes with the correct values.
+
+```python
+
+# create a trace for the current invocation
+with self.tracer.start_as_current_span("highlight-ctx") as span:
+    span.set_attributes({"highlight.project_id": _project_id})
+    span.set_attributes({"highlight.session_id": session_id})
+    span.set_attributes({"highlight.trace_id": request_id})
+    try:
+        # contextmanager yields execution to the code using the contextmanager
+        yield
+    except Exception as e:
+        # if an exception is raised, record it on the current span
+        span.record_exception(e)
+        raise
+
+```
 
 ### Reporting a Log as an OTEL Trace
 
@@ -40,6 +62,35 @@ If a language's OpenTelemetry SDK does not support sending logs natively, we cho
 - Event name - `log`
 - `log.severity` event attribute - the log severity level string
 - `log.message` event attribute - the log message payload.
+
+To associate the highlight context with a log, we use the [LogRecord](https://opentelemetry.io/docs/reference/specification/logs/data-model/#log-and-event-record-definition) [Attributes](https://opentelemetry.io/docs/reference/specification/logs/semantic_conventions/) with the following convention:
+
+
+- highlight.project_id - Highlight Project ID provided to the SDK
+
+- highlight.session_id - Session ID provided as part of the `X-Highlight-Request` header on the network request
+
+- highlight.trace_id - Request ID provided as part of the `X-Highlight-Request` header on the network request
+
+
+```go
+
+package main
+
+import "github.com/highlight/highlight/sdk/highlight-go"
+
+func RecordLog(log string) {
+	span, _ := highlight.StartTrace(context.TODO(), "highlight-go/logrus")
+	defer highlight.EndTrace(span)
+
+	attrs := []attribute.KeyValue{
+		LogSeverityKey.String("ERROR"),
+		LogMessageKey.String(entry.Message),
+	}
+	span.AddEvent(highlight.LogEvent, trace.WithAttributes(attrs...))
+}
+
+```
 
 ## Recording a Log
 
