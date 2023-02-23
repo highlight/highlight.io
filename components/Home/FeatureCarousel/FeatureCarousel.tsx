@@ -149,7 +149,7 @@ const features: Feature[] = [
 
 export const FeatureCarousel = () => {
   const [selected, setSelected] = useState(0)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, draggable: false })
 
   useEffect(() => {
     if (emblaApi) {
