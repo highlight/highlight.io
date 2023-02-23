@@ -157,11 +157,6 @@ const Products = ({ product }: { product: iProduct }) => {
           </AnimateBugRight>
           <div className={landingStyles.anchorFeature}>
             <div className={landingStyles.anchorHead}>
-              <div className={styles.highlightedBadge}>
-                <Typography type="copy4" emphasis>
-                  Highlight for {product.title}
-                </Typography>
-              </div>
               <h1 >
                 The{' '}
                 <span className={landingStyles.highlightedText}>
