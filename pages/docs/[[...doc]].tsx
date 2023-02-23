@@ -355,7 +355,7 @@ const SdkTableOfContents = () => {
     <>
       {nestedHeadings.map((heading: HTMLHeadingElement, i: number) => (
         <Link href={`#${heading.id}`} key={i} legacyBehavior>
-          <div
+          <a
             className={styles.tocRow}
             onClick={(e) => {
               e.preventDefault()
@@ -388,7 +388,7 @@ const SdkTableOfContents = () => {
             >
               {heading.innerText || 'nope'}
             </Typography>
-          </div>
+          </a>
         </Link>
       ))}
     </>
@@ -528,7 +528,7 @@ const TableOfContents = ({
         </div>
       ) : (
         <Link href={path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '')} legacyBehavior>
-          <div
+          <a
             className={styles.tocRow}
             onClick={() => {
               setOpen((o) => !o)
@@ -557,7 +557,7 @@ const TableOfContents = ({
             >
               {toc?.tocHeading || 'nope'}
             </Typography>
-          </div>
+          </a>
         </Link>
       )}
       <Collapse isOpened={open}>
