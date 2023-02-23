@@ -1,11 +1,12 @@
 import React from 'react'
 import { Feature } from './FeatureCarousel'
+import styles from "../Home.module.scss"
 import Image from 'next/image'
 import { Typography } from '../../common/Typography/Typography'
 import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
 import { Code } from 'react-code-blocks'
 import Link from 'next/link'
-import { ArrowRightIcon } from '@heroicons/react/20/solid'
+import { HiArrowRight } from 'react-icons/hi'
 
 const DesktopImage = ({ feature }: { feature: Feature }) => {
   return (
@@ -42,40 +43,78 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
           />
         ) : (
           <div className="flex flex-col gap-3 mt-3 rounded-lg">
-            <div className="flex items-center gap-2 border-[1px] border-divider-on-dark py-3 px-5 rounded-lg text-color-copy-on-dark">
-              {feature.featureImage1}
-              <Typography
-                type="copy3"
-                emphasis
-              >
-                {feature.feature1}
-              </Typography>
-            </div>
-            <div className="flex items-center gap-2 border-[1px] border-divider-on-dark py-3 px-5 rounded-lg text-color-copy-on-dark">
-              {feature.featureImage2}
-              <Typography
-                type="copy3"
-                emphasis
-              >
-                {feature.feature2}
-              </Typography>
-            </div>
-            <div className="flex items-center gap-2 border-[1px] border-divider-on-dark py-3 px-5 rounded-lg text-color-copy-on-dark">
-              {feature.featureImage3}
-              <Typography
-                type="copy3"
-                emphasis
-              >
-                {feature.feature3}
-              </Typography>
-            </div>
+            {feature.feature1Link ? (
+              <a href={feature.feature1Link} target="_blank" rel="noreferrer noopener" className={styles.innerCarouselButton} >
+                {feature.featureImage1}
+                <Typography
+                  type="copy3"
+                  emphasis
+                >
+                  {feature.feature1}
+                </Typography>
+              </a>
+            ) : (
+              <div className={styles.innerCarouselFeature}>
+                {feature.featureImage1}
+                <Typography
+                  type="copy3"
+                  emphasis
+                >
+                  {feature.feature1}
+                </Typography>
+              </div>
+            )}
+
+            {feature.feature2Link ? (
+              <a href={feature.feature2Link} target="_blank" rel="noreferrer noopener" className={styles.innerCarouselButton} >
+                {feature.featureImage2}
+                <Typography
+                  type="copy3"
+                  emphasis
+                >
+                  {feature.feature2}
+                </Typography>
+              </a>
+            ) : (
+              <div className={styles.innerCarouselFeature}>
+                {feature.featureImage2}
+                <Typography
+                  type="copy3"
+                  emphasis
+                >
+                  {feature.feature2}
+                </Typography>
+              </div>
+            )}
+
+            {feature.feature3Link ? (
+              <a href={feature.feature3Link} target="_blank" rel="noreferrer noopener" className={styles.innerCarouselButton} >
+                {feature.featureImage3}
+                <Typography
+                  type="copy3"
+                  emphasis
+                >
+                  {feature.feature3}
+                </Typography>
+              </a>
+            ) : (
+              <div className={styles.innerCarouselFeature}>
+                {feature.featureImage3}
+                <Typography
+                  type="copy3"
+                  emphasis
+                >
+                  {feature.feature3}
+                </Typography>
+              </div>
+            )}
           </div>
         )}
         <div className="flex justify-center sm:justify-start mb-4">
           <Link href={`${feature.link}`} target="_blank">
             <Typography type="copy3" emphasis={true}>
               <div className="flex align-center justify-center gap-2">
-                Learn More <ArrowRightIcon height={28} width={28} />
+                Learn More <HiArrowRight className="h-5" />
               </div>
             </Typography>
           </Link>
@@ -96,7 +135,7 @@ export const DesktopCard = (props: { feature: Feature; index: number }) => {
   return (
     <div
       key={props.index}
-      className="relative flex w-full md:h-[475px] lg:h-[525px] border-x-0 sm:border-y-[1px] md:border-x-[1px]  border-divider-on-dark flex-shrink-0 snap-always snap-center xl:rounded-br-lg xl:rounded-bl-lg overflow-y-hidden"
+      className="relative flex w-full md:h-[475px] lg:h-[525px] border-x-0 sm:border-y-[1px] md:border-x-[1px] border-divider-on-dark flex-shrink-0 snap-always snap-center xl:rounded-br-lg xl:rounded-bl-lg overflow-y-hidden"
     >
       <div className="mx-5 py-8 border-[1px] sm:border-none border-divider-on-dark rounded-lg">
         {props.feature.right ? (

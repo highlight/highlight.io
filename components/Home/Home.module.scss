@@ -189,6 +189,40 @@
   }
 }
 
+//convert to css from tailwind
+//flex items-center gap-2 border-[1px] border-divider-on-dark py-3 px-5 rounded-lg text-color-copy-on-dark
+.innerCarouselFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-divider-on-dark);
+  padding: 12px 20px;
+  border-radius: 0.5rem;
+  color: var(--color-copy-on-dark);
+  cursor: auto;
+
+  &:hover {
+    color: var(--color-copy-on-dark) !important;
+  }
+}
+
+.innerCarouselButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-secondary-200);
+  padding: 12px 20px;
+  border-radius: 0.5rem;
+  color: var(--color-secondary-200);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-secondary-300) !important;
+    color: var(--color-primary-background) !important;
+  }
+}
+
 .featuresColumnContainer {
   width: 100%;
   overflow: visible;

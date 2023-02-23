@@ -45,10 +45,13 @@ export type Feature = {
   right?: boolean
   code?: string[]
   feature1?: string
+  feature1Link?: string
   featureImage1?: JSX.Element
   feature2?: string
+  feature2Link?: string
   featureImage2?: JSX.Element
   feature3?: string
+  feature3Link?: string
   featureImage3?: JSX.Element
   link: string
 }
@@ -132,10 +135,13 @@ const features: Feature[] = [
     mobileImage: githubscreenshot,
     right: true,
     feature1: 'Join the Community',
+    feature1Link: "https://discord.gg/yxaXEAqgwN",
     featureImage1: <HiPresentationChartLine className="h-[20px] w-[20px]" />,
     feature2: 'Find us on GitHub',
+    feature2Link: "https://github.com/highlight/highlight/",
     featureImage2: <HiDesktopComputer className="h-[20px] w-[20px]" />,
     feature3: 'Self host highlight.io',
+    feature3Link: "/docs/general/company/open-source/self-host-hobby",
     featureImage3: <ExclamationCircleFilled className="h-[20px] w-[20px]" />,
     link: 'https://github.com/highlight/highlight',
   },
