@@ -103,11 +103,14 @@ const Navbar = ({
                   {title}
                 </p>
               </Typography>
-              <DocSearch
-                appId="JGT9LI80J2"
-                indexName="highlight"
-                apiKey="ac336720d8f4f996abe3adee603a1c84"
-              />
+              {isDocsPage &&
+                <DocSearch
+                  placeholder='Search the highlight.io docs'
+                  appId="JGT9LI80J2"
+                  indexName="highlight"
+                  apiKey="ac336720d8f4f996abe3adee603a1c84"
+                />
+              }
             </div>
             <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (

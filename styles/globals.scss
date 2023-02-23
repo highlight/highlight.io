@@ -18,12 +18,20 @@
 .DocSearch-Button {
   background-color: #0d0225 !important;
   border: 1px solid var(--divider-on-dark) !important;
+  transition: all 0.1s ease-in-out !important;
 }
 .DocSearch-Button:hover {
   border: 1px solid var(--copy-on-dark) !important;
   box-shadow: none !important;
   border: 1px solid var(--copy-on-light) !important;
   color: var(--copy-on-light) !important;
+}
+.DocSearch-Button-Key {
+  background: none !important;
+  outline: none !important;
+  padding: 0px !important;
+  box-shadow: none !important;
+  border: 1px solid var(--divider-on-dark) !important;
 }
 
 .DocSearch-Button .DocSearch-Search-Icon {
