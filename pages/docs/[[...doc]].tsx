@@ -21,16 +21,16 @@ import { useRouter } from 'next/router'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
 import DocSearchbar from '../../components/Docs/DocSearchbar/DocSearchbar'
-import {
-  IGNORED_DOCS_PATHS,
-  processDocPath,
-  removeOrderingPrefix,
-} from '../api/docs/github'
+import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github'
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
-import { generateIdString } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
+import { DocsMarkdownRenderer, generateIdString } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
 import DocSelect from '../../components/Docs/DocSelect/DocSelect'
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import { Callout } from '../../components/Docs/Callout/Callout'
+import { CodeBlock } from '../../components/common/CodeBlock/CodeBlock'
+import { quickStartContent, QuickStartContent, QuickStartStep, QuickStartType } from '../../components/QuickstartContent/QuickstartContent'
+import Markdown from 'markdown-to-jsx'
+import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')
 const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`
@@ -41,7 +41,7 @@ export interface DocPath {
   simple_path: string
   // e.g. '[/tips, /getting-started/client-sdk]'
   embedded_links: string[]
-  // e.g. /Users/jaykhatri/projects/highlight-landing/docs/tips/sessions-search-deep-linking.md
+  // e.g. /Users/jaykhatri/projects/highlight-landing/s/tips/sessions-search-deep-linking.md
   total_path: string
   // e.g. 'tips/sessions-search-deep-linking.md'
   rel_path: string
@@ -57,10 +57,11 @@ type DocData = {
   markdownText: MDXRemoteSerializeResult | null
   markdownTextOG?: string
   relPath?: string
+  quickstartContent?: QuickStartContent;
   slug: string
   toc: TocEntry
   docOptions: DocPath[]
-  metadata?: { title: string; slug: string; heading: string; }
+  metadata?: { title: string; slug: string; heading: string }
   isSdkDoc?: boolean
   docIndex: number
   redirect?: string
@@ -85,13 +86,10 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
   useEffect(() => {
     const callback = (headings: any) => {
       headingElementsRef.current = {}
-      headingElementsRef.current = headings.reduce(
-        (map: any, headingElement: any) => {
-          map[headingElement.target.id] = headingElement
-          return map
-        },
-        headingElementsRef.current,
-      )
+      headingElementsRef.current = headings.reduce((map: any, headingElement: any) => {
+        map[headingElement.target.id] = headingElement
+        return map
+      }, headingElementsRef.current)
 
       const visibleHeadings: any = []
       Object.keys(headingElementsRef.current).forEach((key) => {
@@ -146,10 +144,7 @@ const isValidDirectory = (files: string[]) => {
 
 // we need to explicitly pass in 'fs_api' because webpack isn't smart enough to
 // know that this is only being called in server-side functions.
-export const getDocsPaths = async (
-  fs_api: any,
-  base: string | undefined,
-): Promise<DocPath[]> => {
+export const getDocsPaths = async (fs_api: any, base: string | undefined): Promise<DocPath[]> => {
   // each docpath needs to have some hierarchy (so we know if its nested, etc..)
   // each path can either be:
   // - parent w/o content
@@ -175,24 +170,14 @@ export const getDocsPaths = async (
     let total_path = path.join(full_path, file_string)
     const file_path = await fs_api.stat(total_path)
     if (file_path.isDirectory()) {
-      paths = paths.concat(
-        await getDocsPaths(fs_api, path.join(base, file_string)),
-      )
+      paths = paths.concat(await getDocsPaths(fs_api, path.join(base, file_string)))
     } else {
       const pp = processDocPath(base, file_string)
-      const { data, links, content } = await readMarkdown(
-        fsp,
-        path.join(total_path || ''),
-      )
-      const hasRequiredMetadata = ['title'].every((item) =>
-        data.hasOwnProperty(item),
-      )
+      const { data, links, content } = await readMarkdown(fsp, path.join(total_path || ''))
+      const hasRequiredMetadata = ['title'].every((item) => data.hasOwnProperty(item))
       if (!hasRequiredMetadata) {
-        throw new Error(
-          `${total_path} does not contain all required metadata fields. Fields "title" are required. `,
-        )
+        throw new Error(`${total_path} does not contain all required metadata fields. Fields "title" are required. `)
       }
-
       paths.push({
         simple_path: pp,
         array_path: pp.split('/'),
@@ -281,22 +266,15 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   }
 
   if (linkingErrors.length > 0) {
-    throw `the following docs had ${linkingErrors.length
-    } broken links: \n\n${linkingErrors.join('\n ---------- \n')}`
+    throw `the following docs had ${linkingErrors.length} broken links: \n\n${linkingErrors.join('\n ---------- \n')}`
   }
 
   const currentDoc = docPaths.find((d) => {
-    return (
-      JSON.stringify(d.array_path) ===
-      JSON.stringify(context?.params?.doc || [''])
-    )
+    return JSON.stringify(d.array_path) === JSON.stringify(context?.params?.doc || [''])
   })
 
   const currentDocIndex = docPaths.findIndex((d) => {
-    return (
-      JSON.stringify(d.array_path) ===
-      JSON.stringify(context?.params?.doc || [''])
-    )
+    return JSON.stringify(d.array_path) === JSON.stringify(context?.params?.doc || [''])
   })
   if (!currentDoc) {
     return {
@@ -307,20 +285,16 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   // the metadata in a file starts with "" and ends with "---" (this is the archbee format).
   const { content } = await readMarkdown(fsp, absPath)
-  const newContent = resolveEmbeddedLinksFromMarkdown(
-    content,
-    currentDoc.rel_path,
-  )
+  const newContent = resolveEmbeddedLinksFromMarkdown(content, currentDoc.rel_path)
 
-  const newerContent = resolveEmbeddedLinksFromHref(
-    newContent,
-    currentDoc.rel_path,
-  )
+  const newerContent = resolveEmbeddedLinksFromHref(newContent, currentDoc.rel_path)
 
   return {
     props: {
       metadata: currentDoc.metadata,
-      markdownText: !currentDoc.isSdkDoc ? await serialize(newerContent, { scope: { path: currentDoc.rel_path } }) : null,
+      markdownText: !currentDoc.isSdkDoc
+        ? await serialize(newerContent, { scope: { path: currentDoc.rel_path, quickStartContent } })
+        : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
       relPath: currentDoc.rel_path,
@@ -382,7 +356,7 @@ const SdkTableOfContents = () => {
     <>
       {nestedHeadings.map((heading: HTMLHeadingElement, i: number) => (
         <Link href={`#${heading.id}`} key={i} legacyBehavior>
-          <div
+          <a
             className={styles.tocRow}
             onClick={(e) => {
               e.preventDefault()
@@ -415,19 +389,14 @@ const SdkTableOfContents = () => {
             >
               {heading.innerText || 'nope'}
             </Typography>
-          </div>
+          </a>
         </Link>
       ))}
     </>
   )
 }
 
-const PageRightBar = ({
-  relativePath,
-}: {
-  title: string
-  relativePath: string
-}) => {
+const PageRightBar = ({ relativePath }: { title: string; relativePath: string }) => {
   const { nestedHeadings } = useHeadingsData('h5')
   const router = useRouter()
   const [activeId, setActiveId] = useState<string>()
@@ -454,11 +423,7 @@ const PageRightBar = ({
           <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
           <Typography type="copy3">Community / Support</Typography>
         </Link>
-        <Link
-          className={styles.socialItem}
-          href={`${DOCS_GITUB_LINK}${relativePath}`}
-          target="_blank"
-        >
+        <Link className={styles.socialItem} href={`${DOCS_GITUB_LINK}${relativePath}`} target="_blank">
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
           <Typography type="copy3">Suggest Edits?</Typography>
         </Link>
@@ -532,14 +497,9 @@ const TableOfContents = ({
   const [open, setOpen] = useState(isTopLevel || openTopLevel)
 
   useEffect(() => {
-    const currentPage = path.join(
-      '/docs',
-      docPaths[toc.docPathId || 0]?.simple_path || '',
-    )
+    const currentPage = path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '')
     setIsCurrentPage(currentPage === window.location.pathname)
-    const isParentOfCurrentPage = window.location.pathname.includes(
-      docPaths[toc.docPathId || 0]?.simple_path,
-    )
+    const isParentOfCurrentPage = window.location.pathname.includes(docPaths[toc.docPathId || 0]?.simple_path)
     setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage)
   }, [docPaths, toc.docPathId])
 
@@ -568,14 +528,8 @@ const TableOfContents = ({
           </Typography>
         </div>
       ) : (
-        <Link
-          href={path.join(
-            '/docs',
-            docPaths[toc.docPathId || 0]?.simple_path || '',
-          )}
-          legacyBehavior
-        >
-          <div
+        <Link href={path.join('/docs', docPaths[toc.docPathId || 0]?.simple_path || '')} legacyBehavior>
+          <a
             className={styles.tocRow}
             onClick={() => {
               setOpen((o) => !o)
@@ -598,14 +552,13 @@ const TableOfContents = ({
               emphasis={isTopLevel}
               className={classNames(styles.tocItem, {
                 [styles.tocItemOpen]: hasChildren && open,
-                [styles.tocItemCurrent]:
-                  (!hasChildren || open) && isCurrentPage,
+                [styles.tocItemCurrent]: (!hasChildren || open) && isCurrentPage,
                 [styles.tocChild]: !isTopLevel,
               })}
             >
               {toc?.tocHeading || 'nope'}
             </Typography>
-          </div>
+          </a>
         </Link>
       )}
       <Collapse isOpened={open}>
@@ -616,12 +569,7 @@ const TableOfContents = ({
           <div className={styles.tocChildrenContent}>
             {toc?.children.map((t) => (
               // TODO(jaykhatri) - this 'docPaths' concept has to be stateful 🤔.
-              <TableOfContents
-                openParent={open && !isTopLevel}
-                docPaths={docPaths}
-                key={t.docPathId}
-                toc={t}
-              />
+              <TableOfContents openParent={open && !isTopLevel} docPaths={docPaths} key={t.docPathId} toc={t} />
             ))}
           </div>
         </div>
@@ -630,11 +578,7 @@ const TableOfContents = ({
   )
 }
 
-const getBreadcrumbs = (
-  metadata: any,
-  docOptions: DocPath[],
-  docIndex: number,
-) => {
+const getBreadcrumbs = (metadata: any, docOptions: DocPath[], docIndex: number) => {
   const trail: { title: string; path: string; hasContent: boolean }[] = [
     { title: 'Docs', path: '/docs', hasContent: true },
   ]
@@ -647,9 +591,7 @@ const getBreadcrumbs = (
     currentDoc.array_path.forEach((section) => {
       pathToSearch.push(section)
       const simplePath = pathToSearch.join('/')
-      const nextBreadcrumb = docOptions.find(
-        (d) => d?.simple_path === simplePath,
-      )
+      const nextBreadcrumb = docOptions.find((d) => d?.simple_path === simplePath)
       trail.push({
         title: nextBreadcrumb?.metadata?.title,
         path: `/docs/${nextBreadcrumb?.simple_path}`,
@@ -676,6 +618,8 @@ const DocPage = ({
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
+  const isQuickstart = metadata && 'quickstart' in metadata;
+
   const description = (markdownTextOG || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
     .replaceAll(/#+/gi, '')
@@ -695,7 +639,9 @@ const DocPage = ({
     }
   }, [router])
 
-  const currentToc = toc?.children.find((c) => c.tocSlug === 'general')
+  const currentToc = toc?.children.find((c) => c.tocSlug === relPath?.split("/").filter(r => r)[0])
+
+  const is400 = useMediaQuery(400);
 
   return (
     <>
@@ -708,60 +654,15 @@ const DocPage = ({
             : ''
         }
         description={description}
-        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL
-          }/api/og/doc${relPath?.replace('.md', '')}`}
+        absoluteImageUrl={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/og/doc${relPath?.replace('.md', '')}`}
         canonical={`/docs/${slug}`}
       />
       <Navbar title="Docs" hideBanner isDocsPage fixed />
-      <div className={styles.contentInnerBar}>
-        <div className={styles.leftInner}>
-          <DocSelect />
-        </div>
-        <div className={styles.centerInner}>
-          <DocSearchbar docPaths={docOptions} />
-          {isSdkDoc && (
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                gap: 8,
-              }}
-            >
-              <Link
-                className={styles.sdkSocialItem}
-                href={`${DOCS_GITUB_LINK}${relPath}`}
-                target="_blank"
-              >
-                <FaGithub
-                  style={{
-                    height: 20,
-                    width: 20,
-                    flexShrink: 0,
-                  }}
-                ></FaGithub>
-                <Typography type="copy4">Suggest Edits?</Typography>
-              </Link>
-              <Link
-                className={styles.sdkSocialItem}
-                href="https://discord.gg/yxaXEAqgwN"
-                target="_blank"
-              >
-                <FaDiscord
-                  style={{
-                    height: 20,
-                    width: 20,
-                    flexShrink: 0,
-                  }}
-                ></FaDiscord>
-                <Typography type="copy4">Community / Support</Typography>
-              </Link>
-            </div>
-          )}
-        </div>
-      </div>
       <main ref={blogBody} className={styles.mainWrapper}>
         <div className={styles.leftSection}>
+          <div className={styles.leftInner}>
+            <DocSelect />
+          </div>
           <div className={styles.tocMenuLarge}>
             {isSdkDoc ? (
               <SdkTableOfContents />
@@ -779,10 +680,7 @@ const DocPage = ({
               })
             )}
           </div>
-          <div
-            className={classNames(styles.tocRow, styles.tocMenu)}
-            onClick={() => setOpen((o) => !o)}
-          >
+          <div className={classNames(styles.tocRow, styles.tocMenu)} onClick={() => setOpen((o) => !o)}>
             <div className={styles.tocMenuLabel}>
               <ChevronDown
                 className={classNames(styles.tocIcon, {
@@ -820,63 +718,31 @@ const DocPage = ({
         </div>
         <div className={styles.contentSection}>
           <div
-            className={classNames(styles.centerSection, {
+            className={classNames("DocSearch-content", styles.centerSection, {
               [styles.sdkCenterSection]: isSdkDoc,
+              [styles.quickStartCenterSection]: isQuickstart,
             })}
           >
-            {!isSdkDoc && (
-              <div className={styles.resourcesMobile}>
-                <Link
-                  className={styles.socialItem}
-                  href="https://discord.gg/yxaXEAqgwN"
-                  target="_blank"
-                  style={{
-                    borderBottom: '1px solid #30294E',
-                  }}
-                >
-                  <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
-                  <Typography type="copy3">Community / Support</Typography>
-                </Link>
-                <Link
-                  className={styles.socialItem}
-                  href={`${DOCS_GITUB_LINK}${relPath ?? ''}`}
-                  target="_blank"
-                >
-                  <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
-                  <Typography type="copy3">Suggest Edits?</Typography>
-                </Link>
-                <Link
-                  style={{ borderTop: '1px solid #30294E' }}
-                  className={styles.socialItem}
-                  href="https://twitter.com/highlightio"
-                  target="_blank"
-                >
-                  <FaTwitter style={{ height: 20, width: 20 }}></FaTwitter>
-                  <Typography type="copy3">Follow us!</Typography>
-                </Link>
-              </div>
-            )}
             <div className={styles.breadcrumb}>
               {!isSdkDoc &&
-                getBreadcrumbs(metadata, docOptions, docIndex).map(
-                  (breadcrumb, i) =>
-                    i === 0 ? (
+                getBreadcrumbs(metadata, docOptions, docIndex).map((breadcrumb, i) =>
+                  i === 0 ? (
+                    <Link href={breadcrumb.path} legacyBehavior>
+                      {breadcrumb.title}
+                    </Link>
+                  ) : breadcrumb.hasContent ? (
+                    <>
+                      {` / `}
                       <Link href={breadcrumb.path} legacyBehavior>
                         {breadcrumb.title}
                       </Link>
-                    ) : breadcrumb.hasContent ? (
-                      <>
-                        {` / `}
-                        <Link href={breadcrumb.path} legacyBehavior>
-                          {breadcrumb.title}
-                        </Link>
-                      </>
-                    ) : (
-                      <>
-                        {` / `}
-                        {breadcrumb.title}
-                      </>
-                    ),
+                    </>
+                  ) : (
+                    <>
+                      {` / `}
+                      {breadcrumb.title}
+                    </>
+                  ),
                 )}
             </div>
             <h3
@@ -894,20 +760,13 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
+                        QuickStart,
                         DocsCard,
                         DocsCardGroup,
                         h1: (props) => <h4 {...props} />,
                         h2: (props) => {
-                          if (
-                            props.children &&
-                            typeof props.children === 'string'
-                          ) {
-                            return (
-                              <h5
-                                id={generateIdString(props.children as string)}
-                                {...props}
-                              />
-                            )
+                          if (props.children && typeof props.children === 'string') {
+                            return <h5 id={generateIdString(props.children as string)} {...props} />
                           }
                           return <></>
                         },
@@ -916,30 +775,18 @@ const DocPage = ({
                         h5: (props) => <h6 {...props} />,
                         code: (props) => {
                           // check if props.children is a string
-                          if (
-                            props.children &&
-                            props.className === 'language-hint'
-                          ) {
-                            return (
-                              <Callout content={props.children as string} />
-                            )
-                          } else if (
-                            typeof props.children === 'string' &&
-                            (props.children.match(/\n/g) || []).length
-                          ) {
+                          if (props.children && props.className === 'language-hint') {
+                            return <Callout content={props.children as string} />
+                          } else if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
                             return (
                               <HighlightCodeBlock
-                                language={'js'}
+                                language={props.className ? (props.className.split('language-').pop() ?? 'js') : 'js'}
                                 text={props.children}
                                 showLineNumbers={false}
                               />
                             )
                           }
-                          return (
-                            <code className={styles.inlineCodeBlock}>
-                              {props.children}
-                            </code>
-                          )
+                          return <code className={styles.inlineCodeBlock}>{props.children}</code>
                         },
                         ul: (props) => {
                           // check if the type of props.children is an array.
@@ -969,28 +816,16 @@ const DocPage = ({
             )}
             <div className={styles.pageNavigateRow}>
               {docIndex > 0 ? (
-                <Link
-                  href={docOptions[docIndex - 1]?.simple_path ?? ''}
-                  passHref
-                  className={styles.pageNavigate}
-                >
+                <Link href={docOptions[docIndex - 1]?.simple_path ?? ''} passHref className={styles.pageNavigate}>
                   <BiChevronLeft />
-                  <Typography type="copy2">
-                    {docOptions[docIndex - 1]?.metadata.title}
-                  </Typography>
+                  <Typography type="copy2">{docOptions[docIndex - 1]?.metadata.title}</Typography>
                 </Link>
               ) : (
                 <div></div>
               )}
               {docIndex < docOptions?.length - 1 ? (
-                <Link
-                  href={docOptions[docIndex + 1]?.simple_path ?? ''}
-                  passHref
-                  className={styles.pageNavigate}
-                >
-                  <Typography type="copy2">
-                    {docOptions[docIndex + 1].metadata.title}
-                  </Typography>
+                <Link href={docOptions[docIndex + 1]?.simple_path ?? ''} passHref className={styles.pageNavigate}>
+                  <Typography type="copy2">{docOptions[docIndex + 1].metadata.title}</Typography>
                   <BiChevronRight />
                 </Link>
               ) : (
@@ -998,12 +833,9 @@ const DocPage = ({
               )}
             </div>
           </div>
-          {!isSdkDoc && (
+          {!isSdkDoc && !isQuickstart && (
             <div className={styles.rightSection}>
-              <PageRightBar
-                title={metadata ? metadata.title : ''}
-                relativePath={relPath ? relPath : ''}
-              />
+              <PageRightBar title={metadata ? metadata.title : ''} relativePath={relPath ? relPath : ''} />
             </div>
           )}
         </div>
@@ -1014,10 +846,7 @@ const DocPage = ({
 
 // function that takes a markdown string, and replaces all of the relative links with links in the form "/docs..."
 // relativePath is the relative path of the doc that this link lives in.
-const resolveEmbeddedLinksFromMarkdown = (
-  markdownContent: string,
-  relativePath: string,
-): string => {
+const resolveEmbeddedLinksFromMarkdown = (markdownContent: string, relativePath: string): string => {
   const regex = /\[(.*?)\]\((.*?)\)/g
   // replace all of the links in the markdown file
   const newContent = markdownContent.replaceAll(regex, (_, text, link) => {
@@ -1030,11 +859,7 @@ const resolveEmbeddedLinksFromMarkdown = (
   return newContent
 }
 
-
-const resolveEmbeddedLinksFromHref = (
-  markdownContent: string,
-  relativePath: string,
-): string => {
+const resolveEmbeddedLinksFromHref = (markdownContent: string, relativePath: string): string => {
   // regex for matching text in the form href="..."
   const hrefRegex = /href="(.*)"/g
   // replace all of the links in the markdown file
@@ -1048,13 +873,8 @@ const resolveEmbeddedLinksFromHref = (
   return newContent
 }
 
-const resolveEmbeddedLink = (
-  linkString: string,
-  relativePath: string,
-): string => {
-  var absolutePath = path
-    .resolve(relativePath, '..', linkString)
-    .replace('.md', '')
+const resolveEmbeddedLink = (linkString: string, relativePath: string): string => {
+  var absolutePath = path.resolve(relativePath, '..', linkString).replace('.md', '')
   absolutePath = removeOrderingPrefix(absolutePath)
   const withDocs = path.join('/docs', absolutePath)
   return withDocs
@@ -1070,7 +890,7 @@ const DocsCard = ({
   title,
   path,
   href,
-}: React.PropsWithChildren<{ title: string; href: string; path: string; }>) => {
+}: React.PropsWithChildren<{ title: string; href: string; path: string }>) => {
   return (
     <Link href={href} className={styles.docsCard}>
       <Typography type="copy2" emphasis>
@@ -1079,6 +899,69 @@ const DocsCard = ({
       <Typography type="copy2">{children}</Typography>
     </Link>
   )
+}
+
+const QuickStart = (content: { content: QuickStartContent }) => {
+  const { content: c } = content;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+      <Typography onDark type='copy1'>{c.subtitle}</Typography>
+      <div style={{ borderTop: "1px solid #EBFF5E", width: 200 }} />
+      <div style={{ display: "flex", flexDirection: "column", marginTop: 10 }}>
+        {
+          c.entries.map((step: QuickStartStep, i: number) => (
+            <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
+              <div style={{ display: "flex", width: 40, flexDirection: "column" }}>
+                <div style={{
+                  width: 32,
+                  minHeight: 32,
+                  backgroundColor: "#30294E",
+                  borderRadius: 100,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}>{i + 1}</div>
+                <div style={{ width: 16, height: "100%", borderRight: "2px solid #30294E" }}></div>
+              </div>
+              <div style={{ width: "100%", display: "flex", gap: 20, marginBottom: 42 }}>
+                <div style={{ width: "50%", display: "flex", flexDirection: "column", gap: 8 }} className={styles.quickStartSubtext}>
+                  <Typography type='copy2' emphasis>{step.title}</Typography>
+                  <Markdown
+                    options={{
+                      forceBlock: true,
+                      overrides: {
+                        code: (props) => {
+                          return <code className={styles.inlineCodeBlock}>{props.children}</code>
+                        },
+                        ul: (props) => {
+                          return <div>hellooooo</div>
+                        },
+
+
+                      }
+                    }}
+                  >
+                    {step.content}
+                  </Markdown>
+                </div>
+                <div style={{ width: "50%" }}>
+                  {step.code &&
+                    <HighlightCodeBlock
+                      style={{ position: "sticky", top: "80px" }}
+                      language={step.code.language}
+                      text={step.code.text}
+                      showLineNumbers={false}
+                    />
+                  }
+                </div>
+              </div>
+            </div>
+          ))
+        }
+
+      </div>
+    </div>
+  );
 }
 
 export default DocPage

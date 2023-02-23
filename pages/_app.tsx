@@ -16,7 +16,6 @@ import { useEffect } from 'react';
 import { rudderInitialize } from '../scripts/rudder-initialize';
 import { SSRProvider } from 'react-aria';
 import { setAttributionData } from '../utils/attribution';
-import { GithubPopup } from '../components/GithubPopup/GithubPopup';
 
 Router.events.on('routeChangeStart', nProgress.start);
 Router.events.on('routeChangeError', nProgress.done);
@@ -51,15 +50,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <SSRProvider>
-      <Script id="google-tag-manager" strategy="afterInteractive">
-        {`
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-P4GK7XG');
-      `}
-      </Script>
       <Head>
         <title>
           highlight.io: The open source monitoring platform.

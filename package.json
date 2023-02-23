@@ -12,6 +12,8 @@
     "styles": "yarn typed-scss-modules ./ --watch --ignore '**/node_modules'"
   },
   "dependencies": {
+    "@docsearch/css": "3",
+    "@docsearch/js": "3",
     "@graphcms/rich-text-react-renderer": "^0.6.1",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
@@ -81,5 +83,6 @@
     "tailwindcss": "^3.1.8",
     "typed-scss-modules": "^7.0.1",
     "typescript": "4.9.4"
-  }
+  },
+  "packageManager": "yarn@3.4.1"
 }

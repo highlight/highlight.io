@@ -1,12 +1,12 @@
-import styles from '../Docs.module.scss';
-import { useRouter } from 'next/router';
-import { HeroVideo } from '../../Home/HeroVideo/HeroVideo';
-import { Callout } from '../Callout/Callout';
-import { HighlightCodeBlock } from '../HighlightCodeBlock/HighlightCodeBlock';
-import Link from 'next/link';
-import { BiLink } from 'react-icons/bi';
-import { createElement } from 'react';
-import classNames from 'classnames';
+import styles from '../Docs.module.scss'
+import { useRouter } from 'next/router'
+import { HeroVideo } from '../../Home/HeroVideo/HeroVideo'
+import { Callout } from '../Callout/Callout'
+import { HighlightCodeBlock } from '../HighlightCodeBlock/HighlightCodeBlock'
+import Link from 'next/link'
+import { BiLink } from 'react-icons/bi'
+import { createElement } from 'react'
+import classNames from 'classnames'
 
 const getIdFromHTMLHeaderProps = (props: any) => {
   return props?.children
@@ -15,26 +15,25 @@ const getIdFromHTMLHeaderProps = (props: any) => {
     .replace(/[^a-zA-Z ]/g, '')
     .trim()
     .split(' ')
-    .join('-');
-};
+    .join('-')
+}
 
 export const getIdFromHeaderProps = (props: any) => {
   return props?.node?.children
-    .map((child: any) =>
-      child.tagName === 'code' ? child?.children[0].value : child.value
-    )
+    .map((child: any) => (child.tagName === 'code' ? child?.children[0].value : child.value))
     .join('')
     .replace(/[^a-zA-Z ]/g, '')
     .trim()
     .split(' ')
-    .join('-');
-};
+    .join('-')
+}
 
 export const generateIdString = (str: string) => {
-  return str.replace(/[^a-zA-Z ]/g, '')
+  return str
+    .replace(/[^a-zA-Z ]/g, '')
     .trim()
     .split(' ')
-    .join('-');
+    .join('-')
 }
 
 const copyHeadingIcon = (index: number) => {
@@ -42,14 +41,12 @@ const copyHeadingIcon = (index: number) => {
     <span className={styles.headingCopyIcon} key={index}>
       <BiLink />
     </span>
-  );
-};
+  )
+}
 
-export const DocsMarkdownRenderer = (
-  renderType: 'h4' | 'h5' | 'h6' | 'code' | 'a' | 'div'
-) => {
+export const DocsMarkdownRenderer = (renderType: 'h4' | 'h5' | 'h6' | 'code' | 'a' | 'div') => {
   function DocsTypography({ ...props }) {
-    const router = useRouter();
+    const router = useRouter()
     return (
       <>
         {renderType === 'code' ? (
@@ -59,7 +56,7 @@ export const DocsMarkdownRenderer = (
             <Callout content={props.children[0]} />
           ) : (
             <HighlightCodeBlock
-              language={'js'}
+              language={props.className ? props.className.split('language-').pop() : 'js'}
               text={props.children[0]}
               showLineNumbers={false}
             />
@@ -77,54 +74,44 @@ export const DocsMarkdownRenderer = (
               className: styles.contentRender,
               ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(renderType)
                 ? {
-                  id: getIdFromHTMLHeaderProps(props),
-                  onClick: () => {
-                    document
-                      .querySelector(`#${getIdFromHeaderProps(props)}`)
-                      ?.scrollIntoView({
+                    id: getIdFromHTMLHeaderProps(props),
+                    onClick: () => {
+                      document.querySelector(`#${getIdFromHeaderProps(props)}`)?.scrollIntoView({
                         behavior: 'smooth',
-                      });
-                    const basePath = router.asPath.split('#')[0];
-                    const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
-                      props
-                    )}`;
-                    window.history.replaceState(
-                      {
-                        ...window.history.state,
-                        as: newUrl,
-                        url: newUrl,
-                      },
-                      '',
-                      newUrl
-                    );
-                  },
-                }
+                      })
+                      const basePath = router.asPath.split('#')[0]
+                      const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(props)}`
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl,
+                      )
+                    },
+                  }
                 : {}),
             },
             [
               ...props?.children.map((c: any, i: number) =>
-                c.props
-                  ? createElement(
-                    'code',
-                    { key: i, className: styles.inlineCodeBlock },
-                    c?.props.children
-                  )
-                  : c
+                c.props ? createElement('code', { key: i, className: styles.inlineCodeBlock }, c?.props.children) : c,
               ),
               copyHeadingIcon(props?.children?.length ?? 0),
-            ] || ''
+            ] || '',
           )
         )}
       </>
-    );
+    )
   }
 
-  return DocsTypography;
-};
+  return DocsTypography
+}
 
 export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
   function DocsTypography({ ...props }) {
-    const router = useRouter();
+    const router = useRouter()
     return (
       <>
         {renderType === 'code' ? (
@@ -132,7 +119,7 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
             <code className={styles.inlineCodeBlock}>{props.children[0]}</code>
           ) : (
             <HighlightCodeBlock
-              language={'js'}
+              language={props.className ? props.className.split('language-').pop() : 'js'}
               text={props.children[0]}
               showLineNumbers={false}
             />
@@ -150,54 +137,44 @@ export const MethodParameterRenderer = (renderType: 'h5' | 'code' | 'a') => {
               className: classNames(styles.contentRender),
               ...(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(renderType)
                 ? {
-                  id: getIdFromHTMLHeaderProps(props),
-                  onClick: () => {
-                    document
-                      .querySelector(`#${getIdFromHeaderProps(props)}`)
-                      ?.scrollIntoView({
+                    id: getIdFromHTMLHeaderProps(props),
+                    onClick: () => {
+                      document.querySelector(`#${getIdFromHeaderProps(props)}`)?.scrollIntoView({
                         behavior: 'smooth',
-                      });
-                    const basePath = router.asPath.split('#')[0];
-                    const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(
-                      props
-                    )}`;
-                    window.history.replaceState(
-                      {
-                        ...window.history.state,
-                        as: newUrl,
-                        url: newUrl,
-                      },
-                      '',
-                      newUrl
-                    );
-                  },
-                }
+                      })
+                      const basePath = router.asPath.split('#')[0]
+                      const newUrl = `${basePath}#${getIdFromHTMLHeaderProps(props)}`
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl,
+                      )
+                    },
+                  }
                 : {}),
             },
             [
               ...props?.children.map((c: any, i: number) =>
-                c.props
-                  ? createElement(
-                    'code',
-                    { key: i, className: styles.inlineCodeBlock },
-                    c?.props.children
-                  )
-                  : c
+                c.props ? createElement('code', { key: i, className: styles.inlineCodeBlock }, c?.props.children) : c,
               ),
               copyHeadingIcon(props?.children?.length ?? 0),
-            ] || ''
+            ] || '',
           )
         )}
       </>
-    );
+    )
   }
 
-  return DocsTypography;
-};
+  return DocsTypography
+}
 
 export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a' | 'ul') => {
   function DocsTypography({ ...props }) {
-    const router = useRouter();
+    const router = useRouter()
     return (
       <>
         {type === 'code' ? (
@@ -211,7 +188,7 @@ export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a
             <Callout content={props.children[0]} />
           ) : (
             <HighlightCodeBlock
-              language={'js'}
+              language={props.className ? props.className.split('language-').pop() : 'js'}
               text={props.children[0]}
               showLineNumbers={false}
             />
@@ -225,7 +202,7 @@ export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a
                     {c.props.children.map((e: any) => e)}
                   </li>
                 )
-              );
+              )
             })}
           </ul>
         ) : type === 'a' ? (
@@ -241,47 +218,39 @@ export const getDocsTypographyRenderer = (type: 'h4' | 'h6' | 'h5' | 'code' | 'a
               className: styles.contentRender,
               ...(['h4', 'h5', 'h6'].includes(type)
                 ? {
-                  id: getIdFromHeaderProps(props),
-                  onClick: () => {
-                    document
-                      .querySelector(`#${getIdFromHeaderProps(props)}`)
-                      ?.scrollIntoView({
+                    id: getIdFromHeaderProps(props),
+                    onClick: () => {
+                      document.querySelector(`#${getIdFromHeaderProps(props)}`)?.scrollIntoView({
                         behavior: 'smooth',
-                      });
-                    const basePath = router.asPath.split('#')[0];
-                    const newUrl = `${basePath}#${getIdFromHeaderProps(
-                      props
-                    )}`;
-                    window.history.replaceState(
-                      {
-                        ...window.history.state,
-                        as: newUrl,
-                        url: newUrl,
-                      },
-                      '',
-                      newUrl
-                    );
-                  },
-                }
+                      })
+                      const basePath = router.asPath.split('#')[0]
+                      const newUrl = `${basePath}#${getIdFromHeaderProps(props)}`
+                      window.history.replaceState(
+                        {
+                          ...window.history.state,
+                          as: newUrl,
+                          url: newUrl,
+                        },
+                        '',
+                        newUrl,
+                      )
+                    },
+                  }
                 : {}),
             },
             [
               ...props?.node?.children.map((c: any, i: number) =>
                 c.tagName === 'code'
-                  ? createElement(
-                    c.tagName,
-                    { key: i, className: styles.inlineCodeBlock },
-                    c?.children[0].value
-                  )
-                  : c.value
+                  ? createElement(c.tagName, { key: i, className: styles.inlineCodeBlock }, c?.children[0].value)
+                  : c.value,
               ),
               copyHeadingIcon(props?.node?.children?.length ?? 0),
-            ] || ''
+            ] || '',
           )
         )}
       </>
-    );
+    )
   }
 
-  return DocsTypography;
-};
+  return DocsTypography
+}

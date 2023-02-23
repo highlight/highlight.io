@@ -96,11 +96,6 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
       <main>
         <div className={styles.caseListLayout}>
           <div className={styles.caseListTitle}>
-            <div className={productStyles.highlightedBadge}>
-              <Typography type="copy4" emphasis>
-                Customer Case Studies
-              </Typography>
-            </div>
             <h1>
               What <span className={styles.limeAccent}>our customers</span> have
               to say.

@@ -22,6 +22,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { matchSorter } from 'match-sorter';
 import { PostAuthor } from '../../components/Blog/Author';
+import styles from '../../components/Blog/Blog.module.scss';
 
 export async function loadPostsFromHygraph(tag?: string) {
   const QUERY = gql`
@@ -144,13 +145,8 @@ export const Blog = ({
   const shouldFeature =
     !debouncedSearchQuery && currentTag.slug === allTag.slug && page <= 1;
 
-  const featuredPosts = posts.filter((p) => shouldFeature && p.featured);
-  const unfeaturedPosts = posts.filter((p) =>
-    shouldFeature ? !p.featured : true
-  );
-
   const filteredPosts = debouncedSearchQuery
-    ? matchSorter(unfeaturedPosts, debouncedSearchQuery, {
+    ? matchSorter(posts, debouncedSearchQuery, {
       keys: [
         'title',
         {
@@ -159,7 +155,7 @@ export const Blog = ({
         },
       ],
     })
-    : unfeaturedPosts;
+    : posts;
 
   page = Math.ceil(Math.min(page, filteredPosts.length / itemsPerPage));
 
@@ -173,43 +169,25 @@ export const Blog = ({
     <>
       <Navbar />
       <main>
-        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1328px] mx-auto items-start px-6">
-          <div /* Sidebar */
-            className="w-[296px] flex-shrink-0 hidden desktop:flex  flex-col gap-2 p-2 border rounded-lg border-divider-on-dark"
-          >
-            {shownTags.map((tag) => (
-              <SidebarTag
-                {...tag}
-                key={tag.slug}
-                current={currentTag.slug === tag.slug}
-              />
-            ))}
-          </div>
+        <div className="flex flex-row w-full gap-8 my-20 desktop:max-w-[1100px] mx-auto items-start px-6">
           <div /* Main Side */ className="flex flex-col flex-1 w-full gap-11">
             <div /* Category Description */
-              className="flex flex-col items-start gap-5 max-w-[808px]"
+              className="flex flex-col items-start gap-5"
             >
-              <Typography
-                type="copy4"
-                emphasis
-                className="py-0.5 px-3 bg-highlight-yellow rounded-full text-dark-background"
-              >
-                {isStartupStack ? "The Startup Stack" : "The Highlight Blog"}
-              </Typography>
               <h3>
                 {isStartupStack ? "Welcome to the Startup Stack!" : currentTag.name}
               </h3>
-              {isStartupStack ? <Typography type="copy1">
+              {isStartupStack ? <Typography className={styles.copyOnDark} type="copy1">
                 This is where we talk about the tools and tech you can use to build your next Startup! Read through our episodes below or find us <Link href="https://www.youtube.com/channel/UCATzQs36Mo7Cezt5Ij9ayZQ">on YouTube</Link>.
               </Typography> :
-                <Typography type="copy1">
+                <Typography type="copy1" className={styles.copyOnDark}>
                   {currentTag.description || allTag.description}
                 </Typography>
               }
             </div>
             <div /* Search and Posts */ className="flex flex-col gap-6">
-              <div /* Mobile Tags Tabs */
-                className="flex gap-8 overflow-x-scroll desktop:hidden scrollbar-hidden"
+              <div /* Tags Tabs */
+                className="flex gap-8 overflow-x-scroll scrollbar-hidden"
               >
                 {shownTags.map((tag) => (
                   <TagTab
@@ -223,7 +201,7 @@ export const Blog = ({
                 className="flex flex-col justify-between w-full gap-4 mobile:flex-row"
               >
                 <div /* Search */
-                  className="flex items-center flex-grow gap-1 px-2 transition-colors border rounded-lg text-copy-on-dark border-divider-on-dark focus-within:border-copy-on-light h-9"
+                  className="flex items-center flex-grow gap-1 px-2 transition-colors border rounded-lg text-copy-on-dark border-divider-on-dark focus-within:border-copy-on-light h-11"
                 >
                   <HiOutlineSearch className="w-5 h-5 text-copy-on-light" />
                   <input
@@ -240,29 +218,7 @@ export const Blog = ({
                     }
                   />
                 </div>
-                {!debouncedSearchQuery && (
-                  <PageController /* Pagination */
-                    page={page}
-                    count={filteredPosts.length / itemsPerPage}
-                    tag={currentTag.slug}
-                  />
-                )}
               </div>
-              {featuredPosts.length > 0 && (
-                <div /* Featured Posts */
-                  className="flex flex-col gap-3 p-3 bg-divider-on-dark rounded-xl"
-                >
-                  <Typography
-                    type="copy4"
-                    className="px-3 py-0.5 bg-dark-background rounded-full text-copy-on-dark self-start"
-                  >
-                    Featured Posts
-                  </Typography>
-                  {featuredPosts.map((post) => (
-                    <PostItem post={post} key={post.slug} />
-                  ))}
-                </div>
-              )}
               {displayedPosts.map((post) => {
                 return (
                   <>{

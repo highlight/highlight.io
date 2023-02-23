@@ -1,5 +1,6 @@
 .mainWrapper {
   display: flex;
+  border-top: 1px solid var(--color-divider-on-dark);
 }
 
 .docsCard {
@@ -23,7 +24,7 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
   flex-wrap: wrap;
-  margin-top: 14px;
+  margin-top: 24px;
   margin-bottom: 34px;
 }
 
@@ -45,7 +46,7 @@
   flex: 0 0 300px;
   position: sticky;
   height: calc(100vh - 54px);
-  top: 54px;
+  top: 0px;
   z-index: 5;
   max-width: 300px;
 }
@@ -210,6 +211,16 @@
   line-height: 36px;
 }
 
+.quickStartSubtext {
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px !important;
+    margin: 0 !important;
+    color: var(--copy-on-dark);
+  }
+}
+
 .contentRender {
   h4,
   h5 {
@@ -229,7 +240,7 @@
     font-size: 18px;
     font-weight: 400;
     line-height: 34px !important;
-    margin: var(--size-medium) 0 !important;
+    margin: var(--size-medium) 0;
     color: var(--copy-on-dark);
   }
 
@@ -399,7 +410,6 @@ h5:hover .headingCopyIcon {
   min-height: 54px;
   display: flex;
   align-items: stretch;
-  border-bottom: 1px solid var(--color-divider-on-dark);
   border-top: 1px solid var(--color-divider-on-dark);
   background-color: var(--color-primary-background);
   z-index: 10;
@@ -407,9 +417,9 @@ h5:hover .headingCopyIcon {
 
 .leftInner {
   position: relative;
-  padding: 0 var(--size-medium);
-  flex: 0 0 300px;
+  padding: var(--size-small) var(--size-medium);
   display: flex;
+  border-bottom: 1px solid var(--color-divider-on-dark);
   align-items: center;
 }
 
@@ -611,7 +621,11 @@ h5:hover .headingCopyIcon {
 }
 
 .sdkCenterSection {
-  max-width: none;
+  max-width: 1500px;
+}
+
+.quickStartCenterSection {
+  max-width: 1500px;
 }
 
 .rightSection {
@@ -620,7 +634,7 @@ h5:hover .headingCopyIcon {
   flex-direction: column;
   position: sticky;
   padding: var(--size-xLarge) var(--size-large);
-  top: 80px;
+  top: 0px;
   height: calc(100vh - 80px);
 }
 
@@ -822,6 +836,7 @@ h5:hover .headingCopyIcon {
 }
 
 .callout {
+  margin-top: 18px;
   display: flex;
   background: var(--color-divider-on-dark);
   border: 1px solid var(--color-divider-on-dark);

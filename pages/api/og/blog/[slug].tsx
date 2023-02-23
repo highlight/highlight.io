@@ -106,7 +106,14 @@ export default async function handler(req: NextRequest) {
             }}>
               Highlight Blog
             </span>
-            <span style={{ fontSize: 50, marginBottom: 60, lineHeight: 1.2 }}>
+            <span style={{
+              fontSize: 50,
+              marginBottom: 60,
+              lineHeight: "1.2em",
+              maxHeight: "4.2em",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+            }}>
               {post?.title || slug}
             </span>
             <div tw={'flex flex-row items-center'}>

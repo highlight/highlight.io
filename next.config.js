@@ -31,6 +31,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/docs/getting-started',
+        destination: '/docs/getting-started/overview',
+        permanent: false,
+      },
+      {
         source: '/docs/general',
         destination: '/docs/general/welcome',
         permanent: false,

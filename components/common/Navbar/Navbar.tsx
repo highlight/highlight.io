@@ -15,6 +15,10 @@ import ProductDropdown from './ProductDropdown';
 import { GithubPopup } from '../../GithubPopup/GithubPopup';
 import { AiFillGithub } from 'react-icons/ai';
 import { FaDiscord } from 'react-icons/fa';
+import { DocSearch } from '@docsearch/react';
+
+import '@docsearch/css';
+import { useMediaQuery } from '../../MediaQuery/MediaQuery';
 
 const Navbar = ({
   hideFreeTrialText,
@@ -89,7 +93,6 @@ const Navbar = ({
               <Link href={'/'} className={styles.urlStyle}>
                 {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
               </Link>
-
               <Typography type="copy3" emphasis={true}>
                 <p
                   className={classNames(styles.navTitle, {
@@ -100,6 +103,14 @@ const Navbar = ({
                   {title}
                 </p>
               </Typography>
+              {isDocsPage &&
+                <DocSearch
+                  placeholder='Search the highlight.io docs'
+                  appId="JGT9LI80J2"
+                  indexName="highlight"
+                  apiKey="ac336720d8f4f996abe3adee603a1c84"
+                />
+              }
             </div>
             <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? (
@@ -108,6 +119,7 @@ const Navbar = ({
                 <AiOutlineMenu />
               )}
             </div>
+
             {isOpen && (
               <div className={styles.mobileMenu}>
                 <ul className={classNames(styles.menuList, styles.header)}>
@@ -191,22 +203,6 @@ const Navbar = ({
                 styles.headerRight
               )}
             >
-              {isDocsPage && (
-                <>
-                  <Link
-                    href="https://discord.gg/yxaXEAqgwN"
-                    className={styles.headerButton}
-                  >
-                    <Typography type="copy2">Community</Typography>
-                  </Link>
-                  <Link
-                    href="https://github.com/highlight/highlight"
-                    className={styles.headerButton}
-                  >
-                    <Typography type="copy2">Github</Typography>
-                  </Link>
-                </>
-              )}
               {!isDocsPage && (
                 <Link href="/docs" className={classNames(styles.headerButton, styles.headerButtonRight)}>
                   <Typography type="copy2">Docs</Typography>
