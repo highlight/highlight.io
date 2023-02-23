@@ -751,7 +751,7 @@ const DocPage = ({
         </div>
         <div className={styles.contentSection}>
           <div
-            className={classNames(styles.centerSection, {
+            className={classNames("DocSearch-content", styles.centerSection, {
               [styles.sdkCenterSection]: isSdkDoc,
               [styles.quickStartCenterSection]: isQuickstart,
             })}
