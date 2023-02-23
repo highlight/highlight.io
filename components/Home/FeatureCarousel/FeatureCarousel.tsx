@@ -53,7 +53,7 @@ export type Feature = {
   feature3?: string
   feature3Link?: string
   featureImage3?: JSX.Element
-  link: string
+  link?: string
 }
 
 //feature images need classname "h-[20px] w-[20px]"
@@ -143,7 +143,6 @@ const features: Feature[] = [
     feature3: 'Self host highlight.io',
     feature3Link: "/docs/general/company/open-source/self-host-hobby",
     featureImage3: <ExclamationCircleFilled className="h-[20px] w-[20px]" />,
-    link: 'https://github.com/highlight/highlight',
   },
 ]
 

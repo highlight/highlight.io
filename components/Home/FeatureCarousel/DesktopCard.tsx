@@ -125,15 +125,17 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
             )}
           </div>
         )}
-        <div className="flex justify-center sm:justify-start mb-4">
-          <Link href={`${feature.link}`} target="_blank">
-            <Typography type="copy3" emphasis={true}>
-              <div className="flex items-center justify-center gap-2">
-                Learn More <HiArrowRight className="h-5" />
-              </div>
-            </Typography>
-          </Link>
-        </div>
+        {feature.link &&
+          <div className="flex justify-center sm:justify-start mb-4">
+            <Link href={`${feature.link}`} target="_blank">
+              <Typography type="copy3" emphasis={true}>
+                <div className="flex items-center justify-center gap-2">
+                  Learn More <HiArrowRight className="h-5" />
+                </div>
+              </Typography>
+            </Link>
+          </div>
+        }
       </div>
       <div className="flex sm:hidden justify-center w-full">
         <Image
