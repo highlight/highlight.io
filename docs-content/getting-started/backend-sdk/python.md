@@ -58,6 +58,26 @@ from highlight_io.integrations.django import DjangoIntegration
 H = highlight_io.H("YOUR_PROJECT_ID", integrations=[DjangoIntegration()], record_logs=True)
 ```
 
+## Adding Highlight to FastAPI
+Import the FastAPI middleware and setup Highlight with your FastAPI App!
+
+```python
+from fastapi import FastAPI
+
+import highlight_io
+from highlight_io.integrations.fastapi import FastAPIMiddleware
+
+H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
+
+app = FastAPI()
+app.add_middleware(FastAPIMiddleware)
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+```
+
 ## Adding Highlight to Azure Functions
 
 Just add the `@observe_handler` decorator to your functions!
