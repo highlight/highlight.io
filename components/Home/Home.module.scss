@@ -162,11 +162,7 @@
 }
 
 .gradientText {
-  background: -webkit-linear-gradient(
-    135deg,
-    var(--color-yellow-300),
-    var(--color-yellow-600)
-  );
+  background: -webkit-linear-gradient(135deg, var(--color-yellow-300), var(--color-yellow-600));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -190,6 +186,40 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+//convert to css from tailwind
+//flex items-center gap-2 border-[1px] border-divider-on-dark py-3 px-5 rounded-lg text-color-copy-on-dark
+.innerCarouselFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-divider-on-dark);
+  padding: 12px 20px;
+  border-radius: 0.5rem;
+  color: var(--color-copy-on-dark);
+  cursor: auto;
+
+  &:hover {
+    color: var(--color-copy-on-dark) !important;
+  }
+}
+
+.innerCarouselButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-secondary-200);
+  padding: 12px 20px;
+  border-radius: 0.5rem;
+  color: var(--color-secondary-200);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-secondary-300) !important;
+    color: var(--color-primary-background) !important;
   }
 }
 
@@ -1256,5 +1286,13 @@
     .ctaContainer {
       padding: 0 !important;
     }
+  }
+
+  .landingAnchorHead {
+    width: 100vw;
+    margin-left: var(--size-medium);
+    margin-right: var(--size-medium);
+    font-size: 44px;
+    line-height: 48px !important;
   }
 }

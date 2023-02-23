@@ -60,6 +60,8 @@ export const highlightedText: string
 export const hollowButton: string
 export const imageInner: string
 export const infoContainer: string
+export const innerCarouselButton: string
+export const innerCarouselFeature: string
 export const jayImage: string
 export const landingAnchorHead: string
 export const landingInfoRow: string
