@@ -7,7 +7,7 @@ updatedAt: 2023-01-24T02:07:22.000Z
 
 # Application Architecture
 
-First, you'll want to understand how Highlight is built to make changes. The best way to get a sense of this is to try and make simple dummy changes to different parts of the stack and see how the changes propagate.
+Here's the high level structure of the code that you'll want to start tinkering with.
 
 -   SDKs `sdk/`
 
