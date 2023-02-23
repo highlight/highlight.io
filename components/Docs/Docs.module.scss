@@ -487,36 +487,6 @@ h5:hover .headingCopyIcon {
   }
 }
 
-.docSearchbar {
-  border: 1px solid var(--color-divider-on-dark);
-  border-radius: var(--border-radius);
-  padding: var(--size-xxSmall) var(--size-small);
-  display: flex;
-  flex: 1 0 360px;
-  width: 100%;
-  gap: var(--size-xSmall);
-  align-items: center;
-
-  svg {
-    flex: 0 0 24px;
-  }
-
-  input {
-    font-family: 'Poppins';
-    background: transparent;
-    border: 0;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
-    color: var(--color-copy-on-dark);
-    flex: 1 1 auto;
-
-    &:focus {
-      outline: none;
-    }
-  }
-}
-
 .codeBlock {
   background-color: var(--color-primary-500);
   border-radius: 20px;
