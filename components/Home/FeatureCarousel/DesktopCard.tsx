@@ -6,25 +6,40 @@ import { Typography } from '../../common/Typography/Typography'
 import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
 import { Code } from 'react-code-blocks'
 import Link from 'next/link'
+import { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
+import { AnimateCarouselImage, AnimateMobileCarouselImage } from '../../Animate'
 
 const DesktopImage = ({ feature }: { feature: Feature }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  function handleLoad() {
+    setImageLoaded(true);
+  }
+
   return (
     <div className="hidden sm:flex w-1/2">
-      <div
-        className={`absolute bottom-0 ${feature.right ? 'right-0' : 'left-0'}`}
-      >
-        <Image
-          className="object-contain sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px] "
-          src={feature.desktopImage}
-          alt="Feature Spotlight"
-        />
+      <div className="absolute right-0 top-0 bottom-0">
+        <AnimateCarouselImage loaded={imageLoaded} >
+          <Image
+            className={`${feature.right ? 'right-0' : 'left-0'} object-contain absolute bottom-0 sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px]`}
+            src={feature.desktopImage}
+            alt="Feature Spotlight"
+            onLoadingComplete={() => handleLoad()}
+          />
+        </AnimateCarouselImage>
       </div>
-    </div>
+    </div >
   )
 }
 
 const DesktopFeatures = ({ feature }: { feature: Feature }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  function handleLoad() {
+    setImageLoaded(true);
+  }
+
   return (
     <div className={`${feature.code ? "md:w-1/2" : "md:w-2/3"} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
       <div className="flex flex-col gap-4 justify-start md:pt-8 text-left">
@@ -113,7 +128,7 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
         <div className="flex justify-center sm:justify-start mb-4">
           <Link href={`${feature.link}`} target="_blank">
             <Typography type="copy3" emphasis={true}>
-              <div className="flex align-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 Learn More <HiArrowRight className="h-5" />
               </div>
             </Typography>
@@ -122,9 +137,10 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
       </div>
       <div className="flex sm:hidden justify-center w-full">
         <Image
-          className="object-contain max-h-[200px]"
+          className="object-contain max-h-[200px] "
           src={feature.mobileImage}
           alt="Feature Spotlight"
+          onLoadingComplete={() => handleLoad()}
         />
       </div>
     </div >

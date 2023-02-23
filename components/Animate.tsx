@@ -77,3 +77,47 @@ export const AnimateBugRight = ({
     </motion.div>
   )
 }
+
+export const AnimateCarouselImage = ({
+  loaded,
+  children,
+}: React.PropsWithChildren<{ loaded: boolean }>) => {
+  const orig = { bottom: -300, opacity: 0 }
+  const final = { bottom: -20, opacity: 1 }
+  return (
+    <motion.div
+      initial={orig}
+      animate={loaded ? final : orig}
+      transition={{
+        type: 'spring',
+        bounce: 0.2,
+        duration: 0.4,
+      }}
+      className="absolute border-2 right-0 sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px]"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export const AnimateMobileCarouselImage = ({
+  loaded,
+  children,
+}: React.PropsWithChildren<{ loaded: boolean }>) => {
+  const orig = { bottom: -300, opacity: 0 }
+  const final = { bottom: 30, opacity: 1 }
+  return (
+    <motion.div
+      initial={orig}
+      animate={loaded ? final : orig}
+      transition={{
+        type: 'spring',
+        bounce: 0.2,
+        duration: 0.4,
+      }}
+      className="absolute bottom-0 border-2 border-red-500 h-[200px] w-[200px]"
+    >
+      {children}
+    </motion.div>
+  )
+}
