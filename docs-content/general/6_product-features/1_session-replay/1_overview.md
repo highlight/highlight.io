@@ -16,7 +16,9 @@ Session replay gives your team visibility into how people use your web app and i
     </DocsCard>
 </DocsCardGroup>
 
-Read more about the feature we support in Session Replay below:
+## Features.
+
+Read more about the features we support in Session Replay below:
 
 <DocsCardGroup>
     <DocsCard title="Shadow DOM & Web Components."  href="./shadow-dom-web-components.md">
