@@ -42,12 +42,12 @@ const PricingPage: NextPage = () => {
 const billingPeriodOptions = ["Monthly", "Annual"] as const
 type BillingPeriod = typeof billingPeriodOptions[number]
 
-const retentionOptions = ["3 months", "6 months", "12 months", "2 years",] as const
+const retentionOptions = ["3 months", "6 months", "1 year", "2 years",] as const
 type Retention = typeof retentionOptions[number]
 const retentionMultipliers: Record<Retention, number> = {
 	"3 months": 1,
 	"6 months": 1.5,
-	"12 months": 2,
+	"1 year": 2,
 	"2 years": 2.5
 } as const
 
