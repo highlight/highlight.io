@@ -78,19 +78,17 @@ const PlanTable = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
 	const [retention, setRetention] = useState<Retention>("3 months")
 
-	return <div className="flex max-w-full mx-auto mt-16 gap-11"> {/* Pricing */}
-		<div className="flex flex-col flex-shrink-0 w-48 gap-11">
-			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
-			<PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
+	return <div className="flex flex-col items-center max-w-full gap-6 mx-auto mt-16"> {/* Pricing */}
+		<div className="flex gap-12">
+			<RadioOptions title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
+			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
-		<div className="flex flex-col">
-			<div className="flex justify-between w-[1100px]">
-				{Object.entries(priceTiers).map(([name, tier]) =>
-					<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retention} />
-				)}
-			</div>
-			<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#overage">usage rate</a> kicks in.</Typography>
+		<div className="flex justify-between w-[1100px]">
+			{Object.entries(priceTiers).map(([name, tier]) =>
+				<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retention} />
+			)}
 		</div>
+		<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#overage">usage rate</a> kicks in.</Typography>
 		<div className="flex-shrink w-48" />
 	</div>
 }
@@ -114,11 +112,11 @@ const PriceCalculator = () => {
 	const errorsCost = getUsagePrice(errorUsage - tier.errors, 0.20, 1_000)
 	const loggingCost = getUsagePrice(loggingUsage, 1.50, 1_000_000)
 
-	return <div className="flex gap-10 mx-auto mt-12"> {/* Price calculator */}
-		<div className="flex flex-col w-48 gap-11">
-			<PricingRadioFilter title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
-			<PricingRadioFilter title="Pricing Tier" options={tierOptions} value={tierName} onChange={setTierName} />
-			<PricingRadioFilter title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
+	return <div className="flex flex-col items-center gap-10 mx-auto mt-12"> {/* Price calculator */}
+		<div className="flex gap-12">
+			<RadioOptions title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
+			<RadioOptions title="Pricing Tier" options={tierOptions} value={tierName} onChange={setTierName} />
+			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
 		<div className="w-[1100px] flex flex-col items-end">
 			<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
@@ -177,17 +175,18 @@ const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: strin
 		</span>
 	</div>
 
-const PricingRadioFilter = <T extends string>({ title, options, value, onChange }: { title: string, options: readonly T[], value?: T, onChange?: (value: T) => void }) => {
-	return <RadioGroup value={value} onChange={onChange} className="border rounded-lg border-divider-on-dark">
-		<RadioGroup.Label className="block px-3 py-1 text-center border-b border-divider-on-dark">
-			<Typography type="copy4" emphasis>{title}</Typography>
+const RadioOptions = <T extends string>({ title, options, value, onChange }: { title: string, options: readonly T[], value?: T, onChange?: (value: T) => void }) => {
+	return <RadioGroup value={value} onChange={onChange} className="flex flex-col items-center gap-2">
+		<RadioGroup.Label className="">
+			<Typography type="copy4" className="text-center text-darker-copy-on-dark">{title}</Typography>
 		</RadioGroup.Label>
-		<div className="divide-y divide-divider-on-dark">
+		<div className="flex p-px border rounded-[10px] gap-1 bg-user-black border-divider-on-dark">
 			{options.map((option) =>
 				<RadioGroup.Option value={option} key={option}>
-					{({ checked }) => <div className="flex items-center h-10 px-3 gap-2.5 cursor-pointer group">
-						<div className={classNames("border-2 rounded-full border-divider-on-dark group-hover:border-darker-copy-on-dark w-4 h-4 transition-colors", checked && "bg-copy-on-dark")} />
-						<Typography type="copy3" className={classNames("group-hover:text-copy-on-dark transition-colors", checked ? "text-copy-on-dark" : "text-darker-copy-on-dark")} emphasis>{option}</Typography>
+					{({ checked }) => <div className="cursor-pointer">
+						<div className={classNames("px-2.5 py-1.5 select-none rounded-lg transition-colors", checked ? "text-dark-background bg-white" : "text-white hover:bg-white/10")}>
+							<Typography type="copy3" emphasis >{option}</Typography>
+						</div>
 					</div>}
 				</RadioGroup.Option>
 			)}
