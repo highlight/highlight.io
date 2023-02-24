@@ -37,7 +37,7 @@ const app = express()
 
 // define any configurations needed
 // <https://docs.highlight.run/api/hinit#w0-highlightoptions>
-const highlightOptions = {}
+const highlightOptions = {projectID: 'YOUR_PROJECT_ID'}
 const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions)
 app.use(highlightHandler)
 
@@ -275,16 +275,12 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   },
 }
 
-export const frontendProductLinks = Object.values(PRODUCTS).filter(
-  (product) => {
-    return product.type == 'frontend'
-  },
-)
+export const frontendProductLinks = Object.values(PRODUCTS).filter((product) => {
+  return product.type == 'frontend'
+})
 export const backendProductLinks = Object.values(PRODUCTS).filter((product) => {
   return product.type == 'backend'
 })
-export const fullStackProductLinks = Object.values(PRODUCTS).filter(
-  (product) => {
-    return product.type == 'fullstack'
-  },
-)
+export const fullStackProductLinks = Object.values(PRODUCTS).filter((product) => {
+  return product.type == 'fullstack'
+})

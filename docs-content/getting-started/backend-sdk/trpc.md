@@ -23,11 +23,9 @@ H.init('<YOUR_PROJECT_ID>', {
 });
 ```
 
-
 The full guide for initializing Highlight in your client can be found [here](../1_overview.md#for-your-frontend) and more information about setting up frontend/backend mapping for any stack can be found [here](../2_frontend-backend-mapping.md).
 
 Lastly, see [H.init()](../../sdk/client.md#Hinit) for a full sdk reference.
-
 
 ## Adding Highlight to your Backend
 
@@ -52,8 +50,8 @@ import { createNextApiHandler } from '@trpc/server/adapters/next'
 import { Handlers } from '@highlight-run/node'
 
 export default createNextApiHandler({
-	// ... your config
-	onError: Handlers.trpcOnError,
+  // ... your config
+  onError: Handlers.trpcOnError,
 })
 ```
 
@@ -66,11 +64,11 @@ import { createNextApiHandler } from '@trpc/server/adapters/next'
 import { Handlers } from '@highlight-run/node'
 
 export default createNextApiHandler({
-	// ... your config
-	onError: ({ error, req }) => {
-		// ... your own error handling logic here
-		Handlers.trpcOnError({ error, req })
-	},
+  // ... your config
+  onError: ({ error, req }) => {
+    // ... your own error handling logic here
+    Handlers.trpcOnError({ error, req }, { projectID: 'YOUR_PROJECT_ID' })
+  },
 })
 ```
 
