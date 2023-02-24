@@ -8,6 +8,7 @@ import homeStyles from "../../components/Home/Home.module.scss";
 import { InformationCircleIcon } from "@heroicons/react/20/solid"
 
 import { RadioGroup } from "@headlessui/react";
+import * as Slider from "@radix-ui/react-slider"
 import { useState } from "react";
 import classNames from "classnames";
 
@@ -99,9 +100,9 @@ const PriceCalculator = () => {
 	const [tierName, setTierName] = useState<TierName>("Free")
 	const [retention, setRetention] = useState<Retention>("3 months")
 
-	const [errorUsage, setErrorUsage] = useState(1000)
-	const [sessionUsage, setSessionUsage] = useState(1000)
-	const [loggingUsage, setLoggingUsage] = useState(1000)
+	const [errorUsage, setErrorUsage] = useState(0)
+	const [sessionUsage, setSessionUsage] = useState(0)
+	const [loggingUsage, setLoggingUsage] = useState(0)
 
 	const tier = priceTiers[tierName]
 	const basePrice = getBasePrice(tier, billingPeriod, retention)
@@ -142,13 +143,30 @@ const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { t
 		<div className="flex flex-col py-5 px-7">
 			<Typography type="copy1" emphasis>{title}</Typography>
 			<Typography type="copy3" className="mt-2.5">{description}</Typography>
-			<input className="mt-4" type="range" step={1000} min={1000} max={10000} value={value} onChange={(ev) => onChange(parseInt(ev.target.value))} />
-			{value}
+			<RangedInput min={0} max={1_000_000} step={500} value={value} onChange={onChange} />
 		</div>
 		<div className="border-l border-divider-on-dark">
 			<CalculatorCostDisplay heading="Base + Usage" cost={cost} />
 		</div>
 	</div>
+}
+
+
+
+const RangedInput = ({ min, max, step, value, onChange }: { min: number, max: number, step: number, value: number, onChange: (value: number) => void }) => {
+	return <Slider.Root min={min} max={max} step={step} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative flex items-center w-full h-16 select-none touch-none">
+		<Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
+		<Slider.Thumb className="relative w-6 h-6 bg-[#F5F5F5] border-copy-on-dark border rounded-full flex flex-col items-center">
+			<div className="absolute px-1 py-0.5 mb-1 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta">{formatNumber(value)}</div>
+		</Slider.Thumb>
+	</Slider.Root>
+}
+
+const formatNumber = (num: number): string => {
+	if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(".0", "") + "m"
+	if (num >= 1_000) return (num / 1_000).toFixed(1).replace(".0", "") + "k"
+
+	return num.toString()
 }
 
 const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: string }) =>
