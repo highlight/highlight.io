@@ -8,6 +8,9 @@ Type out "Cmd + K" in your [dashboard](https://app.highlight.io) to search for f
 
 ![](/images/cmd-k.png)
 
+## We launched on HackerNews
+We launched on hackernews a few days ago, and gained surpassed 1500 github stars!!! Check out our [launch](https://news.ycombinator.com/item?id=34897645) and if you haven't already, check us out on [github](https://github.com/highlight/highlight).
+
 ## Contributing a new SDK:
 Interested in adding a new SDK for your for your backend (that isn't support [here](../../getting-started/1_overview.md))? Check out our new docs on [adding an SDK](../3_company/open-source/contributing/adding-an-sdk.md). We're powered by opentelemetry, so adding something for your framework shouldn't be too tough; we're also down to work with you on it!
 
