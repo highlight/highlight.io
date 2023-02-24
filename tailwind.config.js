@@ -23,6 +23,7 @@ module.exports = {
         'blue-cta': '#72E4FC',
         'purple-dark': '#5420D1',
         'user-black': '#1D0A26',
+        'purple-primary': '#6C37F4',
         'color-selected-light': '#ebff5e',
         'color-selected-dark': '#8dc31a',
         'color-secondary-100': '#b9f2fe',
