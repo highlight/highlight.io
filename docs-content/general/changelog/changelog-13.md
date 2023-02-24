@@ -1,0 +1,29 @@
+---
+title: Changelog 13 (02/24)
+slug: changelog-13
+---
+
+## The new CommandBar!
+Type out "Cmd + K" in your [dashboard](https://app.highlight.io) to search for fields on sessions, errors and more. Here's a sneak peak:
+
+![](/images/cmd-k.png)
+
+## Contributing a new SDK:
+Interested in adding a new SDK for your for your backend (that isn't support [here](../../getting-started/1_overview.md))? Check out our new docs on [adding an SDK](../3_company/open-source/contributing/adding-an-sdk.md). We're powered by opentelemetry, so adding something for your framework shouldn't be too tough; we're also down to work with you on it!
+
+## Better Doc Search
+Thanks to our friends at Algolia, search in our docs is much smoother now! Give it a try with CMD+K.
+
+## New SDKs!!
+We've shipped even more SDKS this week:
+
+[Go Fiber](../../getting-started/backend-sdk/go.md)
+
+[Python Fast API](../../getting-started/backend-sdk/python.md)
+
+## Our new logging product (🤫)
+We're making a lot of progress on our new logging product; want to join the beta? Shoot us a message in [discord](https://highlight.io/community)
+
+## Improvements
+Self-hosting improvements ([docs](../3_company/open-source/self-host-hobby.md))
+Lots of work on logging!
