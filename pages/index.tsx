@@ -6,7 +6,6 @@ import Navbar from '../components/common/Navbar/Navbar'
 import { Section } from '../components/common/Section/Section'
 import styles from '../components/Home/Home.module.scss'
 
-import MobileHeroSection from '../public/images/mobile-insects.png'
 import HeroBugLeft from '../public/images/hero-bug-left.gif'
 import HeroBugRight from '../public/images/hero-bug-right.gif'
 import LandingInfoRow1 from '../public/images/landingInfoRow1.png'
@@ -250,6 +249,7 @@ const Home: NextPage = () => {
             title={`Built with compliance and security.`}
             desc="Whether its SOC 2, HIPAA, or ISO, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
             link={'/docs/general/company/compliance-and-security'}
+            linkText={"Read our docs"}
             imgSrc={LandingInfoRowSecurity}
           />
         </div>

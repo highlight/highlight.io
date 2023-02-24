@@ -11,12 +11,14 @@ const InfoRow = ({
   title,
   desc,
   link,
+  linkText,
   invert,
   imgSrc,
 }: {
   title: string;
   desc: string;
   link: string;
+  linkText: string;
   invert?: boolean;
   imgSrc: any;
 }) => {
@@ -37,7 +39,7 @@ const InfoRow = ({
         <div className="flex justify-center lg:justify-start">
           <PrimaryButton href={link} className={classNames(styles.hollowButton, styles.docsButton, "mt-5")}>
             <Typography type="copy2" emphasis={true}>
-              Read our docs
+              {linkText}
             </Typography>
           </PrimaryButton>
         </div>
