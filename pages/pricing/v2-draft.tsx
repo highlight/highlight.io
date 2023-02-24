@@ -148,28 +148,24 @@ const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { t
 
 
 const RangedInput = ({ min, max, step, value, onChange }: { min: number, max: number, step: number, value: number, onChange: (value: number) => void }) => {
-	return <Slider.Root min={min} max={max} step={step} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative flex items-center w-full h-16 select-none touch-none">
+	return <Slider.Root min={min} max={max} step={step} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative flex items-center w-full h-16 pt-3 select-none touch-none group">
 		<Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
-		<Slider.Thumb className="relative w-6 h-6 bg-[#F5F5F5] border-copy-on-dark border rounded-full flex flex-col items-center">
-			<div className="absolute px-1 py-0.5 mb-1 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta">{formatNumber(value)}</div>
+		<Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px]  outline-none bg-[#F5F5F5] border-copy-on-dark  rounded-full flex flex-col items-center transition-all">
+			<div className="absolute px-1 py-0.5 mb-2 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta flex ">
+				{value.toLocaleString(undefined, { notation: "compact" })}
+			</div>
 		</Slider.Thumb>
 	</Slider.Root>
 }
 
-const formatNumber = (num: number): string => {
-	if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(".0", "") + "m"
-	if (num >= 1_000) return (num / 1_000).toFixed(1).replace(".0", "") + "k"
-
-	return num.toString()
-}
-
-const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: string }) =>
+const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: string }) => (
 	<div className="grid flex-shrink-0 place-content-center place-items-center w-[343px] h-full">
 		<Typography type="copy3" emphasis onDark>{heading}</Typography>
 		<span className="text-4xl font-semibold">
-			+ ${cost.toFixed(2)}
+			{cost.toLocaleString(undefined, { style: "currency", currency: "USD", signDisplay: "always", }).replace("+", "+ ")}
 		</span>
 	</div>
+)
 
 const RadioOptions = <T extends string>({ title, options, value, onChange }: { title: string, options: readonly T[], value?: T, onChange?: (value: T) => void }) => {
 	return <RadioGroup value={value} onChange={onChange} className="flex flex-col items-center gap-2">
