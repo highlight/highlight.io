@@ -79,11 +79,11 @@ const PlanTable = () => {
 	const [retention, setRetention] = useState<Retention>("3 months")
 
 	return <div className="flex flex-col items-center max-w-full gap-6 mx-auto mt-16"> {/* Pricing */}
-		<div className="flex gap-12">
+		<div className="flex flex-wrap justify-center gap-12">
 			<RadioOptions title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
 			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
-		<div className="flex justify-between w-[1100px]">
+		<div className="flex flex-wrap gap-7">
 			{Object.entries(priceTiers).map(([name, tier]) =>
 				<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retention} />
 			)}
@@ -184,7 +184,7 @@ const RadioOptions = <T extends string>({ title, options, value, onChange }: { t
 			{options.map((option) =>
 				<RadioGroup.Option value={option} key={option}>
 					{({ checked }) => <div className="cursor-pointer">
-						<div className={classNames("px-2.5 py-1.5 select-none rounded-lg transition-colors", checked ? "text-dark-background bg-white" : "text-white hover:bg-white/10")}>
+						<div className={classNames("text-center px-2.5 py-1.5 select-none rounded-lg transition-colors", checked ? "text-dark-background bg-white" : "text-white hover:bg-white/10")}>
 							<Typography type="copy3" emphasis >{option}</Typography>
 						</div>
 					</div>}
@@ -195,9 +195,9 @@ const RadioOptions = <T extends string>({ title, options, value, onChange }: { t
 }
 
 const PriceItem = ({ name, tier, billingPeriod, retention }: { name: string, tier: PricingTier, billingPeriod: BillingPeriod, retention: Retention }) => {
-	const { basePrice, sessions, errors } = tier
+	const { sessions, errors } = tier
 
-	return <div className="flex flex-col w-64 border rounded-md border-divider-on-dark">
+	return <div className="flex flex-col flex-grow border rounded-md lg:w-64 border-divider-on-dark">
 		<div className="p-5 border-b border-divider-on-dark">
 			<Typography type="copy1" emphasis>{name}</Typography>
 			<div className="flex items-end mt-2">
