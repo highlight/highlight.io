@@ -20,10 +20,6 @@ const PricingPage: NextPage = () => {
 			<div className="flex flex-col items-center text-center gap-9"> {/* Title, tagline and CTA */}
 				<h1 className="max-w-3xl">Get the <span className="text-highlight-yellow">visibility</span> you need today.</h1>
 				<Typography type="copyHeader" onDark>Fair and transparent pricing that scales with any organization.</Typography>
-				<div className="flex gap-3">
-					<PrimaryButton href="#">Get started</PrimaryButton>
-					<PrimaryButton href="#" className={homeStyles.hollowButton}>Chat with us</PrimaryButton>
-				</div>
 			</div>
 			<PlanTable />
 			<div className="flex flex-col items-center mt-32 text-center gap-9" id="overage"> {/* Pay as you go */}
