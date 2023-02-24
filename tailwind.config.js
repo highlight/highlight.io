@@ -22,6 +22,7 @@ module.exports = {
         'darker-copy-on-dark': '#9D97AA',
         'blue-cta': '#72E4FC',
         'purple-dark': '#5420D1',
+        'user-black': '#1D0A26',
         'color-selected-light': '#ebff5e',
         'color-selected-dark': '#8dc31a',
         'color-secondary-100': '#b9f2fe',
