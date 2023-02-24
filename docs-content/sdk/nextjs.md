@@ -28,6 +28,10 @@ quickstart: true
       <article className="innerParameterContainer">
         <aside className="innerParameterHeading">options properties</aside>
         <aside className="parameter">
+          <h5>projectID <code>boolean</code> <code>required</code></h5>
+          <p>Your Highlight project ID.</p>
+        </aside>
+        <aside className="parameter">
           <h5>disableErrorSourceContext <code>boolean</code> <code>optional</code></h5>
           <p>Disables source code context lines for error reporting. This may be useful for performance if your source files are particularly large or memory is limited.</p>
         </aside>

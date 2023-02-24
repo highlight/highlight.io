@@ -23,12 +23,10 @@ yarn add @highlight-run/node
 
 Pass configurations into the errorHandler and Highlight is ready to go!
 
-
 ```hint
 Where you place the `app.use(highlightErrorHandler)` definition is important. It must be set
-after route handler definitions (`app.get(...)`, etc) and before other error middleware. 
+after route handler definitions (`app.get(...)`, etc) and before other error middleware.
 ```
-
 
 ```typescript
 import * as Highlight from '@highlight-run/node'
@@ -39,21 +37,21 @@ const app = express()
 
 // define any configurations needed
 // <https://docs.highlight.run/api/hinit#w0-highlightoptions>
-const highlightOptions = {}
+const highlightOptions = { projectID: 'YOUR_PROJECT_ID' }
 // initialize the handler
 const highlightErrorHandler = Highlight.Handlers.errorHandler(highlightOptions)
 
 app.get('/', (req, res) => {
-    if (Math.random() < 0.1) {
-        throw new Error(`random error ${Math.random()}`)
-    }
-    res.send(`Hello World! ${Math.random()}`)
+  if (Math.random() < 0.1) {
+    throw new Error(`random error ${Math.random()}`)
+  }
+  res.send(`Hello World! ${Math.random()}`)
 })
 
 // This should be before any other error middleware and after all controllers (route definitions)
 app.use(highlightErrorHandler)
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`)
 })
 ```
 
