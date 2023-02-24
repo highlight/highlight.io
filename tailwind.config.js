@@ -20,6 +20,7 @@ module.exports = {
         'dark-background': '#0D0225',
         'copy-on-light': '#645D74',
         'darker-copy-on-dark': '#9D97AA',
+        'blue-cta': '#72E4FC',
         'purple-dark': '#5420D1',
         'color-selected-light': '#ebff5e',
         'color-selected-dark': '#8dc31a',
