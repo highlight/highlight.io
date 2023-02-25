@@ -32,10 +32,7 @@ const IMAGE_SHOW_OFFSET = 450
 
 const { Panel } = Collapse
 
-export const FeatureItem = ({
-  children,
-  ...props
-}: React.PropsWithChildren<{}>) => {
+export const FeatureItem = ({ children, ...props }: React.PropsWithChildren<{}>) => {
   return (
     <div {...props} className={styles.featureItem}>
       {children}
@@ -43,12 +40,7 @@ export const FeatureItem = ({
   )
 }
 
-export const CustomerReview = ({
-  companyLogo,
-  text,
-  author,
-  scale,
-}: Review) => {
+export const CustomerReview = ({ companyLogo, text, author, scale }: Review) => {
   return (
     <div className={styles.reviewCard}>
       <div
@@ -139,8 +131,7 @@ const Home: NextPage = () => {
       observer.observe(reviewsElement)
 
       // Scroll to center on load
-      reviewsElement.scrollLeft =
-        (reviewsElement.scrollWidth - window.innerWidth) / 2
+      reviewsElement.scrollLeft = (reviewsElement.scrollWidth - window.innerWidth) / 2
     }
 
     return () => {
@@ -157,28 +148,18 @@ const Home: NextPage = () => {
         <Section className={styles.heroVideoWrapper}>
           <AnimateBugLeft loaded={leftBugLoaded && rightBugLoaded}>
             <div className={styles.heroBug}>
-              <Image
-                src={HeroBugLeft}
-                alt="bug left"
-                onLoadingComplete={() => setLeftBugLoaded(true)}
-              />
+              <Image src={HeroBugLeft} alt="bug left" onLoadingComplete={() => setLeftBugLoaded(true)} />
             </div>
           </AnimateBugLeft>
           <AnimateBugRight loaded={leftBugLoaded && rightBugLoaded}>
             <div className={styles.heroBug}>
-              <Image
-                src={HeroBugRight}
-                alt="bug right"
-                onLoadingComplete={() => setRightBugLoaded(true)}
-              />
+              <Image src={HeroBugRight} alt="bug right" onLoadingComplete={() => setRightBugLoaded(true)} />
             </div>
           </AnimateBugRight>
           <div className={styles.anchorFeature}>
             <h2 className={classNames(styles.landingAnchorHead)}>
               The open source, fullstack <br />
-              <span className="text-highlight-yellow">
-                Monitoring Platform.
-              </span>
+              <span className="text-highlight-yellow">Monitoring Platform.</span>
             </h2>
             <div className="flex justify-center mt-8 mb-16">
               <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
@@ -191,10 +172,7 @@ const Home: NextPage = () => {
                   </Typography>
                 </PrimaryButton>
 
-                <PrimaryButton
-                  href={'/docs'}
-                  className={classNames(styles.hollowButton)}
-                >
+                <PrimaryButton href={'/docs'} className={classNames(styles.hollowButton)}>
                   <Typography type="copy2" emphasis={true}>
                     Read our docs
                   </Typography>
@@ -208,10 +186,7 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature} id="features">
             <div className={styles.anchorTitle}>
               <h2>
-                Web application monitoring for{' '}
-                <span className={styles.highlightedText}>
-                  today&#39;s developer.
-                </span>{' '}
+                Web application monitoring for <span className={styles.highlightedText}>today&#39;s developer.</span>{' '}
               </h2>
             </div>
           </div>
@@ -230,7 +205,7 @@ const Home: NextPage = () => {
           <LandingInfoRow
             title={`Support for all the modern frameworks.`}
             desc={`We support all the fancy new frameworks and our platform is powered by open source, scalable technologies.`}
-            link={'/docs/general/getting-started/getting-started-overview'}
+            link={'/docs/general/welcome'}
             linkText={'Read the docs'}
             imgSrc={LandingInfoRow2}
           />
@@ -269,10 +244,7 @@ const Home: NextPage = () => {
           <div className={styles.anchorFeature}>
             <div className={styles.anchorHead}>
               <Typography type="copy2" onDark>
-                Don&apos;t take our word.{' '}
-                <Link href="/customers">
-                  Read our customer review section →
-                </Link>
+                Don&apos;t take our word. <Link href="/customers">Read our customer review section →</Link>
               </Typography>
             </div>
           </div>
