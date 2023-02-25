@@ -10,6 +10,11 @@ import { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
 import { AnimateCarouselImage } from '../../Animate'
 
+const codeTheme = {
+  ...highlightCodeTheme,
+  backgroundColor: `#0D0225`,
+}
+
 const CarouselImage = ({ feature }: { feature: Feature }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
 
@@ -35,7 +40,7 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
-    <div className={`${feature.code ? 'md:w-1/2' : 'md:w-2/3'} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
+    <div className={`${feature.code ? 'md:w-[60%]' : 'md:w-2/3'} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
       <div className="flex flex-col gap-4 justify-start md:pt-8 text-left">
         <div className="flex flex-col gap-2">
           <h5 className="hidden sm:flex">{feature.title}</h5>
@@ -45,13 +50,16 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
           </Typography>
         </div>
         {feature.code ? (
-          <Code
-            language={'bash'}
-            text={feature.code.join('\n')}
-            showLineNumbers={false}
-            theme={highlightCodeTheme}
-            wrapLines
-          />
+          <div className="border-[1px] rounded-lg border-divider-on-dark">
+            {feature.code.map((line, index) => (
+              <div key={index} className="flex flex-col">
+                <div className="m-3">
+                  <Code language={'bash'} text={line} theme={codeTheme} wrapLines />
+                </div>
+                {index != feature.code!.length - 1 && <div className="w-full h-[1px] bg-divider-on-dark" />}
+              </div>
+            ))}
+          </div>
         ) : (
           <div className="flex flex-col gap-3 mt-3 rounded-lg">
             {feature.feature1Link ? (
