@@ -1,6 +1,6 @@
 import React from 'react'
 import { Feature } from './FeatureCarousel'
-import styles from "../Home.module.scss"
+import styles from '../Home.module.scss'
 import Image from 'next/image'
 import { Typography } from '../../common/Typography/Typography'
 import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
@@ -8,45 +8,41 @@ import { Code } from 'react-code-blocks'
 import Link from 'next/link'
 import { useState } from 'react'
 import { HiArrowRight } from 'react-icons/hi'
-import { AnimateCarouselImage, AnimateMobileCarouselImage } from '../../Animate'
+import { AnimateCarouselImage } from '../../Animate'
 
-const DesktopImage = ({ feature }: { feature: Feature }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  function handleLoad() {
-    setImageLoaded(true);
-  }
+const CarouselImage = ({ feature }: { feature: Feature }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <div className="hidden sm:flex w-1/2">
       <div className="absolute right-0 top-0 bottom-0">
-        <AnimateCarouselImage loaded={imageLoaded} >
+        <AnimateCarouselImage loaded={imageLoaded}>
           <Image
-            className={`${feature.right ? 'right-0' : 'left-0'} object-contain absolute bottom-0 sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px]`}
+            className={`${
+              feature.right ? 'right-0' : 'left-0'
+            } object-contain absolute bottom-0 sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px]`}
             src={feature.desktopImage}
             alt="Feature Spotlight"
-            onLoadingComplete={() => handleLoad()}
+            onLoadingComplete={() => setImageLoaded(true)}
           />
         </AnimateCarouselImage>
       </div>
-    </div >
+    </div>
   )
 }
 
-const DesktopFeatures = ({ feature }: { feature: Feature }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  function handleLoad() {
-    setImageLoaded(true);
-  }
+const CarouselFeatures = ({ feature }: { feature: Feature }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
-    <div className={`${feature.code ? "md:w-1/2" : "md:w-2/3"} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
+    <div className={`${feature.code ? 'md:w-1/2' : 'md:w-2/3'} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
       <div className="flex flex-col gap-4 justify-start md:pt-8 text-left">
         <div className="flex flex-col gap-2">
           <h5 className="hidden sm:flex">{feature.title}</h5>
           <h4 className="sm:hidden">{feature.title}</h4>
-          <Typography type="copy3" className="text-copy-on-dark md:text-[18px]">{feature.description}</Typography>
+          <Typography type="copy3" className="text-copy-on-dark md:text-[18px]">
+            {feature.description}
+          </Typography>
         </div>
         {feature.code ? (
           <Code
@@ -59,73 +55,70 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
         ) : (
           <div className="flex flex-col gap-3 mt-3 rounded-lg">
             {feature.feature1Link ? (
-              <a href={feature.feature1Link} target="_blank" rel="noreferrer noopener" className={styles.innerCarouselButton} >
+              <a
+                href={feature.feature1Link}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={styles.innerCarouselButton}
+              >
                 {feature.featureImage1}
-                <Typography
-                  type="copy3"
-                  emphasis
-                >
+                <Typography type="copy3" emphasis>
                   {feature.feature1}
                 </Typography>
               </a>
             ) : (
               <div className={styles.innerCarouselFeature}>
                 {feature.featureImage1}
-                <Typography
-                  type="copy3"
-                  emphasis
-                >
+                <Typography type="copy3" emphasis>
                   {feature.feature1}
                 </Typography>
               </div>
             )}
 
             {feature.feature2Link ? (
-              <a href={feature.feature2Link} target="_blank" rel="noreferrer noopener" className={styles.innerCarouselButton} >
+              <a
+                href={feature.feature2Link}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={styles.innerCarouselButton}
+              >
                 {feature.featureImage2}
-                <Typography
-                  type="copy3"
-                  emphasis
-                >
+                <Typography type="copy3" emphasis>
                   {feature.feature2}
                 </Typography>
               </a>
             ) : (
               <div className={styles.innerCarouselFeature}>
                 {feature.featureImage2}
-                <Typography
-                  type="copy3"
-                  emphasis
-                >
+                <Typography type="copy3" emphasis>
                   {feature.feature2}
                 </Typography>
               </div>
             )}
 
             {feature.feature3Link ? (
-              <a href={feature.feature3Link} target="_blank" rel="noreferrer noopener" className={styles.innerCarouselButton} >
+              <a
+                href={feature.feature3Link}
+                target="_blank"
+                rel="noreferrer noopener"
+                className={styles.innerCarouselButton}
+              >
                 {feature.featureImage3}
-                <Typography
-                  type="copy3"
-                  emphasis
-                >
+                <Typography type="copy3" emphasis>
                   {feature.feature3}
                 </Typography>
               </a>
             ) : (
               <div className={styles.innerCarouselFeature}>
                 {feature.featureImage3}
-                <Typography
-                  type="copy3"
-                  emphasis
-                >
+                <Typography type="copy3" emphasis>
                   {feature.feature3}
                 </Typography>
               </div>
             )}
           </div>
         )}
-        {feature.link &&
+        {feature.link && (
           <div className="flex justify-center sm:justify-start mb-4">
             <Link href={`${feature.link}`} target="_blank">
               <Typography type="copy3" emphasis={true}>
@@ -135,21 +128,16 @@ const DesktopFeatures = ({ feature }: { feature: Feature }) => {
               </Typography>
             </Link>
           </div>
-        }
+        )}
       </div>
       <div className="flex sm:hidden justify-center w-full">
-        <Image
-          className="object-contain max-h-[200px] "
-          src={feature.mobileImage}
-          alt="Feature Spotlight"
-          onLoadingComplete={() => handleLoad()}
-        />
+        <Image className="object-contain max-h-[200px] " src={feature.mobileImage} alt="Feature Spotlight" />
       </div>
-    </div >
+    </div>
   )
 }
 
-export const DesktopCard = (props: { feature: Feature; index: number }) => {
+export const CarouselCard = (props: { feature: Feature; index: number }) => {
   return (
     <div
       key={props.index}
@@ -158,13 +146,13 @@ export const DesktopCard = (props: { feature: Feature; index: number }) => {
       <div className="mx-5 py-8 border-[1px] sm:border-none border-divider-on-dark rounded-lg">
         {props.feature.right ? (
           <>
-            <DesktopFeatures feature={props.feature} />
-            <DesktopImage feature={props.feature} />
+            <CarouselFeatures feature={props.feature} />
+            <CarouselImage feature={props.feature} />
           </>
         ) : (
           <>
-            <DesktopImage feature={props.feature} />
-            <DesktopFeatures feature={props.feature} />
+            <CarouselImage feature={props.feature} />
+            <CarouselFeatures feature={props.feature} />
           </>
         )}
       </div>
