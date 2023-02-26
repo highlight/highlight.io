@@ -108,8 +108,8 @@ const PriceCalculator = () => {
 	const errorsCost = getUsagePrice(errorUsage - tier.errors, 0.20, 1_000)
 	const loggingCost = getUsagePrice(loggingUsage, 1.50, 1_000_000)
 
-	return <div className="flex flex-col items-center gap-10 mx-auto mt-12"> {/* Price calculator */}
-		<div className="flex gap-12">
+	return <div className="flex flex-col items-center w-full gap-10 mx-auto mt-12"> {/* Price calculator */}
+		<div className="flex flex-wrap justify-center gap-12 gap-y-3">
 			<RadioOptions title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
 			<RadioOptions title="Pricing Tier" options={tierOptions} value={tierName} onChange={setTierName} />
 			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
