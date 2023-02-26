@@ -7,9 +7,10 @@ updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
 We've written up several guides on getting started with highlight.io in your framework of choice. If there's a guide missing for your framework, feel free to [create an issue](https://github.com/highlight/highlight/issues/new?assignees=&labels=external+bug+%2F+request&template=feature_request.md&title=) or message us on [discord](https://highlight.io/community).
+
 ## For your frontend:
 
-highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Take a look at our guides for the following frameworks:
+Installing highlight.io in javascript will automatically instrument frontend error collection and session replay. highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Take a look at our guides for the following frameworks:
 
 <DocsCardGroup>
     <DocsCard title="React" href="./client-sdk/reactjs.md">
@@ -29,24 +30,22 @@ highlight.io supports any framework that uses the [dom](https://www.w3schools.co
     </DocsCard>
 </DocsCardGroup>
 
-
 Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](3_client-sdk/6_other.md).
 
 ## For your backend:
 
 Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 
+- [Firebase](./backend-sdk/firebase.md)
 
--   [Firebase](./backend-sdk/firebase.md)
+- [Express](./backend-sdk/express.md)
 
--   [Express](./backend-sdk/express.md)
+- [Go](./backend-sdk/go.md)
 
--   [Go](./backend-sdk/go.md)
+- [Next.js](./backend-sdk/nextjs.md)
 
--   [Next.js](./backend-sdk/nextjs.md)
+- [Node.js](./backend-sdk/nodejs.md)
 
--   [Node.js](./backend-sdk/nodejs.md)
-
--   For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
+- For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
 
 For in-depth instructions, follow the [Backend SDK](./backend-sdk/backend-sdk-overview.md) guide.

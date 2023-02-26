@@ -29,11 +29,12 @@ import {
   HiDesktopComputer,
   HiPresentationChartLine,
 } from 'react-icons/hi'
-import { DesktopCard } from './DesktopCard'
+import { CarouselCard } from './CarouselCard'
 import { HiChevronDown } from 'react-icons/hi'
 import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
 import { AiFillGithub } from 'react-icons/ai'
 import { ExclamationCircleFilled } from '@ant-design/icons'
+import { isMobile } from 'react-device-detect'
 
 export type Feature = {
   name: string
@@ -62,8 +63,7 @@ const features: Feature[] = [
   {
     name: 'Session Replay',
     title: 'Session Replay',
-    description:
-      'Understand the real reason why bugs are happening in your web application.',
+    description: 'Understand the real reason why bugs are happening in your web application.',
     thumbnail: <HiFilm className="h-[35px] w-[35px]" />,
     desktopImage: sessionReplay,
     mobileImage: sessionscreenshot,
@@ -79,8 +79,7 @@ const features: Feature[] = [
   {
     name: 'Error Monitoring',
     title: 'Error Monitoring',
-    description:
-      'Get notified of the exceptions across your app before they become problematic.',
+    description: 'Get notified of the exceptions across your app before they become problematic.',
     thumbnail: <HiTerminal className="h-[35px] w-[35px]" />,
     desktopImage: errorMonitoring,
     mobileImage: monitoringscreenshot,
@@ -112,8 +111,7 @@ const features: Feature[] = [
   {
     name: 'Self-Hosting',
     title: 'Self-Hosting highlight.io',
-    description:
-      'Interested in self-hosting highlight? Spin up highlight.io in docker with just a few commands.',
+    description: 'Interested in self-hosting highlight? Spin up highlight.io in docker with just a few commands.',
     thumbnail: <HiCloudDownload className="h-[35px] w-[35px]" />,
     desktopImage: selfHosting,
     mobileImage: dockerscreenshot,
@@ -128,27 +126,26 @@ const features: Feature[] = [
   {
     name: 'Open Source',
     title: "We're Open Source!",
-    description:
-      'highlight.io is an open source tool for debugging your web application.',
+    description: 'highlight.io is an open source tool for debugging your web application.',
     thumbnail: <AiFillGithub className="h-[35px] w-[35px]" />,
     desktopImage: openSource,
     mobileImage: githubscreenshot,
     right: true,
     feature1: 'Join the Community',
-    feature1Link: "https://discord.gg/yxaXEAqgwN",
+    feature1Link: 'https://discord.gg/yxaXEAqgwN',
     featureImage1: <HiPresentationChartLine className="h-[20px] w-[20px]" />,
     feature2: 'Find us on GitHub',
-    feature2Link: "https://github.com/highlight/highlight/",
+    feature2Link: 'https://github.com/highlight/highlight/',
     featureImage2: <HiDesktopComputer className="h-[20px] w-[20px]" />,
     feature3: 'Self host highlight.io',
-    feature3Link: "/docs/general/company/open-source/self-host-hobby",
+    feature3Link: '/docs/general/company/open-source/self-host-hobby',
     featureImage3: <ExclamationCircleFilled className="h-[20px] w-[20px]" />,
   },
 ]
 
 export const FeatureCarousel = () => {
   const [selected, setSelected] = useState(0)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, draggable: false })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, draggable: isMobile })
 
   useEffect(() => {
     if (emblaApi) {
@@ -157,14 +154,11 @@ export const FeatureCarousel = () => {
         setSelected(emblaApi.selectedScrollSnap())
       })
     }
-    ; (document.getElementById('dropdown') as HTMLSelectElement).value =
-      selected.toString()
+    ;(document.getElementById('dropdown') as HTMLSelectElement).value = selected.toString()
   }, [emblaApi, selected])
 
   const handleDropdown = () => {
-    let dropdownValue = parseInt(
-      (document.getElementById('dropdown') as HTMLSelectElement).value,
-    )
+    let dropdownValue = parseInt((document.getElementById('dropdown') as HTMLSelectElement).value)
     setSelected(dropdownValue)
   }
 
@@ -183,20 +177,13 @@ export const FeatureCarousel = () => {
             )}
           >
             <div
-              className={`${selected == index
-                ? 'bg-divider-on-dark'
-                : 'group-hover:bg-divider-on-dark group-hover:bg-opacity-75'
-                } h-full flex justify-center gap-1 px-3 py-2 rounded-lg transition-all`}
+              className={`${
+                selected == index ? 'bg-divider-on-dark' : 'group-hover:bg-divider-on-dark group-hover:bg-opacity-75'
+              } h-full flex justify-center gap-1 px-3 py-2 rounded-lg transition-all`}
             >
               <div className="flex flex-col gap-1">
-                <div className="flex justify-center text-color-copy-on-dark">
-                  {feature.thumbnail}
-                </div>
-                <Typography
-                  type="copy3"
-                  className="text-center"
-                  emphasis={true}
-                >
+                <div className="flex justify-center text-color-copy-on-dark">{feature.thumbnail}</div>
+                <Typography type="copy3" className="text-center" emphasis={true}>
                   {feature.name}
                 </Typography>
               </div>
@@ -204,19 +191,12 @@ export const FeatureCarousel = () => {
           </div>
         ))}
       </div>
-      <Typography type="copy4" className="md:hidden mb-3 text-copy-on-light">Explore Our Features</Typography>
+      <Typography type="copy4" className="md:hidden mb-3 text-copy-on-light">
+        Explore Our Features
+      </Typography>
       <div className="relative flex md:hidden justify-center mx-5 mb-8 rounded-lg">
-        <PrimaryButton
-          className={classNames(
-            styles.whiteButton,
-            'w-full border-copy-on-dark py-0 px-0 h-[54px]',
-          )}
-        >
-          <Typography
-            type="copy2"
-            className="bg-color-primary-500 rounded-lg w-full"
-            emphasis={true}
-          >
+        <PrimaryButton className={classNames(styles.whiteButton, 'w-full border-copy-on-dark py-0 px-0 h-[54px]')}>
+          <Typography type="copy2" className="bg-color-primary-500 rounded-lg w-full" emphasis={true}>
             <select
               onChange={() => handleDropdown()}
               id="dropdown"
@@ -235,7 +215,7 @@ export const FeatureCarousel = () => {
       <div className="w-full" ref={emblaRef}>
         <div className="flex scrollbar-hide md:gap-4">
           {features.map((feature, index) => (
-            <DesktopCard key={index} feature={feature} index={index} />
+            <CarouselCard key={index} feature={feature} index={index} />
           ))}
         </div>
       </div>

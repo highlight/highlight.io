@@ -8,7 +8,17 @@ updatedAt: 2022-08-18T22:36:12.000Z
 
 Session replay gives your team visibility into how people use your web app and insight into WHY bugs happen. In [highlight.io](https://highlight.io), we focus heavily on "cohesion", or the mapping of sessions, errors and logs across your stack; that way you get an accurate and comprehensive idea of what happens.
 
-Read more about the feature we support in Session Replay below:
+## Get Started.
+
+<DocsCardGroup>
+    <DocsCard title="Get Started."  href="../../../getting-started/1_overview.md">
+        {"Get started with error monitoring by installing highlight.io"}
+    </DocsCard>
+</DocsCardGroup>
+
+## Features.
+
+Read more about the features we support in Session Replay below:
 
 <DocsCardGroup>
     <DocsCard title="Shadow DOM & Web Components."  href="./shadow-dom-web-components.md">

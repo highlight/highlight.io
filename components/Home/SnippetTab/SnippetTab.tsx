@@ -1,27 +1,27 @@
-import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import classNames from 'classnames'
+import React, { useEffect, useState } from 'react'
 
-import { AiOutlineDown } from 'react-icons/ai';
-import { PrimaryLink } from '../../common/Buttons/SecondaryButton';
-import { Section } from '../../common/Section/Section';
-import { Typography } from '../../common/Typography/Typography';
-import ReactImage from '../../../public/images/language/ReactIcon';
-import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple';
-import htmlImage from '../../../public/images/language/htmlIcon';
-import VueImage from '../../../public/images/language/VueIcon';
-import NodeImage from '../../../public/images/language/NodeIcon';
-import NextjsImage from '../../../public/images/language/NextjsIcon';
-import GoImage from '../../../public/images/language/GoIcon';
+import { AiOutlineDown } from 'react-icons/ai'
+import { PrimaryLink } from '../../common/Buttons/SecondaryButton'
+import { Section } from '../../common/Section/Section'
+import { Typography } from '../../common/Typography/Typography'
+import ReactImage from '../../../public/images/language/ReactIcon'
+import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple'
+import htmlImage from '../../../public/images/language/htmlIcon'
+import VueImage from '../../../public/images/language/VueIcon'
+import NodeImage from '../../../public/images/language/NodeIcon'
+import NextjsImage from '../../../public/images/language/NextjsIcon'
+import GoImage from '../../../public/images/language/GoIcon'
 
-import styles from '../../Home/Home.module.scss';
-import productStyles from '../../Products/Products.module.scss';
-import { CodeSnippet } from '../CodeSnippet/CodeSnippet';
+import styles from '../../Home/Home.module.scss'
+import productStyles from '../../Products/Products.module.scss'
+import { CodeSnippet } from '../CodeSnippet/CodeSnippet'
 
 export interface SnippetTabObject {
-  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  key: string;
-  content: JSX.Element;
-  beta?: boolean;
+  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element
+  key: string
+  content: JSX.Element
+  beta?: boolean
 }
 
 const SetupDescription = (
@@ -34,19 +34,16 @@ const SetupDescription = (
       </div>
     </div>
     <h2>
-      Use Highlight{' '}
-      <span className={styles.highlightedText}>within minutes</span>
+      Use Highlight <span className={styles.highlightedText}>within minutes</span>
     </h2>
     <Typography type="copy2" onDark>
       {`Installing Highlight is a matter of selecting your frontend framework and adding three lines of code to your app. Highlight is built to be framework agnostic, so regardless of your stack, we have a solution that'll work for your team. You'll be off to the races in a matter of minutes!`}
     </Typography>
     <div className={styles.buttonContainer}>
-      <PrimaryLink href="/docs/getting-started">
-        Read more about our backend integrations in beta
-      </PrimaryLink>
+      <PrimaryLink href="/docs/getting-started">Read more about our backend integrations in beta</PrimaryLink>
     </div>
   </div>
-);
+)
 
 const SNIPPET_TABS = [
   {
@@ -201,7 +198,7 @@ func main() {
 
 const app = express();
 
-const highlightOptions = {};
+const highlightOptions = {projectID: 'YOUR_PROJECT_ID'};
 const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
 
 // This should be before any other error middleware and after all controllers
@@ -212,26 +209,22 @@ app.use(highlightHandler);`}
       </Section>
     ),
   },
-];
+]
 
 export const SnippetTab = () => {
-  const tabs = SNIPPET_TABS;
-  const [currentTabKey, setCurrentTabKey] = useState(tabs[0]?.key);
-  const [currentHoverKey, setCurrentHoverKey] = useState<String>('');
-  const [currentTabElement, setCurrentTabElement] = useState(tabs[0]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const tabs = SNIPPET_TABS
+  const [currentTabKey, setCurrentTabKey] = useState(tabs[0]?.key)
+  const [currentHoverKey, setCurrentHoverKey] = useState<String>('')
+  const [currentTabElement, setCurrentTabElement] = useState(tabs[0])
+  const [showDropdown, setShowDropdown] = useState(false)
 
   useEffect(() => {
-    setCurrentTabElement(
-      tabs.find((tab) => tab.key === currentTabKey) || tabs[0]
-    );
-  }, [currentTabKey, setCurrentTabElement, tabs]);
+    setCurrentTabElement(tabs.find((tab) => tab.key === currentTabKey) || tabs[0])
+  }, [currentTabKey, setCurrentTabElement, tabs])
 
   return (
     <div>
-      <div
-        className={classNames(styles.snippetTabs, styles.secondaryBackground)}
-      >
+      <div className={classNames(styles.snippetTabs, styles.secondaryBackground)}>
         {tabs.map((tab) => (
           <div
             key={tab.key}
@@ -248,13 +241,7 @@ export const SnippetTab = () => {
               </div>
             )}
             <tab.image
-              color={
-                tab.key === currentTabKey
-                  ? '#EBFF5E'
-                  : tab.key === currentHoverKey
-                    ? '#23B6E2'
-                    : '#72E4FC'
-              }
+              color={tab.key === currentTabKey ? '#EBFF5E' : tab.key === currentHoverKey ? '#23B6E2' : '#72E4FC'}
               secondaryColor={tab.key === currentTabKey ? '#0d0225' : undefined}
             />
           </div>
@@ -262,15 +249,9 @@ export const SnippetTab = () => {
       </div>
       <Section noYBottomPadding={true}>
         <div className={styles.snippetDropdownContainer}>
-          <div
-            className={styles.snippetDropdown}
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
+          <div className={styles.snippetDropdown} onClick={() => setShowDropdown(!showDropdown)}>
             <div className={styles.snippetDropdownValue}>
-              <currentTabElement.image
-                color={'#72E4FC'}
-                secondaryColor={'#0d0225'}
-              />
+              <currentTabElement.image color={'#72E4FC'} secondaryColor={'#0d0225'} />
             </div>
             <AiOutlineDown />
           </div>
@@ -280,8 +261,8 @@ export const SnippetTab = () => {
                 <div
                   key={tab.key}
                   onClick={() => {
-                    setShowDropdown(false);
-                    setCurrentTabKey(tab.key);
+                    setShowDropdown(false)
+                    setCurrentTabKey(tab.key)
                   }}
                 >
                   <tab.image color={'#72E4FC'} secondaryColor={'#0d0225'} />
@@ -293,13 +274,9 @@ export const SnippetTab = () => {
       </Section>
       <div className={styles.snippetContent}>
         {tabs.map((tab) =>
-          tab.key === currentTabKey ? (
-            <div key={tab.key}>{tab.content}</div>
-          ) : (
-            <div key={tab.key}></div>
-          )
+          tab.key === currentTabKey ? <div key={tab.key}>{tab.content}</div> : <div key={tab.key}></div>,
         )}
       </div>
     </div>
-  );
-};
+  )
+}
