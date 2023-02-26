@@ -114,9 +114,9 @@ const PriceCalculator = () => {
 			<RadioOptions title="Pricing Tier" options={tierOptions} value={tierName} onChange={setTierName} />
 			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
-		<div className="w-[1100px] flex flex-col items-end">
-			<div className="flex flex-col border divide-y rounded-lg rounded-br-none divide-divider-on-dark border-divider-on-dark">
-				<div className="flex h-12">
+		<div className="flex flex-col items-end w-full max-w-[1100px]">
+			<div className="flex flex-col overflow-hidden border divide-y rounded-lg md:rounded-br-none divide-divider-on-dark border-divider-on-dark">
+				<div className="hidden h-12 md:flex">
 					<div className="flex items-center flex-1 border-r border-divider-on-dark px-7"><Typography type="copy2" emphasis>Product</Typography></div>
 					<div className="flex items-center justify-center w-[343px] px-7"><Typography type="copy2" emphasis>Cost breakdown</Typography></div>
 				</div>
@@ -124,24 +124,28 @@ const PriceCalculator = () => {
 				<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " value={sessionUsage} onChange={setSessionUsage} cost={sessionsCost + basePrice} />
 				<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." value={loggingUsage} onChange={setLoggingUsage} cost={loggingCost + basePrice} />
 			</div>
-			<div className="border border-t-0 rounded-b-lg h-52 border-divider-on-dark">
+			<div className="hidden border border-t-0 rounded-b-lg md:block h-52 border-divider-on-dark">
 				<CalculatorCostDisplay heading="Total" cost={basePrice + sessionsCost + errorsCost + loggingCost} />
 			</div>
 		</div>
-		<div className="flex-shrink w-48" />
 	</div>
 }
+
+
 
 const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { title: string, description: string, value: number, onChange: (value: number) => void, cost: number }) => {
 	const rangeOptions = [0, 500, 1_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000]
 
 	return <div className="flex flex-row">
-		<div className="flex flex-col gap-1 py-5 px-7">
+		<div className="flex flex-col flex-1 gap-1 py-5 px-7">
+			<Typography type="copy4" emphasis className="rounded-full bg-blue-cta py-0.5 px-3 text-dark-background self-start inline-block md:hidden">
+				{cost.toLocaleString(undefined, { style: "currency", currency: "USD", signDisplay: "always", }).replace("+", "+ ")}
+			</Typography>
 			<Typography type="copy1" emphasis>{title}</Typography>
 			<Typography type="copy3" className="mt-2.5">{description}</Typography>
 			<RangedInput options={rangeOptions} value={value} onChange={onChange} />
 		</div>
-		<div className="border-l border-divider-on-dark">
+		<div className="hidden border-l border-divider-on-dark md:inline-block">
 			<CalculatorCostDisplay heading="Base + Usage" cost={cost} />
 		</div>
 	</div>
@@ -161,9 +165,9 @@ export const RangedInput = ({ options, value, onChange }: { options: number[], v
 	}
 
 	return <>
-		<div className="block sm:hidden">
+		<div className="block md:hidden">
 			<Listbox value={snapValue(value)} onChange={onChange}>
-				<Listbox.Button className="flex items-center justify-center w-full h-12 gap-2 transition-all border rounded-lg border-copy-on-light hover:bg-white/10">
+				<Listbox.Button className="flex items-center justify-center w-full h-12 gap-2 mt-2 transition-all border rounded-lg border-copy-on-light hover:bg-white/10">
 					<Typography type="copy2" emphasis onDark>	{snapValue(value).toLocaleString(undefined, { notation: "compact" })}</Typography>
 					<ChevronDownIcon className="w-5 h-5 text-darker-copy-on-dark" />
 				</Listbox.Button>
@@ -181,7 +185,7 @@ export const RangedInput = ({ options, value, onChange }: { options: number[], v
 				</Listbox.Options>
 			</Listbox>
 		</div>
-		<Slider.Root min={min} max={max} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative items-center hidden w-full h-16 mt-4 select-none sm:flex touch-none group">
+		<Slider.Root min={min} max={max} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative items-center hidden w-full h-16 mt-4 select-none md:flex touch-none group">
 			<Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
 			<Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px] outline-none bg-[#F5F5F5] border-copy-on-dark rounded-full flex flex-col items-center transition-all">
 				<div className="absolute w-2.5 h-2.5 rotate-45 rounded-sm -top-4 bg-blue-cta" />
@@ -224,7 +228,7 @@ const RadioOptions = <T extends string>({ title, options, value, onChange }: { t
 const PriceItem = ({ name, tier, billingPeriod, retention }: { name: string, tier: PricingTier, billingPeriod: BillingPeriod, retention: Retention }) => {
 	const { sessions, errors } = tier
 
-	return <div className="flex flex-col flex-grow border rounded-md lg:w-64 border-divider-on-dark">
+	return <div className="flex flex-col flex-grow border rounded-md md:w-64 border-divider-on-dark">
 		<div className="p-5 border-b border-divider-on-dark">
 			<Typography type="copy1" emphasis>{name}</Typography>
 			<div className="flex items-end mt-2">
