@@ -47,6 +47,7 @@
     "react-collapsible": "^2.10.0",
     "react-compare-image": "^3.3.0",
     "react-copy-to-clipboard": "^5.1.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-github-btn": "^1.4.0",
     "react-highlight-words": "^0.18.0",
