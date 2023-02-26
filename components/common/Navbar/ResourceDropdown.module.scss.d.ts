@@ -1,6 +1,7 @@
 export const copyOnDark: string
 export const copyOnLight: string
 export const gridContainer: string
+export const featureGridContainer: string
 export const gridItem: string
 export const headerButton: string
 export const popover: string
