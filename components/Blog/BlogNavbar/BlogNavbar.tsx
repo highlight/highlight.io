@@ -1,19 +1,16 @@
-import {
-  HighlightLogo,
-  HighlightLogoWhite,
-} from '../../common/HighlightLogo/HighlightLogo';
-import styles from '../../common/Navbar/Navbar.module.scss';
-import classNames from 'classnames';
-import { PrimaryButton } from '../../common/Buttons/PrimaryButton';
-import { useEffect, useState } from 'react';
-import Banner from '../../common/Banner/Banner';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import Link from 'next/link';
-import { Typography } from '../../common/Typography/Typography';
-import ReturnIcon from '../../../public/images/ReturnIcon';
-import { getTagUrl, Tag } from '../Tag';
+import { HighlightLogo, HighlightLogoWhite } from '../../common/HighlightLogo/HighlightLogo'
+import styles from '../../common/Navbar/Navbar.module.scss'
+import classNames from 'classnames'
+import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
+import { useEffect, useState } from 'react'
+import Banner from '../../common/Banner/Banner'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import Link from 'next/link'
+import { Typography } from '../../common/Typography/Typography'
+import ReturnIcon from '../../../public/images/ReturnIcon'
+import { getTagUrl, Tag } from '../Tag'
 
-const SHOW_NAVBAR_OFFSET = 300;
+const SHOW_NAVBAR_OFFSET = 300
 
 const BlogNavbar = ({
   title,
@@ -21,39 +18,33 @@ const BlogNavbar = ({
   attachUnder,
   singleTag,
 }: {
-  singleTag?: Tag;
-  title: string;
-  endPosition: number;
-  attachUnder?: React.ReactElement,
+  singleTag?: Tag
+  title: string
+  endPosition: number
+  attachUnder?: React.ReactElement
 }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [prevY, setPrevY] = useState(0);
+  const [scrolled, setScrolled] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [prevY, setPrevY] = useState(0)
 
   const changeBackground = () => {
-    const currentScrollPos = window.pageYOffset;
+    const currentScrollPos = window.pageYOffset
     if (window.scrollY > SHOW_NAVBAR_OFFSET) {
-      setScrolled(true);
+      setScrolled(true)
     } else if (window.scrollY <= SHOW_NAVBAR_OFFSET) {
-      setScrolled(false);
+      setScrolled(false)
     }
-    setPrevY(currentScrollPos * 1.3);
-  };
+    setPrevY(currentScrollPos * 1.3)
+  }
 
   useEffect(() => {
-    changeBackground();
-    window.addEventListener('scroll', changeBackground);
-  });
+    changeBackground()
+    window.addEventListener('scroll', changeBackground)
+  })
 
   return (
     <>
       <Banner>
-        <div className={styles.bannerContainerBlog}>
-          <p>Want 2 weeks of free Highlight? </p>
-          <a href="http://app.highlight.io/" className={styles.callToAction}>
-            Register Here →
-          </a>
-        </div>
         <div className={styles.navContainer}>
           <ul className={classNames(styles.menuList, styles.header)}>
             <li>
@@ -72,10 +63,7 @@ const BlogNavbar = ({
               </Link>
             </li>
             <li>
-              <Link
-                href={'https://careers.highlight.run'}
-                className={styles.menuItem}
-              >
+              <Link href={'https://careers.highlight.run'} className={styles.menuItem}>
                 Careers
               </Link>
             </li>
@@ -102,17 +90,11 @@ const BlogNavbar = ({
           <Link href={'/'} className={styles.urlStyle}>
             {isOpen ? <HighlightLogoWhite /> : <HighlightLogo />}
           </Link>
-          <div
-            className={classNames(styles.navContainer, styles.headerLeftBlog)}
-          >
+          <div className={classNames(styles.navContainer, styles.headerLeftBlog)}>
             <div className={styles.navPostTitle}>{title}</div>
           </div>
           <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? (
-              <AiOutlineClose className={styles.copyOnDark} />
-            ) : (
-              <AiOutlineMenu />
-            )}
+            {isOpen ? <AiOutlineClose className={styles.copyOnDark} /> : <AiOutlineMenu />}
           </div>
           {isOpen && (
             <div className={styles.mobileMenu}>
@@ -140,10 +122,7 @@ const BlogNavbar = ({
                 </li>
                 <li>
                   <Typography type="copy3" emphasis={true}>
-                    <Link
-                      href={'https://careers.highlight.run'}
-                      className={styles.menuItemLarge}
-                    >
+                    <Link href={'https://careers.highlight.run'} className={styles.menuItemLarge}>
                       Careers
                     </Link>
                   </Typography>
@@ -157,31 +136,17 @@ const BlogNavbar = ({
                 </li>
               </ul>
               <div className={styles.menuButtons}>
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                  Get Started
-                </PrimaryButton>
+                <PrimaryButton href="https://app.highlight.io/?sign_up=1">Get Started</PrimaryButton>
                 <Typography type="copy3" emphasis={true}>
-                  <a
-                    href="https://app.highlight.io/"
-                    className={styles.menuItem}
-                  >
+                  <a href="https://app.highlight.io/" className={styles.menuItem}>
                     Sign In
                   </a>
                 </Typography>
               </div>
             </div>
           )}
-          <div
-            className={classNames(
-              styles.navContainer,
-              styles.header,
-              styles.headerRight
-            )}
-          >
-            <PrimaryButton
-              href="https://app.highlight.io/?sign_up=1"
-              className={styles.signUpButton}
-            >
+          <div className={classNames(styles.navContainer, styles.header, styles.headerRight)}>
+            <PrimaryButton href="https://app.highlight.io/?sign_up=1" className={styles.signUpButton}>
               <Typography type="copy2" emphasis={true}>
                 Sign up
               </Typography>
@@ -191,16 +156,20 @@ const BlogNavbar = ({
         <div
           className={styles.loadingBar}
           style={{
-            width: `${(1 - Math.max(0, endPosition - prevY) / endPosition) * 100
-              }%`,
+            width: `${(1 - Math.max(0, endPosition - prevY) / endPosition) * 100}%`,
           }}
         ></div>
-        <div className='absolute top-full'>
-          <Link href={getTagUrl(singleTag?.slug ?? "all")} className='flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center'><ReturnIcon /> Back</Link>
+        <div className="absolute top-full">
+          <Link
+            href={getTagUrl(singleTag?.slug ?? 'all')}
+            className="flex-row hidden gap-2 mt-6 ml-8 desktop:flex place-items-center"
+          >
+            <ReturnIcon /> Back
+          </Link>
         </div>
       </header>
     </>
-  );
-};
+  )
+}
 
-export default BlogNavbar;
+export default BlogNavbar
