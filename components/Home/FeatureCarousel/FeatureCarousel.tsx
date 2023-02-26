@@ -34,6 +34,7 @@ import { HiChevronDown } from 'react-icons/hi'
 import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
 import { AiFillGithub } from 'react-icons/ai'
 import { ExclamationCircleFilled } from '@ant-design/icons'
+import { isMobile } from 'react-device-detect'
 
 export type Feature = {
   name: string
@@ -144,7 +145,7 @@ const features: Feature[] = [
 
 export const FeatureCarousel = () => {
   const [selected, setSelected] = useState(0)
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, draggable: false })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, draggable: isMobile })
 
   useEffect(() => {
     if (emblaApi) {

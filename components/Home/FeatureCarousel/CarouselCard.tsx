@@ -40,7 +40,7 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
-    <div className={`${feature.code ? 'md:w-[60%]' : 'md:w-2/3'} flex flex-col justify-between h-full  sm:w-1/2 px-5`}>
+    <div className={`${feature.code ? 'md:w-[60%]' : 'md:w-2/3'} flex flex-col justify-between h-full sm:w-1/2 px-5`}>
       <div className="flex flex-col gap-4 justify-start md:pt-8 text-left">
         <div className="flex flex-col gap-2">
           <h5 className="hidden sm:flex">{feature.title}</h5>
@@ -50,10 +50,10 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
           </Typography>
         </div>
         {feature.code ? (
-          <div className="border-[1px] rounded-lg border-divider-on-dark">
+          <div className="border-[1px] rounded-lg border-divider-on-dark mt-3">
             {feature.code.map((line, index) => (
               <div key={index} className="flex flex-col">
-                <div className="m-3">
+                <div className="m-3 whitespace-pre-wrap break-words sm:break-normal">
                   <Code language={'bash'} text={line} theme={codeTheme} wrapLines />
                 </div>
                 {index != feature.code!.length - 1 && <div className="w-full h-[1px] bg-divider-on-dark" />}
@@ -151,7 +151,7 @@ export const CarouselCard = (props: { feature: Feature; index: number }) => {
       key={props.index}
       className="relative flex w-full md:h-[475px] lg:h-[525px] border-x-0 sm:border-y-[1px] md:border-x-[1px] border-divider-on-dark flex-shrink-0 snap-always snap-center xl:rounded-br-lg xl:rounded-bl-lg overflow-y-hidden"
     >
-      <div className="mx-5 py-8 border-[1px] sm:border-none border-divider-on-dark rounded-lg">
+      <div className="mx-5 py-8 overflow-hidden border-[1px] sm:border-none border-divider-on-dark rounded-lg">
         {props.feature.right ? (
           <>
             <CarouselFeatures feature={props.feature} />
