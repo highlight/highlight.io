@@ -1,24 +1,21 @@
-import {
-  HighlightLogo,
-  HighlightLogoWhite,
-} from '../HighlightLogo/HighlightLogo';
-import styles from './Navbar.module.scss';
-import classNames from 'classnames';
-import { PrimaryButton } from '../Buttons/PrimaryButton';
-import { useEffect, useState } from 'react';
-import Banner from '../Banner/Banner';
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-import { Typography } from '../Typography/Typography';
-import Link from 'next/link';
-import ResourceDropdown from './ResourceDropdown';
-import ProductDropdown from './ProductDropdown';
-import { GithubPopup } from '../../GithubPopup/GithubPopup';
-import { AiFillGithub } from 'react-icons/ai';
-import { FaDiscord } from 'react-icons/fa';
-import { DocSearch } from '@docsearch/react';
+import { HighlightLogo, HighlightLogoWhite } from '../HighlightLogo/HighlightLogo'
+import styles from './Navbar.module.scss'
+import classNames from 'classnames'
+import { PrimaryButton } from '../Buttons/PrimaryButton'
+import { useEffect, useState } from 'react'
+import Banner from '../Banner/Banner'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import { Typography } from '../Typography/Typography'
+import Link from 'next/link'
+import ResourceDropdown from './ResourceDropdown'
+import ProductDropdown from './ProductDropdown'
+import { GithubPopup } from '../../GithubPopup/GithubPopup'
+import { AiFillGithub } from 'react-icons/ai'
+import { FaDiscord } from 'react-icons/fa'
+import { DocSearch } from '@docsearch/react'
 
-import '@docsearch/css';
-import { useMediaQuery } from '../../MediaQuery/MediaQuery';
+import '@docsearch/css'
+import { useMediaQuery } from '../../MediaQuery/MediaQuery'
 
 const Navbar = ({
   hideFreeTrialText,
@@ -27,30 +24,30 @@ const Navbar = ({
   fixed,
   title,
 }: {
-  hideFreeTrialText?: boolean;
-  isDocsPage?: boolean;
-  hideBanner?: boolean;
-  fixed?: boolean;
-  title?: string;
+  hideFreeTrialText?: boolean
+  isDocsPage?: boolean
+  hideBanner?: boolean
+  fixed?: boolean
+  title?: string
 }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [prevY, setPrevY] = useState(0);
+  const [scrolled, setScrolled] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [prevY, setPrevY] = useState(0)
 
   const changeBackground = () => {
-    const currentScrollPos = window.pageYOffset;
+    const currentScrollPos = window.pageYOffset
     if (window.scrollY > 60 && prevY < currentScrollPos) {
-      setScrolled(true);
+      setScrolled(true)
     } else if (window.scrollY > 60 && prevY > currentScrollPos) {
-      setScrolled(false);
+      setScrolled(false)
     }
-    setPrevY(currentScrollPos);
-  };
+    setPrevY(currentScrollPos)
+  }
 
   useEffect(() => {
-    changeBackground();
-    window.addEventListener('scroll', changeBackground);
-  });
+    changeBackground()
+    window.addEventListener('scroll', changeBackground)
+  })
 
   return (
     <>
@@ -61,23 +58,6 @@ const Navbar = ({
           [styles.fixed]: fixed,
         })}
       >
-        {!hideBanner && (
-          <Banner>
-            <div className={styles.bannerContainer}>
-              {!hideFreeTrialText && (
-                <>
-                  <p>Want 2 weeks of free Highlight? </p>
-                  <a
-                    href="http://app.highlight.io/"
-                    className={styles.callToAction}
-                  >
-                    Register Here →
-                  </a>
-                </>
-              )}
-            </div>
-          </Banner>
-        )}
         <header
           className={classNames({
             [styles.mobileHeader]: isOpen,
@@ -103,21 +83,17 @@ const Navbar = ({
                   {title}
                 </p>
               </Typography>
-              {isDocsPage &&
+              {isDocsPage && (
                 <DocSearch
-                  placeholder='Search the highlight.io docs'
+                  placeholder="Search the highlight.io docs"
                   appId="JGT9LI80J2"
                   indexName="highlight"
                   apiKey="ac336720d8f4f996abe3adee603a1c84"
                 />
-              }
+              )}
             </div>
             <div className={styles.navMenu} onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? (
-                <AiOutlineClose className={styles.copyOnDark} />
-              ) : (
-                <AiOutlineMenu />
-              )}
+              {isOpen ? <AiOutlineClose className={styles.copyOnDark} /> : <AiOutlineMenu />}
             </div>
 
             {isOpen && (
@@ -139,10 +115,7 @@ const Navbar = ({
                   </li>
                   <li>
                     <Typography type="copy3" emphasis={true}>
-                      <Link
-                        href={'https://careers.highlight.run'}
-                        className={styles.menuItemLarge}
-                      >
+                      <Link href={'https://careers.highlight.run'} className={styles.menuItemLarge}>
                         Careers
                       </Link>
                     </Typography>
@@ -156,14 +129,9 @@ const Navbar = ({
                   </li>
                 </ul>
                 <div className={styles.menuButtons}>
-                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
-                    Get Started
-                  </PrimaryButton>
+                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">Get Started</PrimaryButton>
                   <Typography type="copy3" emphasis={true}>
-                    <a
-                      href="https://app.highlight.io/"
-                      className={styles.menuItem}
-                    >
+                    <a href="https://app.highlight.io/" className={styles.menuItem}>
                       Sign In
                     </a>
                   </Typography>
@@ -171,20 +139,9 @@ const Navbar = ({
               </div>
             )}
             {!isDocsPage && (
-              <div
-                className={classNames(
-                  styles.navContainer,
-                  styles.header,
-                  styles.headerCenter
-                )}
-              >
-                <Link
-                  href="/pricing"
-                  className={styles.headerButton}
-                >
-                  <Typography type="copy2">
-                    Pricing
-                  </Typography>
+              <div className={classNames(styles.navContainer, styles.header, styles.headerCenter)}>
+                <Link href="/pricing" className={styles.headerButton}>
+                  <Typography type="copy2">Pricing</Typography>
                 </Link>
                 <Link href="/customers" className={styles.headerButton}>
                   <Typography type="copy2">Customers</Typography>
@@ -196,13 +153,7 @@ const Navbar = ({
                 <ResourceDropdown isOpen={scrolled && !fixed} />
               </div>
             )}
-            <div
-              className={classNames(
-                styles.navContainer,
-                styles.header,
-                styles.headerRight
-              )}
-            >
+            <div className={classNames(styles.navContainer, styles.header, styles.headerRight)}>
               {!isDocsPage && (
                 <Link href="/docs" className={classNames(styles.headerButton, styles.headerButtonRight)}>
                   <Typography type="copy2">Docs</Typography>
@@ -211,32 +162,36 @@ const Navbar = ({
               <a href="https://app.highlight.io/" className={styles.headerButton}>
                 <Typography type="copy2">Sign in</Typography>
               </a>
-              <PrimaryButton
-                href="https://app.highlight.io/?sign_up=1"
-                className={styles.signUpButton}
-              >
+              <PrimaryButton href="https://app.highlight.io/?sign_up=1" className={styles.signUpButton}>
                 <Typography type="copy2" emphasis={true}>
                   Sign up
                 </Typography>
               </PrimaryButton>
               <div className={styles.socialButtonContainer}>
-                <Link href="https://github.com/highlight/highlight" target="_blank" rel='noreferrer' className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperLeft)}>
+                <Link
+                  href="https://github.com/highlight/highlight"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperLeft)}
+                >
                   <AiFillGithub className={classNames(styles.socialButton)} />
                 </Link>
-                <div className={styles.socialButtonDivider}>
-                </div>
-                <Link href="https://discord.gg/yxaXEAqgwN" target="_blank" rel='noreferrer' className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperRight)}>
+                <div className={styles.socialButtonDivider}></div>
+                <Link
+                  href="https://discord.gg/yxaXEAqgwN"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={classNames(styles.socialButtonWrapper, styles.socialButtonWrapperRight)}
+                >
                   <FaDiscord className={classNames(styles.socialButton)} />
                 </Link>
               </div>
             </div>
           </div>
         </header>
-      </div >
+      </div>
     </>
-  );
-};
+  )
+}
 
-
-
-export default Navbar;
+export default Navbar
