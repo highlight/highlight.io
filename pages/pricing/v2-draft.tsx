@@ -5,9 +5,9 @@ import Footer from "../../components/common/Footer/Footer";
 import Navbar from "../../components/common/Navbar/Navbar";
 import { Typography } from "../../components/common/Typography/Typography";
 import homeStyles from "../../components/Home/Home.module.scss";
-import { InformationCircleIcon } from "@heroicons/react/20/solid"
+import { InformationCircleIcon, ChevronDownIcon, CheckIcon } from "@heroicons/react/20/solid"
 
-import { RadioGroup } from "@headlessui/react";
+import { RadioGroup, Listbox } from "@headlessui/react";
 import * as Slider from "@radix-ui/react-slider"
 import { useState } from "react";
 import classNames from "classnames";
@@ -133,11 +133,13 @@ const PriceCalculator = () => {
 }
 
 const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { title: string, description: string, value: number, onChange: (value: number) => void, cost: number }) => {
+	const rangeOptions = [0, 500, 1_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000]
+
 	return <div className="flex flex-row">
 		<div className="flex flex-col gap-1 py-5 px-7">
 			<Typography type="copy1" emphasis>{title}</Typography>
 			<Typography type="copy3" className="mt-2.5">{description}</Typography>
-			<RangedInput min={0} max={1_000_000} step={500} value={value} onChange={onChange} />
+			<RangedInput options={rangeOptions} value={value} onChange={onChange} />
 		</div>
 		<div className="border-l border-divider-on-dark">
 			<CalculatorCostDisplay heading="Base + Usage" cost={cost} />
@@ -145,18 +147,50 @@ const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { t
 	</div>
 }
 
+export const RangedInput = ({ options, value, onChange }: { options: number[], value: number, onChange: (value: number) => void }) => {
+	const sortedOptions = [...options].sort((a, b) => a - b)
+	const min = sortedOptions[0] ?? 0
+	const max = sortedOptions[sortedOptions.length - 1] ?? 100
 
+	const snapValue = (value: number) => {
+		const deltas = sortedOptions.map(v => Math.abs(v - value))
+		for (const [i, delta] of deltas.entries()) {
+			if ((deltas[i + 1] ?? Infinity) > delta) return sortedOptions[i]
+		}
+		return sortedOptions[0]
+	}
 
-const RangedInput = ({ min, max, step, value, onChange }: { min: number, max: number, step: number, value: number, onChange: (value: number) => void }) => {
-	return <Slider.Root min={min} max={max} step={step} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative flex items-center w-full h-16 mt-4 select-none touch-none group">
-		<Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
-		<Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px] outline-none bg-[#F5F5F5] border-copy-on-dark rounded-full flex flex-col items-center transition-all">
-			<div className="absolute w-2.5 h-2.5 rotate-45 rounded-sm -top-4 bg-blue-cta" />
-			<div className="absolute px-1 py-0.5 mb-2 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta">
-				{value.toLocaleString(undefined, { notation: "compact" })}
-			</div>
-		</Slider.Thumb>
-	</Slider.Root>
+	return <>
+		<div className="block sm:hidden">
+			<Listbox value={snapValue(value)} onChange={onChange}>
+				<Listbox.Button className="flex items-center justify-center w-full h-12 gap-2 transition-all border rounded-lg border-copy-on-light hover:bg-white/10">
+					<Typography type="copy2" emphasis onDark>	{snapValue(value).toLocaleString(undefined, { notation: "compact" })}</Typography>
+					<ChevronDownIcon className="w-5 h-5 text-darker-copy-on-dark" />
+				</Listbox.Button>
+				<Listbox.Options className="p-1 mt-2 border rounded-lg border-copy-on-light">
+					{options.map((value, i) => (
+						<Listbox.Option key={i} value={value} className="flex items-center justify-between px-2 py-1 transition-all rounded cursor-pointer hover:bg-white/10">
+							{({ selected }) => (<>
+								<Typography type="copy2" emphasis={selected} onDark={!selected}>
+									{value.toLocaleString(undefined, { notation: "compact" })}
+								</Typography>
+								{selected && <CheckIcon className="w-5 h-5 text-darker-copy-on-dark" />}
+							</>)}
+						</Listbox.Option>
+					))}
+				</Listbox.Options>
+			</Listbox>
+		</div>
+		<Slider.Root min={min} max={max} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative items-center hidden w-full h-16 mt-4 select-none sm:flex touch-none group">
+			<Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
+			<Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px] outline-none bg-[#F5F5F5] border-copy-on-dark rounded-full flex flex-col items-center transition-all">
+				<div className="absolute w-2.5 h-2.5 rotate-45 rounded-sm -top-4 bg-blue-cta" />
+				<div className="absolute px-1 py-0.5 mb-2 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta">
+					{value.toLocaleString(undefined, { notation: "compact" })}
+				</div>
+			</Slider.Thumb>
+		</Slider.Root>
+	</>
 }
 
 const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: string }) => (
