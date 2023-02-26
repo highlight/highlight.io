@@ -134,7 +134,7 @@ const PriceCalculator = () => {
 
 const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { title: string, description: string, value: number, onChange: (value: number) => void, cost: number }) => {
 	return <div className="flex flex-row">
-		<div className="flex flex-col py-5 px-7">
+		<div className="flex flex-col gap-1 py-5 px-7">
 			<Typography type="copy1" emphasis>{title}</Typography>
 			<Typography type="copy3" className="mt-2.5">{description}</Typography>
 			<RangedInput min={0} max={1_000_000} step={500} value={value} onChange={onChange} />
@@ -148,10 +148,11 @@ const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { t
 
 
 const RangedInput = ({ min, max, step, value, onChange }: { min: number, max: number, step: number, value: number, onChange: (value: number) => void }) => {
-	return <Slider.Root min={min} max={max} step={step} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative flex items-center w-full h-16 pt-3 select-none touch-none group">
+	return <Slider.Root min={min} max={max} step={step} value={[value]} onValueChange={([ev]) => (ev != null) && onChange(ev)} className="relative flex items-center w-full h-16 mt-4 select-none touch-none group">
 		<Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
-		<Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px]  outline-none bg-[#F5F5F5] border-copy-on-dark  rounded-full flex flex-col items-center transition-all">
-			<div className="absolute px-1 py-0.5 mb-2 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta flex ">
+		<Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px] outline-none bg-[#F5F5F5] border-copy-on-dark rounded-full flex flex-col items-center transition-all">
+			<div className="absolute w-2.5 h-2.5 rotate-45 rounded-sm -top-4 bg-blue-cta" />
+			<div className="absolute px-1 py-0.5 mb-2 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta">
 				{value.toLocaleString(undefined, { notation: "compact" })}
 			</div>
 		</Slider.Thumb>
