@@ -1,3 +1,6 @@
 interface Window {
-  rudderanalytics: any;
+  rudderanalytics: any
+  // gtag.js
+  dataLayer: any
+  gtag: any
 }

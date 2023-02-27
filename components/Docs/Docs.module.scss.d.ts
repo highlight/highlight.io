@@ -18,7 +18,6 @@ export const docLink: string
 export const docsCard: string
 export const docsCardGroup: string
 export const docsCardPara: string
-export const docSearchbar: string
 export const docSelect: string
 export const docSelectList: string
 export const docSelectText: string
@@ -43,6 +42,8 @@ export const pageContentTitle: string
 export const pageNavigate: string
 export const pageNavigateRow: string
 export const pageTitle: string
+export const quickStartCenterSection: string
+export const quickStartSubtext: string
 export const resourcesMobile: string
 export const resourcesSideBar: string
 export const resultTitle: string

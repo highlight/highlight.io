@@ -12,6 +12,8 @@
     "styles": "yarn typed-scss-modules ./ --watch --ignore '**/node_modules'"
   },
   "dependencies": {
+    "@docsearch/css": "3",
+    "@docsearch/js": "3",
     "@graphcms/rich-text-react-renderer": "^0.6.1",
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
@@ -38,6 +40,7 @@
     "next-axiom": "^0.16.0",
     "next-mdx-remote": "^4.3.0",
     "nprogress": "^0.2.0",
+    "pretty-quick": "^3.1.3",
     "react": "^18.2.0",
     "react-aria": "^3.20.0",
     "react-code-blocks": "^0.0.9-0",
@@ -45,6 +48,7 @@
     "react-collapsible": "^2.10.0",
     "react-compare-image": "^3.3.0",
     "react-copy-to-clipboard": "^5.1.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-github-btn": "^1.4.0",
     "react-highlight-words": "^0.18.0",
@@ -78,9 +82,10 @@
     "eslint-config-next": "^13.1.6",
     "husky": "^8.0.3",
     "postcss": "^8.4.20",
-    "prettier": "^2.8.3",
+    "prettier": "^2.8.4",
     "tailwindcss": "^3.1.8",
     "typed-scss-modules": "^7.0.1",
     "typescript": "4.9.4"
-  }
+  },
+  "packageManager": "yarn@3.4.1"
 }

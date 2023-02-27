@@ -55,23 +55,7 @@
   }
 }
 
-.heroBugLeft {
-  position: absolute;
-  left: -120px;
-  top: 220px;
-  width: 250px;
-
-  @media screen and (max-width: 1288px) {
-    display: none;
-  }
-}
-
-.heroBugRight {
-  position: absolute;
-  right: -95px;
-  top: 30px;
-  width: 280px;
-
+.heroBug {
   @media screen and (max-width: 1288px) {
     display: none;
   }
@@ -178,13 +162,65 @@
 }
 
 .gradientText {
-  background: -webkit-linear-gradient(
-    135deg,
-    var(--color-yellow-300),
-    var(--color-yellow-600)
-  );
+  background: -webkit-linear-gradient(135deg, var(--color-yellow-300), var(--color-yellow-600));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.carouselButton {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  text-align: left;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-divider-on-dark);
+  cursor: pointer;
+}
+
+.carouselContainer {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+//convert to css from tailwind
+//flex items-center gap-2 border-[1px] border-divider-on-dark py-3 px-5 rounded-lg text-color-copy-on-dark
+.innerCarouselFeature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-divider-on-dark);
+  padding: 12px 20px;
+  border-radius: 0.5rem;
+  color: var(--color-copy-on-dark);
+  cursor: auto;
+
+  &:hover {
+    color: var(--color-copy-on-dark) !important;
+  }
+}
+
+.innerCarouselButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--color-secondary-200);
+  padding: 12px 20px;
+  border-radius: 0.5rem;
+  color: var(--color-secondary-200);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-secondary-300) !important;
+    color: var(--color-primary-background) !important;
+  }
 }
 
 .featuresColumnContainer {
@@ -354,10 +390,10 @@
   text-align: center;
   margin: auto;
 
-  h1,
-  h2 {
-    margin-bottom: calc(10 * var(--space-unit)) !important;
-  }
+  // h1,
+  // h2 {
+  //   margin-bottom: calc(10 * var(--space-unit)) !important;
+  // }
 }
 
 .secondaryAnchor {
@@ -375,7 +411,7 @@
 }
 
 .anchorHead {
-  max-width: 840px;
+  max-width: 1000px;
 }
 
 .landingAnchorHead {
@@ -779,24 +815,26 @@
   }
 }
 
+.solidButton {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid var(--brand-accent-light) !important;
+}
+
 .ossCard {
   border-radius: var(--size-xSmall);
   box-shadow: 8px 8px 0px -2px var(--color-primary-200);
 }
 
-.hollowButton {
+.whiteButton {
   display: flex;
   justify-content: center;
   text-align: center;
-  border: 1px solid var(--brand-accent-light) !important;
+  border: 1px solid var(--copy-on-dark) !important;
   background-color: transparent !important;
-  color: var(--brand-accent-light) !important;
+  color: var(--copy-on-dark) !important;
   border-radius: var(--size-xSmall);
-
-  &:hover {
-    background-color: var(--color-secondary-300) !important;
-    color: var(--color-primary-background) !important;
-  }
 }
 
 .customerReel {
@@ -1248,5 +1286,13 @@
     .ctaContainer {
       padding: 0 !important;
     }
+  }
+
+  .landingAnchorHead {
+    width: 100vw;
+    margin-left: var(--size-medium);
+    margin-right: var(--size-medium);
+    font-size: 44px;
+    line-height: 48px !important;
   }
 }

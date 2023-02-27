@@ -1,38 +1,36 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import Navbar from '../../components/common/Navbar/Navbar';
-import FeatureBox from '../../components/Products/FeatureBox';
-import Image from 'next/image';
-import Link from 'next/link';
+import React, { useRef, useEffect, useState, useCallback } from 'react'
+import Navbar from '../../components/common/Navbar/Navbar'
+import FeatureBox from '../../components/Products/FeatureBox'
+import Image from 'next/image'
+import Link from 'next/link'
+import classNames from 'classnames'
 
-import {
-  BsPlayCircleFill,
-  BsBarChartFill,
-  BsFillTerminalFill,
-} from 'react-icons/bs';
-import { PRODUCTS, iProduct } from '../../components/Products/products';
+import { BsPlayCircleFill, BsBarChartFill, BsFillTerminalFill } from 'react-icons/bs'
+import { PRODUCTS, iProduct } from '../../components/Products/products'
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next'
 
-import { Section } from '../../components/common/Section/Section';
-import { Typography } from '../../components/common/Typography/Typography';
-import landingStyles from '../../components/Home/Home.module.scss';
-import styles from '../../components/Products/Products.module.scss';
-import navStyles from '../../components/common/Navbar/Navbar.module.scss';
-import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
-import ProductsReplay from '../../public/images/products-replay.svg';
-import ProductsErrors from '../../public/images/products-errors.svg';
-import ProductsGraph from '../../public/images/products-graph.svg';
+import { Section } from '../../components/common/Section/Section'
+import { Typography } from '../../components/common/Typography/Typography'
+import landingStyles from '../../components/Home/Home.module.scss'
+import styles from '../../components/Products/Products.module.scss'
+import navStyles from '../../components/common/Navbar/Navbar.module.scss'
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
+import ProductsReplay from '../../public/images/products-replay.png'
+import ProductsErrors from '../../public/images/products-errors.png'
+import ProductsGraph from '../../public/images/products-graph.png'
 
-import HeroBugLeft from '../../public/images/hero-bug-left.gif';
-import HeroBugRight from '../../public/images/hero-bug-right.gif';
-import Footer from '../../components/common/Footer/Footer';
-import { REVIEWS } from '../../components/Home/Reviews';
-import { CustomerReview } from '..';
-import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import Banner from '../../components/common/Banner/Banner';
-import InfoRow from '../../components/Products/InfoRow';
+import HeroBugLeft from '../../public/images/hero-bug-left.gif'
+import HeroBugRight from '../../public/images/hero-bug-right.gif'
+import { AnimateBugLeft, AnimateBugRight } from '../../components/Animate'
+import Footer from '../../components/common/Footer/Footer'
+import { REVIEWS } from '../../components/Home/Reviews'
+import { CustomerReview } from '..'
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import Banner from '../../components/common/Banner/Banner'
+import InfoRow from '../../components/Products/InfoRow'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -40,136 +38,125 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: { slug: k },
     })),
     fallback: 'blocking',
-  };
-};
+  }
+}
 
 //Gets list of products from products.ts
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params?.slug as string;
+  const slug = params?.slug as string
 
   // Handle event slugs which don't exist
   if (!PRODUCTS[slug]) {
     return {
       notFound: true,
-    };
+    }
   }
 
   return {
     props: {
       product: PRODUCTS[slug],
     },
-  };
-};
+  }
+}
 
 const Products = ({ product }: { product: iProduct }) => {
-  const reviewsRef = useRef<HTMLDivElement>(null);
-  const scrollYPosition = useRef<number>(0);
-  const [scrollReviews, setScrollReviews] = useState(false);
+  const reviewsRef = useRef<HTMLDivElement>(null)
+  const scrollYPosition = useRef<number>(0)
+  const [scrollReviews, setScrollReviews] = useState(false)
+  const [leftBugLoaded, setLeftBugLoaded] = useState(false)
+  const [rightBugLoaded, setRightBugLoaded] = useState(false)
 
   const scrollListener = useCallback(() => {
-
     if (!scrollReviews) {
-      return;
+      return
     }
 
     if (reviewsRef.current) {
-      const { scrollY } = window;
-      const scrollingDown = scrollYPosition.current > scrollY;
+      const { scrollY } = window
+      const scrollingDown = scrollYPosition.current > scrollY
       // Adjust this value to control scroll speed
-      const scrollDistance = scrollingDown ? -3 : 3;
-      reviewsRef.current.scrollLeft += scrollDistance;
-      scrollYPosition.current = scrollY;
+      const scrollDistance = scrollingDown ? -3 : 3
+      reviewsRef.current.scrollLeft += scrollDistance
+      scrollYPosition.current = scrollY
     }
-  }, [scrollReviews]);
+  }, [scrollReviews])
 
   useEffect(() => {
-    window.removeEventListener('scroll', scrollListener);
-    window.addEventListener('scroll', scrollListener);
-    return () => window.removeEventListener('scroll', scrollListener);
-  }, [scrollListener]);
+    window.removeEventListener('scroll', scrollListener)
+    window.addEventListener('scroll', scrollListener)
+    return () => window.removeEventListener('scroll', scrollListener)
+  }, [scrollListener])
 
   useEffect(() => {
-    const reviewsElement = reviewsRef.current;
+    const reviewsElement = reviewsRef.current
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setScrollReviews(entry.isIntersecting);
+        setScrollReviews(entry.isIntersecting)
       },
       {
         root: null,
         rootMargin: '250px 0px',
         threshold: 0,
-      }
-    );
+      },
+    )
 
     if (reviewsElement) {
-      observer.observe(reviewsElement);
+      observer.observe(reviewsElement)
 
       // Scroll to center on load
-      reviewsElement.scrollLeft =
-        (reviewsElement.scrollWidth - window.innerWidth) / 2;
+      reviewsElement.scrollLeft = (reviewsElement.scrollWidth - window.innerWidth) / 2
     }
 
     return () => {
       if (reviewsElement) {
-        observer.unobserve(reviewsElement);
+        observer.unobserve(reviewsElement)
       }
-    };
-  }, [reviewsRef]);
+    }
+  }, [reviewsRef])
 
   return (
     <div>
-      <Banner>
-        <div className={navStyles.bannerContainer}>
-          <p>Want 2 weeks of free Highlight? </p>
-          <a
-            href="http://app.highlight.io/"
-            className={navStyles.callToAction}
-          >
-            Register Here →
-          </a>
-        </div>
-      </Banner>
       <Navbar hideBanner />
       <div>
         <Section className={landingStyles.heroVideoWrapper}>
-          <div className={landingStyles.heroBugLeft}>
-            <Image src={HeroBugLeft} alt="bug left" />
-          </div>
-          <div className={landingStyles.heroBugRight}>
-            <Image src={HeroBugRight} alt="bug right" />
-          </div>
+          <AnimateBugLeft loaded={leftBugLoaded && rightBugLoaded}>
+            <div className={landingStyles.heroBug}>
+              <Image src={HeroBugLeft} alt="bug left" onLoadingComplete={() => setLeftBugLoaded(true)} />
+            </div>
+          </AnimateBugLeft>
+          <AnimateBugRight loaded={leftBugLoaded && rightBugLoaded}>
+            <div className={landingStyles.heroBug}>
+              <Image src={HeroBugRight} alt="bug right" onLoadingComplete={() => setRightBugLoaded(true)} />
+            </div>
+          </AnimateBugRight>
           <div className={landingStyles.anchorFeature}>
             <div className={landingStyles.anchorHead}>
-              <div className={styles.highlightedBadge}>
-                <Typography type="copy4" emphasis>
-                  Highlight for {product.title}
-                </Typography>
-              </div>
               <h1>
-                The{' '}
-                <span className={landingStyles.highlightedText}>
-                  {product.title}
-                </span>
+                The <span className={landingStyles.highlightedText}>{product.title}</span>
                 <br />
                 monitoring toolkit <br className="hidden sm:flex" />
                 you&apos;ve been waiting <br className="hidden sm:flex" />
                 for.
               </h1>
-              <Typography type="copy1" onDark>
-                What if monitoring your {product.title} app was as easy as
-                deploying it? With session replay and error monitoring,
-                Highlight’s got you covered.
-              </Typography>
+              <div className="mt-4 sm:mt-8 px-4 max-w-[840px]">
+                <Typography type="copy1" onDark>
+                  What if monitoring your {product.title} app was as easy as deploying it? With session replay and error
+                  monitoring, Highlight&apos;s got you covered.
+                </Typography>
+              </div>
               <div className="flex justify-center my-14">
-                <div className="flex flex-col lg:flex-row justify-center gap-4 w-screen sm:w-auto px-5"
-                >
-                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
+                  <PrimaryButton
+                    className={classNames(landingStyles.solidButton, 'min-w-[180px]')}
+                    href="https://app.highlight.io/?sign_up=1"
+                  >
                     <Typography type="copy2" emphasis={true}>
-                      Get started for free
+                      Get started
                     </Typography>
                   </PrimaryButton>
-                  <PrimaryButton href={product.docsLink} className={styles.hollowButton}>
+
+                  <PrimaryButton href={'/docs'} className={classNames(styles.hollowButton)}>
                     <Typography type="copy2" emphasis={true}>
                       Read our docs
                     </Typography>
@@ -218,8 +205,7 @@ const Products = ({ product }: { product: iProduct }) => {
               </div>
 
               <div className="flex justify-center my-14">
-                <div className="flex flex-col lg:flex-row justify-center gap-4"
-                >
+                <div className="flex flex-col lg:flex-row justify-center gap-4">
                   <PrimaryButton href="https://app.highlight.io/?sign_up=1">
                     <Typography type="copy2" emphasis={true}>
                       Get started for free
@@ -234,12 +220,7 @@ const Products = ({ product }: { product: iProduct }) => {
               </div>
             </div>
             <div className="w-4/5 mb-20 md:mb-40">
-              <HighlightCodeBlock
-                language={'js'}
-                product={product}
-                showLineNumbers={false}
-                topbar={true}
-              />
+              <HighlightCodeBlock language={'js'} product={product} showLineNumbers={false} topbar={true} />
             </div>
           </div>
         </div>
@@ -274,7 +255,6 @@ const Products = ({ product }: { product: iProduct }) => {
             link={product.docsLink}
             imgSrc={ProductsGraph}
           />
-
         </div>
         <Section>
           <CompaniesReel />
@@ -283,10 +263,7 @@ const Products = ({ product }: { product: iProduct }) => {
           <div className={landingStyles.anchorFeature}>
             <div className={landingStyles.anchorHead}>
               <Typography type="copy2" onDark>
-                Don&apos;t take our word.{' '}
-                <Link href="/customers">
-                  What our customers have to say →
-                </Link>
+                Don&apos;t take our word. <Link href="/customers">What our customers have to say →</Link>
               </Typography>
             </div>
           </div>
@@ -308,7 +285,7 @@ const Products = ({ product }: { product: iProduct }) => {
       </div>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Products;
+export default Products

@@ -1,14 +1,14 @@
-import { ImageResponse } from '@vercel/og';
-import { NextRequest, URLPattern } from 'next/server';
-import { gql } from 'graphql-request';
-import { Post } from '../../../../components/Blog/BlogPost/BlogPost';
-import { font, backdrop, fontLight } from '../util';
-import { GraphQLRequest } from '../../../../utils/graphql';
+import { ImageResponse } from '@vercel/og'
+import { NextRequest, URLPattern } from 'next/server'
+import { gql } from 'graphql-request'
+import { Post } from '../../../../components/Blog/BlogPost/BlogPost'
+import { font, backdrop, fontLight } from '../util'
+import { GraphQLRequest } from '../../../../utils/graphql'
 import styles from '../../../../components/Products/Products.module.scss'
 
 export const config = {
   runtime: 'experimental-edge',
-};
+}
 
 const QUERY = gql`
   query GetPost($slug: String!) {
@@ -25,23 +25,20 @@ const QUERY = gql`
       }
     }
   }
-`;
+`
 
 export default async function handler(req: NextRequest) {
-  const fontData = await font;
-  const fontLightData = await fontLight;
-  const backdropData = await backdrop;
+  const fontData = await font
+  const fontLightData = await fontLight
+  const backdropData = await backdrop
   const backDropBase64 = btoa(
     new Uint8Array(backdropData).reduce(function (p, c) {
-      return p + String.fromCharCode(c);
-    }, '')
-  );
+      return p + String.fromCharCode(c)
+    }, ''),
+  )
 
-  const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)
-    ?.pathname.groups.slug;
-  const post = (await GraphQLRequest(QUERY, { slug }, false)).post as
-    | Post
-    | undefined;
+  const slug = new URLPattern({ pathname: '/api/og/blog/:slug' }).exec(req.url)?.pathname.groups.slug
+  const post = (await GraphQLRequest(QUERY, { slug }, false)).post as Post | undefined
 
   return new ImageResponse(
     (
@@ -56,17 +53,19 @@ export default async function handler(req: NextRequest) {
           backgroundColor: '#0D0225',
         }}
       >
-        <div style={{
-          display: "flex",
-          color: "white",
-          flexDirection: "column",
-          width: 600,
-          height: "100%",
-          justifyContent: "space-between",
-          paddingTop: 50,
-          paddingLeft: 50,
-          paddingBottom: 50
-        }}>
+        <div
+          style={{
+            display: 'flex',
+            color: 'white',
+            flexDirection: 'column',
+            width: 600,
+            height: '100%',
+            justifyContent: 'space-between',
+            paddingTop: 50,
+            paddingLeft: 50,
+            paddingBottom: 50,
+          }}
+        >
           <img
             alt={'backdrop'}
             style={{
@@ -78,13 +77,7 @@ export default async function handler(req: NextRequest) {
             height={650}
             src={`data:image/png;base64,${backDropBase64}`}
           ></img>
-          <svg
-            width="68"
-            height="68"
-            viewBox="0 0 68 68"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="34" cy="34" r="34" fill="#6C37F4" />
             <path
               fillRule="evenodd"
@@ -93,20 +86,31 @@ export default async function handler(req: NextRequest) {
               fill="white"
             />
           </svg>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{
-              color: "#0D0225",
-              marginBottom: 20,
-              backgroundColor: "#ebff5e",
-              padding: "6px 18px 2px 18px",
-              borderRadius: 100,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span
+              style={{
+                color: '#0D0225',
+                marginBottom: 20,
+                backgroundColor: '#ebff5e',
+                padding: '6px 18px 2px 18px',
+                borderRadius: 100,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
               Highlight Blog
             </span>
-            <span style={{ fontSize: 50, marginBottom: 60, lineHeight: 1.2 }}>
+            <span
+              style={{
+                fontSize: 50,
+                marginBottom: 60,
+                lineHeight: '1.2em',
+                maxHeight: '4.2em',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+              }}
+            >
               {post?.title || slug}
             </span>
             <div tw={'flex flex-row items-center'}>
@@ -127,7 +131,7 @@ export default async function handler(req: NextRequest) {
             </div>
           </div>
         </div>
-      </div >
+      </div>
     ),
     {
       width: 1200,
@@ -146,6 +150,6 @@ export default async function handler(req: NextRequest) {
           style: 'normal',
         },
       ],
-    }
-  );
+    },
+  )
 }

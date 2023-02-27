@@ -16,6 +16,8 @@ export const bodySmall: string
 export const buttonArrow: string
 export const buttonContainer: string
 export const callToActionBackground: string
+export const carouselButton: string
+export const carouselContainer: string
 export const codeSection: string
 export const codeSnippetButtons: string
 export const codeSnippetCircle: string
@@ -45,6 +47,7 @@ export const footerImageRight: string
 export const gradientText: string
 export const gridSectionImageLeft: string
 export const hero: string
+export const heroBug: string
 export const heroBugLeft: string
 export const heroBugRight: string
 export const heroImage: string
@@ -57,6 +60,8 @@ export const highlightedText: string
 export const hollowButton: string
 export const imageInner: string
 export const infoContainer: string
+export const innerCarouselButton: string
+export const innerCarouselFeature: string
 export const jayImage: string
 export const landingAnchorHead: string
 export const landingInfoRow: string
@@ -99,8 +104,10 @@ export const snippetDropdownList: string
 export const snippetDropdownValue: string
 export const snippetTab: string
 export const snippetTabs: string
+export const solidButton: string
 export const tabletGraphic: string
 export const tabSelected: string
 export const thumbnail: string
 export const tryButtonContainer: string
 export const videoModal: string
+export const whiteButton: string

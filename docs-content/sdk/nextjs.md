@@ -1,6 +1,7 @@
 ---
 title: Next.JS SDK API Reference
 slug: nextjs
+quickstart: true
 ---
 
 <section className="section">
@@ -12,7 +13,7 @@ slug: nextjs
   </div>
   <div className="right">
     <h6>Just getting started?</h6>
-    <p>Check out our [getting started guide](../general/3_getting-started/backend-sdk/nextjs.md) to get up and running quickly.</p>
+    <p>Check out our [getting started guide](https://google.com) to get up and running quickly.</p>
   </div>
 </section>
 
@@ -26,6 +27,10 @@ slug: nextjs
       <p>The configuration for Highlight backend monitoring.</p>
       <article className="innerParameterContainer">
         <aside className="innerParameterHeading">options properties</aside>
+        <aside className="parameter">
+          <h5>projectID <code>boolean</code> <code>required</code></h5>
+          <p>Your Highlight project ID.</p>
+        </aside>
         <aside className="parameter">
           <h5>disableErrorSourceContext <code>boolean</code> <code>optional</code></h5>
           <p>Disables source code context lines for error reporting. This may be useful for performance if your source files are particularly large or memory is limited.</p>

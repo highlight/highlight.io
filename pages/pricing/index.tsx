@@ -1,63 +1,47 @@
-import { NextPage } from 'next';
-import Image from 'next/legacy/image';
-import Head from 'next/head';
-import { useCallback, useEffect, useState } from 'react';
-import CheckMark from '../../public/images/checkmark.svg';
-import PcPlayMedia from '../../public/images/pc-play-media.svg';
-import Wallet from '../../public/images/wallet.svg';
-import Stopwatch from '../../public/images/stopwatch.svg';
-import Globe from '../../public/images/globe.svg';
-import Security from '../../public/images/security.svg';
-import ReceiptList from '../../public/images/receipt-list.svg';
-import CreditCard from '../../public/images/credit-card.svg';
-import Delete from '../../public/images/delete.svg';
-import TagLoyalty from '../../public/images/tag-loyalty.svg';
-import Chat from '../../public/images/pricing-comment.svg';
-import Navbar from '../../components/common/Navbar/Navbar';
-import { Section } from '../../components/common/Section/Section';
-import Footer from '../../components/common/Footer/Footer';
-import styles from '../../components/Pricing/Pricing.module.scss';
-import productStyles from '../../components/Products/Products.module.scss';
-import classNames from 'classnames';
-import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import { Typography } from '../../components/common/Typography/Typography';
-import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel';
-import useEmblaCarousel from 'embla-carousel-react';
+import { NextPage } from 'next'
+import Image from 'next/legacy/image'
+import Head from 'next/head'
+import { useCallback, useEffect, useState } from 'react'
+import CheckMark from '../../public/images/checkmark.svg'
+import PcPlayMedia from '../../public/images/pc-play-media.svg'
+import Wallet from '../../public/images/wallet.svg'
+import Stopwatch from '../../public/images/stopwatch.svg'
+import Globe from '../../public/images/globe.svg'
+import Security from '../../public/images/security.svg'
+import ReceiptList from '../../public/images/receipt-list.svg'
+import CreditCard from '../../public/images/credit-card.svg'
+import Delete from '../../public/images/delete.svg'
+import TagLoyalty from '../../public/images/tag-loyalty.svg'
+import Chat from '../../public/images/pricing-comment.svg'
+import Navbar from '../../components/common/Navbar/Navbar'
+import { Section } from '../../components/common/Section/Section'
+import Footer from '../../components/common/Footer/Footer'
+import styles from '../../components/Pricing/Pricing.module.scss'
+import productStyles from '../../components/Products/Products.module.scss'
+import classNames from 'classnames'
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import { Typography } from '../../components/common/Typography/Typography'
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
+import useEmblaCarousel from 'embla-carousel-react'
 
-import Collapsible from 'react-collapsible';
+import Collapsible from 'react-collapsible'
 import {
   BasicDetails,
   EnterpriseDetails,
   EssentialsDetails,
   PricingDetails,
   StartupDetails,
-} from '../../components/Pricing/plan_features';
-import {
-  BasicInfo,
-  EnterpriseInfo,
-  EssentialsInfo,
-  PricingInfo,
-  StartupInfo,
-} from '../../components/Pricing/plan_info';
-import { Meta } from '../../components/common/Head/Meta';
-import { useMediaQuery } from '../../components/MediaQuery/MediaQuery';
+} from '../../components/Pricing/plan_features'
+import { BasicInfo, EnterpriseInfo, EssentialsInfo, PricingInfo, StartupInfo } from '../../components/Pricing/plan_info'
+import { Meta } from '../../components/common/Head/Meta'
+import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
 
 // Plans and info used for both mobile and desktop views.
-const planDetails: Array<PricingDetails> = [
-  BasicDetails,
-  EssentialsDetails,
-  StartupDetails,
-  EnterpriseDetails,
-];
-const planInfo: Array<PricingInfo> = [
-  BasicInfo,
-  EssentialsInfo,
-  StartupInfo,
-  EnterpriseInfo,
-];
+const planDetails: Array<PricingDetails> = [BasicDetails, EssentialsDetails, StartupDetails, EnterpriseDetails]
+const planInfo: Array<PricingInfo> = [BasicInfo, EssentialsInfo, StartupInfo, EnterpriseInfo]
 
-const docsUrl = '/docs';
+const docsUrl = '/docs'
 
 const FAQS = [
   {
@@ -105,7 +89,7 @@ const FAQS = [
     answer: `Definitely! You can cancel or downgrade your subscription at anytime. You can also delete your workplace in the settings page at anytime. `,
     icon: Delete,
   },
-];
+]
 
 const TierSection = ({
   tierName,
@@ -116,10 +100,10 @@ const TierSection = ({
   mostPopular,
   monthly,
 }: PricingInfo & {
-  features: PricingDetails;
-  monthly: boolean;
+  features: PricingDetails
+  monthly: boolean
 }) => {
-  const contactSales = price === undefined;
+  const contactSales = price === undefined
   return (
     <div>
       {mostPopular && (
@@ -163,25 +147,14 @@ const TierSection = ({
             )}
             <div className={styles.desktopPrice}>
               {contactSales ? (
-                <Image
-                  height={24}
-                  width={24}
-                  src={Chat}
-                  alt="chat icon"
-                ></Image>
+                <Image height={24} width={24} src={Chat} alt="chat icon"></Image>
               ) : (
                 <>
-                  <Typography
-                    type="copy3"
-                    emphasis
-                    className={styles.moneySign}
-                  >
+                  <Typography type="copy3" emphasis className={styles.moneySign}>
                     {'$'}
                   </Typography>
                   <h3 className={styles.price}>
-                    {monthly || !discount
-                      ? price
-                      : Math.round((1 - discount / 100) * price)}
+                    {monthly || !discount ? price : Math.round((1 - discount / 100) * price)}
                   </h3>
                   <div className={styles.timeIndicator}>
                     <Typography type="copy3">{'/ mo'}</Typography>
@@ -191,11 +164,7 @@ const TierSection = ({
             </div>
           </div>
           <PrimaryButton
-            href={
-              contactSales
-                ? 'mailto:sales@highlight.io'
-                : 'https://app.highlight.io/?sign_up=1'
-            }
+            href={contactSales ? 'mailto:sales@highlight.io' : 'https://app.highlight.io/?sign_up=1'}
             className={styles.pricingButton}
           >
             <Typography type="copy2" emphasis={true}>
@@ -211,49 +180,43 @@ const TierSection = ({
                 {(features as any)[headingKey].items.map((item: any) => {
                   return (
                     <>
-                      {item.value ? (
-                        <Image src={CheckMark} alt="checkmark"></Image>
-                      ) : (
-                        <div>-</div>
-                      )}
+                      {item.value ? <Image src={CheckMark} alt="checkmark"></Image> : <div>-</div>}
                       <hr className={styles.featureDivider} />
                     </>
-                  );
+                  )
                 })}
               </div>
-            );
+            )
           })}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Pricing: NextPage = () => {
-  const [monthly, setMonthly] = useState(true);
-  const is800 = useMediaQuery(800);
-  const is400 = useMediaQuery(400);
-  const isMobile = is800 || is400;
+  const [monthly, setMonthly] = useState(true)
+  const is800 = useMediaQuery(800)
+  const is400 = useMediaQuery(400)
+  const isMobile = is800 || is400
   return (
     <div>
       <Head>
-        <title>
-          Highlight: Plans And Pricing For Any Team. Get Started Free.
-        </title>
+        <title>Highlight: Plans And Pricing For Any Team. Get Started Free.</title>
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity":
               ${JSON.stringify(
-            FAQS.map((faq) => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer,
-              },
-            }))
-          )}
+                FAQS.map((faq) => ({
+                  '@type': 'Question',
+                  name: faq.question,
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: faq.answer,
+                  },
+                })),
+              )}
           }`}
         </script>
       </Head>
@@ -266,11 +229,6 @@ const Pricing: NextPage = () => {
         <Section className={styles.titleSection}>
           <div className={styles.pricingTitle}>
             <div className={styles.anchorHead}>
-              <div className={productStyles.highlightedBadge}>
-                <Typography type="copy4" emphasis>
-                  Plans and Pricing
-                </Typography>
-              </div>
               <h1>
                 Get the
                 <span className={styles.yellowText}>{` visibility `}</span>
@@ -286,60 +244,38 @@ const Pricing: NextPage = () => {
               <Typography type="copy3" className={styles.billingCycleText}>
                 Select billing cycle
               </Typography>
-              <BillingWidget
-                onMonthlyChange={(m) => setMonthly(m)}
-                monthly={monthly}
-              />
+              <BillingWidget onMonthlyChange={(m) => setMonthly(m)} monthly={monthly} />
             </div>
             <MobileTierCarousel monthly={monthly} />
           </Section>
         ) : (
           <Section className={styles.tierWrapper}>
             <div className={styles.configColumn}>
-              <BillingWidget
-                onMonthlyChange={(m) => setMonthly(m)}
-                monthly={monthly}
-              />
+              <BillingWidget onMonthlyChange={(m) => setMonthly(m)} monthly={monthly} />
               <div className={styles.featureKeys}>
                 {Object.keys(BasicDetails).map((headingKey) => {
                   return (
                     <div key={headingKey} className={styles.featureSet}>
-                      <Typography
-                        className={styles.featureName}
-                        type="copy3"
-                        emphasis
-                      >
+                      <Typography className={styles.featureName} type="copy3" emphasis>
                         {(BasicDetails as any)[headingKey].name}
                       </Typography>
-                      {(BasicDetails as any)[headingKey].items.map(
-                        (item: any, key: number) => {
-                          return (
-                            <>
-                              <Typography
-                                type="copy3"
-                                key={key}
-                                className={styles.featureKey}
-                                onDark
-                              >
-                                {item.name}
-                              </Typography>
-                              <hr className={styles.featureKeyDivider} />
-                            </>
-                          );
-                        }
-                      )}
+                      {(BasicDetails as any)[headingKey].items.map((item: any, key: number) => {
+                        return (
+                          <>
+                            <Typography type="copy3" key={key} className={styles.featureKey} onDark>
+                              {item.name}
+                            </Typography>
+                            <hr className={styles.featureKeyDivider} />
+                          </>
+                        )
+                      })}
                     </div>
-                  );
+                  )
                 })}
               </div>
             </div>
             {planInfo.map((p: PricingInfo, idx: number) => (
-              <TierSection
-                key={idx}
-                features={planDetails[idx]}
-                monthly={monthly}
-                {...p}
-              />
+              <TierSection key={idx} features={planDetails[idx]} monthly={monthly} {...p} />
             ))}
           </Section>
         )}
@@ -354,12 +290,7 @@ const Pricing: NextPage = () => {
           </div>
           <div>
             {FAQS.map((faq, index) => (
-              <Question
-                key={index}
-                question={faq.question}
-                answer={faq.answer}
-                icon={faq.icon}
-              />
+              <Question key={index} question={faq.question} answer={faq.answer} icon={faq.icon} />
             ))}
           </div>
         </Section>
@@ -367,18 +298,13 @@ const Pricing: NextPage = () => {
       </main>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
 const DownArrow = ({ fill }: { fill: string }) => (
   <svg width={12} height={12} fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clipPath="url(#a)">
-      <path
-        d="M11.625 3.375 6 9 .375 3.375"
-        stroke={fill}
-        strokeWidth={2}
-        strokeMiterlimit={10}
-      />
+      <path d="M11.625 3.375 6 9 .375 3.375" stroke={fill} strokeWidth={2} strokeMiterlimit={10} />
     </g>
     <defs>
       <clipPath id="a">
@@ -386,18 +312,10 @@ const DownArrow = ({ fill }: { fill: string }) => (
       </clipPath>
     </defs>
   </svg>
-);
+)
 
-const Question = ({
-  question,
-  answer,
-  icon,
-}: {
-  question: string;
-  answer: string;
-  icon: string;
-}) => {
-  const [expanded, setExpanded] = useState(false);
+const Question = ({ question, answer, icon }: { question: string; answer: string; icon: string }) => {
+  const [expanded, setExpanded] = useState(false)
   return (
     <div className={styles.faqRowClickable}>
       <Collapsible
@@ -423,27 +341,22 @@ const Question = ({
         }
       >
         <div className={styles.collapseInner}>
-          <Typography
-            className={styles.questionDescription}
-            type="copy3"
-            onDark
-          >
+          <Typography className={styles.questionDescription} type="copy3" onDark>
             <div dangerouslySetInnerHTML={{ __html: answer }}></div>
           </Typography>
         </div>
       </Collapsible>
       <hr className={styles.faqDivider} />
     </div>
-  );
-};
-
+  )
+}
 
 const BillingWidget = ({
   monthly,
   onMonthlyChange,
 }: {
-  monthly: boolean;
-  onMonthlyChange: (monthly: boolean) => void;
+  monthly: boolean
+  onMonthlyChange: (monthly: boolean) => void
 }) => {
   return (
     <>
@@ -468,26 +381,26 @@ const BillingWidget = ({
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 const MobileTierCarousel = ({ monthly }: { monthly: boolean }) => {
-  const { width } = useWindowDimensions();
-  const [planIndex, setPlanIndex] = useState(2);
+  const { width } = useWindowDimensions()
+  const [planIndex, setPlanIndex] = useState(2)
   const [viewportRef, embla] = useEmblaCarousel({
     startIndex: planIndex,
     align: 'center',
-  });
+  })
 
   useEffect(() => {
     if (embla && planIndex) {
-      embla.scrollTo(planIndex);
+      embla.scrollTo(planIndex)
 
       embla.on('select', () => {
-        setPlanIndex(embla.selectedScrollSnap());
-      });
+        setPlanIndex(embla.selectedScrollSnap())
+      })
     }
-  }, [embla, planIndex]);
+  }, [embla, planIndex])
 
   return (
     <>
@@ -509,7 +422,7 @@ const MobileTierCarousel = ({ monthly }: { monthly: boolean }) => {
           <button
             key={i}
             onClick={() => {
-              embla?.scrollTo(i, false);
+              embla?.scrollTo(i, false)
             }}
             className={classNames(styles.mobileTierDot, {
               [styles.dotSelected]: i == planIndex,
@@ -520,9 +433,7 @@ const MobileTierCarousel = ({ monthly }: { monthly: boolean }) => {
       <div className={styles.mobileFeaturesWrapper}>
         <Typography type="copy3" emphasis>
           {Object.keys(planDetails[planIndex]).map((headingKey) => {
-            let currentFeatureSection = (planDetails[planIndex] as any)[
-              headingKey
-            ];
+            let currentFeatureSection = (planDetails[planIndex] as any)[headingKey]
             return (
               <div className={styles.mobileFeaturesSection} key={headingKey}>
                 <div className={styles.mobileFeatureHeader}>
@@ -530,40 +441,34 @@ const MobileTierCarousel = ({ monthly }: { monthly: boolean }) => {
                     {currentFeatureSection.name}
                   </Typography>
                 </div>
-                {Object.keys(currentFeatureSection.items).map(
-                  (featureKey: any, i: number) => {
-                    let currentFeature =
-                      currentFeatureSection.items[featureKey];
-                    return (
-                      <div key={i} className={styles.mobileFeatureRow}>
-                        <div className={styles.mobileFeatureInner}>
-                          <Typography
-                            type="copy3"
-                            className={styles.mobileFeatureName}
-                          >
-                            {currentFeature.name}
-                          </Typography>
-                          <Typography type="copy3">
-                            {currentFeature.value == true ? (
-                              <Image src={CheckMark} alt="checkmark"></Image>
-                            ) : (
-                              <div>-</div>
-                            )}
-                          </Typography>
-                        </div>
-                        <hr className={styles.mobileFeatureDivider} />
+                {Object.keys(currentFeatureSection.items).map((featureKey: any, i: number) => {
+                  let currentFeature = currentFeatureSection.items[featureKey]
+                  return (
+                    <div key={i} className={styles.mobileFeatureRow}>
+                      <div className={styles.mobileFeatureInner}>
+                        <Typography type="copy3" className={styles.mobileFeatureName}>
+                          {currentFeature.name}
+                        </Typography>
+                        <Typography type="copy3">
+                          {currentFeature.value == true ? (
+                            <Image src={CheckMark} alt="checkmark"></Image>
+                          ) : (
+                            <div>-</div>
+                          )}
+                        </Typography>
                       </div>
-                    );
-                  }
-                )}
+                      <hr className={styles.mobileFeatureDivider} />
+                    </div>
+                  )
+                })}
               </div>
-            );
+            )
           })}
         </Typography>
       </div>
     </>
-  );
-};
+  )
+}
 
 const MobileTierSection = ({
   tierName,
@@ -575,11 +480,11 @@ const MobileTierSection = ({
   discount,
   monthly,
 }: {
-  monthly: boolean;
-  selected: boolean;
-  width: number;
+  monthly: boolean
+  selected: boolean
+  width: number
 } & PricingInfo) => {
-  const contactSales = price === undefined;
+  const contactSales = price === undefined
   return (
     <div
       style={{ minWidth: width }}
@@ -611,8 +516,7 @@ const MobileTierSection = ({
             </div>
           </div>
           <Typography type="copy3" className={styles.mobileSessionCredits}>
-            {numSessionCredits ? numSessionCredits.toLocaleString() : 'Custom'}{' '}
-            session credits
+            {numSessionCredits ? numSessionCredits.toLocaleString() : 'Custom'} session credits
           </Typography>
           <div className={styles.desktopPrice}>
             {contactSales ? (
@@ -623,9 +527,7 @@ const MobileTierSection = ({
                   {'$'}
                 </Typography>
                 <h3 className={styles.price}>
-                  {monthly || !discount
-                    ? price
-                    : Math.round((1 - discount / 100) * price)}
+                  {monthly || !discount ? price : Math.round((1 - discount / 100) * price)}
                 </h3>
                 <div className={styles.timeIndicator}>
                   <Typography type="copy3">{'/ mo'}</Typography>
@@ -634,44 +536,37 @@ const MobileTierSection = ({
             )}
           </div>
         </div>
-        <PrimaryButton
-          className={classNames(
-            styles.pricingButton,
-            styles.mobilePricingButton
-          )}
-        >
+        <PrimaryButton className={classNames(styles.pricingButton, styles.mobilePricingButton)}>
           <Typography type="copy2" emphasis={true}>
             {contactSales ? 'Contact Sales' : 'Start Free Trial'}
           </Typography>
         </PrimaryButton>
       </div>
     </div>
-  );
-};
+  )
+}
 
 function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
+  const { innerWidth: width, innerHeight: height } = window
   return {
     width,
     height,
-  };
+  }
 }
 
 function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions())
 
   useEffect(() => {
     function handleResize() {
-      setWindowDimensions(getWindowDimensions());
+      setWindowDimensions(getWindowDimensions())
     }
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
-  return windowDimensions;
+  return windowDimensions
 }
 
-export default Pricing;
+export default Pricing
