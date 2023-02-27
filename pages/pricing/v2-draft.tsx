@@ -75,7 +75,7 @@ const PlanTable = () => {
 	const [retention, setRetention] = useState<Retention>("3 months")
 
 	return <div className="flex flex-col items-center max-w-full gap-6 mx-auto mt-16"> {/* Pricing */}
-		<div className="flex flex-wrap justify-center gap-12">
+		<div className="flex flex-wrap justify-center gap-12 gap-y-3">
 			<RadioOptions title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
 			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
