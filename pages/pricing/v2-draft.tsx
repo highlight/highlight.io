@@ -11,6 +11,7 @@ import { RadioGroup, Listbox } from "@headlessui/react";
 import * as Slider from "@radix-ui/react-slider"
 import { useState } from "react";
 import classNames from "classnames";
+import { CompaniesReel } from "../../components/Home/CompaniesReel/CompaniesReel";
 
 
 const PricingPage: NextPage = () => {
@@ -28,7 +29,9 @@ const PricingPage: NextPage = () => {
 			</div>
 			<PriceCalculator />
 		</div>
-		{/* Customers grid */}
+		<div className="mt-32 mb-20">
+			<CompaniesReel />
+		</div>
 		{/* Customers review carousel */}
 		<FooterCallToAction />
 		<Footer />
