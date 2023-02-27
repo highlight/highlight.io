@@ -1,17 +1,31 @@
 import { NextPage } from "next";
+import Image from "next/image"
 import { PrimaryButton } from "../../components/common/Buttons/PrimaryButton";
 import { FooterCallToAction } from "../../components/common/CallToAction/FooterCallToAction";
 import Footer from "../../components/common/Footer/Footer";
 import Navbar from "../../components/common/Navbar/Navbar";
 import { Typography } from "../../components/common/Typography/Typography";
 import homeStyles from "../../components/Home/Home.module.scss";
+import pricingStyles from "../../components/Pricing/Pricing.module.scss"
 import { InformationCircleIcon, ChevronDownIcon, CheckIcon } from "@heroicons/react/20/solid"
+
+import PcPlayMedia from '../../public/images/pc-play-media.svg';
+import Wallet from '../../public/images/wallet.svg';
+import Stopwatch from '../../public/images/stopwatch.svg';
+import Globe from '../../public/images/globe.svg';
+import Security from '../../public/images/security.svg';
+import ReceiptList from '../../public/images/receipt-list.svg';
+import CreditCard from '../../public/images/credit-card.svg';
+import Delete from '../../public/images/delete.svg';
+import TagLoyalty from '../../public/images/tag-loyalty.svg';
 
 import { RadioGroup, Listbox } from "@headlessui/react";
 import * as Slider from "@radix-ui/react-slider"
 import { useState } from "react";
 import classNames from "classnames";
 import { CompaniesReel } from "../../components/Home/CompaniesReel/CompaniesReel";
+import Collapsible from "react-collapsible";
+import { Section } from "../../components/common/Section/Section";
 
 
 const PricingPage: NextPage = () => {
@@ -29,14 +43,131 @@ const PricingPage: NextPage = () => {
 			</div>
 			<PriceCalculator />
 		</div>
-		<div className="mt-32 mb-20">
+
+		<div className="px-10 mt-32 mb-20">
 			<CompaniesReel />
+
+			<div className={classNames(homeStyles.anchorFeature, "mt-20")}>
+				<div className={homeStyles.anchorHead}>
+					<h2>{`Frequently asked questions`}</h2>
+				</div>
+			</div>
+			<Section>
+				<div>
+					{Faqs.map((faq, index) => (
+						<Question
+							key={index}
+							question={faq.question}
+							answer={faq.answer}
+							icon={faq.icon}
+						/>
+					))}
+				</div>
+			</Section>
 		</div>
-		{/* Customers review carousel */}
 		<FooterCallToAction />
 		<Footer />
-	</div>
+	</div >
 }
+
+const Question = ({
+	question,
+	answer,
+	icon,
+}: {
+	question: string;
+	answer: string;
+	icon: string;
+}) => {
+	const [expanded, setExpanded] = useState(false);
+	return (
+		<div className={pricingStyles.faqRowClickable}>
+			<Collapsible
+				onOpening={() => setExpanded(true)}
+				onClosing={() => setExpanded(false)}
+				transitionTime={200}
+				trigger={
+					<div className={pricingStyles.faqRow}>
+						<div className={pricingStyles.faqLeftContent}>
+							<Image src={icon} alt="pc icon"></Image>
+							<Typography className={pricingStyles.question} type="copy2" emphasis>
+								{question}
+							</Typography>
+						</div>
+						<button
+							className={classNames(pricingStyles.circleButton, {
+								[pricingStyles.expanded]: expanded,
+							})}
+						>
+							<ChevronDownIcon className={classNames("w-5 h-5", expanded ? 'text-dark-background' : 'text-blue-cta')} />
+						</button>
+					</div>
+				}
+			>
+				<div className={pricingStyles.collapseInner}>
+					<Typography
+						className={pricingStyles.questionDescription}
+						type="copy3"
+						onDark
+					>
+						<div dangerouslySetInnerHTML={{ __html: answer }}></div>
+					</Typography>
+				</div>
+			</Collapsible>
+			<hr className={pricingStyles.faqDivider} />
+		</div>
+	);
+};
+
+const docsUrl = '/docs';
+
+const Faqs: { question: string, answer: string, icon: string }[] = [
+	{
+		question: 'Do you offer a discount for non-profits?',
+		answer: `We love supporting non-profits and offer a 75% discount for the lifetime of the account. To activate the discount, create a workplace on either the Standard or Pro plan. Then reach out to support and mention the discount.`,
+		icon: TagLoyalty,
+	},
+	{
+		question: 'How long does it take to setup Highlight?',
+		answer: `It generally takes an engineer less than ten minutes to understand the concepts of Highlight and integrate the app into their workflow. For more information on setup, take a look at our <a href="${docsUrl}">docs</a>.`,
+		icon: Stopwatch,
+	},
+	{
+		question: 'Can I deploy Highlight on-premise?',
+		answer: `Yes! To get a glimpse at how our deployment process looks, take a look <a href="${docsUrl}/on-premise">here</a> (its super simple!). We also support deployments for most cloud providers (Heroku, Render, AWS, etc..). To get a license key for a trial or a production deployment, contact <a href="mailto:sales@highlight.io">sales</a>.`,
+		icon: Globe,
+	},
+	{
+		question: "Is Highlight secure? Where's my data stored?",
+		answer: `Highlight uses end-to-end encryption to keep your data safe while it’s in transit, and we also offer an on-prem solution if you want to keep customer data on your own servers. For more information, see our <a href="/#privacy">security section</a> and <a href="${docsUrl}" target="_blank">docs</a>. If we don't answer your question there, <a href="mailto:jay@highlight.io">let us know</a>.`,
+		icon: Security,
+	},
+	{
+		question: 'Do I need a credit card to sign up?',
+		answer: `Absolutely not! We never ask for your credit card on sign up. If you start on a paid plan then 30 days after signing up you will be politely prompted to enter in your payment information. At anytime you can switch back to a free plan as long as your workplace has less than 6 seats.`,
+		icon: CreditCard,
+	},
+	{
+		question: 'How will you charge me?',
+		answer: `We ask for a credit card. Your credit card information will never touch our servers as we use <a href="https://stripe.com/" target="_blank">Stripe</a> as our payments processor. For Enterprise customers we can do ACH and custom invoices if requested.`,
+		icon: Wallet,
+	},
+	{
+		question: 'How does billing work?',
+		answer: `We charge by usage; or number of sessions collected per month. Our billing system uses prorated billing, meaning you only pay for what you use below each of our thresholds (see above). For example if you move to the Startup plan from the Basic plan in the middle of the month, then you will only be charged for the time you are on the paid plan.`,
+		icon: ReceiptList,
+	},
+	{
+		question: 'What counts as a session?',
+		answer: `A session is contiguous instance of a user's presence on your app for less than 4 hours. That is, if a user is browsing your application for 3 minutes, then closes the tab, this counts as a single session.`,
+		icon: PcPlayMedia,
+	},
+	{
+		question: 'Can I cancel at anytime?',
+		answer: `Definitely! You can cancel or downgrade your subscription at anytime. You can also delete your workplace in the settings page at anytime.`,
+		icon: Delete,
+	},
+];
 
 const billingPeriodOptions = ["Monthly", "Annual"] as const
 type BillingPeriod = typeof billingPeriodOptions[number]
