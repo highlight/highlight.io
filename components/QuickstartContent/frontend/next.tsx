@@ -17,20 +17,6 @@ ReactDOM.render(
     document.getElementById('root')
 );`
 
-const link = 'https://www.highlight.io/docs/getting-started/fullstack-frameworks/next-js/env-variables'
-export const configureSourcemapsNext: QuickStartStep = {
-  title: 'Configure sourcemaps in CI. (optional)',
-  content: `To get properly enhanced stacktraces of your javascript app, we recommend instrumenting sourcemaps. If you deploy public sourcemaps, you can skip this step. Refer to our docs on [sourcemaps](${link}) to read more about this option.`,
-  code: {
-    text: `# Upload sourcemaps to Highlight
-...
-npx --yes @highlight-run/sourcemap-uploader upload --apiKey $\{YOUR_ORG_API_KEY\} --path ./build
-...
-        `,
-    language: 'bash',
-  },
-}
-
 export const NextContent: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io with your Next (frontend) application.',
   entries: [
@@ -57,7 +43,7 @@ yarn add highlight.run @highlight-run/react`,
     },
     identifySnippet,
     verifySnippet,
-    configureSourcemapsNext,
+    configureSourcemapsCI('/docs/getting-started/fullstack-frameworks/next-js/env-variables'),
     setupBackendSnippet,
   ],
 }
