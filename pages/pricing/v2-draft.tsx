@@ -115,6 +115,7 @@ const PlanTier = ({ name, tier, billingPeriod, retention }: { name: string, tier
 	</div>
 }
 
+const formatPrice = (price: number) => price.toLocaleString(undefined, { style: "currency", currency: "USD", signDisplay: "always", }).replace("+", "+ ")
 
 const PriceCalculator = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
@@ -150,6 +151,9 @@ const PriceCalculator = () => {
 				<CalculatorRowDesktop title="Error Monitoring Usage." description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors." value={errorUsage} onChange={setErrorUsage} cost={errorsCost + basePrice} />
 				<CalculatorRowDesktop title="Session Replay Usage." description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. " value={sessionUsage} onChange={setSessionUsage} cost={sessionsCost + basePrice} />
 				<CalculatorRowDesktop title="Logging Usage." description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes." value={loggingUsage} onChange={setLoggingUsage} cost={loggingCost + basePrice} />
+				<div className="block px-3 py-5 rounded-b-lg md:hidden">
+					<Typography type="copy1" emphasis>Total: {formatPrice(basePrice + sessionsCost + errorsCost + loggingCost)}</Typography>
+				</div>
 			</div>
 			<div className="hidden border border-t-0 rounded-b-lg md:block h-52 border-divider-on-dark">
 				<CalculatorCostDisplay heading="Total" cost={basePrice + sessionsCost + errorsCost + loggingCost} />
@@ -164,9 +168,9 @@ const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { t
 	const rangeOptions = [0, 500, 1_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000]
 
 	return <div className="flex flex-row">
-		<div className="flex flex-col flex-1 gap-1 py-5 px-7">
+		<div className="flex flex-col flex-1 gap-1 px-3 py-5 md:px-7">
 			<Typography type="copy4" emphasis className="rounded-full bg-blue-cta py-0.5 px-3 text-dark-background self-start inline-block md:hidden">
-				{cost.toLocaleString(undefined, { style: "currency", currency: "USD", signDisplay: "always", }).replace("+", "+ ")}
+				{formatPrice(cost)}
 			</Typography>
 			<Typography type="copy1" emphasis>{title}</Typography>
 			<Typography type="copy3" className="mt-2.5">{description}</Typography>
@@ -228,7 +232,7 @@ const CalculatorCostDisplay = ({ cost, heading }: { cost: number, heading: strin
 	<div className="grid flex-shrink-0 place-content-center place-items-center w-[343px] h-full">
 		<Typography type="copy3" emphasis onDark>{heading}</Typography>
 		<span className="text-4xl font-semibold">
-			{cost.toLocaleString(undefined, { style: "currency", currency: "USD", signDisplay: "always", }).replace("+", "+ ")}
+			{formatPrice(cost)}
 		</span>
 	</div>
 )
