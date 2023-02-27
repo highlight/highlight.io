@@ -79,15 +79,42 @@ const PlanTable = () => {
 			<RadioOptions title="Billing Period" options={billingPeriodOptions} value={billingPeriod} onChange={setBillingPeriod} />
 			<RadioOptions title="Retention" options={retentionOptions} value={retention} onChange={setRetention} />
 		</div>
-		<div className="flex flex-wrap gap-7">
+		<div className="grid items-stretch w-full grid-cols-1 sm:grid-cols-2 min-[1190px]:grid-flow-col gap-7">
 			{Object.entries(priceTiers).map(([name, tier]) =>
-				<PriceItem name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retention} />
+				<PlanTier name={name} tier={tier} billingPeriod={billingPeriod} key={name} retention={retention} />
 			)}
 		</div>
 		<Typography type="copy1" onDark className="text-center my-9">If usage goes beyond the included monthly quota, your <a href="#overage">usage rate</a> kicks in.</Typography>
 		<div className="flex-shrink w-48" />
 	</div>
 }
+
+const PlanTier = ({ name, tier, billingPeriod, retention }: { name: string, tier: PricingTier, billingPeriod: BillingPeriod, retention: Retention }) => {
+	const { sessions, errors } = tier
+
+	return <div className="flex flex-col flex-grow border rounded-md min-[1190px]:min-w-[255px] basis-64 border-divider-on-dark">
+		<div className="p-5 border-b border-divider-on-dark">
+			<Typography type="copy1" emphasis>{name}</Typography>
+			<div className="flex items-end mt-2">
+				<Typography type="copy3" emphasis className="self-start align-super">$</Typography>
+				<span className="mx-1 text-5xl font-semibold">{getBasePrice(tier, billingPeriod, retention)}</span>
+				<Typography type="copy3">/ mo</Typography>
+			</div>
+		</div>
+		<div className="p-5 flex flex-col gap-2.5 flex-grow">
+			<div className="flex items-center gap-1">
+				<Typography type="copy3" emphasis>Included</Typography> <InformationCircleIcon className="inline w-5 h-5" />
+			</div>
+			<Typography type="copy3">{sessions} monthly sessions</Typography>
+			<Typography type="copy3">{errors} monthly errors</Typography>
+			<Typography type="copy3">Unlimited seats</Typography>
+		</div>
+		<div className="p-5">
+			<PrimaryButton href="#" className={homeStyles.hollowButton}>Start free trial</PrimaryButton>
+		</div>
+	</div>
+}
+
 
 const PriceCalculator = () => {
 	const [billingPeriod, setBillingPeriod] = useState<BillingPeriod>("Monthly")
@@ -225,30 +252,5 @@ const RadioOptions = <T extends string>({ title, options, value, onChange }: { t
 	</RadioGroup>
 }
 
-const PriceItem = ({ name, tier, billingPeriod, retention }: { name: string, tier: PricingTier, billingPeriod: BillingPeriod, retention: Retention }) => {
-	const { sessions, errors } = tier
-
-	return <div className="flex flex-col flex-grow border rounded-md md:w-64 border-divider-on-dark">
-		<div className="p-5 border-b border-divider-on-dark">
-			<Typography type="copy1" emphasis>{name}</Typography>
-			<div className="flex items-end mt-2">
-				<Typography type="copy3" emphasis className="self-start align-super">$</Typography>
-				<span className="mx-1 text-5xl font-semibold">{getBasePrice(tier, billingPeriod, retention)}</span>
-				<Typography type="copy3">/ mo</Typography>
-			</div>
-		</div>
-		<div className="p-5 flex flex-col gap-2.5 flex-grow">
-			<div className="flex items-center gap-1">
-				<Typography type="copy3" emphasis>Included</Typography> <InformationCircleIcon className="inline w-5 h-5" />
-			</div>
-			<Typography type="copy3">{sessions} monthly sessions</Typography>
-			<Typography type="copy3">{errors} monthly errors</Typography>
-			<Typography type="copy3">Unlimited seats</Typography>
-		</div>
-		<div className="p-5">
-			<PrimaryButton href="#" className={homeStyles.hollowButton}>Start free trial</PrimaryButton>
-		</div>
-	</div>
-}
 
 export default PricingPage
