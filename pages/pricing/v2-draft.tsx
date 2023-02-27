@@ -168,7 +168,7 @@ const PriceCalculator = () => {
 
 
 const CalculatorRowDesktop = ({ title, description, value, onChange, cost }: { title: string, description: string, value: number, onChange: (value: number) => void, cost: number }) => {
-	const rangeOptions = [0, 500, 1_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000]
+	const rangeOptions = [0, 500, 1_000, 5_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000, 1_500_000, 2_000_000, 3_000_000, 4_000_000]
 
 	return <div className="flex flex-row">
 		<div className="flex flex-col flex-1 gap-1 px-3 py-5 md:px-7">
