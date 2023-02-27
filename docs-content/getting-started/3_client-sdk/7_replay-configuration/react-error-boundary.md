@@ -15,9 +15,9 @@ Highlight provides an `ErrorBoundary` to help you provide a better experience fo
 import { ErrorBoundary } from '@highlight-run/react'
 
 const App = () => (
-	<ErrorBoundary showDialog>
-		<YourAwesomeApplication />
-	</ErrorBoundary>
+  <ErrorBoundary showDialog>
+    <YourAwesomeApplication />
+  </ErrorBoundary>
 )
 ```
 
@@ -31,9 +31,9 @@ const App = () => (
 import { ErrorBoundary } from '@highlight-run/react'
 
 const App = () => (
-	<ErrorBoundary showDialog>
-		<YourAwesomeApplication />
-	</ErrorBoundary>
+  <ErrorBoundary showDialog>
+    <YourAwesomeApplication />
+  </ErrorBoundary>
 )
 ```
 
@@ -45,26 +45,26 @@ You should use this if you would like to replace the feedback modal with your ow
 import { ErrorBoundary } from '@highlight-run/react'
 
 const App = () => (
-	<ErrorBoundary
-		showDialog
-		customDialog={
-			<div>
-				<h2>Whoops! Looks like a crash happened.</h2>
-				<p>Don't worry, our team is tracking this down!</p>
+  <ErrorBoundary
+    showDialog
+    customDialog={
+      <div>
+        <h2>Whoops! Looks like a crash happened.</h2>
+        <p>Don't worry, our team is tracking this down!</p>
 
-				<form>
-					<label>
-						Feedback
-						<input type="text" />
-					</label>
+        <form>
+          <label>
+            Feedback
+            <input type="text" />
+          </label>
 
-					<button type="submit">Send Feedback</button>
-				</form>
-			</div>
-		}
-	>
-		<YourAwesomeApplication />
-	</ErrorBoundary>
+          <button type="submit">Send Feedback</button>
+        </form>
+      </div>
+    }
+  >
+    <YourAwesomeApplication />
+  </ErrorBoundary>
 )
 ```
 

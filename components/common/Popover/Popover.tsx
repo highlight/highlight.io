@@ -1,9 +1,9 @@
-import { useRef } from 'react';
-import { DismissButton, FocusScope, useOverlay } from 'react-aria';
+import { useRef } from 'react'
+import { DismissButton, FocusScope, useOverlay } from 'react-aria'
 
 export default function Popover(props: any) {
-  let ref = useRef();
-  let { popoverRef = ref, isOpen, onClose, children, popoverClassName } = props;
+  let ref = useRef()
+  let { popoverRef = ref, isOpen, onClose, children, popoverClassName } = props
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.
@@ -14,8 +14,8 @@ export default function Popover(props: any) {
       shouldCloseOnBlur: true,
       isDismissable: true,
     },
-    popoverRef
-  );
+    popoverRef,
+  )
 
   // Add a hidden <DismissButton> component at the end of the popover
   // to allow screen reader users to dismiss the popup easily.
@@ -26,5 +26,5 @@ export default function Popover(props: any) {
         <DismissButton onDismiss={onClose} />
       </div>
     </FocusScope>
-  );
+  )
 }

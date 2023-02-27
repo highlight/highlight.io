@@ -1,6 +1,6 @@
-import styles from '../Docs.module.scss';
-import { FaInfoCircle } from 'react-icons/fa';
-import ReactMarkdown from 'react-markdown';
+import styles from '../Docs.module.scss'
+import { FaInfoCircle } from 'react-icons/fa'
+import ReactMarkdown from 'react-markdown'
 
 export const Callout = (props: { content: string }) => {
   return (
@@ -11,10 +11,8 @@ export const Callout = (props: { content: string }) => {
         </div>
       </div>
       <div className={styles.calloutContent}>
-        <ReactMarkdown className={styles.contentRender}>
-          {props.content}
-        </ReactMarkdown>
+        <ReactMarkdown className={styles.contentRender}>{props.content}</ReactMarkdown>
       </div>
     </div>
-  );
-};
+  )
+}

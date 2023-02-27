@@ -9,23 +9,23 @@ updatedAt: 2023-01-24T02:07:22.000Z
 
 Here's the high level structure of the code that you'll want to start tinkering with.
 
--   SDKs `sdk/`
+- SDKs `sdk/`
 
-    -   Firstload
+  - Firstload
 
-    -   Client
+  - Client
 
-    -   highlight-node / other SDKs
+  - highlight-node / other SDKs
 
--   Public Graph `backend/public-graph/graph/schema.resolvers.go` SDK data ingest graphql endpoint, hosted locally at https://localhost:8082/public
+- Public Graph `backend/public-graph/graph/schema.resolvers.go` SDK data ingest graphql endpoint, hosted locally at https://localhost:8082/public
 
--   Private Graph `backend/private-graph/graph/schema.resolvers.go` Graphql endpoint for frontend, hosted locally at https://localhost:8082/private
+- Private Graph `backend/private-graph/graph/schema.resolvers.go` Graphql endpoint for frontend, hosted locally at https://localhost:8082/private
 
--   Workers `backend/worker.go`
+- Workers `backend/worker.go`
 
-    -   Public graph worker `processPublicWorkerMessage`
+  - Public graph worker `processPublicWorkerMessage`
 
-    -   Async worker `Start`
+  - Async worker `Start`
 
 ## General Architecture Diagram
 

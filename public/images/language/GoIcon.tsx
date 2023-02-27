@@ -1,14 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
 export default function GoIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      width="65"
-      height="25"
-      viewBox="0 0 65 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="65" height="25" viewBox="0 0 65 25" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M4.84432 7.3139C4.71875 7.3139 4.68736 7.25111 4.75014 7.15693L5.4094 6.30931C5.47219 6.21513 5.62916 6.15234 5.75473 6.15234H16.9622C17.0878 6.15234 17.1191 6.24652 17.0564 6.3407L16.5227 7.15693C16.4599 7.25111 16.3029 7.34529 16.2087 7.34529L4.84432 7.3139Z"
         fill={props.color || '#72E4FC'}
@@ -30,5 +24,5 @@ export default function GoIcon(props: React.SVGProps<SVGSVGElement>) {
         fill={props.color || '#72E4FC'}
       />
     </svg>
-  );
+  )
 }

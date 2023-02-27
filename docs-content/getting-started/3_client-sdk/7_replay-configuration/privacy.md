@@ -22,14 +22,13 @@ The Highlight snippet will in-turn measure the dimensions of the ignored element
 Alternatively, you can obfuscate specific HTML elements by adding the `highlight-mask` CSS class. The effect is the same of setting `enableStrictPrivacy` (the randomized text in the photo above) but applies to the specific HTML element that you mask.
 
 ```html
-<div class="highlight-mask">
-	This is some sensitive data <button>Important Button</button>
-</div>
+<div class="highlight-mask">This is some sensitive data <button>Important Button</button></div>
 ```
 
 ## Ignoring Input
+
 ```hint
-The following CSS class only works for `<input>` elements. If you are interested in blocking the capture of other HTML elements, see the `highlight-block` class 
+The following CSS class only works for `<input>` elements. If you are interested in blocking the capture of other HTML elements, see the `highlight-block` class
 ```
 
 For sensitive input fields that your team would like to ignore user input for, you can add a CSS class `highlight-ignore` that will preserve the styling of the input element, but ignore all user input.
@@ -44,23 +43,20 @@ If you don't want to manually annotate what elements to not record then you can 
 
 Here are some examples:
 
--   `<h1>Hello World</h1>` will be recorded as `<h1>1f0eqo jw02d</h1>`
+- `<h1>Hello World</h1>` will be recorded as `<h1>1f0eqo jw02d</h1>`
 
--   `<img src="https://my-secrets.com/secret.png" />` will be recorded as `<img src="" />`
+- `<img src="https://my-secrets.com/secret.png" />` will be recorded as `<img src="" />`
 
 ```html
 <iframe
-	height="500px"
-	href="https://xenodochial-benz-c14354.netlify.app/"
-	width="100%"
-	border="none"
-	src="https://xenodochial-benz-c14354.netlify.app/"
-	style="border:none"
-	><a
-		href="https://xenodochial-benz-c14354.netlify.app/"
-		target=""
-		title="xenodochial-benz-c14354.netlify.app"
-		>null</a
-	></iframe
+  height="500px"
+  href="https://xenodochial-benz-c14354.netlify.app/"
+  width="100%"
+  border="none"
+  src="https://xenodochial-benz-c14354.netlify.app/"
+  style="border:none"
+  ><a href="https://xenodochial-benz-c14354.netlify.app/" target="" title="xenodochial-benz-c14354.netlify.app"
+    >null</a
+  ></iframe
 >
 ```

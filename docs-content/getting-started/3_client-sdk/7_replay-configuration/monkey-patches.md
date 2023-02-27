@@ -7,104 +7,104 @@ updatedAt: 2022-01-21T23:09:14.000Z
 
 All the data that Highlight collects is provded by running the Highlight snippet on your app. When the Highlight snippet runs, it monkey patches browser APIs in order to record things like:
 
--   Errors
+- Errors
 
--   Console messages
+- Console messages
 
--   Network requests
+- Network requests
 
--   Changes on the page
+- Changes on the page
 
 Here is a list of all the browser APIs that Highlight monkey patches
 
--   `window.sessionStorage.setItem`
+- `window.sessionStorage.setItem`
 
--   `window.sessionStorage.getItem`
+- `window.sessionStorage.getItem`
 
--   `window.sessionStorage.removeItem`
+- `window.sessionStorage.removeItem`
 
--   `window.onerror`
+- `window.onerror`
 
--   `window.fetch`
+- `window.fetch`
 
--   `window.FontFace`
+- `window.FontFace`
 
--   `window.scroll`
+- `window.scroll`
 
--   `window.scrollTo`
+- `window.scrollTo`
 
--   `window.scrollBy`
+- `window.scrollBy`
 
--   `window.scrollIntoView`
+- `window.scrollIntoView`
 
--   `window.WebGLRenderingContext`
+- `window.WebGLRenderingContext`
 
--   `window.WebGL2RenderingContext`
+- `window.WebGL2RenderingContext`
 
--   `window.CanvasRenderingContext2D`
+- `window.CanvasRenderingContext2D`
 
--   `window.HTMLCanvasElement`
+- `window.HTMLCanvasElement`
 
--   `window.CSSStyleSheet.prototype.insertRule`
+- `window.CSSStyleSheet.prototype.insertRule`
 
--   `window.CSSStyleSheet.prototype.deleteRule`
+- `window.CSSStyleSheet.prototype.deleteRule`
 
--   `window.CSSGroupingRule`
+- `window.CSSGroupingRule`
 
--   `window.CSSMediaRule`
+- `window.CSSMediaRule`
 
--   `window.CSSConditionRule`
+- `window.CSSConditionRule`
 
--   `window.CSSSuportsRule`
+- `window.CSSSuportsRule`
 
--   `window.CSSStyleDeclaration.prototype.setProperty`
+- `window.CSSStyleDeclaration.prototype.setProperty`
 
--   `window.CSSStyleDeclaration.prototype.removeProperty`
+- `window.CSSStyleDeclaration.prototype.removeProperty`
 
--   `history.pushState`
+- `history.pushState`
 
--   `history.replaceState`
+- `history.replaceState`
 
--   `XMLHttpRequest.prototype.open`
+- `XMLHttpRequest.prototype.open`
 
--   `XMLHttpRequest.prototype.setRequestHeader`
+- `XMLHttpRequest.prototype.setRequestHeader`
 
--   `XMLHttpRequest.prototype.send`
+- `XMLHttpRequest.prototype.send`
 
--   `console.assert`
+- `console.assert`
 
--   `console.clear`
+- `console.clear`
 
--   `console.count`
+- `console.count`
 
--   `console.countReset`
+- `console.countReset`
 
--   `console.debug`
+- `console.debug`
 
--   `console.dir`
+- `console.dir`
 
--   `console.dirxml`
+- `console.dirxml`
 
--   `console.error`
+- `console.error`
 
--   `console.group`
+- `console.group`
 
--   `console.groupCollapsed`
+- `console.groupCollapsed`
 
--   `console.groupEnd`
+- `console.groupEnd`
 
--   `console.info`
+- `console.info`
 
--   `console.log`
+- `console.log`
 
--   `console.table`
+- `console.table`
 
--   `console.time`
+- `console.time`
 
--   `console.timeEnd`
+- `console.timeEnd`
 
--   `console.timeLog`
+- `console.timeLog`
 
--   `console.trace`
+- `console.trace`
 
--   `console.warn`
+- `console.warn`

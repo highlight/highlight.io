@@ -13,19 +13,19 @@ Take a look at the example below, or for a full project, refer to this [sample g
 
 ```typescript
 // app/highlight.tsx
-'use client';
+'use client'
 
-import {H} from 'highlight.run';
+import { H } from 'highlight.run'
 H.init('<YOUR_PROJECT_ID>', {
   environment: 'production',
   enableStrictPrivacy: false,
-});
+})
 
 const Highlight = () => {
-  return null;
-};
+  return null
+}
 
-export default Highlight;
+export default Highlight
 ```
 
 In the `layout.tsx` file below, keep the imported component within the `<body></body>` component so that client-side hydration works correctly.
@@ -33,17 +33,13 @@ In the `layout.tsx` file below, keep the imported component within the `<body></
 ```typescript
 // app/layout.tsx
 import './globals.css'
-import Highlight from './highlight';
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import Highlight from './highlight'
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head />
       <body>
-        <Highlight/>
+        <Highlight />
         {children}
       </body>
     </html>

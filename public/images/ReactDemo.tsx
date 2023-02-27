@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 function ReactDemo(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -11,50 +11,17 @@ function ReactDemo(props: React.SVGProps<SVGSVGElement>) {
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
       <g clipPath="url(#clip0_95_1237)">
-        <rect
-          x="0.718994"
-          width="607.281"
-          height="372.772"
-          rx="14.3024"
-          fill="black"
-        />
+        <rect x="0.718994" width="607.281" height="372.772" rx="14.3024" fill="black" />
         <path
           d="M0.718994 0H608V331.236C608 334.4 605.435 336.965 602.271 336.965H6.44807C3.284 336.965 0.718994 334.4 0.718994 331.236V0Z"
           fill="black"
         />
-        <rect
-          x="18.719"
-          y="18"
-          width="571.281"
-          height="300.965"
-          rx="9.04702"
-          fill="url(#pattern0)"
-        />
-        <rect
-          x="18.719"
-          y="18"
-          width="571.281"
-          height="300.965"
-          rx="9.04702"
-          fill="url(#paint0_linear_95_1237)"
-        />
+        <rect x="18.719" y="18" width="571.281" height="300.965" rx="9.04702" fill="url(#pattern0)" />
+        <rect x="18.719" y="18" width="571.281" height="300.965" rx="9.04702" fill="url(#paint0_linear_95_1237)" />
       </g>
-      <rect
-        x="1.46899"
-        y="0.75"
-        width="605.781"
-        height="371.272"
-        rx="13.5524"
-        stroke="#333333"
-        strokeWidth="1.5"
-      />
+      <rect x="1.46899" y="0.75" width="605.781" height="371.272" rx="13.5524" stroke="#333333" strokeWidth="1.5" />
       <defs>
-        <pattern
-          id="pattern0"
-          patternContentUnits="objectBoundingBox"
-          width="1"
-          height="1"
-        >
+        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
           <use
             xlinkHref="#image0_95_1237"
             transform="translate(-0.0029981 -0.000883487) scale(0.00157863 0.00300851)"
@@ -72,13 +39,7 @@ function ReactDemo(props: React.SVGProps<SVGSVGElement>) {
           <stop offset="1" />
         </linearGradient>
         <clipPath id="clip0_95_1237">
-          <rect
-            x="0.718994"
-            width="607.281"
-            height="372.772"
-            rx="14.3024"
-            fill="white"
-          />
+          <rect x="0.718994" width="607.281" height="372.772" rx="14.3024" fill="white" />
         </clipPath>
         <image
           id="image0_95_1237"
@@ -88,7 +49,7 @@ function ReactDemo(props: React.SVGProps<SVGSVGElement>) {
         />
       </defs>
     </svg>
-  );
+  )
 }
 
-export default ReactDemo;
+export default ReactDemo

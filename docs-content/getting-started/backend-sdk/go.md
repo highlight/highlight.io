@@ -149,9 +149,9 @@ func main() {
 	H.SetProjectID("YOUR_PROJECT_ID")
 	H.Start()
 	defer H.Stop()
-	
+
 	server := ghandler.New(...)
-	server.Use(H.NewGraphqlTracer(string(util.PrivateGraph)))	
+	server.Use(H.NewGraphqlTracer(string(util.PrivateGraph)))
 }
 ```
 

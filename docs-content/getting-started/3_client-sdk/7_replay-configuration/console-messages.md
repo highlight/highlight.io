@@ -13,8 +13,8 @@ Console messages are not recorded on `localhost` because Highlight emits debug m
 
 ## Configuration
 
--   Disabling console recording can be configured with `disableConsoleRecording`.
+- Disabling console recording can be configured with `disableConsoleRecording`.
 
--   You can specify which console methods to record with `consoleMethodsToRecord`.
+- You can specify which console methods to record with `consoleMethodsToRecord`.
 
 See [H.init()](../../../sdk/client.md#Hinit) for more information.

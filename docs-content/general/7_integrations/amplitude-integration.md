@@ -9,11 +9,11 @@ We've made it easy to use Amplitude with Highlight. When you initialize Highligh
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
-	integrations: {
-		amplitude: {
-			apiKey: '<AMPLITUDE_API_KEY>',
-		},
-	},
+  integrations: {
+    amplitude: {
+      apiKey: '<AMPLITUDE_API_KEY>',
+    },
+  },
 })
 ```
 
@@ -25,16 +25,16 @@ Calling [`H.track()`](../../sdk/client.md#Hinit) will forward the data to Amplit
 
 ```typescript
 H.track('signup_button_clicked', {
-	firstTime: true,
-	impressions: 10,
+  firstTime: true,
+  impressions: 10,
 })
 
 // The Highlight track call is equivalent to this logEvent call
 amplitudeClient.logEvent('signup_button_clicked', {
-	firstTime: true,
-	impressions: 10,
-	// This property is added by Highlight. This shows you the session where this event happened.
-	highlightSessionURL: 'https://app.highlight.io/sessions/123',
+  firstTime: true,
+  impressions: 10,
+  // This property is added by Highlight. This shows you the session where this event happened.
+  highlightSessionURL: 'https://app.highlight.io/sessions/123',
 })
 ```
 
@@ -44,25 +44,23 @@ Calling [`H.identify()`](../../sdk/client.md#Hinit) will forward the data to Amp
 
 ```typescript
 H.identify('eliza@corp.com', {
-	planType: 'premium',
-	verified: false,
+  planType: 'premium',
+  verified: false,
 })
 
 // The Highlight identify call is equivalent to setUserId and identify.
 amplitudeClient.setUserId('eliza@corp.com')
-amplitudeClient.identify(
-	new amplitude.Identify().set('planType', 'premium').set('verified', false),
-)
+amplitudeClient.identify(new amplitude.Identify().set('planType', 'premium').set('verified', false))
 ```
 
 If you want to disable this behavior, you can set `enabled: false` for the integration:
 
 ```typescript
-H.init("<YOUR_PROJECT_ID>", {
-	integrations: {
-		amplitude: {
-			enabled: false
-		}
-	}
-});
+H.init('<YOUR_PROJECT_ID>', {
+  integrations: {
+    amplitude: {
+      enabled: false,
+    },
+  },
+})
 ```

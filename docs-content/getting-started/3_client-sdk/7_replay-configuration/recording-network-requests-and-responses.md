@@ -24,10 +24,10 @@ Highlight can also record the request/response headers and bodies. You'll be abl
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
-	networkRecording: {
-		enabled: true,
-		recordHeadersAndBody: true,
-	},
+  networkRecording: {
+    enabled: true,
+    recordHeadersAndBody: true,
+  },
 })
 ```
 
@@ -39,12 +39,12 @@ You may have APIs that you know will always return secrets in the headers, body,
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
-	networkRecording: true,
-	urlBlocklist: [
-		'https://salted-passwords.com',
-		'https://www.googleapis.com/identitytoolkit',
-		'https://securetoken.googleapis.com',
-	],
+  networkRecording: true,
+  urlBlocklist: [
+    'https://salted-passwords.com',
+    'https://www.googleapis.com/identitytoolkit',
+    'https://securetoken.googleapis.com',
+  ],
 })
 ```
 

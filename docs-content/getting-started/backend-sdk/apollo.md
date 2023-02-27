@@ -15,34 +15,35 @@ Ensure that `@highlight-run/node` updated to version 2.2.0 or greater. Then, add
 your `ApolloServer` plugins definition.
 
 ```typescript
-import { ApolloServer  } from '@apollo/server'
-import { ApolloServerHighlightPlugin } from '@highlight-run/node';
+import { ApolloServer } from '@apollo/server'
+import { ApolloServerHighlightPlugin } from '@highlight-run/node'
 
 // ...
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    plugins: [ApolloServerHighlightPlugin({projectID: 'YOUR_PROJECT_ID'})]
-});
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerHighlightPlugin({ projectID: 'YOUR_PROJECT_ID' })],
+})
 ```
 
 ## Usage on Apollo Server v3 (deprecated)
+
 ```hint
 The following example is for the deprecated ApolloServer v3 (importing from apollo-server-express).
 ```
 
 ```typescript
-import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerV3HighlightPlugin } from '@highlight-run/node';
+import { ApolloServer } from 'apollo-server-express'
+import { ApolloServerV3HighlightPlugin } from '@highlight-run/node'
 
 // ...
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    plugins: [ApolloServerV3HighlightPlugin({projectID: 'YOUR_PROJECT_ID'})]
-});
+  typeDefs,
+  resolvers,
+  plugins: [ApolloServerV3HighlightPlugin({ projectID: 'YOUR_PROJECT_ID' })],
+})
 ```
 
 ### Verify

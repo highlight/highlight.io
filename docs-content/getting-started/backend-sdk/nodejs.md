@@ -42,7 +42,7 @@ import { H } from '@highlight-run/node'
 
 const highlightOptions = {}
 if (!H.isInitialized()) {
-	H.init(highlightOptions)
+  H.init(highlightOptions)
 }
 ```
 
@@ -54,10 +54,10 @@ When your app throws a backend error, you can log that error to Highlight by cal
 import { H } from '@highlight-run/node'
 
 const onError = (request, error) => {
-	const parsed = H.parseHeaders(request.headers)
-	if (parsed !== undefined) {
-		H.consumeError(error, parsed.secureSessionId, parsed.requestId)
-	}
+  const parsed = H.parseHeaders(request.headers)
+  if (parsed !== undefined) {
+    H.consumeError(error, parsed.secureSessionId, parsed.requestId)
+  }
 }
 ```
 

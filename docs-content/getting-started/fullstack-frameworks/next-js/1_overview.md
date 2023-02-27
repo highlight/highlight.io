@@ -7,11 +7,11 @@ updatedAt: 2022-10-18T22:40:13.000Z
 
 The Highlight Next.js SDK adds additional features to Highlight, including:
 
--   server-side error monitoring and linking to Highlight sessions
+- server-side error monitoring and linking to Highlight sessions
 
--   automatic configuration of source map uploads
+- automatic configuration of source map uploads
 
--   automatic proxying for Highlight requests using Next.js rewrites
+- automatic proxying for Highlight requests using Next.js rewrites
 
 ## Getting Started
 
@@ -31,7 +31,6 @@ H.init('<YOUR_PROJECT_ID>', {
     ...
 });
 ```
-
 
 ### SDK Setup
 
@@ -56,18 +55,18 @@ If you want to configure source map uploads during your production builds and en
 ```javascript
 import { withHighlightConfig } from '@highlight-run/next'
 export default withHighlightConfig({
-	// your next.config.js options here
+  // your next.config.js options here
 })
 ```
 
 ### Next.js Backend Errors
 
-If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase. 
+If you want to monitor backend errors, this API wrapper will send your errors to Highlight and link them to the session where the network request was made. Define a `withHighlight` wrapper with any common options in a common function file. For example, you can create a `highlight.config.ts` file in the root of your next.js codebase.
 
 ```typescript
 import { Highlight } from '@highlight-run/next'
 
-export const withHighlight = Highlight({projectID: 'YOUR_PROJECT_ID'})
+export const withHighlight = Highlight({ projectID: 'YOUR_PROJECT_ID' })
 ```
 
 You can then wrap each of your handlers in the Next.js `api/` directory with the `withHighlight` function from the previous step.
@@ -76,7 +75,7 @@ You can then wrap each of your handlers in the Next.js `api/` directory with t
 import { withHighlight } from '../highlight.config'
 
 const handler = async (req, res) => {
-	res.status(200).json({ name: 'Jay' })
+  res.status(200).json({ name: 'Jay' })
 }
 
 export default withHighlight(handler)

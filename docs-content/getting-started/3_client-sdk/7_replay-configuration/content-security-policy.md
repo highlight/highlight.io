@@ -24,7 +24,7 @@ Your [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) definition may
 
 ```html
 <meta
-	http-equiv="Content-Security-Policy"
-	content="default-src 'self'; script-src 'self' https://static.highlight.io; worker-src: blob: https://static.highlight.io; connect-src https://pub.highlight.run;"
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' https://static.highlight.io; worker-src: blob: https://static.highlight.io; connect-src https://pub.highlight.run;"
 />
 ```

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 function SvgChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -11,7 +11,7 @@ function SvgChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
         d="M15.25 10.75L12 14.25l-3.25-3.5"
       />
     </svg>
-  );
+  )
 }
 
-export default SvgChevronDownIcon;
+export default SvgChevronDownIcon
