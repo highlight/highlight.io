@@ -1,4 +1,3 @@
-
 # Privacy Policy
 
 Effective date: 11/05/2020
@@ -38,6 +37,7 @@ We collect several different types of information for various purposes to provid
 
 Personal Data
 While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (“Personal Data”). Personally identifiable information may include, but is not limited to:
+
 1. Email address
 
 2. First name and last name
@@ -118,25 +118,25 @@ Your consent to this Privacy Policy followed by your submission of such informat
 
 Highlight Inc. will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.
 
-####  8. Disclosure of Data
+#### 8. Disclosure of Data
 
 We may disclose personal information that we collect, or you provide:
 
 1. Disclosure for Law Enforcement.
-Under certain circumstances, we may be required to disclose your Personal Data if required to do so by law or in response to valid requests by public authorities.
+   Under certain circumstances, we may be required to disclose your Personal Data if required to do so by law or in response to valid requests by public authorities.
 2. Business Transaction.
-If we or our subsidiaries are involved in a merger, acquisition or asset sale, your Personal Data may be transferred.
+   If we or our subsidiaries are involved in a merger, acquisition or asset sale, your Personal Data may be transferred.
 3. Other cases. We may disclose your information also:
 
-1. to our subsidiaries and affiliates;
+4. to our subsidiaries and affiliates;
 
-2. with your consent in any other cases;
+5. with your consent in any other cases;
 
-####  9. Security of Data
+#### 9. Security of Data
 
 The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
 
-####  10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)
+#### 10. Your Data Protection Rights Under General Data Protection Regulation (GDPR)
 
 If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. – See more at https://eur-lex.europa.eu/eli/reg/2016/679/oj
 
@@ -162,7 +162,7 @@ Please note that we may ask you to verify your identity before responding to suc
 
 You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).
 
-####  11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)
+#### 11. Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)
 
 CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law’s reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. – See more at: https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/
 
@@ -182,7 +182,7 @@ We honor Do Not Track signals and do not track, plant cookies, or use advertisin
 
 You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.
 
-####  12. Your Data Protection Rights under the California Consumer Privacy Act (CCPA)
+#### 12. Your Data Protection Rights under the California Consumer Privacy Act (CCPA)
 
 If you are a California resident, you are entitled to learn what data we collect about you, ask to delete your data and not to sell (share) it. To exercise your data protection rights, you can make certain requests and ask us:
 
@@ -190,17 +190,17 @@ If you are a California resident, you are entitled to learn what data we collect
 
 1. The categories of personal information we have collected about you.
 
-2. The categories of sources from which we collect your personal information.
+1. The categories of sources from which we collect your personal information.
 
-3. The business or commercial purpose for collecting or selling your personal information.
+1. The business or commercial purpose for collecting or selling your personal information.
 
-4. The categories of third parties with whom we share personal information.
+1. The categories of third parties with whom we share personal information.
 
-5. The specific pieces of personal information we have collected about you.
+1. The specific pieces of personal information we have collected about you.
 
-6. A list of categories of personal information that we have sold, along with the category of any other company we sold it to. If we have not sold your personal information, we will inform you of that fact.
+1. A list of categories of personal information that we have sold, along with the category of any other company we sold it to. If we have not sold your personal information, we will inform you of that fact.
 
-7. A list of categories of personal information that we have disclosed for a business purpose, along with the category of any other company we shared it with.
+1. A list of categories of personal information that we have disclosed for a business purpose, along with the category of any other company we shared it with.
 
 Please note, you are entitled to ask us to provide you with this information up to two times in a rolling twelve-month period. When you make this request, the information provided may be limited to the personal information we collected about you in the previous 12 months.
 
@@ -216,13 +216,13 @@ By email: jay@highlight.io
 
 Your data protection rights, described above, are covered by the CCPA, short for the California Consumer Privacy Act. To find out more, visit the official California Legislative Information website. The CCPA took effect on 01/01/2020.
 
-####  13. Service Providers
+#### 13. Service Providers
 
 We may employ third party companies and individuals to facilitate our Service (“Service Providers”), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used.
 
 These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.
 
-####  14. CI/CD tools
+#### 14. CI/CD tools
 
 We may use third-party Service Providers to automate the development process of our Service.
 
@@ -233,7 +233,8 @@ GitHub is provided by GitHub, Inc.
 GitHub is a development platform to host and review code, manage projects, and build software.
 
 For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page: https://help.github.com/en/articles/github-privacy-statement.
-####  15. Payments
+
+#### 15. Payments
 
 We may provide paid products and/or services within Service. In that case, we use third-party services for payment processing (e.g. payment processors).
 
@@ -244,19 +245,19 @@ The payment processors we work with are:
 Stripe:
 Their Privacy Policy can be viewed at: https://stripe.com/us/privacy
 
-####  16. Links to Other Sites
+#### 16. Links to Other Sites
 
 Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.
 
 We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
 
-####  17. Children's Privacy
+#### 17. Children's Privacy
 
 Our Services are not intended for use by children under the age of 18 (“Child” or “Children”).
 
 We do not knowingly collect personally identifiable information from Children under 18. If you become aware that a Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from Children without verification of parental consent, we take steps to remove that information from our servers.
 
-####  18. Changes to This Privacy Policy
+#### 18. Changes to This Privacy Policy
 
 We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
 
@@ -264,7 +265,7 @@ We will let you know via email and/or a prominent notice on our Service, prior t
 
 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
 
-####  19. Contact Us
+#### 19. Contact Us
 
 If you have any questions about this Privacy Policy, please contact us:
 

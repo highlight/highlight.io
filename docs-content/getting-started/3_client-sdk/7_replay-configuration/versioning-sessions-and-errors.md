@@ -14,7 +14,7 @@ import App from './App'
 import { H } from 'highlight.run'
 
 H.init('<YOUR_PROJECT_ID>', {
-	version: process.env.REACT_APP_VERSION,
+  version: process.env.REACT_APP_VERSION,
 })
 
 ReactDOM.render(<App />, document.getElementById('root'))

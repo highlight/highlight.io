@@ -1,29 +1,29 @@
-import { GetStaticProps } from 'next';
-import Image from "next/legacy/image";
-import styles from '../../components/Customers/CustomersList.module.scss';
-import productStyles from '../../components/Products/Products.module.scss';
-import Navbar from '../../components/common/Navbar/Navbar';
-import Footer from '../../components/common/Footer/Footer';
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import { Typography } from '../../components/common/Typography/Typography';
-import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton';
-import { gql } from 'graphql-request';
-import { Author } from '../../components/Blog/BlogPost/BlogPost';
-import { GraphQLRequest } from '../../utils/graphql';
+import { GetStaticProps } from 'next'
+import Image from 'next/legacy/image'
+import styles from '../../components/Customers/CustomersList.module.scss'
+import productStyles from '../../components/Products/Products.module.scss'
+import Navbar from '../../components/common/Navbar/Navbar'
+import Footer from '../../components/common/Footer/Footer'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import { Typography } from '../../components/common/Typography/Typography'
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
+import { gql } from 'graphql-request'
+import { Author } from '../../components/Blog/BlogPost/BlogPost'
+import { GraphQLRequest } from '../../utils/graphql'
 
 interface Customer {
-  slug: string;
+  slug: string
   image?: {
-    url: string;
-  };
+    url: string
+  }
   companyLogo?: {
-    url: string;
-  };
+    url: string
+  }
   primaryQuote: {
-    id: string;
-    body: string;
-    author: Author;
-  };
+    id: string
+    body: string
+    author: Author
+  }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -56,20 +56,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
               }
           }
       }
-  `;
+  `
 
-  const data = await GraphQLRequest(QUERY);
+  const data = await GraphQLRequest(QUERY)
 
   return {
     props: {
       customers: data.customers,
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
-  };
-};
+  }
+}
 
 const Customers = ({ customers }: { customers: Customer[] }) => {
-  const expandedCustomers = customers.slice(0, 6);
+  const expandedCustomers = customers.slice(0, 6)
   const allCustomersLogos = [
     'pipe',
     'portal',
@@ -88,7 +88,7 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
     'superpowered',
     'sunsama',
     'cabal',
-  ];
+  ]
 
   return (
     <>
@@ -97,8 +97,7 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
         <div className={styles.caseListLayout}>
           <div className={styles.caseListTitle}>
             <h1>
-              What <span className={styles.limeAccent}>our customers</span> have
-              to say.
+              What <span className={styles.limeAccent}>our customers</span> have to say.
             </h1>
             <PrimaryButton>Get started for free</PrimaryButton>
           </div>
@@ -126,21 +125,16 @@ const Customers = ({ customers }: { customers: Customer[] }) => {
       </main>
       <Footer />
     </>
-  );
-};
+  )
+}
 
 const CompanyLogo = ({ name }: { name: string }) => {
   return (
     <div className={styles.allCustomersLogo}>
-      <Image
-        src={`/images/companies/white-logos/${name}.png`}
-        alt={`${name} logo`}
-        layout="fill"
-        objectFit="contain"
-      />
+      <Image src={`/images/companies/white-logos/${name}.png`} alt={`${name} logo`} layout="fill" objectFit="contain" />
     </div>
-  );
-};
+  )
+}
 
 const CustomerCaseCard = ({
   thumbnail,
@@ -150,34 +144,23 @@ const CustomerCaseCard = ({
   role,
   slug,
 }: {
-  thumbnail: string;
-  logo?: string;
-  quote: string;
-  author: string;
-  role: string;
-  slug: string;
+  thumbnail: string
+  logo?: string
+  quote: string
+  author: string
+  role: string
+  slug: string
 }) => {
   return (
     <div className={styles.caseCard}>
       <div className={styles.thumbnail}>
-        <Image
-          src={thumbnail}
-          layout="fill"
-          objectFit="cover"
-          alt="Case thumbnail"
-        />
+        <Image src={thumbnail} layout="fill" objectFit="cover" alt="Case thumbnail" />
       </div>
       <div className={styles.caseDetails}>
         <div>
           {logo && (
             <div className={styles.companyCaseLogo}>
-              <Image
-                src={logo}
-                alt="Company logo"
-                layout="fill"
-                objectFit="contain"
-                objectPosition="left"
-              />
+              <Image src={logo} alt="Company logo" layout="fill" objectFit="contain" objectPosition="left" />
             </div>
           )}
           <div className={styles.caseCardQuote}>
@@ -196,15 +179,12 @@ const CustomerCaseCard = ({
             </span>
           </div>
         </div>
-        <PrimaryButton
-          href={`/customers/${slug}`}
-          className={styles.cardReadCaseButton}
-        >
+        <PrimaryButton href={`/customers/${slug}`} className={styles.cardReadCaseButton}>
           Read case study
         </PrimaryButton>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Customers;
+export default Customers

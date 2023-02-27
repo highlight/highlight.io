@@ -1,7 +1,7 @@
-import Image from "next/legacy/image";
-import style from './CustomerQuote.module.scss';
-import { Typography } from '../../common/Typography/Typography';
-import classNames from 'classnames';
+import Image from 'next/legacy/image'
+import style from './CustomerQuote.module.scss'
+import { Typography } from '../../common/Typography/Typography'
+import classNames from 'classnames'
 
 export const CustomerQuote = ({
   content,
@@ -9,10 +9,10 @@ export const CustomerQuote = ({
   authorAvatar,
   role,
 }: {
-  content: string;
-  author: string;
-  authorAvatar: string;
-  role: string;
+  content: string
+  author: string
+  authorAvatar: string
+  role: string
 }) => (
   <div className={style.customerQuote}>
     <blockquote>
@@ -37,4 +37,4 @@ export const CustomerQuote = ({
       <Typography type="copy3">{role}</Typography>
     </div>
   </div>
-);
+)

@@ -25,7 +25,7 @@ We are currently working with Segment on an official integration where you can e
 
 ```javascript
 H.init('<YOUR_PROJECT_ID>', {
-	enableSegmentIntegration: true,
+  enableSegmentIntegration: true,
 })
 ```
 
@@ -39,7 +39,7 @@ To forward `analytics.track()` calls to Highlight, you will need to use the `Hig
 import { H, HighlightSegmentMiddleware } from 'highlight.run'
 
 H.init('<YOUR_PROJECT_ID>', {
-	enableSegmentIntegration: true,
+  enableSegmentIntegration: true,
 })
 analytics.addSourceMiddleware(HighlightSegmentMiddleware)
 ```

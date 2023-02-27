@@ -13,12 +13,12 @@ Enable canvas recording by configuring [H.init()](../../../sdk/client.md#Hinit) 
 
 ```javascript
 H.init('YOUR_PROJECT_ID', {
-	enableCanvasRecording: true,
-	samplingStrategy: {
-		canvas: 15,
-		canvasQuality: 'low',
-		canvasMaxSnapshotDimension: 480,
-	},
+  enableCanvasRecording: true,
+  samplingStrategy: {
+    canvas: 15,
+    canvasQuality: 'low',
+    canvasMaxSnapshotDimension: 480,
+  },
 })
 ```
 
@@ -32,11 +32,9 @@ Snapshotting at full resolution and high FPS can produce too much data for our c
 
 Even though this feature is experimental, it should not have any impact on your application. We've recently changed our uploading client to use browser web-workers to ensure that data serialization cannot block the rendering of your application. If you run into any issues please let us know!
 
-
 ## WebGL Recording
 
 In the same vain, Highlight is able to record websites that use WebGL. Recording WebGL is disabled by default. To enable WebGL recording, enable canvas recording by following the instructions for [Canvas](./canvas.md) recording.
-
 
 ## Caveats
 

@@ -1,10 +1,10 @@
-import { HighlightLogo } from '../HighlightLogo/HighlightLogo';
-import styles from './Footer.module.scss';
-import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
-import { Typography } from '../Typography/Typography';
-import Link from 'next/link';
-import { PRODUCTS } from '../../Products/products';
-import { docLink } from '../../Docs/Docs.module.scss';
+import { HighlightLogo } from '../HighlightLogo/HighlightLogo'
+import styles from './Footer.module.scss'
+import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { Typography } from '../Typography/Typography'
+import Link from 'next/link'
+import { PRODUCTS } from '../../Products/products'
+import { docLink } from '../../Docs/Docs.module.scss'
 
 const Footer = () => {
   return (
@@ -131,7 +131,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

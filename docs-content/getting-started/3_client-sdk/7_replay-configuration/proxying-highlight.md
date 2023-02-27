@@ -39,7 +39,7 @@ In your app where you call [H.init()](../../../sdk/client.md#Hinit), you will ne
 
 ```javascript
 H.init('<YOUR_PROJECT_ID>', {
-	backendUrl: 'https://highlight.piedpiper.com',
+  backendUrl: 'https://highlight.piedpiper.com',
 })
 ```
 

@@ -9,7 +9,13 @@ import { useRouter } from 'next/router'
 
 const DOCS_TYPES: Array<{ id: number; name: string; icon: React.ReactNode; url: string; baseUrl: string }> = [
   { id: 1, name: 'General Docs', icon: <DocumentIcon />, url: '/docs/general/welcome', baseUrl: '/docs/general' },
-  { id: 1, name: 'Getting Started', icon: <DocumentTextIcon />, url: '/docs/getting-started/overview', baseUrl: '/docs/getting-started' },
+  {
+    id: 1,
+    name: 'Getting Started',
+    icon: <DocumentTextIcon />,
+    url: '/docs/getting-started/overview',
+    baseUrl: '/docs/getting-started',
+  },
   {
     id: 2,
     name: 'Node.js SDK Documentation',
@@ -65,21 +71,11 @@ const findSelectedDocByArrayPath = (arrayPath: string[]) => {
 function DocSelect() {
   const router = useRouter()
   const [selectedDocs, setSelectedDocs] = useState(
-    DOCS_TYPES[
-    findSelectedDocByArrayPath(
-      Array.isArray(router.query.doc) ? router.query.doc : [],
-    )
-    ],
+    DOCS_TYPES[findSelectedDocByArrayPath(Array.isArray(router.query.doc) ? router.query.doc : [])],
   )
 
   useEffect(() => {
-    setSelectedDocs(
-      DOCS_TYPES[
-      findSelectedDocByArrayPath(
-        Array.isArray(router.query.doc) ? router.query.doc : [],
-      )
-      ],
-    )
+    setSelectedDocs(DOCS_TYPES[findSelectedDocByArrayPath(Array.isArray(router.query.doc) ? router.query.doc : [])])
   }, [router.query.doc])
 
   return (
@@ -91,9 +87,7 @@ function DocSelect() {
             {selectedDocs.name}
           </Typography>
         </div>
-        <SvgChevronDownIcon
-          className={classNames(styles.tocIcon, styles.chevronDown)}
-        />
+        <SvgChevronDownIcon className={classNames(styles.tocIcon, styles.chevronDown)} />
       </Listbox.Button>
       <Listbox.Options className={styles.docSelectList}>
         {DOCS_TYPES.map((doc) => (

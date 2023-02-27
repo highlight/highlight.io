@@ -1,53 +1,53 @@
-import Image from 'next/legacy/image';
-import PlayButton from '../../public/images/playButton.svg';
-import homeStyles from '../../components/Home/Home.module.scss';
-import styles from '../../components/Blog/Blog.module.scss';
-import { Section } from '../../components/common/Section/Section';
-import Footer from '../../components/common/Footer/Footer';
-import { gql } from 'graphql-request';
-import classNames from 'classnames';
-import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import Link from 'next/link';
-import YouTube, { YouTubeProps } from 'react-youtube';
+import Image from 'next/legacy/image'
+import PlayButton from '../../public/images/playButton.svg'
+import homeStyles from '../../components/Home/Home.module.scss'
+import styles from '../../components/Blog/Blog.module.scss'
+import { Section } from '../../components/common/Section/Section'
+import Footer from '../../components/common/Footer/Footer'
+import { gql } from 'graphql-request'
+import classNames from 'classnames'
+import { GetStaticPaths, GetStaticProps } from 'next/types'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import Link from 'next/link'
+import YouTube, { YouTubeProps } from 'react-youtube'
 
-import { RichText } from '@graphcms/rich-text-react-renderer';
-import { Typography } from '../../components/common/Typography/Typography';
-import { createElement, useEffect, useRef, useState } from 'react';
-import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar';
-import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction';
-import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost';
-import { ElementNode } from '@graphcms/rich-text-types';
-import { Post } from '../../components/Blog/BlogPost/BlogPost';
-import { Meta } from '../../components/common/Head/Meta';
-import ReturnIcon from '../../public/images/ReturnIcon';
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock';
-import { GraphQLRequest } from '../../utils/graphql';
-import { getTagUrl, PostTag } from '../../components/Blog/Tag';
-import { PostAuthor } from '../../components/Blog/Author';
+import { RichText } from '@graphcms/rich-text-react-renderer'
+import { Typography } from '../../components/common/Typography/Typography'
+import { createElement, useEffect, useRef, useState } from 'react'
+import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar'
+import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction'
+import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost'
+import { ElementNode } from '@graphcms/rich-text-types'
+import { Post } from '../../components/Blog/BlogPost/BlogPost'
+import { Meta } from '../../components/common/Head/Meta'
+import ReturnIcon from '../../public/images/ReturnIcon'
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
+import { GraphQLRequest } from '../../utils/graphql'
+import { getTagUrl, PostTag } from '../../components/Blog/Tag'
+import { PostAuthor } from '../../components/Blog/Author'
 
-const NUM_SUGGESTED_POSTS = 3;
+const NUM_SUGGESTED_POSTS = 3
 
 interface Content {
-  text?: string;
-  href?: string;
-  type?: string;
-  children?: Content[];
-  openInNewTab?: boolean;
-  code?: boolean;
-  italic?: boolean;
-  bold?: boolean;
+  text?: string
+  href?: string
+  type?: string
+  children?: Content[]
+  openInNewTab?: boolean
+  code?: boolean
+  italic?: boolean
+  bold?: boolean
 }
 
 const getBlogTypographyRenderer = (type: string) => {
   function ParagraphBody({ content }: { content: Content }) {
     if (content.text) {
       if (content.code) {
-        return <span className={styles.codeInline}>{content.text}</span>;
+        return <span className={styles.codeInline}>{content.text}</span>
       } else if (content.italic) {
-        return <i>{content.text}</i>;
+        return <i>{content.text}</i>
       } else if (content.bold) {
-        return <b>{content.text}</b>;
+        return <b>{content.text}</b>
       } else if (content.text.indexOf('://') !== -1) {
         return (
           <>
@@ -59,24 +59,19 @@ const getBlogTypographyRenderer = (type: string) => {
               </>
             ))}
           </>
-        );
+        )
       }
-      return <>{content.text}</>;
+      return <>{content.text}</>
     } else if (content.href) {
       return (
-        <a
-          href={content.href}
-          {...(content.openInNewTab
-            ? { target: '_blank', rel: 'noopener noreferrer' }
-            : {})}
-        >
+        <a href={content.href} {...(content.openInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
           {content?.children?.map((c, idx) => (
             <ParagraphBody content={c} key={`child-${idx}`} />
           ))}
         </a>
-      );
+      )
     }
-    return null;
+    return null
   }
 
   function ParagraphHeader({ children }: { children: any }) {
@@ -87,16 +82,14 @@ const getBlogTypographyRenderer = (type: string) => {
           {
             className: styles.blogText,
           },
-          children?.props?.content.map((c: Content, idx: number) => (
-            <ParagraphBody content={c} key={idx} />
-          ))
+          children?.props?.content.map((c: Content, idx: number) => <ParagraphBody content={c} key={idx} />),
         )}
       </>
-    );
+    )
   }
 
-  return ParagraphHeader;
-};
+  return ParagraphHeader
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const QUERY = gql`
@@ -105,17 +98,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
         slug
       }
     }
-  `;
-  const { posts } = await GraphQLRequest(QUERY);
+  `
+  const { posts } = await GraphQLRequest(QUERY)
 
   return {
     paths: posts.map((p: { slug: string }) => ({ params: { slug: p.slug } })),
     fallback: 'blocking',
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params?.slug as string;
+  const slug = params?.slug as string
 
   const QUERY = gql`
     query GetPost($slug: String!) {
@@ -158,7 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
       }
     }
-  `;
+  `
   const POSTS_QUERY = gql`
       query GetPosts() {
           posts(
@@ -182,35 +175,33 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
               readingTime
           }
       }
-  `;
-  const data = await GraphQLRequest(QUERY, { slug: slug });
-  const { posts } = await GraphQLRequest(POSTS_QUERY);
+  `
+  const data = await GraphQLRequest(QUERY, { slug: slug })
+  const { posts } = await GraphQLRequest(POSTS_QUERY)
 
   // Handle event slugs which don't exist in our CMS
   if (!data.post) {
     return {
       notFound: true,
-    };
+    }
   }
 
-  const otherPosts = posts.filter((post: any) => post.slug !== slug);
-  const suggestedPosts = [];
+  const otherPosts = posts.filter((post: any) => post.slug !== slug)
+  const suggestedPosts = []
   // suggest N random posts that are not the current post
   for (let i = 0; i < Math.min(NUM_SUGGESTED_POSTS, posts.length - 1); i++) {
-    suggestedPosts.push(
-      otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0]
-    );
+    suggestedPosts.push(otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0])
   }
 
-  const postSections: PostSection[] = [];
-  let currentBlock: ElementNode[] = [];
+  const postSections: PostSection[] = []
+  let currentBlock: ElementNode[] = []
   for (const r of data.post.richcontent.raw.children) {
-    let specialType: SectionType | undefined = undefined;
+    let specialType: SectionType | undefined = undefined
     for (const child of r.children) {
       // update here to support other tags
       if (child.text === SectionType.CallToAction) {
-        specialType = SectionType.CallToAction;
-        break;
+        specialType = SectionType.CallToAction
+        break
       }
     }
     switch (specialType) {
@@ -219,25 +210,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         postSections.push({
           nodes: currentBlock,
           footer: 'BlogCallToAction',
-        });
-        currentBlock = [];
-        break;
+        })
+        currentBlock = []
+        break
       default:
-        r.className = '.testing';
-        currentBlock.push(r);
+        r.className = '.testing'
+        currentBlock.push(r)
     }
   }
   if (currentBlock.length) {
     postSections.push({
       nodes: currentBlock,
       footer: null,
-    });
+    })
   }
 
   if (!data.post.author?.profilePhoto?.url) {
     throw new Error(
-      `missing required profile image for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`
-    );
+      `missing required profile image for blog '${data.post.slug}', author: ${data.post.author?.profilePhoto?.url}.`,
+    )
   }
 
   return {
@@ -247,12 +238,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       postSections,
     },
     revalidate: 60 * 60, // Cache response for 1 hour (60 seconds * 60 minutes)
-  };
-};
+  }
+}
 
 interface PostSection {
-  nodes: ElementNode[];
-  footer: string | null;
+  nodes: ElementNode[]
+  footer: string | null
 }
 
 // update here to support other tags
@@ -270,12 +261,8 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
         renderers={{
           code_block: ({ children }: { children: any }) => {
             return (
-              <HighlightCodeBlock
-                language={'js'}
-                text={children?.props?.content[0].text}
-                showLineNumbers={false}
-              />
-            );
+              <HighlightCodeBlock language={'js'} text={children?.props?.content[0].text} showLineNumbers={false} />
+            )
           },
           h1: getBlogTypographyRenderer('h1'),
           h2: getBlogTypographyRenderer('h2'),
@@ -300,28 +287,28 @@ const PostSection = ({ p }: { p: PostSection; idx: number }) => {
       {/*update to support new footer components*/}
       {p.footer === 'BlogCallToAction' ? <BlogCallToAction /> : null}
     </>
-  );
-};
+  )
+}
 
 const PostPage = ({
   post,
   postSections,
   suggestedPosts,
 }: {
-  post: Post;
-  postSections: PostSection[];
-  suggestedPosts: Post[];
+  post: Post
+  postSections: PostSection[]
+  suggestedPosts: Post[]
 }) => {
-  const blogBody = useRef<HTMLDivElement>(null);
-  const [endPosition, setEndPosition] = useState(0);
+  const blogBody = useRef<HTMLDivElement>(null)
+  const [endPosition, setEndPosition] = useState(0)
 
   useEffect(() => {
-    setEndPosition(blogBody.current?.offsetHeight || 0);
+    setEndPosition(blogBody.current?.offsetHeight || 0)
     // recalculate end position when blog sections are processed
     // because at that point the page height is finalized
-  }, [postSections]);
+  }, [postSections])
 
-  const isStartupStack = post.tags_relations.filter(t => t.name.toLocaleLowerCase().includes("stack")).length > 0;
+  const isStartupStack = post.tags_relations.filter((t) => t.name.toLocaleLowerCase().includes('stack')).length > 0
 
   const singleTag = post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
 
@@ -334,19 +321,15 @@ const PostPage = ({
         canonical={`/blog/${post.slug}`}
       />
       <BlogNavbar title={post.title} endPosition={endPosition} singleTag={singleTag} />
-      <main ref={blogBody} className={classNames(styles.mainBlogPadding, "relative")}>
+      <main ref={blogBody} className={classNames(styles.mainBlogPadding, 'relative')}>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.blogSection)}>
             <Typography type="copy2">
-              <p className={styles.dateDiv}>{`${new Date(
-                post.publishedAt
-              ).toLocaleDateString('en-US', {
+              <p className={styles.dateDiv}>{`${new Date(post.publishedAt).toLocaleDateString('en-US', {
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${post.readingTime ||
-              Math.floor(post.richcontent.markdown.split(' ').length / 200)
-                } min read`}</p>
+              })} • ${post.readingTime || Math.floor(post.richcontent.markdown.split(' ').length / 200)} min read`}</p>
             </Typography>
             <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
@@ -354,41 +337,27 @@ const PostPage = ({
                 <PostTag {...tag} key={tag.slug} />
               ))}
             </div>
-            <div className={styles.authorDiv}>
-              {post.author && <PostAuthor {...post.author} />}
-            </div>
+            <div className={styles.authorDiv}>{post.author && <PostAuthor {...post.author} />}</div>
           </div>
         </Section>
         {post.image?.url && (
           <Section className={styles.headerSection}>
-            {isStartupStack ?
+            {isStartupStack ? (
               <div className={classNames(styles.youtubeEmbed, homeStyles.anchorTitle, styles.blogSection)}>
-                <YouTube videoId={post.youtubeVideoId || "dQw4w9WgXcQ"} style={{ display: "flex", justifyContent: "center" }}></YouTube>
+                <YouTube
+                  videoId={post.youtubeVideoId || 'dQw4w9WgXcQ'}
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                ></YouTube>
               </div>
-              :
-              <div
-                className={classNames(styles.mainImage, homeStyles.anchorTitle, styles.blogSection)}
-              >
-                <Image
-                  src={post.image.url || ''}
-                  alt=""
-                  layout="fill"
-                  objectFit="cover"
-                  priority
-                />
+            ) : (
+              <div className={classNames(styles.mainImage, homeStyles.anchorTitle, styles.blogSection)}>
+                <Image src={post.image.url || ''} alt="" layout="fill" objectFit="cover" priority />
               </div>
-            }
+            )}
           </Section>
         )}
         <Section className={styles.headerSection}>
-          <div
-            className={classNames(
-              homeStyles.anchorTitle,
-              styles.postBody,
-              styles.postBodyTop,
-              styles.blogSection
-            )}
-          >
+          <div className={classNames(homeStyles.anchorTitle, styles.postBody, styles.postBodyTop, styles.blogSection)}>
             {postSections?.map((p, idx) => (
               <PostSection key={idx} idx={idx} p={p} />
             ))}
@@ -399,9 +368,7 @@ const PostPage = ({
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>
-            <h3 className={styles.otherArticlesHeader}>
-              Other articles you may like
-            </h3>
+            <h3 className={styles.otherArticlesHeader}>Other articles you may like</h3>
             {suggestedPosts.map((p, i) => (
               <SuggestedBlogPost {...p} key={i} />
             ))}
@@ -411,7 +378,7 @@ const PostPage = ({
       <FooterCallToAction />
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default PostPage;
+export default PostPage

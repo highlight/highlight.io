@@ -9,24 +9,24 @@ We've made it easy to use Mixpanel with Highlight. If you don't already have Mix
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
-	integrations: {
-		mixpanel: {
-			projectToken: '<MIXPANEL_PROJECT_TOKEN>',
-		},
-	},
+  integrations: {
+    mixpanel: {
+      projectToken: '<MIXPANEL_PROJECT_TOKEN>',
+    },
+  },
 })
 ```
 
 Whenever you call [`H.track()`](../../sdk/client.md#Htrack) or [`H.identify()`](../../sdk/client.md#Hinit) it will forward that data to Mixpanel's `track` and `identify` calls. If you want to disable this behavior, you can set `enabled: false` for the integration:
 
 ```typescript
-H.init("<YOUR_PROJECT_ID>", {
-	integrations: {
-		mixpanel: {
-			enabled: false
-		}
-	}
-});
+H.init('<YOUR_PROJECT_ID>', {
+  integrations: {
+    mixpanel: {
+      enabled: false,
+    },
+  },
+})
 ```
 
 ## API

@@ -60,4 +60,4 @@ Below are solutions for what we support today. If you'd like us to support a new
 
 3.  For debugging the backend sdk of your choice, in order to debug, we suggest enabling verbose logging. For example, in go, add `highlight.SetDebugMode(myLogger)`
 
-4. If all else fails, please send us an email at support@highlight.io or join the #support channel on our [discord](https://discord.gg/yxaXEAqgwN).
+4.  If all else fails, please send us an email at support@highlight.io or join the #support channel on our [discord](https://discord.gg/yxaXEAqgwN).
