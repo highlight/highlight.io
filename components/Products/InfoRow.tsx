@@ -32,7 +32,7 @@ const InfoRow = ({
 }) => {
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center gap-16 xl:gap-32">
-      <div className={`${invert ? 'lg:hidden ' : ''} flex justify-center w-full h-full`}>
+      <div className={`${invert ? 'lg:hidden ' : ''} flex justify-center lg:w-[570px] w-full h-full`}>
         {privacy ? (
           <ReactCompareImage
             leftImage={RegularText.src}

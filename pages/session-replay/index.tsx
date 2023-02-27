@@ -10,15 +10,14 @@ import Footer from '../../components/common/Footer/Footer'
 import Navbar from '../../components/common/Navbar/Navbar'
 import { Section } from '../../components/common/Section/Section'
 import { Typography } from '../../components/common/Typography/Typography'
-import { BigHeroArt } from '../../components/Home/BigHeroArt'
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
 import { CustomerReviewTrack } from '../../components/Home/CustomerReviewTrack'
 import homeStyles from '../../components/Home/Home.module.scss'
 import productStyles from '../../components/Products/Products.module.scss'
 import InfoRow from '../../components/Products/InfoRow'
-import ProductsReplay from '../../public/images/products-replay.png'
 import { MdKeyboardReturn } from 'react-icons/md'
-import sessionReplay from '../../public/images/session-replay.png'
+import sessionscreenshot from '../../public/images/sessionscreenshot.png'
+import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 import sessionReplay1 from '../../public/images/features/sessionReplay1.png'
 import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
 import sessionReplay3 from '../../public/images/landingInfoRow1.png'
@@ -40,39 +39,43 @@ const ShowcasePage: NextPage = () => {
         </Link>
       </div>
       <main>
-        <div className="flex justify-center">
-          <div className="flex flex-col md:flex-row justify-between w-screen overflow-hidden md:py-28 max-w-[1200px]">
-            <div className="w-1/2 flex justify-center mt-10">
-              <div className="flex flex-col max-w-4xl gap-8 text-center md:text-left">
-                <h1 className="text-white">Session Replay & UX Monitoring</h1>
-                <Typography type="copy1" className="text-copy-on-dark">
-                  A cohesive toolset for monitoring and maintaining your full-stack web application.
-                </Typography>
-                <div className="flex flex-col md:flex-row justify-start gap-4 w-full md:w-auto">
-                  <PrimaryButton
-                    className={classNames(homeStyles.solidButton, 'min-w-[180px]')}
-                    href="https://app.highlight.io/?sign_up=1"
-                  >
-                    <Typography type="copy2" emphasis={true}>
-                      Get started
-                    </Typography>
-                  </PrimaryButton>
-                  <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
-                    <Typography type="copy2" emphasis={true}>
-                      Read our docs
-                    </Typography>
-                  </PrimaryButton>
-                </div>
+        <div className="flex flex-col xl:flex-row justify-between w-screen overflow-hidden px-8 mx-auto lg:px-4 lg:py-28 max-w-[1200px]">
+          <div className="lg:w-1/2 flex justify-center mt-10">
+            <div className="flex flex-col max-w-4xl gap-8 text-center lg:text-left">
+              <h1 className="text-white">Session Replay & UX Monitoring</h1>
+              <Typography type="copy1" className="text-copy-on-dark">
+                Understand your users, and why they’re falling through the cracks.
+              </Typography>
+              <div className="flex flex-col lg:flex-row justify-start gap-4 w-full lg:w-auto">
+                <PrimaryButton
+                  className={classNames(homeStyles.solidButton, 'min-w-[180px]')}
+                  href="https://app.highlight.io/?sign_up=1"
+                >
+                  <Typography type="copy2" emphasis={true}>
+                    Get started
+                  </Typography>
+                </PrimaryButton>
+                <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
+                  <Typography type="copy2" emphasis={true}>
+                    Read our docs
+                  </Typography>
+                </PrimaryButton>
               </div>
             </div>
-            <div className="flex justify-center mt-12 md:mt-0 md:absolute right-0 overflow-y-hidden">
-              <Image
-                className={`right-0 object-contain bottom-0 sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px]`}
-                src={sessionReplay}
-                alt="Feature Spotlight"
-                onLoadingComplete={() => setImageLoaded(true)}
-              />
-            </div>
+          </div>
+          <div className="flex justify-center mt-12 lg:mt-0 lg:absolute right-0 overflow-y-hidden">
+            <Image
+              className={`hidden lg:flex right-0 object-contain bottom-0 lg:w-[450px] xl:w-[600px]`}
+              src={sessionReplayHero}
+              alt="Feature Spotlight"
+              onLoadingComplete={() => setImageLoaded(true)}
+            />
+            <Image
+              className={`lg:hidden right-0 object-contain bottom-0  md:w-[500px]`}
+              src={sessionscreenshot}
+              alt="Feature Spotlight"
+              onLoadingComplete={() => setImageLoaded(true)}
+            />
           </div>
         </div>
         <div className="w-full mx-auto max-w-screen-2xl mt-24">
@@ -116,6 +119,7 @@ const ShowcasePage: NextPage = () => {
               />
 
               <div className={productStyles.divider} />
+              <div className="hidden md:flex"></div>
 
               <InfoRow
                 title={'From a button click to a server-side error.'}
