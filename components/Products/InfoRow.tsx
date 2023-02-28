@@ -4,12 +4,10 @@ import homeStyles from '../Home/Home.module.scss'
 import classNames from 'classnames'
 import { Typography } from '../common/Typography/Typography'
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
-import { ObfuscationSlider } from '../Home/ObfuscationSlider/ObfuscationSlider'
 import React from 'react'
 import ReactCompareImage from 'react-compare-image'
-import ObfuscatedText from '../../public/images/obfuscatedText.svg'
-import RegularText from '../../public/images/regularText.svg'
-import SecurityImage from '../../public/images/safety-security-section.gif'
+import ObfuscatedText from '../../public/images/obfuscatedtext.png'
+import RegularText from '../../public/images/regulartext.png'
 
 //Component for the image/text row for the footer of the product page
 //invert puts the image on the right side of the text
