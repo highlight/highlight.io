@@ -48,7 +48,7 @@ yarn add @highlight-run/gatsby-plugin-highlight
     initializePluginSnippet,
     identifySnippet,
     verifySnippet,
-    configureSourcemapsCI,
+    configureSourcemapsCI(),
     setupBackendSnippet,
   ],
 }

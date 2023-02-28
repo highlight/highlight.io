@@ -1,52 +1,46 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react'
 
-import styles from '../../Home/Home.module.scss';
-import VideoThumbnail from '../../../public/images/thumbnail.svg';
-import Jay from '../../../public/images/jay.png';
-import PlayButton from '../../../public/images/playButton.svg';
-import classNames from 'classnames';
-import Image from "next/legacy/image";
-import { Typography } from '../../common/Typography/Typography';
-import { FaTimes } from 'react-icons/fa';
+import styles from '../../Home/Home.module.scss'
+import VideoThumbnail from '../../../public/images/thumbnail.svg'
+import Jay from '../../../public/images/jay.png'
+import PlayButton from '../../../public/images/playButton.svg'
+import classNames from 'classnames'
+import Image from 'next/legacy/image'
+import { Typography } from '../../common/Typography/Typography'
+import { FaTimes } from 'react-icons/fa'
 
 // When someone scrolls with the video open we close the video after scrolling
 // this many pixels.
-const SCROLL_THRESHOLD = 50;
+const SCROLL_THRESHOLD = 50
 
 export const HeroVideo = () => {
-  const [hideVideo, setHideVideo] = useState(true);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [hideVideo, setHideVideo] = useState(true)
+  const [scrollPosition, setScrollPosition] = useState(0)
 
   const showVideo = () => {
-    setScrollPosition(window.scrollY);
-    setHideVideo(false);
-  };
+    setScrollPosition(window.scrollY)
+    setHideVideo(false)
+  }
 
   const scrollHandler = useCallback(() => {
     if (hideVideo) {
-      return;
+      return
     }
 
     if (Math.abs(window.scrollY - scrollPosition) > SCROLL_THRESHOLD) {
-      setHideVideo(true);
+      setHideVideo(true)
     }
-  }, [hideVideo, scrollPosition]);
+  }, [hideVideo, scrollPosition])
 
   useEffect(() => {
-    window.removeEventListener('scroll', scrollHandler);
-    window.addEventListener('scroll', scrollHandler);
+    window.removeEventListener('scroll', scrollHandler)
+    window.addEventListener('scroll', scrollHandler)
 
-    return () => window.removeEventListener('scroll', scrollHandler);
-  }, [scrollHandler]);
+    return () => window.removeEventListener('scroll', scrollHandler)
+  }, [scrollHandler])
 
   return (
-    <div
-      className={classNames(
-        styles.anchorImage,
-        styles.heroImage,
-        styles.imageInner
-      )}
-    >
+    <div className={classNames(styles.anchorImage, styles.heroImage, styles.imageInner)}>
       <div
         className={classNames(styles.videoModal, {
           [styles.hideVideo]: hideVideo,
@@ -83,5 +77,5 @@ export const HeroVideo = () => {
         <Image src={VideoThumbnail} alt="" />
       </div>
     </div>
-  );
-};
+  )
+}

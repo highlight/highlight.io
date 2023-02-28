@@ -56,7 +56,7 @@ export const AngularContent: QuickStartContent = {
     },
     identifySnippet,
     verifySnippet,
-    configureSourcemapsCI,
+    configureSourcemapsCI(),
     setupBackendSnippet,
   ],
 }

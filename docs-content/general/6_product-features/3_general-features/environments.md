@@ -13,6 +13,6 @@ Environments are also used to determine whether [Alerts](../3_general-features/a
 
 ```typescript
 H.init('<YOUR_PROJECT_ID>', {
-	environment: process.env.ENVIRONMENT,
+  environment: process.env.ENVIRONMENT,
 })
 ```

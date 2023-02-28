@@ -59,7 +59,7 @@ export const OtherContext: QuickStartContent = {
     },
     identifySnippet,
     verifySnippet,
-    configureSourcemapsCI,
+    configureSourcemapsCI(),
     setupBackendSnippet,
   ],
 }

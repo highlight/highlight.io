@@ -8,7 +8,7 @@ updatedAt: 2022-04-01T19:52:59.000Z
 
 We've written up several guides on getting started with highlight.io in your framework of choice. If there's a guide missing for your framework, feel free to [create an issue](https://github.com/highlight/highlight/issues/new?assignees=&labels=external+bug+%2F+request&template=feature_request.md&title=) or message us on [discord](https://highlight.io/community).
 
-## For your frontend:
+## For your Frontend
 
 Installing highlight.io in javascript will automatically instrument frontend error collection and session replay. highlight.io supports any framework that uses the [dom](https://www.w3schools.com/js/js_htmldom.asp) under the hood, and we support all modern browsers to date. Take a look at our guides for the following frameworks:
 
@@ -32,7 +32,7 @@ Installing highlight.io in javascript will automatically instrument frontend err
 
 Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](3_client-sdk/6_other.md).
 
-## For your backend:
+## For your Backend
 
 Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 

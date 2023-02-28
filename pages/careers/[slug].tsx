@@ -1,17 +1,17 @@
-import Image from "next/legacy/image";
-import BlueGradient from '../../public/images/bg_blue_gradient.svg';
-import PurpleGradient from '../../public/images/bg_purple_gradient.svg';
-import homeStyles from '../../components/Home/Home.module.scss';
-import styles from '../../components/Blog/Blog.module.scss';
-import Navbar from '../../components/common/Navbar/Navbar';
-import { Section } from '../../components/common/Section/Section';
-import Footer from '../../components/common/Footer/Footer';
-import classNames from 'classnames';
-import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction';
-import { OPEN_ROLES } from '../../components/Careers/careers';
-import ReactMarkdown from 'react-markdown';
-import { Meta } from '../../components/common/Head/Meta';
+import Image from 'next/legacy/image'
+import BlueGradient from '../../public/images/bg_blue_gradient.svg'
+import PurpleGradient from '../../public/images/bg_purple_gradient.svg'
+import homeStyles from '../../components/Home/Home.module.scss'
+import styles from '../../components/Blog/Blog.module.scss'
+import Navbar from '../../components/common/Navbar/Navbar'
+import { Section } from '../../components/common/Section/Section'
+import Footer from '../../components/common/Footer/Footer'
+import classNames from 'classnames'
+import { GetStaticPaths, GetStaticProps } from 'next/types'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import { OPEN_ROLES } from '../../components/Careers/careers'
+import ReactMarkdown from 'react-markdown'
+import { Meta } from '../../components/common/Head/Meta'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -19,25 +19,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: { slug: k },
     })),
     fallback: 'blocking',
-  };
-};
+  }
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params?.slug as string;
+  const slug = params?.slug as string
 
   // Handle event slugs which don't exist
   if (!OPEN_ROLES[slug]) {
     return {
       notFound: true,
-    };
+    }
   }
 
   return {
     props: {
       role: OPEN_ROLES[slug],
     },
-  };
-};
+  }
+}
 
 const CareerPage = ({ role }: { role: any }) => {
   return (
@@ -70,7 +70,7 @@ const CareerPage = ({ role }: { role: any }) => {
       </main>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default CareerPage;
+export default CareerPage

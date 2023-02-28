@@ -47,7 +47,7 @@ export const VueContent: QuickStartContent = {
     vueInitSnippet,
     identifySnippet,
     verifySnippet,
-    configureSourcemapsCI,
+    configureSourcemapsCI(),
     setupBackendSnippet,
   ],
 }

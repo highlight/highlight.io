@@ -43,7 +43,7 @@ yarn add highlight.run @highlight-run/react`,
     },
     identifySnippet,
     verifySnippet,
-    configureSourcemapsCI,
+    configureSourcemapsCI('/docs/getting-started/fullstack-frameworks/next-js/env-variables'),
     setupBackendSnippet,
   ],
 }

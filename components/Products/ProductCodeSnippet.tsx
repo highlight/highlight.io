@@ -1,17 +1,17 @@
-import Image from 'next/legacy/image';
-import { CodeBlock } from 'react-code-blocks';
-import { SyntaxHighlighterProps } from 'react-syntax-highlighter';
-import CopyIcon from '../../public/images/copy.svg';
-import highlightCodeTheme from './../common/CodeBlock/highlight-code-theme';
-import homeStyles from '../../Home/Home.module.scss';
+import Image from 'next/legacy/image'
+import { CodeBlock } from 'react-code-blocks'
+import { SyntaxHighlighterProps } from 'react-syntax-highlighter'
+import CopyIcon from '../../public/images/copy.svg'
+import highlightCodeTheme from './../common/CodeBlock/highlight-code-theme'
+import homeStyles from '../../Home/Home.module.scss'
 
 const ProductCodeSnippet = ({
   content,
   canCopy,
   ...props
 }: Omit<SyntaxHighlighterProps, 'children'> & {
-  content: string;
-  canCopy?: boolean;
+  content: string
+  canCopy?: boolean
 }) => {
   return (
     <div className={homeStyles.codeSnippetFrame}>
@@ -24,10 +24,7 @@ const ProductCodeSnippet = ({
       </div>
       <div className={homeStyles.codeSnippetContent}>
         {canCopy && (
-          <div
-            className={homeStyles.codeSnippetCopy}
-            onClick={() => navigator.clipboard.writeText(content)}
-          >
+          <div className={homeStyles.codeSnippetCopy} onClick={() => navigator.clipboard.writeText(content)}>
             <div className={homeStyles.codeSnippetCopyIcon}>
               <Image src={CopyIcon} alt="" />
             </div>
@@ -47,7 +44,7 @@ const ProductCodeSnippet = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductCodeSnippet;
+export default ProductCodeSnippet

@@ -1,11 +1,11 @@
-import classNames from 'classnames';
-import { useRef } from 'react';
-import { useListBox, useOption } from 'react-aria';
+import classNames from 'classnames'
+import { useRef } from 'react'
+import { useListBox, useOption } from 'react-aria'
 
 export default function ListBox(props: any) {
-  let ref = useRef();
-  let { listBoxRef = ref, state } = props;
-  let { listBoxProps } = useListBox(props, state, listBoxRef);
+  let ref = useRef()
+  let { listBoxRef = ref, state } = props
+  let { listBoxProps } = useListBox(props, state, listBoxRef)
 
   return (
     <ul
@@ -19,40 +19,19 @@ export default function ListBox(props: any) {
       }}
     >
       {[...state.collection].map((item) => (
-        <Option
-          key={item.key}
-          item={item}
-          state={state}
-          activeClass={props.activeClass}
-        />
+        <Option key={item.key} item={item} state={state} activeClass={props.activeClass} />
       ))}
     </ul>
-  );
+  )
 }
 
-export function Option({
-  item,
-  state,
-  activeClass,
-}: {
-  item: any;
-  state: any;
-  activeClass: string;
-}) {
-  let ref = useRef<any>();
-  let { optionProps, isSelected, isFocused } = useOption(
-    { key: item.key },
-    state,
-    ref
-  );
+export function Option({ item, state, activeClass }: { item: any; state: any; activeClass: string }) {
+  let ref = useRef<any>()
+  let { optionProps, isSelected, isFocused } = useOption({ key: item.key }, state, ref)
 
   return (
-    <li
-      {...optionProps}
-      ref={ref}
-      className={classNames({ [activeClass]: isSelected || isFocused })}
-    >
+    <li {...optionProps} ref={ref} className={classNames({ [activeClass]: isSelected || isFocused })}>
       {item.rendered}
     </li>
-  );
+  )
 }
