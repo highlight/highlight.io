@@ -38,10 +38,13 @@ const highlightNode = require('@highlight-run/node')
 
 // Callable function wrapper
 exports.exampleCallable = functions.https.onCall(
-	highlightNode.Handlers.firebaseCallableFunctionHandler((data, context) => {
-		// ... your handler code here
-		return { result: 'useful result!' }
-	}, {projectID: "YOUR_PROJECT_ID"}),
+  highlightNode.Handlers.firebaseCallableFunctionHandler(
+    (data, context) => {
+      // ... your handler code here
+      return { result: 'useful result!' }
+    },
+    { projectID: 'YOUR_PROJECT_ID' },
+  ),
 )
 ```
 
@@ -50,10 +53,13 @@ const highlightNode = require('@highlight-run/node')
 
 // Http function wrapper
 exports.exampleHttp = functions.https.onRequest(
-	highlightNode.Handlers.firebaseHttpFunctionHandler((req, res) => {
-		// ... your handler code here
-		res.json({ result: 'useful result!' })
-	}, {projectID: "YOUR_PROJECT_ID"}),
+  highlightNode.Handlers.firebaseHttpFunctionHandler(
+    (req, res) => {
+      // ... your handler code here
+      res.json({ result: 'useful result!' })
+    },
+    { projectID: 'YOUR_PROJECT_ID' },
+  ),
 )
 ```
 

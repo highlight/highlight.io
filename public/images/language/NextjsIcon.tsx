@@ -1,14 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
 export default function NextjsIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      width="100"
-      height="40"
-      viewBox="0 20 394 60"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="100" height="40" viewBox="0 20 394 60" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M261.919 0.0330722H330.547V12.7H303.323V79.339H289.71V12.7H261.919V0.0330722Z"
         fill={props.color || '#72E4FC'}
@@ -21,10 +15,7 @@ export default function NextjsIcon(props: React.SVGProps<SVGSVGElement>) {
         d="M183.32 0.0661486H165.506L229.312 79.3721H247.178L215.271 39.7464L247.127 0.126654L229.312 0.154184L206.352 28.6697L183.32 0.0661486Z"
         fill={props.color || '#72E4FC'}
       />
-      <path
-        d="M201.6 56.7148L192.679 45.6229L165.455 79.4326H183.32L201.6 56.7148Z"
-        fill={props.color || '#72E4FC'}
-      />
+      <path d="M201.6 56.7148L192.679 45.6229L165.455 79.4326H183.32L201.6 56.7148Z" fill={props.color || '#72E4FC'} />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -44,5 +35,5 @@ export default function NextjsIcon(props: React.SVGProps<SVGSVGElement>) {
         fill={props.color || '#72E4FC'}
       />
     </svg>
-  );
+  )
 }

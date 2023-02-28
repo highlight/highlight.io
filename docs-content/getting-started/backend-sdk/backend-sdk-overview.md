@@ -25,7 +25,7 @@ Below is an example of a backend error (thrown in `go` ) ,mapped to an actual ne
 
 ### Enable proper flags in your client-side snippet:
 
-As a first step, you must enable the correct options in your client-side code snippet detailed in our [full stack mapping reference](../2_frontend-backend-mapping.md). 
+As a first step, you must enable the correct options in your client-side code snippet detailed in our [full stack mapping reference](../2_frontend-backend-mapping.md).
 
 ### Make the appropriate backend changes:
 

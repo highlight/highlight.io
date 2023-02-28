@@ -1,10 +1,10 @@
-import styles from '../Blog.module.scss';
-import Image from 'next/legacy/image';
-import Link from 'next/link';
-import { Typography } from '../../common/Typography/Typography';
-import { Post } from '../BlogPost/BlogPost';
-import classNames from 'classnames';
-import { PostTag } from '../Tag';
+import styles from '../Blog.module.scss'
+import Image from 'next/legacy/image'
+import Link from 'next/link'
+import { Typography } from '../../common/Typography/Typography'
+import { Post } from '../BlogPost/BlogPost'
+import classNames from 'classnames'
+import { PostTag } from '../Tag'
 
 export const SuggestedBlogPost = ({
   slug,
@@ -16,20 +16,11 @@ export const SuggestedBlogPost = ({
   readingTime,
 }: Post) => {
   return (
-    <Link
-      href={`/blog/${slug}`}
-      style={{ textDecoration: 'none' }}
-      legacyBehavior
-    >
+    <Link href={`/blog/${slug}`} style={{ textDecoration: 'none' }} legacyBehavior>
       <div className={classNames(styles.blogPost, styles.suggestedBlogPost)}>
         <div className={styles.cardSection}>
           <div className={styles.cardImage}>
-            <Image
-              src={image?.url || ''}
-              alt=""
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={image?.url || ''} alt="" layout="fill" objectFit="cover" />
           </div>
         </div>
         <div className={styles.cardSection}>
@@ -39,10 +30,7 @@ export const SuggestedBlogPost = ({
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${
-                readingTime ||
-                Math.floor(richcontent.markdown.split(' ').length / 200)
-              } min. read`}</p>
+              })} • ${readingTime || Math.floor(richcontent.markdown.split(' ').length / 200)} min. read`}</p>
             </Typography>
           </div>
           <div className={styles.suggestedPostTitle}>
@@ -58,5 +46,5 @@ export const SuggestedBlogPost = ({
         </div>
       </div>
     </Link>
-  );
-};
+  )
+}

@@ -1,14 +1,8 @@
-import * as React from 'react';
+import * as React from 'react'
 
 function CTABg(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      width="1240"
-      height="574"
-      viewBox="0 0 1240 574"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="1240" height="574" viewBox="0 0 1240 574" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask
         id="mask0_95_1786"
         style={{ maskType: 'alpha' }}
@@ -47,16 +41,8 @@ function CTABg(props: React.SVGProps<SVGSVGElement>) {
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="BackgroundImageFix"
-            result="shape"
-          />
-          <feGaussianBlur
-            stdDeviation="100"
-            result="effect1_foregroundBlur_95_1786"
-          />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_95_1786" />
         </filter>
         <filter
           id="filter1_f_95_1786"
@@ -68,16 +54,8 @@ function CTABg(props: React.SVGProps<SVGSVGElement>) {
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="BackgroundImageFix"
-            result="shape"
-          />
-          <feGaussianBlur
-            stdDeviation="100"
-            result="effect1_foregroundBlur_95_1786"
-          />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_95_1786" />
         </filter>
         <linearGradient
           id="paint0_linear_95_1786"
@@ -103,7 +81,7 @@ function CTABg(props: React.SVGProps<SVGSVGElement>) {
         </linearGradient>
       </defs>
     </svg>
-  );
+  )
 }
 
-export default CTABg;
+export default CTABg

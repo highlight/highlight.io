@@ -128,7 +128,7 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
         )}
         {feature.link && (
           <div className="flex justify-center sm:justify-start mb-4">
-            <Link href={`${feature.link}`} target="_blank">
+            <Link href={`${feature.link}`}>
               <Typography type="copy3" emphasis={true}>
                 <div className="flex items-center justify-center gap-2">
                   Learn More <HiArrowRight className="h-5" />

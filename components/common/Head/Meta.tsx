@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import MetaImage from '../../../public/images/meta-image.jpg';
+import Head from 'next/head'
+import MetaImage from '../../../public/images/meta-image.jpg'
 
 export const Meta = ({
   title,
@@ -7,14 +7,12 @@ export const Meta = ({
   absoluteImageUrl,
   canonical,
 }: {
-  title: string;
-  description: string;
-  absoluteImageUrl?: string;
-  canonical?: string;
+  title: string
+  description: string
+  absoluteImageUrl?: string
+  canonical?: string
 }) => {
-  const img =
-    absoluteImageUrl ||
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`;
+  const img = absoluteImageUrl || `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${MetaImage.src}`
   return (
     <Head>
       <title>{title}</title>
@@ -32,9 +30,7 @@ export const Meta = ({
       <meta property="og:site_name" content="Highlight" key="ogsitename" />
       <meta property="og:title" content={title} key="ogtitle" />
       <meta property="og:description" content={description} key="ogdesc" />
-      {canonical && (
-        <link rel="canonical" href={`https://www.highlight.io${canonical}`} />
-      )}
+      {canonical && <link rel="canonical" href={`https://www.highlight.io${canonical}`} />}
     </Head>
-  );
-};
+  )
+}

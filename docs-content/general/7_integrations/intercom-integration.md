@@ -10,13 +10,13 @@ Highlight makes it easy to send events to Intercom. If you have both Highlight a
 If you want to disable this integration, you can set `enabled: false` for the integration in your client config:
 
 ```typescript
-H.init("<YOUR_PROJECT_ID>", {
-	integrations: {
-		intercom: {
-			enabled: false
-		}
-	}
-});
+H.init('<YOUR_PROJECT_ID>', {
+  integrations: {
+    intercom: {
+      enabled: false,
+    },
+  },
+})
 ```
 
 ## Messaging
@@ -31,13 +31,13 @@ Calling [`H.track`](../../sdk/client.md#Hinit) will forward the data to Intercom
 
 ```typescript
 H.track('signup_button_clicked', {
-	firstTime: true,
-	impressions: 10,
+  firstTime: true,
+  impressions: 10,
 })
 
 // The Highlight track call is equivalent to this Intercom call
 Intercom('trackEvent', 'signup_button_clicked', {
-	firstTime: true,
-	impressions: 10,
+  firstTime: true,
+  impressions: 10,
 })
 ```

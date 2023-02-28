@@ -33,7 +33,6 @@ npm install @highlight-run/cloudflare
 yarn add @highlight-run/cloudflare
 ```
 
-
 ### Handle errors
 
 When your app throws a backend error, you can log that error to Highlight by calling [H.consumeError()](../../sdk/cloudflare.md#Hconsume-error). Your cloudflare worker code would look something like this:
@@ -42,21 +41,21 @@ When your app throws a backend error, you can log that error to Highlight by cal
 import { H } from '@highlight-run/cloudflare'
 
 async function doRequest() {
-    return new Response("hello!")
+  return new Response('hello!')
 }
 
 export default {
-    async fetch(request: Request, env: {}, ctx: ExecutionContext) {
-        const hEnv = { HIGHLIGHT_PROJECT_ID: 'YOUR_PROJECT_ID' }
-        try {
-            const response = await doRequest()
-            H.sendResponse(request, hEnv, ctx, response)
-            return response
-        } catch (e: any) {
-            H.consumeError(request, hEnv, ctx, e)
-            throw e
-        }
-    },
+  async fetch(request: Request, env: {}, ctx: ExecutionContext) {
+    const hEnv = { HIGHLIGHT_PROJECT_ID: 'YOUR_PROJECT_ID' }
+    try {
+      const response = await doRequest()
+      H.sendResponse(request, hEnv, ctx, response)
+      return response
+    } catch (e: any) {
+      H.consumeError(request, hEnv, ctx, e)
+      throw e
+    }
+  },
 }
 ```
 

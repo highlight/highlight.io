@@ -22,12 +22,20 @@ import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
 import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github'
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
-import { DocsMarkdownRenderer, generateIdString } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
+import {
+  DocsMarkdownRenderer,
+  generateIdString,
+} from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
 import DocSelect from '../../components/Docs/DocSelect/DocSelect'
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import { Callout } from '../../components/Docs/Callout/Callout'
 import { CodeBlock } from '../../components/common/CodeBlock/CodeBlock'
-import { quickStartContent, QuickStartContent, QuickStartStep, QuickStartType } from '../../components/QuickstartContent/QuickstartContent'
+import {
+  quickStartContent,
+  QuickStartContent,
+  QuickStartStep,
+  QuickStartType,
+} from '../../components/QuickstartContent/QuickstartContent'
 import Markdown from 'markdown-to-jsx'
 import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
 
@@ -56,7 +64,7 @@ type DocData = {
   markdownText: MDXRemoteSerializeResult | null
   markdownTextOG?: string
   relPath?: string
-  quickstartContent?: QuickStartContent;
+  quickstartContent?: QuickStartContent
   slug: string
   toc: TocEntry
   docOptions: DocPath[]
@@ -617,7 +625,7 @@ const DocPage = ({
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  const isQuickstart = metadata && 'quickstart' in metadata;
+  const isQuickstart = metadata && 'quickstart' in metadata
 
   const description = (markdownTextOG || '')
     .replaceAll(/[`[(]+.+[`\])]+/gi, '')
@@ -638,9 +646,9 @@ const DocPage = ({
     }
   }, [router])
 
-  const currentToc = toc?.children.find((c) => c.tocSlug === relPath?.split("/").filter(r => r)[0])
+  const currentToc = toc?.children.find((c) => c.tocSlug === relPath?.split('/').filter((r) => r)[0])
 
-  const is400 = useMediaQuery(400);
+  const is400 = useMediaQuery(400)
 
   return (
     <>
@@ -717,7 +725,7 @@ const DocPage = ({
         </div>
         <div className={styles.contentSection}>
           <div
-            className={classNames("DocSearch-content", styles.centerSection, {
+            className={classNames('DocSearch-content', styles.centerSection, {
               [styles.sdkCenterSection]: isSdkDoc,
               [styles.quickStartCenterSection]: isQuickstart,
             })}
@@ -779,7 +787,7 @@ const DocPage = ({
                           } else if (typeof props.children === 'string' && (props.children.match(/\n/g) || []).length) {
                             return (
                               <HighlightCodeBlock
-                                language={props.className ? (props.className.split('language-').pop() ?? 'js') : 'js'}
+                                language={props.className ? props.className.split('language-').pop() ?? 'js' : 'js'}
                                 text={props.children}
                                 showLineNumbers={false}
                               />
@@ -901,66 +909,72 @@ const DocsCard = ({
 }
 
 const QuickStart = (content: { content: QuickStartContent }) => {
-  const { content: c } = content;
+  const { content: c } = content
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
-      <Typography onDark type='copy1'>{c.subtitle}</Typography>
-      <div style={{ borderTop: "1px solid #EBFF5E", width: 200 }} />
-      <div style={{ display: "flex", flexDirection: "column", marginTop: 10 }}>
-        {
-          c.entries.map((step: QuickStartStep, i: number) => (
-            <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
-              <div style={{ display: "flex", width: 40, flexDirection: "column" }}>
-                <div style={{
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+      <Typography onDark type="copy1">
+        {c.subtitle}
+      </Typography>
+      <div style={{ borderTop: '1px solid #EBFF5E', width: 200 }} />
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
+        {c.entries.map((step: QuickStartStep, i: number) => (
+          <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
+            <div style={{ display: 'flex', width: 40, flexDirection: 'column' }}>
+              <div
+                style={{
                   width: 32,
                   minHeight: 32,
-                  backgroundColor: "#30294E",
+                  backgroundColor: '#30294E',
                   borderRadius: 100,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}>{i + 1}</div>
-                <div style={{ width: 16, height: "100%", borderRight: "2px solid #30294E" }}></div>
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {i + 1}
               </div>
-              <div style={{ width: "100%", display: "flex", gap: 20, marginBottom: 42 }}>
-                <div style={{ width: "50%", display: "flex", flexDirection: "column", gap: 8 }} className={styles.quickStartSubtext}>
-                  <Typography type='copy2' emphasis>{step.title}</Typography>
-                  <Markdown
-                    options={{
-                      forceBlock: true,
-                      overrides: {
-                        code: (props) => {
-                          return <code className={styles.inlineCodeBlock}>{props.children}</code>
-                        },
-                        ul: (props) => {
-                          return <div>hellooooo</div>
-                        },
-
-
-                      }
-                    }}
-                  >
-                    {step.content}
-                  </Markdown>
-                </div>
-                <div style={{ width: "50%" }}>
-                  {step.code &&
-                    <HighlightCodeBlock
-                      style={{ position: "sticky", top: "80px" }}
-                      language={step.code.language}
-                      text={step.code.text}
-                      showLineNumbers={false}
-                    />
-                  }
-                </div>
+              <div style={{ width: 16, height: '100%', borderRight: '2px solid #30294E' }}></div>
+            </div>
+            <div style={{ width: '100%', display: 'flex', gap: 20, marginBottom: 42 }}>
+              <div
+                style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: 8 }}
+                className={styles.quickStartSubtext}
+              >
+                <Typography type="copy2" emphasis>
+                  {step.title}
+                </Typography>
+                <Markdown
+                  options={{
+                    forceBlock: true,
+                    overrides: {
+                      code: (props) => {
+                        return <code className={styles.inlineCodeBlock}>{props.children}</code>
+                      },
+                      ul: (props) => {
+                        return <div>hellooooo</div>
+                      },
+                    },
+                  }}
+                >
+                  {step.content}
+                </Markdown>
+              </div>
+              <div style={{ width: '50%' }}>
+                {step.code && (
+                  <HighlightCodeBlock
+                    style={{ position: 'sticky', top: '80px' }}
+                    language={step.code.language}
+                    text={step.code.text}
+                    showLineNumbers={false}
+                  />
+                )}
               </div>
             </div>
-          ))
-        }
-
+          </div>
+        ))}
       </div>
     </div>
-  );
+  )
 }
 
 export default DocPage

@@ -1,7 +1,7 @@
-import React from 'react';
-import classNames from 'classnames';
+import React from 'react'
+import classNames from 'classnames'
 
-import styles from './Typography.module.scss';
+import styles from './Typography.module.scss'
 
 export const Typography = ({
   children,
@@ -10,10 +10,10 @@ export const Typography = ({
   className,
   ...props
 }: React.PropsWithChildren<{
-  type: 'copyHeader' | 'copy1' | 'copy2' | 'copy3' | 'copy4' | 'outline';
-  emphasis?: boolean;
-  onDark?: boolean;
-  className?: string;
+  type: 'copyHeader' | 'copy1' | 'copy2' | 'copy3' | 'copy4' | 'outline'
+  emphasis?: boolean
+  onDark?: boolean
+  className?: string
 }>) => {
   return (
     <span
@@ -31,5 +31,5 @@ export const Typography = ({
     >
       {children}
     </span>
-  );
-};
+  )
+}

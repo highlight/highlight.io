@@ -59,6 +59,7 @@ H = highlight_io.H("YOUR_PROJECT_ID", integrations=[DjangoIntegration()], record
 ```
 
 ## Adding Highlight to FastAPI
+
 Import the FastAPI middleware and setup Highlight with your FastAPI App!
 
 ```python

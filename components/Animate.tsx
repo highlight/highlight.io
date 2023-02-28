@@ -26,10 +26,7 @@ export const AnimateIn = ({ children }: React.PropsWithChildren) => {
   )
 }
 
-export const AnimateBugLeft = ({
-  loaded,
-  children,
-}: React.PropsWithChildren<{ loaded: boolean }>) => {
+export const AnimateBugLeft = ({ loaded, children }: React.PropsWithChildren<{ loaded: boolean }>) => {
   const orig = { left: -300, top: 0, opacity: 0 }
   const final = { left: -120, top: 125, opacity: 1 }
   return (
@@ -52,10 +49,7 @@ export const AnimateBugLeft = ({
   )
 }
 
-export const AnimateBugRight = ({
-  loaded,
-  children,
-}: React.PropsWithChildren<{ loaded: boolean }>) => {
+export const AnimateBugRight = ({ loaded, children }: React.PropsWithChildren<{ loaded: boolean }>) => {
   const orig = { right: -275, top: -95, opacity: 0 }
   const final = { right: -95, top: 30, opacity: 1 }
   return (
@@ -82,7 +76,7 @@ export const AnimateCarouselImage = ({
   loaded,
   children,
   delay,
-}: React.PropsWithChildren<{ loaded: boolean, delay?: number }>) => {
+}: React.PropsWithChildren<{ loaded: boolean; delay?: number }>) => {
   const orig = { bottom: -300, opacity: 0 }
   const final = { bottom: -20, opacity: 1 }
   return (
@@ -102,10 +96,7 @@ export const AnimateCarouselImage = ({
   )
 }
 
-export const AnimateMobileCarouselImage = ({
-  loaded,
-  children,
-}: React.PropsWithChildren<{ loaded: boolean }>) => {
+export const AnimateMobileCarouselImage = ({ loaded, children }: React.PropsWithChildren<{ loaded: boolean }>) => {
   const orig = { bottom: -300, opacity: 0 }
   const final = { bottom: 30, opacity: 1 }
   return (

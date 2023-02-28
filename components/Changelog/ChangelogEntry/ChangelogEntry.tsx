@@ -1,17 +1,16 @@
-import styles from '../../Blog/Blog.module.scss';
-import Link from 'next/link';
+import styles from '../../Blog/Blog.module.scss'
+import Link from 'next/link'
 
 export interface Entry {
-  slug: string;
-  title: string;
-  createdAt: string;
-  content: string;
+  slug: string
+  title: string
+  createdAt: string
+  content: string
 }
 
 export const ChangelogEntry = ({ slug, content, title, createdAt }: Entry) => {
   return (
-    (<Link href={`/changelog/${slug}`} style={{ textDecoration: 'none' }}>
-
+    <Link href={`/changelog/${slug}`} style={{ textDecoration: 'none' }}>
       <div className={styles.blogPost}>
         <div className={styles.cardSection}>
           <h2>{title}</h2>
@@ -22,7 +21,6 @@ export const ChangelogEntry = ({ slug, content, title, createdAt }: Entry) => {
           </div>
         </div>
       </div>
-
-    </Link>)
-  );
-};
+    </Link>
+  )
+}
