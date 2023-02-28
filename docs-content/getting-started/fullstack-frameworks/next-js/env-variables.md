@@ -15,4 +15,4 @@ Start your app, go to it in the browser, then click around. Highlight will be re
 
 ### Versioning your Sourcemaps
 
-To version the frontend of your app, we recommend using the Next.js config [generateBuildId](https://nextjs.org/docs/api-reference/next.config.js/configuring-the-build-id). Highlight will automatically use that setting to upload sourcemaps with that version. On your next.js frontend, you'll want to set the `H.init` setting of `version` to the same value. Make sure to upgrade [@highlight-run/next to 2.1.2](https://www.npmjs.com/package/@highlight-run/next/v/2.1.0) for `generateBuildId` support.
+To version the frontend of your app, we recommend using the Next.js config [generateBuildId](https://nextjs.org/docs/api-reference/next.config.js/configuring-the-build-id). Highlight will automatically use that setting to upload sourcemaps with that version. On your next.js frontend, you'll want to set the `H.init` setting of `version` to the same value. Make sure to upgrade [@highlight-run/next to 2.1.2](https://www.npmjs.com/package/@highlight-run/next/v/2.1.2) for `generateBuildId` support.
