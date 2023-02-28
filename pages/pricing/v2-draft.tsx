@@ -424,6 +424,9 @@ export const RangedInput = ({
     return sortedOptions[0]
   }
 
+  const normalize = (value: number) => (value - min) / (max - min)
+  const denormalize = (normal: number) => normal * (max - min) + min
+
   return (
     <>
       <div className="block md:hidden">
@@ -449,8 +452,9 @@ export const RangedInput = ({
       <Slider.Root
         min={min}
         max={max}
-        value={[value]}
-        onValueChange={([ev]) => ev != null && onChange(ev)}
+        step={500}
+        value={[denormalize(Math.pow(normalize(value), 1 / 3))]}
+        onValueChange={([value]) => value != null && onChange(Math.ceil(denormalize(Math.pow(normalize(value), 3))))}
         className="relative items-center hidden w-full h-16 mt-4 select-none md:flex touch-none group"
       >
         <Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
