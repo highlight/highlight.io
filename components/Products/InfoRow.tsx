@@ -7,6 +7,7 @@ import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
 import React from 'react'
 import ReactCompareImage from 'react-compare-image'
 import ObfuscatedText from '../../public/images/obfuscatedtext.png'
+import { ObfuscationSlider } from '../Home/ObfuscationSlider/ObfuscationSlider'
 import RegularText from '../../public/images/regulartext.png'
 
 //Component for the image/text row for the footer of the product page
@@ -31,22 +32,7 @@ const InfoRow = ({
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center gap-16 xl:gap-32">
       <div className={`${invert ? 'lg:hidden ' : ''} flex justify-center lg:w-[570px] w-full h-full`}>
-        {privacy ? (
-          <ReactCompareImage
-            leftImage={RegularText.src}
-            rightImage={ObfuscatedText.src}
-            sliderLineColor="#72E4FC"
-            sliderLineWidth={3}
-            handle={
-              <div className={homeStyles.obfuscationHandle}>
-                <div className={homeStyles.arrow1}></div>
-                <div className={homeStyles.arrow2}></div>
-              </div>
-            }
-          />
-        ) : (
-          <Image src={imgSrc} alt="" />
-        )}
+        {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
       </div>
       <div className="lg:w-1/2 text-center lg:text-left">
         <h3 className={styles.infoTitle}>{title}</h3>
@@ -62,22 +48,7 @@ const InfoRow = ({
         </div>
       </div>
       <div className={`${invert ? 'lg:flex' : ''} hidden justify-center lg:w-[570px]`}>
-        {privacy ? (
-          <ReactCompareImage
-            leftImage={RegularText.src}
-            rightImage={ObfuscatedText.src}
-            sliderLineColor="#72E4FC"
-            sliderLineWidth={3}
-            handle={
-              <div className={homeStyles.obfuscationHandle}>
-                <div className={homeStyles.arrow1}></div>
-                <div className={homeStyles.arrow2}></div>
-              </div>
-            }
-          />
-        ) : (
-          <Image src={imgSrc} alt="" />
-        )}
+        {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
       </div>
     </div>
   )
