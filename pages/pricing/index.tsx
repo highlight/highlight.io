@@ -286,9 +286,9 @@ const PriceCalculator = () => {
   const [tierName, setTierName] = useState<TierName>('Free')
   const [retention, setRetention] = useState<Retention>('3 months')
 
-  const [errorUsage, setErrorUsage] = useState(0)
-  const [sessionUsage, setSessionUsage] = useState(0)
-  const [loggingUsage, setLoggingUsage] = useState(0)
+  const [errorUsage, setErrorUsage] = useState(50000)
+  const [sessionUsage, setSessionUsage] = useState(50000)
+  const [loggingUsage, setLoggingUsage] = useState(50000)
 
   const tier = priceTiers[tierName]
   const basePrice = getBasePrice(tier, billingPeriod, retention)
