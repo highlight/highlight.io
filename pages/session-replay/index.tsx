@@ -21,7 +21,7 @@ import sessionReplayHero from '../../public/images/features/sessionReplayHero.pn
 import sessionReplay1 from '../../public/images/features/sessionReplay1.png'
 import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
 import sessionReplay3 from '../../public/images/landingInfoRow1.png'
-import { ObfuscationSlider } from '../../components/Home/ObfuscationSlider/ObfuscationSlider'
+import sessionReplay4 from '../../public/images/landingInfoRow2.png'
 
 const ShowcasePage: NextPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -42,9 +42,9 @@ const ShowcasePage: NextPage = () => {
         <div className="flex flex-col xl:flex-row justify-between w-screen overflow-hidden px-8 mx-auto lg:px-4 lg:py-28 max-w-[1200px]">
           <div className="lg:w-1/2 flex justify-center mt-10">
             <div className="flex flex-col max-w-4xl gap-8 text-center lg:text-left">
-              <h1 className="text-white">Session Replay & UX Monitoring</h1>
+              <h2 className="text-white">Session Replay & UX Monitoring</h2>
               <Typography type="copy1" className="text-copy-on-dark">
-                Understand your users, and why they’re falling through the cracks.
+                Pixel-perfect video replay of your web application. Step into the shoes of your users.
               </Typography>
               <div className="flex flex-col lg:flex-row justify-start gap-4 w-full lg:w-auto">
                 <PrimaryButton
@@ -55,11 +55,11 @@ const ShowcasePage: NextPage = () => {
                     Get started
                   </Typography>
                 </PrimaryButton>
-                <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
+                {/* <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
                   <Typography type="copy2" emphasis={true}>
                     Read our docs
                   </Typography>
-                </PrimaryButton>
+                </PrimaryButton> */}
               </div>
             </div>
           </div>
@@ -80,17 +80,27 @@ const ShowcasePage: NextPage = () => {
         </div>
         <div className="w-full mx-auto max-w-screen-2xl mt-24">
           <Section className="flex flex-col gap-20">
-            <h2 className="self-center max-w-[809px] text-center">
-              Understand your users & why they’re falling through the cracks.
-            </h2>
+            <div className="mx-auto max-w-[1000px]">
+              <h2 className="self-center text-center">
+                Step into the shoes of <span className="text-highlight-yellow">your users.</span>
+              </h2>
+              <div className="px-8 max-w-[750px] mx-auto mt-6 text-center">
+                <Typography type="copyHeader" className="text-copy-on-dark text-center">
+                  Reproduce hard-to-crack issues, understand how your product is used.
+                </Typography>
+              </div>
+            </div>
 
             <div className={productStyles.infoContainer}>
               <InfoRow
-                title={'Search for sessions in confidence.'}
-                desc={'Search for user sessions by email, text content, and more. And create saved searches for later.'}
-                link={'/docs/general/product-features/session-replay/session-search'}
+                title={'Powerful privacy controls.'}
+                desc={
+                  'Privacy matters. Use the highlight.io SDK to obfuscate and redact data to control when and where to record.'
+                }
+                link={'/docs/getting-started/client-sdk/replay-configuration/privacy'}
                 linkText={'Read the docs'}
-                imgSrc={sessionReplay1}
+                privacy
+                imgSrc={sessionReplay2}
                 invert
               />
 
@@ -109,19 +119,6 @@ const ShowcasePage: NextPage = () => {
               <div className={productStyles.divider} />
 
               <InfoRow
-                title={'Powerful privacy controls.'}
-                desc={'Privacy matters. Use our SDK to obfuscate and redact data to control when and where to record.'}
-                link={'/docs/getting-started/client-sdk/replay-configuration/privacy'}
-                linkText={'Read the docs'}
-                privacy
-                imgSrc={sessionReplay2}
-                invert
-              />
-
-              <div className={productStyles.divider} />
-              <div className="hidden md:flex"></div>
-
-              <InfoRow
                 title={'From a button click to a server-side error.'}
                 desc={
                   'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side log.'
@@ -130,10 +127,22 @@ const ShowcasePage: NextPage = () => {
                 linkText={'Get started for free'}
                 imgSrc={sessionReplay3}
               />
+
+              <div className={productStyles.divider} />
+
+              <InfoRow
+                title={'Support for all the modern frameworks.'}
+                desc={
+                  'Whether its react, angular, or even a framework you built yourself. As long as it run javascript, we got you covered.'
+                }
+                link={'https://app.highlight.io/?sign_up=1'}
+                linkText={'Get started for free'}
+                imgSrc={sessionReplay4}
+                invert
+              />
             </div>
           </Section>
         </div>
-        <div className="hidden md:flex mx-auto h-[2px] rounded-full bg-divider-on-dark opacity-50 max-w-[400px]"></div>
         <OSSCallToAction />
         <Section>
           <CompaniesReel />

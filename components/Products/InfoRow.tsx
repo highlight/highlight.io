@@ -1,14 +1,10 @@
 import Image from 'next/image'
 import styles from './Products.module.scss'
-import homeStyles from '../Home/Home.module.scss'
 import classNames from 'classnames'
 import { Typography } from '../common/Typography/Typography'
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
 import React from 'react'
-import ReactCompareImage from 'react-compare-image'
-import ObfuscatedText from '../../public/images/obfuscatedtext.png'
 import { ObfuscationSlider } from '../Home/ObfuscationSlider/ObfuscationSlider'
-import RegularText from '../../public/images/regulartext.png'
 
 //Component for the image/text row for the footer of the product page
 //invert puts the image on the right side of the text
@@ -34,7 +30,7 @@ const InfoRow = ({
       <div className={`${invert ? 'lg:hidden ' : ''} flex justify-center lg:w-[570px] w-full h-full`}>
         {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
       </div>
-      <div className="lg:w-1/2 text-center lg:text-left">
+      <div className="lg:w-[60%] text-center lg:text-left">
         <h3 className={styles.infoTitle}>{title}</h3>
         <Typography type="copy2" onDark>
           <p className="text-color-copy-on-dark md:text-xl">{desc}</p>
