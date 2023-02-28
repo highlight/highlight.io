@@ -427,33 +427,24 @@ export const RangedInput = ({
   return (
     <>
       <div className="block md:hidden">
-        <Listbox value={snapValue(value)} onChange={onChange}>
-          <Listbox.Button className="flex items-center justify-center w-full h-12 gap-2 mt-2 transition-all border rounded-lg border-copy-on-light hover:bg-white/10">
+        <div className="relative">
+          <select
+            className="flex items-center justify-center w-full h-12 gap-2 text-center text-transparent transition-all border rounded-lg appearance-none cursor-pointer border-copy-on-light hover:bg-white/10 bg-dark-background"
+            onChange={(ev) => onChange(parseFloat(ev.target.value))}
+          >
+            {options.map((value, i) => (
+              <option value={value} key={i}>
+                {value.toLocaleString(undefined, { notation: 'compact' })}
+              </option>
+            ))}
+          </select>
+          <div className="absolute inset-0 flex items-center justify-center w-full h-12 gap-2 transition-all border rounded-lg pointer-events-none border-copy-on-light hover:bg-white/10">
             <Typography type="copy2" emphasis onDark>
-              {' '}
               {snapValue(value).toLocaleString(undefined, { notation: 'compact' })}
             </Typography>
             <ChevronDownIcon className="w-5 h-5 text-darker-copy-on-dark" />
-          </Listbox.Button>
-          <Listbox.Options className="p-1 mt-2 border rounded-lg border-copy-on-light">
-            {options.map((value, i) => (
-              <Listbox.Option
-                key={i}
-                value={value}
-                className="flex items-center justify-between px-2 py-1 transition-all rounded cursor-pointer hover:bg-white/10"
-              >
-                {({ selected }) => (
-                  <>
-                    <Typography type="copy2" emphasis={selected} onDark={!selected}>
-                      {value.toLocaleString(undefined, { notation: 'compact' })}
-                    </Typography>
-                    {selected && <CheckIcon className="w-5 h-5 text-darker-copy-on-dark" />}
-                  </>
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Listbox>
+          </div>
+        </div>
       </div>
       <Slider.Root
         min={min}
