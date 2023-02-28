@@ -95,7 +95,7 @@ const features: Feature[] = [
   {
     name: 'Logging',
     title: 'Logging',
-    description: 'Drill down on all the logs being written throughout your stack to uncover issues.',
+    description: 'Search for and set alerts for logs being written throughout your stack.',
     thumbnail: <HiLightningBolt className="h-[35px] w-[35px]" />,
     desktopImage: fullstackLogging,
     mobileImage: loggingscreenshot,
