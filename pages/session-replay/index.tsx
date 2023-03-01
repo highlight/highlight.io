@@ -14,14 +14,15 @@ import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel
 import { CustomerReviewTrack } from '../../components/Home/CustomerReviewTrack'
 import homeStyles from '../../components/Home/Home.module.scss'
 import productStyles from '../../components/Products/Products.module.scss'
-import InfoRow from '../../components/Products/InfoRow'
+import LandingInfoRow from '../../components/Home/LandingInfoRow'
+import obfuscatedtext from '../../public/images/obfuscatedtext.png'
 import { MdKeyboardReturn } from 'react-icons/md'
 import sessionscreenshot from '../../public/images/sessionscreenshot.png'
 import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
-import sessionReplay1 from '../../public/images/features/sessionReplay1.png'
 import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
 import sessionReplay3 from '../../public/images/landingInfoRow1.png'
 import sessionReplay4 from '../../public/images/landingInfoRow2.png'
+import { AnimateFeatureHeroRight } from '../../components/Animate'
 
 const ShowcasePage: NextPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -55,93 +56,92 @@ const ShowcasePage: NextPage = () => {
                     Get started
                   </Typography>
                 </PrimaryButton>
-                {/* <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
+                <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
                   <Typography type="copy2" emphasis={true}>
                     Read our docs
                   </Typography>
-                </PrimaryButton> */}
+                </PrimaryButton>
               </div>
             </div>
           </div>
-          <div className="flex justify-center mt-12 lg:mt-0 lg:absolute right-0 overflow-y-hidden">
+          <div className="flex justify-center mt-12 lg:mt-0">
+            <AnimateFeatureHeroRight loaded={imageLoaded}>
+              <Image
+                className={`hidden lg:flex  right-0 object-contain top-0 lg:w-[800px] xl:w-[800px]`}
+                src={sessionReplayHero}
+                alt="Feature Spotlight"
+                onLoadingComplete={() => setImageLoaded(true)}
+              />
+            </AnimateFeatureHeroRight>
             <Image
-              className={`hidden lg:flex right-0 object-contain bottom-0 lg:w-[450px] xl:w-[600px]`}
-              src={sessionReplayHero}
-              alt="Feature Spotlight"
-              onLoadingComplete={() => setImageLoaded(true)}
-            />
-            <Image
-              className={`lg:hidden right-0 object-contain bottom-0  md:w-[500px]`}
+              className={`lg:hidden right-0 object-contain bottom-0 md:w-[500px]`}
               src={sessionscreenshot}
               alt="Feature Spotlight"
               onLoadingComplete={() => setImageLoaded(true)}
             />
           </div>
         </div>
-        <div className="w-full mx-auto max-w-screen-2xl mt-24">
+        <div className="w-full mx-auto max-w-screen-2xl mt-36 lg:mt-80">
           <Section className="flex flex-col gap-20">
-            <div className="mx-auto max-w-[1000px]">
+            <div className="mx-auto max-w-[840px]">
               <h2 className="self-center text-center">
-                Step into the shoes of <span className="text-highlight-yellow">your users.</span>
+                {/* Step into the shoes of <span className="text-highlight-yellow">your users.</span> */}
+                {`
+                Debug from a 
+                user's perspective.`}
               </h2>
-              <div className="px-8 max-w-[750px] mx-auto mt-6 text-center">
-                <Typography type="copyHeader" className="text-copy-on-dark text-center">
-                  Reproduce hard-to-crack issues, understand how your product is used.
+              <div className="px-8 max-w-[600px] mx-auto mt-6 text-center">
+                <Typography type="copy1" className="text-copy-on-dark text-center">
+                  Reproduce hard-to-crack issues and understand how your product is used.
                 </Typography>
               </div>
             </div>
-
-            <div className={productStyles.infoContainer}>
-              <InfoRow
-                title={'Powerful privacy controls.'}
-                desc={
-                  'Privacy matters. Use the highlight.io SDK to obfuscate and redact data to control when and where to record.'
-                }
-                link={'/docs/getting-started/client-sdk/replay-configuration/privacy'}
-                linkText={'Read the docs'}
-                privacy
-                imgSrc={sessionReplay2}
-                invert
-              />
-
-              <div className={productStyles.divider} />
-
-              <InfoRow
-                title={'Reproduce the dev-tools for every user session.'}
-                desc={
-                  'Console logs, errors, network requests, and more. Get full context around the issues on your web application.'
-                }
-                link={'/docs/getting-started/client-sdk/replay-configuration/overview'}
-                linkText={'Read the docs'}
-                imgSrc={sessionReplay2}
-              />
-
-              <div className={productStyles.divider} />
-
-              <InfoRow
-                title={'From a button click to a server-side error.'}
-                desc={
-                  'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side log.'
-                }
-                link={'https://app.highlight.io/?sign_up=1'}
-                linkText={'Get started for free'}
-                imgSrc={sessionReplay3}
-              />
-
-              <div className={productStyles.divider} />
-
-              <InfoRow
-                title={'Support for all the modern frameworks.'}
-                desc={
-                  'Whether its react, angular, or even a framework you built yourself. As long as it run javascript, we got you covered.'
-                }
-                link={'https://app.highlight.io/?sign_up=1'}
-                linkText={'Get started for free'}
-                imgSrc={sessionReplay4}
-                invert
-              />
-            </div>
           </Section>
+        </div>
+
+        <div className={classNames(homeStyles.infoContainer, '')}>
+          <LandingInfoRow
+            title={'Powerful privacy controls.'}
+            desc={
+              'Privacy matters. Use the highlight.io SDK to obfuscate and redact data to control when and where to record.'
+            }
+            link={'/docs/getting-started/client-sdk/replay-configuration/privacy'}
+            linkText={'Read the docs'}
+            privacy
+            imgSrc={obfuscatedtext}
+            invert
+          />
+
+          <LandingInfoRow
+            title={'Reproduce the dev-tools for every user session.'}
+            desc={
+              'Console logs, errors, network requests, and more. Get full context around the issues on your web application.'
+            }
+            link={'/docs/getting-started/client-sdk/replay-configuration/overview'}
+            linkText={'Read the docs'}
+            imgSrc={sessionReplay2}
+          />
+
+          <LandingInfoRow
+            title={'From a button click to a server-side error.'}
+            desc={
+              'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side log.'
+            }
+            link={'https://app.highlight.io/?sign_up=1'}
+            linkText={'Get started for free'}
+            imgSrc={sessionReplay3}
+          />
+
+          <LandingInfoRow
+            title={'Support for all the modern frameworks.'}
+            desc={
+              'Whether its react, angular, or even a framework you built yourself. As long as it run javascript, we got you covered.'
+            }
+            link={'https://app.highlight.io/?sign_up=1'}
+            linkText={'Get started for free'}
+            imgSrc={sessionReplay4}
+            invert
+          />
         </div>
         <OSSCallToAction />
         <Section>

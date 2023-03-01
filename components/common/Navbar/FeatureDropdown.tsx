@@ -47,7 +47,7 @@ const FeatureDropdown = ({ isOpen }: { isOpen?: boolean }) => {
               })}
             >
               <div className="flex gap-[6.5px] items-center">
-                <Typography type="copy2">Features</Typography>
+                <Typography type="copy2">Product</Typography>
                 <FaChevronDown className="w-[10px]" />
               </div>
             </a>

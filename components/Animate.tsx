@@ -96,6 +96,30 @@ export const AnimateCarouselImage = ({
   )
 }
 
+export const AnimateFeatureHeroRight = ({
+  loaded,
+  children,
+  delay,
+}: React.PropsWithChildren<{ loaded: boolean; delay?: number }>) => {
+  const orig = { right: '-500px', opacity: 0 }
+  const final = { right: '-30px', opacity: 1 }
+  return (
+    <motion.div
+      initial={orig}
+      animate={loaded ? final : orig}
+      transition={{
+        type: 'spring',
+        bounce: 0.2,
+        duration: 0.4,
+        delay: delay || 0,
+      }}
+      className="absolute -translate-y-16 lg:w-[600px] xl:w-[650px] h-[500px]"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 export const AnimateMobileCarouselImage = ({ loaded, children }: React.PropsWithChildren<{ loaded: boolean }>) => {
   const orig = { bottom: -300, opacity: 0 }
   const final = { bottom: 30, opacity: 1 }

@@ -30,7 +30,7 @@ const InfoRow = ({
       <div className={`${invert ? 'lg:hidden ' : ''} flex justify-center lg:w-[570px] w-full h-full`}>
         {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
       </div>
-      <div className="lg:w-[60%] text-center lg:text-left">
+      <div className="lg:w-1/2 text-center lg:text-left">
         <h3 className={styles.infoTitle}>{title}</h3>
         <Typography type="copy2" onDark>
           <p className="text-color-copy-on-dark md:text-xl">{desc}</p>

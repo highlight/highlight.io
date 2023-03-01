@@ -4,6 +4,7 @@ import productStyles from '../Products/Products.module.scss'
 import classNames from 'classnames'
 import { Typography } from '../common/Typography/Typography'
 import { PrimaryButton } from '../common/Buttons/PrimaryButton'
+import { ObfuscationSlider } from './ObfuscationSlider/ObfuscationSlider'
 
 //Component for the image/text row for the footer of the product page
 //invert puts the image on the right side of the text
@@ -14,6 +15,7 @@ const LandingInfoRow = ({
   linkText,
   invert,
   imgSrc,
+  privacy,
 }: {
   title: string
   desc: string
@@ -21,15 +23,22 @@ const LandingInfoRow = ({
   linkText: string
   invert?: boolean
   imgSrc: any
+  privacy?: boolean
 }) => {
   return (
     <div className={styles.landingInfoRow}>
       <div
         className={`${
           invert ? 'lg:hidden' : ''
-        } flex justify-center px-5 mt-5 min-h-[200px] sm:h-[300px] lg:h-auto lg:w-[570px]`}
+        } flex justify-center px-5 mt-5 w-2/3 sm:w-1/2 min-h-[200px] sm:h-[300px] lg:h-auto lg:w-[570px]`}
       >
-        <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" />
+        {privacy ? (
+          <div className="flex flex-col justify-center w-full">
+            <ObfuscationSlider />
+          </div>
+        ) : (
+          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" />
+        )}
       </div>
       <div className="flex md:hidden w-full h-[1px] bg-divider-on-dark"> </div>
       <div className="flex flex-col justify-between h-full lg:w-1/2 px-5 text-left lg:text-left">
@@ -51,7 +60,7 @@ const LandingInfoRow = ({
         </div>
       </div>
       <div className={`${invert ? 'lg:flex' : ''} hidden justify-center lg:w-[570px]`}>
-        <Image src={imgSrc} alt="" />
+        {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
       </div>
     </div>
   )

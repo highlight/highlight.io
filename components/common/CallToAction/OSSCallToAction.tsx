@@ -8,7 +8,7 @@ import classNames from 'classnames'
 
 export const OSSCallToAction = () => {
   return (
-    <div className={'flex justify-center mx-5 md:mx-[10vw] my-10 md:my-40'}>
+    <div className={'flex justify-center mx-5 md:mx-[10vw] my-10 md:my-32'}>
       <div
         className={classNames(
           styles.ossCard,
