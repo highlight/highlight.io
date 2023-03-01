@@ -1,7 +1,7 @@
 import { QuickStartContent } from '../QuickstartContent'
 
 export const DevDeploymentContent: QuickStartContent = {
-  subtitle: 'Learn how to set up highlight.io with your Angular application.',
+  subtitle: 'Learn how to set up the dev deployment of highlight.io to start contributing.',
   entries: [
     {
       title: 'Prerequisites',

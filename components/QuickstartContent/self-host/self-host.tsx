@@ -1,7 +1,7 @@
 import { QuickStartContent } from '../QuickstartContent'
 
 export const SelfHostContent: QuickStartContent = {
-  subtitle: 'Learn how to set up highlight.io with your Angular application.',
+  subtitle: 'Learn how to set up the self-hosted hobby deployment of highlight.io.',
   entries: [
     {
       title: 'Prerequisites',
