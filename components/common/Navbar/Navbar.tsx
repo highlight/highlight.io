@@ -139,15 +139,15 @@ const Navbar = ({
             )}
             {!isDocsPage && (
               <div className={classNames(styles.navContainer, styles.header, styles.headerCenter)}>
-                <FeatureDropdown isOpen={scrolled && !fixed} />
-
                 <Link href="/pricing" className={styles.headerButton}>
+                  <Typography type="copy2">Pricing</Typography>
+                </Link>
+                <Link href="/customers" className={styles.headerButton}>
                   <Typography type="copy2">Pricing</Typography>
                 </Link>
                 <Link href="/blog" className={styles.headerButton}>
                   <Typography type="copy2">Blog</Typography>
                 </Link>
-
                 <ResourceDropdown isOpen={scrolled && !fixed} />
               </div>
             )}
