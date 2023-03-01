@@ -67,11 +67,17 @@ const ShowcasePage: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center mt-12 lg:mt-0">
+          <div className="flex justify-end mt-12 lg:mt-0 2xl:relative">
             <AnimateFeatureHeroRight loaded={imageLoaded}>
               <Image
-                className={`hidden lg:flex  right-0 object-contain top-0`}
+                className={`hidden lg:flex 2xl:hidden right-0 object-contain top-0`}
                 src={sessionReplayHero}
+                alt="Feature Spotlight"
+                onLoadingComplete={() => setImageLoaded(true)}
+              />
+              <Image
+                className={`hidden 2xl:flex object-contain`}
+                src={sessionscreenshot}
                 alt="Feature Spotlight"
                 onLoadingComplete={() => setImageLoaded(true)}
               />
