@@ -19,7 +19,7 @@ Looking to deploy the self-hosted hobby deployment of highlight.io? Checkout thi
 Looking to contribute to highlight.io? Checkout out guide on deploying highlight.io in docker for development. This includes specific flags to support local filesystem mounts, hot reloading, etc..
 
 <DocsCardGroup>
-    <DocsCard title="Local Development Guide." href="./dev-deployment-guide.md">
+    <DocsCard title="Dev Deployment Guide." href="./dev-deployment-guide.md">
         {"Running a docker version of highlight.io for development."}
     </DocsCard>
 </DocsCardGroup>

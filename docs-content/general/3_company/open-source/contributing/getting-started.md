@@ -11,4 +11,10 @@ It's best to start with issues marked as ["good first issue"](https://github.com
 
 ## How do I develop?
 
-You'll want to spin up Highlight locally to get to developing. The best way to do this is by using docker. Check out [the self-hosting instructions](../self-host-hobby.md) for more info.
+You'll want to spinar up Highlight locally to get to developing. The best way to do this is by using docker. Check out our development deployment guide to get started:
+
+<DocsCardGroup>
+    <DocsCard title="Dev Deployment Guide." href="./dev-deployment-guide.md">
+        {"Running a docker version of highlight.io for development."}
+    </DocsCard>
+</DocsCardGroup>
