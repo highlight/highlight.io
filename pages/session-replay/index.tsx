@@ -56,7 +56,10 @@ const ShowcasePage: NextPage = () => {
                     Get started
                   </Typography>
                 </PrimaryButton>
-                <PrimaryButton href={'/docs'} className={classNames(homeStyles.hollowButton)}>
+                <PrimaryButton
+                  href={'https://www.highlight.io/docs/general/product-features/session-replay/overview'}
+                  className={classNames(homeStyles.hollowButton)}
+                >
                   <Typography type="copy2" emphasis={true}>
                     Read our docs
                   </Typography>
@@ -67,7 +70,7 @@ const ShowcasePage: NextPage = () => {
           <div className="flex justify-center mt-12 lg:mt-0">
             <AnimateFeatureHeroRight loaded={imageLoaded}>
               <Image
-                className={`hidden lg:flex  right-0 object-contain top-0 lg:w-[800px] xl:w-[800px]`}
+                className={`hidden lg:flex  right-0 object-contain top-0`}
                 src={sessionReplayHero}
                 alt="Feature Spotlight"
                 onLoadingComplete={() => setImageLoaded(true)}
@@ -81,16 +84,13 @@ const ShowcasePage: NextPage = () => {
             />
           </div>
         </div>
-        <div className="w-full mx-auto max-w-screen-2xl mt-36 lg:mt-80">
+        <div className="w-full mx-auto max-w-screen-2xl mt-36 lg:mt-60">
           <Section className="flex flex-col gap-20">
-            <div className="mx-auto max-w-[840px]">
+            <div className="mx-auto max-w-[1000px]">
               <h2 className="self-center text-center">
-                {/* Step into the shoes of <span className="text-highlight-yellow">your users.</span> */}
-                {`
-                Debug from a 
-                user's perspective.`}
+                Debug from a <span className="text-highlight-yellow">user&apos;s</span> perspective.
               </h2>
-              <div className="px-8 max-w-[600px] mx-auto mt-6 text-center">
+              <div className="px-8 max-w-[700px] mx-auto mt-6 text-center">
                 <Typography type="copy1" className="text-copy-on-dark text-center">
                   Reproduce hard-to-crack issues and understand how your product is used.
                 </Typography>
@@ -113,7 +113,7 @@ const ShowcasePage: NextPage = () => {
           />
 
           <LandingInfoRow
-            title={'Reproduce the dev-tools for every user session.'}
+            title={'Reproduce the dev-tools for every session.'}
             desc={
               'Console logs, errors, network requests, and more. Get full context around the issues on your web application.'
             }

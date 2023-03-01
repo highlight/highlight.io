@@ -30,7 +30,7 @@ const LandingInfoRow = ({
       <div
         className={`${
           invert ? 'lg:hidden' : ''
-        } flex justify-center px-5 mt-5 w-2/3 sm:w-1/2 min-h-[200px] sm:h-[300px] lg:h-auto lg:w-[570px]`}
+        } flex justify-center px-5 mt-5 w-full min-h-[280px] sm:min-h-[300px] sm:h-[400px] lg:h-auto lg:w-[570px]`}
       >
         {privacy ? (
           <div className="flex flex-col justify-center w-full">
@@ -42,7 +42,7 @@ const LandingInfoRow = ({
       </div>
       <div className="flex md:hidden w-full h-[1px] bg-divider-on-dark"> </div>
       <div className="flex flex-col justify-between h-full lg:w-1/2 px-5 text-left lg:text-left">
-        <div>
+        <div className="mb-8 md:mb-0">
           <h3 className={productStyles.infoTitle}>{title}</h3>
           <Typography type="copy2" onDark>
             <p className="text-color-copy-on-dark md:text-xl">{desc}</p>

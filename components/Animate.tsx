@@ -113,7 +113,7 @@ export const AnimateFeatureHeroRight = ({
         duration: 0.4,
         delay: delay || 0,
       }}
-      className="absolute -translate-y-16 lg:w-[600px] xl:w-[650px] h-[500px]"
+      className="absolute -translate-y-16 lg:w-[650px] xl:w-[650px] h-[500px]"
     >
       {children}
     </motion.div>
