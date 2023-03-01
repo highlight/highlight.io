@@ -1,5 +1,6 @@
 ---
-title: Self Host & Local Development
+headline: Self Host & Local Development
+title: Overview
 slug: self-host
 ---
 
@@ -13,12 +14,12 @@ Looking to deploy the self-hosted hobby deployment of highlight.io? Checkout thi
     </DocsCard>
 </DocsCardGroup>
 
-## Local Deploy for Development
+## Development Deployment Guide
 
-Looking to contribute to highlight.io? Checkout out guide on deploying highlight.io in docker with specific flags to support local filesystem mounts, hot reloading, etc..
+Looking to contribute to highlight.io? Checkout out guide on deploying highlight.io in docker for development. This includes specific flags to support local filesystem mounts, hot reloading, etc..
 
 <DocsCardGroup>
-    <DocsCard title="Local Development Guide." href="./local-development-guide.md">
+    <DocsCard title="Local Development Guide." href="./dev-deployment-guide.md">
         {"Running a docker version of highlight.io for development."}
     </DocsCard>
 </DocsCardGroup>
