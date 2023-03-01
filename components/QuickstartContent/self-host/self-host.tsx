@@ -46,7 +46,7 @@ export const SelfHostContent: QuickStartContent = {
         text: `import { H } from 'highlight.run';
 
 H.init('<YOUR_PROJECT_ID>', {
-    backendUrl: 'https://localhost:3000',
+    backendUrl: 'https://localhost:8082/public',
     ...
 });`,
         language: 'javascript',
