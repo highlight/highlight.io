@@ -4,4 +4,4 @@ slug: welcome-to-highlight
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["self-host"]}/>
+<QuickStart content={quickStartContent["local-deploy"]}/>
