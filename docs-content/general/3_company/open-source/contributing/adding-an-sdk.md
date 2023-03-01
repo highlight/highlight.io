@@ -1,5 +1,5 @@
 ---
-title: Adding an OpenTelemetry SDK
+title: Adding an SDK
 slug: adding-an-sdk
 createdAt: 2023-01-24T20:28:14.000Z
 updatedAt: 2023-01-24T02:07:22.000Z
