@@ -26,7 +26,16 @@ export const LocalDeployContent: QuickStartContent = {
       },
     },
     {
-      title: 'Start the docker comose containers.',
+      title: 'Set the environment variable `COMPOSE_FILE` to support hot reloading.',
+      content:
+        'In the `highlight/docker` directory, set the environment variable `COMPOSE_FILE` as specified. This will enable hot reloading of both our backend and frontend.',
+      code: {
+        text: `export COMPOSE_FILE=compose.yml:compose.dev.yml`,
+        language: 'bash',
+      },
+    },
+    {
+      title: 'Start the docker compose containers.',
       content:
         'In the `highlight/docker` directory, run `docker compose up --build -d` to start the docker containers.',
       code: {
@@ -36,21 +45,13 @@ export const LocalDeployContent: QuickStartContent = {
     },
     {
       title: 'Visit the dashboard.',
-      content: 'Visit https://localhost:3000 to view the dashboard; there are no login credentials required.',
+      content:
+        'Visit https://localhost:3000 to view the dashboard and go through the login flow; there are no login credentials required.',
     },
     {
-      title: 'Setup the snippet.',
+      title: 'View your first session.',
       content:
-        'In your frontend application, you should setup highlight.io as usual (see [our guides](https://highlight.io/docs/getting-started/overview#For-your-frontend)), with the exeption of adding the `backendUrl` flag to your `init()` method. See the example in react to the right. ',
-      code: {
-        text: `import { H } from 'highlight.run';
-
-H.init('<YOUR_PROJECT_ID>', {
-    backendUrl: 'https://localhost:3000',
-    ...
-});`,
-        language: 'javascript',
-      },
+        'After clicking around on the dashboard for a bit, you should see a session appear at https://localhost:3000/1/sessions. Click on the session to view the session details page.',
     },
     {
       title: 'Troubleshoot the deployment.',

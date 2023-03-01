@@ -26,7 +26,7 @@ export const SelfHostContent: QuickStartContent = {
       },
     },
     {
-      title: 'Start the docker comose containers.',
+      title: 'Start the docker compose containers.',
       content:
         'In the `highlight/docker` directory, run `docker compose up --build -d` to start the docker containers.',
       code: {
