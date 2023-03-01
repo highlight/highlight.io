@@ -4,7 +4,7 @@ import { NextContent } from './frontend/next'
 import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
-import { DevDeploymentContent, LocalDeployContent } from './self-host/dev-deploy'
+import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
 export type QuickStartContent = {
