@@ -57,7 +57,7 @@ const ShowcasePage: NextPage = () => {
                   </Typography>
                 </PrimaryButton>
                 <PrimaryButton
-                  href={'https://www.highlight.io/docs/general/product-features/session-replay/overview'}
+                  href={'/docs/general/product-features/session-replay/overview'}
                   className={classNames(homeStyles.hollowButton)}
                 >
                   <Typography type="copy2" emphasis={true}>
@@ -84,7 +84,7 @@ const ShowcasePage: NextPage = () => {
             />
           </div>
         </div>
-        <div className="w-full mx-auto max-w-screen-2xl mt-36 lg:mt-60">
+        <div className="w-full mx-auto max-w-screen-2xl mt-24 lg:mt-60">
           <Section className="flex flex-col gap-20">
             <div className="mx-auto max-w-[1000px]">
               <h2 className="self-center text-center">
