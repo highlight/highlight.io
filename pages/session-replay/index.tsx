@@ -22,7 +22,7 @@ import sessionReplayHero from '../../public/images/features/sessionReplayHero.pn
 import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
 import sessionReplay3 from '../../public/images/landingInfoRow1.png'
 import sessionReplay4 from '../../public/images/landingInfoRow2.png'
-import { AnimateFeatureHeroRight } from '../../components/Animate'
+import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../../components/Animate'
 
 const ShowcasePage: NextPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -40,7 +40,7 @@ const ShowcasePage: NextPage = () => {
         </Link>
       </div>
       <main>
-        <div className="flex flex-col xl:flex-row justify-between w-screen overflow-hidden px-8 mx-auto lg:px-4 lg:py-28 max-w-[1200px]">
+        <div className="flex flex-col xl:flex-row justify-between w-screen overflow-hidden px-8 mx-auto lg:px-4 lg:py-28 max-w-[1200px] 2xl:max-w-[1400px]">
           <div className="lg:w-1/2 flex justify-center mt-10">
             <div className="flex flex-col max-w-4xl gap-8 text-center lg:text-left">
               <h2 className="text-white">Session Replay & UX Monitoring</h2>
@@ -67,7 +67,7 @@ const ShowcasePage: NextPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-end mt-12 lg:mt-0 2xl:relative">
+          <div className="flex justify-center mt-12 lg:mt-0 2xl:relative">
             <AnimateFeatureHeroRight loaded={imageLoaded}>
               <Image
                 className={`hidden lg:flex 2xl:hidden right-0 object-contain top-0`}
@@ -75,13 +75,16 @@ const ShowcasePage: NextPage = () => {
                 alt="Feature Spotlight"
                 onLoadingComplete={() => setImageLoaded(true)}
               />
+            </AnimateFeatureHeroRight>
+            <AnimateFeatureHeroXL loaded={imageLoaded}>
               <Image
-                className={`hidden 2xl:flex object-contain`}
+                className={`hidden 2xl:flex`}
                 src={sessionscreenshot}
                 alt="Feature Spotlight"
                 onLoadingComplete={() => setImageLoaded(true)}
               />
-            </AnimateFeatureHeroRight>
+            </AnimateFeatureHeroXL>
+
             <Image
               className={`lg:hidden right-0 object-contain bottom-0 md:w-[500px]`}
               src={sessionscreenshot}

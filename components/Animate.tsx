@@ -113,7 +113,31 @@ export const AnimateFeatureHeroRight = ({
         duration: 0.4,
         delay: delay || 0,
       }}
-      className="absolute lg:-translate-y-96 xl:-translate-y-16 lg:w-[550px] xl:w-[650px]"
+      className="absolute lg:-translate-y-96 xl:-translate-y-16 lg:w-[550px] xl:w-[650px] 2xl:w-[400px]"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export const AnimateFeatureHeroXL = ({
+  loaded,
+  children,
+  delay,
+}: React.PropsWithChildren<{ loaded: boolean; delay?: number }>) => {
+  const orig = { right: '-500px', opacity: 0 }
+  const final = { right: '0px', opacity: 1 }
+  return (
+    <motion.div
+      initial={orig}
+      animate={loaded ? final : orig}
+      transition={{
+        type: 'spring',
+        bounce: 0.2,
+        duration: 0.4,
+        delay: delay || 0,
+      }}
+      className="absolute 2xl:w-[550px] h-full flex flex-col justify-center"
     >
       {children}
     </motion.div>
