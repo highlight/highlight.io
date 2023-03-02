@@ -33,18 +33,16 @@ const PricingPage: NextPage = () => {
       <Navbar />
       <div className="flex flex-col w-full px-10 mx-auto mt-24">
         <div className="flex flex-col items-center text-center gap-9">
-          {' '}
           {/* Title, tagline and CTA */}
           <h1 className="max-w-3xl">
             Get the <span className="text-highlight-yellow">visibility</span> you need today.
           </h1>
-          <Typography type="copyHeader" onDark>
+          <Typography type="copy1" onDark>
             Fair and transparent pricing that scales with any organization.
           </Typography>
         </div>
         <PlanTable />
         <div className="flex flex-col items-center mt-32 text-center gap-9" id="overage">
-          {' '}
           {/* Pay as you go */}
           <h2>
             Pay <span className="text-highlight-yellow">as you go.</span>
