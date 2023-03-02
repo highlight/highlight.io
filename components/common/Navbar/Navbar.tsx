@@ -8,14 +8,13 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import { Typography } from '../Typography/Typography'
 import Link from 'next/link'
 import ResourceDropdown from './ResourceDropdown'
-import ProductDropdown from './ProductDropdown'
+import FeatureDropdown from './FeatureDropdown'
 import { GithubPopup } from '../../GithubPopup/GithubPopup'
 import { AiFillGithub } from 'react-icons/ai'
 import { FaDiscord } from 'react-icons/fa'
 import { DocSearch } from '@docsearch/react'
 
 import '@docsearch/css'
-import { useMediaQuery } from '../../MediaQuery/MediaQuery'
 
 const Navbar = ({
   hideFreeTrialText,
@@ -149,7 +148,6 @@ const Navbar = ({
                 <Link href="/blog" className={styles.headerButton}>
                   <Typography type="copy2">Blog</Typography>
                 </Link>
-
                 <ResourceDropdown isOpen={scrolled && !fixed} />
               </div>
             )}

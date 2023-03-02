@@ -231,6 +231,7 @@ const Products = ({ product }: { product: iProduct }) => {
             you'll get to the bottom of issues in no time and better
             understand how your app is being used.`}
             link={product.docsLink}
+            linkText={'Read our docs'}
             imgSrc={ProductsReplay}
           />
 
@@ -242,6 +243,7 @@ const Products = ({ product }: { product: iProduct }) => {
             errors raised in your ${product.title} app and notify your
             engineering team over Slack, Discord, and more!`}
             link={product.docsLink}
+            linkText={'Read our docs'}
             imgSrc={ProductsErrors}
             invert={true}
           />
@@ -253,6 +255,7 @@ const Products = ({ product }: { product: iProduct }) => {
             desc={`Highlight allows you to track performance, request timings, and several other metrics
             in your ${product.title} application.`}
             link={product.docsLink}
+            linkText={'Read our docs'}
             imgSrc={ProductsGraph}
           />
         </div>

@@ -74,7 +74,7 @@ const features: Feature[] = [
     featureImage2: <HiDocumentSearch className="h-[20px] w-[20px]" />,
     feature3: 'Powerful Privacy Controls',
     featureImage3: <HiPhoneOutgoing className="h-[20px] w-[20px]" />,
-    link: '/docs/general/product-features/session-replay/overview',
+    link: '/session-replay',
   },
   {
     name: 'Error Monitoring',

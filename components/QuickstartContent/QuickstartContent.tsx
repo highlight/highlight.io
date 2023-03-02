@@ -4,6 +4,7 @@ import { NextContent } from './frontend/next'
 import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
+import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
 export type QuickStartContent = {
@@ -28,6 +29,7 @@ export enum QuickStartType {
   Vue = 'vue',
   Gatsby = 'gatsby',
   SelfHost = 'self-host',
+  DevDeploy = 'dev-deploy',
   Other = 'other',
 }
 
@@ -37,6 +39,7 @@ export const quickStartContent: { [type in QuickStartType]: QuickStartContent } 
   [QuickStartType.React]: ReactContent,
   [QuickStartType.Next]: NextContent,
   [QuickStartType.Vue]: VueContent,
+  [QuickStartType.DevDeploy]: DevDeploymentContent,
   [QuickStartType.Gatsby]: GatsbyContent,
   [QuickStartType.Other]: OtherContext,
 }

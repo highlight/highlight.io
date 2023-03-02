@@ -857,29 +857,7 @@
   margin: 0 auto;
   margin-bottom: var(--size-xxxLarge);
   padding: 25px var(--size-medium);
-  padding-top: 0px;
-  gap: 96px;
-}
-
-.landingInfoRow {
-  display: flex;
-  flex-direction: row;
-  flex-shrink: 0;
-  align-items: center;
-  gap: 96px;
-  padding-bottom: var(--size-xLarge);
-  border-radius: var(--size-xSmall);
-}
-
-.infoContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: calc(var(--max-width) + (var(--size-large) * 2));
-  margin: 0 auto;
-  margin-bottom: var(--size-xxxLarge);
-  padding: 25px var(--size-medium);
-  padding-top: 0px;
+  padding-top: 52px;
   gap: 96px;
 }
 
@@ -1105,17 +1083,19 @@
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
+    margin-top: 36px;
     margin-bottom: 96px;
-    padding-top: 0px;
+    padding-top: 12px;
+    gap: 24px;
   }
 
   .landingInfoRow {
     border: 1px solid var(--color-divider-on-dark);
     border-radius: 20px;
     width: 80vw;
+    max-width: 500px;
     gap: var(--size-xLarge);
     flex-direction: column;
-    padding-tom: var(--size-xLarge);
   }
 }
 
