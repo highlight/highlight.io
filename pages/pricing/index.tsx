@@ -49,7 +49,7 @@ const PricingPage: NextPage = () => {
           </h2>
           <Typography type="copy1" onDark className="max-w-4xl">
             Each of our plans comes with a pre-defined usage quota, and if you exceed that quota, we charge an
-            additional fee. For custom plans, <a href="#">reach out to us</a>.
+            additional fee. For custom plans, <a href="mailto:sales@highlight.io">reach out to us</a>.
           </Typography>
         </div>
         <PriceCalculator />
@@ -268,7 +268,7 @@ const PlanTier = ({
         <Typography type="copy3">Unlimited seats</Typography>
       </div>
       <div className="p-5">
-        <PrimaryButton href="#" className={homeStyles.hollowButton}>
+        <PrimaryButton href="https://app.highlight.io/?sign_up=1" className={homeStyles.hollowButton}>
           Start free trial
         </PrimaryButton>
       </div>
