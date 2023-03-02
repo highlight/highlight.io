@@ -144,7 +144,7 @@ const ShowcasePage: NextPage = () => {
           <LandingInfoRow
             title={'Support for all the modern frameworks.'}
             desc={
-              'Whether its react, angular, or even a framework you built yourself. As long as it run javascript, we got you covered.'
+              'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.'
             }
             link={'https://app.highlight.io/?sign_up=1'}
             linkText={'Get started for free'}
