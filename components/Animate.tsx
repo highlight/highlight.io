@@ -72,7 +72,11 @@ export const AnimateBugRight = ({ loaded, children }: React.PropsWithChildren<{ 
   )
 }
 
-export const AnimateCarouselImage = ({ loaded, children }: React.PropsWithChildren<{ loaded: boolean }>) => {
+export const AnimateCarouselImage = ({
+  loaded,
+  children,
+  delay,
+}: React.PropsWithChildren<{ loaded: boolean; delay?: number }>) => {
   const orig = { bottom: -300, opacity: 0 }
   const final = { bottom: -20, opacity: 1 }
   return (
@@ -83,8 +87,57 @@ export const AnimateCarouselImage = ({ loaded, children }: React.PropsWithChildr
         type: 'spring',
         bounce: 0.2,
         duration: 0.4,
+        delay: delay || 0,
       }}
       className="absolute border-2 right-0 sm:w-[280px] md:w-[300px] lg:w-[450px] xl:w-[450px]"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export const AnimateFeatureHeroRight = ({
+  loaded,
+  children,
+  delay,
+}: React.PropsWithChildren<{ loaded: boolean; delay?: number }>) => {
+  const orig = { right: '-500px', opacity: 0 }
+  const final = { right: '-30px', opacity: 1 }
+  return (
+    <motion.div
+      initial={orig}
+      animate={loaded ? final : orig}
+      transition={{
+        type: 'spring',
+        bounce: 0.2,
+        duration: 0.4,
+        delay: delay || 0,
+      }}
+      className="absolute lg:-translate-y-96 xl:-translate-y-16 lg:w-[550px] xl:w-[650px] 2xl:w-[400px]"
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+export const AnimateFeatureHeroXL = ({
+  loaded,
+  children,
+  delay,
+}: React.PropsWithChildren<{ loaded: boolean; delay?: number }>) => {
+  const orig = { right: '-500px', opacity: 0 }
+  const final = { right: '0px', opacity: 1 }
+  return (
+    <motion.div
+      initial={orig}
+      animate={loaded ? final : orig}
+      transition={{
+        type: 'spring',
+        bounce: 0.2,
+        duration: 0.4,
+        delay: delay || 0,
+      }}
+      className="absolute 2xl:w-[550px] h-full flex flex-col justify-center"
     >
       {children}
     </motion.div>

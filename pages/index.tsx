@@ -6,7 +6,6 @@ import Navbar from '../components/common/Navbar/Navbar'
 import { Section } from '../components/common/Section/Section'
 import styles from '../components/Home/Home.module.scss'
 
-import MobileHeroSection from '../public/images/mobile-insects.png'
 import HeroBugLeft from '../public/images/hero-bug-left.gif'
 import HeroBugRight from '../public/images/hero-bug-right.gif'
 import LandingInfoRow1 from '../public/images/landingInfoRow1.png'
@@ -27,6 +26,8 @@ import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToActi
 import LandingInfoRow from '../components/Home/LandingInfoRow'
 import InfoRow from '../components/Products/InfoRow'
 import { AnimateBugLeft, AnimateBugRight } from '../components/Animate'
+import { CustomerReviewTrack } from '../components/Home/CustomerReviewTrack'
+import { BigHeroArt } from '../components/Home/BigHeroArt'
 
 const IMAGE_SHOW_OFFSET = 450
 
@@ -223,19 +224,11 @@ const Home: NextPage = () => {
             title={`Built with compliance and security.`}
             desc="Whether its SOC 2, HIPAA, or ISO, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
             link={'/docs/general/company/compliance-and-security'}
+            linkText={"Read our docs"}
             imgSrc={LandingInfoRowSecurity}
           />
         </div>
-        <div className={classNames(styles.bigHero, styles.hideMobile)}>
-          <div className={classNames(styles.hero)}>
-            <video playsInline autoPlay muted loop id="big-hero-video">
-              <source src="/images/big-hero.mp4" type="video/mp4"></source>
-            </video>
-          </div>
-        </div>
-        <div className={classNames(styles.hero, styles.mobile)}>
-          <Image src={MobileHeroSection} alt="hero" />
-        </div>
+        <BigHeroArt />
         <OSSCallToAction />
         <Section>
           <CompaniesReel />
@@ -249,19 +242,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </Section>
-        <div className={styles.slider} ref={reviewsRef}>
-          <div className={styles.slideTrack}>
-            {[...REVIEWS, ...REVIEWS].map((review, i) => (
-              <CustomerReview
-                key={i}
-                companyLogo={review.companyLogo}
-                text={review.text}
-                author={review.author}
-                scale={review.scale}
-              />
-            ))}
-          </div>
-        </div>
+        <CustomerReviewTrack />
         <FooterCallToAction />
       </main>
       <Footer />

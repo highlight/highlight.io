@@ -68,6 +68,13 @@
   row-gap: 6px;
 }
 
+.featureGridContainer {
+  display: grid;
+  place-items: left;
+  grid-template-columns: 160px;
+  row-gap: 6px;
+}
+
 .gridItem {
   display: flex;
   align-items: center;
