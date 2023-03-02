@@ -13,16 +13,18 @@ We strive to build in public in every way we can. This means sharing our roadmap
 
 ## We prioritize cohesion.
 
-People may think that we're building multiple products (session replay, error monitoring, etc..). But we see it as one. Before we build anything new, we prioritize making it operate seemlessly with everything else. E.g. see our [fullstack mapping](../../getting-started/2_frontend-backend-mapping.md)
+People may think that we're building multiple products (session replay, error monitoring, etc..) but we see it as one. Before we build anything new, we prioritize making it operate seemlessly with everything else. E.g. see our [fullstack mapping guide](../../getting-started/2_frontend-backend-mapping.md).
 
 ## We build for today's developer.
 
-If you're building software in today’s, you want to focus on building software. We challenge ourselves to build developer tooling that’s simple, straightforward but powerful when you need it to be. highlight.io is built for developers that want to **develop**. Leave the monitoring stuff to us 👍.
+If you're building software in today's ecosystem, you probably want to focus on building software. We challenge ourselves to build developer tooling that’s simple, straightforward but powerful if you'd like to dig deeper. highlight.io is built for developers that want to **develop**. Leave the monitoring stuff to us 👍.
 
 ## We execute quickly and fail fast.
 
-Given that most of the things we build are zero to one, there's often no better way to learn than to build. It's hard to predict how something will scale or be interacted w/ without building something and just shipping it. The only caveat here are processes/work that could affect our customers' software (e.g. building & testing client sdks).
+Given that most of the things we build are zero to one, there's often no better way to learn than to build. It's hard to predict how something will scale or be interacted w/ without building something and getting early feedback. With this philosophy, however, its easy to ship low quality work, which is why we prefer to "cut scope, not quality".
 
 ## ABC: Always be chilling....
+
+Working at highlight.io can be intense at times.
 
 ![](/images/ohyeah.gif)

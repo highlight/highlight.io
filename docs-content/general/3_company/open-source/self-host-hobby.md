@@ -7,7 +7,13 @@ updatedAt: 2022-04-15T02:07:22.000Z
 
 ## Our Hobby Self-hosted Deployment
 
-Interested in deploying highlight.io on your local machine or on a small remote instance? You're in the right place. Here's a [walkthrough](../../../getting-started/self-host/self-hosted-hobby-guide.md) on getting this set up
+Interested in deploying highlight.io on your local machine or on a small remote instance? You're in the right place. Here's a walkthrough on getting this set up:
+
+<DocsCardGroup>
+    <DocsCard title="Hobby Deployment Guide" href="../../../getting-started/self-host/self-hosted-hobby-guide.md">
+        {"Getting started with our hobby deployment."}
+    </DocsCard>
+</DocsCardGroup>
 
 ## Pricing
 
