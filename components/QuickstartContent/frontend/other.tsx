@@ -17,7 +17,7 @@ export const OtherContext: QuickStartContent = {
       code: {
         text: `<html>
 <head>
-    <script src="https://unpkg.com/highlight.run"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
 </head>
 <body>
     <!-- Your Application -->
@@ -34,7 +34,7 @@ export const OtherContext: QuickStartContent = {
       code: {
         text: `<html>
 <head>
-    <script src="https://unpkg.com/highlight.run"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.run@latest"></script>
     <script>
         H.init('<YOUR_PROJECT_ID>', { // Get your project ID from https://app.highlight.io/setup
             environment: 'production',
