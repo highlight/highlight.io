@@ -6,6 +6,12 @@ import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
+import { FlaskContext, PythonFlaskContext } from './backend/python/flask'
+import { PythonDjangoContext } from './backend/python/django'
+import { PythonOtherContext } from './backend/python/other'
+import { PythonAWSContext } from './backend/python/aws'
+import { PythonGCPContext } from './backend/python/gcp'
+import { PythonAzureContext } from './backend/python/azure'
 
 export type QuickStartContent = {
   subtitle: string
@@ -31,6 +37,12 @@ export enum QuickStartType {
   SelfHost = 'self-host',
   DevDeploy = 'dev-deploy',
   Other = 'other',
+  PythonFlask = 'python/flask',
+  PythonDjango = 'python/django',
+  PythonOther = 'python/other',
+  PythonAWSFn = 'python/aws-lambda',
+  PythonAzureFn = 'python/azure-functions',
+  PythonGCPFn = 'python/google-cloud-functions',
 }
 
 export const quickStartContent: { [type in QuickStartType]: QuickStartContent } = {
@@ -42,4 +54,10 @@ export const quickStartContent: { [type in QuickStartType]: QuickStartContent } 
   [QuickStartType.DevDeploy]: DevDeploymentContent,
   [QuickStartType.Gatsby]: GatsbyContent,
   [QuickStartType.Other]: OtherContext,
+  [QuickStartType.PythonFlask]: PythonFlaskContext,
+  [QuickStartType.PythonDjango]: PythonDjangoContext,
+  [QuickStartType.PythonOther]: PythonOtherContext,
+  [QuickStartType.PythonAWSFn]: PythonAWSContext,
+  [QuickStartType.PythonAzureFn]: PythonAzureContext,
+  [QuickStartType.PythonGCPFn]: PythonGCPContext,
 }

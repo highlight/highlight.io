@@ -23,7 +23,7 @@ poetry add highlight-io
 pip install highlight-io
 ```
 
-If you are uswing a Flask app, you'll need the Flask integration.
+If you are using a Flask app, you'll need the Flask integration.
 
 ```bash
 poetry add highlight-io[Flask]

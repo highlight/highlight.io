@@ -36,16 +36,34 @@ Don't see your framework? Shoot us a [message](https://highlight.io/community) a
 
 Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 
-- [Firebase](./backend-sdk/firebase.md)
+<DocsCardGroup>
+    <DocsCard title="Python" href="./backend-sdk/python/flask.md">
+        {"Get started in your React.js app"}
+    </DocsCard>
+    <DocsCard title="Angular"  href="./client-sdk/angular.md">
+        {"Get started in your Angular.js app"}
+    </DocsCard>
+    <DocsCard title="Gatsby"  href="./client-sdk/gatsbyjs.md">
+        {"Get started in your Gatsby app"}
+    </DocsCard>
+    <DocsCard title="NextJS"  href="./client-sdk/nextjs.md">
+        {"Get started in your NextJS app"}
+    </DocsCard>
+    <DocsCard title="VueJS"  href="./client-sdk/vuejs.md">
+        {"Get started in your VueJS app"}
+    </DocsCard>
+</DocsCardGroup>
 
-- [Express](./backend-sdk/express.md)
+- [Firebase](backend-sdk/firebase.md)
 
-- [Go](./backend-sdk/go.md)
+- [Express](backend-sdk/express.md)
 
-- [Next.js](./backend-sdk/nextjs.md)
+- [Go](backend-sdk/go.md)
 
-- [Node.js](./backend-sdk/nodejs.md)
+- [Next.js](backend-sdk/nextjs.md)
+
+- [Node.js](backend-sdk/nodejs.md)
 
 - For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
 
-For in-depth instructions, follow the [Backend SDK](./backend-sdk/backend-sdk-overview.md) guide.
+For in-depth instructions, follow the [Backend SDK](backend-sdk/backend-sdk-overview.md) guide.
