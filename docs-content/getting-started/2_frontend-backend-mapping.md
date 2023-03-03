@@ -44,7 +44,7 @@ Backend changes are dependent on the underlying language/framework used on the s
 
 Below are solutions for what we support today. If you'd like us to support a new framework, feel free to shoot us a message at [support@highlight.io](mailto:support@highlight.io) or drop us a note in our [discord](https://discord.gg/yxaXEAqgwN).
 
-- [Go Backend Integration](backend-sdk/go.md)
+- [Go Backend Integration](backend-sdk/go)
 
 - [Next.js Backend Integration](backend-sdk/nodejs.md)
 

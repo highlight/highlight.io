@@ -46,7 +46,7 @@ Highlight also supports reporting errors from your backend and mapping these to 
 
 - [Express](backend-sdk/express.md)
 
-- [Go](backend-sdk/go.md)
+- [Go](backend-sdk/go)
 
 - [Next.js](backend-sdk/nextjs.md)
 
