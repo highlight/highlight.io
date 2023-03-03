@@ -1,35 +1,11 @@
 import { QuickStartContent } from '../../QuickstartContent'
+import { downloadSnippet, setupFrontendSnippet } from './shared-snippets'
 
 export const PythonDjangoContext: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io on your Python Django backend API.',
   entries: [
-    {
-      title: 'Setup your frontend Highlight snippet with tracingOrigins.',
-      content:
-        'Make sure that you followed the [fullstack mapping guide](../../../getting-started/frontend-backend-mapping#How-can-I-start-using-this).',
-      code: {
-        text: `H.init("<YOUR_PROJECT_ID>", {
-    tracingOrigins: ['localhost', 'example.myapp.com/backend'],
-    networkRecording: {
-      enabled: true,
-      recordHeadersAndBody: true,
-    },
-  });
-`,
-        language: 'js',
-      },
-    },
-    {
-      title: 'Install the highlight-io python package.',
-      content: 'Download the package from pypi and save it to your requirements.',
-      code: {
-        text: `poetry add highlight-io[Django]
-# or with pip
-pip install highlight-io[Django]          
-`,
-        language: 'bash',
-      },
-    },
+    setupFrontendSnippet,
+    downloadSnippet('Django'),
     {
       title: 'Initialize the Highlight SDK.',
       content: 'Add Highlight with the Django integration to your `settings.py` file.',

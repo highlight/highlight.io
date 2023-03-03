@@ -37,20 +37,8 @@ Don't see your framework? Shoot us a [message](https://highlight.io/community) a
 Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 
 <DocsCardGroup>
-    <DocsCard title="Python" href="./backend-sdk/python/flask.md">
-        {"Get started in your React.js app"}
-    </DocsCard>
-    <DocsCard title="Angular"  href="./client-sdk/angular.md">
-        {"Get started in your Angular.js app"}
-    </DocsCard>
-    <DocsCard title="Gatsby"  href="./client-sdk/gatsbyjs.md">
-        {"Get started in your Gatsby app"}
-    </DocsCard>
-    <DocsCard title="NextJS"  href="./client-sdk/nextjs.md">
-        {"Get started in your NextJS app"}
-    </DocsCard>
-    <DocsCard title="VueJS"  href="./client-sdk/vuejs.md">
-        {"Get started in your VueJS app"}
+    <DocsCard title="Python" href="./backend-sdk/python/overview">
+        {"Get started in Python"}
     </DocsCard>
 </DocsCardGroup>
 

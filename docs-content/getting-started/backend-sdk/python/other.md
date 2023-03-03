@@ -1,7 +1,7 @@
 ---
-title: Other
+title: Python App
 heading: Using highlight.io with Other Python Frameworks
-slug: flask
+slug: other
 quickstart: true
 ---
 

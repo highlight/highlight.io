@@ -1,7 +1,7 @@
 ---
 title: Azure Functions
 heading: Using highlight.io with Python on Azure Functions
-slug: flask
+slug: azure-functions
 quickstart: true
 ---
 
