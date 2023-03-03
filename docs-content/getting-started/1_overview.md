@@ -36,16 +36,22 @@ Don't see your framework? Shoot us a [message](https://highlight.io/community) a
 
 Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 
-- [Firebase](./backend-sdk/firebase.md)
+<DocsCardGroup>
+    <DocsCard title="Python" href="./backend-sdk/python/overview">
+        {"Get started in Python"}
+    </DocsCard>
+</DocsCardGroup>
 
-- [Express](./backend-sdk/express.md)
+- [Firebase](backend-sdk/firebase.md)
 
-- [Go](./backend-sdk/go.md)
+- [Express](backend-sdk/express.md)
 
-- [Next.js](./backend-sdk/nextjs.md)
+- [Go](backend-sdk/go.md)
 
-- [Node.js](./backend-sdk/nodejs.md)
+- [Next.js](backend-sdk/nextjs.md)
+
+- [Node.js](backend-sdk/nodejs.md)
 
 - For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
 
-For in-depth instructions, follow the [Backend SDK](./backend-sdk/backend-sdk-overview.md) guide.
+For in-depth instructions, follow the [Backend SDK](backend-sdk/backend-sdk-overview.md) guide.
