@@ -38,6 +38,7 @@ import {
 } from '../../components/QuickstartContent/QuickstartContent'
 import Markdown from 'markdown-to-jsx'
 import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
+import { Roadmap } from '../../components/common/Roadmap/Roadmap'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')
 const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`
@@ -767,6 +768,7 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
+                        Roadmap,
                         QuickStart,
                         DocsCard,
                         DocsCardGroup,
