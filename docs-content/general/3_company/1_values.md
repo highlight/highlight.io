@@ -25,6 +25,6 @@ Given that most of the things we build are zero to one, there's often no better 
 
 ## ABC: Always be chilling....
 
-Working at highlight.io can be intense at times.
+Though working at highlight.io can be fast-paced at times, we keep a chill atmosphere and regularly spend time with each other in a non-professional sense.
 
 ![](/images/ohyeah.gif)
