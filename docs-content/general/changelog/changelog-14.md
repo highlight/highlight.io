@@ -9,6 +9,10 @@ We just shipped a new signup flow on [app.highlight.io](https://app.highlight.io
 
 ![](/images/signup.png)
 
+## Fixes to Replay Jitters
+
+This week, we made quite a lot of improvements to jitter/jank on the replay timeline. Notably, there was a bug related to inactive periods as well as the timeline UI resetting multiple times.
+
 ## New Python Guide Homepage
 
 Our python guides now have a new home; check them out [here](../../getting-started/backend-sdk/python/1_overview.md).
