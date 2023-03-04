@@ -17,6 +17,6 @@ This week, we made quite a lot of improvements to jitter/jank on the replay time
 
 Our python guides now have a new home; check them out [here](../../getting-started/backend-sdk/python/1_overview.md).
 
-## More Loggin Updates (🤫)
+## More Logging Updates (🤫)
 
 We're making a lot of progress on our new logging product; want to join the beta? Shoot us a message in [discord](https://highlight.io/community)
