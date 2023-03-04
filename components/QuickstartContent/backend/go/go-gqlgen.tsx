@@ -11,7 +11,7 @@ export const GoGqlgenContent: QuickStartContent = {
     {
       title: 'Add the Highlight gqlgen error handler.',
       content:
-        '`H.NewGraphqlTracer` provides a middleware you can add to your GraphQL handler to automatically record and send GraphQL resolver errors to Highlight.',
+        '`H.NewGraphqlTracer` provides a middleware you can add to your [GraphQL](https://gqlgen.com/getting-started/) handler to automatically record and send GraphQL resolver errors to Highlight.',
       code: {
         text: `import (
   H "github.com/highlight/highlight/sdk/highlight-go"

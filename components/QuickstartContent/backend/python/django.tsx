@@ -1,5 +1,5 @@
 import { QuickStartContent } from '../../QuickstartContent'
-import { downloadSnippet, setupFrontendSnippet } from './shared-snippets'
+import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonDjangoContext: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io on your Python Django backend API.',
@@ -38,10 +38,6 @@ def index(request: HttpRequest):
         language: 'python',
       },
     },
-    {
-      title: 'Set up logging.',
-      content:
-        'Next, set up log ingestion! Follow the [logging setup guide](../../../getting-started/backend-logging/python/django).',
-    },
+    setupLogging('django'),
   ],
 }

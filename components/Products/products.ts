@@ -240,7 +240,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
   },
   express: {
     type: 'backend',
-    docsLink: '/docs/getting-started/backend-sdk/express',
+    docsLink: '/docs/getting-started/4_backend-sdk/express',
     slug: 'express',
     title: 'Express',
     types: ['Backend', 'Frontend'],
@@ -249,7 +249,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   go: {
     type: 'backend',
-    docsLink: '/docs/getting-started/backend-sdk/go',
+    docsLink: '/docs/getting-started/4_backend-sdk/go',
     slug: 'go',
     title: 'Golang',
     types: ['Backend', 'Frontend'],
@@ -267,7 +267,7 @@ export const PRODUCTS: { [k: string]: iProduct } = {
 
   node: {
     type: 'backend',
-    docsLink: '/docs/getting-started/backend-sdk/nodejs',
+    docsLink: '/docs/getting-started/4_backend-sdk/nodejs',
     slug: 'node',
     title: 'Node.js',
     types: ['Backend', 'Frontend'],

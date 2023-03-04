@@ -1,5 +1,5 @@
 import { QuickStartContent } from '../../QuickstartContent'
-import { downloadSnippet, setupFrontendSnippet } from './shared-snippets'
+import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonAWSContext: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io on AWS Lambda.',
@@ -49,10 +49,6 @@ def lambda_handler(event, context):
         language: 'python',
       },
     },
-    {
-      title: 'Set up logging.',
-      content:
-        'Next, set up log ingestion! Follow the [logging setup guide](../../../getting-started/backend-logging/python/aws).',
-    },
+    setupLogging('aws'),
   ],
 }
