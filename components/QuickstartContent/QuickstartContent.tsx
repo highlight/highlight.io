@@ -1,3 +1,8 @@
+import { GoChiContent } from './backend/go/chi'
+import { GoFiberContent } from './backend/go/fiber'
+import { GoGinContent } from './backend/go/gin'
+import { GoGqlgenContent } from './backend/go/go-gqlgen'
+import { GoMuxContent } from './backend/go/mux'
 import { AngularContent } from './frontend/angular'
 import { GatsbyContent } from './frontend/gatsby'
 import { NextContent } from './frontend/next'
@@ -44,6 +49,11 @@ export enum QuickStartType {
   PythonAWSFn = 'python/aws-lambda',
   PythonAzureFn = 'python/azure-functions',
   PythonGCPFn = 'python/google-cloud-functions',
+  GoGqlgen = 'go/qglgen',
+  GoFiber = 'go/fiber',
+  GoChi = 'go/chi',
+  GoMux = 'go/mux',
+  GoGin = 'go/gin',
 }
 
 export const quickStartContent: { [type in QuickStartType]: QuickStartContent } = {
@@ -62,4 +72,9 @@ export const quickStartContent: { [type in QuickStartType]: QuickStartContent } 
   [QuickStartType.PythonAWSFn]: PythonAWSContext,
   [QuickStartType.PythonAzureFn]: PythonAzureContext,
   [QuickStartType.PythonGCPFn]: PythonGCPContext,
+  [QuickStartType.GoGqlgen]: GoGqlgenContent,
+  [QuickStartType.GoFiber]: GoFiberContent,
+  [QuickStartType.GoChi]: GoChiContent,
+  [QuickStartType.GoMux]: GoMuxContent,
+  [QuickStartType.GoGin]: GoGinContent,
 }
