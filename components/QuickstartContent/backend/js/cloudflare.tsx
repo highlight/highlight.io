@@ -1,17 +1,17 @@
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
-import { initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
+import { addIntegrationContent, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JSCloudflareContent: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io in Cloudflare Workers.',
   entries: [
     frontendInstallSnippet,
     jsGetSnippet('cloudflare'),
-    initializeNodeSDK('cloudflare'),
     {
       title: `Add the Cloudflare Worker Highlight integration.`,
       content:
-        'Use the Cloudflare Highlight SDK in your response handler. ' +
+        addIntegrationContent('Cloudflare Worker SDK', 'cloudflare') +
+        ' ' +
         'The `sendResponse` method traces successful requests while `consumeError` reports exceptions. ' +
         'All Highlight data submission uses [waitUntil](https://developers.cloudflare.com/workers/runtime-apis/fetch-event/#waituntil) to make sure that we have no impact on request handling performance.',
       code: {

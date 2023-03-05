@@ -1,6 +1,6 @@
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
-import { initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
+import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JSExpressContent: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io in Express.js.',
@@ -10,7 +10,7 @@ export const JSExpressContent: QuickStartContent = {
     initializeNodeSDK('node'),
     {
       title: `Add the Express.js Highlight integration.`,
-      content: 'Use the Node Highlight SDK in your response handler.',
+      content: addIntegrationContent('Node Highlight SDK', 'nodejs'),
       code: {
         text: `import * as Highlight from '@highlight-run/node'
 // or like this with commonjs

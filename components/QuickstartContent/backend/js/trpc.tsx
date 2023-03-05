@@ -1,6 +1,6 @@
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
-import { initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
+import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JStRPCContent: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io in tRPC.',
@@ -10,7 +10,7 @@ export const JStRPCContent: QuickStartContent = {
     initializeNodeSDK('node'),
     {
       title: 'Add the tRPC Highlight integration.',
-      content: 'Use the Node Highlight SDK in your response handler.',
+      content: addIntegrationContent('Node Highlight SDK', 'nodejs'),
       code: {
         text: `import { createNextApiHandler } from '@trpc/server/adapters/next'
 import { Handlers } from '@highlight-run/node'

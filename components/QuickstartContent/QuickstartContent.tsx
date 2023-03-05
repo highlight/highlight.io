@@ -37,6 +37,7 @@ export type QuickStartStep = {
     text: string
     language: string
   }
+  hidden?: true
 }
 
 export enum QuickStartType {

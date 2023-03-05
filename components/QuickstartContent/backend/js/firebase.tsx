@@ -1,6 +1,6 @@
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
-import { initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
+import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JSFirebaseContent: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io in Firebase Cloud Functions.',
@@ -10,7 +10,7 @@ export const JSFirebaseContent: QuickStartContent = {
     initializeNodeSDK('node'),
     {
       title: `Add the Firebase Highlight integration.`,
-      content: 'Use the Node Highlight SDK in your response handler.',
+      content: addIntegrationContent('Node Highlight SDK', 'nodejs'),
       code: {
         text: `const highlightNode = require('@highlight-run/node')
 

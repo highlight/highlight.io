@@ -2,7 +2,7 @@ import { QuickStartStep } from '../../QuickstartContent'
 
 export const jsGetSnippet: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Install the Highlight JS SDK.',
-  content: `Install the @highlight-run/${slug} package with your package manager.`,
+  content: `Install the [@highlight-run/${slug}](https://www.npmjs.com/package/@highlight-run/${slug}) package with your package manager.`,
   code: {
     text: `# with yarn
 yarn add @highlight-run/${slug}
@@ -18,9 +18,9 @@ npm install @highlight-run/${slug}`,
 
 export const initializeNodeSDK: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Initialize the Highlight JS SDK.',
-  content: `Initialize the Highlight JS SDK with your project ID.`,
+  content: `Initialize the [Highlight JS SDK](../../../sdk/nodejs) with your project ID.`,
   code: {
-    text: `import { H } from '@highlight-run/node'
+    text: `import { H } from '@highlight-run/${slug}'
 
 H.init({projectID: 'YOUR_PROJECT_ID')`,
     language: 'js',
@@ -55,4 +55,8 @@ export const manualError = {
 export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Set up logging.',
   content: `Start sending logs to Highlight! Follow the [logging setup guide](../../../getting-started/backend-logging/js/${slug}) to get started.`,
+  hidden: true,
 })
+
+export const addIntegrationContent = (name: string, slug: string) =>
+  `Use the [${name}](../../../sdk/${slug}) in your response handler.`
