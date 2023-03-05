@@ -1,5 +1,4 @@
 import { QuickStartStep } from '../../QuickstartContent'
-import { sourceMapDetailsLink } from '../../frontend/shared-snippets'
 
 export const setupFrontendSnippet: QuickStartStep = {
   title: 'Setup your frontend Highlight snippet with tracingOrigins.',
@@ -12,7 +11,7 @@ export const setupFrontendSnippet: QuickStartStep = {
       enabled: true,
       recordHeadersAndBody: true,
     },
-  });
+  }); 
 `,
     language: 'js',
   },
@@ -32,5 +31,13 @@ pip install highlight-io${variant ? '[' + variant + ']' : ''}
 `,
       language: 'bash',
     },
+  }
+}
+
+export const setupLogging = (variant?: string): QuickStartStep => {
+  return {
+    title: 'Set up logging.',
+    content: `Next, set up log ingestion! Follow the [logging setup guide](../../../getting-started/backend-logging/python/${variant}).`,
+    hidden: true,
   }
 }

@@ -1,6 +1,5 @@
-import { QuickStartContent, QuickStartStep } from '../QuickstartContent'
+import { QuickStartContent } from '../QuickstartContent'
 import {
-  backendInstrumentationLink,
   configureSourcemapsCI,
   identifySnippet,
   initializeSnippet,

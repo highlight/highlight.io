@@ -11,7 +11,7 @@ export const GoFiberContent: QuickStartContent = {
     {
       title: 'Add the Highlight Fiber error handler.',
       content:
-        '`highlightFiber.Middleware()` provides a Fiber middleware to automatically record and send errors to Highlight.',
+        '`highlightFiber.Middleware()` provides a [Go Fiber](https://github.com/gofiber/fiber) middleware to automatically record and send errors to Highlight.',
       code: {
         text: `import (
   highlightFiber "github.com/highlight/highlight/sdk/highlight-go/middleware/fiber"
