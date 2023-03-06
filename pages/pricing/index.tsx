@@ -292,8 +292,8 @@ const PriceCalculator = () => {
   const tier = priceTiers[tierName]
   const basePrice = getBasePrice(tier, billingPeriod, retention)
 
-  const getUsagePrice = (useage: number, price: number, size: number) =>
-    Math.trunc(((Math.max(useage, 0) * price) / size) * retentionMultipliers[retention] * 100) / 100
+  const getUsagePrice = (usage: number, price: number, size: number) =>
+    Math.trunc(((Math.max(usage, 0) * price) / size) * retentionMultipliers[retention] * 100) / 100
 
   const sessionsCost = getUsagePrice(sessionUsage - tier.sessions, 5.0, 1_000)
   const errorsCost = getUsagePrice(errorUsage - tier.errors, 0.2, 1_000)
