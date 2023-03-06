@@ -16,10 +16,10 @@ class HighlightDocument extends Document {
             rel="stylesheet"
           ></link>
           <Script
-            type="text/javascript"
             id="hs-script-loader"
             async
             defer
+            strategy="afterInteractive"
             src="//js.hs-scripts.com/20473940.js"
           ></Script>
           <Script src="https://www.googletagmanager.com/gtag/js?id=AW-10833687189" strategy="afterInteractive" />
