@@ -22,7 +22,7 @@ import Wallet from '../../public/images/wallet.svg'
 import { RadioGroup } from '@headlessui/react'
 import * as Slider from '@radix-ui/react-slider'
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Collapsible from 'react-collapsible'
 import { Section } from '../../components/common/Section/Section'
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
@@ -285,11 +285,17 @@ const PriceCalculator = () => {
   const [tierName, setTierName] = useState<TierName>('Free')
   const [retention, setRetention] = useState<Retention>('3 months')
 
-  const [errorUsage, setErrorUsage] = useState(50000)
-  const [sessionUsage, setSessionUsage] = useState(50000)
-  const [loggingUsage, setLoggingUsage] = useState(50000)
-
   const tier = priceTiers[tierName]
+
+  const [errorUsage, setErrorUsage] = useState(0)
+  const [sessionUsage, setSessionUsage] = useState(0)
+  const [loggingUsage, setLoggingUsage] = useState(0)
+
+  useEffect(() => {
+    setErrorUsage(tier.errors)
+    setSessionUsage(tier.sessions)
+  }, [tier, tierName])
+
   const basePrice = getBasePrice(tier, billingPeriod, retention)
 
   const getUsagePrice = (usage: number, price: number, size: number) =>
@@ -301,7 +307,6 @@ const PriceCalculator = () => {
 
   return (
     <div className="flex flex-col items-center w-full gap-10 mx-auto mt-12">
-      {' '}
       {/* Price calculator */}
       <div className="flex flex-wrap justify-center gap-12 gap-y-3">
         <RadioOptions
