@@ -354,6 +354,7 @@ const PriceCalculator = () => {
             value={loggingUsage}
             cost={loggingCost + basePrice}
             includedRange={0}
+            rangeMultiplier={100}
             onChange={setLoggingUsage}
           />
           <div className="block px-3 py-5 rounded-b-lg md:hidden">
@@ -376,6 +377,7 @@ const CalculatorRowDesktop = ({
   value,
   cost,
   includedRange,
+  rangeMultiplier = 1,
   onChange,
 }: {
   title: string
@@ -383,9 +385,12 @@ const CalculatorRowDesktop = ({
   value: number
   includedRange: number
   cost: number
+  rangeMultiplier?: number
   onChange: (value: number) => void
 }) => {
-  const rangeOptions = [0, 500, 1_000, 5_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000]
+  const rangeOptions = [0, 500, 1_000, 5_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000].map(
+    (v) => v * rangeMultiplier,
+  )
 
   return (
     <div className="flex flex-row">
