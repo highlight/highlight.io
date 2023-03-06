@@ -5,4 +5,4 @@ heading: Using highlight.io with Next.JS
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["next"]}/>
+<QuickStart content={quickStartContent["client"]["next"]}/>
