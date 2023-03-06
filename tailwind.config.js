@@ -43,6 +43,7 @@ module.exports = {
       screens: {
         desktop: '1340px',
         mobile: '601px',
+        ultra: '1920px',
       },
     },
   },
