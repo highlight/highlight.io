@@ -336,22 +336,25 @@ const PriceCalculator = () => {
             title="Error Monitoring Usage."
             description="Error monitoring usage is defined by the number of errors collected by Highlight per month. Our frontend/server SDKs send errors, but you can also send custom errors."
             value={errorUsage}
-            onChange={setErrorUsage}
             cost={errorsCost + basePrice}
+            includedRange={tier.errors}
+            onChange={setErrorUsage}
           />
           <CalculatorRowDesktop
             title="Session Replay Usage."
             description="Session replay usage is defined by the number of sessions collected per month. A session is defined by an instance of a user’s tab on your application. "
             value={sessionUsage}
-            onChange={setSessionUsage}
             cost={sessionsCost + basePrice}
+            includedRange={tier.sessions}
+            onChange={setSessionUsage}
           />
           <CalculatorRowDesktop
             title="Logging Usage."
             description="Log usage is defined by the number of logs collected by highlight.io per month. A log is defined by a text field with attributes."
             value={loggingUsage}
-            onChange={setLoggingUsage}
             cost={loggingCost + basePrice}
+            includedRange={0}
+            onChange={setLoggingUsage}
           />
           <div className="block px-3 py-5 rounded-b-lg md:hidden">
             <Typography type="copy1" emphasis>
@@ -371,14 +374,16 @@ const CalculatorRowDesktop = ({
   title,
   description,
   value,
-  onChange,
   cost,
+  includedRange,
+  onChange,
 }: {
   title: string
   description: string
   value: number
-  onChange: (value: number) => void
+  includedRange: number
   cost: number
+  onChange: (value: number) => void
 }) => {
   const rangeOptions = [0, 500, 1_000, 5_000, 10_000, 100_000, 250_000, 500_000, 750_000, 1_000_000]
 
@@ -398,7 +403,7 @@ const CalculatorRowDesktop = ({
         <Typography type="copy3" className="mt-2.5">
           {description}
         </Typography>
-        <RangedInput options={rangeOptions} value={value} onChange={onChange} />
+        <RangedInput options={rangeOptions} value={value} includedRange={includedRange} onChange={onChange} />
       </div>
       <div className="hidden border-l border-divider-on-dark md:inline-block">
         <CalculatorCostDisplay heading="Base + Usage" cost={cost} />
@@ -410,10 +415,12 @@ const CalculatorRowDesktop = ({
 export const RangedInput = ({
   options,
   value,
+  includedRange = 0,
   onChange,
 }: {
   options: number[]
   value: number
+  includedRange?: number
   onChange: (value: number) => void
 }) => {
   const sortedOptions = [...options].sort((a, b) => a - b)
@@ -461,8 +468,13 @@ export const RangedInput = ({
         onValueChange={([value]) => value != null && onChange(Math.ceil(denormalize(Math.pow(normalize(value), 3))))}
         className="relative items-center hidden w-full h-16 mt-4 select-none md:flex touch-none group"
       >
-        <Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark" />
-        <Slider.Thumb className="relative w-6 h-6 border-2 focus:border-purple-primary hover:shadow-white/25 hover:shadow-[0_0_0_4px] outline-none bg-[#F5F5F5] border-copy-on-dark rounded-full flex flex-col items-center transition-all">
+        <Slider.Track className="relative flex-1 h-3 overflow-hidden rounded-full bg-divider-on-dark">
+          <div
+            className="absolute inset-y-0 left-0 h-full bg-blue-cta/30"
+            style={{ width: `${Math.pow(normalize(includedRange), 1 / 3) * 100}%` }}
+          />
+        </Slider.Track>
+        <Slider.Thumb className="relative w-6 h-6 border-2 focus:border-blue-cta hover:shadow-white/25 hover:shadow-[0_0_0_4px] outline-none bg-[#F5F5F5] border-copy-on-dark rounded-full flex flex-col items-center transition-all">
           <div className="absolute w-2.5 h-2.5 rotate-45 rounded-sm -top-4 bg-blue-cta" />
           <div className="absolute px-1 py-0.5 mb-2 text-divider-on-dark font-semibold text-[10px] rounded-sm bottom-full bg-blue-cta">
             {value.toLocaleString(undefined, { notation: 'compact' })}
