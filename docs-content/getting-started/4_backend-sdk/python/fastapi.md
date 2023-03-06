@@ -5,4 +5,4 @@ slug: fastapi
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["python/fastapi"]}/>
+<QuickStart content={quickStartContent["server"]["python"]["python/fastapi"]}/>

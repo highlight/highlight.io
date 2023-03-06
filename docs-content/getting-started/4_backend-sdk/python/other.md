@@ -5,4 +5,4 @@ slug: other
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["python/other"]}/>
+<QuickStart content={quickStartContent["server"]["python"]["python/other"]}/>

@@ -5,4 +5,4 @@ slug: flask
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["python/flask"]}/>
+<QuickStart content={quickStartContent["server"]["python"]["python/flask"]}/>

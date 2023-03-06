@@ -5,4 +5,4 @@ slug: aws-lambda
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["python/aws-lambda"]}/>
+<QuickStart content={quickStartContent["server"]["python"]["python/aws-lambda"]}/>
