@@ -1,3 +1,4 @@
+import { ChevronDownIcon, InformationCircleIcon } from '@heroicons/react/20/solid'
 import { NextPage } from 'next'
 import Image from 'next/image'
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
@@ -7,25 +8,24 @@ import Navbar from '../../components/common/Navbar/Navbar'
 import { Typography } from '../../components/common/Typography/Typography'
 import homeStyles from '../../components/Home/Home.module.scss'
 import pricingStyles from '../../components/Pricing/Pricing.module.scss'
-import { InformationCircleIcon, ChevronDownIcon, CheckIcon } from '@heroicons/react/20/solid'
 
-import PcPlayMedia from '../../public/images/pc-play-media.svg'
-import Wallet from '../../public/images/wallet.svg'
-import Stopwatch from '../../public/images/stopwatch.svg'
-import Globe from '../../public/images/globe.svg'
-import Security from '../../public/images/security.svg'
-import ReceiptList from '../../public/images/receipt-list.svg'
 import CreditCard from '../../public/images/credit-card.svg'
 import Delete from '../../public/images/delete.svg'
+import Globe from '../../public/images/globe.svg'
+import PcPlayMedia from '../../public/images/pc-play-media.svg'
+import ReceiptList from '../../public/images/receipt-list.svg'
+import Security from '../../public/images/security.svg'
+import Stopwatch from '../../public/images/stopwatch.svg'
 import TagLoyalty from '../../public/images/tag-loyalty.svg'
+import Wallet from '../../public/images/wallet.svg'
 
-import { RadioGroup, Listbox } from '@headlessui/react'
+import { RadioGroup } from '@headlessui/react'
 import * as Slider from '@radix-ui/react-slider'
-import { useState } from 'react'
 import classNames from 'classnames'
-import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
+import { useState } from 'react'
 import Collapsible from 'react-collapsible'
 import { Section } from '../../components/common/Section/Section'
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
 
 const PricingPage: NextPage = () => {
   return (
@@ -205,7 +205,6 @@ const PlanTable = () => {
 
   return (
     <div className="flex flex-col items-center max-w-full gap-6 mx-auto mt-16">
-      {' '}
       {/* Pricing */}
       <div className="flex flex-wrap justify-center gap-12 gap-y-3">
         <RadioOptions
@@ -260,8 +259,10 @@ const PlanTier = ({
         <div className="flex items-center gap-1">
           <Typography type="copy3" emphasis>
             Included
-          </Typography>{' '}
-          <InformationCircleIcon className="inline w-5 h-5" />
+          </Typography>
+          <a href="#overage" className="text-white transition-colors hover:text-blue-cta">
+            <InformationCircleIcon className="inline w-5 h-5" />
+          </a>
         </div>
         <Typography type="copy3">{sessions} monthly sessions</Typography>
         <Typography type="copy3">{errors} monthly errors</Typography>
