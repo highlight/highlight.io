@@ -24,7 +24,7 @@ Read more about the features we support in Session Replay below:
     <DocsCard title="Shadow DOM & Web Components."  href="./shadow-dom-web-components.md">
         {"Support for Shadow DOM & Web Components"}
     </DocsCard>
-    <DocsCard title="Proxying through your domain."  href="./canvas-iframe.md">
+    <DocsCard title="Proxying through your domain."  href="./request-proxying.md">
         {"Support for proxying highlight.io requests through your domain."}
     </DocsCard>
     <DocsCard title="Canvas & Iframe Recording."  href="./canvas-iframe.md">

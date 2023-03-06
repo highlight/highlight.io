@@ -18,6 +18,7 @@
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "@highlight-run/next": "^2.2.1",
+    "@radix-ui/react-slider": "^1.1.0",
     "@types/js-cookie": "^3.0.2",
     "@vercel/og": "^0.0.27",
     "antd": "^4.24.7",
@@ -82,6 +83,7 @@
     "husky": "^8.0.3",
     "postcss": "^8.4.20",
     "prettier": "^2.8.4",
+    "prettier-plugin-organize-imports": "^3.2.2",
     "tailwindcss": "^3.1.8",
     "typed-scss-modules": "^7.0.1",
     "typescript": "4.9.4"

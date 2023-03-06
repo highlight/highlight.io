@@ -1,6 +1,6 @@
 ---
 title: Fullstack Mapping
-slug: backend-sdk
+slug: 4_backend-sdk
 createdAt: 2022-03-28T20:05:46.000Z
 updatedAt: 2022-04-01T20:40:53.000Z
 ---
@@ -44,13 +44,11 @@ Backend changes are dependent on the underlying language/framework used on the s
 
 Below are solutions for what we support today. If you'd like us to support a new framework, feel free to shoot us a message at [support@highlight.io](mailto:support@highlight.io) or drop us a note in our [discord](https://discord.gg/yxaXEAqgwN).
 
-- [Go Backend Integration](./backend-sdk/go.md)
+- [Go Backend Integration](4_backend-sdk/go)
 
-- [Next.js Backend Integration](./backend-sdk/nodejs.md)
+- [JS Backend Integration](4_backend-sdk/js)
 
-- [Node.js Backend Integration](./backend-sdk/nodejs.md)
-
-- [Express Backend Integration](./backend-sdk/express.md)
+- [Python Backend Integration](4_backend-sdk/python)
 
 ## Troubleshooting
 

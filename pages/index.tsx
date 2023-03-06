@@ -224,7 +224,7 @@ const Home: NextPage = () => {
             title={`Built with compliance and security.`}
             desc="Whether its SOC 2, HIPAA, or ISO, highlight.io can work with your stack. Contact us at security@highlight.io for more information."
             link={'/docs/general/company/compliance-and-security'}
-            linkText={"Read our docs"}
+            linkText={'Read our docs'}
             imgSrc={LandingInfoRowSecurity}
           />
         </div>

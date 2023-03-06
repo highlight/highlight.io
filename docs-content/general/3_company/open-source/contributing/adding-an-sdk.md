@@ -58,7 +58,9 @@ with self.tracer.start_as_current_span("highlight-ctx") as span:
 If a language's OpenTelemetry SDK does not support sending logs natively, we choose to send the message data as a Trace [Event](https://opentelemetry.io/docs/concepts/signals/traces/#span-events).
 
 - Event name - `log`
+
 - `log.severity` event attribute - the log severity level string
+
 - `log.message` event attribute - the log message payload.
 
 To associate the highlight context with a log, we use the [LogRecord](https://opentelemetry.io/docs/reference/specification/logs/data-model/#log-and-event-record-definition) [Attributes](https://opentelemetry.io/docs/reference/specification/logs/semantic_conventions/) with the following convention:
