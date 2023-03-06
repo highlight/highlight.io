@@ -1,6 +1,6 @@
 import sessionscreenshot from '../../public/images/sessionscreenshot.png'
-import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
-import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
+import sessionReplayHero from '../../public/images/sessionReplayHero.png'
+import sessionReplay2 from '../../public/images/sessionReplay2.png'
 import sessionReplay3 from '../../public/images/landingInfoRow1.png'
 import sessionReplay4 from '../../public/images/landingInfoRow2.png'
 import { StaticImageData } from 'next/image'
