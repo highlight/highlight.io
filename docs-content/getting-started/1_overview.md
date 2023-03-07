@@ -6,7 +6,7 @@ createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
-Highlight's allows you to get full-stack visibility into issues across your whole stack, all the way from a user's button click to an error in your backend infrastructure. Read more about how to get started below.
+Highligh.io allows you to get full-stack visibility into issues across your whole stack, all the way from a user's button click to an error in your backend infrastructure. Read more about how to get started below.
 
 ## For your Frontend
 
