@@ -16,6 +16,7 @@ import homeStyles from '../components/Home/Home.module.scss'
 import LandingInfoRow from '../components/Home/LandingInfoRow'
 import { MdKeyboardReturn } from 'react-icons/md'
 import { iFeature, FEATURES } from '../components/Features/features'
+import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 
 import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../components/Animate'
 
@@ -63,7 +64,7 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
             <AnimateFeatureHeroRight loaded={imageLoaded}>
               <Image
                 className={`hidden lg:flex ultra:hidden right-0 object-contain top-0`}
-                src={feature.slantedImage}
+                src={sessionReplayHero}
                 alt="Feature Spotlight"
                 onLoadingComplete={() => setImageLoaded(true)}
               />
