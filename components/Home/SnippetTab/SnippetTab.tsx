@@ -2,16 +2,16 @@ import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 
 import { AiOutlineDown } from 'react-icons/ai'
+import GoImage from '../../../public/images/language/GoIcon'
+import htmlImage from '../../../public/images/language/htmlIcon'
+import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple'
+import NextjsImage from '../../../public/images/language/NextjsIcon'
+import NodeImage from '../../../public/images/language/NodeIcon'
+import ReactImage from '../../../public/images/language/ReactIcon'
+import VueImage from '../../../public/images/language/VueIcon'
 import { PrimaryLink } from '../../common/Buttons/SecondaryButton'
 import { Section } from '../../common/Section/Section'
 import { Typography } from '../../common/Typography/Typography'
-import ReactImage from '../../../public/images/language/ReactIcon'
-import htmlImageDarkPurple from '../../../public/images/language/htmlIconDarkPurple'
-import htmlImage from '../../../public/images/language/htmlIcon'
-import VueImage from '../../../public/images/language/VueIcon'
-import NodeImage from '../../../public/images/language/NodeIcon'
-import NextjsImage from '../../../public/images/language/NextjsIcon'
-import GoImage from '../../../public/images/language/GoIcon'
 
 import styles from '../../Home/Home.module.scss'
 import productStyles from '../../Products/Products.module.scss'
@@ -194,12 +194,12 @@ func main() {
             HeaderImage={NodeImage}
             canCopy={true}
             language="javascript"
-            content={`import { Highlight } from "@highlight-run/node";
+            content={`import { Handlers } from '@highlight-run/node';
 
 const app = express();
 
 const highlightOptions = {projectID: 'YOUR_PROJECT_ID'};
-const highlightHandler = Highlight.Handlers.errorHandler(highlightOptions);
+const highlightHandler = Handlers.errorHandler(highlightOptions);
 
 // This should be before any other error middleware and after all controllers
 app.use(highlightHandler);`}
