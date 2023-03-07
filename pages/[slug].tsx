@@ -16,7 +16,6 @@ import homeStyles from '../components/Home/Home.module.scss'
 import LandingInfoRow from '../components/Home/LandingInfoRow'
 import { MdKeyboardReturn } from 'react-icons/md'
 import { iFeature, FEATURES } from '../components/Features/features'
-import sessionReplayHero from '../public/images/features/sessionReplayHero.png'
 import sessionReplay2 from '../public/images/features/sessionReplay2.png'
 
 import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../components/Animate'
