@@ -16,8 +16,8 @@ import homeStyles from '../components/Home/Home.module.scss'
 import LandingInfoRow from '../components/Home/LandingInfoRow'
 import { MdKeyboardReturn } from 'react-icons/md'
 import { iFeature, FEATURES } from '../components/Features/features'
-import sessionscreenshot from '../public/images/sessionscreenshot.png'
 import sessionReplayHero from '../public/images/features/sessionReplayHero.png'
+import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
 
 import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../components/Animate'
 
@@ -27,7 +27,7 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
   return (
     <div>
       <Image src={sessionReplayHero} alt="Hero Background" layout="fill" objectFit="cover" />
-      <Image src={sessionscreenshot} alt="Hero Background" layout="fill" objectFit="cover" />
+      <Image src={sessionReplay2} alt="Hero Background" layout="fill" objectFit="cover" />
       <Navbar />
       <div className="hidden md:flex ml-10 my-2">
         <Link href="/">
