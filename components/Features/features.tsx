@@ -11,7 +11,9 @@ type InfoRow = {
   link: string
   linkText: string
   image?: StaticImageData //Shows the privacy slider if null
-  invert?: boolean //Image on right
+  invert: boolean //Image on right
+  code?: string
+  privacy?: boolean
 }
 
 export interface iFeature {
@@ -25,6 +27,13 @@ export interface iFeature {
   subheader2: string
   infoRows?: InfoRow[]
 }
+
+const reactSnippet: string = `import { NextResponse } from 'next/server'
+
+export function middleware (request: NextRequest) {
+  return NextResponse.next()
+}
+`
 
 export const FEATURES: { [k: string]: iFeature } = {
   'session-replay': {
@@ -44,6 +53,7 @@ export const FEATURES: { [k: string]: iFeature } = {
         link: '/docs/getting-started/client-sdk/replay-configuration/privacy',
         linkText: 'Read the Docs',
         invert: true,
+        privacy: true,
       },
       {
         header: 'Reproduce the dev-tools for every session.',
@@ -52,6 +62,7 @@ export const FEATURES: { [k: string]: iFeature } = {
         link: '/docs/getting-started/client-sdk/replay-configuration/overview',
         linkText: 'Read the Docs',
         image: sessionReplay2,
+        invert: false,
       },
       {
         header: 'From a button click to a server-side error.',
@@ -60,15 +71,24 @@ export const FEATURES: { [k: string]: iFeature } = {
         link: 'https://app.highlight.io/?sign_up=1',
         linkText: 'Get started for free',
         image: sessionReplay3,
+        invert: true,
       },
       {
         header: 'Support for all the modern frameworks.',
         subheader:
           'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
-        link: 'https://app.highlight.io/?sign_up=1',
-        linkText: 'Get started for free',
+        link: '/docs/getting-started/overview',
+        linkText: 'Read the docs',
         image: sessionReplay4,
+        invert: false,
+      },
+      {
+        header: 'A few lines of code. That’s it.',
+        subheader: 'Turn on Session Replay in seconds and instantly get the visibility you need.',
+        link: '/docs/getting-started/overview',
+        linkText: 'Framework Docs',
         invert: true,
+        code: reactSnippet,
       },
     ],
   },

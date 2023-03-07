@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import { Typography } from '../common/Typography/Typography'
 import { PrimaryButton } from '../common/Buttons/PrimaryButton'
 import { ObfuscationSlider } from './ObfuscationSlider/ObfuscationSlider'
+import { HighlightCodeBlock } from '../Docs/HighlightCodeBlock/HighlightCodeBlock'
 
 //Component for the image/text row for the footer of the product page
 //invert puts the image on the right side of the text
@@ -16,6 +17,7 @@ const LandingInfoRow = ({
   invert,
   imgSrc,
   privacy,
+  code,
 }: {
   title: string
   desc: string
@@ -24,6 +26,7 @@ const LandingInfoRow = ({
   invert?: boolean
   imgSrc: any
   privacy?: boolean
+  code?: string
 }) => {
   return (
     <div className={styles.landingInfoRow}>
@@ -38,6 +41,12 @@ const LandingInfoRow = ({
           </div>
         ) : (
           <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" />
+        )}
+
+        {!privacy && code && (
+          <div className="flex flex-col justify-center w-full">
+            <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
+          </div>
         )}
       </div>
       <div className="flex md:hidden w-full h-[1px] bg-divider-on-dark"> </div>
@@ -61,6 +70,14 @@ const LandingInfoRow = ({
       </div>
       <div className={`${invert ? 'lg:flex' : ''} hidden justify-center lg:w-[570px]`}>
         {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
+        {!privacy && code && (
+          <div className="flex flex-col justify-center w-full">
+            <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
+            <Typography type="copy4" className="text-copy-on-light mx-auto mt-1">
+              Above Example in React.js
+            </Typography>
+          </div>
+        )}
       </div>
     </div>
   )

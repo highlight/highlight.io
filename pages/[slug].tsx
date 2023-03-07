@@ -110,9 +110,10 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
                 desc={row.subheader}
                 link={row.link}
                 linkText={row.linkText}
-                privacy={!row.image}
+                privacy={row.privacy || false}
                 imgSrc={row.image}
                 invert={row.invert}
+                code={row.code}
               />
             )
           })}
