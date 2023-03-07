@@ -26,8 +26,8 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
 
   return (
     <div>
-      <Image src={sessionReplayHero} alt="Hero Background" layout="fill" objectFit="cover" />
-      <Image src={sessionReplay2} alt="Hero Background" layout="fill" objectFit="cover" />
+      {/* <Image src={sessionReplayHero} alt="Hero Background" layout="fill" objectFit="cover" />
+      <Image src={sessionReplay2} alt="Hero Background" layout="fill" objectFit="cover" /> */}
       <Navbar />
       <div className="hidden md:flex ml-10 my-2">
         <Link href="/">
