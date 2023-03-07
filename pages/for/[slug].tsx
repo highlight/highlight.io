@@ -149,7 +149,7 @@ const Products = ({ product }: { product: iProduct }) => {
                 <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
                   <PrimaryButton
                     className={classNames(landingStyles.solidButton, 'min-w-[180px]')}
-                    href="https://app.highlight.io/?sign_up=1"
+                    href="https://app.highlight.io/sign_up"
                   >
                     <Typography type="copy2" emphasis={true}>
                       Get started
@@ -206,7 +206,7 @@ const Products = ({ product }: { product: iProduct }) => {
 
               <div className="flex justify-center my-14">
                 <div className="flex flex-col lg:flex-row justify-center gap-4">
-                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <PrimaryButton href="https://app.highlight.io/sign_up">
                     <Typography type="copy2" emphasis={true}>
                       Get started for free
                     </Typography>

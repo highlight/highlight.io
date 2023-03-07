@@ -19,7 +19,7 @@ export const BlogCallToAction = () => {
           Get the <span className={styles.highlightedText}>visibility</span> you need
         </h3>
         <div className={classNames(styles.buttonContainer, styles.tryButtonContainer)}>
-          <PrimaryButton href="https://app.highlight.io/?sign_up=1" style={{ color: 'black' }}>
+          <PrimaryButton href="https://app.highlight.io/sign_up" style={{ color: 'black' }}>
             <Typography type="copy2" emphasis={true}>
               Get started for free
             </Typography>

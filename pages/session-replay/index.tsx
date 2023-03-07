@@ -50,7 +50,7 @@ const ShowcasePage: NextPage = () => {
               <div className="flex flex-col lg:flex-row justify-start gap-4 w-full lg:w-auto">
                 <PrimaryButton
                   className={classNames(homeStyles.solidButton, 'min-w-[180px]')}
-                  href="https://app.highlight.io/?sign_up=1"
+                  href="https://app.highlight.io/sign_up"
                 >
                   <Typography type="copy2" emphasis={true}>
                     Get started
@@ -136,7 +136,7 @@ const ShowcasePage: NextPage = () => {
             desc={
               'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side log.'
             }
-            link={'https://app.highlight.io/?sign_up=1'}
+            link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
             imgSrc={sessionReplay3}
           />
@@ -146,7 +146,7 @@ const ShowcasePage: NextPage = () => {
             desc={
               'Whether its react, angular, or even a framework you built yourself. As long as it run javascript, we got you covered.'
             }
-            link={'https://app.highlight.io/?sign_up=1'}
+            link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
             imgSrc={sessionReplay4}
             invert
