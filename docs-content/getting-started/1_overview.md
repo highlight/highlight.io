@@ -6,7 +6,13 @@ createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
-We've written up several guides on getting started with highlight.io in your framework of choice. If there's a guide missing for your framework, feel free to [create an issue](https://github.com/highlight/highlight/issues/new?assignees=&labels=external+bug+%2F+request&template=feature_request.md&title=) or message us on [discord](https://highlight.io/community).
+Highlight's Full-stack integration allows you to get visibility into errors and issues across your whole stack, not just your frontend. These errors are paired with outgoing requests on your frontend so that you can understand:
+
+- Exactly what happened when a user reports a bug
+
+- Where specific errors are initiated and what caused them
+
+- What backend issues could have caused corresponding frontend bugs.
 
 ## For your Frontend
 
@@ -28,24 +34,27 @@ Installing highlight.io in javascript will automatically instrument frontend err
     <DocsCard title="VueJS"  href="./client-sdk/vuejs.md">
         {"Get started in your VueJS app"}
     </DocsCard>
+    <DocsCard title="Other HTML"  href="./3_client-sdk/6_other.md">
+        {"Get started in any HTML/JS app"}
+    </DocsCard>
 </DocsCardGroup>
-
-Don't see your framework? Shoot us a [message](https://highlight.io/community) and we're happy to add one. You can also import highlight.io via a [script tag](3_client-sdk/6_other.md).
 
 ## For your Backend
 
 Highlight also supports reporting errors from your backend and mapping these to corresponding sessions. This gives you and your team a full picture of your application's state. Support frameworks / tech below:
 
-- [Firebase](./backend-sdk/firebase.md)
+<DocsCardGroup>
+    <DocsCard title="Python" href="./backend-sdk/python/overview">
+        {"Get started in Python"}
+    </DocsCard>
+    <DocsCard title="Go" href="./backend-sdk/go/overview">
+        {"Get started in Golang"}
+    </DocsCard>
+    <DocsCard title="JS / TS" href="./backend-sdk/js/overview">
+        {"Get started in Javascript"}
+    </DocsCard>
+</DocsCardGroup>
 
-- [Express](./backend-sdk/express.md)
+### Something missing?
 
-- [Go](./backend-sdk/go.md)
-
-- [Next.js](./backend-sdk/nextjs.md)
-
-- [Node.js](./backend-sdk/nodejs.md)
-
-- For requesting other backend frameworks, shoot us a message at [support@highlight.io](mailto:support@highlight.io) or share in our [community](https://discord.gg/yxaXEAqgwN)
-
-For in-depth instructions, follow the [Backend SDK](./backend-sdk/backend-sdk-overview.md) guide.
+We've written up several guides on getting started with highlight.io in your framework of choice. If there's a guide missing for your framework, feel free to [create an issue](https://github.com/highlight/highlight/issues/new?assignees=&labels=external+bug+%2F+request&template=feature_request.md&title=) or message us on [discord](https://highlight.io/community).

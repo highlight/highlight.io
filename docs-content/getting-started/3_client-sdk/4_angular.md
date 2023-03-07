@@ -5,4 +5,4 @@ slug: angular
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["angular"]}/>
+<QuickStart content={quickStartContent["client"]["angular"]}/>

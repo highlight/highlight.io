@@ -1,44 +1,39 @@
 import { promises as fsp } from 'fs'
+import yaml from 'js-yaml'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { serialize } from 'next-mdx-remote/serialize'
 import { GetStaticPaths, GetStaticProps } from 'next/types'
 import React, { useEffect, useRef, useState } from 'react'
+import { Collapse } from 'react-collapse'
 import styles from '../../components/Docs/Docs.module.scss'
-import yaml from 'js-yaml'
 import ChevronDown from '../../public/images/ChevronDownIcon'
 import Minus from '../../public/images/MinusIcon'
-import { Collapse } from 'react-collapse'
-import { serialize } from 'next-mdx-remote/serialize'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import path from 'path'
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa'
 
-import Navbar from '../../components/common/Navbar/Navbar'
-import Link from 'next/link'
-import { Typography } from '../../components/common/Typography/Typography'
-import matter from 'gray-matter'
 import classNames from 'classnames'
+import matter from 'gray-matter'
+import Markdown from 'markdown-to-jsx'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
-import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github'
-import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
-import {
-  DocsMarkdownRenderer,
-  generateIdString,
-} from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
-import DocSelect from '../../components/Docs/DocSelect/DocSelect'
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
+import Navbar from '../../components/common/Navbar/Navbar'
+import { Typography } from '../../components/common/Typography/Typography'
 import { Callout } from '../../components/Docs/Callout/Callout'
-import { CodeBlock } from '../../components/common/CodeBlock/CodeBlock'
+import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
+import DocSelect from '../../components/Docs/DocSelect/DocSelect'
+import { generateIdString } from '../../components/Docs/DocsTypographyRenderer/DocsTypographyRenderer'
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
+import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
 import {
   quickStartContent,
   QuickStartContent,
   QuickStartStep,
-  QuickStartType,
 } from '../../components/QuickstartContent/QuickstartContent'
-import Markdown from 'markdown-to-jsx'
-import { useMediaQuery } from '../../components/MediaQuery/MediaQuery'
 import { Roadmap } from '../../components/common/Roadmap/Roadmap'
+import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')
 const DOCS_GITUB_LINK = `https://github.com/highlight/highlight.io/blob/main/docs-content/`
@@ -919,61 +914,64 @@ const QuickStart = (content: { content: QuickStartContent }) => {
       </Typography>
       <div style={{ borderTop: '1px solid #EBFF5E', width: 200 }} />
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: 10 }}>
-        {c.entries.map((step: QuickStartStep, i: number) => (
-          <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
-            <div style={{ display: 'flex', width: 40, flexDirection: 'column' }}>
-              <div
-                style={{
-                  width: 32,
-                  minHeight: 32,
-                  backgroundColor: '#30294E',
-                  borderRadius: 100,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {i + 1}
-              </div>
-              <div style={{ width: 16, height: '100%', borderRight: '2px solid #30294E' }}></div>
-            </div>
-            <div style={{ width: '100%', display: 'flex', gap: 20, marginBottom: 42 }}>
-              <div
-                style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: 8 }}
-                className={styles.quickStartSubtext}
-              >
-                <Typography type="copy2" emphasis>
-                  {step.title}
-                </Typography>
-                <Markdown
-                  options={{
-                    forceBlock: true,
-                    overrides: {
-                      code: (props) => {
-                        return <code className={styles.inlineCodeBlock}>{props.children}</code>
-                      },
-                      ul: (props) => {
-                        return <div>hellooooo</div>
-                      },
-                    },
+        {c.entries.map((step: QuickStartStep, i: number) => {
+          if (step.hidden) return null
+          return (
+            <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
+              <div style={{ display: 'flex', width: 40, flexDirection: 'column' }}>
+                <div
+                  style={{
+                    width: 32,
+                    minHeight: 32,
+                    backgroundColor: '#30294E',
+                    borderRadius: 100,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
-                  {step.content}
-                </Markdown>
+                  {i + 1}
+                </div>
+                <div style={{ width: 16, height: '100%', borderRight: '2px solid #30294E' }}></div>
               </div>
-              <div style={{ width: '50%' }}>
-                {step.code && (
-                  <HighlightCodeBlock
-                    style={{ position: 'sticky', top: '80px' }}
-                    language={step.code.language}
-                    text={step.code.text}
-                    showLineNumbers={false}
-                  />
-                )}
+              <div style={{ width: '100%', display: 'flex', gap: 20, marginBottom: 42 }}>
+                <div
+                  style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: 8 }}
+                  className={styles.quickStartSubtext}
+                >
+                  <Typography type="copy2" emphasis>
+                    {step.title}
+                  </Typography>
+                  <Markdown
+                    options={{
+                      forceBlock: true,
+                      overrides: {
+                        code: (props) => {
+                          return <code className={styles.inlineCodeBlock}>{props.children}</code>
+                        },
+                        ul: (props) => {
+                          return <div>hellooooo</div>
+                        },
+                      },
+                    }}
+                  >
+                    {step.content}
+                  </Markdown>
+                </div>
+                <div style={{ width: '50%' }}>
+                  {step.code && (
+                    <HighlightCodeBlock
+                      style={{ position: 'sticky', top: '80px' }}
+                      language={step.code.language}
+                      text={step.code.text}
+                      showLineNumbers={false}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )
