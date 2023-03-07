@@ -39,7 +39,7 @@ const Comments: NextPage = () => {
                 issues to ensure that your whole team is on the same page. Give Highlight a try and stay in the loop!
               </p>
               <div className={styles.buttonContainer}>
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">Get Started For Free</PrimaryButton>
+                <PrimaryButton href="https://app.highlight.io/sign_up">Get Started For Free</PrimaryButton>
                 <PrimaryLink href="https://calendly.com/jaykhatri/highlight-demo-call">Request A Demo</PrimaryLink>
               </div>
             </div>

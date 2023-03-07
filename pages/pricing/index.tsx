@@ -269,7 +269,7 @@ const PlanTier = ({
         <Typography type="copy3">Unlimited seats</Typography>
       </div>
       <div className="p-5">
-        <PrimaryButton href="https://app.highlight.io/?sign_up=1" className={homeStyles.hollowButton}>
+        <PrimaryButton href="https://app.highlight.io/sign_up" className={homeStyles.hollowButton}>
           Start free trial
         </PrimaryButton>
       </div>

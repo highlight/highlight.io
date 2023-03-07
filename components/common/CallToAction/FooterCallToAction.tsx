@@ -26,7 +26,7 @@ export const FooterCallToAction = () => {
           Get the <span className={styles.highlightedText}>visibility</span> you need
         </h2>
         <div className={classNames(styles.buttonContainer, styles.tryButtonContainer)}>
-          <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+          <PrimaryButton href="https://app.highlight.io/sign_up">
             <Typography type="copy2" emphasis={true}>
               Get started for free
             </Typography>
