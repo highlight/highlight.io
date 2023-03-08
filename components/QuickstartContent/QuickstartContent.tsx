@@ -24,6 +24,7 @@ import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
 import { GoLogrusContent } from './logging/go/logrus'
 import { GoOtherContent } from './logging/go/other'
+import { HTTPContent } from './logging/http'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
@@ -71,6 +72,7 @@ export enum QuickStartType {
   JSFirebase = 'js/firebase',
   JSNodejs = 'js/nodejs',
   JStRPC = 'js/trpc',
+  HTTPOTLP = 'http/otlp',
 }
 
 export const quickStartContent = {
@@ -113,6 +115,7 @@ export const quickStartContent = {
       [QuickStartType.GoLogrus]: GoLogrusContent,
       [QuickStartType.GoOther]: GoOtherContent,
     },
+    [QuickStartType.HTTPOTLP]: HTTPContent,
   },
   other: {
     [QuickStartType.SelfHost]: SelfHostContent,
