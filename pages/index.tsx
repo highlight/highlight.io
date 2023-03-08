@@ -13,21 +13,21 @@ import LandingInfoRow2 from '../public/images/landingInfoRow2.png'
 import LandingInfoRow3 from '../public/images/landingInfoRow3.png'
 import LandingInfoRowSecurity from '../public/images/landingInfoRowSecurity.png'
 
-import Footer from '../components/common/Footer/Footer'
-import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction'
-import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel'
-import classNames from 'classnames'
-import { Review, REVIEWS } from '../components/Home/Reviews'
-import { Typography } from '../components/common/Typography/Typography'
 import { Collapse } from 'antd'
+import classNames from 'classnames'
 import Link from 'next/link'
-import { FeatureCarousel } from '../components/Home/FeatureCarousel/FeatureCarousel'
-import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToAction'
-import LandingInfoRow from '../components/Home/LandingInfoRow'
-import InfoRow from '../components/Products/InfoRow'
 import { AnimateBugLeft, AnimateBugRight } from '../components/Animate'
-import { CustomerReviewTrack } from '../components/Home/CustomerReviewTrack'
+import { FooterCallToAction } from '../components/common/CallToAction/FooterCallToAction'
+import { OSSCallToAction } from '../components/common/CallToAction/OSSCallToAction'
+import Footer from '../components/common/Footer/Footer'
+import { Typography } from '../components/common/Typography/Typography'
 import { BigHeroArt } from '../components/Home/BigHeroArt'
+import { CompaniesReel } from '../components/Home/CompaniesReel/CompaniesReel'
+import { CustomerReviewTrack } from '../components/Home/CustomerReviewTrack'
+import { FeatureCarousel } from '../components/Home/FeatureCarousel/FeatureCarousel'
+import LandingInfoRow from '../components/Home/LandingInfoRow'
+import { Review } from '../components/Home/Reviews'
+import InfoRow from '../components/Products/InfoRow'
 
 const IMAGE_SHOW_OFFSET = 450
 
@@ -166,7 +166,7 @@ const Home: NextPage = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
                 <PrimaryButton
                   className={classNames(styles.solidButton, 'min-w-[180px]')}
-                  href="https://app.highlight.io/?sign_up=1"
+                  href="https://app.highlight.io/sign_up"
                 >
                   <Typography type="copy2" emphasis={true}>
                     Get started
@@ -198,7 +198,7 @@ const Home: NextPage = () => {
             desc={
               'A natural pairing between your errors, session replay, logs and more. Understand the “what”, “why” and “how” of your full-stack web application.'
             }
-            link={'https://app.highlight.io/?sign_up=1'}
+            link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
             imgSrc={LandingInfoRow1}
             invert

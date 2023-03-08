@@ -22,6 +22,9 @@ import { NextContent } from './frontend/next'
 import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
+import { GoLogrusContent } from './logging/go/logrus'
+import { GoOtherContent } from './logging/go/other'
+import { HTTPContent } from './logging/http'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
@@ -61,12 +64,15 @@ export enum QuickStartType {
   GoChi = 'chi',
   GoMux = 'mux',
   GoGin = 'gin',
+  GoLogrus = 'logrus',
+  GoOther = 'other',
   JSApollo = 'apollo',
   JSCloudflare = 'cloudflare',
   JSExpress = 'express',
   JSFirebase = 'firebase',
   JSNodejs = 'nodejs',
   JStRPC = 'trpc',
+  HTTPOTLP = 'http/otlp',
 }
 
 export const quickStartContent = {
@@ -103,6 +109,13 @@ export const quickStartContent = {
       [QuickStartType.JSNodejs]: JSNodeContent,
       [QuickStartType.JStRPC]: JStRPCContent,
     },
+  },
+  'server-logging': {
+    go: {
+      [QuickStartType.GoLogrus]: GoLogrusContent,
+      [QuickStartType.GoOther]: GoOtherContent,
+    },
+    [QuickStartType.HTTPOTLP]: HTTPContent,
   },
   other: {
     [QuickStartType.SelfHost]: SelfHostContent,

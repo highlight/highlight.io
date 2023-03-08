@@ -1,18 +1,15 @@
-import { HighlightLogo, HighlightLogoWhite } from '../HighlightLogo/HighlightLogo'
-import styles from './Navbar.module.scss'
-import classNames from 'classnames'
-import { PrimaryButton } from '../Buttons/PrimaryButton'
-import { useEffect, useState } from 'react'
-import Banner from '../Banner/Banner'
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
-import { Typography } from '../Typography/Typography'
-import Link from 'next/link'
-import ResourceDropdown from './ResourceDropdown'
-import FeatureDropdown from './FeatureDropdown'
-import { GithubPopup } from '../../GithubPopup/GithubPopup'
-import { AiFillGithub } from 'react-icons/ai'
-import { FaDiscord } from 'react-icons/fa'
 import { DocSearch } from '@docsearch/react'
+import classNames from 'classnames'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { AiFillGithub, AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import { FaDiscord } from 'react-icons/fa'
+import { GithubPopup } from '../../GithubPopup/GithubPopup'
+import { PrimaryButton } from '../Buttons/PrimaryButton'
+import { HighlightLogo, HighlightLogoWhite } from '../HighlightLogo/HighlightLogo'
+import { Typography } from '../Typography/Typography'
+import styles from './Navbar.module.scss'
+import ResourceDropdown from './ResourceDropdown'
 
 import '@docsearch/css'
 
@@ -128,7 +125,7 @@ const Navbar = ({
                   </li>
                 </ul>
                 <div className={styles.menuButtons}>
-                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">Get Started</PrimaryButton>
+                  <PrimaryButton href="https://app.highlight.io/sign_up">Get Started</PrimaryButton>
                   <Typography type="copy3" emphasis={true}>
                     <a href="https://app.highlight.io/" className={styles.menuItem}>
                       Sign In
@@ -160,7 +157,7 @@ const Navbar = ({
               <a href="https://app.highlight.io/" className={styles.headerButton}>
                 <Typography type="copy2">Sign in</Typography>
               </a>
-              <PrimaryButton href="https://app.highlight.io/?sign_up=1" className={styles.signUpButton}>
+              <PrimaryButton href="https://app.highlight.io/sign_up" className={styles.signUpButton}>
                 <Typography type="copy2" emphasis={true}>
                   Sign up
                 </Typography>

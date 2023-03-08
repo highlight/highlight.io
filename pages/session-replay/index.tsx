@@ -1,8 +1,10 @@
 import classNames from 'classnames'
 import { NextPage } from 'next'
-import { useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { MdKeyboardReturn } from 'react-icons/md'
+import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../../components/Animate'
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
 import { OSSCallToAction } from '../../components/common/CallToAction/OSSCallToAction'
@@ -13,16 +15,13 @@ import { Typography } from '../../components/common/Typography/Typography'
 import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
 import { CustomerReviewTrack } from '../../components/Home/CustomerReviewTrack'
 import homeStyles from '../../components/Home/Home.module.scss'
-import productStyles from '../../components/Products/Products.module.scss'
 import LandingInfoRow from '../../components/Home/LandingInfoRow'
-import obfuscatedtext from '../../public/images/obfuscatedtext.png'
-import { MdKeyboardReturn } from 'react-icons/md'
-import sessionscreenshot from '../../public/images/sessionscreenshot.png'
-import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
+import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 import sessionReplay3 from '../../public/images/landingInfoRow1.png'
 import sessionReplay4 from '../../public/images/landingInfoRow2.png'
-import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../../components/Animate'
+import obfuscatedtext from '../../public/images/obfuscatedtext.png'
+import sessionscreenshot from '../../public/images/sessionscreenshot.png'
 
 const ShowcasePage: NextPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -50,7 +49,7 @@ const ShowcasePage: NextPage = () => {
               <div className="flex flex-col lg:flex-row justify-start gap-4 w-full lg:w-auto">
                 <PrimaryButton
                   className={classNames(homeStyles.solidButton, 'min-w-[180px]')}
-                  href="https://app.highlight.io/?sign_up=1"
+                  href="https://app.highlight.io/sign_up"
                 >
                   <Typography type="copy2" emphasis={true}>
                     Get started
@@ -136,7 +135,7 @@ const ShowcasePage: NextPage = () => {
             desc={
               'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side log.'
             }
-            link={'https://app.highlight.io/?sign_up=1'}
+            link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
             imgSrc={sessionReplay3}
           />
@@ -146,7 +145,7 @@ const ShowcasePage: NextPage = () => {
             desc={
               'Whether its react, angular, or even a framework you built yourself. As long as it run javascript, we got you covered.'
             }
-            link={'https://app.highlight.io/?sign_up=1'}
+            link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
             imgSrc={sessionReplay4}
             invert

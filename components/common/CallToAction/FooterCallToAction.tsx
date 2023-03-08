@@ -1,14 +1,13 @@
-import React from 'react'
 import classNames from 'classnames'
 
 import styles from '../../Home/Home.module.scss'
 import productStyles from '../../Products/Products.module.scss'
 
+import Image from 'next/legacy/image'
+import FooterRightImage from '../../../public/images/hero-bug-right.gif'
+import FooterLeftImage from '../../../public/images/safety-security-section.gif'
 import { PrimaryButton } from '../Buttons/PrimaryButton'
 import { Typography } from '../Typography/Typography'
-import FooterLeftImage from '../../../public/images/safety-security-section.gif'
-import FooterRightImage from '../../../public/images/hero-bug-right.gif'
-import Image from 'next/legacy/image'
 
 export const FooterCallToAction = () => {
   return (
@@ -26,7 +25,7 @@ export const FooterCallToAction = () => {
           Get the <span className={styles.highlightedText}>visibility</span> you need
         </h2>
         <div className={classNames(styles.buttonContainer, styles.tryButtonContainer)}>
-          <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+          <PrimaryButton href="https://app.highlight.io/sign_up">
             <Typography type="copy2" emphasis={true}>
               Get started for free
             </Typography>
