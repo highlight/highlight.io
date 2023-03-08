@@ -13,6 +13,7 @@ type InfoRow = {
   image?: StaticImageData //Shows the privacy slider if null
   invert: boolean //Image on right
   code?: string
+  codeFrom?: string
   privacy?: boolean
 }
 
@@ -23,16 +24,16 @@ export interface iFeature {
   docsLink: string
   slantedImage: StaticImageData
   regularImage: StaticImageData //For mobile and 2xl screens
-  header2: string
+  header2Selection: number //GetStaticProps prevents you from passing in a component, so we pass in a number and use a switch statement to render the correct component
   subheader2: string
   infoRows?: InfoRow[]
 }
 
-const reactSnippet: string = `import { NextResponse } from 'next/server'
+const reactSnippet: string = `import { H } from 'highlight.run';
 
-export function middleware (request: NextRequest) {
-  return NextResponse.next()
-}
+H.init('<YOUR_PROJECT_ID>', {
+    tracingOrigins: true,
+});
 `
 
 export const FEATURES: { [k: string]: iFeature } = {
@@ -43,7 +44,7 @@ export const FEATURES: { [k: string]: iFeature } = {
     docsLink: '/docs/general/product-features/session-replay/overview',
     slantedImage: sessionReplayHero,
     regularImage: sessionscreenshot,
-    header2: "Debug from a user's perspective",
+    header2Selection: 0,
     subheader2: 'Reproduce hard-to-crack issues and understand how your product is used.',
     infoRows: [
       {
@@ -89,6 +90,7 @@ export const FEATURES: { [k: string]: iFeature } = {
         linkText: 'Framework Docs',
         invert: true,
         code: reactSnippet,
+        codeFrom: 'React.js',
       },
     ],
   },

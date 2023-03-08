@@ -18,6 +18,7 @@ const LandingInfoRow = ({
   imgSrc,
   privacy,
   code,
+  codeFrom,
 }: {
   title: string
   desc: string
@@ -27,6 +28,7 @@ const LandingInfoRow = ({
   imgSrc: any
   privacy?: boolean
   code?: string
+  codeFrom?: string
 }) => {
   return (
     <div className={styles.landingInfoRow}>
@@ -73,8 +75,8 @@ const LandingInfoRow = ({
         {!privacy && code && (
           <div className="flex flex-col justify-center w-full">
             <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
-            <Typography type="copy4" className="text-copy-on-light mx-auto mt-1">
-              Above Example in React.js
+            <Typography type="copy3" className="text-copy-on-dark mx-auto mt-1">
+              Above Example in {codeFrom}
             </Typography>
           </div>
         )}

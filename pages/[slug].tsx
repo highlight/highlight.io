@@ -24,6 +24,12 @@ import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../components/Ani
 const ShowcasePage = ({ feature }: { feature: iFeature }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
 
+  const subHeader2List = [
+    <>
+      Debug from a <span className="text-color-selected-light">user&apos;s</span> perspective.
+    </>,
+  ]
+
   return (
     <div>
       <Image src={sessionReplayHero} alt="Hero Background" className="hidden" />
@@ -43,6 +49,7 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
           <div className="lg:w-1/2 flex justify-center mt-10">
             <div className="flex flex-col max-w-4xl gap-8 text-center lg:text-left">
               <h2 className="text-white">{feature.header}</h2>
+
               <Typography type="copy1" className="text-copy-on-dark">
                 {feature.subheader}
               </Typography>
@@ -91,7 +98,7 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
         <div className="w-full mx-auto max-w-screen-2xl mt-24 lg:mt-60">
           <Section className="flex flex-col gap-20">
             <div className="mx-auto max-w-[1000px]">
-              <h2 className="self-center text-center">{feature.header2}</h2>
+              <h2 className="self-center text-center">{subHeader2List[feature.header2Selection]}</h2>
               <div className="px-8 max-w-[700px] mx-auto mt-6 text-center">
                 <Typography type="copy1" className="text-copy-on-dark text-center">
                   {feature.subheader2}
@@ -114,6 +121,7 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
                 imgSrc={row.image}
                 invert={row.invert}
                 code={row.code}
+                codeFrom={row.codeFrom}
               />
             )
           })}
