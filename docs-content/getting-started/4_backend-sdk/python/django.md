@@ -5,4 +5,4 @@ slug: django
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["python/django"]}/>
+<QuickStart content={quickStartContent["server"]["python"]["python/django"]}/>

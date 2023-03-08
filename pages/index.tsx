@@ -166,7 +166,7 @@ const Home: NextPage = () => {
               <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
                 <PrimaryButton
                   className={classNames(styles.solidButton, 'min-w-[180px]')}
-                  href="https://app.highlight.io/?sign_up=1"
+                  href="https://app.highlight.io/sign_up"
                 >
                   <Typography type="copy2" emphasis={true}>
                     Get started
@@ -198,7 +198,7 @@ const Home: NextPage = () => {
             desc={
               'A natural pairing between your errors, session replay, logs and more. Understand the “what”, “why” and “how” of your full-stack web application.'
             }
-            link={'https://app.highlight.io/?sign_up=1'}
+            link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
             imgSrc={LandingInfoRow1}
             invert
