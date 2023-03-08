@@ -50,6 +50,7 @@ export interface DocPath {
   // whether the path has an index.md file in it or a "homepage" of some sort for that directory.
   indexPath: boolean
   // metadata stored at the top of each md file.
+  redirect: string | null
   metadata: any
   isSdkDoc: boolean
   content: string
@@ -66,7 +67,7 @@ type DocData = {
   metadata?: { title: string; slug: string; heading: string }
   isSdkDoc?: boolean
   docIndex: number
-  redirect?: string
+  redirect: string | null
 }
 
 const useHeadingsData = (headingTag: string) => {
@@ -163,8 +164,10 @@ export const getDocsPaths = async (fs_api: any, base: string | undefined): Promi
     )
   }
   read.sort(sortByFilePrefix)
+  let firstRead: any
   let paths: DocPath[] = []
   for (var i = 0; i < read.length; i++) {
+    // goes through index.md, go1.md, etc..
     const file_string = read[i]
     if (IGNORED_DOCS_PATHS.has(file_string)) {
       continue
@@ -175,11 +178,15 @@ export const getDocsPaths = async (fs_api: any, base: string | undefined): Promi
       paths = paths.concat(await getDocsPaths(fs_api, path.join(base, file_string)))
     } else {
       const pp = processDocPath(base, file_string)
+      if (i == 0) {
+        firstRead = pp
+      }
       const { data, links, content } = await readMarkdown(fsp, path.join(total_path || ''))
       const hasRequiredMetadata = ['title'].every((item) => data.hasOwnProperty(item))
       if (!hasRequiredMetadata) {
         throw new Error(`${total_path} does not contain all required metadata fields. Fields "title" are required. `)
       }
+      const indexPath = file_string.includes('index.md')
       paths.push({
         simple_path: pp,
         array_path: pp.split('/'),
@@ -187,7 +194,8 @@ export const getDocsPaths = async (fs_api: any, base: string | undefined): Promi
         total_path,
         isSdkDoc: pp.startsWith('sdk/'),
         rel_path: total_path.replace(DOCS_CONTENT_PATH, ''),
-        indexPath: file_string.includes('index.md'),
+        indexPath,
+        redirect: indexPath && firstRead ? firstRead : null,
         metadata: data,
         content: content,
       })
@@ -302,6 +310,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       relPath: currentDoc.rel_path,
       docIndex: currentDocIndex,
       docOptions: docPaths,
+      redirect: currentDoc.redirect ? currentDoc.redirect : null,
       isSdkDoc: currentDoc.isSdkDoc,
       toc,
     },
