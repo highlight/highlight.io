@@ -109,26 +109,9 @@ export const quickStartContent = {
     },
   },
   'server-logging': {
-    python: {
-      [QuickStartType.PythonFlask]: PythonFlaskContext,
-      [QuickStartType.PythonDjango]: PythonDjangoContext,
-      [QuickStartType.PythonFastAPI]: PythonFastAPIContext,
-      [QuickStartType.PythonOther]: PythonOtherContext,
-      [QuickStartType.PythonAWSFn]: PythonAWSContext,
-      [QuickStartType.PythonAzureFn]: PythonAzureContext,
-      [QuickStartType.PythonGCPFn]: PythonGCPContext,
-    },
     go: {
       [QuickStartType.GoLogrus]: GoLogrusContent,
       [QuickStartType.GoOther]: GoOtherContent,
-    },
-    js: {
-      [QuickStartType.JSApollo]: JSApolloContent,
-      [QuickStartType.JSCloudflare]: JSCloudflareContent,
-      [QuickStartType.JSExpress]: JSExpressContent,
-      [QuickStartType.JSFirebase]: JSFirebaseContent,
-      [QuickStartType.JSNodejs]: JSNodeContent,
-      [QuickStartType.JStRPC]: JStRPCContent,
     },
   },
   other: {
