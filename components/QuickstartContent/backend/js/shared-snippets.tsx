@@ -53,9 +53,9 @@ export const manualError = {
 }
 
 export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
-  title: 'Set up logging.',
-  content: `Start sending logs to Highlight! Follow the [logging setup guide](../../../getting-started/backend-logging/js/${slug}) to get started.`,
-  hidden: true,
+  title: 'Verify your backend logs are being recorded.',
+  content:
+    'With the JS SDKs, your logs are reported automatically from console methods. Visit the [highlight logs portal](http://app.highlight.io/logs) and check that backend logs are coming in.',
 })
 
 export const addIntegrationContent = (name: string, slug: string) =>

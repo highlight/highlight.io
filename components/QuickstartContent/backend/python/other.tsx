@@ -34,7 +34,9 @@ H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 
 
 def main():
-    return f"<h1>bad idea { 5/0 }</h1>"
+    with H.trace():
+        logging.info('hello, world!', {'favorite_number': 7})
+        return f"<h1>bad idea { 5/0 }</h1>"
 
 
 if __name__ == "__main__":
