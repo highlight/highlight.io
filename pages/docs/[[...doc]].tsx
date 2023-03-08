@@ -225,6 +225,8 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     children: [],
   }
 
+  const indexDocsSimplePaths = docPaths.filter((doc) => !doc.indexPath).map((doc) => doc.simple_path)
+
   let docid = 0
   const linkingErrors: Array<string> = []
   for (const d of docPaths) {
@@ -291,6 +293,13 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   const newerContent = resolveEmbeddedLinksFromHref(newContent, currentDoc.rel_path)
 
+  let redirect = ''
+
+  if (!indexDocsSimplePaths.includes(currentDoc.simple_path)) {
+    const target = indexDocsSimplePaths.find((path) => path.startsWith(currentDoc.simple_path))
+    redirect = target ?? ''
+  }
+
   return {
     props: {
       metadata: currentDoc.metadata,
@@ -304,6 +313,7 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       docOptions: docPaths,
       isSdkDoc: currentDoc.isSdkDoc,
       toc,
+      redirect,
     },
     revalidate: 60 * 30, // Cache response for 30 minutes
   }
@@ -629,9 +639,7 @@ const DocPage = ({
     .join(' ')
 
   useEffect(() => {
-    if (redirect != null) {
-      router.push(redirect)
-    }
+    if (redirect) router.push(redirect)
   }, [redirect, router])
 
   useEffect(() => {
@@ -732,17 +740,12 @@ const DocPage = ({
                     <Link href={breadcrumb.path} legacyBehavior>
                       {breadcrumb.title}
                     </Link>
-                  ) : breadcrumb.hasContent ? (
+                  ) : (
                     <>
                       {` / `}
                       <Link href={breadcrumb.path} legacyBehavior>
                         {breadcrumb.title}
                       </Link>
-                    </>
-                  ) : (
-                    <>
-                      {` / `}
-                      {breadcrumb.title}
                     </>
                   ),
                 )}
