@@ -85,7 +85,7 @@ export const FEATURES: { [k: string]: iFeature } = {
       },
       {
         header: 'A few lines of code. That’s it.',
-        subheader: 'Turn on Session Replay in seconds and instantly get the visibility you need.',
+        subheader: 'Install highlight.io in seconds and get session replay & frontend monitoring out of the box.',
         link: '/docs/getting-started/overview',
         linkText: 'Framework Docs',
         invert: true,
