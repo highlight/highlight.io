@@ -22,6 +22,8 @@ import { NextContent } from './frontend/next'
 import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
+import { GoLogrusContent } from './logging/go/logrus'
+import { GoOtherContent } from './logging/go/other'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
@@ -61,6 +63,8 @@ export enum QuickStartType {
   GoChi = 'go/chi',
   GoMux = 'go/mux',
   GoGin = 'go/gin',
+  GoLogrus = 'go/logrus',
+  GoOther = 'go/other',
   JSApollo = 'js/apollo',
   JSCloudflare = 'js/cloudflare',
   JSExpress = 'js/express',
@@ -94,6 +98,29 @@ export const quickStartContent = {
       [QuickStartType.GoChi]: GoChiContent,
       [QuickStartType.GoMux]: GoMuxContent,
       [QuickStartType.GoGin]: GoGinContent,
+    },
+    js: {
+      [QuickStartType.JSApollo]: JSApolloContent,
+      [QuickStartType.JSCloudflare]: JSCloudflareContent,
+      [QuickStartType.JSExpress]: JSExpressContent,
+      [QuickStartType.JSFirebase]: JSFirebaseContent,
+      [QuickStartType.JSNodejs]: JSNodeContent,
+      [QuickStartType.JStRPC]: JStRPCContent,
+    },
+  },
+  'server-logging': {
+    python: {
+      [QuickStartType.PythonFlask]: PythonFlaskContext,
+      [QuickStartType.PythonDjango]: PythonDjangoContext,
+      [QuickStartType.PythonFastAPI]: PythonFastAPIContext,
+      [QuickStartType.PythonOther]: PythonOtherContext,
+      [QuickStartType.PythonAWSFn]: PythonAWSContext,
+      [QuickStartType.PythonAzureFn]: PythonAzureContext,
+      [QuickStartType.PythonGCPFn]: PythonGCPContext,
+    },
+    go: {
+      [QuickStartType.GoLogrus]: GoLogrusContent,
+      [QuickStartType.GoOther]: GoOtherContent,
     },
     js: {
       [QuickStartType.JSApollo]: JSApolloContent,
