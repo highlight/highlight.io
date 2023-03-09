@@ -1,10 +1,9 @@
-import { HighlightLogo } from '../HighlightLogo/HighlightLogo'
-import styles from './Footer.module.scss'
-import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
-import { Typography } from '../Typography/Typography'
 import Link from 'next/link'
+import { FaGithub, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
 import { PRODUCTS } from '../../Products/products'
-import { docLink } from '../../Docs/Docs.module.scss'
+import { HighlightLogo } from '../HighlightLogo/HighlightLogo'
+import { Typography } from '../Typography/Typography'
+import styles from './Footer.module.scss'
 
 const Footer = () => {
   return (

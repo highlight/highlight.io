@@ -22,6 +22,9 @@ import { NextContent } from './frontend/next'
 import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
+import { GoLogrusContent } from './logging/go/logrus'
+import { GoOtherContent } from './logging/go/other'
+import { HTTPContent } from './logging/http'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
@@ -49,24 +52,27 @@ export enum QuickStartType {
   SelfHost = 'self-host',
   DevDeploy = 'dev-deploy',
   Other = 'other',
-  PythonFlask = 'python/flask',
-  PythonDjango = 'python/django',
-  PythonFastAPI = 'python/fastapi',
-  PythonOther = 'python/other',
-  PythonAWSFn = 'python/aws-lambda',
-  PythonAzureFn = 'python/azure-functions',
-  PythonGCPFn = 'python/google-cloud-functions',
-  GoGqlgen = 'go/qglgen',
-  GoFiber = 'go/fiber',
-  GoChi = 'go/chi',
-  GoMux = 'go/mux',
-  GoGin = 'go/gin',
-  JSApollo = 'js/apollo',
-  JSCloudflare = 'js/cloudflare',
-  JSExpress = 'js/express',
-  JSFirebase = 'js/firebase',
-  JSNodejs = 'js/nodejs',
-  JStRPC = 'js/trpc',
+  PythonFlask = 'flask',
+  PythonDjango = 'django',
+  PythonFastAPI = 'fastapi',
+  PythonOther = 'other',
+  PythonAWSFn = 'aws-lambda',
+  PythonAzureFn = 'azure-functions',
+  PythonGCPFn = 'google-cloud-functions',
+  GoGqlgen = 'gqlgen',
+  GoFiber = 'fiber',
+  GoChi = 'chi',
+  GoMux = 'mux',
+  GoGin = 'gin',
+  GoLogrus = 'logrus',
+  GoOther = 'other',
+  JSApollo = 'apollo',
+  JSCloudflare = 'cloudflare',
+  JSExpress = 'express',
+  JSFirebase = 'firebase',
+  JSNodejs = 'nodejs',
+  JStRPC = 'trpc',
+  HTTPOTLP = 'http/otlp',
 }
 
 export const quickStartContent = {
@@ -103,6 +109,13 @@ export const quickStartContent = {
       [QuickStartType.JSNodejs]: JSNodeContent,
       [QuickStartType.JStRPC]: JStRPCContent,
     },
+  },
+  'server-logging': {
+    go: {
+      [QuickStartType.GoLogrus]: GoLogrusContent,
+      [QuickStartType.GoOther]: GoOtherContent,
+    },
+    [QuickStartType.HTTPOTLP]: HTTPContent,
   },
   other: {
     [QuickStartType.SelfHost]: SelfHostContent,

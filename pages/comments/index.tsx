@@ -1,20 +1,19 @@
+import classNames from 'classnames'
 import type { NextPage } from 'next'
 import Image from 'next/legacy/image'
-import React from 'react'
+import commentStyles from '../../components/Comments/Comments.module.scss'
 import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
 import { PrimaryLink } from '../../components/common/Buttons/SecondaryButton'
 import Navbar from '../../components/common/Navbar/Navbar'
 import { Section } from '../../components/common/Section/Section'
-import classNames from 'classnames'
 import styles from '../../components/Home/Home.module.scss'
-import commentStyles from '../../components/Comments/Comments.module.scss'
 
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import Footer from '../../components/common/Footer/Footer'
+import { Meta } from '../../components/common/Head/Meta'
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
 import BlueGradient from '../../public/images/bg_blue_gradient.svg'
 import PurpleGradient from '../../public/images/bg_purple_gradient.svg'
-import Footer from '../../components/common/Footer/Footer'
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
-import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
-import { Meta } from '../../components/common/Head/Meta'
 
 const Comments: NextPage = () => {
   return (
