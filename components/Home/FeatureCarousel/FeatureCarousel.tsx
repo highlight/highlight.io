@@ -106,7 +106,7 @@ const features: Feature[] = [
     featureImage2: <HiCode className="h-[20px] w-[20px]" />,
     feature3: 'Powered by Clickhouse',
     featureImage3: <HiDatabase className="h-[20px] w-[20px]" />,
-    link: '/docs/general/product-features/logging/overview',
+    link: '/logging',
   },
   {
     name: 'Self-Hosting',
