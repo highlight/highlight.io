@@ -18,6 +18,7 @@ import { MdKeyboardReturn } from 'react-icons/md'
 import { iFeature, FEATURES } from '../components/Features/features'
 import sessionReplay2 from '../public/images/features/sessionReplay2.png'
 import sessionReplayHero from '../public/images/features/sessionReplayHero.png'
+import errorMonitoringHero from '../public/images/features/errorMonitoringHero.png'
 
 import { AnimateFeatureHeroRight, AnimateFeatureHeroXL } from '../components/Animate'
 
@@ -27,6 +28,9 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
   const subHeader2List = [
     <>
       Debug from a <span className="text-color-selected-light">user&apos;s</span> perspective.
+    </>,
+    <>
+      Uncover the issues <span className="text-color-selected-light">user&apos;s</span> face.
     </>,
   ]
 
@@ -118,7 +122,7 @@ const ShowcasePage = ({ feature }: { feature: iFeature }) => {
                 link={row.link}
                 linkText={row.linkText}
                 privacy={row.privacy || false}
-                imgSrc={row.image}
+                imgSrc={row.imgSrc || ''}
                 invert={row.invert}
                 code={row.code}
                 codeFrom={row.codeFrom}

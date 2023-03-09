@@ -25,7 +25,7 @@ const LandingInfoRow = ({
   link: string
   linkText: string
   invert?: boolean
-  imgSrc: any
+  imgSrc: string
   privacy?: boolean
   code?: string
   codeFrom?: string
@@ -37,15 +37,17 @@ const LandingInfoRow = ({
           invert ? 'lg:hidden' : ''
         } flex justify-center px-5 mt-5 w-full min-h-[280px] sm:min-h-[300px] sm:h-[400px] lg:h-auto lg:w-[570px]`}
       >
-        {privacy ? (
+        {privacy && (
           <div className="flex flex-col justify-center w-full">
             <ObfuscationSlider />
           </div>
-        ) : (
-          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" />
         )}
 
-        {!privacy && code && (
+        {imgSrc && (
+          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" width={500} height={400} />
+        )}
+
+        {code && (
           <div className="flex flex-col justify-center w-full">
             <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
           </div>
@@ -71,8 +73,9 @@ const LandingInfoRow = ({
         </div>
       </div>
       <div className={`${invert ? 'lg:flex' : ''} hidden justify-center lg:w-[570px]`}>
-        {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
-        {!privacy && code && (
+        {privacy && <ObfuscationSlider />}
+        {imgSrc && <Image src={imgSrc} alt="" width={500} height={400} />}
+        {code && (
           <div className="flex flex-col justify-center w-full">
             <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
             <Typography type="copy3" className="text-copy-on-dark mx-auto mt-1">

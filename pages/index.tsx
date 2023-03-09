@@ -8,9 +8,6 @@ import styles from '../components/Home/Home.module.scss'
 
 import HeroBugLeft from '../public/images/hero-bug-left.gif'
 import HeroBugRight from '../public/images/hero-bug-right.gif'
-import LandingInfoRow1 from '../public/images/landingInfoRow1.png'
-import LandingInfoRow2 from '../public/images/landingInfoRow2.png'
-import LandingInfoRow3 from '../public/images/landingInfoRow3.png'
 import LandingInfoRowSecurity from '../public/images/landingInfoRowSecurity.png'
 
 import { Collapse } from 'antd'
@@ -200,7 +197,7 @@ const Home: NextPage = () => {
             }
             link={'https://app.highlight.io/sign_up'}
             linkText={'Get started for free'}
-            imgSrc={LandingInfoRow1}
+            imgSrc={'/images/landingInfoRow1.png'}
             invert
           />
           <LandingInfoRow
@@ -208,14 +205,14 @@ const Home: NextPage = () => {
             desc={`We support all the fancy new frameworks and our platform is powered by open source, scalable technologies.`}
             link={'/docs/general/welcome'}
             linkText={'Read the docs'}
-            imgSrc={LandingInfoRow2}
+            imgSrc={'/images/landingInfoRow2.png'}
           />
           <LandingInfoRow
             title={`Integrations with your favorite tools.`}
             desc="Connect your favorite issue tracker, support tool, or even analytics software and we’ll give you a way to push and pull data in the right places."
             link={'/docs/general/integrations/overview'}
             linkText={'Read the docs'}
-            imgSrc={LandingInfoRow3}
+            imgSrc={'/images/landingInfoRow3.png'}
             invert
           />
         </div>

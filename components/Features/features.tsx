@@ -1,8 +1,13 @@
 import sessionscreenshot from '../../public/images/sessionscreenshot.png'
 import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
-import sessionReplay2 from '../../public/images/features/sessionReplay2.png'
-import sessionReplay3 from '../../public/images/landingInfoRow1.png'
-import sessionReplay4 from '../../public/images/landingInfoRow2.png'
+const sessionReplay2 = '/images/features/sessionReplay2.png'
+const sessionReplay3 = '/images/landingInfoRow1.png'
+const errorMonitoring1 = '/images/features/errorMonitoring1.png'
+const errorMonitoring2 = '/images/features/errorMonitoring2.png'
+const sessionReplay4 = '/images/landingInfoRow2.png'
+
+import errorMonitoringHero from '../../public/images/features/errorMonitoringHero.png'
+
 import { StaticImageData } from 'next/image'
 
 type InfoRow = {
@@ -10,7 +15,7 @@ type InfoRow = {
   subheader: string
   link: string
   linkText: string
-  image?: StaticImageData //Shows the privacy slider if null
+  imgSrc?: string //Shows the privacy slider if null
   invert: boolean //Image on right
   code?: string
   codeFrom?: string
@@ -34,6 +39,17 @@ const reactSnippet: string = `import { H } from 'highlight.run';
 H.init('<YOUR_PROJECT_ID>', {
     tracingOrigins: true,
 });
+`
+
+const nodeSnippet: string = `import { H } from '@highlight-run/node'
+
+H.init({projectID: 'YOUR_PROJECT_ID')
+
+const onError = (request, error) => {
+  const parsed = H.parseHeaders(request.headers)
+  H.consumeError(error, parsed.secureSessionId, parsed.requestId)
+}
+
 `
 
 export const FEATURES: { [k: string]: iFeature } = {
@@ -62,7 +78,7 @@ export const FEATURES: { [k: string]: iFeature } = {
           'Console logs, errors, network requests, and more. Get full context around the issues on your web application.',
         link: '/docs/getting-started/client-sdk/replay-configuration/overview',
         linkText: 'Read the Docs',
-        image: sessionReplay2,
+        imgSrc: sessionReplay2,
         invert: false,
       },
       {
@@ -71,7 +87,7 @@ export const FEATURES: { [k: string]: iFeature } = {
           'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side log.',
         link: 'https://app.highlight.io/?sign_up=1',
         linkText: 'Get started for free',
-        image: sessionReplay3,
+        imgSrc: sessionReplay3,
         invert: true,
       },
       {
@@ -80,7 +96,7 @@ export const FEATURES: { [k: string]: iFeature } = {
           'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
         link: '/docs/getting-started/overview',
         linkText: 'Read the docs',
-        image: sessionReplay4,
+        imgSrc: sessionReplay4,
         invert: false,
       },
       {
@@ -91,6 +107,62 @@ export const FEATURES: { [k: string]: iFeature } = {
         invert: true,
         code: reactSnippet,
         codeFrom: 'React.js',
+      },
+    ],
+  },
+
+  'error-monitoring': {
+    slug: 'error-monitoring',
+    header: 'Error monitoring for today’s developer.',
+    subheader: 'Error and exception monitoring built for modern web apps. ',
+    docsLink: '/docs/general/product-features/error-monitoring/overview',
+    slantedImage: errorMonitoringHero,
+    regularImage: sessionscreenshot,
+    header2Selection: 1,
+    subheader2: 'Reproduce hard-to-crack bugs with error monitoring across your stack.',
+    infoRows: [
+      {
+        header: 'Stacktrace enhancement out of the box.',
+        subheader: 'Enhanced stacktraces from your client and server-side errors, with optional uploading in CI.',
+        link: '/docs/getting-started/client-sdk/replay-configuration/privacy',
+        linkText: 'Read the Docs',
+        imgSrc: '/images/features/errorMonitoring1.png',
+        invert: true,
+      },
+      {
+        header: 'User context from the get-go.',
+        subheader: 'Understand the actual users affected by a given error. Keep your customers happy. ',
+        link: '/docs/getting-started/client-sdk/replay-configuration/overview',
+        linkText: 'Read the Docs',
+        imgSrc: errorMonitoring2,
+        invert: false,
+      },
+      {
+        header: 'From a “click” to a server-side error.',
+        subheader:
+          'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side error.',
+        link: 'https://app.highlight.io/?sign_up=1',
+        linkText: 'Get started for free',
+        imgSrc: sessionReplay3,
+        invert: true,
+      },
+      {
+        header: 'Support for all the modern frameworks.',
+        subheader:
+          'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
+        link: '/docs/getting-started/overview',
+        linkText: 'Read the docs',
+        imgSrc: sessionReplay4,
+        invert: false,
+      },
+      {
+        header: 'A few lines of code. That’s it.',
+        subheader: 'Install highlight.io in seconds and get error monitoring out of the box.',
+        link: '/docs/getting-started/overview',
+        linkText: 'Framework Docs',
+        invert: true,
+        code: nodeSnippet,
+        codeFrom: 'Node.js',
       },
     ],
   },

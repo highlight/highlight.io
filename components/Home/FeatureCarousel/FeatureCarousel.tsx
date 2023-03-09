@@ -90,7 +90,7 @@ const features: Feature[] = [
     featureImage2: <HiViewBoards className="h-[20px] w-[20px]" />,
     feature3: 'Powered by Open Telemetry',
     featureImage3: <ExclamationCircleFilled className="h-[20px] w-[20px]" />,
-    link: '/docs/general/product-features/error-monitoring/overview',
+    link: '/error-monitoring',
   },
   {
     name: 'Logging',
