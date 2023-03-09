@@ -1,12 +1,15 @@
 import sessionscreenshot from '../../public/images/sessionscreenshot.png'
 import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
+import errorMonitoringHero from '../../public/images/features/errorMonitoringHero.png'
+import loggingHero from '../../public/images/features/loggingHero.png'
+
 const sessionReplay2 = '/images/features/sessionReplay2.png'
 const sessionReplay3 = '/images/landingInfoRow1.png'
+const sessionReplay4 = '/images/landingInfoRow2.png'
 const errorMonitoring1 = '/images/features/errorMonitoring1.png'
 const errorMonitoring2 = '/images/features/errorMonitoring2.png'
-const sessionReplay4 = '/images/landingInfoRow2.png'
-
-import errorMonitoringHero from '../../public/images/features/errorMonitoringHero.png'
+const logging1 = '/images/features/logging1.png'
+const logging2 = '/images/features/logging2.png'
 
 import { StaticImageData } from 'next/image'
 
@@ -114,7 +117,7 @@ export const FEATURES: { [k: string]: iFeature } = {
   'error-monitoring': {
     slug: 'error-monitoring',
     header: 'Error monitoring for today’s developer.',
-    subheader: 'Error and exception monitoring built for modern web apps. ',
+    subheader: 'Error and exception monitoring built for modern web apps.',
     docsLink: '/docs/general/product-features/error-monitoring/overview',
     slantedImage: errorMonitoringHero,
     regularImage: sessionscreenshot,
@@ -126,12 +129,12 @@ export const FEATURES: { [k: string]: iFeature } = {
         subheader: 'Enhanced stacktraces from your client and server-side errors, with optional uploading in CI.',
         link: '/docs/getting-started/client-sdk/replay-configuration/privacy',
         linkText: 'Read the Docs',
-        imgSrc: '/images/features/errorMonitoring1.png',
+        imgSrc: errorMonitoring1,
         invert: true,
       },
       {
         header: 'User context from the get-go.',
-        subheader: 'Understand the actual users affected by a given error. Keep your customers happy. ',
+        subheader: 'Understand the actual users affected by a given error. Keep your customers happy.',
         link: '/docs/getting-started/client-sdk/replay-configuration/overview',
         linkText: 'Read the Docs',
         imgSrc: errorMonitoring2,
@@ -158,6 +161,63 @@ export const FEATURES: { [k: string]: iFeature } = {
       {
         header: 'A few lines of code. That’s it.',
         subheader: 'Install highlight.io in seconds and get error monitoring out of the box.',
+        link: '/docs/getting-started/overview',
+        linkText: 'Framework Docs',
+        invert: true,
+        code: nodeSnippet,
+        codeFrom: 'Node.js',
+      },
+    ],
+  },
+
+  logging: {
+    slug: 'logging',
+    header: 'Logging for modern web applications.',
+    subheader: 'Search for and query the logs across your full-stack web app.',
+    docsLink: '/docs/general/product-features/error-monitoring/overview',
+    slantedImage: loggingHero,
+    regularImage: sessionscreenshot,
+    header2Selection: 2,
+    subheader2: 'All the tools you need to search, analyze and set alerts for your web app’s logs.',
+    infoRows: [
+      {
+        header: 'Alerts on log patterns across your stack.',
+        subheader: 'Create log alerts by setting log patterns and thresholds for real-time logs.',
+        link: '/docs/general/product-features/logging/overview',
+        linkText: 'Read the Docs',
+        imgSrc: logging1,
+        invert: true,
+      },
+      {
+        header: 'Powerful search. Powered by ClickHouse.',
+        subheader:
+          'Perform fine-grained searches across all of your logs. Powered by ClickHouse, an industry leading time-series database.',
+        link: '/docs/general/product-features/logging/overview',
+        linkText: 'Read the Docs',
+        imgSrc: logging2,
+        invert: false,
+      },
+      {
+        header: 'From a “click” to a server-side error.',
+        subheader:
+          'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side error.',
+        link: '/docs/general/product-features/logging/overview',
+        linkText: 'Read the docs',
+        imgSrc: sessionReplay3,
+        invert: true,
+      },
+      {
+        header: 'Support for all the modern frameworks.',
+        subheader:
+          'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
+        link: '/docs/getting-started/overview',
+        linkText: 'Read the docs',
+        imgSrc: sessionReplay4,
+        invert: false,
+      },
+      {
+        header: 'A few lines of code. That’s it.',
+        subheader: 'Install highlight.io in seconds and get logging out of the box.',
         link: '/docs/getting-started/overview',
         linkText: 'Framework Docs',
         invert: true,
