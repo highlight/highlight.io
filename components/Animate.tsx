@@ -113,7 +113,7 @@ export const AnimateFeatureHeroRight = ({
         duration: 0.4,
         delay: delay || 0,
       }}
-      className="absolute lg:-translate-y-96 xl:-translate-y-16 lg:w-[550px] xl:w-[650px] 2xl:w-[400px]"
+      className="absolute lg:-translate-y-96 xl:-translate-y-16 lg:w-[550px] xl:w-[650px] 2xl:w-[700px] ultra:w-[500px]"
     >
       {children}
     </motion.div>
@@ -137,7 +137,7 @@ export const AnimateFeatureHeroXL = ({
         duration: 0.4,
         delay: delay || 0,
       }}
-      className="absolute 2xl:w-[550px] h-full flex flex-col justify-center"
+      className="absolute ultra:w-[650px] translate-x-24 translate-y-8 h-full flex flex-col justify-center"
     >
       {children}
     </motion.div>
