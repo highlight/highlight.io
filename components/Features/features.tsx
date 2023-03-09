@@ -1,7 +1,9 @@
-import sessionscreenshot from '../../public/images/sessionscreenshot.png'
 import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 import errorMonitoringHero from '../../public/images/features/errorMonitoringHero.png'
 import loggingHero from '../../public/images/features/loggingHero.png'
+import sessionscreenshot from '../../public/images/sessionscreenshot.png'
+import loggingscreenshot from '../../public/images/loggingscreenshot.png'
+import monitoringscreenshot from '../../public/images/monitoringscreenshot.png'
 
 const sessionReplay2 = '/images/features/sessionReplay2.png'
 const sessionReplay3 = '/images/landingInfoRow1.png'
@@ -120,12 +122,12 @@ export const FEATURES: { [k: string]: iFeature } = {
     subheader: 'Error and exception monitoring built for modern web apps.',
     docsLink: '/docs/general/product-features/error-monitoring/overview',
     slantedImage: errorMonitoringHero,
-    regularImage: sessionscreenshot,
+    regularImage: monitoringscreenshot,
     header2Selection: 1,
     subheader2: 'Reproduce hard-to-crack bugs with error monitoring across your stack.',
     infoRows: [
       {
-        header: 'Stacktrace enhancement out of the box.',
+        header: 'Instant Stacktrace Enhancements.',
         subheader: 'Enhanced stacktraces from your client and server-side errors, with optional uploading in CI.',
         link: '/docs/getting-started/client-sdk/replay-configuration/privacy',
         linkText: 'Read the Docs',
@@ -176,7 +178,7 @@ export const FEATURES: { [k: string]: iFeature } = {
     subheader: 'Search for and query the logs across your full-stack web app.',
     docsLink: '/docs/general/product-features/error-monitoring/overview',
     slantedImage: loggingHero,
-    regularImage: sessionscreenshot,
+    regularImage: loggingscreenshot,
     header2Selection: 2,
     subheader2: 'All the tools you need to search, analyze and set alerts for your web app’s logs.',
     infoRows: [
