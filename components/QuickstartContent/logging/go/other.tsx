@@ -10,12 +10,12 @@ export const GoOtherLogContent: QuickStartContent = {
       title: 'Call the Highlight logging SDK.',
       content: '',
       code: {
-        text: `import (
+        text: `package main
+        
+import (
   "context"
   "github.com/highlight/highlight/sdk/highlight-go"
   "github.com/highlight/highlight/sdk/highlight-go/log"
-  "github.com/sirupsen/logrus"
-  "go.opentelemetry.io/otel/attribute"
 )
 
 func main() {
