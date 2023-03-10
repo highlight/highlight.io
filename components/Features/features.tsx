@@ -48,13 +48,18 @@ H.init('<YOUR_PROJECT_ID>', {
 
 const nodeSnippet: string = `import { H } from '@highlight-run/node'
 
-H.init({projectID: 'YOUR_PROJECT_ID')
+H.init({projectID: 'YOUR_PROJECT_ID'})
 
 const onError = (request, error) => {
   const parsed = H.parseHeaders(request.headers)
   H.consumeError(error, parsed.secureSessionId, parsed.requestId)
 }
 
+`
+
+const pythonSnippet: string = `import highlight_io
+
+H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 `
 
 export const FEATURES: { [k: string]: iFeature } = {
@@ -222,8 +227,8 @@ export const FEATURES: { [k: string]: iFeature } = {
         link: '/docs/getting-started/overview',
         linkText: 'Framework Docs',
         invert: true,
-        code: nodeSnippet,
-        codeFrom: 'Node.js',
+        code: pythonSnippet,
+        codeFrom: 'Python',
       },
     ],
   },
