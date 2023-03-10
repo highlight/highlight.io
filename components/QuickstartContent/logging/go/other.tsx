@@ -34,7 +34,7 @@ func main() {
   hlog.WithContext(context.TODO()).Warn("oh no...")
   
   // extract session id and request id from our frontend sdk x-highlight-request header
-  hlog.WithSession("a1b2c3").WithRequest("d4e5f6").Info("error handling frontend request with highlight context")
+  hlog.WithContext(context.TODO()).WithSession("a1b2c3").WithRequest("d4e5f6").Info("error handling frontend request with highlight context")
 }`,
         language: 'go',
       },
