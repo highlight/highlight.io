@@ -1,9 +1,9 @@
+import { fullstackMappingLink } from '../../frontend/shared-snippets'
 import { QuickStartStep } from '../../QuickstartContent'
 
 export const setupFrontendSnippet: QuickStartStep = {
   title: 'Setup your frontend Highlight snippet with tracingOrigins.',
-  content:
-    'Make sure that you followed the [fullstack mapping guide](../../../getting-started/frontend-backend-mapping#How-can-I-start-using-this).',
+  content: `Make sure that you followed the [fullstack mapping guide](${fullstackMappingLink}#How-can-I-start-using-this).`,
   code: {
     text: `H.init("<YOUR_PROJECT_ID>", {
     tracingOrigins: ['localhost', 'example.myapp.com/backend'],
@@ -11,7 +11,7 @@ export const setupFrontendSnippet: QuickStartStep = {
       enabled: true,
       recordHeadersAndBody: true,
     },
-  }); 
+  });
 `,
     language: 'js',
   },
