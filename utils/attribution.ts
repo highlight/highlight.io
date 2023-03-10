@@ -1,24 +1,22 @@
 import Cookies from 'js-cookie'
 
 interface Referrer {
-  utm_source: string | null
-  utm_medium: string | null
-  utm_campaign: string | null
-  utm_content: string | null
-  utm_term: string | null
-  device: string | null
-  gclid: string | null
-  referrer: string | null
+  utm_source?: string | null
+  utm_medium?: string | null
+  utm_campaign?: string | null
+  utm_content?: string | null
+  utm_term?: string | null
+  device?: string | null
+  gclid?: string | null
+  referrer?: string | null
 }
 
 // Same as what we have in frontend. Need to keep these in sync.
 export const setAttributionData = () => {
-  let referrer: Referrer
+  let referrer: Referrer = {}
   const prevRef = Cookies.get('referrer')
-  if (prevRef) {
-    referrer = JSON.parse(prevRef) as Referrer
-  } else {
-    const urlParams = new URLSearchParams(window.location.search)
+  const urlParams = new URLSearchParams(window.location.search)
+  if (urlParams.get('utm_source')) {
     referrer = {
       utm_source: urlParams.get('utm_source'),
       utm_medium: urlParams.get('utm_medium'),
@@ -29,6 +27,8 @@ export const setAttributionData = () => {
       gclid: urlParams.get('gclid'),
       referrer: urlParams.get('ref') || document.referrer,
     }
+  } else if (prevRef) {
+    referrer = JSON.parse(prevRef) as Referrer
   }
-  Cookies.set('referrer', JSON.stringify(referrer), { domain: 'highlight.io' })
+  Cookies.set('referrer', JSON.stringify(referrer), { domain: 'localhost' })
 }
