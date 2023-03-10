@@ -10,12 +10,12 @@ export const GoOtherLogContent: QuickStartContent = {
       title: 'Call the Highlight logging SDK.',
       content: '',
       code: {
-        text: `import (
+        text: `package main
+        
+import (
   "context"
   "github.com/highlight/highlight/sdk/highlight-go"
   "github.com/highlight/highlight/sdk/highlight-go/log"
-  "github.com/sirupsen/logrus"
-  "go.opentelemetry.io/otel/attribute"
 )
 
 func main() {
@@ -34,7 +34,7 @@ func main() {
   hlog.WithContext(context.TODO()).Warn("oh no...")
   
   // extract session id and request id from our frontend sdk x-highlight-request header
-  hlog.WithSession("a1b2c3").WithRequest("d4e5f6").Info("error handling frontend request with highlight context")
+  hlog.WithContext(context.TODO()).WithSession("a1b2c3").WithRequest("d4e5f6").Info("error handling frontend request with highlight context")
 }`,
         language: 'go',
       },
