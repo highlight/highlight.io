@@ -23,12 +23,15 @@ import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
 import { VueContent } from './frontend/vue'
 import { GoLogrusContent } from './logging/go/logrus'
-import { GoOtherContent } from './logging/go/other'
+import { GoOtherLogContent } from './logging/go/other'
 import { HTTPContent } from './logging/http'
+import { JSOtherLogContent } from './logging/js/other'
+import { PythonOtherLogContent } from './logging/python/other'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
 
 export type QuickStartContent = {
+  title: string
   subtitle: string
   entries: Array<QuickStartStep>
 }
@@ -111,9 +114,15 @@ export const quickStartContent = {
     },
   },
   'server-logging': {
+    python: {
+      [QuickStartType.PythonOther]: PythonOtherLogContent,
+    },
     go: {
       [QuickStartType.GoLogrus]: GoLogrusContent,
-      [QuickStartType.GoOther]: GoOtherContent,
+      [QuickStartType.GoOther]: GoOtherLogContent,
+    },
+    js: {
+      [QuickStartType.JSNodejs]: JSOtherLogContent,
     },
     [QuickStartType.HTTPOTLP]: HTTPContent,
   },

@@ -2,7 +2,6 @@ import { QuickStartContent, QuickStartStep } from '../QuickstartContent'
 import {
   configureSourcemapsCI,
   identifySnippet,
-  initializeSnippet,
   sessionReplayFeaturesLink,
   setupBackendSnippet,
   verifySnippet,
@@ -29,6 +28,7 @@ export const initializePluginSnippet: QuickStartStep = {
 }
 
 export const GatsbyContent: QuickStartContent = {
+  title: 'Gatsby',
   subtitle: 'Learn how to set up highlight.io with your Gatsby application.',
   entries: [
     {

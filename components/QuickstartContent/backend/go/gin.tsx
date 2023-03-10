@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { customGoError, goGetSnippet, initializeGoSdk, setUpLogging, verifyCustomError } from './shared-snippets'
 
 export const GoGinContent: QuickStartContent = {
+  title: 'Go Gin',
   subtitle: 'Learn how to set up highlight.io on your Go gqlgen backend.',
   entries: [
     frontendInstallSnippet,

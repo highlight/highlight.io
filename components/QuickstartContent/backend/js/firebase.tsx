@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JSFirebaseContent: QuickStartContent = {
+  title: 'Firebase',
   subtitle: 'Learn how to set up highlight.io in Firebase Cloud Functions.',
   entries: [
     frontendInstallSnippet,

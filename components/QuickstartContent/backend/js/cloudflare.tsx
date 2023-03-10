@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { addIntegrationContent, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JSCloudflareContent: QuickStartContent = {
+  title: 'Cloudflare Workers',
   subtitle: 'Learn how to set up highlight.io in Cloudflare Workers.',
   entries: [
     frontendInstallSnippet,

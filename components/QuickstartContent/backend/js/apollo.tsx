@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { initializeNodeSDK, jsGetSnippet, manualError, setupLogging, verifyError } from './shared-snippets'
 
 export const JSApolloContent: QuickStartContent = {
+  title: 'Apollo',
   subtitle: 'Learn how to set up highlight.io on your Apollo Server backend.',
   entries: [
     frontendInstallSnippet,

@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonDjangoContext: QuickStartContent = {
+  title: 'Python Django',
   subtitle: 'Learn how to set up highlight.io on your Python Django backend API.',
   entries: [
     setupFrontendSnippet,

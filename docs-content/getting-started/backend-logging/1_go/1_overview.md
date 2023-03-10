@@ -1,6 +1,6 @@
 ---
-heading: Getting Started in Go
-title: Getting Started in Go
+heading: Logging in Go
+title: Logging in Go
 slug: go
 createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z

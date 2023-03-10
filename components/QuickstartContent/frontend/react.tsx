@@ -17,6 +17,7 @@ ReactDOM.render(
 );`
 
 export const ReactContent: QuickStartContent = {
+  title: 'React.js',
   subtitle: 'Learn how to set up highlight.io with your React application.',
   entries: [
     {
