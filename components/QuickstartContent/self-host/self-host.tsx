@@ -1,6 +1,7 @@
 import { QuickStartContent } from '../QuickstartContent'
 
 export const SelfHostContent: QuickStartContent = {
+  title: 'Self-hosted (Hobby) Deployment',
   subtitle: 'Learn how to set up the self-hosted hobby deployment of highlight.io.',
   entries: [
     {
