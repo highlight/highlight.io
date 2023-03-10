@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JStRPCContent: QuickStartContent = {
+  title: 'tRPC',
   subtitle: 'Learn how to set up highlight.io in tRPC.',
   entries: [
     frontendInstallSnippet,

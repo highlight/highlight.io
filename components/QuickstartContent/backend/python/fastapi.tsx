@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonFastAPIContext: QuickStartContent = {
+  title: 'Python FastAPI',
   subtitle: 'Learn how to set up highlight.io on your Python FastAPI backend API.',
   entries: [
     setupFrontendSnippet,

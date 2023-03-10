@@ -2,13 +2,13 @@ import { QuickStartContent } from '../QuickstartContent'
 import {
   configureSourcemapsCI,
   identifySnippet,
-  initializeSnippet,
   sessionReplayFeaturesLink,
   setupBackendSnippet,
   verifySnippet,
 } from './shared-snippets'
 
 export const OtherContext: QuickStartContent = {
+  title: 'HTML/JS',
   subtitle: 'Learn how to set up highlight.io with any browser-based framework.',
   entries: [
     {

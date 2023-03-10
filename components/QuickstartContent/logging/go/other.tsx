@@ -1,15 +1,17 @@
 import { QuickStartContent } from '../../QuickstartContent'
 import { previousInstallSnippet, verifyLogs } from '../shared-snippets'
 
-export const GoOtherContent: QuickStartContent = {
+export const GoOtherLogContent: QuickStartContent = {
+  title: 'Go',
   subtitle: 'Learn how to set up highlight.io Go log ingestion without a logging library.',
   entries: [
-    previousInstallSnippet,
+    previousInstallSnippet('go'),
     {
       title: 'Call the Highlight logging SDK.',
       content: '',
       code: {
         text: `import (
+  "context"
   "github.com/highlight/highlight/sdk/highlight-go"
   "github.com/highlight/highlight/sdk/highlight-go/log"
   "github.com/sirupsen/logrus"
@@ -17,17 +19,22 @@ export const GoOtherContent: QuickStartContent = {
 )
 
 func main() {
+  // setup the highlight SDK
+  highlight.SetProjectID("YOUR_PROJECT_ID")
+  highlight.Start()
+  defer highlight.Stop()
+	
   // set whether you want highlight printing logs to console
-  highlight.SetLogOut(true)
+  hlog.SetOutput(true)
+  hlog.SetOutputLevel(hlog.DebugLevel)
+  
+  // use log sdk
   hlog.Info("welcome to highlight.io")
-  hlog.Warn("oh no...")
+  // if using a web framework integration, pass the request context along to provide headers to our sdk
+  hlog.WithContext(context.TODO()).Warn("oh no...")
   
   // extract session id and request id from our frontend sdk x-highlight-request header
-  hlog.Error(
-    "error handling frontend request with highlight context", 
-    attribute.String(highlight.SessionIDAttribute, "..."), 
-    attribute.String(highlight.RequestIDAttribute, "..."),
-    )
+  hlog.WithSession("a1b2c3").WithRequest("d4e5f6").Info("error handling frontend request with highlight context")
 }`,
         language: 'go',
       },

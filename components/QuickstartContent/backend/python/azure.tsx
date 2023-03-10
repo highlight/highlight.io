@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonAzureContext: QuickStartContent = {
+  title: 'Python Azure Functions',
   subtitle: 'Learn how to set up highlight.io with Azure Functions.',
   entries: [
     setupFrontendSnippet,
