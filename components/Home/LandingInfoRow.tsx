@@ -6,6 +6,7 @@ import { Typography } from '../common/Typography/Typography'
 import { PrimaryButton } from '../common/Buttons/PrimaryButton'
 import { ObfuscationSlider } from './ObfuscationSlider/ObfuscationSlider'
 import { HighlightCodeBlock } from '../Docs/HighlightCodeBlock/HighlightCodeBlock'
+import Link from 'next/link'
 
 //Component for the image/text row for the footer of the product page
 //invert puts the image on the right side of the text
@@ -25,7 +26,7 @@ const LandingInfoRow = ({
   link: string
   linkText: string
   invert?: boolean
-  imgSrc: any
+  imgSrc: string
   privacy?: boolean
   code?: string
   codeFrom?: string
@@ -37,15 +38,17 @@ const LandingInfoRow = ({
           invert ? 'lg:hidden' : ''
         } flex justify-center px-5 mt-5 w-full min-h-[280px] sm:min-h-[300px] sm:h-[400px] lg:h-auto lg:w-[570px]`}
       >
-        {privacy ? (
+        {privacy && (
           <div className="flex flex-col justify-center w-full">
             <ObfuscationSlider />
           </div>
-        ) : (
-          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" />
         )}
 
-        {!privacy && code && (
+        {imgSrc && (
+          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" width={500} height={400} />
+        )}
+
+        {code && (
           <div className="flex flex-col justify-center w-full">
             <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
           </div>
@@ -71,12 +74,16 @@ const LandingInfoRow = ({
         </div>
       </div>
       <div className={`${invert ? 'lg:flex' : ''} hidden justify-center lg:w-[570px]`}>
-        {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
-        {!privacy && code && (
+        {privacy && <ObfuscationSlider />}
+        {imgSrc && <Image src={imgSrc} alt="" width={500} height={400} />}
+        {code && (
           <div className="flex flex-col justify-center w-full">
             <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
             <Typography type="copy3" className="text-copy-on-dark mx-auto mt-1">
-              Above Example in {codeFrom}
+              Above Example in {codeFrom}{' '}
+              <Link className="ml-1 font-medium" href="/docs/getting-started/overview">
+                Other Frameworks →
+              </Link>
             </Typography>
           </div>
         )}

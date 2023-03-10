@@ -12,6 +12,7 @@ import styles from './Navbar.module.scss'
 import ResourceDropdown from './ResourceDropdown'
 
 import '@docsearch/css'
+import FeatureDropdown from './FeatureDropdown'
 
 const Navbar = ({
   hideFreeTrialText,
@@ -136,11 +137,9 @@ const Navbar = ({
             )}
             {!isDocsPage && (
               <div className={classNames(styles.navContainer, styles.header, styles.headerCenter)}>
+                <FeatureDropdown isOpen={scrolled && !fixed} />
                 <Link href="/pricing" className={styles.headerButton}>
                   <Typography type="copy2">Pricing</Typography>
-                </Link>
-                <Link href="/customers" className={styles.headerButton}>
-                  <Typography type="copy2">Customers</Typography>
                 </Link>
                 <Link href="/blog" className={styles.headerButton}>
                   <Typography type="copy2">Blog</Typography>

@@ -21,13 +21,13 @@ const FeatureDropdown = ({ isOpen }: { isOpen?: boolean }) => {
     {
       title: 'Error Monitoring',
       icon: <Icons.HiTerminal className={styles.copyOnLight} />,
-      link: '/session-replay',
+      link: '/error-monitoring',
       sameTab: true,
     },
     {
       title: 'Logging',
       icon: <Icons.HiLightningBolt className={styles.copyOnLight} />,
-      link: '/session-replay',
+      link: '/logging',
       sameTab: true,
     },
   ]
