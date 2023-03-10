@@ -9,6 +9,7 @@ interface Referrer {
   device?: string | null
   gclid?: string | null
   referrer?: string | null
+  documentReferrer?: string | null
 }
 
 // Same as what we have in frontend. Need to keep these in sync.
@@ -25,10 +26,11 @@ export const setAttributionData = () => {
       utm_term: urlParams.get('utm_term'),
       device: urlParams.get('device'),
       gclid: urlParams.get('gclid'),
-      referrer: urlParams.get('ref') || document.referrer,
+      referrer: urlParams.get('ref'),
     }
   } else if (prevRef) {
     referrer = JSON.parse(prevRef) as Referrer
   }
-  Cookies.set('referrer', JSON.stringify(referrer), { domain: 'localhost' })
+  referrer.documentReferrer = document.referrer
+  Cookies.set('referrer', JSON.stringify(referrer), { domain: 'highlight.io' })
 }
