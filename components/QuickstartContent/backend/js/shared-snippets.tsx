@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartStep } from '../../QuickstartContent'
 
 export const jsGetSnippet: (slug: string) => QuickStartStep = (slug) => ({
@@ -10,7 +11,7 @@ yarn add @highlight-run/${slug}
 # with pnpm
 pnpm add @highlight-run/${slug}
 
-# with npm 
+# with npm
 npm install @highlight-run/${slug}`,
     language: 'bash',
   },
@@ -18,7 +19,7 @@ npm install @highlight-run/${slug}`,
 
 export const initializeNodeSDK: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Initialize the Highlight JS SDK.',
-  content: `Initialize the [Highlight JS SDK](../../../sdk/nodejs) with your project ID.`,
+  content: `Initialize the [Highlight JS SDK](${siteUrl('/docs/sdk/nodejs')}) with your project ID.`,
   code: {
     text: `import { H } from '@highlight-run/${slug}'
 
@@ -59,4 +60,4 @@ export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
 })
 
 export const addIntegrationContent = (name: string, slug: string) =>
-  `Use the [${name}](../../../sdk/${slug}) in your response handler.`
+  `Use the [${name}](${siteUrl(`/docs/sdk/${slug}`)}) in your response handler.`
