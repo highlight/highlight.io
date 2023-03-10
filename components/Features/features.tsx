@@ -97,8 +97,7 @@ export const FEATURES: { [k: string]: iFeature } = {
       },
       {
         header: 'Support for all the modern frameworks.',
-        subheader:
-          'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
+        subheader: "Whether it's React, Angular, or even vanilla JS, we got you covered.",
         link: '/docs/getting-started/overview',
         linkText: 'Read the docs',
         imgSrc: sessionReplay4,
@@ -129,7 +128,7 @@ export const FEATURES: { [k: string]: iFeature } = {
       {
         header: 'Instant Stacktrace Enhancements.',
         subheader: 'Enhanced stacktraces from your client and server-side errors, with optional uploading in CI.',
-        link: '/docs/getting-started/client-sdk/replay-configuration/privacy',
+        link: '/docs/general/product-features/error-monitoring/sourcemaps',
         linkText: 'Read the Docs',
         imgSrc: errorMonitoring1,
         invert: true,
@@ -137,7 +136,7 @@ export const FEATURES: { [k: string]: iFeature } = {
       {
         header: 'User context from the get-go.',
         subheader: 'Understand the actual users affected by a given error. Keep your customers happy.',
-        link: '/docs/getting-started/client-sdk/replay-configuration/overview',
+        link: '/docs/general/welcome',
         linkText: 'Read the Docs',
         imgSrc: errorMonitoring2,
         invert: false,
@@ -154,7 +153,7 @@ export const FEATURES: { [k: string]: iFeature } = {
       {
         header: 'Support for all the modern frameworks.',
         subheader:
-          'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
+          'Whether it’s React, Angular, or even vanilla JS, we got you covered. Get started with just a few lines of code.',
         link: '/docs/getting-started/overview',
         linkText: 'Read the docs',
         imgSrc: sessionReplay4,
@@ -162,7 +161,7 @@ export const FEATURES: { [k: string]: iFeature } = {
       },
       {
         header: 'A few lines of code. That’s it.',
-        subheader: 'Install highlight.io in seconds and get error monitoring out of the box.',
+        subheader: 'Turn on Session Replay in seconds and instantly get the visibility you need.',
         link: '/docs/getting-started/overview',
         linkText: 'Framework Docs',
         invert: true,
@@ -203,15 +202,15 @@ export const FEATURES: { [k: string]: iFeature } = {
         header: 'From a “click” to a server-side error.',
         subheader:
           'Visualize a complete, cohesive view of your entire stack. All the way from a user clicking a button to a server-side error.',
-        link: '/docs/general/product-features/logging/overview',
-        linkText: 'Read the docs',
+        link: 'https://app.highlight.io/?sign_up=1',
+        linkText: 'Get started for free',
         imgSrc: sessionReplay3,
         invert: true,
       },
       {
         header: 'Support for all the modern frameworks.',
         subheader:
-          'Whether its React, Angular, or even a framework you built yourself. As long as it runs Javascript, we got you covered.',
+          'Whether its Python, Golang, or even vanilla JS, we got you covered. Get started with just a few lines of code.',
         link: '/docs/getting-started/overview',
         linkText: 'Read the docs',
         imgSrc: sessionReplay4,

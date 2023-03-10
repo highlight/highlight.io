@@ -6,6 +6,7 @@ import { Typography } from '../common/Typography/Typography'
 import { PrimaryButton } from '../common/Buttons/PrimaryButton'
 import { ObfuscationSlider } from './ObfuscationSlider/ObfuscationSlider'
 import { HighlightCodeBlock } from '../Docs/HighlightCodeBlock/HighlightCodeBlock'
+import Link from 'next/link'
 
 //Component for the image/text row for the footer of the product page
 //invert puts the image on the right side of the text
@@ -79,7 +80,10 @@ const LandingInfoRow = ({
           <div className="flex flex-col justify-center w-full">
             <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
             <Typography type="copy3" className="text-copy-on-dark mx-auto mt-1">
-              Above Example in {codeFrom}
+              Above Example in {codeFrom}{' '}
+              <Link className="ml-1 font-medium" href="/docs/getting-started/overview">
+                Other Frameworks →
+              </Link>
             </Typography>
           </div>
         )}
