@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonGCPContext: QuickStartContent = {
+  title: 'Python Google Cloud Functions',
   subtitle: 'Learn how to set up highlight.io on Google Cloud Functions.',
   entries: [
     setupFrontendSnippet,

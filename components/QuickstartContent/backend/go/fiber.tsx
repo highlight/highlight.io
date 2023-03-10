@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { customGoError, goGetSnippet, initializeGoSdk, setUpLogging, verifyGoErrors } from './shared-snippets'
 
 export const GoFiberContent: QuickStartContent = {
+  title: 'Go Fiber',
   subtitle: 'Learn how to set up highlight.io on your Go Fiber backend.',
   entries: [
     frontendInstallSnippet,

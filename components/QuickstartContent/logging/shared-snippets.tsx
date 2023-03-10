@@ -1,10 +1,9 @@
 import { QuickStartStep } from '../QuickstartContent'
 
-export const previousInstallSnippet: QuickStartStep = {
+export const previousInstallSnippet: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Set up your frontend and backend highlight.io integration.',
-  content:
-    "First, make sure you've followed the [frontend getting started](../../../getting-started/frontend) and [backend getting started](../../../getting-started/backend) guides.",
-}
+  content: `First, make sure you've followed the [frontend getting started](../../../getting-started/frontend) and [backend getting started](../../../getting-started/backend-sdk/${slug}/overview) guides.`,
+})
 
 export const verifyLogs: QuickStartStep = {
   title: 'Verify your backend logs are being recorded.',

@@ -1,6 +1,6 @@
 ---
-heading: Getting Started in Javascript / Typescript
-title: Getting Started in Javascript / Typescript
+heading: Error Monitoring in Javascript / Typescript
+title: Error Monitoring in Javascript / Typescript
 slug: go
 createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z

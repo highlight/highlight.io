@@ -2,7 +2,6 @@ import { QuickStartContent, QuickStartStep } from '../QuickstartContent'
 import {
   configureSourcemapsCI,
   identifySnippet,
-  initializeSnippet,
   packageInstallSnippet,
   sessionReplayFeaturesLink,
   setupBackendSnippet,
@@ -41,6 +40,7 @@ createApp(App).mount('#app')
 }
 
 export const VueContent: QuickStartContent = {
+  title: 'Vue.js',
   subtitle: 'Learn how to set up highlight.io with your React application.',
   entries: [
     packageInstallSnippet,

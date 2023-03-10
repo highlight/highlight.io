@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonFlaskContext: QuickStartContent = {
+  title: 'Python Flask',
   subtitle: 'Learn how to set up highlight.io on your Python Flask backend API.',
   entries: [
     setupFrontendSnippet,

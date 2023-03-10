@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonAWSContext: QuickStartContent = {
+  title: 'Python AWS Lambda',
   subtitle: 'Learn how to set up highlight.io on AWS Lambda.',
   entries: [
     setupFrontendSnippet,
