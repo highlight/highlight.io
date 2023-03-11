@@ -35,4 +35,6 @@ We just added some new product pages on our landing page. Take a look and share 
 
 ## SVB Exposure
 
+hi
+
 [Highlight.io](https://highlight.io) luckily had no exposure to the revent SVB situation, however, we understand that many of our customers might. If this is the case, and you need payment relief for your subscription, please reach out to us at [support@highlight.io](mailto:support@highlight.io).
