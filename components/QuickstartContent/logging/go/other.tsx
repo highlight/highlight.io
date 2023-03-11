@@ -8,7 +8,8 @@ export const GoOtherLogContent: QuickStartContent = {
     previousInstallSnippet('go'),
     {
       title: 'Call the Highlight logging SDK.',
-      content: '',
+      content:
+        'Use our SDK to configure [logrus](https://pkg.go.dev/github.com/sirupsen/logrus), and use it as normal.',
       code: {
         text: `package main
         
@@ -16,6 +17,7 @@ import (
   "context"
   "github.com/highlight/highlight/sdk/highlight-go"
   "github.com/highlight/highlight/sdk/highlight-go/log"
+  "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -24,17 +26,18 @@ func main() {
   highlight.Start()
   defer highlight.Stop()
 	
-  // set whether you want highlight printing logs to console
-  hlog.SetOutput(true)
-  hlog.SetOutputLevel(hlog.DebugLevel)
+  // setup highlight logrus hook
+  hlog.Init()
+  // if you don't want to get stdout / stderr output, add the following uncommented
+  // hlog.DisableOutput()
   
-  // use log sdk
-  hlog.Info("welcome to highlight.io")
-  // if using a web framework integration, pass the request context along to provide headers to our sdk
-  hlog.WithContext(context.TODO()).Warn("oh no...")
-  
-  // extract session id and request id from our frontend sdk x-highlight-request header
-  hlog.WithContext(context.TODO()).WithSession("a1b2c3").WithRequest("d4e5f6").Info("error handling frontend request with highlight context")
+  // if in a request, provide context to associate logs with frontend sessions
+  ctx := context.TODO()
+  // send logs
+  logrus.WithContext(ctx).WithField("hello", "world").Info("welcome to highlight.io")
+  // send logs with a string message severity
+  lvl, _ := logrus.ParseLevel("warn")
+  logrus.WithContext(ctx).Log(lvl, "whoa there")
 }`,
         language: 'go',
       },
