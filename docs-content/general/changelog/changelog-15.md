@@ -1,5 +1,5 @@
 ---
-title: Changelog 15 (03/03)
+title: Changelog 15 (03/11)
 slug: changelog-15
 ---
 
@@ -32,3 +32,7 @@ We just added some new product pages on our landing page. Take a look and share 
 - [highlight.io/error-monitoring](https://www.highlight.io/error-monitoring)
 
 - [highlight.io/loggin](https://www.highlight.io/logging)
+
+## SVB Exposure
+
+[Highlight.io](https://highlight.io) luckily had no exposure to the revent SVB situation, however, we understand that many of our customers might. If this is the case, and you need payment relief for your subscription, please reach out to use at [support@highlight.io](mailto:support@highlight.io).
