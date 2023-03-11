@@ -5,7 +5,7 @@ slug: changelog-15
 
 ## Added a "goto" button on each devtools resource.
 
-These past few weeks, we got feedback from our [discord](https://highlight.io/community) members that being able to directly click "goto" on an error, network request, or log would be valuable. We just shipped that!
+In the devtools panel, you can now directly click a "goto" icon on an error, network request, or log. Check it out:
 
 [PR Link](https://github.com/highlight/highlight/issues/4485)
 
