@@ -62,9 +62,7 @@
     "remark-gfm": "^3.0.1",
     "remove-markdown": "^0.5.0",
     "rudder-sdk-js": "^2.20.0",
-    "sass": "^1.56.1",
-    "use-local-storage-state": "^18.2.1",
-    "use-persisted-state": "^0.3.3"
+    "sass": "^1.56.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
