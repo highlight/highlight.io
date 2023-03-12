@@ -13,22 +13,15 @@ export const GithubPopup = () => {
   const [lastPageLoadTime, setLastPageLoadTime] = useState<number | undefined>(undefined)
 
   useEffect(() => {
+    const localStorageKey = 'lastPageLoadTime'
     console.log('s:lplt')
-    const lplt = JSON.parse(localStorage.getItem('lastPageLoadTime') ?? '')
+    const lplt = JSON.parse(localStorage.getItem(localStorageKey) ?? '')
     console.log('e:lplt', lplt)
     if (lplt) {
       setLastPageLoadTime(lplt)
     }
+    localStorage.setItem(localStorageKey, JSON.stringify(new Date().getTime()))
   }, [setLastPageLoadTime])
-
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      localStorage.setItem('lastPageLoadTime', JSON.stringify(new Date().getTime()))
-    }, 1000)
-    return () => {
-      clearTimeout(timer)
-    }
-  })
 
   const popup = <>{is400 ? <MobileGithubPopup /> : <DesktopGithubPopup />}</>
 
