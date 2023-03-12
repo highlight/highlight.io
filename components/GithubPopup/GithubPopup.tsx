@@ -20,11 +20,11 @@ export const GithubPopup = () => {
   }, [setLastPageLoadTime])
 
   useEffect(() => {
-    let timer1 = setTimeout(() => {
+    let timer = setTimeout(() => {
       localStorage.setItem('lastPageLoadTime', JSON.stringify(new Date().getTime()))
     }, 1000)
     return () => {
-      clearTimeout(timer1)
+      clearTimeout(timer)
     }
   })
 
@@ -32,8 +32,8 @@ export const GithubPopup = () => {
 
   const delta = lastPageLoadTime && new Date().getTime() - lastPageLoadTime
 
-  // don't render if a render happened 500 seconds ago.
-  return delta && delta > 500 * 1000 ? popup : <></>
+  // don't render if a render happened 60 seconds ago.
+  return delta == undefined || (delta && delta > 60 * 1000) ? popup : <></>
 }
 
 const MobileGithubPopup = () => {
