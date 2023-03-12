@@ -15,7 +15,7 @@ export const GithubPopup = () => {
   useEffect(() => {
     const localStorageKey = 'lastPageLoadTime'
     console.log('s:lplt')
-    const lplt = JSON.parse(localStorage.getItem(localStorageKey) ?? '')
+    const lplt = JSON.parse(localStorage.getItem(localStorageKey) ?? 'null')
     console.log('e:lplt', lplt)
     if (lplt) {
       setLastPageLoadTime(lplt)
