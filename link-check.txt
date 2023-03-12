@@ -1,0 +1,902 @@
+Getting links from: http://localhost:3000/
+├───OK─── https://github.com/highlight/highlight
+├───OK─── http://localhost:3000/pricing
+├───OK─── http://localhost:3000/blog
+├───OK─── http://localhost:3000/docs
+├───OK─── https://app.highlight.io/
+├───OK─── https://app.highlight.io/sign_up
+├───OK─── https://discord.gg/yxaXEAqgwN
+├───OK─── http://localhost:3000/session-replay
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsessionscreenshot.2415984d.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsession-replay.6a7e665d.png&w=3840&q=75
+├───OK─── http://localhost:3000/error-monitoring
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmonitoringscreenshot.6f76b251.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ferror-monitoring.5b4b3d3b.png&w=3840&q=75
+├───OK─── http://localhost:3000/logging
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Floggingscreenshot.46986851.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffullstack-logging.36bc863e.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdockerscreenshot.e67480fe.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdocker.b3272830.png&w=3840&q=75
+├───OK─── https://github.com/highlight/highlight/
+├───OK─── http://localhost:3000/docs/general/company/open-source/self-host-hobby
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fgithubscreenshot.fb4645ff.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fopen-source.0a04c973.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2FlandingInfoRow1.png&w=1080&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2FlandingInfoRow2.png&w=1080&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2FlandingInfoRow3.png&w=1080&q=75
+├───OK─── http://localhost:3000/docs/general/integrations/overview
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FlandingInfoRowSecurity.7b55fb59.png&w=3840&q=75
+├───OK─── http://localhost:3000/docs/general/company/compliance-and-security
+├───OK─── http://localhost:3000/images/big-hero.mp4
+├───OK─── http://localhost:3000/customers
+├───OK─── https://twitter.com/highlightio
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├───OK─── http://localhost:3000/privacy
+├───OK─── https://feedback.highlight.run/changelog
+├───OK─── http://localhost:3000/for/react
+├───OK─── http://localhost:3000/for/next
+├───OK─── http://localhost:3000/for/angular
+├───OK─── http://localhost:3000/for/gatsby
+├───OK─── http://localhost:3000/for/svelte
+├───OK─── http://localhost:3000/for/vue
+├───OK─── http://localhost:3000/for/express
+├───OK─── http://localhost:3000/for/go
+├───OK─── http://localhost:3000/for/next-backend
+├───OK─── http://localhost:3000/for/node
+├───OK─── http://localhost:3000/terms
+├───OK─── https://careers.highlight.run/
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 153 links found. 106 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/pricing
+├───OK─── http://localhost:3000/_next/static/media/tag-loyalty.2daf62a8.svg
+├───OK─── http://localhost:3000/_next/static/media/stopwatch.4a134a7c.svg
+├───OK─── http://localhost:3000/_next/static/media/globe.1dc90133.svg
+├─BROKEN─ http://localhost:3000/docs/on-premise (HTTP_404)
+├───OK─── http://localhost:3000/_next/static/media/security.2681f794.svg
+├───OK─── http://localhost:3000/_next/static/media/credit-card.212878e6.svg
+├───OK─── http://localhost:3000/_next/static/media/wallet.9df2c29b.svg
+├───OK─── https://stripe.com/
+├───OK─── http://localhost:3000/_next/static/media/receipt-list.5cb65368.svg
+├───OK─── http://localhost:3000/_next/static/media/pc-play-media.0e69c013.svg
+├───OK─── http://localhost:3000/_next/static/media/delete.1278a3f5.svg
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 109 links found. 96 excluded. 3 broken.
+
+Getting links from: http://localhost:3000/blog
+├───OK─── http://localhost:3000/blog/tag/developer-tooling
+├───OK─── http://localhost:3000/blog/tag/highlight-engineering
+├───OK─── http://localhost:3000/blog/tag/the-startup-stack
+├───OK─── http://localhost:3000/blog/aws-msk-kafka-guide
+├─BROKEN─ https://vadweb.us/ (BLC_UNKNOWN)
+├───OK─── https://twitter.com/vkorolik
+├───OK─── https://github.com/Vadman97
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── http://localhost:3000/blog/publishing-private-pnpm-monorepo
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── http://localhost:3000/blog/injecting-metrics-with-time-series-influxdb
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── http://localhost:3000/blog/preview-react-components-directly-in-vscode-francois-ep1
+├───OK─── https://twitter.com/theJayKhatri
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├───OK─── http://localhost:3000/blog?page=2
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 116 links found. 89 excluded. 16 broken.
+
+Getting links from: http://localhost:3000/docs
+├───OK─── http://localhost:3000/docs/general/getting-started
+├───OK─── http://localhost:3000/docs/general/company/values
+├───OK─── http://localhost:3000/docs/general/company/open-source/contributing/getting-started
+├───OK─── http://localhost:3000/docs/general/company/open-source/contributing/adding-an-sdk
+├───OK─── http://localhost:3000/docs/general/company/open-source/contributing/architecture
+├───OK─── http://localhost:3000/docs/general/company/open-source/contributing/code-style
+├───OK─── http://localhost:3000/docs/general/company/open-source/self-host-enterprise
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/overview
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/canvas-iframe
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/dev-tools
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/events-and-users
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/live-mode
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/performance-impact
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/privacy
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/rage-clicks
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/request-proxying
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/session-search
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/sessions-search-deep-linking
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay/shadow-dom-web-components
+├───OK─── http://localhost:3000/docs/general/product-features/error-monitoring/overview
+├───OK─── http://localhost:3000/docs/general/product-features/error-monitoring/grouping-errors
+├───OK─── http://localhost:3000/docs/general/product-features/error-monitoring/sourcemaps
+├───OK─── http://localhost:3000/docs/general/product-features/general-features/overview
+├───OK─── http://localhost:3000/docs/general/product-features/general-features/alerts
+├───OK─── http://localhost:3000/docs/general/product-features/general-features/comments
+├───OK─── http://localhost:3000/docs/general/product-features/general-features/digests
+├───OK─── http://localhost:3000/docs/general/product-features/general-features/environments
+├───OK─── http://localhost:3000/docs/general/product-features/general-features/segments
+├───OK─── http://localhost:3000/docs/general/product-features/logging/overview
+├───OK─── http://localhost:3000/docs/general/integrations/amplitude-integration
+├───OK─── http://localhost:3000/docs/general/integrations/clickup-integration
+├───OK─── http://localhost:3000/docs/general/integrations/discord-integration
+├───OK─── http://localhost:3000/docs/general/integrations/electron-integration
+├───OK─── http://localhost:3000/docs/general/integrations/front-integration
+├───OK─── http://localhost:3000/docs/general/integrations/height-integration
+├───OK─── http://localhost:3000/docs/general/integrations/intercom-integration
+├───OK─── http://localhost:3000/docs/general/integrations/linear-integration
+├───OK─── http://localhost:3000/docs/general/integrations/mixpanel-integration
+├───OK─── http://localhost:3000/docs/general/integrations/segment-integration
+├───OK─── http://localhost:3000/docs/general/integrations/slack-integration
+├───OK─── http://localhost:3000/docs/general/integrations/vercel-integration
+├───OK─── http://localhost:3000/docs/general/changelog/overview
+├───OK─── http://localhost:3000/docs/general/changelog/changelog-12
+├───OK─── http://localhost:3000/docs/general/changelog/changelog-13
+├───OK─── http://localhost:3000/docs/general/changelog/changelog-14
+├───OK─── http://localhost:3000/docs/general/changelog/changelog-15
+├───OK─── http://localhost:3000/docs/getting-started/overview
+├───OK─── http://localhost:3000/docs/getting-started/frontend-backend-mapping
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/reactjs
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/nextjs
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/vuejs
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/angular
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/gatsbyjs
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/other
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/overview
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/changelog/overview
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/canvas
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/console-messages
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/content-security-policy
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/identifying-sessions
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/iframes
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/monkey-patches
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/privacy
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/proxying-highlight
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/react-error-boundary
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/recording-network-requests-and-responses
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/sourcemaps
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/tracking-events
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/troubleshooting
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/upgrading-highlight
+├───OK─── http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/versioning-sessions-and-errors
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/go/overview
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/go/chi
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/go/fiber
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/go/gin
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/go/gqlgen
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/go/mux
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/overview
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/apollo
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/cloudflare
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/express
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/firebase
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/nextjs
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/nodejs
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/js/trpc
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/overview
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/aws-lambda
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/azure-functions
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/django
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/fastapi
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/flask
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/google-cloud-functions
+├───OK─── http://localhost:3000/docs/getting-started/backend-sdk/python/other
+├───OK─── http://localhost:3000/docs/getting-started/backend-logging/go/overview
+├───OK─── http://localhost:3000/docs/getting-started/backend-logging/go/logrus
+├───OK─── http://localhost:3000/docs/getting-started/backend-logging/go/other
+├───OK─── http://localhost:3000/docs/getting-started/backend-logging/js/overview
+├───OK─── http://localhost:3000/docs/getting-started/backend-logging/python/overview
+├───OK─── http://localhost:3000/docs/getting-started/backend-logging/http
+├───OK─── http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/overview
+├───OK─── http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/env-variables
+├───OK─── http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/next-13-considerations
+├───OK─── http://localhost:3000/docs/getting-started/self-host/overview
+├───OK─── http://localhost:3000/docs/getting-started/self-host/dev-deployment-guide
+├───OK─── http://localhost:3000/docs/getting-started/self-host/self-hosted-hobby-guide
+├───OK─── http://localhost:3000/docs/sdk/client
+├───OK─── http://localhost:3000/docs/sdk/cloudflare
+├───OK─── http://localhost:3000/docs/sdk/go
+├───OK─── http://localhost:3000/docs/sdk/nextjs
+├───OK─── http://localhost:3000/docs/sdk/nodejs
+├───OK─── http://localhost:3000/docs/sdk/python
+├───OK─── http://localhost:3000/docs/general
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── http://localhost:3000/docs/general/company/open-source/contributing
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/1_welcome.md
+Finished! 207 links found. 91 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/session-replay
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FsessionReplayHero.7e615733.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FerrorMonitoringHero.07dcba1e.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FloggingHero.e5bd46a4.png&w=3840&q=75
+├───OK─── https://app.highlight.io/?sign_up=1
+├───OK─── http://localhost:3000/_next/static/media/obfuscatedtext.ac05a169.png
+├───OK─── http://localhost:3000/_next/static/media/regulartext.30612b8d.png
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2Ffeatures%2FsessionReplay2.png&w=1080&q=75
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 145 links found. 136 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/error-monitoring
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2Ffeatures%2FerrorMonitoring1.png&w=1080&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2Ffeatures%2FerrorMonitoring2.png&w=1080&q=75
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 143 links found. 139 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/logging
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2Ffeatures%2Flogging1.png&w=1080&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2Fimages%2Ffeatures%2Flogging2.png&w=1080&q=75
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 143 links found. 139 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/self-host-hobby
+├───OK─── http://localhost:3000/docs/general/company
+├───OK─── http://localhost:3000/docs/general/company/open-source
+├───OK─── https://community.highlight.io/
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/open-source/self-host-hobby.md
+Finished! 203 links found. 199 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/welcome
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+Finished! 207 links found. 205 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/docs/general/integrations/overview
+├───OK─── http://localhost:3000/docs/general/integrations
+├─BROKEN─ https://highlight.io/community (HTTP_308)
+├───OK─── http://localhost:3000/docs/general/product-features
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/7_integrations/1_overview.md
+Finished! 210 links found. 206 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/compliance-and-security
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── http://localhost:3000/images/certs.png
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/compliance-and-security.md
+Finished! 201 links found. 198 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/customers
+├───OK─── http://localhost:3000/customers/superpowered
+├───OK─── http://localhost:3000/customers/cabal
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 85 links found. 81 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/privacy
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 62 links found. 60 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/react
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-bug-left.c1d860d6.gif&w=828&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero-bug-right.5afcc5fc.gif&w=828&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fproducts-replay.50f0acc5.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fproducts-errors.a1af7f1b.png&w=3840&q=75
+├───OK─── http://localhost:3000/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fproducts-graph.a45327f6.png&w=3840&q=75
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 124 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/next
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 129 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/angular
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 129 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/gatsby
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 129 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/svelte
+├─BROKEN─ http://localhost:3000/docs/getting-started/client-sdk/sveltekit (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/client-sdk/sveltekit (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/client-sdk/sveltekit (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/client-sdk/sveltekit (HTTP_404)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 125 excluded. 6 broken.
+
+Getting links from: http://localhost:3000/for/vue
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 129 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/express
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/express (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/express (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/express (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/express (HTTP_404)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 125 excluded. 6 broken.
+
+Getting links from: http://localhost:3000/for/go
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/go (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/go (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/go (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/go (HTTP_404)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 125 excluded. 6 broken.
+
+Getting links from: http://localhost:3000/for/next-backend
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 129 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/for/node
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/nodejs (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/nodejs (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/nodejs (HTTP_404)
+├─BROKEN─ http://localhost:3000/docs/getting-started/4_backend-sdk/nodejs (HTTP_404)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 131 links found. 125 excluded. 6 broken.
+
+Getting links from: http://localhost:3000/terms
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 62 links found. 60 excluded. 2 broken.
+
+Getting links from: http://localhost:3000/blog/tag/developer-tooling
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── http://localhost:3000/blog/chrome-devtools-tips
+├───OK─── https://twitter.com/haroonchoudery
+├─BROKEN─ https://linkedin.com/in/haroonchoudery (HTTP_999)
+├─BROKEN─ https://linkedin.com/in/haroonchoudery (HTTP_999)
+├───OK─── http://localhost:3000/blog/auto-generating-open-api-documents-with-type-script-interfaces
+├───OK─── https://fwouts.com/
+├───OK─── https://twitter.com/fwouts
+├───OK─── https://github.com/fwouts
+├─BROKEN─ https://linkedin.com/in/fwouts (HTTP_999)
+├─BROKEN─ https://linkedin.com/in/fwouts (HTTP_999)
+├───OK─── http://localhost:3000/blog/3-levels-of-data-validation-in-a-full-stack-application-with-react
+├─BROKEN─ https://paweldabrowski.com/articles/categories/ruby?source=longliveruby (HTTP_404)
+├─BROKEN─ https://paweldabrowski.com/articles/categories/ruby?source=longliveruby (HTTP_404)
+├───OK─── http://localhost:3000/blog/tag/developer-tooling?page=2
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 110 links found. 90 excluded. 12 broken.
+
+Getting links from: http://localhost:3000/blog/tag/highlight-engineering
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── http://localhost:3000/blog/new-error-management-ui
+├───OK─── http://localhost:3000/blog/tag/highlight-engineering?page=2
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 112 links found. 96 excluded. 14 broken.
+
+Getting links from: http://localhost:3000/blog/tag/the-startup-stack
+├───OK─── https://www.youtube.com/channel/UCATzQs36Mo7Cezt5Ij9ayZQ
+├───OK─── http://localhost:3000/_next/image?url=https%3A%2F%2Fmedia.graphassets.com%2F1dRnb0aCSpuN8Bnm83m9&w=384&q=75
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 75 links found. 69 excluded. 4 broken.
+
+Getting links from: http://localhost:3000/blog/aws-msk-kafka-guide
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── https://us-east-2.console.aws.amazon.com/msk/home?region=us-east-2#/clusters
+├───OK─── https://docs.aws.amazon.com/msk/latest/developerguide/public-access.html
+├───OK─── https://docs.aws.amazon.com/msk/latest/developerguide/create-topic.html
+├───OK─── https://docs.aws.amazon.com/msk/latest/developerguide/msk-acls.html
+├───OK─── https://docs.confluent.io/platform/current/kafka/authorization.html#operations
+├───OK─── https://hub.docker.com/r/provectuslabs/kafka-ui
+├───OK─── http://localhost:3000/blog/scalable-data-processing-with-apache-kafka
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 96 links found. 85 excluded. 4 broken.
+
+Getting links from: http://localhost:3000/blog/publishing-private-pnpm-monorepo
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── https://www.npmjs.com/package/highlight.run
+├───OK─── https://en.wikipedia.org/wiki/Monorepo
+├───OK─── https://github.com/wclr/yalc
+├───OK─── https://yarnpkg.com/features/workspaces/
+├───OK─── https://github.com/highlight/highlight/blob/main/frontend/src/index.tsx
+├───OK─── https://github.com/highlight/highlight/blob/main/sdk/firstload/package.json
+├─BROKEN─ https://www.highlight.io/docs/tips/performance-impact (HTTP_404)
+├─BROKEN─ https://github.com/highlight/highlight/blob/main/firstload/src/index.tsx (HTTP_404)
+├───OK─── https://github.com/highlight/example-monorepo-pnpm
+├───OK─── https://github.com/highlight/example-monorepo-pnpm/blob/main/packages/first/tsconfig.json
+├───OK─── https://www.typescriptlang.org/docs/handbook/project-references.html
+├───OK─── https://github.com/vercel/turbo
+├───OK─── https://nx.dev/
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 99 links found. 82 excluded. 6 broken.
+
+Getting links from: http://localhost:3000/blog/injecting-metrics-with-time-series-influxdb
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├───OK─── https://www.influxdata.com/
+├───OK─── https://docs.influxdata.com/influxdb/cloud/write-data/best-practices/resolve-high-cardinality/
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 83 links found. 77 excluded. 4 broken.
+
+Getting links from: http://localhost:3000/blog/preview-react-components-directly-in-vscode-francois-ep1
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├───OK─── https://previewjs.com/
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 75 links found. 71 excluded. 3 broken.
+
+Getting links from: http://localhost:3000/blog?page=2
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://vadweb.us/ (HTTP_undefined)
+├─BROKEN─ https://www.linkedin.com/in/vkorolik/ (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/in/jay-khatri/ (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+├─BROKEN─ https://www.linkedin.com/company/highlightrun (HTTP_999)
+Finished! 116 links found. 100 excluded. 16 broken.
+
+Getting links from: http://localhost:3000/docs/general/getting-started
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/2_getting-started.md
+Finished! 198 links found. 197 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/values
+├───OK─── http://localhost:3000/images/ohyeah.gif
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/1_values.md
+Finished! 201 links found. 199 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/contributing/getting-started
+├───OK─── https://github.com/highlight/highlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+├───OK─── https://github.com/highlight/highlight/discussions
+├─BROKEN─ https://highlight.io/community (HTTP_308)
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/open-source/contributing/1_getting-started.md
+Finished! 204 links found. 200 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/contributing/adding-an-sdk
+├───OK─── https://opentelemetry.io/
+├─BROKEN─ https://otel.highlight.io/ (HTTP_404)
+├───OK─── https://opentelemetry.io/docs/reference/specification/trace/
+├───OK─── https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/
+├───OK─── https://opentelemetry.io/docs/reference/specification/trace/semantic_conventions/exceptions/
+├───OK─── https://opentelemetry.io/docs/concepts/signals/traces/#span-events
+├───OK─── https://opentelemetry.io/docs/reference/specification/logs/data-model/#log-and-event-record-definition
+├───OK─── https://opentelemetry.io/docs/reference/specification/logs/semantic_conventions/
+├───OK─── https://github.com/highlight/highlight/blob/93bfea864440a1976ac945ba2b40a34cf3b53479/sdk/highlight-py/highlight_io/sdk.py#L139-L160
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/open-source/contributing/adding-an-sdk.md
+Finished! 217 links found. 207 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/contributing/architecture
+├───OK─── http://localhost:3000/images/architecture.png
+├───OK─── http://localhost:3000/images/software-components.png
+├───OK─── http://localhost:3000/images/kafka.png
+├───OK─── http://localhost:3000/images/influx.png
+├───OK─── http://localhost:3000/images/opentelemetry.png
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/open-source/contributing/architecture.md
+Finished! 205 links found. 199 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/contributing/code-style
+├───OK─── https://github.com/highlight/highlight/blob/main/LICENSE
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/open-source/contributing/code-style.md
+Finished! 201 links found. 199 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/self-host-enterprise
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/3_company/open-source/self-host-enterprise.md
+Finished! 202 links found. 201 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/overview
+├───OK─── http://localhost:3000/docs/general/product-features/session-replay
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/1_overview.md
+Finished! 212 links found. 209 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/canvas-iframe
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/canvas-iframe.md
+Finished! 203 links found. 201 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/dev-tools
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── http://localhost:3000/images/devtools.png
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/dev-tools.md
+Finished! 202 links found. 199 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/events-and-users
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── http://localhost:3000/images/user-info.png
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/events-and-users.md
+Finished! 202 links found. 199 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/live-mode
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/live-mode.md
+Finished! 200 links found. 198 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/performance-impact
+├───OK─── https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/performance-impact.md
+Finished! 201 links found. 199 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/privacy
+├─BROKEN─ https://highlight.io/ (HTTP_308)
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/privacy.md
+Finished! 202 links found. 200 excluded. 1 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/rage-clicks
+├───OK─── https://app.highlight.io/settings
+├───OK─── https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/0sgR-VlLcRpAl9SsbDfR-_image.png
+├───OK─── https://app.highlight.io/alerts
+├───OK─── https://archbee-image-uploads.s3.amazonaws.com/XPwQFz8tul7ogqGkmtA0y/XxyLN8kFXtefRgFf1BBUI_image.png
+├───OK─── https://github.com/highlight/highlight.io/blob/main/docs-content/general/6_product-features/1_session-replay/rage-clicks.md
+Finished! 203 links found. 198 excluded. 0 broken.
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/request-proxying
+Error: socket hang up
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/session-search
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/sessions-search-deep-linking
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay/shadow-dom-web-components
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/error-monitoring/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/error-monitoring/grouping-errors
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/error-monitoring/sourcemaps
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/general-features/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/general-features/alerts
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/general-features/comments
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/general-features/digests
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/general-features/environments
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/general-features/segments
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/logging/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/amplitude-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/clickup-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/discord-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/electron-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/front-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/height-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/intercom-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/linear-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/mixpanel-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/segment-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/slack-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations/vercel-integration
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/changelog/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/changelog/changelog-12
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/changelog/changelog-13
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/changelog/changelog-14
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/changelog/changelog-15
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/frontend-backend-mapping
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/reactjs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/nextjs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/vuejs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/angular
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/gatsbyjs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/other
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/changelog/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/canvas
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/console-messages
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/content-security-policy
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/identifying-sessions
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/iframes
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/monkey-patches
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/privacy
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/proxying-highlight
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/react-error-boundary
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/recording-network-requests-and-responses
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/sourcemaps
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/tracking-events
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/troubleshooting
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/upgrading-highlight
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/client-sdk/replay-configuration/versioning-sessions-and-errors
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/go/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/go/chi
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/go/fiber
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/go/gin
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/go/gqlgen
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/go/mux
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/apollo
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/cloudflare
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/express
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/firebase
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/nextjs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/nodejs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/js/trpc
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/aws-lambda
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/azure-functions
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/django
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/fastapi
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/flask
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/google-cloud-functions
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-sdk/python/other
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-logging/go/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-logging/go/logrus
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-logging/go/other
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-logging/js/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-logging/python/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/backend-logging/http
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/env-variables
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/fullstack-frameworks/next-js/next-13-considerations
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/self-host/overview
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/self-host/dev-deployment-guide
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/getting-started/self-host/self-hosted-hobby-guide
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/sdk/client
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/sdk/cloudflare
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/sdk/go
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/sdk/nextjs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/sdk/nodejs
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/sdk/python
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/company/open-source/contributing
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/company
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/company/open-source
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/integrations
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/customers/superpowered
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/customers/cabal
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/chrome-devtools-tips
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/auto-generating-open-api-documents-with-type-script-interfaces
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/3-levels-of-data-validation-in-a-full-stack-application-with-react
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/tag/developer-tooling?page=2
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/new-error-management-ui
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/tag/highlight-engineering?page=2
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/blog/scalable-data-processing-with-apache-kafka
+Error: connect ECONNREFUSED ::1:3000
+
+Getting links from: http://localhost:3000/docs/general/product-features/session-replay
+Error: connect ECONNREFUSED ::1:3000
+
+Finished! 7175 links found. 6749 excluded. 146 broken.
+Elapsed time: 4 minutes, 44 seconds
