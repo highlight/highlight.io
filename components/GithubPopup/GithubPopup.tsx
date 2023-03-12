@@ -1,44 +1,19 @@
 import { useEffect, useState } from 'react'
 import GitHubButton from 'react-github-btn'
-
-import { motion } from 'framer-motion'
 import CrossIcon from '../../public/images/CrossIcon'
-import { useMediaQuery } from '../MediaQuery/MediaQuery'
+import { motion } from 'framer-motion'
 import styles from './GithubPopup.module.scss'
+import { useMediaQuery } from '../MediaQuery/MediaQuery'
 
 import { AnimateIn } from '../Animate'
 
 export const GithubPopup = () => {
   const is400 = useMediaQuery(400)
-  const [lastPageLoadTime, setLastPageLoadTime] = useState<number | undefined>(undefined)
-
-  useEffect(() => {
-    const lplt = JSON.parse(localStorage.getItem('lastPageLoadTime') ?? '')
-    if (lplt) {
-      setLastPageLoadTime(lplt)
-    }
-  }, [setLastPageLoadTime])
-
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      localStorage.setItem('lastPageLoadTime', JSON.stringify(new Date().getTime()))
-    }, 1000)
-    return () => {
-      clearTimeout(timer)
-    }
-  })
-
-  const popup = <>{is400 ? <MobileGithubPopup /> : <DesktopGithubPopup />}</>
-
-  const delta = lastPageLoadTime && new Date().getTime() - lastPageLoadTime
-
-  // don't render if a render happened 60 seconds ago.
-  return delta == undefined || (delta && delta > 60 * 1000) ? popup : <></>
+  return <>{is400 ? <MobileGithubPopup /> : <DesktopGithubPopup />}</>
 }
 
 const MobileGithubPopup = () => {
   const [hide, setHide] = useState(false)
-
   return hide ? (
     <></>
   ) : (
