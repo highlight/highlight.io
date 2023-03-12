@@ -31,7 +31,7 @@ We just added some new product pages on our landing page. Take a look and share 
 
 - [highlight.io/error-monitoring](https://www.highlight.io/error-monitoring)
 
-- [highlight.io/loggin](https://www.highlight.io/logging)
+- [highlight.io/logging](https://www.highlight.io/logging)
 
 ## SVB Exposure
 
