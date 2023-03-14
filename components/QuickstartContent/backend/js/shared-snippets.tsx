@@ -48,7 +48,7 @@ export const manualError = {
   content: `If you need to report exceptions outside of a handler, use the Highlight SDK.`,
   code: {
     text: `const parsed = H.parseHeaders(request.headers)
-	H.consumeError(error, parsed?.secureSessionId, parsed?.requestId)`,
+H.consumeError(error, parsed?.secureSessionId, parsed?.requestId)`,
     language: 'js',
   },
 }
