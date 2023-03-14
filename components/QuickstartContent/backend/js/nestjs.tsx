@@ -11,7 +11,7 @@ export const JSNestContent: QuickStartContent = {
     jsGetSnippet('nest'),
     {
       title: 'Add the @highlight-run/nest app middleware.',
-      content: 'Use the `HighlightErrorFilter` to capture backend errors.',
+      content: 'Use the `HighlightErrorFilter` middleware to capture backend errors.',
       code: {
         text: `import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'

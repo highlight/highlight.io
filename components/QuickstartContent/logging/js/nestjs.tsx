@@ -7,7 +7,7 @@ export const JSNestLogContent: QuickStartContent = {
   entries: [
     previousInstallSnippet('nestjs'),
     {
-      title: 'Call built-in console methods.',
+      title: 'Add the @highlight-run/nest app middleware.',
       content: 'Use the `HighlightLogger` middleware to record backend logs in highlight.io',
       code: {
         text: `import { HttpAdapterHost, NestFactory } from '@nestjs/core'
