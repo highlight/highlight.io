@@ -7,6 +7,7 @@ import { JSApolloContent } from './backend/js/apollo'
 import { JSCloudflareContent } from './backend/js/cloudflare'
 import { JSExpressContent } from './backend/js/express'
 import { JSFirebaseContent } from './backend/js/firebase'
+import { JSNestContent } from './backend/js/nestjs'
 import { JSNodeContent } from './backend/js/nodejs'
 import { JStRPCContent } from './backend/js/trpc'
 import { PythonAWSContext } from './backend/python/aws'
@@ -25,6 +26,7 @@ import { VueContent } from './frontend/vue'
 import { GoLogrusContent } from './logging/go/logrus'
 import { GoOtherLogContent } from './logging/go/other'
 import { HTTPContent } from './logging/http'
+import { JSNestLogContent } from './logging/js/nestjs'
 import { JSOtherLogContent } from './logging/js/other'
 import { PythonOtherLogContent } from './logging/python/other'
 import { DevDeploymentContent } from './self-host/dev-deploy'
@@ -74,6 +76,7 @@ export enum QuickStartType {
   JSExpress = 'express',
   JSFirebase = 'firebase',
   JSNodejs = 'nodejs',
+  JSNestjs = 'nestjs',
   JStRPC = 'trpc',
   HTTPOTLP = 'http/otlp',
 }
@@ -110,6 +113,7 @@ export const quickStartContent = {
       [QuickStartType.JSExpress]: JSExpressContent,
       [QuickStartType.JSFirebase]: JSFirebaseContent,
       [QuickStartType.JSNodejs]: JSNodeContent,
+      [QuickStartType.JSNestjs]: JSNestContent,
       [QuickStartType.JStRPC]: JStRPCContent,
     },
   },
@@ -123,6 +127,7 @@ export const quickStartContent = {
     },
     js: {
       [QuickStartType.JSNodejs]: JSOtherLogContent,
+      [QuickStartType.JSNestjs]: JSNestLogContent,
     },
     [QuickStartType.HTTPOTLP]: HTTPContent,
   },
