@@ -2,7 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { previousInstallSnippet, verifyLogs } from '../shared-snippets'
 
 export const GoLogrusContent: QuickStartContent = {
-  title: 'Go',
+  title: 'Go Logrus',
   subtitle: 'Learn how to set up highlight.io Go logrus log ingestion.',
   entries: [
     previousInstallSnippet('go'),

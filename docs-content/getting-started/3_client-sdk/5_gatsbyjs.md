@@ -5,4 +5,4 @@ slug: gatsbyjs
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["client"]["gatsby"]}/>
+<QuickStart content={quickStartContent["client"]["js"]["gatsby"]}/>

@@ -2,7 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { previousInstallSnippet, verifyLogs } from '../shared-snippets'
 
 export const GoOtherLogContent: QuickStartContent = {
-  title: 'Go',
+  title: 'Go (Other)',
   subtitle: 'Learn how to set up highlight.io Go log ingestion without a logging library.',
   entries: [
     previousInstallSnippet('go'),
@@ -12,7 +12,7 @@ export const GoOtherLogContent: QuickStartContent = {
         'Use our SDK to configure [logrus](https://pkg.go.dev/github.com/sirupsen/logrus), and use it as normal.',
       code: {
         text: `package main
-        
+
 import (
   "context"
   "github.com/highlight/highlight/sdk/highlight-go"
@@ -25,12 +25,12 @@ func main() {
   highlight.SetProjectID("YOUR_PROJECT_ID")
   highlight.Start()
   defer highlight.Stop()
-	
+
   // setup highlight logrus hook
   hlog.Init()
   // if you don't want to get stdout / stderr output, add the following uncommented
   // hlog.DisableOutput()
-  
+
   // if in a request, provide context to associate logs with frontend sessions
   ctx := context.TODO()
   // send logs

@@ -5,4 +5,4 @@ slug: other
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["client"]["other"]}/>
+<QuickStart content={quickStartContent["client"]["js"]["other"]}/>

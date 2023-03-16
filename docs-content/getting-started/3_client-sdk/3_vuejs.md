@@ -5,4 +5,4 @@ headline: Using highlight.io in Vue.js
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["client"]["vue"]}/>
+<QuickStart content={quickStartContent["client"]["js"]["vue"]}/>
