@@ -5,7 +5,7 @@ export const setupFrontendSnippet: QuickStartStep = {
   title: 'Setup your frontend Highlight snippet with tracingOrigins.',
   content: `Make sure that you followed the [fullstack mapping guide](${fullstackMappingLink}#How-can-I-start-using-this).`,
   code: {
-    text: `H.init("<YOUR_PROJECT_ID>", {
+    text: `  H.init("<YOUR_PROJECT_ID>", {
     tracingOrigins: ['localhost', 'example.myapp.com/backend'],
     networkRecording: {
       enabled: true,
