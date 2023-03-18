@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { useCallback, useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
+import { CommentsBox } from './CommentsBox'
 
 const Channel = 'blog-posts'
 
@@ -29,7 +30,6 @@ export interface Comment {
 
 export const Comments = function ({ slug }: { slug: string }) {
   const [comments, setComments] = useState<Comment[]>([])
-  const [currentCommentText, setCurrentCommentText] = useState<string>('')
 
   const shouldAddComment = useCallback(
     (comment: Comment): boolean => {
@@ -64,15 +64,15 @@ export const Comments = function ({ slug }: { slug: string }) {
     }
   }, [shouldAddComment, setComments, slug])
 
-  const onComment = async () => {
+  const onComment = async ({ email, name, body }: { email: string; name: string; body: string }) => {
     const unique_id = uuid()
     const comment = {
       id: unique_id,
       blog_id: slug,
-      name: '',
-      email: '',
+      name,
+      email,
       vote: 0,
-      text: currentCommentText,
+      text: body,
     } as Comment
     if (shouldAddComment(comment)) {
       setComments((prev) => [...prev, comment])
@@ -85,24 +85,9 @@ export const Comments = function ({ slug }: { slug: string }) {
     const getComments = async () => {
       return (await supabase.from('comments').select().eq('blog_id', slug)).data as Comment[]
     }
-    getComments().then(setComments)
+    getComments().then((d) => d && setComments(d))
   }, [setComments, slug])
 
-  return (
-    <div>
-      <div>{comments?.map((comment) => <div key={comment.id}>{comment.text}</div>) ?? 'we got nothing'}</div>
-      <div>
-        <textarea
-          style={{ color: 'black' }}
-          id="message"
-          name="message"
-          value={currentCommentText}
-          onChange={(event) => {
-            setCurrentCommentText(event.target.value)
-          }}
-        />
-        <button onClick={onComment}>submit</button>
-      </div>
-    </div>
-  )
+  console.log('vadim', { comments })
+  return <CommentsBox comments={comments} onSubmit={onComment} />
 }

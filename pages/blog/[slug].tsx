@@ -1,30 +1,28 @@
-import Image from 'next/legacy/image'
-import homeStyles from '../../components/Home/Home.module.scss'
-import styles from '../../components/Blog/Blog.module.scss'
-import { Section } from '../../components/common/Section/Section'
-import Footer from '../../components/common/Footer/Footer'
-import { gql } from 'graphql-request'
 import classNames from 'classnames'
+import { gql } from 'graphql-request'
+import Image from 'next/legacy/image'
 import { GetStaticPaths, GetStaticProps } from 'next/types'
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
-import Link from 'next/link'
 import YouTube from 'react-youtube'
+import styles from '../../components/Blog/Blog.module.scss'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import Footer from '../../components/common/Footer/Footer'
+import { Section } from '../../components/common/Section/Section'
+import homeStyles from '../../components/Home/Home.module.scss'
 
 import { RichText } from '@graphcms/rich-text-react-renderer'
-import { Typography } from '../../components/common/Typography/Typography'
-import { createElement, useEffect, useRef, useState } from 'react'
-import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar'
-import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction'
-import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost'
 import { ElementNode } from '@graphcms/rich-text-types'
+import { createElement, useEffect, useRef, useState } from 'react'
+import { PostAuthor } from '../../components/Blog/Author'
+import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar'
 import { Post } from '../../components/Blog/BlogPost/BlogPost'
+import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost'
+import { PostTag } from '../../components/Blog/Tag'
+import { Comments } from '../../components/Comments/Comments'
+import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction'
 import { Meta } from '../../components/common/Head/Meta'
-import ReturnIcon from '../../public/images/ReturnIcon'
+import { Typography } from '../../components/common/Typography/Typography'
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import { GraphQLRequest } from '../../utils/graphql'
-import { getTagUrl, PostTag } from '../../components/Blog/Tag'
-import { PostAuthor } from '../../components/Blog/Author'
-import { CommentsBox } from '../../components/Comments/CommentsBox'
 
 const NUM_SUGGESTED_POSTS = 3
 
@@ -190,9 +188,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const suggestedPosts = []
   // suggest N random posts that are not the current post
   for (let i = 0; i < Math.min(NUM_SUGGESTED_POSTS, posts.length - 1); i++) {
-    suggestedPosts.push(
-      otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0],
-    )
+    suggestedPosts.push(otherPosts.splice(Math.floor(Math.random() * otherPosts.length), 1)[0])
   }
 
   const postSections: PostSection[] = []
@@ -310,13 +306,9 @@ const PostPage = ({
     // because at that point the page height is finalized
   }, [postSections])
 
-  const isStartupStack =
-    post.tags_relations.filter((t) =>
-      t.name.toLocaleLowerCase().includes('stack'),
-    ).length > 0
+  const isStartupStack = post.tags_relations.filter((t) => t.name.toLocaleLowerCase().includes('stack')).length > 0
 
-  const singleTag =
-    post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
+  const singleTag = post.tags_relations.length === 1 ? post.tags_relations[0] : undefined
 
   return (
     <>
@@ -331,15 +323,11 @@ const PostPage = ({
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.blogSection)}>
             <Typography type="copy2">
-              <p className={styles.dateDiv}>{`${new Date(
-                post.publishedAt,
-              ).toLocaleDateString('en-US', {
+              <p className={styles.dateDiv}>{`${new Date(post.publishedAt).toLocaleDateString('en-US', {
                 day: 'numeric',
                 year: 'numeric',
                 month: 'short',
-              })} • ${post.readingTime ||
-              Math.floor(post.richcontent.markdown.split(' ').length / 200)
-                } min read`}</p>
+              })} • ${post.readingTime || Math.floor(post.richcontent.markdown.split(' ').length / 200)} min read`}</p>
             </Typography>
             <h1 className={styles.blogText}>{post.title}</h1>
             <div className={classNames(styles.tagDiv, styles.postTagDiv)}>
@@ -377,7 +365,7 @@ const PostPage = ({
           <div className={styles.postBodyDivider}></div>
         </Section>
         <Section>
-          <CommentsBox />
+          <Comments slug={post.slug} />
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>

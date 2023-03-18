@@ -1,4 +1,4 @@
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import classNames from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -11,24 +11,18 @@ const input = classNames(
   'p-3 h-12 leading-none bg-transparent outline-none text-copy-on-dark text-[17px] rounded-xl bg-[#72E4FC0F] border-2 border-[#72E4FC1C]',
 )
 
-export const CommentsBox = function () {
-  const comments: Comment[] = [
-    {
-      id: '123asdf',
-      email: 'jay@highlight.io',
-      name: 'Jay Khatri',
-      text: 'good morning',
-      created_at: new Date(),
-      blog_id: 'aws-msk-kafka-guide',
-      image: 'https://picsum.photos/32/32',
-    },
-  ]
-  const numComments = comments.length
-
+export const CommentsBox = function ({
+  comments,
+  onSubmit,
+}: {
+  comments: Comment[]
+  onSubmit: (c: { email: string; name: string; body: string }) => void
+}) {
   const [name, setName] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [body, setBody] = useState<string>()
 
+  const numComments = comments.length
   return (
     <div className="w-full flex justify-center">
       <div className="grid-flow-row w-[810px]">
@@ -37,36 +31,38 @@ export const CommentsBox = function () {
             <Typography type="copy1">Comments ({numComments})</Typography>
           </div>
         </div>
-        <div className={section}>
-          <div className="w-full">
-            {comments.map((c) => (
-              <div key={c.id} className="flex w-full gap-4">
-                {c.image && (
-                  <Image className="rounded-full h-8 w-8" alt={'profile pic'} src={c.image} width={32} height={32} />
-                )}
-                <div className="flex flex-col gap-2">
-                  <div className="flex flex-col">
-                    <Typography type="copy4" emphasis>
-                      {c.name}
-                    </Typography>
-                    <Typography type="copy4" className="text-[#FFFFFF8F]">
-                      {c.email}
-                    </Typography>
-                  </div>
-                  <Typography type="copy2">{c.text}</Typography>
-                  <div className="flex flex-row gap-2">
-                    <button className={upvoteButton}>
-                      👍 <Typography type="copy4">4</Typography>
-                    </button>
-                    <button className={upvoteButton}>
-                      ❤️ <Typography type="copy4">5</Typography>
-                    </button>
+        {numComments ? (
+          <div className={section}>
+            <div className="w-full">
+              {comments.map((c) => (
+                <div key={c.id} className="flex w-full gap-4">
+                  {c.image && (
+                    <Image className="rounded-full h-8 w-8" alt={'profile pic'} src={c.image} width={32} height={32} />
+                  )}
+                  <div className="flex flex-col gap-2">
+                    <div className="flex flex-col">
+                      <Typography type="copy4" emphasis>
+                        {c.name}
+                      </Typography>
+                      <Typography type="copy4" className="text-[#FFFFFF8F]">
+                        {c.email}
+                      </Typography>
+                    </div>
+                    <Typography type="copy2">{c.text}</Typography>
+                    <div className="flex flex-row gap-2">
+                      <button className={upvoteButton}>
+                        👍 <Typography type="copy4">4</Typography>
+                      </button>
+                      <button className={upvoteButton}>
+                        ❤️ <Typography type="copy4">5</Typography>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className={section}>
           <div className="w-full flex flex-col gap-5">
             <div className="grid grid-cols-2 gap-5">
@@ -111,7 +107,17 @@ export const CommentsBox = function () {
               <Button
                 className="bg-blue-cta text-black px-3 py-1 rounded-lg"
                 size={'small'}
-                onClick={() => console.warn('submit!')}
+                onClick={() => {
+                  if (!email || !name || !body) {
+                    message.warn('Please fill out the name, email, and comment body.', 5)
+                    return
+                  }
+                  onSubmit({
+                    email,
+                    name,
+                    body,
+                  })
+                }}
               >
                 <Typography type="copy3" emphasis={true}>
                   New Comment
