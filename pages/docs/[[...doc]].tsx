@@ -20,6 +20,8 @@ import { useRouter } from 'next/router'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
 import Navbar from '../../components/common/Navbar/Navbar'
+import { Roadmap } from '../../components/common/Roadmap/Roadmap'
+import { roadmapFetcher, RoadmapProps } from '../../components/common/Roadmap/RoadmapUtils'
 import { Typography } from '../../components/common/Typography/Typography'
 import { Callout } from '../../components/Docs/Callout/Callout'
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
@@ -32,7 +34,6 @@ import {
   QuickStartContent,
   QuickStartStep,
 } from '../../components/QuickstartContent/QuickstartContent'
-import { Roadmap } from '../../components/common/Roadmap/Roadmap'
 import { IGNORED_DOCS_PATHS, processDocPath, removeOrderingPrefix } from '../api/docs/github'
 
 const DOCS_CONTENT_PATH = path.join(process.cwd(), 'docs-content')
@@ -68,6 +69,7 @@ type DocData = {
   isSdkDoc?: boolean
   docIndex: number
   redirect?: string
+  roadmapData?: any
 }
 
 const useHeadingsData = (headingTag: string) => {
@@ -292,11 +294,19 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   const newerContent = resolveEmbeddedLinksFromHref(newContent, currentDoc.rel_path)
 
+  const roadmapData: RoadmapProps = await roadmapFetcher()
+
   return {
     props: {
       metadata: currentDoc.metadata,
       markdownText: !currentDoc.isSdkDoc
-        ? await serialize(newerContent, { scope: { path: currentDoc.rel_path, quickStartContent } })
+        ? await serialize(newerContent, {
+            scope: {
+              path: currentDoc.rel_path,
+              quickStartContent,
+              roadmapData: currentDoc.rel_path.includes('roadmap') ? roadmapData : null,
+            },
+          })
         : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
