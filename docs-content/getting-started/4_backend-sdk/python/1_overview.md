@@ -1,6 +1,6 @@
 ---
-heading: Getting Started in Python
-title: Getting Started in Python
+heading: Error Monitoring in Python
+title: Error Monitoring in Python
 slug: python
 createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z

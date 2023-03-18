@@ -37,6 +37,13 @@ class HighlightDocument extends Document {
                         window.gtag = gtag
                     `}
           </Script>
+          <Script
+            type="text/javascript"
+            id="hs-script-loader"
+            async
+            defer
+            src="//js.hs-scripts.com/20473940.js"
+          ></Script>
           <NextScript />
         </Head>
         <body style={{ overflowX: 'hidden' }}>

@@ -1,14 +1,13 @@
-import React from 'react'
-import { Feature } from './FeatureCarousel'
-import styles from '../Home.module.scss'
 import Image from 'next/image'
-import { Typography } from '../../common/Typography/Typography'
-import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
-import { Code } from 'react-code-blocks'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Code } from 'react-code-blocks'
 import { HiArrowRight } from 'react-icons/hi'
 import { AnimateCarouselImage } from '../../Animate'
+import highlightCodeTheme from '../../common/CodeBlock/highlight-code-theme'
+import { Typography } from '../../common/Typography/Typography'
+import styles from '../Home.module.scss'
+import { Feature } from './FeatureCarousel'
 
 const codeTheme = {
   ...highlightCodeTheme,
@@ -61,7 +60,19 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
             ))}
           </div>
         ) : (
-          <div className="flex flex-col gap-3 mt-3 rounded-lg">
+          <div className="flex flex-col gap-3 rounded-lg">
+            {feature.link && (
+              <div className="flex justify-center sm:justify-start mb-4">
+                <Link href={`${feature.link}`}>
+                  <Typography type="copy3" emphasis={true}>
+                    <div className="flex items-center justify-center gap-2">
+                      Learn More <HiArrowRight className="h-5" />
+                    </div>
+                  </Typography>
+                </Link>
+              </div>
+            )}
+
             {feature.feature1Link ? (
               <a
                 href={feature.feature1Link}
@@ -126,19 +137,8 @@ const CarouselFeatures = ({ feature }: { feature: Feature }) => {
             )}
           </div>
         )}
-        {feature.link && (
-          <div className="flex justify-center sm:justify-start mb-4">
-            <Link href={`${feature.link}`}>
-              <Typography type="copy3" emphasis={true}>
-                <div className="flex items-center justify-center gap-2">
-                  Learn More <HiArrowRight className="h-5" />
-                </div>
-              </Typography>
-            </Link>
-          </div>
-        )}
       </div>
-      <div className="flex sm:hidden justify-center w-full">
+      <div className="flex sm:hidden justify-center w-full mt-4">
         <Image className="object-contain max-h-[200px] " src={feature.mobileImage} alt="Feature Spotlight" />
       </div>
     </div>

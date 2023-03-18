@@ -17,6 +17,7 @@ ReactDOM.render(
 );`
 
 export const NextContent: QuickStartContent = {
+  title: 'Next.js',
   subtitle: 'Learn how to set up highlight.io with your Next (frontend) application.',
   entries: [
     {

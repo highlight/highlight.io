@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartStep } from '../../QuickstartContent'
 
 export const jsGetSnippet: (slug: string) => QuickStartStep = (slug) => ({
@@ -10,7 +11,7 @@ yarn add @highlight-run/${slug}
 # with pnpm
 pnpm add @highlight-run/${slug}
 
-# with npm 
+# with npm
 npm install @highlight-run/${slug}`,
     language: 'bash',
   },
@@ -18,11 +19,11 @@ npm install @highlight-run/${slug}`,
 
 export const initializeNodeSDK: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Initialize the Highlight JS SDK.',
-  content: `Initialize the [Highlight JS SDK](../../../sdk/nodejs) with your project ID.`,
+  content: `Initialize the [Highlight JS SDK](${siteUrl('/docs/sdk/nodejs')}) with your project ID.`,
   code: {
     text: `import { H } from '@highlight-run/${slug}'
 
-H.init({projectID: 'YOUR_PROJECT_ID')`,
+H.init({projectID: 'YOUR_PROJECT_ID'})`,
     language: 'js',
   },
 })
@@ -47,16 +48,16 @@ export const manualError = {
   content: `If you need to report exceptions outside of a handler, use the Highlight SDK.`,
   code: {
     text: `const parsed = H.parseHeaders(request.headers)
-	H.consumeError(error, parsed?.secureSessionId, parsed?.requestId)`,
+H.consumeError(error, parsed?.secureSessionId, parsed?.requestId)`,
     language: 'js',
   },
 }
 
 export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
-  title: 'Set up logging.',
-  content: `Start sending logs to Highlight! Follow the [logging setup guide](../../../getting-started/backend-logging/js/${slug}) to get started.`,
-  hidden: true,
+  title: 'Verify your backend logs are being recorded.',
+  content:
+    'With the JS SDKs, your logs are reported automatically from console methods. Visit the [highlight logs portal](http://app.highlight.io/logs) and check that backend logs are coming in.',
 })
 
 export const addIntegrationContent = (name: string, slug: string) =>
-  `Use the [${name}](../../../sdk/${slug}) in your response handler.`
+  `Use the [${name}](${siteUrl(`/docs/sdk/${slug}`)}) in your response handler.`

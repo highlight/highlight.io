@@ -2,6 +2,7 @@ import { QuickStartContent } from '../../QuickstartContent'
 import { downloadSnippet, setupFrontendSnippet, setupLogging } from './shared-snippets'
 
 export const PythonFastAPIContext: QuickStartContent = {
+  title: 'Python FastAPI',
   subtitle: 'Learn how to set up highlight.io on your Python FastAPI backend API.',
   entries: [
     setupFrontendSnippet,
@@ -15,11 +16,7 @@ export const PythonFastAPIContext: QuickStartContent = {
 import highlight_io
 from highlight_io.integrations.fastapi import FastAPIMiddleware
 
-H = highlight_io.H(
-    "1",
-    record_logs=True,
-    otlp_endpoint="http://localhost:4318",
-)
+H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 
 app = FastAPI()
 app.add_middleware(FastAPIMiddleware)`,
@@ -40,11 +37,7 @@ app.add_middleware(FastAPIMiddleware)`,
 import highlight_io
 from highlight_io.integrations.fastapi import FastAPIMiddleware
 
-H = highlight_io.H(
-    "1",
-    record_logs=True,
-    otlp_endpoint="http://localhost:4318",
-)
+H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 
 app = FastAPI()
 app.add_middleware(FastAPIMiddleware)

@@ -1,9 +1,9 @@
+import { fullstackMappingLink } from '../../frontend/shared-snippets'
 import { QuickStartStep } from '../../QuickstartContent'
 
 export const setupFrontendSnippet: QuickStartStep = {
   title: 'Setup your frontend Highlight snippet with tracingOrigins.',
-  content:
-    'Make sure that you followed the [fullstack mapping guide](../../../getting-started/frontend-backend-mapping#How-can-I-start-using-this).',
+  content: `Make sure that you followed the [fullstack mapping guide](${fullstackMappingLink}#How-can-I-start-using-this).`,
   code: {
     text: `H.init("<YOUR_PROJECT_ID>", {
     tracingOrigins: ['localhost', 'example.myapp.com/backend'],
@@ -11,7 +11,7 @@ export const setupFrontendSnippet: QuickStartStep = {
       enabled: true,
       recordHeadersAndBody: true,
     },
-  }); 
+  });
 `,
     language: 'js',
   },
@@ -34,10 +34,8 @@ pip install highlight-io${variant ? '[' + variant + ']' : ''}
   }
 }
 
-export const setupLogging = (variant?: string): QuickStartStep => {
-  return {
-    title: 'Set up logging.',
-    content: `Next, set up log ingestion! Follow the [logging setup guide](../../../getting-started/backend-logging/python/${variant}).`,
-    hidden: true,
-  }
-}
+export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
+  title: 'Verify your backend logs are being recorded.',
+  content:
+    'With the Python SDK, your logs are reported automatically from the builtin logging methods (as long as `record_logs=True` is provided to the `highlight_io.H` constructor). Visit the [highlight logs portal](http://app.highlight.io/logs) and check that backend logs are coming in.',
+})

@@ -1,9 +1,11 @@
-import Image from 'next/image'
-import styles from './Home.module.scss'
-import productStyles from '../Products/Products.module.scss'
 import classNames from 'classnames'
-import { Typography } from '../common/Typography/Typography'
+import Image from 'next/image'
+import Link from 'next/link'
 import { PrimaryButton } from '../common/Buttons/PrimaryButton'
+import { Typography } from '../common/Typography/Typography'
+import { HighlightCodeBlock } from '../Docs/HighlightCodeBlock/HighlightCodeBlock'
+import productStyles from '../Products/Products.module.scss'
+import styles from './Home.module.scss'
 import { ObfuscationSlider } from './ObfuscationSlider/ObfuscationSlider'
 
 //Component for the image/text row for the footer of the product page
@@ -16,14 +18,18 @@ const LandingInfoRow = ({
   invert,
   imgSrc,
   privacy,
+  code,
+  codeFrom,
 }: {
   title: string
   desc: string
   link: string
   linkText: string
   invert?: boolean
-  imgSrc: any
+  imgSrc: string
   privacy?: boolean
+  code?: string
+  codeFrom?: string
 }) => {
   return (
     <div className={styles.landingInfoRow}>
@@ -32,12 +38,20 @@ const LandingInfoRow = ({
           invert ? 'lg:hidden' : ''
         } flex justify-center px-5 mt-5 w-full min-h-[280px] sm:min-h-[300px] sm:h-[400px] lg:h-auto lg:w-[570px]`}
       >
-        {privacy ? (
+        {privacy && (
           <div className="flex flex-col justify-center w-full">
             <ObfuscationSlider />
           </div>
-        ) : (
-          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" />
+        )}
+
+        {imgSrc && (
+          <Image className="object-scale-down sm:object-contain" src={imgSrc} alt="" width={500} height={400} />
+        )}
+
+        {code && (
+          <div className="flex flex-col justify-center w-full">
+            <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
+          </div>
         )}
       </div>
       <div className="flex md:hidden w-full h-[1px] bg-divider-on-dark"> </div>
@@ -60,7 +74,19 @@ const LandingInfoRow = ({
         </div>
       </div>
       <div className={`${invert ? 'lg:flex' : ''} hidden justify-center lg:w-[570px]`}>
-        {privacy ? <ObfuscationSlider /> : <Image src={imgSrc} alt="" />}
+        {privacy && <ObfuscationSlider />}
+        {imgSrc && <Image src={imgSrc} alt="" width={500} height={400} />}
+        {code && (
+          <div className="flex flex-col justify-center w-full">
+            <HighlightCodeBlock language={'js'} text={code} showLineNumbers={false} />
+            <Typography type="copy3" className="text-copy-on-dark mx-auto mt-1">
+              Above Example in {codeFrom}{' '}
+              <Link className="ml-1 font-medium" href="/docs/getting-started/overview">
+                Other Frameworks →
+              </Link>
+            </Typography>
+          </div>
+        )}
       </div>
     </div>
   )

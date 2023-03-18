@@ -7,13 +7,22 @@ updatedAt: 2022-04-01T20:40:53.000Z
 
 ## What's this?
 
-In order to make the most out of highlight.io, we suggest instrumenting your frontend & backend so that you can attribute frontend requests with backend errors. See an example below, where you can view an error's details alongside session replay, allowing you to see the full context around it.
+In order to make the most out of [highlight.io](https://highlight.io), we suggest instrumenting your frontend & backend so that you can attribute frontend requests with backend errors & logs. See an example below, where you can view an error's details alongside frontend session replay, allowing you to get the full context you need.
 
 ![](/images/fullstack-mapping.png)
 
 Below, we detail the requirements to get this working as well how to troubleshoot.
 
 ## How can I start using this?
+
+### Install the client bundle
+
+If you haven't already, you need to install our client javascript bundle in the framework of your choice. Get started below:
+<DocsCardGroup>
+<DocsCard title="Getting Started (Client)" href="./1_overview.md">
+{"Install the `highlight.run` client bundle in your app."}
+</DocsCard>
+</DocsCardGroup>
 
 ### Turn on `tracingOrigins`
 

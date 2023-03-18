@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
 
 export const JSExpressContent: QuickStartContent = {
+  title: 'Express.js',
   subtitle: 'Learn how to set up highlight.io in Express.js.',
   entries: [
     frontendInstallSnippet,
@@ -12,13 +13,13 @@ export const JSExpressContent: QuickStartContent = {
       title: `Add the Express.js Highlight integration.`,
       content: addIntegrationContent('Node Highlight SDK', 'nodejs'),
       code: {
-        text: `import * as Highlight from '@highlight-run/node'
+        text: `import { Handlers } from '@highlight-run/node'
 // or like this with commonjs
 // const Highlight = require('@highlight-run/node')
 
 const app = express()
 
-const highlightErrorHandler = Highlight.Handlers.errorHandler({ projectID: 'YOUR_PROJECT_ID' })
+const highlightErrorHandler = Handlers.errorHandler({ projectID: 'YOUR_PROJECT_ID' })
 
 app.get('/', (req, res) => {
   res.send(\`Hello World! ${Math.random()}\`)

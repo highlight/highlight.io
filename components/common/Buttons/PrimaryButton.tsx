@@ -1,6 +1,6 @@
-import React from 'react'
 import { ButtonProps } from 'antd'
 import classNames from 'classnames'
+import React from 'react'
 
 import styles from './Buttons.module.scss'
 
@@ -9,7 +9,7 @@ export const PrimaryButton = ({ children, ...props }: React.PropsWithChildren<Bu
     <a
       {...props}
       onClick={(e) => {
-        if (window.dataLayer && props.href?.includes('app.highlight.io/?sign_up=1')) {
+        if (window.dataLayer && props.href?.includes('app.highlight.io/sign_up')) {
           e.preventDefault()
           if (props.onClick) {
             props.onClick(e)

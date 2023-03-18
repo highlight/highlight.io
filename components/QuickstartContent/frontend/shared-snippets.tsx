@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../utils/urls'
 import { QuickStartStep } from '../QuickstartContent'
 
 export const packageInstallSnippet: QuickStartStep = {
@@ -10,17 +11,19 @@ yarn add highlight.run
 # with pnpm
 pnpm add highlight.run
 
-# with npm 
+# with npm
 npm install highlight.run`,
     language: 'bash',
   },
 }
 
-export const sessionReplayFeaturesLink = '/docs/getting-started/client-sdk/replay-configuration/overview'
-export const identifyingUsersLink = '/docs/getting-started/client-sdk/replay-configuration/identifying-sessions'
-export const backendInstrumentationLink = '/docs/getting-started/overview#For-your-backend'
-export const fullstackMappingLink = '/docs/getting-started/frontend-backend-mapping'
-export const sourceMapDetailsLink = '/docs/getting-started/client-sdk/replay-configuration/sourcemaps'
+export const sessionReplayFeaturesLink = siteUrl('/docs/getting-started/client-sdk/replay-configuration/overview')
+export const identifyingUsersLink = siteUrl(
+  '/docs/getting-started/client-sdk/replay-configuration/identifying-sessions',
+)
+export const backendInstrumentationLink = siteUrl('/docs/getting-started/overview#For-your-backend')
+export const fullstackMappingLink = siteUrl('/docs/getting-started/frontend-backend-mapping')
+export const sourceMapDetailsLink = siteUrl('/docs/getting-started/client-sdk/replay-configuration/sourcemaps')
 
 export const configureSourcemapsCI = (docsLink?: string): QuickStartStep => {
   return {
@@ -41,7 +44,7 @@ npx --yes @highlight-run/sourcemap-uploader upload --apiKey $\{YOUR_ORG_API_KEY\
 
 export const initializeSnippet: QuickStartStep = {
   title: 'Initialize the SDK in your frontend.',
-  content: `Grab your project ID from [app.highlight.io/setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\`.  
+  content: `Grab your project ID from [app.highlight.io/setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\`.
                     To get started, we recommend setting \`tracingOrigins\` and \`networkRecording\` so that highlight.io can pass a header to pair frontend/backend errors . Refer to our docs on [SDK configuration](${sessionReplayFeaturesLink}) and [Fullstack Mapping](${fullstackMappingLink}) to read more about these options.`,
   code: {
     text: `...
@@ -58,7 +61,7 @@ H.init('<YOUR_PROJECT_ID>', {
 	},
 });
 
-... 
+...
 // rendering code.
 
                 `,

@@ -1,36 +1,34 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react'
-import Navbar from '../../components/common/Navbar/Navbar'
-import FeatureBox from '../../components/Products/FeatureBox'
+import classNames from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
-import classNames from 'classnames'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import Navbar from '../../components/common/Navbar/Navbar'
+import FeatureBox from '../../components/Products/FeatureBox'
 
-import { BsPlayCircleFill, BsBarChartFill, BsFillTerminalFill } from 'react-icons/bs'
-import { PRODUCTS, iProduct } from '../../components/Products/products'
+import { BsBarChartFill, BsFillTerminalFill, BsPlayCircleFill } from 'react-icons/bs'
+import { iProduct, PRODUCTS } from '../../components/Products/products'
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 
+import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
 import { Section } from '../../components/common/Section/Section'
 import { Typography } from '../../components/common/Typography/Typography'
+import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import landingStyles from '../../components/Home/Home.module.scss'
 import styles from '../../components/Products/Products.module.scss'
-import navStyles from '../../components/common/Navbar/Navbar.module.scss'
-import { PrimaryButton } from '../../components/common/Buttons/PrimaryButton'
-import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
-import ProductsReplay from '../../public/images/products-replay.png'
 import ProductsErrors from '../../public/images/products-errors.png'
 import ProductsGraph from '../../public/images/products-graph.png'
+import ProductsReplay from '../../public/images/products-replay.png'
 
+import { CustomerReview } from '..'
+import { AnimateBugLeft, AnimateBugRight } from '../../components/Animate'
+import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
+import Footer from '../../components/common/Footer/Footer'
+import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
+import { REVIEWS } from '../../components/Home/Reviews'
+import InfoRow from '../../components/Products/InfoRow'
 import HeroBugLeft from '../../public/images/hero-bug-left.gif'
 import HeroBugRight from '../../public/images/hero-bug-right.gif'
-import { AnimateBugLeft, AnimateBugRight } from '../../components/Animate'
-import Footer from '../../components/common/Footer/Footer'
-import { REVIEWS } from '../../components/Home/Reviews'
-import { CustomerReview } from '..'
-import { CompaniesReel } from '../../components/Home/CompaniesReel/CompaniesReel'
-import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
-import Banner from '../../components/common/Banner/Banner'
-import InfoRow from '../../components/Products/InfoRow'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -149,7 +147,7 @@ const Products = ({ product }: { product: iProduct }) => {
                 <div className="flex flex-col sm:flex-row justify-center gap-4 w-screen sm:w-auto px-5">
                   <PrimaryButton
                     className={classNames(landingStyles.solidButton, 'min-w-[180px]')}
-                    href="https://app.highlight.io/?sign_up=1"
+                    href="https://app.highlight.io/sign_up"
                   >
                     <Typography type="copy2" emphasis={true}>
                       Get started
@@ -206,7 +204,7 @@ const Products = ({ product }: { product: iProduct }) => {
 
               <div className="flex justify-center my-14">
                 <div className="flex flex-col lg:flex-row justify-center gap-4">
-                  <PrimaryButton href="https://app.highlight.io/?sign_up=1">
+                  <PrimaryButton href="https://app.highlight.io/sign_up">
                     <Typography type="copy2" emphasis={true}>
                       Get started for free
                     </Typography>

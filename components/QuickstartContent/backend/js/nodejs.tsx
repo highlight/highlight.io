@@ -3,6 +3,7 @@ import { frontendInstallSnippet } from '../shared-snippets'
 import { initializeNodeSDK, jsGetSnippet, manualError, setupLogging, verifyError } from './shared-snippets'
 
 export const JSNodeContent: QuickStartContent = {
+  title: 'Node.js',
   subtitle: 'Learn how to set up highlight.io in Node.js.',
   entries: [
     frontendInstallSnippet,

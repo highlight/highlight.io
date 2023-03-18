@@ -6,13 +6,7 @@ createdAt: 2021-09-13T22:07:04.000Z
 updatedAt: 2022-04-01T19:52:59.000Z
 ---
 
-Highlight's Full-stack integration allows you to get visibility into errors and issues across your whole stack, not just your frontend. These errors are paired with outgoing requests on your frontend so that you can understand:
-
-- Exactly what happened when a user reports a bug
-
-- Where specific errors are initiated and what caused them
-
-- What backend issues could have caused corresponding frontend bugs.
+Highlight.io allows you to get full-stack visibility into issues across your whole stack, all the way from a user's button click to an error in your backend infrastructure. Read more about how to get started below.
 
 ## For your Frontend
 

@@ -1,12 +1,13 @@
 import { QuickStartContent } from '../QuickstartContent'
 
 export const DevDeploymentContent: QuickStartContent = {
+  title: 'Developer Deployment',
   subtitle: 'Learn how to set up the dev deployment of highlight.io to start contributing.',
   entries: [
     {
       title: 'Prerequisites',
       content:
-        'Before we get started, you should have the latest version of [docker](https://docs.docker.com/engine/install/) (19.03.0+) and [git](https://git-scm.com/downloads) (2.13+) installed. For a local deploy, we suggest [configuring docker](https://docs.docker.com/desktop/settings/mac/#resources) to use at least 16GB of memory and 4 CPUs.',
+        'Before we get started, you should have the latest version of [docker](https://docs.docker.com/engine/install/) (19.03.0+) and [git](https://git-scm.com/downloads) (2.13+) installed. For a local deploy, we suggest [configuring docker](https://docs.docker.com/desktop/settings/mac/#resources) to use at least 16GB of memory, 4 CPUs, and 256 GB of disk space.',
     },
     {
       title: 'Clone the repository.',

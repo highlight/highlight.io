@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartStep } from '../../QuickstartContent'
 
 export const goGetSnippet: QuickStartStep = {
@@ -57,6 +58,7 @@ export const verifyCustomError: QuickStartStep = {
 
 export const setUpLogging: (slug: string) => QuickStartStep = (slug) => ({
   title: 'Set up logging.',
-  content: `Start sending logs to Highlight! Follow the [logging setup guide](../../../getting-started/backend-logging/go/${slug}) to get started.`,
-  hidden: true,
+  content: `Start sending logs to Highlight! Follow the [logging setup guide](${siteUrl(
+    '/docs/getting-started/backend-logging/go/overview',
+  )}) to get started.`,
 })

@@ -1,13 +1,13 @@
+import classNames from 'classnames'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import ReturnIcon from '../../../public/images/ReturnIcon'
+import Banner from '../../common/Banner/Banner'
+import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
 import { HighlightLogo, HighlightLogoWhite } from '../../common/HighlightLogo/HighlightLogo'
 import styles from '../../common/Navbar/Navbar.module.scss'
-import classNames from 'classnames'
-import { PrimaryButton } from '../../common/Buttons/PrimaryButton'
-import { useEffect, useState } from 'react'
-import Banner from '../../common/Banner/Banner'
-import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
-import Link from 'next/link'
 import { Typography } from '../../common/Typography/Typography'
-import ReturnIcon from '../../../public/images/ReturnIcon'
 import { getTagUrl, Tag } from '../Tag'
 
 const SHOW_NAVBAR_OFFSET = 300
@@ -136,7 +136,7 @@ const BlogNavbar = ({
                 </li>
               </ul>
               <div className={styles.menuButtons}>
-                <PrimaryButton href="https://app.highlight.io/?sign_up=1">Get Started</PrimaryButton>
+                <PrimaryButton href="https://app.highlight.io/sign_up">Get Started</PrimaryButton>
                 <Typography type="copy3" emphasis={true}>
                   <a href="https://app.highlight.io/" className={styles.menuItem}>
                     Sign In
@@ -146,7 +146,7 @@ const BlogNavbar = ({
             </div>
           )}
           <div className={classNames(styles.navContainer, styles.header, styles.headerRight)}>
-            <PrimaryButton href="https://app.highlight.io/?sign_up=1" className={styles.signUpButton}>
+            <PrimaryButton href="https://app.highlight.io/sign_up" className={styles.signUpButton}>
               <Typography type="copy2" emphasis={true}>
                 Sign up
               </Typography>
