@@ -117,9 +117,13 @@ const options = {
 export const roadmapFetcher = async () => {
   const response = await fetch('https://api.github.com/graphql', options)
   const { data } = await response.json()
-  let column1 = []
-  let column2 = []
-  let column3 = []
+  let column1: Issue[] = []
+  let column2: Issue[] = []
+  let column3: Issue[] = []
+
+  if (!data) {
+    return { column1, column2, column3 }
+  }
 
   let issues = data.node.items.nodes
 
