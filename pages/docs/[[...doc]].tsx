@@ -303,8 +303,6 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
   }
 
   let roadmapData = await roadmapFetcher()
-  console.log(roadmapData)
-  console.log(process.env.GITHUB_TOKEN)
 
   return {
     props: {
