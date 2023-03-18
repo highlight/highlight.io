@@ -88,6 +88,5 @@ export const Comments = function ({ slug }: { slug: string }) {
     getComments().then((d) => d && setComments(d))
   }, [setComments, slug])
 
-  console.log('vadim', { comments })
   return <CommentsBox comments={comments} onSubmit={onComment} />
 }
