@@ -20,8 +20,7 @@ import { useRouter } from 'next/router'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
 import Navbar from '../../components/common/Navbar/Navbar'
-import { Roadmap } from '../../components/common/Roadmap/Roadmap'
-import { roadmapFetcher, RoadmapProps } from '../../components/common/Roadmap/RoadmapUtils'
+import { roadmapFetcher } from '../../components/common/Roadmap/RoadmapUtils'
 import { Typography } from '../../components/common/Typography/Typography'
 import { Callout } from '../../components/Docs/Callout/Callout'
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
@@ -69,7 +68,6 @@ type DocData = {
   isSdkDoc?: boolean
   docIndex: number
   redirect?: string
-  roadmapData?: any
 }
 
 const useHeadingsData = (headingTag: string) => {
@@ -296,13 +294,14 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
 
   const newerContent = resolveEmbeddedLinksFromHref(newContent, currentDoc.rel_path)
 
-  const roadmapData: RoadmapProps = await roadmapFetcher()
   let redirect = ''
 
   if (!indexDocsSimplePaths.includes(currentDoc.simple_path)) {
     const target = indexDocsSimplePaths.find((path) => path.startsWith(currentDoc.simple_path))
     redirect = target ?? ''
   }
+
+  const roadmapData = await roadmapFetcher()
 
   return {
     props: {
@@ -775,7 +774,6 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
-                        Roadmap,
                         QuickStart,
                         DocsCard,
                         DocsCardGroup,
