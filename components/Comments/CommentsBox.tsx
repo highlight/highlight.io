@@ -1,55 +1,123 @@
-import { PrimaryButton } from "../common/Buttons/PrimaryButton"
-import { Typography } from "../common/Typography/Typography"
-import type { Comment } from "./Comments"
+import { Button } from 'antd'
+import classNames from 'classnames'
+import Image from 'next/image'
+import { useState } from 'react'
+import { Typography } from '../common/Typography/Typography'
+import type { Comment } from './Comments'
+
+const upvoteButton = classNames('bg-[#131032] rounded border-2 border-[#1E2848] p-2')
+const section = classNames('col-4 border-2 border-[#1E2848] rounded-xl p-6 my-3')
+const input = classNames(
+  'p-3 h-12 leading-none bg-transparent outline-none text-copy-on-dark text-[17px] rounded-xl bg-[#72E4FC0F] border-2 border-[#72E4FC1C]',
+)
 
 export const CommentsBox = function () {
-  const comments: Comment[] = [{
-    id: '123asdf',
-    email: 'jay@highlight.io',
-    name: 'Jay Khatri',
-    text: 'good morning',
-    created_at: new Date(),
-    blog_id: 'aws-msk-kafka-guide'
-  }]
+  const comments: Comment[] = [
+    {
+      id: '123asdf',
+      email: 'jay@highlight.io',
+      name: 'Jay Khatri',
+      text: 'good morning',
+      created_at: new Date(),
+      blog_id: 'aws-msk-kafka-guide',
+      image: 'https://picsum.photos/32/32',
+    },
+  ]
   const numComments = comments.length
+
+  const [name, setName] = useState<string>()
+  const [email, setEmail] = useState<string>()
+  const [body, setBody] = useState<string>()
+
   return (
     <div className="w-full flex justify-center">
       <div className="grid-flow-row w-[810px]">
-        <div className="col-4">
+        <div className={section}>
           <div className="w-full flex justify-between">
             <Typography type="copy1">Comments ({numComments})</Typography>
-            <PrimaryButton
-              href="https://app.highlight.io/?sign_up=1"
-              style={{ color: 'black' }}
-            >
-              <Typography type="copy2" emphasis={true}>
-                New Comment
-              </Typography>
-            </PrimaryButton>
           </div>
         </div>
-        <div className="col-4">
+        <div className={section}>
           <div className="w-full">
-            {comments.map((c) => <div key={c.id} className="flex w-full gap-4">
-              <div>circle</div>
-              <div className="flex flex-col">
-                <Typography type="copy2" >
-                  {c.name}
-                </Typography>
-                <Typography type="copy2" >
-                  {c.email}
-                </Typography>
-                <Typography type="copy2" >
-                  {c.text}
-                </Typography>
-                <div>upvote</div>
+            {comments.map((c) => (
+              <div key={c.id} className="flex w-full gap-4">
+                {c.image && (
+                  <Image className="rounded-full h-8 w-8" alt={'profile pic'} src={c.image} width={32} height={32} />
+                )}
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col">
+                    <Typography type="copy4" emphasis>
+                      {c.name}
+                    </Typography>
+                    <Typography type="copy4" className="text-[#FFFFFF8F]">
+                      {c.email}
+                    </Typography>
+                  </div>
+                  <Typography type="copy2">{c.text}</Typography>
+                  <div className="flex flex-row gap-2">
+                    <button className={upvoteButton}>
+                      👍 <Typography type="copy4">4</Typography>
+                    </button>
+                    <button className={upvoteButton}>
+                      ❤️ <Typography type="copy4">5</Typography>
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>)}
+            ))}
           </div>
         </div>
-        <div className="col-4">
-          <div className="w-full flex justify-center">
-            new comment form
+        <div className={section}>
+          <div className="w-full flex flex-col gap-5">
+            <div className="grid grid-cols-2 gap-5">
+              <div className="flex flex-col gap-1">
+                <Typography type="copy4" className="text-[#FFFFFF8F]">
+                  Name
+                </Typography>
+                <input
+                  type="text"
+                  placeholder={`Brian`}
+                  value={name}
+                  onChange={(ev) => setName(ev.currentTarget.value)}
+                  className={input}
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <Typography type="copy4" className="text-[#FFFFFF8F]">
+                  Email
+                </Typography>
+                <input
+                  type="email"
+                  placeholder={`brian@example.com`}
+                  value={email}
+                  onChange={(ev) => setEmail(ev.currentTarget.value)}
+                  className={input}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-1">
+              <Typography type="copy4" className="text-[#FFFFFF8F]">
+                Your Message
+              </Typography>
+              <input
+                type="text"
+                placeholder={`hello there...`}
+                value={body}
+                onChange={(ev) => setBody(ev.currentTarget.value)}
+                className={input}
+              />
+            </div>
+            <div className="flex w-full gap-4">
+              <Button
+                className="bg-blue-cta text-black px-3 py-1 rounded-lg"
+                size={'small'}
+                onClick={() => console.warn('submit!')}
+              >
+                <Typography type="copy3" emphasis={true}>
+                  New Comment
+                </Typography>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

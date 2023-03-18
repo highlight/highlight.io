@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { useEffect, useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 const Channel = 'blog-posts'
@@ -24,6 +24,7 @@ export interface Comment {
   email?: string
   text?: string
   vote?: number
+  image?: string
 }
 
 export const Comments = function ({ slug }: { slug: string }) {
@@ -82,19 +83,14 @@ export const Comments = function ({ slug }: { slug: string }) {
   // for populating comments
   useEffect(() => {
     const getComments = async () => {
-      return (await supabase.from('comments').select().eq('blog_id', slug))
-        .data as Comment[]
+      return (await supabase.from('comments').select().eq('blog_id', slug)).data as Comment[]
     }
     getComments().then(setComments)
   }, [setComments, slug])
 
   return (
     <div>
-      <div>
-        {comments?.map((comment) => (
-          <div key={comment.id}>{comment.text}</div>
-        )) ?? 'we got nothing'}
-      </div>
+      <div>{comments?.map((comment) => <div key={comment.id}>{comment.text}</div>) ?? 'we got nothing'}</div>
       <div>
         <textarea
           style={{ color: 'black' }}
