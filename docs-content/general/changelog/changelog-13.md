@@ -15,7 +15,7 @@ We launched on hackernews a few days ago, and gained surpassed 1.5k github stars
 
 ## Contributing a new SDK:
 
-Interested in adding a new SDK for your for your backend (that isn't support [here](../../getting-started/1_overview.md))? Check out our new docs on [adding an SDK](../3_company/open-source/contributing/adding-an-sdk.md). We're powered by opentelemetry, so adding something for your framework shouldn't be too tough; we're also down to work with you on it!
+Interested in adding a new SDK for your for your backend (that isn't support [here](../../getting-started/1_overview.md))? Check out our new docs on [adding an SDK](../4_company/open-source/contributing/adding-an-sdk.md). We're powered by opentelemetry, so adding something for your framework shouldn't be too tough; we're also down to work with you on it!
 
 ## Better Doc Search
 
@@ -35,5 +35,5 @@ We're making a lot of progress on our new logging product; want to join the beta
 
 ## Improvements
 
-Self-hosting improvements ([docs](../3_company/open-source/self-host-hobby.md))
+Self-hosting improvements ([docs](../4_company/open-source/self-host-hobby.md))
 Lots of work on logging!
