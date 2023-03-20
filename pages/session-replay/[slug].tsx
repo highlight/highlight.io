@@ -101,9 +101,9 @@ const CompetitorComparisonPage = ({ competitor }: { competitor: Competitor }) =>
               <h2 className="self-center text-center">
                 How does <span className="text-color-selected-light">highlight.io</span> stack up?
               </h2>
-              <div className="px-8 max-w-[700px] mx-auto mt-6 text-center">
-                <Typography type="copy1" className="text-copy-on-dark text-center">
-                  LogRocket? More like dog pocket.
+              <div className="px-8 max-w-[1000px] mx-auto mt-6 text-center">
+                <Typography type="copy2" className="text-copy-on-dark text-center">
+                  {competitor.subHeader}
                 </Typography>
               </div>
             </div>

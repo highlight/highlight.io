@@ -15,6 +15,7 @@ export type ComparisonTableSection = {
 export type Competitor = {
   slug: string
   name: string
+  subHeader: string
   logo?: StaticImageData
   sections: ComparisonTableSection[]
 }
@@ -23,6 +24,7 @@ export const COMPETITORS: { [k: string]: Competitor } = {
   'log-rocket': {
     slug: 'log-rocket',
     name: 'LogRocket',
+    subHeader: 'An Open Source, Fullstack Alternative to Logrocket. Get Started for free in minutes.',
     sections: [
       {
         title: 'General',
