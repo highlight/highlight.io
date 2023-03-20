@@ -16,7 +16,7 @@ import { H } from 'highlight.run';
 
 H.init('<YOUR_PROJECT_ID>', {
     environment: 'production',
-    appVersion: 'commit:abcdefg12345',
+    version: 'commit:abcdefg12345',
 	networkRecording: {
 		enabled: true,
 		recordHeadersAndBody: true,
