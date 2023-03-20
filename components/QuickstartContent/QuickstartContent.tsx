@@ -22,6 +22,7 @@ import { GatsbyContent } from './frontend/gatsby'
 import { NextContent } from './frontend/next'
 import { OtherContext } from './frontend/other'
 import { ReactContent } from './frontend/react'
+import { SvelteKitContent } from './frontend/sveltekit'
 import { VueContent } from './frontend/vue'
 import { GoLogrusContent } from './logging/go/logrus'
 import { GoOtherLogContent } from './logging/go/other'
@@ -51,6 +52,7 @@ export type QuickStartStep = {
 export enum QuickStartType {
   Angular = 'angular',
   React = 'react',
+  SvelteKit = 'svelte-kit',
   Next = 'next',
   Vue = 'vue',
   Gatsby = 'gatsby',
@@ -88,6 +90,7 @@ export const quickStartContent = {
     [QuickStartType.Next]: NextContent,
     [QuickStartType.Vue]: VueContent,
     [QuickStartType.Gatsby]: GatsbyContent,
+    [QuickStartType.SvelteKit]: SvelteKitContent,
     [QuickStartType.Other]: OtherContext,
   },
   server: {
