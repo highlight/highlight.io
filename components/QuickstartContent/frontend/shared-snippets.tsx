@@ -35,8 +35,7 @@ export const configureSourcemapsCI = (docsLink?: string): QuickStartStep => {
       text: `# Upload sourcemaps to Highlight
 ...
 npx --yes @highlight-run/sourcemap-uploader upload --apiKey $\{YOUR_ORG_API_KEY\} --path ./build
-...
-        `,
+...`,
       language: 'bash',
     },
   }
@@ -62,9 +61,7 @@ H.init('<YOUR_PROJECT_ID>', {
 });
 
 ...
-// rendering code.
-
-                `,
+// rendering code.`,
     language: 'js',
   },
 }

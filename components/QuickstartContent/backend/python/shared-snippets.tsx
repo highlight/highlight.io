@@ -5,14 +5,13 @@ export const setupFrontendSnippet: QuickStartStep = {
   title: 'Setup your frontend Highlight snippet with tracingOrigins.',
   content: `Make sure that you followed the [fullstack mapping guide](${fullstackMappingLink}#How-can-I-start-using-this).`,
   code: {
-    text: `  H.init("<YOUR_PROJECT_ID>", {
-    tracingOrigins: ['localhost', 'example.myapp.com/backend'],
-    networkRecording: {
-      enabled: true,
-      recordHeadersAndBody: true,
-    },
-  });
-`,
+    text: `H.init("<YOUR_PROJECT_ID>", {
+  tracingOrigins: ['localhost', 'example.myapp.com/backend'],
+  networkRecording: {
+    enabled: true,
+    recordHeadersAndBody: true,
+  },
+});`,
     language: 'js',
   },
 }
@@ -27,8 +26,7 @@ export const downloadSnippet = (variant?: string): QuickStartStep => {
     code: {
       text: `poetry add highlight-io${variant ? '[' + variant + ']' : ''}
 # or with pip
-pip install highlight-io${variant ? '[' + variant + ']' : ''}
-`,
+pip install highlight-io${variant ? '[' + variant + ']' : ''}`,
       language: 'bash',
     },
   }
