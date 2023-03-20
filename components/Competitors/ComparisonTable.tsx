@@ -1,6 +1,8 @@
 import Image from 'next/image'
-import { HiCheckCircle, HiXCircle } from 'react-icons/hi'
+import { HiCheckCircle, HiDotsCircleHorizontal, HiXCircle } from 'react-icons/hi'
+import highlightlogosmall from '../../public/images/logo-on-dark.png'
 import logrocketlogofull from '../../public/images/logrocketlogofull.png'
+import logrocketlogosmall from '../../public/images/logrocketlogosmall.png'
 import { HighlightLogo } from '../common/HighlightLogo/HighlightLogo'
 import { Typography } from '../common/Typography/Typography'
 import { ComparisonTableRow, ComparisonTableSection, Competitor } from './competitors'
@@ -18,12 +20,16 @@ export default function ComparisonTable(props: { competitor: Competitor }) {
             <Typography type="copy1" className="text-white" emphasis>
               {section.title}
             </Typography>
-            <div className={`${i == 0 ? 'md:flex' : ''} hidden items-center`}>
-              <div className="w-[200px] pl-2">
-                <HighlightLogo />
+            <div className={`${i == 0 ? 'flex' : 'hidden '} items-center`}>
+              <div className="w-[50px] md:w-[200px] px-2">
+                <div className="hidden md:flex">
+                  <HighlightLogo />
+                </div>
+                <Image src={highlightlogosmall} alt="LogRocket Logo" className="md:hidden" />
               </div>
-              <div className="w-[200px]">
-                <Image src={logrocketlogofull} alt="LogRocket Logo" />
+              <div className="w-[50px] md:w-[200px] px-1">
+                <Image src={logrocketlogofull} alt="LogRocket Logo" className="hidden md:flex" />
+                <Image src={logrocketlogosmall} alt="LogRocket Logo" className="md:hidden" />
               </div>
             </div>
           </div>
@@ -42,7 +48,8 @@ export default function ComparisonTable(props: { competitor: Competitor }) {
                     <HiCheckCircle className="text-copy-on-dark h-7 w-7" />
                   ) : (
                     <div className="flex gap-1">
-                      <HiXCircle className="text-copy-on-light h-7 w-7" />
+                      <HiXCircle className="hidden md:flex text-copy-on-light h-7 w-7" />
+                      <HiDotsCircleHorizontal className="md:hidden text-copy-on-light h-7 w-7" />
                       {row.highlight == 0.5 && (
                         <div className="hidden md:flex items-center bg-copy-on-light px-3 rounded-full">
                           <Typography type="copy4" emphasis className="text-copy-on-dark rounded-full">
