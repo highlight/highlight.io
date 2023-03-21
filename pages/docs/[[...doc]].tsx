@@ -918,28 +918,15 @@ const QuickStart = (content: { content: QuickStartContent }) => {
         {c.entries.map((step: QuickStartStep, i: number) => {
           if (step.hidden) return null
           return (
-            <div key={JSON.stringify(step)} style={{ display: 'flex', gap: 24 }}>
-              <div style={{ display: 'flex', width: 40, flexDirection: 'column' }}>
-                <div
-                  style={{
-                    width: 32,
-                    minHeight: 32,
-                    backgroundColor: '#30294E',
-                    borderRadius: 100,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
+            <div key={JSON.stringify(step)} className="flex gap-6">
+              <div className="flex flex-col items-center flex-shrink-0 w-10">
+                <div className="grid flex-shrink-0 w-8 h-8 rounded-full bg-divider-on-dark place-items-center">
                   {i + 1}
                 </div>
-                <div style={{ width: 16, height: '100%', borderRight: '2px solid #30294E' }}></div>
+                <div className="w-0.5 flex-1 bg-divider-on-dark" />
               </div>
-              <div style={{ width: '100%', display: 'flex', gap: 20, marginBottom: 42 }}>
-                <div
-                  style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: 8 }}
-                  className={styles.quickStartSubtext}
-                >
+              <div className="grid gap-5 mb-[42px] flex-1 min-[1000px]:grid-cols-2 min-[1000px]:grid-flow-col">
+                <div className={classNames(' flex flex-col gap-2', styles.quickStartSubtext)}>
                   <Typography type="copy2" emphasis>
                     {step.title}
                   </Typography>
@@ -959,7 +946,7 @@ const QuickStart = (content: { content: QuickStartContent }) => {
                     {step.content}
                   </Markdown>
                 </div>
-                <div style={{ width: '50%' }}>
+                <div className="min-w-0">
                   {step.code && (
                     <HighlightCodeBlock
                       style={{ position: 'sticky', top: '80px' }}
