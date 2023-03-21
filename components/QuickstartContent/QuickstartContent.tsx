@@ -84,10 +84,11 @@ export enum QuickStartType {
 export const quickStartContent = {
   client: {
     title: 'Client SDKs',
-    subtitle: 'Get started with the client SDKs',
+    subtitle: 'Select a client SDK to get started.',
     js: {
       title: 'Select your client framework',
-      subtitle: 'Get started with the web SDKs.',
+      subtitle:
+        'Select a client SDK to install session replay, error monitoring, and logging for your frontend application.',
       [QuickStartType.React]: ReactContent,
       [QuickStartType.Angular]: AngularContent,
       [QuickStartType.Next]: NextContent,
@@ -104,12 +105,13 @@ export const quickStartContent = {
     [QuickStartType.Gatsby]: GatsbyContent,
     [QuickStartType.Other]: OtherContext,
   },
-  server: {
-    title: 'Select your server framework',
-    subtitle: 'Get started with the server SDKs',
+  backend: {
+    title: 'Select your backend language',
+    subtitle:
+      'Select a backend language to see the SDKs available for setting up error monitoring and logging for your application.',
     python: {
-      title: 'Python SDKs',
-      subtitle: 'Get started with the Python SDKs',
+      title: 'Python',
+      subtitle: 'Select your Python framework to install error monitoring for your application.',
       [QuickStartType.PythonFlask]: PythonFlaskContext,
       [QuickStartType.PythonDjango]: PythonDjangoContext,
       [QuickStartType.PythonFastAPI]: PythonFastAPIContext,
@@ -119,8 +121,8 @@ export const quickStartContent = {
       [QuickStartType.PythonGCPFn]: PythonGCPContext,
     },
     go: {
-      title: 'Go SDKs',
-      subtitle: 'Get started with the Go SDKs',
+      title: 'Go',
+      subtitle: 'Select your Go framework to install error monitoring for your application.',
       [QuickStartType.GoGqlgen]: GoGqlgenContent,
       [QuickStartType.GoFiber]: GoFiberContent,
       [QuickStartType.GoChi]: GoChiContent,
@@ -128,8 +130,8 @@ export const quickStartContent = {
       [QuickStartType.GoGin]: GoGinContent,
     },
     js: {
-      title: 'JavaScript SDKs',
-      subtitle: 'Get started with the JavaScript SDKs',
+      title: 'JavaScript',
+      subtitle: 'Select your JavaScript framework to install error monitoring for your application.',
       [QuickStartType.JSApollo]: JSApolloContent,
       [QuickStartType.JSCloudflare]: JSCloudflareContent,
       [QuickStartType.JSExpress]: JSExpressContent,
@@ -139,29 +141,29 @@ export const quickStartContent = {
       [QuickStartType.JStRPC]: JStRPCContent,
     },
   },
-  'server-logging': {
-    title: 'Select your logging language',
-    subtitle: 'Get started with the logging SDKs',
+  'backend-logging': {
+    title: 'Select your language',
+    subtitle: 'Select your backend language to install logging in your application.',
     python: {
-      title: 'Python logging libraries',
-      subtitle: 'Get started with logging in Python.',
+      title: 'Python',
+      subtitle: 'Select your Python framework to install logging in your application.',
       [QuickStartType.PythonOther]: PythonOtherLogContent,
     },
     go: {
-      title: 'Go Logging Quickstart',
-      subtitle: 'Get started with logging in Go.',
+      title: 'Go',
+      subtitle: 'Select your Go framework to install logging in your application.',
       [QuickStartType.GoLogrus]: GoLogrusContent,
       [QuickStartType.GoOther]: GoOtherLogContent,
     },
     js: {
-      title: 'JS Logging Quickstart',
-      subtitle: 'Get started with logging in JavaScript.',
+      title: 'JavaScript',
+      subtitle: 'Select your JavaScript framework to install logging in your application.',
       [QuickStartType.JSNodejs]: JSOtherLogContent,
       [QuickStartType.JSNestjs]: JSNestLogContent,
     },
     http: {
-      title: 'HTTP Logging Quickstart',
-      subtitle: 'Get started with logging over HTTP.',
+      title: 'HTTP/OTLP',
+      subtitle: 'Get started with logging in your application via HTTP or OTLP.',
       [QuickStartType.HTTPOTLP]: HTTPContent,
     },
   },
