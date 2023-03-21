@@ -8,8 +8,7 @@ import {
   verifySnippet,
 } from './shared-snippets'
 
-const angularInitCodeSnippet = `// app.module.ts
-    import { NgModule } from '@angular/core';
+const svelteKitInitCodeSnippet = `// hooks.client.ts
 ...
 
 import { H } from 'highlight.run';
@@ -25,23 +24,22 @@ H.init('<YOUR_PROJECT_ID>', {
         ],
 	},
 });
-
-@NgModule({
-    ...
-})
-export class AppModule { }
+...
 `
 
-export const AngularContent: QuickStartContent = {
-  title: 'Angular',
-  subtitle: 'Learn how to set up highlight.io with your Angular application.',
+export const SvelteKitContent: QuickStartContent = {
+  title: 'SvelteKit',
+  subtitle: 'Learn how to set up highlight.io with your SvelteKit application.',
   entries: [
     packageInstallSnippet,
     {
       ...initializeSnippet,
+      content:
+        'In SvelteKit, we recommend initializing highlight.io in the `hooks.client.js` or `hooks.client.ts` file. You can find more details about this file in the SvelteKit docs [here](https://kit.svelte.dev/docs/hooks). To get started, we recommend setting `tracingOrigins` and `networkRecording` so that we can pass a header to pair frontend and backend errors. \n\n\n' +
+        `Grab your project ID from [app.highlight.io/setup](https://app.highlight.io/setup) and insert it in place of \`<YOUR_PROJECT_ID>\` in the code snippet to the right.`,
       code: {
         ...initializeSnippet.code,
-        text: angularInitCodeSnippet,
+        text: svelteKitInitCodeSnippet,
         language: initializeSnippet.code?.language ?? 'js',
       },
     },
