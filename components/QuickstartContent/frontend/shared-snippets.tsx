@@ -71,7 +71,7 @@ H.init('<YOUR_PROJECT_ID>', {
 
 export const identifySnippet: QuickStartStep = {
   title: 'Identify users.',
-  content: `Identify users to tie their sessions/errors to their account. We suggest doing this before/after the authentication flow of your web app. \n\n\nThe first argument of \`identify\` will be searchable via the property \`identifier\`, and the second property is searchable by the key of each item in the object. Read more about this in our [identifying users](${identifyingUsersLink}) section.`,
+  content: `Identify users to tie their sessions/errors to their account. We suggest doing this after the authentication flow of your web app. \n\n\nThe first argument of \`identify\` will be searchable via the property \`identifier\`, and the second property is searchable by the key of each item in the object. Read more about this in our [identifying users](${identifyingUsersLink}) section.`,
   code: {
     text: `H.identify('jay@highlight.io', {
     id: 'very-secure-id',
