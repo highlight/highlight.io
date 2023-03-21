@@ -771,7 +771,15 @@ const DocPage = ({
                         h1: (props) => <h4 {...props} />,
                         h2: (props) => {
                           if (props.children && typeof props.children === 'string') {
-                            return <h5 id={generateIdString(props.children as string)} {...props} />
+                            const id = generateIdString(props.children as string)
+                            return (
+                              <Link
+                                href={`#${id}`}
+                                className="inline-flex items-baseline gap-2 my-6 transition-all group"
+                              >
+                                <h5 id={id} {...props} />
+                              </Link>
+                            )
                           }
                           return <></>
                         },
