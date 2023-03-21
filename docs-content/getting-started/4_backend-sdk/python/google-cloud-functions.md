@@ -5,4 +5,4 @@ slug: google-cloud-functions
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["python"]["google-cloud-functions"]}/>
+<QuickStart content={quickStartContent["backend"]["python"]["google-cloud-functions"]}/>
