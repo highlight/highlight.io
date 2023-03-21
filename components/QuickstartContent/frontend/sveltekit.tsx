@@ -28,7 +28,7 @@ H.init('<YOUR_PROJECT_ID>', {
 `
 
 export const SvelteKitContent: QuickStartContent = {
-  title: 'Svelte',
+  title: 'SvelteKit',
   subtitle: 'Learn how to set up highlight.io with your SvelteKit application.',
   entries: [
     packageInstallSnippet,
