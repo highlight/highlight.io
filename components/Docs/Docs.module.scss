@@ -1009,7 +1009,8 @@ h5:hover .headingCopyIcon {
     flex: 0 0 auto;
     height: auto;
     border-bottom: 1px solid var(--divider-on-dark);
-    padding: var(--size-large) var(--size-large);
+    padding: 24px var(--size-large) 20px;
+    gap: 8px;
     position: relative;
     max-width: none;
     top: 0;
@@ -1030,6 +1031,8 @@ h5:hover .headingCopyIcon {
 
   .leftInner {
     padding: 0;
+    border-bottom: 0;
+    margin-left: -8px;
   }
 
   .tocMenu {
@@ -1090,10 +1093,6 @@ h5:hover .headingCopyIcon {
 @media screen and (max-width: 600px) {
   .inlineCodeBlock {
     word-break: break-word;
-  }
-
-  .leftSection {
-    top: 0;
   }
 
   .centerSection {
