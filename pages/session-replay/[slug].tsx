@@ -43,12 +43,12 @@ const CompetitorComparisonPage = ({ competitor }: { competitor: Competitor }) =>
       </div>
       <main>
         <div className="flex flex-col xl:flex-row justify-between w-screen px-8 mx-auto lg:px-4 lg:py-28 max-w-[1200px] 2xl:max-w-[1400px]">
-          <div className="lg:w-1/2 flex justify-center mt-10">
+          <div className="lg:w-[60%] flex justify-center mt-10">
             <div className="flex flex-col max-w-4xl gap-8 text-center lg:text-left">
-              <h2 className="text-white">The {competitor.name} alternative you&apos;ve been waiting for</h2>
+              <h2 className="text-white">The Open Source {competitor.name} alternative.</h2>
 
-              <Typography type="copy1" className="text-copy-on-dark">
-                Pixel-perfect video replay of your web application. Step into the shoes of your users.
+              <Typography type="copy1" className="lg:w-3/4 text-copy-on-dark">
+                {competitor.subheader}
               </Typography>
               <div className="flex flex-col lg:flex-row justify-start gap-4 w-full lg:w-auto">
                 <PrimaryButton
@@ -103,7 +103,7 @@ const CompetitorComparisonPage = ({ competitor }: { competitor: Competitor }) =>
               </h2>
               <div className="px-8 max-w-[1000px] mx-auto mt-6 text-center">
                 <Typography type="copy2" className="text-copy-on-dark text-center">
-                  {competitor.subHeader}
+                  {competitor.subHeader2}
                 </Typography>
               </div>
             </div>

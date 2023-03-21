@@ -1,3 +1,4 @@
+import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 import { HiCheckCircle, HiDotsCircleHorizontal, HiXCircle } from 'react-icons/hi'
 import highlightlogosmall from '../../public/images/logo-on-dark.png'
@@ -38,7 +39,9 @@ export default function ComparisonTable(props: { competitor: Competitor }) {
               <Typography type="copy2" className="text-copy-on-dark">
                 {row.feature}
               </Typography>
-              <div className="flex">
+              <div className="flex items-center">
+                <QuestionMarkCircleIcon className="h-5 w-5 mr-2 text-copy-on-light " />
+
                 <div
                   className={`bg-divider-on-dark px-2 py-2 w-[50px] md:w-[200px] border-r-[1px] border-copy-on-light ${
                     j == 0 ? 'rounded-tl-lg' : j == section.rows.length - 1 ? 'rounded-bl-lg' : ''
