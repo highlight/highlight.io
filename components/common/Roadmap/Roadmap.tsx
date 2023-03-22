@@ -10,15 +10,26 @@ export const Roadmap = (content: { content: RoadmapProps }) => {
 
   return (
     <>
-      <PrimaryButton
-        href="https://github.com/orgs/highlight/projects/11/views/1"
-        className="inline-block py-[6px] mt-4 items-center px-3 rounded-md"
-      >
-        <BsGithub className="inline-block mr-2 mb-[3px] h-[18px] " />
-        <Typography type="copy3" emphasis>
-          Submit a Feature Request
-        </Typography>
-      </PrimaryButton>
+      <div className="flex flex-col sm:flex-row gap-4 mt-4">
+        <PrimaryButton
+          href="https://github.com/highlight/highlight/issues/new?assignees=&labels=external+bug+%2F+request&template=feature_request.md&title="
+          className={classNames(styles.solidButton, 'inline-block py-[6px] items-center px-3 rounded-md')}
+        >
+          <BsGithub className="inline-block mr-2 mb-[3px] h-[18px]" />
+          <Typography type="copy3" emphasis>
+            Submit Feature Request
+          </Typography>
+        </PrimaryButton>
+        <PrimaryButton
+          href="https://github.com/orgs/highlight/projects/11/views/1"
+          className={classNames(styles.hollowButton, 'inline-block py-[6px]  items-center rounded-md')}
+        >
+          <BsGithub className="inline-block mr-2 mb-[3px] h-[18px] " />
+          <Typography type="copy3" emphasis>
+            View on GitHub
+          </Typography>
+        </PrimaryButton>
+      </div>
       <div className="border-[1px] border-divider-on-dark my-10 w-[300px]" />
       <div className="flex flex-col xl:flex-row w-full gap-16 xl:gap-0">
         <RoadmapColumn
