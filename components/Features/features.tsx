@@ -65,7 +65,7 @@ H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 export const FEATURES: { [k: string]: iFeature } = {
   'session-replay': {
     slug: 'session-replay',
-    header: 'Open Source Session Replay & Monitoring.',
+    header: 'Session Replay & UX Monitoring.',
     subheader:
       'The only tool you need to monitor your frontend. Pixel-perfect video replay & comprehensive javascript monitoring.',
     docsLink: '/docs/general/product-features/session-replay/overview',
