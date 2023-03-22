@@ -1,9 +1,9 @@
-import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 import errorMonitoringHero from '../../public/images/features/errorMonitoringHero.png'
 import loggingHero from '../../public/images/features/loggingHero.png'
-import sessionscreenshot from '../../public/images/sessionscreenshot.png'
+import sessionReplayHero from '../../public/images/features/sessionReplayHero.png'
 import loggingscreenshot from '../../public/images/loggingscreenshot.png'
 import monitoringscreenshot from '../../public/images/monitoringscreenshot.png'
+import sessionscreenshot from '../../public/images/sessionscreenshot.png'
 
 const sessionReplay2 = '/images/features/sessionReplay2.png'
 const sessionReplay3 = '/images/landingInfoRow1.png'
@@ -65,8 +65,9 @@ H = highlight_io.H("YOUR_PROJECT_ID", record_logs=True)
 export const FEATURES: { [k: string]: iFeature } = {
   'session-replay': {
     slug: 'session-replay',
-    header: 'Session Replay & UX Monitoring',
-    subheader: 'Pixel-perfect video replay of your web application. Step into the shoes of your users.',
+    header: 'Open Source Session Replay & Monitoring.',
+    subheader:
+      'The only tool you need to monitor your frontend. Pixel-perfect video replay & comprehensive javascript monitoring.',
     docsLink: '/docs/general/product-features/session-replay/overview',
     slantedImage: sessionReplayHero,
     regularImage: sessionscreenshot,
