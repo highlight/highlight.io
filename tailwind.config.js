@@ -39,6 +39,7 @@ module.exports = {
         'color-darker-copy-on-dark': '#9D97AA',
         'color-copy-on-light': '#645d74',
         'color-divider-on-dark': '#30294e',
+        'color-gray': '#a9a9a9',
       },
       fontFamily: {
         sans: 'Poppins',

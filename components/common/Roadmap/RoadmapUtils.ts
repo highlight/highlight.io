@@ -33,17 +33,17 @@ export const labels = [
   'session-replay',
   'error-monitoring',
   'logging',
-  'bug',
-  'dependencies',
-  'good first issue',
-  'design',
-  'enhancement',
   'future-work',
-  'discussion',
-  'documentation',
-  'duplicate',
-  'github_actions',
-  'go',
+  //'bug',
+  //'dependencies',
+  //'good first issue',
+  //'design',
+  //'enhancement',
+  //'discussion',
+  //'documentation',
+  //'duplicate',
+  //'github_actions',
+  //'go',
 ]
 
 export const query = gql`
@@ -152,7 +152,7 @@ export const roadmapFetcher = async () => {
       number: content.number,
       labels: content.labels.nodes.map((label: { name: string }) => label.name),
       link: content.url,
-      linkText: 'Vote on Github',
+      linkText: 'Vote on GitHub',
       issueReactions: issueReactions,
     }
 

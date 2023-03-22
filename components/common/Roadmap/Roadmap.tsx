@@ -10,14 +10,17 @@ export const Roadmap = (content: { content: RoadmapProps }) => {
 
   return (
     <>
-      <PrimaryButton className="inline-block py-1 mt-4 items-center">
-        <BsGithub className="inline-block mr-2 mb-[2px] h-[15px] " />
+      <PrimaryButton
+        href="https://github.com/orgs/highlight/projects/11/views/1"
+        className="inline-block py-[6px] mt-4 items-center px-3 rounded-md"
+      >
+        <BsGithub className="inline-block mr-2 mb-[3px] h-[18px] " />
         <Typography type="copy3" emphasis>
           Submit a Feature Request
         </Typography>
       </PrimaryButton>
       <div className="border-[1px] border-divider-on-dark my-10 w-[300px]" />
-      <div className="flex flex-col xl:flex-row w-full">
+      <div className="flex flex-col xl:flex-row w-full gap-16 xl:gap-0">
         <RoadmapColumn
           title="Under Consideration"
           subTitle="The features and improvements on our radar. Feel free to contribute."
@@ -37,7 +40,7 @@ export const Roadmap = (content: { content: RoadmapProps }) => {
 const RoadmapColumn = ({ title, subTitle, issues }: { title: string; subTitle: string; issues: Issue[] }) => {
   return (
     <div className="flex w-full flex-col">
-      <div className="flex flex-col h-[100px] mb-8 gap-2">
+      <div className="flex flex-col xl:h-[100px] mb-8 gap-2">
         <Typography type="copy1" emphasis>
           {title}
         </Typography>
@@ -55,14 +58,14 @@ const RoadmapColumn = ({ title, subTitle, issues }: { title: string; subTitle: s
 }
 
 const RoadmapCategory = ({ label, items }: { label: string; items: Issue[] }) => {
-  let filteredItems = items.filter((item) => item.labels.includes(label))
+  let filteredItems = items.filter((item) => item.labels[0] === label)
 
   if (filteredItems.length === 0) {
     return null
   }
 
   return (
-    <div className="w-11/12 text-center border-[1px] border-divider-on-dark rounded-lg">
+    <div className="xl:w-11/12 text-center border-[1px] border-divider-on-dark rounded-lg">
       <div className="py-2">
         <Typography type="copy3" emphasis>
           {tagToTitle(label)}
@@ -78,9 +81,11 @@ const RoadmapCategory = ({ label, items }: { label: string; items: Issue[] }) =>
 const RoadmapItem = ({ title, number, link, linkText, issueReactions }: Issue) => {
   return (
     <div className="flex flex-col gap-2 pt-3 border-t-[1px] border-divider-on-dark text-start px-4">
-      <Typography type="copy4" emphasis className="text-copy-on-dark">
-        {title} <span className="text-copy-on-light ml-1">#{number}</span>
-      </Typography>
+      <a href={link} className="cursor-pointer">
+        <Typography type="copy4" emphasis className="text-copy-on-dark">
+          {title} <span className="text-color-gray">#{number}</span>
+        </Typography>
+      </a>
 
       <div className="flex gap-4">
         {issueReactions &&
@@ -98,9 +103,12 @@ const RoadmapItem = ({ title, number, link, linkText, issueReactions }: Issue) =
 
       {link && (
         <div className="inline-block">
-          <PrimaryButton className={classNames('inline-block py-1 mt-2 items-center mb-4', styles.hollowButton)}>
+          <PrimaryButton
+            href={link}
+            className={classNames('inline-block px-3 py-1 mt-2 items-center mb-4 rounded-md', styles.hollowButton)}
+          >
             <div className="flex items-center gap-2">
-              <BsGithub className="mb-[2px] h-[15px] " />
+              <BsGithub className="h-[15px]" />
               <Typography type="copy3" emphasis>
                 {linkText}
               </Typography>
