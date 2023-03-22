@@ -54,9 +54,10 @@ H.consumeError(error, parsed?.secureSessionId, parsed?.requestId)`,
 }
 
 export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
-  title: 'Verify your backend logs are being recorded.',
-  content:
-    'With the JS SDKs, your logs are reported automatically from console methods. Visit the [highlight logs portal](http://app.highlight.io/logs) and check that backend logs are coming in.',
+  title: 'Set up logging.',
+  content: `With the JS SDKs, your logs are reported automatically from console methods. See the JS [logging setup guide](${siteUrl(
+    '/docs/getting-started/backend-logging/js/overview',
+  )}) for more details.`,
 })
 
 export const addIntegrationContent = (name: string, slug: string) =>
