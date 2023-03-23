@@ -20,6 +20,8 @@ import { useRouter } from 'next/router'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
 import Navbar from '../../components/common/Navbar/Navbar'
+import { Roadmap } from '../../components/common/Roadmap/Roadmap'
+import { roadmapFetcher } from '../../components/common/Roadmap/RoadmapUtils'
 import { Typography } from '../../components/common/Typography/Typography'
 import { Callout } from '../../components/Docs/Callout/Callout'
 import { DocSection } from '../../components/Docs/DocLayout/DocLayout'
@@ -300,11 +302,19 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
     redirect = target ?? ''
   }
 
+  let roadmapData = await roadmapFetcher()
+
   return {
     props: {
       metadata: currentDoc.metadata,
       markdownText: !currentDoc.isSdkDoc
-        ? await serialize(newerContent, { scope: { path: currentDoc.rel_path, quickStartContent } })
+        ? await serialize(newerContent, {
+            scope: {
+              path: currentDoc.rel_path,
+              quickStartContent,
+              roadmapData: currentDoc.rel_path.includes('roadmap') ? roadmapData : null,
+            },
+          })
         : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
@@ -765,6 +775,7 @@ const DocPage = ({
                   {markdownText && (
                     <MDXRemote
                       components={{
+                        Roadmap,
                         QuickStart,
                         DocsCard,
                         DocsCardGroup,
