@@ -15,13 +15,12 @@ interface Referrer {
 
 // Same as what we have in frontend. Need to keep these in sync.
 export const setAttributionData = () => {
-  let referrer: Referrer = {
-    documentReferrer: document.referrer,
-  }
+  let referrer: Referrer = { documentReferrer: document.referrer }
   const prevRef = Cookies.get('referrer')
   if (prevRef) {
     referrer = { ...referrer, ...(JSON.parse(prevRef) as Referrer) }
   }
+  referrer.documentReferrer = document.referrer
 
   const urlParams = new URLSearchParams(window.location.search)
   if (urlParams.get('ref')) {
