@@ -9,19 +9,27 @@ interface Referrer {
   device?: string | null
   gclid?: string | null
   referrer?: string | null
-  documentReferrer?: string | null
   pathReferrer?: string | null
+  documentReferrer: string
 }
 
 // Same as what we have in frontend. Need to keep these in sync.
 export const setAttributionData = () => {
-  let referrer: Referrer = {}
+  let referrer: Referrer = {
+    documentReferrer: document.referrer,
+  }
   const prevRef = Cookies.get('referrer')
+  if (prevRef) {
+    referrer = { ...referrer, ...(JSON.parse(prevRef) as Referrer) }
+  }
+
   const urlParams = new URLSearchParams(window.location.search)
-  const pathRef =
-    window.location.pathname.indexOf('/r/') === -1 ? undefined : window.location.pathname.split('/r/').pop()
-  if (pathRef || urlParams.get('ref') || urlParams.get('utm_source')) {
+  if (urlParams.get('ref')) {
+    referrer = { ...referrer, referrer: urlParams.get('ref') }
+  }
+  if (urlParams.get('utm_source')) {
     referrer = {
+      ...referrer,
       utm_source: urlParams.get('utm_source'),
       utm_medium: urlParams.get('utm_medium'),
       utm_campaign: urlParams.get('utm_campaign'),
@@ -29,12 +37,14 @@ export const setAttributionData = () => {
       utm_term: urlParams.get('utm_term'),
       device: urlParams.get('device'),
       gclid: urlParams.get('gclid'),
-      referrer: urlParams.get('ref'),
-      pathReferrer: pathRef,
     }
-  } else if (prevRef) {
-    referrer = JSON.parse(prevRef) as Referrer
   }
-  referrer.documentReferrer = document.referrer
+
+  const pathRef =
+    window.location.pathname.indexOf('/r/') === -1 ? undefined : window.location.pathname.split('/r/').pop()
+  if (pathRef) {
+    referrer = { ...referrer, pathReferrer: pathRef }
+  }
+
   Cookies.set('referrer', JSON.stringify(referrer), { domain: 'highlight.io' })
 }
