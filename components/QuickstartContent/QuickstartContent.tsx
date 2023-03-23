@@ -80,21 +80,41 @@ export enum QuickStartType {
   JSNodejs = 'nodejs',
   JSNestjs = 'nestjs',
   JStRPC = 'trpc',
-  HTTPOTLP = 'http/otlp',
+  HTTPOTLP = 'http-otlp',
 }
 
 export const quickStartContent = {
   client: {
-    [QuickStartType.Angular]: AngularContent,
+    title: 'Client SDKs',
+    subtitle: 'Select a client SDK to get started.',
+    js: {
+      title: 'Select your client framework',
+      subtitle:
+        'Select a client SDK to install session replay, error monitoring, and logging for your frontend application.',
+      [QuickStartType.React]: ReactContent,
+      [QuickStartType.Angular]: AngularContent,
+      [QuickStartType.Next]: NextContent,
+      [QuickStartType.Vue]: VueContent,
+      [QuickStartType.Gatsby]: GatsbyContent,
+      [QuickStartType.Other]: OtherContext,
+    },
+    // Returning this as part of the base object so we don't break the old docs.
+    // We can remove this once the app-side changes are deployed.
     [QuickStartType.React]: ReactContent,
+    [QuickStartType.Angular]: AngularContent,
     [QuickStartType.Next]: NextContent,
     [QuickStartType.Vue]: VueContent,
     [QuickStartType.Gatsby]: GatsbyContent,
     [QuickStartType.SvelteKit]: SvelteKitContent,
     [QuickStartType.Other]: OtherContext,
   },
-  server: {
+  backend: {
+    title: 'Select your backend language',
+    subtitle:
+      'Select a backend language to see the SDKs available for setting up error monitoring and logging for your application.',
     python: {
+      title: 'Python',
+      subtitle: 'Select your Python framework to install error monitoring for your application.',
       [QuickStartType.PythonFlask]: PythonFlaskContext,
       [QuickStartType.PythonDjango]: PythonDjangoContext,
       [QuickStartType.PythonFastAPI]: PythonFastAPIContext,
@@ -104,6 +124,8 @@ export const quickStartContent = {
       [QuickStartType.PythonGCPFn]: PythonGCPContext,
     },
     go: {
+      title: 'Go',
+      subtitle: 'Select your Go framework to install error monitoring for your application.',
       [QuickStartType.GoGqlgen]: GoGqlgenContent,
       [QuickStartType.GoFiber]: GoFiberContent,
       [QuickStartType.GoChi]: GoChiContent,
@@ -111,6 +133,8 @@ export const quickStartContent = {
       [QuickStartType.GoGin]: GoGinContent,
     },
     js: {
+      title: 'JavaScript',
+      subtitle: 'Select your JavaScript framework to install error monitoring for your application.',
       [QuickStartType.JSApollo]: JSApolloContent,
       [QuickStartType.JSCloudflare]: JSCloudflareContent,
       [QuickStartType.JSExpress]: JSExpressContent,
@@ -120,19 +144,31 @@ export const quickStartContent = {
       [QuickStartType.JStRPC]: JStRPCContent,
     },
   },
-  'server-logging': {
+  'backend-logging': {
+    title: 'Select your language',
+    subtitle: 'Select your backend language to install logging in your application.',
     python: {
+      title: 'Python',
+      subtitle: 'Select your Python framework to install logging in your application.',
       [QuickStartType.PythonOther]: PythonOtherLogContent,
     },
     go: {
+      title: 'Go',
+      subtitle: 'Select your Go framework to install logging in your application.',
       [QuickStartType.GoLogrus]: GoLogrusContent,
       [QuickStartType.GoOther]: GoOtherLogContent,
     },
     js: {
+      title: 'JavaScript',
+      subtitle: 'Select your JavaScript framework to install logging in your application.',
       [QuickStartType.JSNodejs]: JSOtherLogContent,
       [QuickStartType.JSNestjs]: JSNestLogContent,
     },
-    [QuickStartType.HTTPOTLP]: HTTPContent,
+    http: {
+      title: 'HTTP/OTLP',
+      subtitle: 'Get started with logging in your application via HTTP or OTLP.',
+      [QuickStartType.HTTPOTLP]: HTTPContent,
+    },
   },
   other: {
     [QuickStartType.SelfHost]: SelfHostContent,

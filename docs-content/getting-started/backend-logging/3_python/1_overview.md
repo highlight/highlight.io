@@ -6,4 +6,4 @@ updatedAt: 2022-04-06T20:22:54.000Z
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server-logging"]["python"]["other"]}/>
+<QuickStart content={quickStartContent["backend-logging"]["python"]["other"]}/>

@@ -6,4 +6,4 @@ updatedAt: 2022-04-06T20:22:54.000Z
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["go"]["fiber"]}/>
+<QuickStart content={quickStartContent["backend"]["go"]["fiber"]}/>

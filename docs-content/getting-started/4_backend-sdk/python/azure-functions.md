@@ -5,4 +5,4 @@ slug: azure-functions
 quickstart: true
 ---
 
-<QuickStart content={quickStartContent["server"]["python"]["azure-functions"]}/>
+<QuickStart content={quickStartContent["backend"]["python"]["azure-functions"]}/>

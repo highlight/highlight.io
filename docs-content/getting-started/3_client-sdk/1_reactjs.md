@@ -5,4 +5,4 @@ slug: react
 quickstart: react
 ---
 
-<QuickStart content={quickStartContent["client"]["react"]}/>
+<QuickStart content={quickStartContent["client"]["js"]["react"]}/>
