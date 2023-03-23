@@ -10,6 +10,7 @@ interface Referrer {
   gclid?: string | null
   referrer?: string | null
   documentReferrer?: string | null
+  pathReferrer?: string | null
 }
 
 // Same as what we have in frontend. Need to keep these in sync.
@@ -17,7 +18,9 @@ export const setAttributionData = () => {
   let referrer: Referrer = {}
   const prevRef = Cookies.get('referrer')
   const urlParams = new URLSearchParams(window.location.search)
-  if (urlParams.get('utm_source')) {
+  const pathRef =
+    window.location.pathname.indexOf('/r/') === -1 ? undefined : window.location.pathname.split('/r/').pop()
+  if (pathRef || urlParams.get('ref') || urlParams.get('utm_source')) {
     referrer = {
       utm_source: urlParams.get('utm_source'),
       utm_medium: urlParams.get('utm_medium'),
@@ -27,6 +30,7 @@ export const setAttributionData = () => {
       device: urlParams.get('device'),
       gclid: urlParams.get('gclid'),
       referrer: urlParams.get('ref'),
+      pathReferrer: pathRef,
     }
   } else if (prevRef) {
     referrer = JSON.parse(prevRef) as Referrer
