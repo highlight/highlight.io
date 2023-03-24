@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
 import { initializeNodeSDK, jsGetSnippet, manualError, setupLogging, verifyError } from './shared-snippets'
@@ -5,6 +6,7 @@ import { initializeNodeSDK, jsGetSnippet, manualError, setupLogging, verifyError
 export const JSApolloContent: QuickStartContent = {
   title: 'Apollo',
   subtitle: 'Learn how to set up highlight.io on your Apollo Server backend.',
+  logoUrl: siteUrl('/images/quickstart/apollo.svg'),
   entries: [
     frontendInstallSnippet,
     jsGetSnippet('node'),

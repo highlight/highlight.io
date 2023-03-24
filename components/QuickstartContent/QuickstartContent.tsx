@@ -1,3 +1,4 @@
+import { siteUrl } from '../../utils/urls'
 import { GoChiContent } from './backend/go/chi'
 import { GoFiberContent } from './backend/go/fiber'
 import { GoGinContent } from './backend/go/gin'
@@ -36,6 +37,7 @@ import { SelfHostContent } from './self-host/self-host'
 export type QuickStartContent = {
   title: string
   subtitle: string
+  logoUrl?: string
   entries: Array<QuickStartStep>
 }
 
@@ -91,6 +93,7 @@ export const quickStartContent = {
       title: 'Select your client framework',
       subtitle:
         'Select a client SDK to install session replay, error monitoring, and logging for your frontend application.',
+      logoUrl: siteUrl('/images/quickstart/javascript.svg'),
       [QuickStartType.React]: ReactContent,
       [QuickStartType.Angular]: AngularContent,
       [QuickStartType.Next]: NextContent,
@@ -115,6 +118,7 @@ export const quickStartContent = {
     python: {
       title: 'Python',
       subtitle: 'Select your Python framework to install error monitoring for your application.',
+      logoUrl: siteUrl('/images/quickstart/python.svg'),
       [QuickStartType.PythonFlask]: PythonFlaskContext,
       [QuickStartType.PythonDjango]: PythonDjangoContext,
       [QuickStartType.PythonFastAPI]: PythonFastAPIContext,
@@ -126,6 +130,7 @@ export const quickStartContent = {
     go: {
       title: 'Go',
       subtitle: 'Select your Go framework to install error monitoring for your application.',
+      logoUrl: siteUrl('/images/quickstart/go.svg'),
       [QuickStartType.GoGqlgen]: GoGqlgenContent,
       [QuickStartType.GoFiber]: GoFiberContent,
       [QuickStartType.GoChi]: GoChiContent,
@@ -135,6 +140,7 @@ export const quickStartContent = {
     js: {
       title: 'JavaScript',
       subtitle: 'Select your JavaScript framework to install error monitoring for your application.',
+      logoUrl: siteUrl('/images/quickstart/javascript.svg'),
       [QuickStartType.JSApollo]: JSApolloContent,
       [QuickStartType.JSCloudflare]: JSCloudflareContent,
       [QuickStartType.JSExpress]: JSExpressContent,
@@ -150,17 +156,20 @@ export const quickStartContent = {
     python: {
       title: 'Python',
       subtitle: 'Select your Python framework to install logging in your application.',
+      logoUrl: siteUrl('/images/quickstart/python.svg'),
       [QuickStartType.PythonOther]: PythonOtherLogContent,
     },
     go: {
       title: 'Go',
       subtitle: 'Select your Go framework to install logging in your application.',
+      logoUrl: siteUrl('/images/quickstart/go.svg'),
       [QuickStartType.GoLogrus]: GoLogrusContent,
       [QuickStartType.GoOther]: GoOtherLogContent,
     },
     js: {
       title: 'JavaScript',
       subtitle: 'Select your JavaScript framework to install logging in your application.',
+      logoUrl: siteUrl('/images/quickstart/javascript.svg'),
       [QuickStartType.JSNodejs]: JSOtherLogContent,
       [QuickStartType.JSNestjs]: JSNestLogContent,
     },

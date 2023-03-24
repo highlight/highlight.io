@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
 import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
@@ -5,6 +6,7 @@ import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, v
 export const JSExpressContent: QuickStartContent = {
   title: 'Express.js',
   subtitle: 'Learn how to set up highlight.io in Express.js.',
+  logoUrl: siteUrl('/images/quickstart/express.svg'),
   entries: [
     frontendInstallSnippet,
     jsGetSnippet('node'),

@@ -1,9 +1,11 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartContent } from '../../QuickstartContent'
 import { previousInstallSnippet, verifyLogs } from '../shared-snippets'
 
 export const PythonOtherLogContent: QuickStartContent = {
   title: 'Python',
   subtitle: 'Learn how to set up highlight.io Python log ingestion without a logging library.',
+  logoUrl: siteUrl('/images/quickstart/python.svg'),
   entries: [
     previousInstallSnippet('python'),
     {
