@@ -1,4 +1,5 @@
 import { siteUrl } from '../../../../utils/urls'
+import { initializeNodeSDK, jsGetSnippet } from '../../backend/js/shared-snippets'
 import { QuickStartContent } from '../../QuickstartContent'
 import { previousInstallSnippet, verifyLogs } from '../shared-snippets'
 
@@ -8,6 +9,8 @@ export const JSOtherLogContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/javascript.svg'),
   entries: [
     previousInstallSnippet('js'),
+    jsGetSnippet('node'),
+    initializeNodeSDK('node'),
     {
       title: 'Call built-in console methods.',
       content:

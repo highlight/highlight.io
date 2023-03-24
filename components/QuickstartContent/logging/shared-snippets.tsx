@@ -2,10 +2,10 @@ import { siteUrl } from '../../../utils/urls'
 import { QuickStartStep } from '../QuickstartContent'
 
 export const previousInstallSnippet: (slug: string) => QuickStartStep = (slug) => ({
-  title: 'Set up your frontend and backend highlight.io integration.',
+  title: 'Set up your frontend highlight.io integration.',
   content: `First, make sure you've followed the [frontend getting started](${siteUrl(
     '/docs/getting-started/overview',
-  )}) and [backend getting started](${siteUrl(`/docs/getting-started/backend-sdk/${slug}/overview`)}) guides.`,
+  )}) guide.`,
 })
 
 export const verifyLogs: QuickStartStep = {

@@ -21,17 +21,39 @@ export const JSExpressContent: QuickStartContent = {
 
 const app = express()
 
-const highlightErrorHandler = Handlers.errorHandler({ projectID: 'YOUR_PROJECT_ID' })
-
 app.get('/', (req, res) => {
   res.send(\`Hello World! ${Math.random()}\`)
 })
 
 // This should be before any other error middleware and after all controllers (route definitions)
-app.use(highlightErrorHandler)
+app.use(Handlers.errorHandler({ projectID: 'YOUR_PROJECT_ID' }))
 app.listen(8080, () => {
   console.log(\`Example app listening on port 8080\`)
 })`,
+        language: `js`,
+      },
+    },
+    {
+      title: `Try/catch an error manually (without middleware).`,
+      content:
+        'If you are using express.js async handlers, you will need your own try/catch block that directly calls the highlight SDK to report an error. ' +
+        'This is because express.js async handlers do not invoke error middleware.',
+      code: {
+        text: `app.get('/async', async (req: Request, res: Response) => {
+  try {
+    // do something dangerous...
+    throw new Error('oh no!');
+  } catch (error) {
+    const parsedHeaders = H.parseHeaders(req.headers);
+    H.consumeError(
+      error as Error,
+      parsedHeaders?.secureSessionId,
+      parsedHeaders?.requestId
+    );
+  } finally {
+    res.status(200).json({hello: 'world'});
+  }
+});`,
         language: `js`,
       },
     },
