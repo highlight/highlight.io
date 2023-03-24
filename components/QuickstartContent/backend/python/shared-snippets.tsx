@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { fullstackMappingLink } from '../../frontend/shared-snippets'
 import { QuickStartStep } from '../../QuickstartContent'
 
@@ -33,7 +34,8 @@ pip install highlight-io${variant ? '[' + variant + ']' : ''}`,
 }
 
 export const setupLogging: (slug: string) => QuickStartStep = (slug) => ({
-  title: 'Verify your backend logs are being recorded.',
-  content:
-    'With the Python SDK, your logs are reported automatically from the builtin logging methods (as long as `record_logs=True` is provided to the `highlight_io.H` constructor). Visit the [highlight logs portal](http://app.highlight.io/logs) and check that backend logs are coming in.',
+  title: 'Set up logging.',
+  content: `With the Python SDK, your logs are reported automatically from builtin logging methods. See the Python [logging setup guide](${siteUrl(
+    '/docs/getting-started/backend-logging/python/overview',
+  )}) for more details.`,
 })

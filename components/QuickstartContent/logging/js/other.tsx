@@ -1,3 +1,4 @@
+import { initializeNodeSDK, jsGetSnippet } from '../../backend/js/shared-snippets'
 import { QuickStartContent } from '../../QuickstartContent'
 import { previousInstallSnippet, verifyLogs } from '../shared-snippets'
 
@@ -6,6 +7,8 @@ export const JSOtherLogContent: QuickStartContent = {
   subtitle: 'Learn how to set up highlight.io JS log ingestion without a logging library.',
   entries: [
     previousInstallSnippet('js'),
+    jsGetSnippet('node'),
+    initializeNodeSDK('node'),
     {
       title: 'Call built-in console methods.',
       content:
