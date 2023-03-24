@@ -198,8 +198,73 @@ export const getDocsPaths = async (fs_api: any, base: string | undefined): Promi
   return paths
 }
 
+function sortBySlashLength(docPaths: DocPath[]): DocPath[] {
+  let trees: any[] = []
+  let dataIndice: any = {}
+  for (let key in docPaths) {
+    dataIndice[docPaths[key].simple_path] = key
+  }
+
+  docPaths.forEach(item => {
+    const nodes = item.simple_path.split('/')
+    let children = trees
+
+    for (const label of nodes) {
+      let node = {
+        label: label,
+        children: []
+      }
+      if (children.length === 0) {
+        children.push(node)
+      }
+
+      let isExist = false
+      for (let child of children) {
+        if (child.label === node.label) {
+          children = child.children
+          isExist = true
+          break
+        }
+      }
+
+      if (!isExist) {
+        children.push(node)
+        children = children[children.length - 1].children
+      }
+    }
+  })
+
+  let sortedPaths: string[] = []
+  let ret: any[] = []
+
+  function dfs(data: any, path: string) {
+    if (data.children.length === 0) {
+      sortedPaths.push(path)
+      if (dataIndice[path]) {
+        ret.push(docPaths[dataIndice[path]])
+      }
+      return
+    }
+
+    for (let child of data.children) {
+      if (!(path === '' || sortedPaths.includes(path))) {
+        sortedPaths.push(path)
+        if (dataIndice[path]) {
+          ret.push(docPaths[dataIndice[path]])
+        }
+      }
+      let prefix = path === '' ? path : path + '/'
+      dfs(child, prefix + child.label)
+    }
+  }
+
+  dfs({ label: '', children: trees }, '')
+
+  return ret
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
-  const docPaths = await getDocsPaths(fsp, undefined)
+  const docPaths = sortBySlashLength(await getDocsPaths(fsp, undefined))
   const staticPaths = [...docPaths].map((p) => {
     const joined = path.join('/docs', p.simple_path)
     return joined
@@ -218,7 +283,8 @@ interface TocEntry {
 }
 
 export const getStaticProps: GetStaticProps<DocData> = async (context) => {
-  const docPaths = await getDocsPaths(fsp, undefined)
+  const docPaths = sortBySlashLength(await getDocsPaths(fsp, undefined))
+
   // const sdkPaths = await getSdkPaths(fsp, undefined);
   let toc: TocEntry = {
     tocHeading: 'Home',
@@ -309,12 +375,12 @@ export const getStaticProps: GetStaticProps<DocData> = async (context) => {
       metadata: currentDoc.metadata,
       markdownText: !currentDoc.isSdkDoc
         ? await serialize(newerContent, {
-            scope: {
-              path: currentDoc.rel_path,
-              quickStartContent,
-              roadmapData: currentDoc.rel_path.includes('roadmap') ? roadmapData : null,
-            },
-          })
+          scope: {
+            path: currentDoc.rel_path,
+            quickStartContent,
+            roadmapData: currentDoc.rel_path.includes('roadmap') ? roadmapData : null,
+          },
+        })
         : null,
       markdownTextOG: newContent,
       slug: currentDoc.simple_path,
