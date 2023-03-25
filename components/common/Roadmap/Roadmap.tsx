@@ -92,7 +92,7 @@ const RoadmapCategory = ({ label, items }: { label: string; items: Issue[] }) =>
   )
 }
 
-const RoadmapItem = ({ title, number, link, linkText, issueReactions }: Issue) => {
+export const RoadmapItem = ({ title, number, link, linkText, issueReactions }: Issue) => {
   return (
     <div className="flex flex-col gap-2 pt-3 border-t-[1px] border-divider-on-dark text-start px-4">
       <a href={link} className="cursor-pointer">

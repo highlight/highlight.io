@@ -20,7 +20,7 @@ import { useRouter } from 'next/router'
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi'
 import { Meta } from '../../components/common/Head/Meta'
 import Navbar from '../../components/common/Navbar/Navbar'
-import { Roadmap } from '../../components/common/Roadmap/Roadmap'
+import { Roadmap, RoadmapItem } from '../../components/common/Roadmap/Roadmap'
 import { roadmapFetcher } from '../../components/common/Roadmap/RoadmapUtils'
 import { Typography } from '../../components/common/Typography/Typography'
 import { Callout } from '../../components/Docs/Callout/Callout'
@@ -776,6 +776,7 @@ const DocPage = ({
                     <MDXRemote
                       components={{
                         Roadmap,
+                        RoadmapItem,
                         QuickStart,
                         DocsCard,
                         DocsCardGroup,
