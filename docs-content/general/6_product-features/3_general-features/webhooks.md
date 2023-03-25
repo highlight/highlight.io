@@ -24,3 +24,9 @@ Here's an example of a payload that is sent.
   "VisitedURL": "https://app.highlight.io/1/alerts"
 }
 ```
+
+Session alerts, user alerts, and metric monitors can all send webhook notifications. The payload resembles a similar format for all notification types.
+
+If you are interested in customizing the payload or authenticating the webhook request with an authorization header, follow this [issue on GitHub](https://github.com/highlight/highlight/issues/4697) for updates.
+
+<RoadmapItem title="Webhook Payload Customization & Authentication" number="4697" link="https://github.com/highlight/highlight/issues/4697" linkText="Outgoing Webhook Enhancements" />
