@@ -1,30 +1,28 @@
-import Image from 'next/legacy/image'
-import PlayButton from '../../public/images/playButton.svg'
-import homeStyles from '../../components/Home/Home.module.scss'
-import styles from '../../components/Blog/Blog.module.scss'
-import { Section } from '../../components/common/Section/Section'
-import Footer from '../../components/common/Footer/Footer'
-import { gql } from 'graphql-request'
 import classNames from 'classnames'
+import { gql } from 'graphql-request'
+import Image from 'next/legacy/image'
 import { GetStaticPaths, GetStaticProps } from 'next/types'
+import YouTube from 'react-youtube'
+import styles from '../../components/Blog/Blog.module.scss'
 import { FooterCallToAction } from '../../components/common/CallToAction/FooterCallToAction'
-import Link from 'next/link'
-import YouTube, { YouTubeProps } from 'react-youtube'
+import Footer from '../../components/common/Footer/Footer'
+import { Section } from '../../components/common/Section/Section'
+import homeStyles from '../../components/Home/Home.module.scss'
 
 import { RichText } from '@graphcms/rich-text-react-renderer'
-import { Typography } from '../../components/common/Typography/Typography'
-import { createElement, useEffect, useRef, useState } from 'react'
-import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar'
-import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction'
-import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost'
 import { ElementNode } from '@graphcms/rich-text-types'
+import { createElement, useEffect, useRef, useState } from 'react'
+import { PostAuthor } from '../../components/Blog/Author'
+import BlogNavbar from '../../components/Blog/BlogNavbar/BlogNavbar'
 import { Post } from '../../components/Blog/BlogPost/BlogPost'
+import { SuggestedBlogPost } from '../../components/Blog/SuggestedBlogPost/SuggestedBlogPost'
+import { PostTag } from '../../components/Blog/Tag'
+import { Comments } from '../../components/Comments/Comments'
+import { BlogCallToAction } from '../../components/common/CallToAction/BlogCallToAction'
 import { Meta } from '../../components/common/Head/Meta'
-import ReturnIcon from '../../public/images/ReturnIcon'
+import { Typography } from '../../components/common/Typography/Typography'
 import { HighlightCodeBlock } from '../../components/Docs/HighlightCodeBlock/HighlightCodeBlock'
 import { GraphQLRequest } from '../../utils/graphql'
-import { getTagUrl, PostTag } from '../../components/Blog/Tag'
-import { PostAuthor } from '../../components/Blog/Author'
 
 const NUM_SUGGESTED_POSTS = 3
 
@@ -365,6 +363,9 @@ const PostPage = ({
         </Section>
         <Section>
           <div className={styles.postBodyDivider}></div>
+        </Section>
+        <Section>
+          <Comments slug={post.slug} />
         </Section>
         <Section>
           <div className={classNames(homeStyles.anchorTitle, styles.postBody)}>

@@ -15,7 +15,7 @@ const nextConfig = {
   },
   compress: true,
   images: {
-    domains: ['media.graphassets.com', 'lh3.googleusercontent.com'],
+    domains: ['media.graphassets.com', 'lh3.googleusercontent.com', 'picsum.photos'],
   },
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
