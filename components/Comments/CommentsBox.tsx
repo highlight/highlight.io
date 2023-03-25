@@ -13,9 +13,11 @@ const input = classNames(
 
 export const CommentsBox = function ({
   comments,
+  onUpvote,
   onSubmit,
 }: {
   comments: Comment[]
+  onUpvote: (id: string) => void
   onSubmit: (c: { email: string; name: string; body: string }) => void
 }) {
   const [name, setName] = useState<string>()
@@ -33,7 +35,7 @@ export const CommentsBox = function ({
         </div>
         {numComments ? (
           <div className={section}>
-            <div className="w-full">
+            <div className="w-full flex flex-col gap-4">
               {comments.map((c) => (
                 <div key={c.id} className="flex w-full gap-4">
                   {c.image && (
@@ -50,11 +52,8 @@ export const CommentsBox = function ({
                     </div>
                     <Typography type="copy2">{c.text}</Typography>
                     <div className="flex flex-row gap-2">
-                      <button className={upvoteButton}>
-                        👍 <Typography type="copy4">4</Typography>
-                      </button>
-                      <button className={upvoteButton}>
-                        ❤️ <Typography type="copy4">5</Typography>
+                      <button className={upvoteButton} onClick={() => onUpvote(c.id)}>
+                        👍 <Typography type="copy4">{c.vote}</Typography>
                       </button>
                     </div>
                   </div>

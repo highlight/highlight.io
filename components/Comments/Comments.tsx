@@ -80,6 +80,20 @@ export const Comments = function ({ slug }: { slug: string }) {
     await supabase.from('comments').insert(comment)
   }
 
+  const onUpvote = async (id: string) => {
+    const promises: any[] = []
+    const updatedComments: Comment[] = []
+    for (const comment of comments) {
+      if (comment.id === id) {
+        comment.vote = (comment?.vote || 0) + 1
+        promises.push(supabase.from('comments').update(comment).eq('id', comment.id))
+      }
+      updatedComments.push(comment)
+    }
+    setComments(updatedComments)
+    await Promise.all(promises)
+  }
+
   // for populating comments
   useEffect(() => {
     const getComments = async () => {
@@ -88,5 +102,5 @@ export const Comments = function ({ slug }: { slug: string }) {
     getComments().then((d) => d && setComments(d))
   }, [setComments, slug])
 
-  return <CommentsBox comments={comments} onSubmit={onComment} />
+  return <CommentsBox comments={comments} onSubmit={onComment} onUpvote={onUpvote} />
 }
