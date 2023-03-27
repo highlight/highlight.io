@@ -33,6 +33,10 @@ import { JSOtherLogContent } from './logging/js/other'
 import { PythonOtherLogContent } from './logging/python/other'
 import { DevDeploymentContent } from './self-host/dev-deploy'
 import { SelfHostContent } from './self-host/self-host'
+import { RubyOtherContent } from './backend/ruby/other'
+import { RubyRailsContent } from './backend/ruby/rails'
+import { RubyOtherLogContent } from './logging/ruby/other'
+import { RubyRailsLogContent } from './logging/ruby/rails'
 
 export type QuickStartContent = {
   title: string
@@ -83,6 +87,8 @@ export enum QuickStartType {
   JSNestjs = 'nestjs',
   JStRPC = 'trpc',
   HTTPOTLP = 'http-otlp',
+  RubyOther = 'other',
+  RubyRails = 'rails',
 }
 
 export const quickStartContent = {
@@ -149,6 +155,10 @@ export const quickStartContent = {
       [QuickStartType.JSNestjs]: JSNestContent,
       [QuickStartType.JStRPC]: JStRPCContent,
     },
+    ruby: {
+      [QuickStartType.RubyRails]: RubyRailsContent,
+      [QuickStartType.RubyOther]: RubyOtherContent,
+    },
   },
   'backend-logging': {
     title: 'Select your language',
@@ -177,6 +187,10 @@ export const quickStartContent = {
       title: 'HTTP/OTLP',
       subtitle: 'Get started with logging in your application via HTTP or OTLP.',
       [QuickStartType.HTTPOTLP]: HTTPContent,
+    },
+    ruby: {
+      [QuickStartType.RubyRails]: RubyRailsLogContent,
+      [QuickStartType.RubyOther]: RubyOtherLogContent,
     },
   },
   other: {
