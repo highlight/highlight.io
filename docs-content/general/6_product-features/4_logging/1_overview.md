@@ -10,6 +10,6 @@ Logging is currently in alpha and you can find our logging product at [app.highl
 
 <DocsCardGroup>
     <DocsCard title="Log Search Specification" href="./log-search.md">
-        {"How our logging product works + how to search for logs!"}
+        {"The specification we use for ingesting and searching for logs."}
     </DocsCard>
 </DocsCardGroup>
