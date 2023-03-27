@@ -1,3 +1,4 @@
+import { siteUrl } from '../../../../utils/urls'
 import { QuickStartContent } from '../../QuickstartContent'
 import { frontendInstallSnippet } from '../shared-snippets'
 import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, verifyError } from './shared-snippets'
@@ -5,6 +6,7 @@ import { addIntegrationContent, initializeNodeSDK, jsGetSnippet, setupLogging, v
 export const JStRPCContent: QuickStartContent = {
   title: 'tRPC',
   subtitle: 'Learn how to set up highlight.io in tRPC.',
+  logoUrl: siteUrl('/images/quickstart/javascript.svg'),
   entries: [
     frontendInstallSnippet,
     jsGetSnippet('node'),
