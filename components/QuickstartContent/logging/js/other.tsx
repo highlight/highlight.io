@@ -9,7 +9,7 @@ export const JSOtherLogContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/javascript.svg'),
   entries: [
     previousInstallSnippet('js'),
-    jsGetSnippet('node'),
+    jsGetSnippet(['node']),
     initializeNodeSDK('node'),
     {
       title: 'Call built-in console methods.',

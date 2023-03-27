@@ -9,7 +9,7 @@ export const JSFirebaseContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/firebase.svg'),
   entries: [
     frontendInstallSnippet,
-    jsGetSnippet('node'),
+    jsGetSnippet(['node']),
     initializeNodeSDK('node'),
     {
       title: `Add the Firebase Highlight integration.`,

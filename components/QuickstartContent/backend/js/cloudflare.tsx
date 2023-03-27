@@ -9,7 +9,7 @@ export const JSCloudflareContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/cloudflare.svg'),
   entries: [
     frontendInstallSnippet,
-    jsGetSnippet('cloudflare'),
+    jsGetSnippet(['cloudflare']),
     {
       title: `Add the Cloudflare Worker Highlight integration.`,
       content:
