@@ -9,7 +9,7 @@ export const JSApolloContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/apollo.svg'),
   entries: [
     frontendInstallSnippet,
-    jsGetSnippet('node'),
+    jsGetSnippet(['node', 'apollo']),
     initializeNodeSDK('node'),
     {
       title: `Add the Apollo Server integration.`,
@@ -17,7 +17,9 @@ export const JSApolloContent: QuickStartContent = {
         '`ApolloServerHighlightPlugin` is an [Apollo Server](https://www.apollographql.com/docs/apollo-server/) plugin to capture errors in your graphql handlers.',
       code: {
         text: `import { ApolloServer } from '@apollo/server'
-import { ApolloServerHighlightPlugin } from '@highlight-run/node'
+import { ApolloServerHighlightPlugin } from '@highlight-run/apollo'
+// on legacy Apollo V3, use the following import 
+// import { ApolloServerV3HighlightPlugin as ApolloServerHighlightPlugin } from '@highlight-run/apollo'
 
 // ...
 

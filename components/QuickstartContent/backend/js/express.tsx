@@ -9,7 +9,7 @@ export const JSExpressContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/express.svg'),
   entries: [
     frontendInstallSnippet,
-    jsGetSnippet('node'),
+    jsGetSnippet(['node']),
     initializeNodeSDK('node'),
     {
       title: `Add the Express.js Highlight integration.`,

@@ -9,7 +9,7 @@ export const JSNodeContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/node.svg'),
   entries: [
     frontendInstallSnippet,
-    jsGetSnippet('node'),
+    jsGetSnippet(['node']),
     initializeNodeSDK('node'),
     manualError,
     verifyError(

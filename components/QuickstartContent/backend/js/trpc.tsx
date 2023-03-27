@@ -9,7 +9,7 @@ export const JStRPCContent: QuickStartContent = {
   logoUrl: siteUrl('/images/quickstart/javascript.svg'),
   entries: [
     frontendInstallSnippet,
-    jsGetSnippet('node'),
+    jsGetSnippet(['node']),
     initializeNodeSDK('node'),
     {
       title: 'Add the tRPC Highlight integration.',
