@@ -498,11 +498,13 @@ const TableOfContents = ({
   docPaths,
   openParent,
   openTopLevel = false,
+  onNavigate,
 }: {
   toc: TocEntry
   openParent: boolean
   openTopLevel?: boolean
   docPaths: DocPath[]
+  onNavigate?: () => void
 }) => {
   const hasChildren = !!toc?.children.length
 
@@ -515,7 +517,8 @@ const TableOfContents = ({
     setIsCurrentPage(currentPage === window.location.pathname)
     const isParentOfCurrentPage = window.location.pathname.includes(docPaths[toc.docPathId || 0]?.simple_path)
     setOpen((prevOpenState) => prevOpenState || isParentOfCurrentPage)
-  }, [docPaths, toc.docPathId])
+    onNavigate?.()
+  }, [docPaths, toc.docPathId, onNavigate])
 
   return (
     <div className="max-w-full">
@@ -722,6 +725,7 @@ const DocPage = ({
                     docPaths={docOptions}
                     openParent={false}
                     openTopLevel={false}
+                    onNavigate={() => setOpen(false)}
                   />
                 ))
               )}
