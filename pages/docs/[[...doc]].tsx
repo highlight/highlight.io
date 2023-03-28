@@ -105,7 +105,7 @@ const useIntersectionObserver = (setActiveId: (s: string) => void) => {
     }
 
     const observer = new IntersectionObserver(callback, {
-      rootMargin: '0px 0px -40% 0px',
+      rootMargin: '-45% 0px',
     })
 
     const headingElements = Array.from(document.querySelectorAll('h4, h5'))
@@ -465,6 +465,8 @@ const PageRightBar = ({ relativePath }: { title: string; relativePath: string })
                       e.preventDefault()
                       document.querySelector(`#${heading.id}`)?.scrollIntoView({
                         behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center',
                       })
                       const basePath = router.asPath.split('#')[0]
                       const newUrl = `${basePath}#${heading.id}`
