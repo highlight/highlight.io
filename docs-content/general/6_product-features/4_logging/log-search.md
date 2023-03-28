@@ -1,5 +1,5 @@
 ---
-heading: Log Search
+heading: Log Search Specification
 title: Log Search
 slug: log-search
 createdAt: 2021-09-10T17:54:08.000Z
