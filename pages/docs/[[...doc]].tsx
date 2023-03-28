@@ -435,7 +435,11 @@ const PageRightBar = ({ relativePath }: { title: string; relativePath: string })
           <FaDiscord style={{ height: 20, width: 20 }}></FaDiscord>
           <Typography type="copy3">Community / Support</Typography>
         </Link>
-        <Link className={styles.socialItem} href={`${DOCS_GITUB_LINK}${relativePath}`} target="_blank">
+        <Link
+          className={styles.socialItem}
+          href={`${DOCS_GITUB_LINK}${relativePath}`.replaceAll(/\/+/g, '/')}
+          target="_blank"
+        >
           <FaGithub style={{ height: 20, width: 20 }}></FaGithub>
           <Typography type="copy3">Suggest Edits?</Typography>
         </Link>
